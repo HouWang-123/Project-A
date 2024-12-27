@@ -1,0 +1,58 @@
+{
+    "Summary": {
+        "YooVersion": "2.1.2",
+        "UnityVersion": "6000.0.32f1",
+        "BuildDate": "2024/12/27 17:55:13",
+        "BuildSeconds": 53,
+        "BuildTarget": 19,
+        "BuildMode": 0,
+        "BuildPipeline": "BuiltinBuildPipeline",
+        "BuildPackageName": "DefaultPackage",
+        "BuildPackageVersion": "2024-12-27-1073",
+        "UniqueBundleName": false,
+        "EnableAddressable": true,
+        "LocationToLower": false,
+        "IncludeAssetGUID": false,
+        "AutoCollectShaders": true,
+        "IgnoreRuleName": "YooAsset.Editor.NormalIgnoreRule",
+        "EnableSharePackRule": true,
+        "EncryptionClassName": "null",
+        "FileNameStyle": 0,
+        "CompressOption": 2,
+        "DisableWriteTypeTree": false,
+        "IgnoreTypeTreeChanges": true,
+        "AssetFileTotalCount": 1,
+        "MainAssetTotalCount": 1,
+        "AllBundleTotalCount": 1,
+        "AllBundleTotalSize": 1711,
+        "EncryptedBundleTotalCount": 0,
+        "EncryptedBundleTotalSize": 0
+    },
+    "AssetInfos": [
+        {
+            "Address": "GameObject",
+            "AssetPath": "Assets/ArtAssets/GameObject.prefab",
+            "AssetGUID": "4d6f6b706053412428dffa4d61cc308e",
+            "AssetTags": [],
+            "MainBundleName": "assets_artassets.bundle",
+            "MainBundleSize": 1711,
+            "DependAssets": []
+        }
+    ],
+    "BundleInfos": [
+        {
+            "BundleName": "assets_artassets.bundle",
+            "FileName": "8d479e1263fe83f1a5887f666fca1927.bundle",
+            "FileHash": "8d479e1263fe83f1a5887f666fca1927",
+            "FileCRC": "60835ffa",
+            "FileSize": 1711,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundles": [],
+            "AllBuiltinAssets": [
+                "Assets/ArtAssets/GameObject.prefab"
+            ]
+        }
+    ],
+    "IndependAssets": []
+}
