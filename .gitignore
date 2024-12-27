@@ -1,0 +1,5 @@
+*.csproj
+Library/
+Temp/Burst/burst-aot4jkfcwa0.lbf/lib_burst_generated_part_c0f203d8da3a5c5a2ea74f891c3f77ec.gbc
+Temp/
+Logs/
