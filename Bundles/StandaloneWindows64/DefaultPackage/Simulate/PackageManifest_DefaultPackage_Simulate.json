@@ -9,20 +9,135 @@
     "PackageVersion": "Simulate",
     "AssetList": [
         {
-            "Address": "GameObject",
-            "AssetPath": "Assets/ArtAssets/GameObject.prefab",
+            "Address": "FoodTable",
+            "AssetPath": "Assets/ArtAssets/Jsons/FoodTable.json",
             "AssetGUID": "",
             "AssetTags": [],
             "BundleID": 0
+        },
+        {
+            "Address": "FunctionalItemTable",
+            "AssetPath": "Assets/ArtAssets/Jsons/FunctionalItemTable.json",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 0
+        },
+        {
+            "Address": "InteractionTable",
+            "AssetPath": "Assets/ArtAssets/Jsons/InteractionTable.json",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 0
+        },
+        {
+            "Address": "ItemTable",
+            "AssetPath": "Assets/ArtAssets/Jsons/ItemTable.json",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 0
+        },
+        {
+            "Address": "JewlishTable",
+            "AssetPath": "Assets/ArtAssets/Jsons/JewlishTable.json",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 0
+        },
+        {
+            "Address": "RoleActiveSkillTable",
+            "AssetPath": "Assets/ArtAssets/Jsons/RoleActiveSkillTable.json",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 0
+        },
+        {
+            "Address": "RoleAttributeTable",
+            "AssetPath": "Assets/ArtAssets/Jsons/RoleAttributeTable.json",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 0
+        },
+        {
+            "Address": "RolePassiveTable",
+            "AssetPath": "Assets/ArtAssets/Jsons/RolePassiveTable.json",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 0
+        },
+        {
+            "Address": "RoleStatusTable",
+            "AssetPath": "Assets/ArtAssets/Jsons/RoleStatusTable.json",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 0
+        },
+        {
+            "Address": "SceneItemTable",
+            "AssetPath": "Assets/ArtAssets/Jsons/SceneItemTable.json",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 0
+        },
+        {
+            "Address": "SceneRoleTable",
+            "AssetPath": "Assets/ArtAssets/Jsons/SceneRoleTable.json",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 0
+        },
+        {
+            "Address": "ThrowableTable",
+            "AssetPath": "Assets/ArtAssets/Jsons/ThrowableTable.json",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 0
+        },
+        {
+            "Address": "WeaponTable",
+            "AssetPath": "Assets/ArtAssets/Jsons/WeaponTable.json",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 0
+        },
+        {
+            "Address": "GamePanel",
+            "AssetPath": "Assets/ArtAssets/Prefabs/UI/GamePanel.prefab",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 1
+        },
+        {
+            "Address": "MainPanel",
+            "AssetPath": "Assets/ArtAssets/Prefabs/UI/MainPanel.prefab",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 1
+        },
+        {
+            "Address": "SaveDataPanel",
+            "AssetPath": "Assets/ArtAssets/Prefabs/UI/SaveDataPanel.prefab",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 1
         }
     ],
     "BundleList": [
         {
-            "BundleName": "assets_artassets.bundle",
+            "BundleName": "assets_artassets_jsons.bundle",
             "UnityCRC": 0,
-            "FileHash": "8d6e1a642d3366fe9c6bd3ccc221ed09",
+            "FileHash": "e87935d6279d855320b187be9af6ec0b",
             "FileCRC": "00000000",
-            "FileSize": 930,
+            "FileSize": 19254,
+            "Encrypted": false,
+            "Tags": [],
+            "DependIDs": []
+        },
+        {
+            "BundleName": "assets_artassets_prefabs_ui.bundle",
+            "UnityCRC": 0,
+            "FileHash": "5c36c6f022cb628d54db36a3f7566c16",
+            "FileCRC": "00000000",
+            "FileSize": 75822,
             "Encrypted": false,
             "Tags": [],
             "DependIDs": []

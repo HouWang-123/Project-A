@@ -9,6 +9,7 @@ public class GameRoot : MonoBehaviour
 
     private void Awake()
     {
+        Instantiate(Resources.Load<GameObject>("LoadingPanel"), UIManager.Instance.transform);
         YooAssets.Initialize();
         package = YooAssets.CreatePackage("DefaultPackage");
 
@@ -50,9 +51,12 @@ public class GameRoot : MonoBehaviour
 
     private void GameStart()
     {
+
         //Data
-        AssetHandle handle2 = YooAssets.LoadAssetSync<GameObject>("GameObject");
-        GameObject @object = Instantiate(handle2.AssetObject) as GameObject;
-        
+        //AssetHandle handle2 = YooAssets.LoadAssetSync<GameObject>("GameObject");
+        //GameObject @object = Instantiate(handle2.AssetObject) as GameObject;
+        UIManager.Instance.GetPanel("MainPanel");
+
+        UIManager.Instance.GetPanel("LoadingPanel").GetComponent<UIBase>().Hide();
     }
 }

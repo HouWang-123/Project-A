@@ -68,6 +68,7 @@ public class UIManager : MonoBehaviour
     {
         Instance = this;
         allWedgate = new Dictionary<string, Dictionary<string, GameObject>>();
+        DontDestroyOnLoad(gameObject);
     }
 
 

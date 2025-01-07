@@ -26,7 +26,9 @@ public abstract class UIBase : MonoBehaviour, IUIShowHide
             }
         }
         UIManager.Instance.RegistGameObject(transform.name, transform.name, gameObject);
+        AddListen();
     }
+    protected abstract void AddListen();
     //从UIManager里面得到子控件
     public GameObject GetWedgate(string widegateName)
     {   //Debug .Log ("执行");
@@ -133,10 +135,12 @@ public abstract class UIBase : MonoBehaviour, IUIShowHide
     public virtual void Show()
     {
         gameObject.SetActive(true);
+        transform.SetAsLastSibling();
     }
 
     public virtual void Hide()
     {
         gameObject.SetActive(false);
+        transform.SetAsFirstSibling();
     }
 }
