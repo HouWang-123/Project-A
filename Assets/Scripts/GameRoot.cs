@@ -55,7 +55,7 @@ public class GameRoot : MonoBehaviour
     {
         ColorfulDebugger.Debug("LoadingData",ColorfulDebugger.Data);
         //Data
-        DataManagement.LoadAllTable();
+        GameDataAgent.LoadAllTable();
         //AssetHandle handle2 = YooAssets.LoadAssetSync<GameObject>("GameObject");
         //GameObject @object = Instantiate(handle2.AssetObject) as GameObject;
         UIManager.Instance.GetPanel("MainPanel");
