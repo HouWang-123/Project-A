@@ -1,4 +1,6 @@
 using System.Collections;
+using cfg;
+using SimpleJSON;
 using UnityEngine;
 using YooAsset;
 
@@ -51,8 +53,9 @@ public class GameRoot : MonoBehaviour
 
     private void GameStart()
     {
-
+        ColorfulDebugger.Debug("LoadingData",ColorfulDebugger.Data);
         //Data
+        DataManagement.LoadAllTable();
         //AssetHandle handle2 = YooAssets.LoadAssetSync<GameObject>("GameObject");
         //GameObject @object = Instantiate(handle2.AssetObject) as GameObject;
         UIManager.Instance.GetPanel("MainPanel");

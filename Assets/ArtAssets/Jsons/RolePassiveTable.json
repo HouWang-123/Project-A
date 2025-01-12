@@ -1,1 +1,1 @@
-{"RolePassiveTable": [{"ID": 40001, "Name": "娜塔莉亚被动", "DESCRIBE": "被动技能文本", "SkillEffectFuncNam": "x"}, {"ID": 40002, "Name": "淑女的秘密弹匣", "DESCRIBE": "被动技能文本", "SkillEffectFuncNam": "手枪弹药携带量上限+7，霰弹携带量上限+5"}]}
+{"RolePassiveTable": [{"ID": 103001, "Name": "娜塔莉亚被动", "DESCRIBE": "被动技能文本", "SkillEffectFuncNam": "x"}, {"ID": 103002, "Name": "淑女的秘密弹匣", "DESCRIBE": "被动技能文本", "SkillEffectFuncNam": "手枪弹药携带量上限+7，霰弹携带量上限+5"}]}

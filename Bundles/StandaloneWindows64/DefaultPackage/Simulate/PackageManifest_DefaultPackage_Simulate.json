@@ -9,92 +9,8 @@
     "PackageVersion": "Simulate",
     "AssetList": [
         {
-            "Address": "FoodTable",
-            "AssetPath": "Assets/ArtAssets/Jsons/FoodTable.json",
-            "AssetGUID": "",
-            "AssetTags": [],
-            "BundleID": 0
-        },
-        {
-            "Address": "FunctionalItemTable",
-            "AssetPath": "Assets/ArtAssets/Jsons/FunctionalItemTable.json",
-            "AssetGUID": "",
-            "AssetTags": [],
-            "BundleID": 0
-        },
-        {
-            "Address": "InteractionTable",
-            "AssetPath": "Assets/ArtAssets/Jsons/InteractionTable.json",
-            "AssetGUID": "",
-            "AssetTags": [],
-            "BundleID": 0
-        },
-        {
-            "Address": "ItemTable",
-            "AssetPath": "Assets/ArtAssets/Jsons/ItemTable.json",
-            "AssetGUID": "",
-            "AssetTags": [],
-            "BundleID": 0
-        },
-        {
-            "Address": "JewlishTable",
-            "AssetPath": "Assets/ArtAssets/Jsons/JewlishTable.json",
-            "AssetGUID": "",
-            "AssetTags": [],
-            "BundleID": 0
-        },
-        {
-            "Address": "RoleActiveSkillTable",
-            "AssetPath": "Assets/ArtAssets/Jsons/RoleActiveSkillTable.json",
-            "AssetGUID": "",
-            "AssetTags": [],
-            "BundleID": 0
-        },
-        {
-            "Address": "RoleAttributeTable",
-            "AssetPath": "Assets/ArtAssets/Jsons/RoleAttributeTable.json",
-            "AssetGUID": "",
-            "AssetTags": [],
-            "BundleID": 0
-        },
-        {
-            "Address": "RolePassiveTable",
-            "AssetPath": "Assets/ArtAssets/Jsons/RolePassiveTable.json",
-            "AssetGUID": "",
-            "AssetTags": [],
-            "BundleID": 0
-        },
-        {
-            "Address": "RoleStatusTable",
-            "AssetPath": "Assets/ArtAssets/Jsons/RoleStatusTable.json",
-            "AssetGUID": "",
-            "AssetTags": [],
-            "BundleID": 0
-        },
-        {
-            "Address": "SceneItemTable",
-            "AssetPath": "Assets/ArtAssets/Jsons/SceneItemTable.json",
-            "AssetGUID": "",
-            "AssetTags": [],
-            "BundleID": 0
-        },
-        {
-            "Address": "SceneRoleTable",
-            "AssetPath": "Assets/ArtAssets/Jsons/SceneRoleTable.json",
-            "AssetGUID": "",
-            "AssetTags": [],
-            "BundleID": 0
-        },
-        {
-            "Address": "ThrowableTable",
-            "AssetPath": "Assets/ArtAssets/Jsons/ThrowableTable.json",
-            "AssetGUID": "",
-            "AssetTags": [],
-            "BundleID": 0
-        },
-        {
-            "Address": "WeaponTable",
-            "AssetPath": "Assets/ArtAssets/Jsons/WeaponTable.json",
+            "Address": "item_tablereward",
+            "AssetPath": "Assets/ArtAssets/DATAOUTPUT/item_tablereward.json",
             "AssetGUID": "",
             "AssetTags": [],
             "BundleID": 0
@@ -123,11 +39,11 @@
     ],
     "BundleList": [
         {
-            "BundleName": "assets_artassets_jsons.bundle",
+            "BundleName": "assets_artassets_dataoutput.bundle",
             "UnityCRC": 0,
-            "FileHash": "e87935d6279d855320b187be9af6ec0b",
+            "FileHash": "1c8431051b42ea4ecae4787a1883c551",
             "FileCRC": "00000000",
-            "FileSize": 19254,
+            "FileSize": 190,
             "Encrypted": false,
             "Tags": [],
             "DependIDs": []
@@ -135,9 +51,9 @@
         {
             "BundleName": "assets_artassets_prefabs_ui.bundle",
             "UnityCRC": 0,
-            "FileHash": "5c36c6f022cb628d54db36a3f7566c16",
+            "FileHash": "1227adc1c6265a9f0dc982af079fa552",
             "FileCRC": "00000000",
-            "FileSize": 75822,
+            "FileSize": 78373,
             "Encrypted": false,
             "Tags": [],
             "DependIDs": []
