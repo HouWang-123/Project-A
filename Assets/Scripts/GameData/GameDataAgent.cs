@@ -22,9 +22,9 @@ public static class GameDataAgent
     /// </summary>
     /// <param name="type"></param>
     /// <returns></returns>
-    public static T GetTableByType<T>(Type type) where T: ITable
+    public static T GetTableByType<T>() where T: ITable
     {
-        return (T)tb.ITables[type];
+        return (T)tb.ITables[typeof(T)];
     }
     /// <summary>
     /// 通过传入Type和Id得到数据
@@ -33,9 +33,9 @@ public static class GameDataAgent
     /// <param name="type"></param>
     /// <param name="Id"></param>
     /// <returns></returns>
-    public static T GetTableDataById<T>(Type type, int Id) where T: IData
+    public static T GetTableDataById<T>(int Id) where T: IData
     {
-        return (T)tb.ITables[type].FindById(Id);
+        return (T)tb.ITables[typeof(T)].FindById(Id);
     }
     private static JSONNode LoadByteBuf(string file)
     {
