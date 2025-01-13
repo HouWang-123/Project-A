@@ -345,6 +345,7 @@ GameObject:
   m_Component:
   - component: {fileID: 605675690}
   - component: {fileID: 605675691}
+  - component: {fileID: 605675692}
   m_Layer: 0
   m_Name: Root
   m_TagString: Untagged
@@ -380,6 +381,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayMode: 0
+--- !u!114 &605675692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 605675689}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2626a7cfcc6c2442b32412f5b05c8b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Camera: {r: 0.7647059, g: 0.55803996, b: 0.12549019, a: 1}
+  Collision: {r: 0.15593326, g: 0.764151, b: 0, a: 1}
+  Battle: {r: 1, g: 0.3915094, b: 0.62023216, a: 1}
+  Data: {r: 0, g: 0.7453065, b: 1, a: 1}
+  Error: {r: 1, g: 0, b: 0, a: 1}
+  File: {r: 0.9574859, g: 1, b: 0.4666667, a: 1}
+  GameObject: {r: 0.31990921, g: 0.56335205, b: 0.745283, a: 1}
+  Info: {r: 0.22560515, g: 0.17888929, b: 0.5660378, a: 1}
+  Resource: {r: 0.9056604, g: 0.15806337, b: 0.76985925, a: 1}
+  Scene: {r: 0.6603774, g: 0, b: 0.45416752, a: 1}
+  Time: {r: 0.504717, g: 0.98240966, b: 1, a: 1}
+  UI: {r: 0.87165225, g: 1, b: 0, a: 1}
+  Warning: {r: 1, g: 0.5813637, b: 0.47450984, a: 1}
 --- !u!1 &1828182705
 GameObject:
   m_ObjectHideFlags: 0

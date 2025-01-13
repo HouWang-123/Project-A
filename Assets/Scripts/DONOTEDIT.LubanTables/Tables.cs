@@ -29,7 +29,7 @@ namespace cfg
 {
 public partial class Tables
 {
-    public Dictionary<Type, ITable> ITables;
+    public Dictionary<Type, ITable> ITables = new Dictionary<Type, ITable>();
     public item.TableReward TableReward {get; }
 
     public Tables(System.Func<string, JSONNode> loader)

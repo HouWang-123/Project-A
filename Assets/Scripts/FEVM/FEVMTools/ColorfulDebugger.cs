@@ -1,21 +1,28 @@
+using System;
 using UnityEngine;
 
 public class ColorfulDebugger : MonoBehaviour
 {
-    public static Color Camera;
-    public static Color Collision;
-    public static Color Battle;
-    public static Color Data;
-    public static Color Error;
-    public static Color File;
-    public static Color GameObject;
-    public static Color Info;
-    public static Color Resource;
-    public static Color Scene;
-    public static Color Time;
-    public static Color UI;
-    public static Color Warning;
-    
+    public static ColorfulDebugger Instance;
+    public  Color Camera;
+    public  Color Collision;
+    public  Color Battle;
+    public  Color Data;
+    public  Color Error;
+    public  Color File;
+    public  Color GameObject;
+    public  Color Info;
+    public  Color Resource;
+    public  Color Scene;
+    public  Color Time;
+    public  Color UI;
+    public  Color Warning;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+
     public static void Debug(string str,Color color)
     {
         int r,g,b,a;

@@ -53,7 +53,7 @@ public class GameRoot : MonoBehaviour
 
     private void GameStart()
     {
-        ColorfulDebugger.Debug("LoadingData",ColorfulDebugger.Data);
+        ColorfulDebugger.Debug("LoadingData",ColorfulDebugger.Instance.Data);
         //Data
         GameDataAgent.LoadAllTable();
         //AssetHandle handle2 = YooAssets.LoadAssetSync<GameObject>("GameObject");

@@ -14,7 +14,7 @@ public static class GameDataAgent
     {
         Tables tables = new cfg.Tables(LoadByteBuf);
         tb = tables;
-        ColorfulDebugger.Debug(" All Game Data loaded", ColorfulDebugger.Data);
+        ColorfulDebugger.Debug(" All Game Data loaded", ColorfulDebugger.Instance.Data);
     }
     /// <summary>
     /// 通过类型获取数据表
