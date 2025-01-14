@@ -7,7 +7,7 @@ using YooAsset;
 /// <summary>
 ///  Update: 修改类为 static
 /// </summary>
-public static class GameDataAgent
+public static class GameTableDataAgent
 {
     public static Tables tb;
     public static void LoadAllTable()

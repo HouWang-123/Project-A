@@ -143,38 +143,6 @@ public static class Tools
 
         return curAngle;
     }
-
-    /// <summary>
-    /// 输出log
-    /// </summary>
-    /// <param name="dc"></param>
-    /// <param name="str"></param>
-    public static void Debug(string str,FEVMToolsEnum.DebugColor dc = FEVMToolsEnum.DebugColor.Normal)
-    {
-#if !UNITY_EDITOR
-        return;
-#endif
-        //return;
-        switch (dc)
-        {
-            case FEVMToolsEnum.DebugColor.Normal:
-                UnityEngine.Debug.Log(str);
-                break;
-            case FEVMToolsEnum.DebugColor.Red:
-                UnityEngine.Debug.Log("<color=#ff0000ff>" + str + "</color>");
-                break;
-            case FEVMToolsEnum.DebugColor.Yellow:
-                UnityEngine.Debug.Log("<color=#ffff00ff>" + str + "</color>");
-                break;
-            case FEVMToolsEnum.DebugColor.Green:
-                UnityEngine.Debug.Log("<color=#00ff00ff>" + str + "</color>");
-                break;
-            default:
-                UnityEngine.Debug.Log(str);
-                break;
-        }
-    }
-
     public static string ColorToHex(Color color)
     {
         int r,g,b,a;

@@ -15,6 +15,18 @@ namespace MyEventObj
     {
         public new UnityAction<T> Action;
     }
+    public class EventAbs<T,T2> : EventAbs
+    {
+        public new UnityAction<T,T2> Action;
+    }
+    public class EventAbs<T,T2,T3> : EventAbs
+    {
+        public new UnityAction<T,T2,T3> Action;
+    }
+    public class EventAbs<T,T2,T3,T4> : EventAbs
+    {
+        public new UnityAction<T,T2,T3,T4> Action;
+    }
 }
 
 public class EventManager
@@ -96,7 +108,7 @@ public class EventManager
         }
     }
 
-    public void RuneEvent(string name)
+    public void RunEvent(string name)
     {
         if(actions.ContainsKey(name))
         {
@@ -104,7 +116,7 @@ public class EventManager
         }
     }
 
-    public void RuneEvent<T>(string name, T obj)
+    public void RunEvent<T>(string name, T obj)
     {
         if(actionTs.ContainsKey(name))
         {

@@ -9,11 +9,11 @@ namespace FEVM.Data
 
         public static FEVMDataManager Instance => _instance.Value;
 
-        private readonly Dictionary<Type, IData> _keepers = new();
+        private readonly Dictionary<Type, IDataKeeper> _keepers = new();
 
         private FEVMDataManager() { }
 
-        public void AddDataKeeper<T>(T data) where T : IData
+        public void AddDataKeeper<T>(T data) where T : IDataKeeper
         {
             var key = typeof(T);
             if (_keepers.ContainsKey(key))

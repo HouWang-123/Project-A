@@ -1,9 +1,8 @@
 using System;
 using UnityEngine;
 
-public class ColorfulDebugger : MonoBehaviour
+public class ColorfulDebugger : Singleton<ColorfulDebugger>
 {
-    public static ColorfulDebugger Instance;
     public  Color Camera;
     public  Color Collision;
     public  Color Battle;
@@ -17,12 +16,7 @@ public class ColorfulDebugger : MonoBehaviour
     public  Color Time;
     public  Color UI;
     public  Color Warning;
-
-    private void Awake()
-    {
-        Instance = this;
-    }
-
+    
     public static void Debug(string str,Color color)
     {
         int r,g,b,a;

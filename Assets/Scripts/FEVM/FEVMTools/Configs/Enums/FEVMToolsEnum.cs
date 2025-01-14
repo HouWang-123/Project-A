@@ -14,24 +14,4 @@ public class FEVMToolsEnum
       UI,
       TopUI,
    }
-   
-   /// <summary>
-   /// 输出颜色
-   /// </summary>
-   public enum DebugColor
-   {
-      Normal,
-      Red,
-      Yellow,
-      Green,
-   }
-   /// <summary>
-   /// Canvas
-   /// </summary>
-   public enum CanvasType
-   {
-      UI2D,
-      DisUI,
-      TopUI
-   }
 }

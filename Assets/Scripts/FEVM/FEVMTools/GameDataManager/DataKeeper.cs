@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace FEVM.Data
 {
-    public interface IData
+    public interface IDataKeeper
     {
         void Save();
         BaseData Read();
@@ -42,14 +42,14 @@ namespace FEVM.Data
     /// 可通过存储器本身进行数据的读取，写入，存储，也可也通过全局对象 FEVMDataManager 进行数据的管理和调用
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class BaseDataKeeper<T> : IData where T : BaseData, new()
+    public class BaseDataKeeperKeeper<T> : IDataKeeper where T : BaseData, new()
     {
         public T Data { get { return baseData; } }
         protected T baseData;
         public bool initialized;
         public List<string> floder_arr;
         public bool loaded;
-        public BaseDataKeeper()
+        public BaseDataKeeperKeeper()
         {
             InitData();
         }
@@ -145,7 +145,7 @@ namespace FEVM.Data
             if (!Directory.Exists(directory)) { Directory.CreateDirectory(directory); }
             string jsonData = JsonUtility.ToJson(baseData);
             File.WriteAllText(SavePath, jsonData);
-            Tools.Debug(Data.GetKey()+"数据保存成功,位置:"+SavePath,FEVMToolsEnum.DebugColor.Green);
+            ColorfulDebugger.Debug(Data.GetKey()+"数据保存成功,位置:"+SavePath,ColorfulDebugger.Instance.File);
         }
         protected void LoadData(Action callBack)
         {

@@ -13,11 +13,11 @@ public class PlayerData : BaseData
 }
 
 // 测试类
-public class DataKeeperExample: BaseDataKeeper<PlayerData>
+public class DataKeeperKeeperExample: BaseDataKeeperKeeper<PlayerData>
 {
     // 这里编写业务逻辑
     public PlayerData data;
-    protected void Start()
+    void Execution()
     {
         bool historyData;
         // 从自身获取 dataEntity

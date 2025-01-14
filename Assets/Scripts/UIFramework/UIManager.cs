@@ -7,6 +7,13 @@ public class UIManager : MonoBehaviour
 {
     //单例
     public static UIManager Instance;
+    void Awake()
+    {
+        Instance = this;
+        allWedgate = new Dictionary<string, Dictionary<string, GameObject>>();
+        DontDestroyOnLoad(gameObject);
+    }
+    
     //建立一个集合，将UIBehaviour放入集合中
     //二维数组
     Dictionary<string, Dictionary<string, GameObject>> allWedgate;
@@ -64,21 +71,5 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    void Awake()
-    {
-        Instance = this;
-        allWedgate = new Dictionary<string, Dictionary<string, GameObject>>();
-        DontDestroyOnLoad(gameObject);
-    }
-
-
-    void Start()
-    {
-
-    }
-    void Update()
-    {
-
-    }
 }
 
