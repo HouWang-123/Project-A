@@ -1,16 +1,22 @@
 {
   "dependencies": {
-    "com.tuyoogame.yooasset": {
-      "version": "2.1.2",
+    "com.newtonsoft.json": {
+      "version": "1.0.1",
       "depth": 0,
       "source": "registry",
+      "dependencies": {},
+      "url": "https://package.openupm.com"
+    },
+    "com.tuyoogame.yooasset": {
+      "version": "file:H:\\Download\\YooAsset-2.1.2\\YooAsset-2.1.2\\Assets\\YooAsset",
+      "depth": 0,
+      "source": "local",
       "dependencies": {
         "com.unity.scriptablebuildpipeline": "2.1.3",
         "com.unity.modules.assetbundle": "1.0.0",
         "com.unity.modules.unitywebrequest": "1.0.0",
         "com.unity.modules.unitywebrequestassetbundle": "1.0.0"
-      },
-      "url": "https://package.openupm.com"
+      }
     },
     "com.unity.2d.animation": {
       "version": "10.1.4",

@@ -125,7 +125,7 @@
         {
             "BundleName": "assets_artassets_jsons.bundle",
             "UnityCRC": 0,
-            "FileHash": "e87935d6279d855320b187be9af6ec0b",
+            "FileHash": "6f9d94fa7b60f85c2e6e2e50217d687b",
             "FileCRC": "00000000",
             "FileSize": 19254,
             "Encrypted": false,
@@ -135,9 +135,9 @@
         {
             "BundleName": "assets_artassets_prefabs_ui.bundle",
             "UnityCRC": 0,
-            "FileHash": "5c36c6f022cb628d54db36a3f7566c16",
+            "FileHash": "8c784155784c811f682aa9b4d0b44153",
             "FileCRC": "00000000",
-            "FileSize": 75822,
+            "FileSize": 78373,
             "Encrypted": false,
             "Tags": [],
             "DependIDs": []

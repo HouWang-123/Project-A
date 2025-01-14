@@ -1,0 +1,6 @@
+﻿#	SceneTable			
+#	ID		SceneName	BackgroundMusicId
+#	int		string	int
+#		备注	场景名称	背景音乐名称
+	1	菜单场景	Menu	1
+	2	主场景	Main	2

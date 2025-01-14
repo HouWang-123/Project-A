@@ -1,0 +1,23 @@
+﻿#	默认游戏配置		
+#	Key	备注	Value
+	AD_REWARD_MULTI	看广告领取多倍	2
+	DEFAULT_COINS	玩家初始金币数	10
+	AD2MONEY_BASE	看广告得金币基数	500
+	AD2MONEY_EXT	每看一个额外得金币数	10
+	AD2MONEY_LV_MAX	看广告得金币最高等级	50
+	APPSTORE	苹果商店评分跳转连接	https://apps.apple.com/
+	DEFAULT_LEVEL	默认第一关	1
+	FREE_AD_TIMES	免费观看广告的次数	3
+	RANDOM_LV_ID	随机生成的关卡对应的ID	0
+	TOTAL_LEVEL_TYPE	总共的关卡类型（4*4,6*6,9*9）	3
+	TOTAL_DIFF_NUM	总共的难度个数（简单，普通，困难，专家，大师）	5
+	DIFFICULTY_MIN_1	难度1的空格个数范围的最小值	15
+	DIFFICULTY_MAX_1	难度1的空格个数范围的最大值	22
+	DIFFICULTY_MIN_2		23
+	DIFFICULTY_MAX_2		35
+	DIFFICULTY_MIN_3		36
+	DIFFICULTY_MAX_3		45
+	DIFFICULTY_MIN_4		46
+	DIFFICULTY_MAX_4		50
+	DIFFICULTY_MIN_5		51
+	DIFFICULTY_MAX_5		56

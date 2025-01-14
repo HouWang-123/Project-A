@@ -1,0 +1,14 @@
+﻿#	UI界面表							
+#	Id		SortOrder	UIPrefab	PauseCoveredUI	UIGroup	EscapeClose	
+#	int		int	string	bool	string	bool	
+#		备注			同组界面被覆盖时是否隐藏	UI组	返回键触发关闭界面	
+	1	设置界面	801	SettingDialog	False	Dialog	True	
+	2	toast界面	999	ToastTips	False	Tips	False	
+	3	游戏结束界面	103	GameOverUIForm	True	UIForm	False	
+	4	语言选择界面	802	LanguagesDialog	False	Dialog	True	
+	5	主菜单	10	MainMenu	False	UIForm	False	
+	6	免广够买弹窗	20	NoADsUIForm	False	UIForm	True	
+	7	大关卡选择界面	20	ChooseBigLevelUIForm	False	UIForm	True	
+	8	小关卡选择界面	20	ChooseLitLevelUIForm	False	UIForm	True	
+	9	数独板界面	10	SudokuBoardUIForm	False	UIForm	False	
+	10	二次确认弹窗	20	SureOptDialog	False	Dialog	True	

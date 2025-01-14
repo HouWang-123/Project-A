@@ -39,8 +39,8 @@ public class UIManager : MonoBehaviour
     {
         if (allWedgate.ContainsKey(panleName))
         {
-            return allWedgate[panleName][wedgateName];
             Debug.Log("执行");
+            return allWedgate[panleName][wedgateName];
         }
         return null;
     }

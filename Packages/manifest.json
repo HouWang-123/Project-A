@@ -1,6 +1,7 @@
 {
   "dependencies": {
-    "com.tuyoogame.yooasset": "2.1.2",
+    "com.newtonsoft.json": "1.0.1",
+    "com.tuyoogame.yooasset": "file:H:\\Download\\YooAsset-2.1.2\\YooAsset-2.1.2\\Assets\\YooAsset",
     "com.unity.cinemachine": "3.1.2",
     "com.unity.collab-proxy": "2.6.0",
     "com.unity.feature.2d": "2.0.1",
@@ -50,9 +51,9 @@
       "name": "package.openupm.com",
       "url": "https://package.openupm.com",
       "scopes": [
-        "com.tuyoogame.yooasset"
-      ],
-      "overrideBuiltIns": false
+        "com.tuyoogame.yooasset",
+        "com.newtonsoft.json"
+      ]
     }
   ]
 }
