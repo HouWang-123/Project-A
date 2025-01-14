@@ -66,7 +66,7 @@ end
 {{~if __bean.is_value_type~}}
 public partial struct {{__name}}
 {{~else~}}
-public {{class_modifier __bean}} partial class {{__name}} : {{if parent_def_type}}{{__bean.parent}}{{else}}Luban.BeanBase{{end}} , IData
+public {{class_modifier __bean}} partial class {{__name}} : {{if parent_def_type}}{{__bean.parent}}{{else}}Luban.BeanBase{{end}}
 {{~end~}}
 {
     public {{__name}}(JSONNode _buf) {{if parent_def_type}} : base(_buf) {{end}}

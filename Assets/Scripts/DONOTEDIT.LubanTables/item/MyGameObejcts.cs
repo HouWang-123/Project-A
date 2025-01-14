@@ -13,9 +13,9 @@ using SimpleJSON;
 
 namespace cfg.item
 {
-public sealed partial class Reward : Luban.BeanBase
+public sealed partial class MyGameObejcts : Luban.BeanBase
 {
-    public Reward(JSONNode _buf) 
+    public MyGameObejcts(JSONNode _buf) 
     {
         { if(!_buf["id"].IsNumber) { throw new SerializationException(); }  Id = _buf["id"]; }
         { if(!_buf["name"].IsString) { throw new SerializationException(); }  Name = _buf["name"]; }
@@ -23,9 +23,9 @@ public sealed partial class Reward : Luban.BeanBase
         { if(!_buf["count"].IsNumber) { throw new SerializationException(); }  Count = _buf["count"]; }
     }
 
-    public static Reward DeserializeReward(JSONNode _buf)
+    public static MyGameObejcts DeserializeMyGameObejcts(JSONNode _buf)
     {
-        return new item.Reward(_buf);
+        return new item.MyGameObejcts(_buf);
     }
 
     /// <summary>
@@ -45,7 +45,7 @@ public sealed partial class Reward : Luban.BeanBase
     /// </summary>
     public readonly int Count;
    
-    public const int __ID__ = -1878566262;
+    public const int __ID__ = 1548028945;
     public override int GetTypeId() => __ID__;
 
     public  void ResolveRef(Tables tables)

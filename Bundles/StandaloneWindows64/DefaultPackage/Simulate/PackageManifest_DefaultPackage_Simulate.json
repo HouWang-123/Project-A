@@ -9,8 +9,15 @@
     "PackageVersion": "Simulate",
     "AssetList": [
         {
-            "Address": "item_tablereward",
-            "AssetPath": "Assets/ArtAssets/DATAOUTPUT/item_tablereward.json",
+            "Address": "item_gameobjectstable",
+            "AssetPath": "Assets/ArtAssets/DATAOUTPUT/item_gameobjectstable.json",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 0
+        },
+        {
+            "Address": "item_rewardtable",
+            "AssetPath": "Assets/ArtAssets/DATAOUTPUT/item_rewardtable.json",
             "AssetGUID": "",
             "AssetTags": [],
             "BundleID": 0
@@ -188,9 +195,9 @@
         {
             "BundleName": "assets_artassets_dataoutput.bundle",
             "UnityCRC": 0,
-            "FileHash": "31952c1f47596ceeac0251dbc981662a",
+            "FileHash": "1c8431051b42ea4ecae4787a1883c551",
             "FileCRC": "00000000",
-            "FileSize": 190,
+            "FileSize": 380,
             "Encrypted": false,
             "Tags": [],
             "DependIDs": []
@@ -198,7 +205,7 @@
         {
             "BundleName": "assets_artassets_jsons.bundle",
             "UnityCRC": 0,
-            "FileHash": "e87935d6279d855320b187be9af6ec0b",
+            "FileHash": "c51a2632d432d25056282893732a0748",
             "FileCRC": "00000000",
             "FileSize": 27683,
             "Encrypted": false,
@@ -208,9 +215,9 @@
         {
             "BundleName": "assets_artassets_prefabs_map.bundle",
             "UnityCRC": 0,
-            "FileHash": "68447f3fc6378479591f8108a7b5c2c4",
+            "FileHash": "00d784d87d22c0627187c577f2ba19c2",
             "FileCRC": "00000000",
-            "FileSize": 18334,
+            "FileSize": 18978,
             "Encrypted": false,
             "Tags": [],
             "DependIDs": []
@@ -218,7 +225,7 @@
         {
             "BundleName": "assets_artassets_prefabs_player.bundle",
             "UnityCRC": 0,
-            "FileHash": "99bb9b3d0e865096835421b0d121aca0",
+            "FileHash": "84222f36399f9b119af857c1cebe7a35",
             "FileCRC": "00000000",
             "FileSize": 5329,
             "Encrypted": false,
@@ -228,9 +235,9 @@
         {
             "BundleName": "assets_artassets_prefabs_ui.bundle",
             "UnityCRC": 0,
-            "FileHash": "5c36c6f022cb628d54db36a3f7566c16",
+            "FileHash": "1227adc1c6265a9f0dc982af079fa552",
             "FileCRC": "00000000",
-            "FileSize": 75822,
+            "FileSize": 78373,
             "Encrypted": false,
             "Tags": [],
             "DependIDs": []

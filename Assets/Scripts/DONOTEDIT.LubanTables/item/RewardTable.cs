@@ -13,12 +13,12 @@ using SimpleJSON;
 
 namespace cfg.item
 {
-public partial class TableReward : ITable
+public partial class RewardTable
 {
     private readonly System.Collections.Generic.Dictionary<int, item.Reward> _dataMap;
     private readonly System.Collections.Generic.List<item.Reward> _dataList;
     
-    public TableReward(JSONNode _buf)
+    public RewardTable(JSONNode _buf)
     {
         _dataMap = new System.Collections.Generic.Dictionary<int, item.Reward>();
         _dataList = new System.Collections.Generic.List<item.Reward>();
@@ -47,12 +47,6 @@ public partial class TableReward : ITable
         }
     }
 
-    /// <summary>
-    /// 自定义接口操作
-    /// </summary>
-    public IData FindById(int Id){
-        return _dataMap[Id];
-    }
 }
 
 }

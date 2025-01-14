@@ -1,5 +1,7 @@
 using System.Collections;
+using System.Collections.Generic;
 using cfg;
+using cfg.item;
 using SimpleJSON;
 using UnityEngine;
 using YooAsset;
@@ -17,7 +19,7 @@ public class GameRoot : MonoBehaviour
 
         YooAssets.SetDefaultPackage(package);
 
-        switch(PlayMode)
+        switch (PlayMode)
         {
             case EPlayMode.EditorSimulateMode:
                 StartCoroutine(EditorInitPackage());
@@ -35,7 +37,8 @@ public class GameRoot : MonoBehaviour
     private IEnumerator EditorInitPackage()
     {
         var initParameters = new EditorSimulateModeParameters();
-        var simulateManifestFilePath = EditorSimulateModeHelper.SimulateBuild(EDefaultBuildPipeline.BuiltinBuildPipeline, "DefaultPackage");
+        var simulateManifestFilePath =
+            EditorSimulateModeHelper.SimulateBuild(EDefaultBuildPipeline.BuiltinBuildPipeline, "DefaultPackage");
         initParameters.SimulateManifestFilePath = simulateManifestFilePath;
         yield return package.InitializeAsync(initParameters);
         yield return null;
@@ -53,13 +56,22 @@ public class GameRoot : MonoBehaviour
 
     private void GameStart()
     {
-        ColorfulDebugger.Debug("LoadingData",ColorfulDebugger.Instance.Data);
+        ColorfulDebugger.Debug("LoadingData", ColorfulDebugger.Instance.Data);
         //Data
         GameTableDataAgent.LoadAllTable();
+        Invoke("ShowTables", 1f);
         //AssetHandle handle2 = YooAssets.LoadAssetSync<GameObject>("GameObject");
         //GameObject @object = Instantiate(handle2.AssetObject) as GameObject;
         UIManager.Instance.GetPanel("MainPanel");
-
         UIManager.Instance.GetPanel("LoadingPanel").GetComponent<UIBase>().Hide();
+    }
+
+    private void ShowTables()
+    {
+        Reward tableDataById = GameTableDataAgent.tb.RewardTable.Get(1001);
+        List<Reward> tableDataByIdtable = GameTableDataAgent.tb.RewardTable.DataList;
+        
+        ColorfulDebugger.Debug(tableDataById.ToString(),ColorfulDebugger.Instance.Data);
+        
     }
 }

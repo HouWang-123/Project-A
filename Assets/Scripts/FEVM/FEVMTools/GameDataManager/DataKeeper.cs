@@ -125,6 +125,10 @@ namespace FEVM.Data
             if (File.Exists(SavePath))
             {
                 string jsonData = File.ReadAllText(SavePath);
+                
+                // todo 解密
+                
+                
                 success = true;
                 // 新增：如果读取成功则可通过datakeeper实例中basedata直接获取
                 baseData = JsonUtility.FromJson<T>(jsonData);
@@ -144,6 +148,10 @@ namespace FEVM.Data
             string directory = Path.GetDirectoryName(SavePath);
             if (!Directory.Exists(directory)) { Directory.CreateDirectory(directory); }
             string jsonData = JsonUtility.ToJson(baseData);
+            
+            // todo 加密
+            
+            
             File.WriteAllText(SavePath, jsonData);
             ColorfulDebugger.Debug(Data.GetKey()+"数据保存成功,位置:"+SavePath,ColorfulDebugger.Instance.File);
         }

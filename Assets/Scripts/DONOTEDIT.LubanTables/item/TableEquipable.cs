@@ -13,7 +13,7 @@ using SimpleJSON;
 
 namespace cfg.item
 {
-public sealed partial class TableEquipable : Luban.BeanBase , IData
+public sealed partial class TableEquipable : Luban.BeanBase
 {
     public TableEquipable(JSONNode _buf) 
     {

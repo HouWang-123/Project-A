@@ -1,25 +1,9 @@
-using System;
-using System.Collections.Generic;
 using Luban;
 using SimpleJSON;
-
-///
-/// 添加接口编程规范
-///
-public interface IData
-{
-    
-}
-
-public interface ITable
-{
-    public IData FindById(int ID);
-}
 
 {{namespace_with_grace_begin __namespace}}
 public partial class {{__name}}
 {
-    public Dictionary<Type, ITable> ITables;
     {{~for table in __tables ~}}
 {{~if table.comment != '' ~}}
     /// <summary>
@@ -41,7 +25,6 @@ public partial class {{__name}}
     {
         {{~for table in __tables ~}}
         {{format_property_name __code_style table.name}}.ResolveRef(this);
-        ITables.Add({{format_property_name __code_style table.name}}.GetType(),{{format_property_name __code_style table.name}});
         {{~end~}}
     }
 }

@@ -12,37 +12,24 @@ using System.Collections.Generic;
 using Luban;
 using SimpleJSON;
 
-///
-/// 添加接口编程规范
-///
-public interface IData
-{
-    
-}
-
-public interface ITable
-{
-    public IData FindById(int ID);
-}
-
 namespace cfg
 {
 public partial class Tables
 {
-    public Dictionary<Type, ITable> ITables = new Dictionary<Type, ITable>();
-    public item.TableReward TableReward {get; }
+    public item.RewardTable RewardTable {get; }
+    public item.GameObjectsTable GameObjectsTable {get; }
 
     public Tables(System.Func<string, JSONNode> loader)
     {
-        TableReward = new item.TableReward(loader("item_tablereward"));
+        RewardTable = new item.RewardTable(loader("item_rewardtable"));
+        GameObjectsTable = new item.GameObjectsTable(loader("item_gameobjectstable"));
         ResolveRef();
     }
     
     private void ResolveRef()
     {
-        TableReward.ResolveRef(this);
-        ITables.Add(TableReward.GetType(),TableReward);
+        RewardTable.ResolveRef(this);
+        GameObjectsTable.ResolveRef(this);
     }
 }
-
 }
