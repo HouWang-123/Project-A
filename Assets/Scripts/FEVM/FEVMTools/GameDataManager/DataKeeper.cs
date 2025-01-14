@@ -124,11 +124,12 @@ namespace FEVM.Data
             if (!initialized) throw new DataException("数据初始化异常");
             if (File.Exists(SavePath))
             {
-                string jsonData = File.ReadAllText(SavePath);
-                
+                string decrypted = File.ReadAllText(SavePath);
+
                 // todo 解密
-                
-                
+                var (Key, IV) = AesEncryption.ConstAesKeyAndIv();
+                string jsonData = AesEncryption.DecryptString(decrypted, Key, IV);
+
                 success = true;
                 // 新增：如果读取成功则可通过datakeeper实例中basedata直接获取
                 baseData = JsonUtility.FromJson<T>(jsonData);
@@ -148,11 +149,12 @@ namespace FEVM.Data
             string directory = Path.GetDirectoryName(SavePath);
             if (!Directory.Exists(directory)) { Directory.CreateDirectory(directory); }
             string jsonData = JsonUtility.ToJson(baseData);
-            
+
             // todo 加密
-            
-            
-            File.WriteAllText(SavePath, jsonData);
+            var (Key, IV) = AesEncryption.ConstAesKeyAndIv();
+            string encrypted = AesEncryption.EncryptString(jsonData, Key, IV);
+
+            File.WriteAllText(SavePath, encrypted);
             ColorfulDebugger.Debug(Data.GetKey()+"数据保存成功,位置:"+SavePath,ColorfulDebugger.Instance.File);
         }
         protected void LoadData(Action callBack)
