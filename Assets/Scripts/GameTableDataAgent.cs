@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using cfg;
+using cfg.item;
 using SimpleJSON;
 using UnityEngine;
 using YooAsset;
@@ -9,11 +10,25 @@ using YooAsset;
 /// </summary>
 public class GameTableDataAgent
 {
-    public static Tables tb; // 所有表的集合
+    private static Tables _Instance; // 所有表的集合
+    
+    // in case of CLASSNAME CHANGES, introduce the table alas variable, and bridge it to real table instance
+    public static RewardTable RewardTable;
+    public static GameObjectsTable GameObjectsTable;
+    
+    
+    
     public static void LoadAllTable()
     {
         Tables tables = new cfg.Tables(LoadByteBuf);
-        tb = tables;
+        _Instance = tables;
+        
+        // bridge to shorter table usage, in case of CLASSNAME CHANGES
+        RewardTable = _Instance.RewardTable;
+        GameObjectsTable = _Instance.GameObjectsTable;
+        
+        
+        
         ColorfulDebugger.Debug(" All Game Data loaded", ColorfulDebugger.Instance.Data);
     }
     
