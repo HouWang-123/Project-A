@@ -7,8 +7,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System;
-using System.Collections.Generic;
 using Luban;
 using SimpleJSON;
 
@@ -18,11 +16,35 @@ public partial class Tables
 {
     public item.RewardTable RewardTable {get; }
     public item.GameObjectsTable GameObjectsTable {get; }
+    public item.TinyObjectsTable TinyObjectsTable {get; }
+    public item.WeaponTable WeaponTable {get; }
+    public item.FoodTable FoodTable {get; }
+    public item.ThrowObjectsTable ThrowObjectsTable {get; }
+    public item.SceneObjectsTable SceneObjectsTable {get; }
+    public item.ToolsTable ToolsTable {get; }
+    public item.JewelryTable JewelryTable {get; }
+    public cha.CharacterTable CharacterTable {get; }
+    public buff.ConditionsTable ConditionsTable {get; }
+    public buff.PassiveSkillsTable PassiveSkillsTable {get; }
+    public skill.ActiveSkillsTable ActiveSkillsTable {get; }
+    public interact.InteractEffectTable InteractEffectTable {get; }
 
     public Tables(System.Func<string, JSONNode> loader)
     {
         RewardTable = new item.RewardTable(loader("item_rewardtable"));
         GameObjectsTable = new item.GameObjectsTable(loader("item_gameobjectstable"));
+        TinyObjectsTable = new item.TinyObjectsTable(loader("item_tinyobjectstable"));
+        WeaponTable = new item.WeaponTable(loader("item_weapontable"));
+        FoodTable = new item.FoodTable(loader("item_foodtable"));
+        ThrowObjectsTable = new item.ThrowObjectsTable(loader("item_throwobjectstable"));
+        SceneObjectsTable = new item.SceneObjectsTable(loader("item_sceneobjectstable"));
+        ToolsTable = new item.ToolsTable(loader("item_toolstable"));
+        JewelryTable = new item.JewelryTable(loader("item_jewelrytable"));
+        CharacterTable = new cha.CharacterTable(loader("cha_charactertable"));
+        ConditionsTable = new buff.ConditionsTable(loader("buff_conditionstable"));
+        PassiveSkillsTable = new buff.PassiveSkillsTable(loader("buff_passiveskillstable"));
+        ActiveSkillsTable = new skill.ActiveSkillsTable(loader("skill_activeskillstable"));
+        InteractEffectTable = new interact.InteractEffectTable(loader("interact_interacteffecttable"));
         ResolveRef();
     }
     
@@ -30,6 +52,19 @@ public partial class Tables
     {
         RewardTable.ResolveRef(this);
         GameObjectsTable.ResolveRef(this);
+        TinyObjectsTable.ResolveRef(this);
+        WeaponTable.ResolveRef(this);
+        FoodTable.ResolveRef(this);
+        ThrowObjectsTable.ResolveRef(this);
+        SceneObjectsTable.ResolveRef(this);
+        ToolsTable.ResolveRef(this);
+        JewelryTable.ResolveRef(this);
+        CharacterTable.ResolveRef(this);
+        ConditionsTable.ResolveRef(this);
+        PassiveSkillsTable.ResolveRef(this);
+        ActiveSkillsTable.ResolveRef(this);
+        InteractEffectTable.ResolveRef(this);
     }
 }
+
 }

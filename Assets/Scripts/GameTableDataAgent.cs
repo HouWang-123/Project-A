@@ -1,37 +1,63 @@
 using System;
 using System.Collections.Generic;
 using cfg;
+using cfg.buff;
+using cfg.cha;
+using cfg.interact;
 using cfg.item;
+using cfg.skill;
 using SimpleJSON;
 using UnityEngine;
 using YooAsset;
+
 /// <summary>
 ///  Update: 修改类为 static
 /// </summary>
 public class GameTableDataAgent
 {
     private static Tables _Instance; // 所有表的集合
-    
+
     // in case of CLASSNAME CHANGES, introduce the table alas variable, and bridge it to real table instance
     public static RewardTable RewardTable;
     public static GameObjectsTable GameObjectsTable;
-    
-    
-    
+    public static TinyObjectsTable TinyObjectsTable;
+    public static WeaponTable WeaponTable;
+    public static FoodTable FoodTable;
+    public static ThrowObjectsTable ThrowObjectsTable;
+    public static SceneObjectsTable SceneObjectsTable;
+    public static ToolsTable ToolsTable;
+    public static JewelryTable JewelryTable;
+    public static CharacterTable CharacterTable;
+    public static ConditionsTable ConditionsTable;
+    public static PassiveSkillsTable PassiveSkillsTable;
+    public static ActiveSkillsTable ActiveSkillsTable;
+    public static InteractEffectTable InteractEffectTable;
+
+
     public static void LoadAllTable()
     {
         Tables tables = new cfg.Tables(LoadByteBuf);
         _Instance = tables;
-        
+
         // bridge to shorter table usage, in case of CLASSNAME CHANGES
         RewardTable = _Instance.RewardTable;
         GameObjectsTable = _Instance.GameObjectsTable;
-        
-        
-        
+        TinyObjectsTable = _Instance.TinyObjectsTable;
+        WeaponTable = _Instance.WeaponTable;
+        FoodTable = _Instance.FoodTable;
+        ThrowObjectsTable = _Instance.ThrowObjectsTable;
+        SceneObjectsTable = _Instance.SceneObjectsTable;
+        ToolsTable = _Instance.ToolsTable;
+        JewelryTable = _Instance.JewelryTable;
+        CharacterTable = _Instance.CharacterTable;
+        ConditionsTable = _Instance.ConditionsTable;
+        PassiveSkillsTable = _Instance.PassiveSkillsTable;
+        ActiveSkillsTable = _Instance.ActiveSkillsTable;
+        InteractEffectTable = _Instance.InteractEffectTable;
+
         ColorfulDebugger.Debug(" All Game Data loaded", ColorfulDebugger.Instance.Data);
     }
-    
+
     private static JSONNode LoadByteBuf(string file)
     {
         AssetHandle loadAssetSync = YooAssets.LoadAssetSync<TextAsset>(file);
@@ -39,78 +65,3 @@ public class GameTableDataAgent
         return JSON.Parse(assetObject.text);
     }
 }
-//
-// /// <summary>
-// /// 通过类型获取数据表
-// /// update: 添加泛型
-// /// </summary>
-// /// <param name="type"></param>
-// /// <returns></returns>
-// public static T GetTableByType<T>()
-// {
-//     
-// }
-//
-// /// <summary>
-// /// 通过传入Type和Id得到数据
-// /// update: 添加泛型
-// /// </summary>
-// /// <param name="type"></param>
-// /// <param name="Id"></param>
-// /// <returns></returns>
-// public static T GetTableDataById<T>(int Id)
-// {
-//     
-// }
-
-/// <summary>
-/// 万用数据（可以组合任意类型数据）
-/// 不推荐使用，这样会极大增加维护成本
-/// 相当于json中的可塞入任何数据的对象
-/// 不到万不得已千万不要使用，不然出现问题非常难排查
-/// </summary>
-// public class DataPackageBuilder
-// {
-//     private DataPackage dp = new ();
-//     public void BuildData(IData data)
-//     {
-//         dp.AddData(data);
-//     }
-//     public DataPackage Build()
-//     {
-//         return dp;
-//     }
-//     public class DataPackage
-//     {
-//         public List<Dictionary<Type, IData>> Datas = new();
-//         public List<IData> GetDataByType(Type t)
-//         {
-//             List<IData> datas = new List<IData>();
-//             foreach (var d in Datas)
-//             {
-//                 if (d.ContainsKey(t)) { datas.Add(d[t]); }
-//             }
-//             return datas;
-//         }
-//         public void AddData(IData data)
-//         {
-//             Type t = data.GetType();
-//             foreach (var VARIABLE in Datas)
-//             {
-//                 if (VARIABLE.ContainsKey(t))
-//                 {
-//                     continue;
-//                 }
-//                 else
-//                 {
-//                     VARIABLE.Add(t,data);
-//                     return;
-//                 }
-//             }
-//             Dictionary<Type, IData> AddOne = new Dictionary<Type, IData>();
-//             AddOne.Add(t,data);
-//             Datas.Add(AddOne);
-//         }
-//     }
-// }
-//

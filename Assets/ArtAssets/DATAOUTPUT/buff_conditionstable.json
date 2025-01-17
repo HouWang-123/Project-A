@@ -1,0 +1,90 @@
+[
+  {
+    "ID": 1001,
+    "NAME": "中毒",
+    "DESCRIBE": "技能描述",
+    "isTimed": true,
+    "canTimeStack": true,
+    "maxTime": 60
+  },
+  {
+    "ID": 1002,
+    "NAME": "灵视",
+    "DESCRIBE": "能看到隐形的东西",
+    "isTimed": true,
+    "canTimeStack": false,
+    "maxTime": 999
+  },
+  {
+    "ID": 1003,
+    "NAME": "寄生",
+    "DESCRIBE": "消化效率降低为[2:2:1]，当再次被寄生时，会变为【严重寄生】",
+    "isTimed": false,
+    "canTimeStack": false,
+    "maxTime": 0
+  },
+  {
+    "ID": 1004,
+    "NAME": "严重寄生",
+    "DESCRIBE": "消化效率降低为[3:3:1]]，当再次被寄生时，会变为【完全寄生】",
+    "isTimed": false,
+    "canTimeStack": false,
+    "maxTime": 0
+  },
+  {
+    "ID": 1005,
+    "NAME": "完全寄生",
+    "DESCRIBE": "消化效率降低为[4:4:1]，当再次被寄生时，立即受到20%最大生命值的伤害",
+    "isTimed": false,
+    "canTimeStack": false,
+    "maxTime": 0
+  },
+  {
+    "ID": 1006,
+    "NAME": "美德",
+    "DESCRIBE": "状态描述",
+    "isTimed": true,
+    "canTimeStack": true,
+    "maxTime": 120
+  },
+  {
+    "ID": 1007,
+    "NAME": "疯狂",
+    "DESCRIBE": "状态描述",
+    "isTimed": true,
+    "canTimeStack": true,
+    "maxTime": 120
+  },
+  {
+    "ID": 1008,
+    "NAME": "惊恐",
+    "DESCRIBE": "状态描述",
+    "isTimed": true,
+    "canTimeStack": false,
+    "maxTime": 999
+  },
+  {
+    "ID": 1009,
+    "NAME": "飞奔",
+    "DESCRIBE": "基础移动速度+0.5m/S",
+    "isTimed": true,
+    "canTimeStack": true,
+    "maxTime": 12
+  },
+  {
+    "ID": 1010,
+    "NAME": "洞开",
+    "DESCRIBE": "可以无消耗解锁一个门或物品，直到成功使用或持续时间结束",
+    "isTimed": true,
+    "canTimeStack": false,
+    "maxTime": 999
+  },
+  {
+    "ID": 1011,
+    "NAME": "精准射击",
+    "DESCRIBE": "下一次使用枪械的造成的伤害+30%，直到攻击一次或持续时间结束",
+    "isTimed": true,
+    "canTimeStack": false,
+    "maxTime": 999
+  }
+]

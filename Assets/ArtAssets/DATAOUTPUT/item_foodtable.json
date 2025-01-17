@@ -1,0 +1,38 @@
+[
+  {
+    "ID": 1001,
+    "NAME": "瓶装水",
+    "DESCRIBE": "物品描述",
+    "maxStackCount": 9,
+    "interactEffectID": 1001,
+    "WaterGain": 35,
+    "FoodGain": 0,
+    "SanGain": 0,
+    "StatusGain": 0,
+    "Weight": 1
+  },
+  {
+    "ID": 1002,
+    "NAME": "罐头",
+    "DESCRIBE": "物品描述",
+    "maxStackCount": 9,
+    "interactEffectID": 1001,
+    "WaterGain": 0,
+    "FoodGain": 35,
+    "SanGain": 0,
+    "StatusGain": 0,
+    "Weight": 1
+  },
+  {
+    "ID": 1003,
+    "NAME": "可乐",
+    "DESCRIBE": "物品描述",
+    "maxStackCount": 9,
+    "interactEffectID": 1001,
+    "WaterGain": 15,
+    "FoodGain": 15,
+    "SanGain": 1,
+    "StatusGain": 0,
+    "Weight": 1
+  }
+]
