@@ -1,0 +1,123 @@
+[
+  {
+    "ID": 1001,
+    "NAME": "匕首",
+    "DESCRIBE": "物品描述",
+    "maxStackCount": 1,
+    "interactEffectID": 10001,
+    "duribility": 10,
+    "Weight": 1,
+    "Attack": 8,
+    "AttackCD": 0.2
+  },
+  {
+    "ID": 1002,
+    "NAME": "刺剑",
+    "DESCRIBE": "物品描述",
+    "maxStackCount": 1,
+    "interactEffectID": 10001,
+    "duribility": 10,
+    "Weight": 2,
+    "Attack": 12,
+    "AttackCD": 0.3
+  },
+  {
+    "ID": 1003,
+    "NAME": "菜刀",
+    "DESCRIBE": "物品描述",
+    "maxStackCount": 1,
+    "interactEffectID": 10001,
+    "duribility": 10,
+    "Weight": 1,
+    "Attack": 8,
+    "AttackCD": 0.2
+  },
+  {
+    "ID": 1004,
+    "NAME": "太刀",
+    "DESCRIBE": "物品描述",
+    "maxStackCount": 1,
+    "interactEffectID": 10001,
+    "duribility": 10,
+    "Weight": 3,
+    "Attack": 16,
+    "AttackCD": 0.3
+  },
+  {
+    "ID": 1005,
+    "NAME": "消防斧",
+    "DESCRIBE": "物品描述",
+    "maxStackCount": 1,
+    "interactEffectID": 10001,
+    "duribility": 10,
+    "Weight": 5,
+    "Attack": 28,
+    "AttackCD": 0.5
+  },
+  {
+    "ID": 1010,
+    "NAME": "榔头",
+    "DESCRIBE": "物品描述",
+    "maxStackCount": 1,
+    "interactEffectID": 10001,
+    "duribility": 10,
+    "Weight": 2,
+    "Attack": 8,
+    "AttackCD": 0.3
+  },
+  {
+    "ID": 1011,
+    "NAME": "大锤",
+    "DESCRIBE": "物品描述",
+    "maxStackCount": 1,
+    "interactEffectID": 10001,
+    "duribility": 10,
+    "Weight": 5,
+    "Attack": 24,
+    "AttackCD": 0.5
+  },
+  {
+    "ID": 1012,
+    "NAME": "棒球棍",
+    "DESCRIBE": "物品描述",
+    "maxStackCount": 1,
+    "interactEffectID": 10001,
+    "duribility": 10,
+    "Weight": 3,
+    "Attack": 12,
+    "AttackCD": 0.3
+  },
+  {
+    "ID": 1013,
+    "NAME": "手枪",
+    "DESCRIBE": "物品描述",
+    "maxStackCount": 1,
+    "interactEffectID": 10001,
+    "duribility": 5000,
+    "Weight": 1,
+    "Attack": 12,
+    "AttackCD": 0.2
+  },
+  {
+    "ID": 1014,
+    "NAME": "霰弹枪",
+    "DESCRIBE": "物品描述",
+    "maxStackCount": 1,
+    "interactEffectID": 10001,
+    "duribility": 5000,
+    "Weight": 2,
+    "Attack": 16,
+    "AttackCD": 0.4
+  },
+  {
+    "ID": 1015,
+    "NAME": "打火机",
+    "DESCRIBE": "物品描述",
+    "maxStackCount": 1,
+    "interactEffectID": 10001,
+    "duribility": 30,
+    "Weight": 0,
+    "Attack": 0,
+    "AttackCD": 0.8
+  }
+]

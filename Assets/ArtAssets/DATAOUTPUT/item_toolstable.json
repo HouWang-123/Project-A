@@ -1,0 +1,42 @@
+[
+  {
+    "ID": 1001,
+    "NAME": "聚光手电",
+    "DESCRIBE": "物品描述",
+    "interactEffectID": 1001,
+    "derubility": 200,
+    "weight": 1
+  },
+  {
+    "ID": 1002,
+    "NAME": "萤火虫",
+    "DESCRIBE": "物品描述",
+    "interactEffectID": 1001,
+    "derubility": 0,
+    "weight": 0
+  },
+  {
+    "ID": 1003,
+    "NAME": "奇妙触手",
+    "DESCRIBE": "物品描述",
+    "interactEffectID": 1001,
+    "derubility": 100,
+    "weight": 0
+  },
+  {
+    "ID": 1004,
+    "NAME": "怀表",
+    "DESCRIBE": "物品描述",
+    "interactEffectID": 1001,
+    "derubility": 10,
+    "weight": 0
+  },
+  {
+    "ID": 1005,
+    "NAME": "燃液补充瓶",
+    "DESCRIBE": "物品描述",
+    "interactEffectID": 1001,
+    "derubility": 50,
+    "weight": 1
+  }
+]

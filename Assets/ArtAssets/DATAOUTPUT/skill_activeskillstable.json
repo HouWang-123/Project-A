@@ -1,0 +1,20 @@
+[
+  {
+    "ID": 1001,
+    "NAME": "千知万晓的洞开",
+    "DESCRIBE": "技能介绍文本",
+    "skillCD": 10,
+    "SkillSanCost": -25,
+    "SkillEffectID": 1010,
+    "SustainTime": 10
+  },
+  {
+    "ID": 1002,
+    "NAME": "砰！然后心动的射击",
+    "DESCRIBE": "技能介绍文本",
+    "skillCD": 10,
+    "SkillSanCost": -10,
+    "SkillEffectID": 1011,
+    "SustainTime": 10
+  }
+]

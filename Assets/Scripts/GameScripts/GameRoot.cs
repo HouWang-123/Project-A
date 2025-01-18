@@ -59,17 +59,19 @@ public class GameRoot : MonoBehaviour
         ColorfulDebugger.Debug("LoadingData", ColorfulDebugger.Instance.Data);
         //Data
         GameTableDataAgent.LoadAllTable();
-        Invoke("ShowTables", 1f);
+        
+        Invoke("ReadTableTest", 1f);
+        
         //AssetHandle handle2 = YooAssets.LoadAssetSync<GameObject>("GameObject");
         //GameObject @object = Instantiate(handle2.AssetObject) as GameObject;
         UIManager.Instance.GetPanel("MainPanel");
         UIManager.Instance.GetPanel("LoadingPanel").GetComponent<UIBase>().Hide();
     }
 
-    private void ShowTables()
+    private void ReadTableTest()
     {
-        Reward tableDataById = GameTableDataAgent.tb.RewardTable.Get(1001);
-        List<Reward> tableDataByIdtable = GameTableDataAgent.tb.RewardTable.DataList;
+        Reward tableDataById = GameTableDataAgent.RewardTable.Get(1001);
+        List<Reward> tableDataByIdtable = GameTableDataAgent.RewardTable.DataList;
         
         ColorfulDebugger.Debug(tableDataById.ToString(),ColorfulDebugger.Instance.Data);
         

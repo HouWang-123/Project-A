@@ -1,0 +1,29 @@
+[
+  {
+    "ID": 1001,
+    "NAME": "木箱",
+    "DESCRIBE": "物品描述",
+    "interactEffectID": 1002,
+    "isDestructible": true,
+    "weight": 3,
+    "attack": 16
+  },
+  {
+    "ID": 1002,
+    "NAME": "篮球",
+    "DESCRIBE": "物品描述",
+    "interactEffectID": 1002,
+    "isDestructible": true,
+    "weight": 1,
+    "attack": 4
+  },
+  {
+    "ID": 1003,
+    "NAME": "花瓶",
+    "DESCRIBE": "物品描述",
+    "interactEffectID": 1002,
+    "isDestructible": true,
+    "weight": 2,
+    "attack": 8
+  }
+]

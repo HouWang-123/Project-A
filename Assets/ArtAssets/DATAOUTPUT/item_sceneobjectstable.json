@@ -1,0 +1,110 @@
+[
+  {
+    "ID": 1001,
+    "NAME": "木屑",
+    "DESCRIBE": "文本描述",
+    "interactEffectID": 1004,
+    "isDestructible": true,
+    "durability": 1,
+    "attack": 0
+  },
+  {
+    "ID": 1002,
+    "NAME": "燃烧的木屑",
+    "DESCRIBE": "文本描述",
+    "interactEffectID": 0,
+    "isDestructible": false,
+    "durability": 8,
+    "attack": 14
+  },
+  {
+    "ID": 1003,
+    "NAME": "陶瓷碎片",
+    "DESCRIBE": "文本描述",
+    "interactEffectID": 0,
+    "isDestructible": true,
+    "durability": 3,
+    "attack": 8
+  },
+  {
+    "ID": 1004,
+    "NAME": "座钟",
+    "DESCRIBE": "文本描述",
+    "interactEffectID": 1005,
+    "isDestructible": false,
+    "durability": 0,
+    "attack": 0
+  },
+  {
+    "ID": 1005,
+    "NAME": "磨刀石",
+    "DESCRIBE": "文本描述",
+    "interactEffectID": 1006,
+    "isDestructible": false,
+    "durability": 0,
+    "attack": 0
+  },
+  {
+    "ID": 1006,
+    "NAME": "铁砧",
+    "DESCRIBE": "文本描述",
+    "interactEffectID": 1007,
+    "isDestructible": false,
+    "durability": 0,
+    "attack": 0
+  },
+  {
+    "ID": 1007,
+    "NAME": "充电站",
+    "DESCRIBE": "文本描述",
+    "interactEffectID": 1008,
+    "isDestructible": false,
+    "durability": 10,
+    "attack": 0
+  },
+  {
+    "ID": 1008,
+    "NAME": "干枯藤蔓",
+    "DESCRIBE": "文本描述",
+    "interactEffectID": 1004,
+    "isDestructible": true,
+    "durability": 3,
+    "attack": 0
+  },
+  {
+    "ID": 1009,
+    "NAME": "储物柜",
+    "DESCRIBE": "文本描述",
+    "interactEffectID": 1003,
+    "isDestructible": false,
+    "durability": 0,
+    "attack": 0
+  },
+  {
+    "ID": 1010,
+    "NAME": "书",
+    "DESCRIBE": "书本内容",
+    "interactEffectID": 1009,
+    "isDestructible": false,
+    "durability": 5,
+    "attack": 0
+  },
+  {
+    "ID": 1011,
+    "NAME": "尸骨堆",
+    "DESCRIBE": "文本描述",
+    "interactEffectID": 1004,
+    "isDestructible": true,
+    "durability": 300,
+    "attack": 0
+  },
+  {
+    "ID": 1012,
+    "NAME": "火焰",
+    "DESCRIBE": "文本描述",
+    "interactEffectID": 0,
+    "isDestructible": false,
+    "durability": 5,
+    "attack": 14
+  }
+]

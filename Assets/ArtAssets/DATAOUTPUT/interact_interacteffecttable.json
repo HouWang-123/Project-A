@@ -1,0 +1,162 @@
+[
+  {
+    "ID": 1001,
+    "NAME": "E：捡起",
+    "DESCRIBE": "0",
+    "requiredWeaponID": [
+      0
+    ],
+    "requiredFoodID": [
+      0
+    ],
+    "requiredThrowID": [
+      0
+    ],
+    "requiredToolID": [
+      0
+    ]
+  },
+  {
+    "ID": 1002,
+    "NAME": "E：举起",
+    "DESCRIBE": "0",
+    "requiredWeaponID": [
+      0
+    ],
+    "requiredFoodID": [
+      0
+    ],
+    "requiredThrowID": [
+      0
+    ],
+    "requiredToolID": [
+      0
+    ]
+  },
+  {
+    "ID": 1003,
+    "NAME": "E：查看",
+    "DESCRIBE": "0",
+    "requiredWeaponID": [
+      0
+    ],
+    "requiredFoodID": [
+      0
+    ],
+    "requiredThrowID": [
+      0
+    ],
+    "requiredToolID": [
+      0
+    ]
+  },
+  {
+    "ID": 1004,
+    "NAME": "E：点燃",
+    "DESCRIBE": "0",
+    "requiredWeaponID": [
+      1015
+    ],
+    "requiredFoodID": [
+      0
+    ],
+    "requiredThrowID": [
+      0
+    ],
+    "requiredToolID": [
+      0
+    ]
+  },
+  {
+    "ID": 1005,
+    "NAME": "E：现在几点了？",
+    "DESCRIBE": "0",
+    "requiredWeaponID": [
+      0
+    ],
+    "requiredFoodID": [
+      0
+    ],
+    "requiredThrowID": [
+      0
+    ],
+    "requiredToolID": [
+      0
+    ]
+  },
+  {
+    "ID": 1006,
+    "NAME": "E：打磨",
+    "DESCRIBE": "也许我可以拿利器来磨",
+    "requiredWeaponID": [
+      10001,
+      1002,
+      1003,
+      1004,
+      1005
+    ],
+    "requiredFoodID": [
+      0
+    ],
+    "requiredThrowID": [
+      0
+    ],
+    "requiredToolID": [
+      0
+    ]
+  },
+  {
+    "ID": 1007,
+    "NAME": "E：修缮",
+    "DESCRIBE": "也许我可以拿钝器来修",
+    "requiredWeaponID": [
+      1010,
+      1011,
+      1012
+    ],
+    "requiredFoodID": [
+      0
+    ],
+    "requiredThrowID": [
+      0
+    ],
+    "requiredToolID": [
+      0
+    ]
+  },
+  {
+    "ID": 1008,
+    "NAME": "E：充电",
+    "DESCRIBE": "也许我可以拿些什么来充电",
+    "requiredWeaponID": [
+      0
+    ],
+    "requiredFoodID": [
+      0
+    ],
+    "requiredThrowID": [
+      0
+    ],
+    "requiredToolID": [
+      1001,
+      1004
+    ]
+  },
+  {
+    "ID": 1009,
+    "NAME": "E：点燃",
+    "DESCRIBE": "E:阅读",
+    "requiredWeaponID": [
+      1015
+    ],
+    "requiredFoodID": [
+      0
+    ],
+    "requiredThrowID": [
+      0
+    ],
+    "requiredToolID": [
+      0
+    ]
+  }
+]
