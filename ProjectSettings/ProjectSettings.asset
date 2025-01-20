@@ -774,7 +774,7 @@ PlayerSettings:
     PS5: DOTWEEN
     QNX: DOTWEEN
     ReservedCFE: DOTWEEN
-    Standalone: DOTWEEN;TMP_PRESENT
+    Standalone: DOTWEEN;TMP_PRESENT;USE_CINEMACHINE_3
     VisionOS: DOTWEEN
     WebGL: DOTWEEN
     Windows Store Apps: DOTWEEN
