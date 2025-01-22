@@ -9,6 +9,41 @@
     "PackageVersion": "Simulate",
     "AssetList": [
         {
+            "Address": "buff_conditionstable",
+            "AssetPath": "Assets/ArtAssets/DATAOUTPUT/buff_conditionstable.json",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 0
+        },
+        {
+            "Address": "buff_passiveskillstable",
+            "AssetPath": "Assets/ArtAssets/DATAOUTPUT/buff_passiveskillstable.json",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 0
+        },
+        {
+            "Address": "cha_charactertable",
+            "AssetPath": "Assets/ArtAssets/DATAOUTPUT/cha_charactertable.json",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 0
+        },
+        {
+            "Address": "interact_interacteffecttable",
+            "AssetPath": "Assets/ArtAssets/DATAOUTPUT/interact_interacteffecttable.json",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 0
+        },
+        {
+            "Address": "item_foodtable",
+            "AssetPath": "Assets/ArtAssets/DATAOUTPUT/item_foodtable.json",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 0
+        },
+        {
             "Address": "item_gameobjectstable",
             "AssetPath": "Assets/ArtAssets/DATAOUTPUT/item_gameobjectstable.json",
             "AssetGUID": "",
@@ -16,8 +51,57 @@
             "BundleID": 0
         },
         {
+            "Address": "item_jewelrytable",
+            "AssetPath": "Assets/ArtAssets/DATAOUTPUT/item_jewelrytable.json",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 0
+        },
+        {
             "Address": "item_rewardtable",
             "AssetPath": "Assets/ArtAssets/DATAOUTPUT/item_rewardtable.json",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 0
+        },
+        {
+            "Address": "item_sceneobjectstable",
+            "AssetPath": "Assets/ArtAssets/DATAOUTPUT/item_sceneobjectstable.json",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 0
+        },
+        {
+            "Address": "item_throwobjectstable",
+            "AssetPath": "Assets/ArtAssets/DATAOUTPUT/item_throwobjectstable.json",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 0
+        },
+        {
+            "Address": "item_tinyobjectstable",
+            "AssetPath": "Assets/ArtAssets/DATAOUTPUT/item_tinyobjectstable.json",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 0
+        },
+        {
+            "Address": "item_toolstable",
+            "AssetPath": "Assets/ArtAssets/DATAOUTPUT/item_toolstable.json",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 0
+        },
+        {
+            "Address": "item_weapontable",
+            "AssetPath": "Assets/ArtAssets/DATAOUTPUT/item_weapontable.json",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 0
+        },
+        {
+            "Address": "skill_activeskillstable",
+            "AssetPath": "Assets/ArtAssets/DATAOUTPUT/skill_activeskillstable.json",
             "AssetGUID": "",
             "AssetTags": [],
             "BundleID": 0
@@ -197,7 +281,7 @@
             "UnityCRC": 0,
             "FileHash": "31952c1f47596ceeac0251dbc981662a",
             "FileCRC": "00000000",
-            "FileSize": 380,
+            "FileSize": 19517,
             "Encrypted": false,
             "Tags": [],
             "DependIDs": []
@@ -237,7 +321,7 @@
             "UnityCRC": 0,
             "FileHash": "5c36c6f022cb628d54db36a3f7566c16",
             "FileCRC": "00000000",
-            "FileSize": 75822,
+            "FileSize": 75942,
             "Encrypted": false,
             "Tags": [],
             "DependIDs": []

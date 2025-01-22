@@ -7,7 +7,7 @@ public class SaveDataPanel : UIBase
     protected override void Awake()
     {
         base.Awake();
-
+        SetSelect("GameSaveData1_N");
     }
 
     protected override void AddListen()
@@ -21,6 +21,8 @@ public class SaveDataPanel : UIBase
         });
         AddButtonListen("CancelButton_N", () =>
         {
+            //UIManager.Instance.GetGameObject("MainPanel", "GameStartButton_N").GetComponent<UIBehaviour>().SetSelect();
+            UIManager.Instance.GetPanel("MainPanel").GetComponent<UIBase>().SetSelect("GameStartButton_N");
             Hide();
         });
     }
