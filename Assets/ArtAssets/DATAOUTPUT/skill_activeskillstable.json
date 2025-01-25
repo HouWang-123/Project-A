@@ -2,19 +2,17 @@
   {
     "ID": 1001,
     "NAME": "千知万晓的洞开",
-    "DESCRIBE": "技能介绍文本",
+    "DESCRIBE": "San值-25，下一次解锁物件时将不需要钥匙",
     "skillCD": 10,
     "SkillSanCost": -25,
-    "SkillEffectID": 1010,
-    "SustainTime": 10
+    "SkillEffectID": 1010
   },
   {
     "ID": 1002,
     "NAME": "砰！然后心动的射击",
-    "DESCRIBE": "技能介绍文本",
+    "DESCRIBE": "San值-5.下一次通过枪械的造成的伤害+50%",
     "skillCD": 10,
-    "SkillSanCost": -10,
-    "SkillEffectID": 1011,
-    "SustainTime": 10
+    "SkillSanCost": -5,
+    "SkillEffectID": 1011
   }
 ]

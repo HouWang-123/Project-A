@@ -42,7 +42,7 @@
   {
     "ID": 1006,
     "NAME": "美德",
-    "DESCRIBE": "状态描述",
+    "DESCRIBE": "在此期间，反转San值的变化量",
     "isTimed": true,
     "canTimeStack": true,
     "maxTime": 120
@@ -50,7 +50,7 @@
   {
     "ID": 1007,
     "NAME": "疯狂",
-    "DESCRIBE": "状态描述",
+    "DESCRIBE": "通过武器造成的最终伤害提升，值为最大San值与当前San值差值的一半",
     "isTimed": true,
     "canTimeStack": true,
     "maxTime": 120
@@ -58,7 +58,7 @@
   {
     "ID": 1008,
     "NAME": "惊恐",
-    "DESCRIBE": "状态描述",
+    "DESCRIBE": "角色力量值+1，近战武器造成的伤害-30% ",
     "isTimed": true,
     "canTimeStack": false,
     "maxTime": 999
@@ -74,17 +74,41 @@
   {
     "ID": 1010,
     "NAME": "洞开",
-    "DESCRIBE": "可以无消耗解锁一个门或物品，直到成功使用或持续时间结束",
-    "isTimed": true,
+    "DESCRIBE": "下一次解锁一个普通门或物品时将不消耗钥匙，持续到成功使用",
+    "isTimed": false,
     "canTimeStack": false,
-    "maxTime": 999
+    "maxTime": 0
   },
   {
     "ID": 1011,
     "NAME": "精准射击",
-    "DESCRIBE": "下一次使用枪械的造成的伤害+30%，直到攻击一次或持续时间结束",
-    "isTimed": true,
+    "DESCRIBE": "下一次通过枪械的造成的伤害+50%，持续到成功使用",
+    "isTimed": false,
     "canTimeStack": false,
-    "maxTime": 999
+    "maxTime": 0
+  },
+  {
+    "ID": 1012,
+    "NAME": "癫狂1",
+    "DESCRIBE": "San值在(40,60]",
+    "isTimed": false,
+    "canTimeStack": false,
+    "maxTime": 0
+  },
+  {
+    "ID": 1013,
+    "NAME": "癫狂2",
+    "DESCRIBE": "San值在(20-40]",
+    "isTimed": false,
+    "canTimeStack": false,
+    "maxTime": 0
+  },
+  {
+    "ID": 1014,
+    "NAME": "癫狂3",
+    "DESCRIBE": "San值在[0,20]",
+    "isTimed": false,
+    "canTimeStack": false,
+    "maxTime": 0
   }
 ]

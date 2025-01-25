@@ -1,1 +1,0 @@
-{"RoleActiveSkillTable": [{"ID": 102001, "Name": "千知万晓的洞开", "DESCRIBE": "技能文本", "SkillCD": 10, "SkillSanCost": -25, "SkillEffectID": 20010, "SustainTime": 10}, {"ID": 102002, "Name": "砰！然后心动的射击", "DESCRIBE": "技能文本", "SkillCD": 10, "SkillSanCost": -10, "SkillEffectID": 20011, "SustainTime": 10}]}

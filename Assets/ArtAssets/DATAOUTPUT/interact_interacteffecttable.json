@@ -86,14 +86,17 @@
   },
   {
     "ID": 1006,
-    "NAME": "E：打磨",
-    "DESCRIBE": "也许我可以拿利器来磨",
+    "NAME": "E：修缮",
+    "DESCRIBE": "也许我可以拿武器来修",
     "requiredWeaponID": [
-      10001,
+      1001,
       1002,
       1003,
       1004,
-      1005
+      1005,
+      1006,
+      1007,
+      1008
     ],
     "requiredFoodID": [
       0
@@ -107,25 +110,6 @@
   },
   {
     "ID": 1007,
-    "NAME": "E：修缮",
-    "DESCRIBE": "也许我可以拿钝器来修",
-    "requiredWeaponID": [
-      1010,
-      1011,
-      1012
-    ],
-    "requiredFoodID": [
-      0
-    ],
-    "requiredThrowID": [
-      0
-    ],
-    "requiredToolID": [
-      0
-    ]
-  },
-  {
-    "ID": 1008,
     "NAME": "E：充电",
     "DESCRIBE": "也许我可以拿些什么来充电",
     "requiredWeaponID": [
@@ -143,7 +127,7 @@
     ]
   },
   {
-    "ID": 1009,
+    "ID": 1008,
     "NAME": "E：点燃",
     "DESCRIBE": "E:阅读",
     "requiredWeaponID": [
@@ -154,6 +138,23 @@
     ],
     "requiredThrowID": [
       0
+    ],
+    "requiredToolID": [
+      0
+    ]
+  },
+  {
+    "ID": 1009,
+    "NAME": "E：放入篮球",
+    "DESCRIBE": "0",
+    "requiredWeaponID": [
+      0
+    ],
+    "requiredFoodID": [
+      0
+    ],
+    "requiredThrowID": [
+      1002
     ],
     "requiredToolID": [
       0
