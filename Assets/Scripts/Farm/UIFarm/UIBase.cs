@@ -125,6 +125,15 @@ public abstract class UIBase : MonoBehaviour, IUIShowHide
         }
         return null;
     }
+
+    public void SetSelect(string widageName)
+    {
+        UIBehaviour tmpBehaviour = GetBehaviour(widageName);
+        if(tmpBehaviour != null)
+        {
+            tmpBehaviour.SetSelect();
+        }
+    }
     
     public void Destroy()
     {

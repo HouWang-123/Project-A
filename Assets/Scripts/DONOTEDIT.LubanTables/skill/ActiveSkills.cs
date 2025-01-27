@@ -23,7 +23,6 @@ public sealed partial class ActiveSkills : Luban.BeanBase
         { if(!_buf["skillCD"].IsNumber) { throw new SerializationException(); }  SkillCD = _buf["skillCD"]; }
         { if(!_buf["SkillSanCost"].IsNumber) { throw new SerializationException(); }  SkillSanCost = _buf["SkillSanCost"]; }
         { if(!_buf["SkillEffectID"].IsNumber) { throw new SerializationException(); }  SkillEffectID = _buf["SkillEffectID"]; }
-        { if(!_buf["SustainTime"].IsNumber) { throw new SerializationException(); }  SustainTime = _buf["SustainTime"]; }
     }
 
     public static ActiveSkills DeserializeActiveSkills(JSONNode _buf)
@@ -36,8 +35,10 @@ public sealed partial class ActiveSkills : Luban.BeanBase
     public readonly string DESCRIBE;
     public readonly int SkillCD;
     public readonly int SkillSanCost;
+    /// <summary>
+    /// 技能效果
+    /// </summary>
     public readonly int SkillEffectID;
-    public readonly int SustainTime;
    
     public const int __ID__ = -179974267;
     public override int GetTypeId() => __ID__;
@@ -55,7 +56,6 @@ public sealed partial class ActiveSkills : Luban.BeanBase
         + "skillCD:" + SkillCD + ","
         + "SkillSanCost:" + SkillSanCost + ","
         + "SkillEffectID:" + SkillEffectID + ","
-        + "SustainTime:" + SustainTime + ","
         + "}";
     }
 }

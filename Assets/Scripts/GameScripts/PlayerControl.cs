@@ -38,11 +38,12 @@ public class PlayerControl : MonoBehaviour
         {
             //PlayerMove(new Vector3(x, 0, z), Speed * Time.deltaTime);
         }
-        PlayerMove(inputControl.GamePlayer.Move.ReadValue<Vector2>(), Speed * Time.deltaTime);
+        //PlayerMove(inputControl.GamePlayer.Move.ReadValue<Vector2>(), Speed * Time.deltaTime);
+        PlayerMove(InputControl.Instance.MovePoint, Speed * Time.deltaTime);
         //Debug.Log(Input.mousePosition);
         Vector3 v = Camera.main.WorldToScreenPoint(transform.position);
         //if(Input.mousePosition.x < v.x)
-        if(inputControl.GamePlayer.Look.ReadValue<Vector2>().x < v.x)
+        if(InputControl.Instance.GetLook().x < v.x)
         {
             playerRenderer.localScale = GameConstData.ReverseScale;
         }

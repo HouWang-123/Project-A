@@ -197,6 +197,14 @@ public class UIBehaviour : MonoBehaviour, IUIShowHide
         Image tmpBtn = transform.GetComponent<Image>();
         return tmpBtn;
     }
+    public void SetSelect()
+    {
+        Selectable selectable = transform.GetComponent<Selectable>();
+        if (selectable != null)
+        {
+            selectable.Select();
+        }
+    }
     void Start()
     {
 

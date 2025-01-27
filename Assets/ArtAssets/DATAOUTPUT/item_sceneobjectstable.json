@@ -37,7 +37,7 @@
   },
   {
     "ID": 1005,
-    "NAME": "磨刀石",
+    "NAME": "铁砧",
     "DESCRIBE": "文本描述",
     "interactEffectID": 1006,
     "isDestructible": false,
@@ -46,24 +46,15 @@
   },
   {
     "ID": 1006,
-    "NAME": "铁砧",
-    "DESCRIBE": "文本描述",
-    "interactEffectID": 1007,
-    "isDestructible": false,
-    "durability": 0,
-    "attack": 0
-  },
-  {
-    "ID": 1007,
     "NAME": "充电站",
     "DESCRIBE": "文本描述",
-    "interactEffectID": 1008,
+    "interactEffectID": 1007,
     "isDestructible": false,
     "durability": 10,
     "attack": 0
   },
   {
-    "ID": 1008,
+    "ID": 1007,
     "NAME": "干枯藤蔓",
     "DESCRIBE": "文本描述",
     "interactEffectID": 1004,
@@ -72,7 +63,7 @@
     "attack": 0
   },
   {
-    "ID": 1009,
+    "ID": 1008,
     "NAME": "储物柜",
     "DESCRIBE": "文本描述",
     "interactEffectID": 1003,
@@ -81,16 +72,16 @@
     "attack": 0
   },
   {
-    "ID": 1010,
+    "ID": 1009,
     "NAME": "书",
     "DESCRIBE": "书本内容",
-    "interactEffectID": 1009,
+    "interactEffectID": 1008,
     "isDestructible": false,
     "durability": 5,
     "attack": 0
   },
   {
-    "ID": 1011,
+    "ID": 1010,
     "NAME": "尸骨堆",
     "DESCRIBE": "文本描述",
     "interactEffectID": 1004,
@@ -99,12 +90,21 @@
     "attack": 0
   },
   {
-    "ID": 1012,
+    "ID": 1011,
     "NAME": "火焰",
     "DESCRIBE": "文本描述",
     "interactEffectID": 0,
     "isDestructible": false,
     "durability": 5,
     "attack": 14
+  },
+  {
+    "ID": 1012,
+    "NAME": "篮球框",
+    "DESCRIBE": "文本描述",
+    "interactEffectID": 0,
+    "isDestructible": false,
+    "durability": 0,
+    "attack": 0
   }
 ]
