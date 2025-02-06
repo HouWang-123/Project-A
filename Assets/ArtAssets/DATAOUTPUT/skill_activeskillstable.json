@@ -1,7 +1,7 @@
 [
   {
     "ID": 1001,
-    "NAME": "千知万晓的洞开",
+    "NAME": "无界通行",
     "DESCRIBE": "San值-25，下一次解锁物件时将不需要钥匙",
     "skillCD": 10,
     "SkillSanCost": -25,
@@ -9,7 +9,7 @@
   },
   {
     "ID": 1002,
-    "NAME": "砰！然后心动的射击",
+    "NAME": "膛线与真理",
     "DESCRIBE": "San值-5.下一次通过枪械的造成的伤害+50%",
     "skillCD": 10,
     "SkillSanCost": -5,
