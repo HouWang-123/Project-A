@@ -44,13 +44,6 @@
             "BundleID": 0
         },
         {
-            "Address": "item_gameobjectstable",
-            "AssetPath": "Assets/ArtAssets/DATAOUTPUT/item_gameobjectstable.json",
-            "AssetGUID": "",
-            "AssetTags": [],
-            "BundleID": 0
-        },
-        {
             "Address": "item_jewelrytable",
             "AssetPath": "Assets/ArtAssets/DATAOUTPUT/item_jewelrytable.json",
             "AssetGUID": "",
@@ -107,172 +100,46 @@
             "BundleID": 0
         },
         {
-            "Address": "DropsTable",
-            "AssetPath": "Assets/ArtAssets/Jsons/DropsTable.json",
-            "AssetGUID": "",
-            "AssetTags": [],
-            "BundleID": 1
-        },
-        {
-            "Address": "FoodTable",
-            "AssetPath": "Assets/ArtAssets/Jsons/FoodTable.json",
-            "AssetGUID": "",
-            "AssetTags": [],
-            "BundleID": 1
-        },
-        {
-            "Address": "FunctionalItemTable",
-            "AssetPath": "Assets/ArtAssets/Jsons/FunctionalItemTable.json",
-            "AssetGUID": "",
-            "AssetTags": [],
-            "BundleID": 1
-        },
-        {
-            "Address": "InteractionTable",
-            "AssetPath": "Assets/ArtAssets/Jsons/InteractionTable.json",
-            "AssetGUID": "",
-            "AssetTags": [],
-            "BundleID": 1
-        },
-        {
-            "Address": "ItemTable",
-            "AssetPath": "Assets/ArtAssets/Jsons/ItemTable.json",
-            "AssetGUID": "",
-            "AssetTags": [],
-            "BundleID": 1
-        },
-        {
-            "Address": "JewlishTable",
-            "AssetPath": "Assets/ArtAssets/Jsons/JewlishTable.json",
-            "AssetGUID": "",
-            "AssetTags": [],
-            "BundleID": 1
-        },
-        {
-            "Address": "LevelTable",
-            "AssetPath": "Assets/ArtAssets/Jsons/LevelTable.json",
-            "AssetGUID": "",
-            "AssetTags": [],
-            "BundleID": 1
-        },
-        {
-            "Address": "MonsterSkillTable",
-            "AssetPath": "Assets/ArtAssets/Jsons/MonsterSkillTable.json",
-            "AssetGUID": "",
-            "AssetTags": [],
-            "BundleID": 1
-        },
-        {
-            "Address": "MonsterTable",
-            "AssetPath": "Assets/ArtAssets/Jsons/MonsterTable.json",
-            "AssetGUID": "",
-            "AssetTags": [],
-            "BundleID": 1
-        },
-        {
-            "Address": "RoleActiveSkillTable",
-            "AssetPath": "Assets/ArtAssets/Jsons/RoleActiveSkillTable.json",
-            "AssetGUID": "",
-            "AssetTags": [],
-            "BundleID": 1
-        },
-        {
-            "Address": "RoleAttributeTable",
-            "AssetPath": "Assets/ArtAssets/Jsons/RoleAttributeTable.json",
-            "AssetGUID": "",
-            "AssetTags": [],
-            "BundleID": 1
-        },
-        {
-            "Address": "RolePassiveTable",
-            "AssetPath": "Assets/ArtAssets/Jsons/RolePassiveTable.json",
-            "AssetGUID": "",
-            "AssetTags": [],
-            "BundleID": 1
-        },
-        {
-            "Address": "RoleStatusTable",
-            "AssetPath": "Assets/ArtAssets/Jsons/RoleStatusTable.json",
-            "AssetGUID": "",
-            "AssetTags": [],
-            "BundleID": 1
-        },
-        {
-            "Address": "SceneItemTable",
-            "AssetPath": "Assets/ArtAssets/Jsons/SceneItemTable.json",
-            "AssetGUID": "",
-            "AssetTags": [],
-            "BundleID": 1
-        },
-        {
-            "Address": "SceneRoleTable",
-            "AssetPath": "Assets/ArtAssets/Jsons/SceneRoleTable.json",
-            "AssetGUID": "",
-            "AssetTags": [],
-            "BundleID": 1
-        },
-        {
-            "Address": "SceneRuleTable",
-            "AssetPath": "Assets/ArtAssets/Jsons/SceneRuleTable.json",
-            "AssetGUID": "",
-            "AssetTags": [],
-            "BundleID": 1
-        },
-        {
-            "Address": "SpawnTable",
-            "AssetPath": "Assets/ArtAssets/Jsons/SpawnTable.json",
-            "AssetGUID": "",
-            "AssetTags": [],
-            "BundleID": 1
-        },
-        {
-            "Address": "ThrowableTable",
-            "AssetPath": "Assets/ArtAssets/Jsons/ThrowableTable.json",
-            "AssetGUID": "",
-            "AssetTags": [],
-            "BundleID": 1
-        },
-        {
-            "Address": "WeaponTable",
-            "AssetPath": "Assets/ArtAssets/Jsons/WeaponTable.json",
-            "AssetGUID": "",
-            "AssetTags": [],
-            "BundleID": 1
-        },
-        {
             "Address": "Map0000",
             "AssetPath": "Assets/ArtAssets/Prefabs/Map/Map0000.prefab",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 2
+            "BundleID": 1
         },
         {
             "Address": "Player000",
             "AssetPath": "Assets/ArtAssets/Prefabs/Player/Player000.prefab",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 3
+            "BundleID": 2
+        },
+        {
+            "Address": "ZiDan",
+            "AssetPath": "Assets/ArtAssets/Prefabs/Player/ZiDan.prefab",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 2
         },
         {
             "Address": "GamePanel",
             "AssetPath": "Assets/ArtAssets/Prefabs/UI/GamePanel.prefab",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 4
+            "BundleID": 3
         },
         {
             "Address": "MainPanel",
             "AssetPath": "Assets/ArtAssets/Prefabs/UI/MainPanel.prefab",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 4
+            "BundleID": 3
         },
         {
             "Address": "SaveDataPanel",
             "AssetPath": "Assets/ArtAssets/Prefabs/UI/SaveDataPanel.prefab",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 4
+            "BundleID": 3
         }
     ],
     "BundleList": [
@@ -281,17 +148,7 @@
             "UnityCRC": 0,
             "FileHash": "31952c1f47596ceeac0251dbc981662a",
             "FileCRC": "00000000",
-            "FileSize": 19517,
-            "Encrypted": false,
-            "Tags": [],
-            "DependIDs": []
-        },
-        {
-            "BundleName": "assets_artassets_jsons.bundle",
-            "UnityCRC": 0,
-            "FileHash": "e87935d6279d855320b187be9af6ec0b",
-            "FileCRC": "00000000",
-            "FileSize": 27683,
+            "FileSize": 21587,
             "Encrypted": false,
             "Tags": [],
             "DependIDs": []
@@ -311,7 +168,7 @@
             "UnityCRC": 0,
             "FileHash": "99bb9b3d0e865096835421b0d121aca0",
             "FileCRC": "00000000",
-            "FileSize": 5142,
+            "FileSize": 11424,
             "Encrypted": false,
             "Tags": [],
             "DependIDs": []
