@@ -146,7 +146,7 @@
         {
             "BundleName": "assets_artassets_dataoutput.bundle",
             "UnityCRC": 0,
-            "FileHash": "31952c1f47596ceeac0251dbc981662a",
+            "FileHash": "1c8431051b42ea4ecae4787a1883c551",
             "FileCRC": "00000000",
             "FileSize": 21587,
             "Encrypted": false,
@@ -156,9 +156,9 @@
         {
             "BundleName": "assets_artassets_prefabs_map.bundle",
             "UnityCRC": 0,
-            "FileHash": "68447f3fc6378479591f8108a7b5c2c4",
+            "FileHash": "00d784d87d22c0627187c577f2ba19c2",
             "FileCRC": "00000000",
-            "FileSize": 19720,
+            "FileSize": 22554,
             "Encrypted": false,
             "Tags": [],
             "DependIDs": []
@@ -166,9 +166,9 @@
         {
             "BundleName": "assets_artassets_prefabs_player.bundle",
             "UnityCRC": 0,
-            "FileHash": "99bb9b3d0e865096835421b0d121aca0",
+            "FileHash": "84222f36399f9b119af857c1cebe7a35",
             "FileCRC": "00000000",
-            "FileSize": 11424,
+            "FileSize": 12311,
             "Encrypted": false,
             "Tags": [],
             "DependIDs": []
@@ -176,9 +176,9 @@
         {
             "BundleName": "assets_artassets_prefabs_ui.bundle",
             "UnityCRC": 0,
-            "FileHash": "5c36c6f022cb628d54db36a3f7566c16",
+            "FileHash": "1227adc1c6265a9f0dc982af079fa552",
             "FileCRC": "00000000",
-            "FileSize": 75942,
+            "FileSize": 78493,
             "Encrypted": false,
             "Tags": [],
             "DependIDs": []

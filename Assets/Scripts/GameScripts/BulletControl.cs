@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using DG.Tweening;
 
@@ -10,5 +11,8 @@ public class BulletControl : MonoBehaviour
         transform.position += transform.right * Speed * Time.deltaTime;
     }
 
-
+    private void OnCollisionEnter(Collision other)
+    {
+        Destroy(gameObject);
+    }
 }
