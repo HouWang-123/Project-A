@@ -1,0 +1,66 @@
+using System;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.SearchService;
+using UnityEngine.Serialization;
+
+public class PlayerPickupController : MonoBehaviour
+{
+    public ItemBase currentPickup; // 目标拾取
+    public List<ItemBase> Item2PickList; // 拾取列表
+
+    public void Start()
+    {
+        Item2PickList = new List<ItemBase>();
+    }
+
+    public void ChangePickupTarget() // 拾取范围内目标拾取物品转换逻辑
+    {
+        if (Item2PickList.Count == 0)
+        {
+            currentPickup = null;
+            return;
+        }
+        currentPickup.setTargerted(false);
+        int RangeLength = Item2PickList.Count;
+        int nextindex = Item2PickList.IndexOf(currentPickup) + 1;
+        if (Item2PickList.IndexOf(currentPickup) + 1 == RangeLength)
+        {
+            nextindex = 0;
+        }
+        currentPickup = Item2PickList[nextindex];
+        currentPickup.setCanBePickUp(true);
+    }
+    public void OnTriggerEnter(Collider other){
+        Debug.Log(other.gameObject.name);
+        if (other.gameObject.tag.Equals("Item"))
+        {
+            if (currentPickup != null)
+            {
+                currentPickup.setTargerted(false);  // 新物品进入范围后取消之前的目标
+            }
+            currentPickup = other.gameObject.GetComponent<ItemBase>();
+            if (currentPickup == null)
+            {
+                Debug.LogWarning("no ItemBase component assigned to " + other.gameObject.name);
+                return;
+            }
+            Item2PickList.Add(currentPickup);
+            currentPickup.setCanBePickUp(true);
+            currentPickup.setTargerted(true);
+        }
+    }
+
+    public void OnTriggerExit(Collider other) // 物品离开拾取范围
+    {
+        Debug.Log(other.gameObject.name);
+        if (other.gameObject.tag.Equals("Item"))
+        {
+            ItemBase itemBase = other.gameObject.GetComponent<ItemBase>();
+            itemBase.setCanBePickUp(false);
+            itemBase.setTargerted(false);
+            Item2PickList.Remove(itemBase);
+            ChangePickupTarget(); // 重新设定一个目标拾取
+        }
+    }
+}

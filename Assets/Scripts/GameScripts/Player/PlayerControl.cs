@@ -12,7 +12,7 @@ public class PlayerControl : MonoBehaviour
     private Transform useObjParent;
 
     public float Speed = 5f;
-
+    
     //前后移动的速度比率
     private float fToB = 0.6f;
 
@@ -43,14 +43,14 @@ public class PlayerControl : MonoBehaviour
     private void FireCancelTest(UnityEngine.InputSystem.InputAction.CallbackContext text)
     {
         fire = false;
-        Debug.Log("点击结束");
+        // Debug.Log("点击结束");
     }
 
     private void FireStarTest(UnityEngine.InputSystem.InputAction.CallbackContext text)
     {
         asset = YooAssets.LoadAssetSync("ZiDan");
         fire = true;
-        Debug.Log("操作开始");
+        // Debug.Log("操作开始");
     }
     AssetHandle asset;
     float Waitime = 0.3f;
@@ -58,12 +58,12 @@ public class PlayerControl : MonoBehaviour
     bool fire = false;
     private void FireTest(UnityEngine.InputSystem.InputAction.CallbackContext text)
     {
-        Debug.Log("点击");
+        // Debug.Log("点击");
     }
 
     Vector3 u, v, l, a, b;
     float angle;
-    private void Update()
+    private void FixedUpdate()
     {
         PlayerMove(InputControl.Instance.MovePoint, Speed * Time.deltaTime);
         v = Camera.main.WorldToScreenPoint(transform.position);
@@ -71,10 +71,21 @@ public class PlayerControl : MonoBehaviour
         if(l.x < v.x)
         {
             playerRenderer.localScale = GameConstData.ReverseScale;
+            
+            // // 翻转 usepoint 位置
+            // Vector3 originalUsePosition = useObjParent.localPosition;
+            // originalUsePosition.x *= -1;
+            // useObjParent.localPosition = originalUsePosition;
         }
         else
         {
             playerRenderer.localScale = Vector3.one;
+            
+            // // 翻转 usepoint 位置
+            // Vector3 originalUsePosition = useObjParent.localPosition;
+            // originalUsePosition.x *= -1;
+            // useObjParent.localPosition = originalUsePosition;
+            
         }
         u = Camera.main.WorldToScreenPoint(useObjParent.position);
         l = l - u;
@@ -143,7 +154,16 @@ public class PlayerControl : MonoBehaviour
             playerRG.Move(vector * speed + transform.position, Quaternion.identity);
         }
     }
+    // 物品拾取
+    public PlayerPickupController PlayerPickupController;
+    public GameObject PickUpPosition;
+    public void DropItem()  // 丢下当前物品
+    {
+        
+    }
 
-
-
+    public void PickItem() // 拾取物品
+    {
+        
+    }
 }

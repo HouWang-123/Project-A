@@ -18,7 +18,7 @@ public partial class Tables
     public item.TinyObjectsTable TinyObjectsTable {get; }
     public item.WeaponTable WeaponTable {get; }
     public item.FoodTable FoodTable {get; }
-    public item.ThrowObjectsTable ThrowObjectsTable {get; }
+    public item.ThrowObjectsTable ThrowObjectsTable {get;}
     public item.SceneObjectsTable SceneObjectsTable {get; }
     public item.ToolsTable ToolsTable {get; }
     public item.JewelryTable JewelryTable {get; }
