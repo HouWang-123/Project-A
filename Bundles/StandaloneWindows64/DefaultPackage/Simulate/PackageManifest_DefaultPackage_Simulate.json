@@ -44,13 +44,6 @@
             "BundleID": 0
         },
         {
-            "Address": "item_gameobjectstable",
-            "AssetPath": "Assets/ArtAssets/DATAOUTPUT/item_gameobjectstable.json",
-            "AssetGUID": "",
-            "AssetTags": [],
-            "BundleID": 0
-        },
-        {
             "Address": "item_jewelrytable",
             "AssetPath": "Assets/ArtAssets/DATAOUTPUT/item_jewelrytable.json",
             "AssetGUID": "",
@@ -107,134 +100,8 @@
             "BundleID": 0
         },
         {
-            "Address": "DropsTable",
-            "AssetPath": "Assets/ArtAssets/Jsons/DropsTable.json",
-            "AssetGUID": "",
-            "AssetTags": [],
-            "BundleID": 1
-        },
-        {
-            "Address": "FoodTable",
-            "AssetPath": "Assets/ArtAssets/Jsons/FoodTable.json",
-            "AssetGUID": "",
-            "AssetTags": [],
-            "BundleID": 1
-        },
-        {
-            "Address": "FunctionalItemTable",
-            "AssetPath": "Assets/ArtAssets/Jsons/FunctionalItemTable.json",
-            "AssetGUID": "",
-            "AssetTags": [],
-            "BundleID": 1
-        },
-        {
-            "Address": "InteractionTable",
-            "AssetPath": "Assets/ArtAssets/Jsons/InteractionTable.json",
-            "AssetGUID": "",
-            "AssetTags": [],
-            "BundleID": 1
-        },
-        {
-            "Address": "ItemTable",
-            "AssetPath": "Assets/ArtAssets/Jsons/ItemTable.json",
-            "AssetGUID": "",
-            "AssetTags": [],
-            "BundleID": 1
-        },
-        {
-            "Address": "JewlishTable",
-            "AssetPath": "Assets/ArtAssets/Jsons/JewlishTable.json",
-            "AssetGUID": "",
-            "AssetTags": [],
-            "BundleID": 1
-        },
-        {
-            "Address": "LevelTable",
-            "AssetPath": "Assets/ArtAssets/Jsons/LevelTable.json",
-            "AssetGUID": "",
-            "AssetTags": [],
-            "BundleID": 1
-        },
-        {
-            "Address": "MonsterSkillTable",
-            "AssetPath": "Assets/ArtAssets/Jsons/MonsterSkillTable.json",
-            "AssetGUID": "",
-            "AssetTags": [],
-            "BundleID": 1
-        },
-        {
-            "Address": "MonsterTable",
-            "AssetPath": "Assets/ArtAssets/Jsons/MonsterTable.json",
-            "AssetGUID": "",
-            "AssetTags": [],
-            "BundleID": 1
-        },
-        {
-            "Address": "RoleActiveSkillTable",
-            "AssetPath": "Assets/ArtAssets/Jsons/RoleActiveSkillTable.json",
-            "AssetGUID": "",
-            "AssetTags": [],
-            "BundleID": 1
-        },
-        {
-            "Address": "RoleAttributeTable",
-            "AssetPath": "Assets/ArtAssets/Jsons/RoleAttributeTable.json",
-            "AssetGUID": "",
-            "AssetTags": [],
-            "BundleID": 1
-        },
-        {
-            "Address": "RolePassiveTable",
-            "AssetPath": "Assets/ArtAssets/Jsons/RolePassiveTable.json",
-            "AssetGUID": "",
-            "AssetTags": [],
-            "BundleID": 1
-        },
-        {
-            "Address": "RoleStatusTable",
-            "AssetPath": "Assets/ArtAssets/Jsons/RoleStatusTable.json",
-            "AssetGUID": "",
-            "AssetTags": [],
-            "BundleID": 1
-        },
-        {
-            "Address": "SceneItemTable",
-            "AssetPath": "Assets/ArtAssets/Jsons/SceneItemTable.json",
-            "AssetGUID": "",
-            "AssetTags": [],
-            "BundleID": 1
-        },
-        {
-            "Address": "SceneRoleTable",
-            "AssetPath": "Assets/ArtAssets/Jsons/SceneRoleTable.json",
-            "AssetGUID": "",
-            "AssetTags": [],
-            "BundleID": 1
-        },
-        {
-            "Address": "SceneRuleTable",
-            "AssetPath": "Assets/ArtAssets/Jsons/SceneRuleTable.json",
-            "AssetGUID": "",
-            "AssetTags": [],
-            "BundleID": 1
-        },
-        {
-            "Address": "SpawnTable",
-            "AssetPath": "Assets/ArtAssets/Jsons/SpawnTable.json",
-            "AssetGUID": "",
-            "AssetTags": [],
-            "BundleID": 1
-        },
-        {
-            "Address": "ThrowableTable",
-            "AssetPath": "Assets/ArtAssets/Jsons/ThrowableTable.json",
-            "AssetGUID": "",
-            "AssetTags": [],
-            "BundleID": 1
-        },
-        {
-            "Address": "WeaponTable",
-            "AssetPath": "Assets/ArtAssets/Jsons/WeaponTable.json",
+            "Address": "WeaponTest",
+            "AssetPath": "Assets/ArtAssets/Prefabs/Items/Weapons/WeaponTest.prefab",
             "AssetGUID": "",
             "AssetTags": [],
             "BundleID": 1
@@ -249,6 +116,13 @@
         {
             "Address": "Player000",
             "AssetPath": "Assets/ArtAssets/Prefabs/Player/Player000.prefab",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 3
+        },
+        {
+            "Address": "ZiDan",
+            "AssetPath": "Assets/ArtAssets/Prefabs/Player/ZiDan.prefab",
             "AssetGUID": "",
             "AssetTags": [],
             "BundleID": 3
@@ -273,25 +147,39 @@
             "AssetGUID": "",
             "AssetTags": [],
             "BundleID": 4
+        },
+        {
+            "Address": "Gun",
+            "AssetPath": "Assets/ArtAssets/Sprite/Item/Weapon/Gun.png",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 5
+        },
+        {
+            "Address": "Bullet",
+            "AssetPath": "Assets/ArtAssets/Sprite/Other/Bullet.png",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 6
         }
     ],
     "BundleList": [
         {
             "BundleName": "assets_artassets_dataoutput.bundle",
             "UnityCRC": 0,
-            "FileHash": "31952c1f47596ceeac0251dbc981662a",
+            "FileHash": "1c8431051b42ea4ecae4787a1883c551",
             "FileCRC": "00000000",
-            "FileSize": 19517,
+            "FileSize": 21587,
             "Encrypted": false,
             "Tags": [],
             "DependIDs": []
         },
         {
-            "BundleName": "assets_artassets_jsons.bundle",
+            "BundleName": "assets_artassets_prefabs_items_weapons.bundle",
             "UnityCRC": 0,
-            "FileHash": "e87935d6279d855320b187be9af6ec0b",
+            "FileHash": "2b107f0b3e33e9242ae57fe27f0d9c29",
             "FileCRC": "00000000",
-            "FileSize": 27683,
+            "FileSize": 4498,
             "Encrypted": false,
             "Tags": [],
             "DependIDs": []
@@ -299,9 +187,9 @@
         {
             "BundleName": "assets_artassets_prefabs_map.bundle",
             "UnityCRC": 0,
-            "FileHash": "68447f3fc6378479591f8108a7b5c2c4",
+            "FileHash": "00d784d87d22c0627187c577f2ba19c2",
             "FileCRC": "00000000",
-            "FileSize": 19720,
+            "FileSize": 38363,
             "Encrypted": false,
             "Tags": [],
             "DependIDs": []
@@ -309,9 +197,9 @@
         {
             "BundleName": "assets_artassets_prefabs_player.bundle",
             "UnityCRC": 0,
-            "FileHash": "99bb9b3d0e865096835421b0d121aca0",
+            "FileHash": "84222f36399f9b119af857c1cebe7a35",
             "FileCRC": "00000000",
-            "FileSize": 5142,
+            "FileSize": 14344,
             "Encrypted": false,
             "Tags": [],
             "DependIDs": []
@@ -319,9 +207,29 @@
         {
             "BundleName": "assets_artassets_prefabs_ui.bundle",
             "UnityCRC": 0,
-            "FileHash": "5c36c6f022cb628d54db36a3f7566c16",
+            "FileHash": "1227adc1c6265a9f0dc982af079fa552",
             "FileCRC": "00000000",
-            "FileSize": 75942,
+            "FileSize": 78493,
+            "Encrypted": false,
+            "Tags": [],
+            "DependIDs": []
+        },
+        {
+            "BundleName": "assets_artassets_sprite_item_weapon.bundle",
+            "UnityCRC": 0,
+            "FileHash": "7090fcce2d9194be1e6130507068161f",
+            "FileCRC": "00000000",
+            "FileSize": 2175,
+            "Encrypted": false,
+            "Tags": [],
+            "DependIDs": []
+        },
+        {
+            "BundleName": "assets_artassets_sprite_other.bundle",
+            "UnityCRC": 0,
+            "FileHash": "1d1b677297e3ae7a96c21801226a0057",
+            "FileCRC": "00000000",
+            "FileSize": 281,
             "Encrypted": false,
             "Tags": [],
             "DependIDs": []

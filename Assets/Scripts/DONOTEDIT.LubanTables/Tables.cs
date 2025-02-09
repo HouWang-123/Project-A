@@ -15,11 +15,10 @@ namespace cfg
 public partial class Tables
 {
     public item.RewardTable RewardTable {get; }
-    public item.GameObjectsTable GameObjectsTable {get; }
     public item.TinyObjectsTable TinyObjectsTable {get; }
     public item.WeaponTable WeaponTable {get; }
     public item.FoodTable FoodTable {get; }
-    public item.ThrowObjectsTable ThrowObjectsTable {get; }
+    public item.ThrowObjectsTable ThrowObjectsTable {get;}
     public item.SceneObjectsTable SceneObjectsTable {get; }
     public item.ToolsTable ToolsTable {get; }
     public item.JewelryTable JewelryTable {get; }
@@ -32,7 +31,6 @@ public partial class Tables
     public Tables(System.Func<string, JSONNode> loader)
     {
         RewardTable = new item.RewardTable(loader("item_rewardtable"));
-        GameObjectsTable = new item.GameObjectsTable(loader("item_gameobjectstable"));
         TinyObjectsTable = new item.TinyObjectsTable(loader("item_tinyobjectstable"));
         WeaponTable = new item.WeaponTable(loader("item_weapontable"));
         FoodTable = new item.FoodTable(loader("item_foodtable"));
@@ -51,7 +49,6 @@ public partial class Tables
     private void ResolveRef()
     {
         RewardTable.ResolveRef(this);
-        GameObjectsTable.ResolveRef(this);
         TinyObjectsTable.ResolveRef(this);
         WeaponTable.ResolveRef(this);
         FoodTable.ResolveRef(this);

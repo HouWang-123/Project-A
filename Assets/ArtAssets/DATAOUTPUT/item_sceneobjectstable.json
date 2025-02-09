@@ -2,7 +2,7 @@
   {
     "ID": 1001,
     "NAME": "木屑",
-    "DESCRIBE": "文本描述",
+    "DESCRIBE": "0",
     "interactEffectID": 1004,
     "isDestructible": true,
     "durability": 1,
@@ -11,7 +11,7 @@
   {
     "ID": 1002,
     "NAME": "燃烧的木屑",
-    "DESCRIBE": "文本描述",
+    "DESCRIBE": "0",
     "interactEffectID": 0,
     "isDestructible": false,
     "durability": 8,
@@ -20,7 +20,7 @@
   {
     "ID": 1003,
     "NAME": "陶瓷碎片",
-    "DESCRIBE": "文本描述",
+    "DESCRIBE": "0",
     "interactEffectID": 0,
     "isDestructible": true,
     "durability": 3,
@@ -29,7 +29,7 @@
   {
     "ID": 1004,
     "NAME": "座钟",
-    "DESCRIBE": "文本描述",
+    "DESCRIBE": "0",
     "interactEffectID": 1005,
     "isDestructible": false,
     "durability": 0,
@@ -38,7 +38,7 @@
   {
     "ID": 1005,
     "NAME": "铁砧",
-    "DESCRIBE": "文本描述",
+    "DESCRIBE": "0",
     "interactEffectID": 1006,
     "isDestructible": false,
     "durability": 0,
@@ -47,7 +47,7 @@
   {
     "ID": 1006,
     "NAME": "充电站",
-    "DESCRIBE": "文本描述",
+    "DESCRIBE": "0",
     "interactEffectID": 1007,
     "isDestructible": false,
     "durability": 10,
@@ -56,7 +56,7 @@
   {
     "ID": 1007,
     "NAME": "干枯藤蔓",
-    "DESCRIBE": "文本描述",
+    "DESCRIBE": "0",
     "interactEffectID": 1004,
     "isDestructible": true,
     "durability": 3,
@@ -65,7 +65,7 @@
   {
     "ID": 1008,
     "NAME": "储物柜",
-    "DESCRIBE": "文本描述",
+    "DESCRIBE": "0",
     "interactEffectID": 1003,
     "isDestructible": false,
     "durability": 0,
@@ -74,7 +74,7 @@
   {
     "ID": 1009,
     "NAME": "书",
-    "DESCRIBE": "书本内容",
+    "DESCRIBE": "0",
     "interactEffectID": 1008,
     "isDestructible": false,
     "durability": 5,
@@ -83,7 +83,7 @@
   {
     "ID": 1010,
     "NAME": "尸骨堆",
-    "DESCRIBE": "文本描述",
+    "DESCRIBE": "0",
     "interactEffectID": 1004,
     "isDestructible": true,
     "durability": 300,
@@ -92,7 +92,7 @@
   {
     "ID": 1011,
     "NAME": "火焰",
-    "DESCRIBE": "文本描述",
+    "DESCRIBE": "0",
     "interactEffectID": 0,
     "isDestructible": false,
     "durability": 5,
@@ -101,7 +101,7 @@
   {
     "ID": 1012,
     "NAME": "篮球框",
-    "DESCRIBE": "文本描述",
+    "DESCRIBE": "0",
     "interactEffectID": 0,
     "isDestructible": false,
     "durability": 0,

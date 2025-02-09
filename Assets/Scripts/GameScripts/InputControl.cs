@@ -66,12 +66,10 @@ public class InputControl
         }
         if(isMouse)
         {
-            Debug.Log("IsMouse!!!!!");
             LookPoint = inputActions.GamePlayer.Look.ReadValue<Vector2>();
         }
         else
         {
-            Debug.Log("IsMouse11111!!!!!");
             LookPoint += inputActions.GamePlayer.Look.ReadValue<Vector2>();
         }
         return LookPoint;

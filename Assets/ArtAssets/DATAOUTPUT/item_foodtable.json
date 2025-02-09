@@ -2,7 +2,7 @@
   {
     "ID": 1001,
     "NAME": "瓶装水",
-    "DESCRIBE": "物品描述",
+    "DESCRIBE": "虽然保质期已磨损，但是是校园里为数不多的干净水源，恢复35点水份值。",
     "maxStackCount": 9,
     "interactEffectID": 1001,
     "WaterGain": 35,
@@ -14,7 +14,7 @@
   {
     "ID": 1002,
     "NAME": "罐头",
-    "DESCRIBE": "物品描述",
+    "DESCRIBE": "几辈子也等不到过期的食品，装载了美味预制菜，恢复35点饱腹度。",
     "maxStackCount": 9,
     "interactEffectID": 1001,
     "WaterGain": 0,
@@ -25,8 +25,8 @@
   },
   {
     "ID": 1003,
-    "NAME": "可乐",
-    "DESCRIBE": "物品描述",
+    "NAME": "蝌蚪汽水",
+    "DESCRIBE": "甜腻的饮料，喝起来很快乐。同时恢复15点水份值和饱腹度以及1点San值。",
     "maxStackCount": 9,
     "interactEffectID": 1001,
     "WaterGain": 15,

@@ -19,7 +19,6 @@ public class GameTableDataAgent
 
     // in case of CLASSNAME CHANGES, introduce the table alas variable, and bridge it to real table instance
     public static RewardTable RewardTable;
-    public static GameObjectsTable GameObjectsTable;
     public static TinyObjectsTable TinyObjectsTable;
     public static WeaponTable WeaponTable;
     public static FoodTable FoodTable;
@@ -41,7 +40,6 @@ public class GameTableDataAgent
 
         // bridge to shorter table usage, in case of CLASSNAME CHANGES
         RewardTable = _Instance.RewardTable;
-        GameObjectsTable = _Instance.GameObjectsTable;
         TinyObjectsTable = _Instance.TinyObjectsTable;
         WeaponTable = _Instance.WeaponTable;
         FoodTable = _Instance.FoodTable;
