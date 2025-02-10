@@ -97,7 +97,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7396498991645650676}
   - component: {fileID: 983395914922150801}
-  - component: {fileID: 915531309998610227}
+  - component: {fileID: 7891078066038410637}
   m_Layer: 12
   m_Name: WeaponTest
   m_TagString: Item
@@ -142,7 +142,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.4519237, y: 0.4821086, z: 0.20717245}
   m_Center: {x: 0.57100123, y: 0.049236774, z: 0.014853273}
---- !u!114 &915531309998610227
+--- !u!114 &7891078066038410637
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -151,7 +151,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7601832128168043183}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2aa4a2ec7c4019b43a69ba855c7eb045, type: 3}
+  m_Script: {fileID: 11500000, guid: d79fe90f6b4275f47bb504c29895b227, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerHoldPoint: {fileID: 7601832128168043183}

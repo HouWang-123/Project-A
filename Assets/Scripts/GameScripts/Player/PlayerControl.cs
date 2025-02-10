@@ -147,7 +147,7 @@ public class PlayerControl : MonoBehaviour
         vector.y = 0;
         if(playerRG != null)
         {
-            if((vector.x > 0 && playerRenderer.localScale.x < 0) || (vector.x < 0 && playerRenderer.localScale.x > 0))
+            if ((vector.x > 0 && playerRenderer.localScale.x < 0) || (vector.x < 0 && playerRenderer.localScale.x > 0))
             {
                 speed *= fToB;
             }

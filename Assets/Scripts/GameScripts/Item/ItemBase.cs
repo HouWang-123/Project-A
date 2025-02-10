@@ -1,6 +1,8 @@
 
 using UnityEngine;
-
+/// <summary>
+/// 可是拾取接口
+/// </summary>
 public interface IPickUpable
 {
     void OnItemPickUp();
