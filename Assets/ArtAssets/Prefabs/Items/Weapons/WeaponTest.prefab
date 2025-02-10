@@ -157,6 +157,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PickupTip: {fileID: 9208992112299470524}
   PlayerHoldPoint: {fileID: 7601832128168043183}
+  id: 1101
 --- !u!1 &9208992112299470524
 GameObject:
   m_ObjectHideFlags: 0
@@ -167,7 +168,6 @@ GameObject:
   m_Component:
   - component: {fileID: 632697598770105882}
   - component: {fileID: 3052106517441263949}
-  - component: {fileID: 6415426296082713271}
   m_Layer: 0
   m_Name: PickUpTip
   m_TagString: Untagged
@@ -245,20 +245,3 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!111 &6415426296082713271
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9208992112299470524}
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Animation: {fileID: 7400000, guid: 911189d4c9bb289469db10f8aa0b84d7, type: 2}
-  m_Animations:
-  - {fileID: 7400000, guid: 911189d4c9bb289469db10f8aa0b84d7, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_UpdateMode: 0
-  m_CullingType: 0

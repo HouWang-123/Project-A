@@ -20,7 +20,7 @@ public abstract class ItemBase : MonoBehaviour , IPickUpable
     {
         PickupTip.gameObject.SetActive(false);
     }
-
+    
     public void setCanBePickUp( bool v)
     {
         canbePickup = v;
@@ -42,5 +42,6 @@ public abstract class ItemBase : MonoBehaviour , IPickUpable
 
     public abstract void OnItemPickUp();// 拾取
     public abstract void OnItemDrop(); // 丢弃
+    public abstract void InitItem();
 
 }

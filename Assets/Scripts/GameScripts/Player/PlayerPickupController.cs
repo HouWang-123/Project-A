@@ -4,9 +4,11 @@ using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.SearchService;
 using UnityEngine.Serialization;
-
+using UnityEngine.InputSystem;
 public class PlayerPickupController : MonoBehaviour
 {
+    public float changekeyPressTime;
+    bool isfirstInput = false;
     public ItemBase currentPickup; // 目标拾取
     public List<ItemBase> Item2PickList; // 拾取列表
 
@@ -15,6 +17,37 @@ public class PlayerPickupController : MonoBehaviour
         Item2PickList = new List<ItemBase>();
     }
 
+    public void Update()
+    {
+        PlayerChangePickupItem();
+    }
+
+    public void PlayerChangePickupItem()
+    {
+        if (Keyboard.current.qKey.isPressed)
+        {
+            changekeyPressTime += Time.deltaTime;
+            if (isfirstInput)
+            {
+                ChangePickupTarget();
+                isfirstInput = false;
+            }
+            else
+            if (changekeyPressTime >= 0.2f)
+            {
+                ChangePickupTarget();
+                changekeyPressTime = 0;
+                isfirstInput = false;
+            }
+
+            UpdateCurrentPickup();
+        }
+        else
+        {
+            changekeyPressTime = 0;
+            isfirstInput = true;
+        }
+    }
     public void ChangePickupTarget() // 拾取范围内目标拾取物品转换逻辑
     {
         if (Item2PickList.Count == 0)
@@ -33,7 +66,6 @@ public class PlayerPickupController : MonoBehaviour
         currentPickup.setCanBePickUp(true);
     }
     public void OnTriggerEnter(Collider other){
-        Debug.Log(other.gameObject.name);
         if (other.gameObject.tag.Equals("Item"))
         {
             if (currentPickup != null)
@@ -55,7 +87,6 @@ public class PlayerPickupController : MonoBehaviour
 
     public void OnTriggerExit(Collider other) // 物品离开拾取范围
     {
-        Debug.Log(other.gameObject.name);
         if (other.gameObject.tag.Equals("Item"))
         {
             ItemBase itemBase = other.gameObject.GetComponent<ItemBase>();

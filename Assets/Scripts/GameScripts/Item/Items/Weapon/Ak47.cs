@@ -1,5 +1,6 @@
 public class Ak47 : Weapon
 {
+    
     public override void Fire()
     {
     }

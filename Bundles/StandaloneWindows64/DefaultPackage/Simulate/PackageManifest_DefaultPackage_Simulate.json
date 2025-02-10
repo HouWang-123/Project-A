@@ -114,53 +114,53 @@
             "BundleID": 2
         },
         {
-            "Address": "Player000",
-            "AssetPath": "Assets/ArtAssets/Prefabs/Player/Player000.prefab",
+            "Address": "ZiDan",
+            "AssetPath": "Assets/ArtAssets/Prefabs/Object/ZiDan.prefab",
             "AssetGUID": "",
             "AssetTags": [],
             "BundleID": 3
         },
         {
-            "Address": "ZiDan",
-            "AssetPath": "Assets/ArtAssets/Prefabs/Player/ZiDan.prefab",
+            "Address": "Player000",
+            "AssetPath": "Assets/ArtAssets/Prefabs/Player/Player000.prefab",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 3
+            "BundleID": 4
         },
         {
             "Address": "GamePanel",
             "AssetPath": "Assets/ArtAssets/Prefabs/UI/GamePanel.prefab",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 4
+            "BundleID": 5
         },
         {
             "Address": "MainPanel",
             "AssetPath": "Assets/ArtAssets/Prefabs/UI/MainPanel.prefab",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 4
+            "BundleID": 5
         },
         {
             "Address": "SaveDataPanel",
             "AssetPath": "Assets/ArtAssets/Prefabs/UI/SaveDataPanel.prefab",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 4
+            "BundleID": 5
         },
         {
             "Address": "Gun",
             "AssetPath": "Assets/ArtAssets/Sprite/Item/Weapon/Gun.png",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 5
+            "BundleID": 6
         },
         {
             "Address": "Bullet",
             "AssetPath": "Assets/ArtAssets/Sprite/Other/Bullet.png",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 6
+            "BundleID": 7
         }
     ],
     "BundleList": [
@@ -179,7 +179,7 @@
             "UnityCRC": 0,
             "FileHash": "2b107f0b3e33e9242ae57fe27f0d9c29",
             "FileCRC": "00000000",
-            "FileSize": 7603,
+            "FileSize": 7046,
             "Encrypted": false,
             "Tags": [],
             "DependIDs": []
@@ -189,7 +189,17 @@
             "UnityCRC": 0,
             "FileHash": "00d784d87d22c0627187c577f2ba19c2",
             "FileCRC": "00000000",
-            "FileSize": 38363,
+            "FileSize": 38461,
+            "Encrypted": false,
+            "Tags": [],
+            "DependIDs": []
+        },
+        {
+            "BundleName": "assets_artassets_prefabs_object.bundle",
+            "UnityCRC": 0,
+            "FileHash": "de754db78dd9d98f95c70c695a3b9a6e",
+            "FileCRC": "00000000",
+            "FileSize": 3470,
             "Encrypted": false,
             "Tags": [],
             "DependIDs": []
@@ -199,7 +209,7 @@
             "UnityCRC": 0,
             "FileHash": "84222f36399f9b119af857c1cebe7a35",
             "FileCRC": "00000000",
-            "FileSize": 14351,
+            "FileSize": 11793,
             "Encrypted": false,
             "Tags": [],
             "DependIDs": []
