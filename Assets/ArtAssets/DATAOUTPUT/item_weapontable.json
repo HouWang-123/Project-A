@@ -2,7 +2,7 @@
   {
     "ID": 1001,
     "NAME": "匕首",
-    "DESCRIBE": "物品描述",
+    "DESCRIBE": "像是某种宗教仪式的器具，用途不详，外观不祥。小矩形范围刺击。",
     "maxStackCount": 1,
     "interactEffectID": 10001,
     "duribility": 10,
@@ -13,7 +13,7 @@
   {
     "ID": 1002,
     "NAME": "刺剑",
-    "DESCRIBE": "物品描述",
+    "DESCRIBE": "原来它是还没断的匕首。中矩形范围刺击。",
     "maxStackCount": 1,
     "interactEffectID": 10001,
     "duribility": 10,
@@ -24,7 +24,7 @@
   {
     "ID": 1003,
     "NAME": "菜刀",
-    "DESCRIBE": "物品描述",
+    "DESCRIBE": "因血液而生锈的斑驳，能嗅到曾刻于其上的惨叫。小扇形范围劈砍。",
     "maxStackCount": 1,
     "interactEffectID": 10001,
     "duribility": 10,
@@ -34,8 +34,8 @@
   },
   {
     "ID": 1004,
-    "NAME": "太刀",
-    "DESCRIBE": "物品描述",
+    "NAME": "唐刀",
+    "DESCRIBE": "老旧的唐刀，端庄的外观勉强能在这鬼地方给人一丝心理上的慰藉。中扇形范围劈砍。",
     "maxStackCount": 1,
     "interactEffectID": 10001,
     "duribility": 10,
@@ -46,7 +46,7 @@
   {
     "ID": 1005,
     "NAME": "消防斧",
-    "DESCRIBE": "物品描述",
+    "DESCRIBE": "不仅能救火，还能让怪物们明白你不仅是来灭火的。超大扇形范围劈砍。",
     "maxStackCount": 1,
     "interactEffectID": 10001,
     "duribility": 10,
@@ -57,7 +57,7 @@
   {
     "ID": 1006,
     "NAME": "榔头",
-    "DESCRIBE": "物品描述",
+    "DESCRIBE": "即是工具，也是武器，它是最容易使用的钝器代表。小圆形范围概率击晕，概率随角色力量值变化。",
     "maxStackCount": 1,
     "interactEffectID": 10001,
     "duribility": 10,
@@ -68,7 +68,7 @@
   {
     "ID": 1007,
     "NAME": "大锤",
-    "DESCRIBE": "物品描述",
+    "DESCRIBE": "它重、它响，它更容易击晕敌人，绝对能让人记住你来过。中圆形范围概率击晕，概率随角色力量值变化。",
     "maxStackCount": 1,
     "interactEffectID": 10001,
     "duribility": 10,
@@ -79,7 +79,7 @@
   {
     "ID": 1008,
     "NAME": "棒球棍",
-    "DESCRIBE": "物品描述",
+    "DESCRIBE": "“你可能在球场上安全，但这里不行。”中扇形范围概率击退，概率随角色力量值变化。",
     "maxStackCount": 1,
     "interactEffectID": 10001,
     "duribility": 10,
@@ -90,7 +90,7 @@
   {
     "ID": 1100,
     "NAME": "手枪",
-    "DESCRIBE": "物品描述",
+    "DESCRIBE": "一点点火力，能让你轻松解决问题，或者至少威胁一下。",
     "maxStackCount": 1,
     "interactEffectID": 10001,
     "duribility": 5000,
@@ -101,7 +101,7 @@
   {
     "ID": 1101,
     "NAME": "霰弹枪",
-    "DESCRIBE": "物品描述",
+    "DESCRIBE": "扇形设计，且距离越近伤害越高，在印象里是匪徒的武器。",
     "maxStackCount": 1,
     "interactEffectID": 10001,
     "duribility": 5000,
@@ -112,12 +112,12 @@
   {
     "ID": 1102,
     "NAME": "打火机",
-    "DESCRIBE": "物品描述",
+    "DESCRIBE": "这是你与易燃物交流的唯一渠道，使用时还可以微微照亮四周。",
     "maxStackCount": 1,
     "interactEffectID": 10001,
     "duribility": 30,
     "Weight": 0,
     "Attack": 0,
-    "AttackCD": 0.8
+    "AttackCD": 0.5
   }
 ]

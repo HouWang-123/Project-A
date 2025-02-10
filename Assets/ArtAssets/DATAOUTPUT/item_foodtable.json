@@ -26,7 +26,7 @@
   {
     "ID": 1003,
     "NAME": "蝌蚪汽水",
-    "DESCRIBE": "甜腻的饮料，喝起来很快乐。同时恢复15点水份值和饱腹度以及1点San值。",
+    "DESCRIBE": "甜腻的饮料，喝一口，好快乐！同时恢复15点水份值和饱腹度以及1点San值。",
     "maxStackCount": 9,
     "interactEffectID": 1001,
     "WaterGain": 15,

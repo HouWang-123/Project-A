@@ -57,7 +57,7 @@ public sealed partial class Character : Luban.BeanBase
     /// </summary>
     public readonly string DESCRIBE;
     /// <summary>
-    /// 玩家与其的交互是哪一种
+    /// spine动画的名字
     /// </summary>
     public readonly string SpineID;
     /// <summary>

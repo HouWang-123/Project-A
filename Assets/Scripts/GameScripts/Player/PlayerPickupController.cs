@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.SearchService;
 using UnityEngine.Serialization;
@@ -49,6 +50,7 @@ public class PlayerPickupController : MonoBehaviour
             currentPickup.setCanBePickUp(true);
             currentPickup.setTargerted(true);
         }
+        UpdateCurrentPickup();
     }
 
     public void OnTriggerExit(Collider other) // 物品离开拾取范围
@@ -62,5 +64,12 @@ public class PlayerPickupController : MonoBehaviour
             Item2PickList.Remove(itemBase);
             ChangePickupTarget(); // 重新设定一个目标拾取
         }
+        UpdateCurrentPickup();
+    }
+
+    private void UpdateCurrentPickup()
+    {
+        if (currentPickup == null) return;
+        currentPickup.setTargerted(true);
     }
 }

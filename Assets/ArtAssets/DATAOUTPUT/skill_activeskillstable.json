@@ -2,7 +2,7 @@
   {
     "ID": 1001,
     "NAME": "无界通行",
-    "DESCRIBE": "San值-25，下一次解锁物件时将不需要钥匙",
+    "DESCRIBE": "San值-25，下一次解锁被缠绕的物件时将无视代价",
     "skillCD": 10,
     "SkillSanCost": -25,
     "SkillEffectID": 1010

@@ -1,10 +1,4 @@
-public class Weapon : ItemBase
+public abstract class Weapon : ItemBase
 {
-    public override void OnItemPickUp()
-    {
-    }
-
-    public override void  OnItemDrop()
-    {
-    }
+    public abstract void Fire();
 }
