@@ -7,8 +7,6 @@ using UnityEngine.Serialization;
 using UnityEngine.InputSystem;
 public class PlayerPickupController : MonoBehaviour
 {
-    public float changekeyPressTime;
-    bool isfirstInput = false;
     public ItemBase currentPickup; // 目标拾取
     public List<ItemBase> Item2PickList; // 拾取列表
 
@@ -21,8 +19,11 @@ public class PlayerPickupController : MonoBehaviour
     {
         PlayerChangePickupItem();
     }
-
-    public void PlayerChangePickupItem()
+    
+    float changekeyPressTime;
+    bool isfirstInput = false;
+    
+    private void PlayerChangePickupItem()
     {
         if (Keyboard.current.qKey.isPressed)
         {
@@ -48,7 +49,7 @@ public class PlayerPickupController : MonoBehaviour
             isfirstInput = true;
         }
     }
-    public void ChangePickupTarget() // 拾取范围内目标拾取物品转换逻辑
+    private void ChangePickupTarget() // 拾取范围内目标拾取物品转换逻辑
     {
         if (Item2PickList.Count == 0)
         {
@@ -63,9 +64,9 @@ public class PlayerPickupController : MonoBehaviour
             nextindex = 0;
         }
         currentPickup = Item2PickList[nextindex];
-        currentPickup.setCanBePickUp(true);
+        currentPickup.SetPickupable(true);
     }
-    public void OnTriggerEnter(Collider other){
+    private void OnTriggerEnter(Collider other){
         if (other.gameObject.tag.Equals("Item"))
         {
             if (currentPickup != null)
@@ -79,18 +80,17 @@ public class PlayerPickupController : MonoBehaviour
                 return;
             }
             Item2PickList.Add(currentPickup);
-            currentPickup.setCanBePickUp(true);
+            currentPickup.SetPickupable(true);
             currentPickup.setTargerted(true);
         }
         UpdateCurrentPickup();
     }
-
-    public void OnTriggerExit(Collider other) // 物品离开拾取范围
+    private void OnTriggerExit(Collider other) // 物品离开拾取范围
     {
         if (other.gameObject.tag.Equals("Item"))
         {
             ItemBase itemBase = other.gameObject.GetComponent<ItemBase>();
-            itemBase.setCanBePickUp(false);
+            itemBase.SetPickupable(false);
             itemBase.setTargerted(false);
             Item2PickList.Remove(itemBase);
             ChangePickupTarget(); // 重新设定一个目标拾取

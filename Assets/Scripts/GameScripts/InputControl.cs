@@ -5,9 +5,6 @@ using UnityEngine.InputSystem;
 public class InputControl
 {
     public readonly static InputControl Instance;
-
-
-
     private PlayerInputControl inputActions;
     //GamePlayer
     public Vector2 MovePoint => inputActions.GamePlayer.Move.ReadValue<Vector2>();
