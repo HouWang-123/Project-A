@@ -155,13 +155,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 950d8354f79e7ab46a062abf0c6af97e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ItemID: 0
+  ItemID: 1101
   ItemType: 0
-  ItemRenderer: {fileID: 0}
+  ItemRenderer: {fileID: 5502388850923554619}
   PickupTip: {fileID: 9208992112299470524}
   ItemProperty:
     Stackable: 0
-    Equipable: 0
+    Equipable: 1
     EquipOnHand: 0
 --- !u!1 &9208992112299470524
 GameObject:
