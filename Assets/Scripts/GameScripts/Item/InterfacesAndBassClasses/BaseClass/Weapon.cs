@@ -1,4 +1,5 @@
 using System;
+using DG.Tweening;
 using Spine.Unity.Examples;
 using UnityEngine;
 

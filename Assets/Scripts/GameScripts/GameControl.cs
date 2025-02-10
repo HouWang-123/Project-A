@@ -4,8 +4,17 @@ using YooAsset;
 public class GameControl
 {
     public readonly static GameControl Instance;
+    private GameObject SceneItemNode;            //场景物品节点
 
-
+    public void SetSceneItemList(GameObject gameObject)
+    {
+        SceneItemNode = gameObject;
+    }
+    public GameObject GetSceneItemList()
+    {
+        return SceneItemNode;
+    }
+    
     private GameObject playerObj;
 
     private GameObject mapObj;

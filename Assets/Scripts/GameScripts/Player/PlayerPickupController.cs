@@ -5,6 +5,9 @@ using UnityEngine;
 using UnityEngine.SearchService;
 using UnityEngine.Serialization;
 using UnityEngine.InputSystem;
+
+
+[RequireComponent(typeof(PlayerControl))]
 public class PlayerPickupController : MonoBehaviour
 {
     public ItemBase currentPickup; // 目标拾取
@@ -19,10 +22,10 @@ public class PlayerPickupController : MonoBehaviour
     {
         PlayerChangePickupItem();
     }
-    
+
     float changekeyPressTime;
     bool isfirstInput = false;
-    
+
     private void PlayerChangePickupItem()
     {
         if (Keyboard.current.qKey.isPressed)
@@ -33,8 +36,7 @@ public class PlayerPickupController : MonoBehaviour
                 ChangePickupTarget();
                 isfirstInput = false;
             }
-            else
-            if (changekeyPressTime >= 0.2f)
+            else if (changekeyPressTime >= 0.2f)
             {
                 ChangePickupTarget();
                 changekeyPressTime = 0;
@@ -49,6 +51,7 @@ public class PlayerPickupController : MonoBehaviour
             isfirstInput = true;
         }
     }
+
     private void ChangePickupTarget() // 拾取范围内目标拾取物品转换逻辑
     {
         if (Item2PickList.Count == 0)
@@ -56,35 +59,46 @@ public class PlayerPickupController : MonoBehaviour
             currentPickup = null;
             return;
         }
-        currentPickup.setTargerted(false);
+
+        if (currentPickup != null)
+        {
+            currentPickup.setTargerted(false);
+        }
         int RangeLength = Item2PickList.Count;
         int nextindex = Item2PickList.IndexOf(currentPickup) + 1;
         if (Item2PickList.IndexOf(currentPickup) + 1 == RangeLength)
         {
             nextindex = 0;
         }
+
         currentPickup = Item2PickList[nextindex];
         currentPickup.SetPickupable(true);
     }
-    private void OnTriggerEnter(Collider other){
+
+    private void OnTriggerEnter(Collider other)
+    {
         if (other.gameObject.tag.Equals("Item"))
         {
             if (currentPickup != null)
             {
-                currentPickup.setTargerted(false);  // 新物品进入范围后取消之前的目标
+                currentPickup.setTargerted(false); // 新物品进入范围后取消之前的目标
             }
+
             currentPickup = other.gameObject.GetComponent<ItemBase>();
             if (currentPickup == null)
             {
                 Debug.LogWarning("no ItemBase component assigned to " + other.gameObject.name);
                 return;
             }
+
             Item2PickList.Add(currentPickup);
             currentPickup.SetPickupable(true);
             currentPickup.setTargerted(true);
         }
+
         UpdateCurrentPickup();
     }
+
     private void OnTriggerExit(Collider other) // 物品离开拾取范围
     {
         if (other.gameObject.tag.Equals("Item"))
@@ -95,7 +109,15 @@ public class PlayerPickupController : MonoBehaviour
             Item2PickList.Remove(itemBase);
             ChangePickupTarget(); // 重新设定一个目标拾取
         }
+
         UpdateCurrentPickup();
+    }
+
+    public void PlayerPickupItem()
+    {
+        currentPickup.setTargerted(false);
+        Item2PickList.Remove(currentPickup);
+        currentPickup = null;
     }
 
     private void UpdateCurrentPickup()

@@ -9,4 +9,5 @@ public class GameConstData
     public static readonly Vector3 DefAngles = new(45, 0, 0);
     //反向
     internal static readonly Vector3 ReverseScale = new(-1,1,1);
+    public static readonly Vector3 ReversedRotation = new(0, -180, 0);
 }
