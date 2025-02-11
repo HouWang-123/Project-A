@@ -189,20 +189,11 @@ public class PlayerControl : MonoBehaviour
 
     public void PickItem() // 拾取物品
     {
+        if (playerReversed) { useObjParent.localEulerAngles = GameConstData.ReversedRotation; }
+        else { useObjParent.localEulerAngles = Vector3.zero; }
+        if (_pickupController.currentPickup == null) { return; }
+        if (_pickupController.currentPickup.DropState) { return; }
         pickupLock = true;
-        if (playerReversed)
-        {
-            useObjParent.localEulerAngles = GameConstData.ReversedRotation;
-        }
-        else
-        {
-            useObjParent.localEulerAngles = Vector3.zero;
-        }
-        
-        if (_pickupController.currentPickup == null)
-        {
-            return;
-        }
         _pickupController.currentPickup.transform.SetParent(ItemHoldPosition);
         _pickupController.currentPickup.CheckReverse(playerReversed);
         _pickupController.PlayerPickupItem();
