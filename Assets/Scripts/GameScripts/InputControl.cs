@@ -41,13 +41,21 @@ public class InputControl
     public void UIEnable()
     {
         inputActions.UI.Enable();
-        inputActions.GamePlayer.Disable();
+    }
+
+    public void UIDisable()
+    {
+        inputActions.UI.Disable();
     }
 
     public void GamePlayerEnable()
     {
         inputActions.GamePlayer.Enable();
-        inputActions.UI.Enable();
+    }
+
+    public void GamePlayerDisable()
+    {
+        inputActions.GamePlayer.Disable();
     }
 
     bool isMouse = true;

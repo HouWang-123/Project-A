@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using YooAsset;
 using UnityEngine.InputSystem.Interactions;
+using UnityEngine.Events;
 
 public class PlayerControl : MonoBehaviour
 {
@@ -18,6 +19,15 @@ public class PlayerControl : MonoBehaviour
     public float Speed = 5f;
     //前后移动的速度比率
     private float fToB = 0.6f;
+    //奔跑速度比率
+    private float runeToB = 1.5f;
+
+    //Action
+    private UnityAction leftMouseAction = null;
+    private bool leftMous = false;
+    private UnityAction rightMouseAction = null;
+    private bool rightMous = false;
+    private bool shiftButt = false;
     private void Awake() { inputControl = new PlayerInputControl(); }
     private void OnEnable() { inputControl?.Enable(); }
 
@@ -29,33 +39,68 @@ public class PlayerControl : MonoBehaviour
         playerRenderer.localEulerAngles = GameConstData.DefAngles;
         useObjParent = transform.GetChild(1);
         ItemHoldPosition = useObjParent.GetChild(0);
-        if (ItemHoldPosition.childCount>0)
+        if(ItemHoldPosition.childCount > 0)
         {
             ItemOnHand = ItemHoldPosition.GetChild(0).GetComponent<ItemBase>();
         }
-        InputControl.Instance.LeftMouse.started += FireStarTest;
-        InputControl.Instance.LeftMouse.performed += FireTest;
-        InputControl.Instance.LeftMouse.canceled += FireCancelTest;
+        InputControl.Instance.GamePlayerEnable();
+        InputControl.Instance.UIDisable();
+        InputControl.Instance.LeftMouse.started += (item) =>
+        {
+            leftMous = true;
+        };
+        InputControl.Instance.LeftMouse.performed += (item) =>
+        {
+
+        };
+        InputControl.Instance.LeftMouse.canceled += (item) =>
+        {
+            leftMous = false;
+        };
+        InputControl.Instance.RightMouse.started += (item) =>
+        {
+            rightMous = true;
+        };
+        InputControl.Instance.RightMouse.performed += (item) =>
+        {
+
+        };
+        InputControl.Instance.RightMouse.canceled += (item) =>
+        {
+            rightMous = false;
+        };
+        InputControl.Instance.ShiftButton.started += (item) =>
+        {
+            shiftButt = true;
+        };
+        InputControl.Instance.ShiftButton.performed += (item) =>
+        {
+
+        };
+        InputControl.Instance.ShiftButton.canceled += (item) =>
+        {
+            shiftButt = false;
+        };
     }
-    AssetHandle asset;
-    float time = 0;
-    bool fire = false;
-    float Waitime = 0.3f;
-    private void FireCancelTest(UnityEngine.InputSystem.InputAction.CallbackContext text)
-    {
-        fire = false;
-        // Debug.Log("点击结束");
-    }
-    private void FireStarTest(UnityEngine.InputSystem.InputAction.CallbackContext text)
-    {
-        asset = YooAssets.LoadAssetSync("ZiDan");
-        fire = true;
-        // Debug.Log("操作开始");
-    }
-    private void FireTest(UnityEngine.InputSystem.InputAction.CallbackContext text)
-    {
-        // Debug.Log("点击");
-    }
+    //AssetHandle asset;
+    //float time = 0;
+    //bool fire = false;
+    //float Waitime = 0.3f;
+    //private void FireCancelTest(UnityEngine.InputSystem.InputAction.CallbackContext text)
+    //{
+    //    fire = false;
+    //    // Debug.Log("点击结束");
+    //}
+    //private void FireStarTest(UnityEngine.InputSystem.InputAction.CallbackContext text)
+    //{
+    //    asset = YooAssets.LoadAssetSync("ZiDan");
+    //    fire = true;
+    //    // Debug.Log("操作开始");
+    //}
+    //private void FireTest(UnityEngine.InputSystem.InputAction.CallbackContext text)
+    //{
+    //    // Debug.Log("点击");
+    //}
 
     Vector3 u, v, l, a, b;
     float angle;
@@ -81,12 +126,12 @@ public class PlayerControl : MonoBehaviour
     private void FixedUpdate()
     {
         PlayerMove(InputControl.Instance.MovePoint, Speed * Time.deltaTime);
-        if (!pickupLock)
+        if(!pickupLock)
         {
             CalculateUseObjectRotation();
             useObjParent.localEulerAngles = a;
         }
-        
+
         // Rotate WeaponTr
         Transform weaponTr = useObjParent.GetChild(0);
         angle = a.y;
@@ -111,25 +156,33 @@ public class PlayerControl : MonoBehaviour
         b.z = 0;
         weaponTr.localEulerAngles = b;
         // 武器使用相关
-
-        if(fire)
+        if(leftMous)
         {
-            if (ItemOnHand == null)
-            {
-                return;
-            }
-            if(time > 0)
-            {
-                time -= Time.deltaTime;
-            }
-            else
-            {   // 实例化子弹
-                time = Waitime;
-                GameObject zidan = Instantiate(asset.AssetObject, null) as GameObject;
-                zidan.transform.eulerAngles = weaponTr.eulerAngles;
-                zidan.transform.position = weaponTr.position;
-            }
+            leftMouseAction?.Invoke();
         }
+
+        if(rightMous)
+        {
+            rightMouseAction?.Invoke();
+        }
+        //if(fire)
+        //{
+        //    if (ItemOnHand == null)
+        //    {
+        //        return;
+        //    }
+        //    if(time > 0)
+        //    {
+        //        time -= Time.deltaTime;
+        //    }
+        //    else
+        //    {   // 实例化子弹
+        //        time = Waitime;
+        //        GameObject zidan = Instantiate(asset.AssetObject, null) as GameObject;
+        //        zidan.transform.eulerAngles = weaponTr.eulerAngles;
+        //        zidan.transform.position = weaponTr.position;
+        //    }
+        //}
         DropItemDetection();
     }
 
@@ -137,20 +190,31 @@ public class PlayerControl : MonoBehaviour
     {
         inputControl?.Dispose();
     }
-    
+
     private void PlayerMove(Vector3 vector, float speed)
     {
         vector.z = vector.y;
         vector.y = 0;
         if(playerRG != null)
         {
-            if ((vector.x > 0 && playerRenderer.localScale.x < 0) || (vector.x < 0 && playerRenderer.localScale.x > 0))
+            if((vector.x > 0 && playerRenderer.localScale.x < 0) || (vector.x < 0 && playerRenderer.localScale.x > 0))
             {
                 speed *= fToB;
+            }
+            else if(shiftButt)
+            {
+                speed *= runeToB;
             }
             playerRG.Move(vector * speed + transform.position, Quaternion.identity);
         }
     }
+
+    public void SetMouseAction(UnityAction leftAction =null,UnityAction rightAction = null)
+    {
+        leftMouseAction = leftAction;
+        rightMouseAction = rightAction;
+    }
+
     // 物品拾取
     public PlayerPickupController PlayerPickupController;
     public GameObject PickUpPosition;
@@ -158,17 +222,17 @@ public class PlayerControl : MonoBehaviour
     private bool pickupLock;      // 拾取锁
     private void DropItemDetection()
     {
-        if (pickupLock)
+        if(pickupLock)
         {
             return;
         }
-        if (Keyboard.current.gKey.isPressed)
+        if(Keyboard.current.gKey.isPressed)
         {
-            if (dropKeyPressed)
+            if(dropKeyPressed)
             {
                 return;
             }
-            if (ItemOnHand != null)
+            if(ItemOnHand != null)
             {
                 ItemOnHand.CheckReverse(playerReversed);
                 ItemOnHand.transform.SetParent(GameControl.Instance.GetSceneItemList().transform);
@@ -189,10 +253,14 @@ public class PlayerControl : MonoBehaviour
 
     public void PickItem() // 拾取物品
     {
-        if (playerReversed) { useObjParent.localEulerAngles = GameConstData.ReversedRotation; }
-        else { useObjParent.localEulerAngles = Vector3.zero; }
-        if (_pickupController.currentPickup == null) { return; }
-        if (_pickupController.currentPickup.DropState) { return; }
+        if(playerReversed)
+        { useObjParent.localEulerAngles = GameConstData.ReversedRotation; }
+        else
+        { useObjParent.localEulerAngles = Vector3.zero; }
+        if(_pickupController.currentPickup == null)
+        { return; }
+        if(_pickupController.currentPickup.DropState)
+        { return; }
         pickupLock = true;
         _pickupController.currentPickup.transform.SetParent(ItemHoldPosition);
         _pickupController.currentPickup.CheckReverse(playerReversed);
