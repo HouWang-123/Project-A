@@ -8,7 +8,7 @@ public class DoorMono : MonoBehaviour
 
     private bool doorEnabled = true;
 
-    public void SetDate(int v)
+    public void SetData(int v)
     {
         SetData(GameTableDataAgent.DoorsTable.Get(v));
     }
