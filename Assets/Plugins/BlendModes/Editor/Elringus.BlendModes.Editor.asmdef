@@ -1,7 +1,8 @@
 {
     "name": "Elringus.BlendModes.Editor",
     "references": [
-        "GUID:1a9e74e42ceb2fb47af7cd53f553c423"
+        "GUID:1a9e74e42ceb2fb47af7cd53f553c423",
+        "GUID:0acc523941302664db1f4e527237feb3"
     ],
     "optionalUnityReferences": [],
     "includePlatforms": [

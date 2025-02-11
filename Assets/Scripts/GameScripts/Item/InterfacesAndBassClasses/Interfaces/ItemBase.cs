@@ -23,10 +23,14 @@ public abstract class ItemBase : MonoBehaviour , IPickUpable
     private bool Targeted;                           // 是否被拾取系统选中
     private bool ItemReversed;
     public bool DropState;
+    Vector3 OriginalRendererScale;
     public void Start()
     {
+        
         PickupTip.gameObject.SetActive(false);
-        ItemRenderer.transform.localEulerAngles = GameConstData.DefAngles;
+        var RendererTr = ItemRenderer.transform;
+        RendererTr.localEulerAngles = GameConstData.DefAngles;
+        OriginalRendererScale = RendererTr.localScale;
     }
     public void SetPickupable( bool v) { IsItemInPickupRange = v; }
     public void setTargerted(bool v)              // 拾取系统相关功能，与拾取标识相关
@@ -46,13 +50,15 @@ public abstract class ItemBase : MonoBehaviour , IPickUpable
     {
         if (reversed && !ItemReversed)
         {
-            transform.localScale = GameConstData.ReverseScale;
+            Vector3 ReversedScale = OriginalRendererScale;
+            ReversedScale.x = -ReversedScale.x;
+            ItemRenderer.transform.localScale = ReversedScale;
             ItemReversed = true;
+            return;
         }
-
         if (!reversed && ItemReversed)
         {
-            transform.localScale = Vector3.one;
+            ItemRenderer.transform.localScale = OriginalRendererScale;
             ItemReversed = false;
         }
     }          
