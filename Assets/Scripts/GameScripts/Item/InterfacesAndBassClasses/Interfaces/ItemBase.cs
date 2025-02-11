@@ -16,7 +16,8 @@ public abstract class ItemBase : MonoBehaviour , IPickUpable
     [HideInInspector] public GameItemType ItemType;  // 物品类型
     [Space]
     public SpriteRenderer ItemRenderer;              // 物品目标渲染
-    public GameObject PickupTip;                     // 拾取提示
+    public Shader oulineShader;                      // 选中时的shader
+    public Shader DefaultSpriteShader;
     [Space]
     public ItemProperty ItemProperty;                // 物品属性
     private bool IsItemInPickupRange;                // 可否拾取
@@ -26,8 +27,6 @@ public abstract class ItemBase : MonoBehaviour , IPickUpable
     Vector3 OriginalRendererScale;
     public void Start()
     {
-        
-        PickupTip.gameObject.SetActive(false);
         var RendererTr = ItemRenderer.transform;
         RendererTr.localEulerAngles = GameConstData.DefAngles;
         OriginalRendererScale = RendererTr.localScale;
@@ -38,11 +37,11 @@ public abstract class ItemBase : MonoBehaviour , IPickUpable
         Targeted = v;
         if (Targeted)
         {
-            PickupTip.gameObject.SetActive(true);
+            ItemRenderer.material.shader = oulineShader;
         }
         else
         {
-            PickupTip.gameObject.SetActive(false);
+            ItemRenderer.material.shader = DefaultSpriteShader;
         }
     }
     // 拾取接口相关控制
@@ -111,8 +110,6 @@ public abstract class ItemBase : MonoBehaviour , IPickUpable
     {
         
     }
-
-    [ContextMenu("Drop")]
     public virtual void OnItemDrop()
     {
         DropState = true;
