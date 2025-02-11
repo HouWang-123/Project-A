@@ -5,8 +5,22 @@ using cfg.scene;
 public class GameControl
 {
     public readonly static GameControl Instance;
-    private GameObject sceneItemNode;            //场景物品节点
 
+    //data
+    private Rooms room;
+
+    //mono
+    private GameObject sceneItemNode;            //场景物品节点
+    private GameObject playerObj;
+    private GameObject roomObj;
+
+
+
+    static GameControl()
+    {
+        Instance = new GameControl();
+    }
+    private GameControl() { }
 
     public void SetSceneItemList(GameObject gameObject)
     {
@@ -16,18 +30,6 @@ public class GameControl
     {
         return sceneItemNode;
     }
-
-    private GameObject playerObj;
-
-    private Rooms room;
-    private GameObject roomObj;
-
-    static GameControl()
-    {
-        Instance = new GameControl();
-    }
-    private GameControl() { }
-
 
     public void GameStart()
     {

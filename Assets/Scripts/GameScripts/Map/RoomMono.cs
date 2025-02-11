@@ -44,7 +44,7 @@ public class RoomMono : MonoBehaviour
                 {
                     mono = doorParent.GetChild(i).gameObject.AddComponent<DoorMono>();
                 }
-                mono.SetDate(roomData.DoorList[i]);
+                mono.SetData(roomData.DoorList[i]);
                 doorDic.Add(roomData.DoorList[i], mono);
             }
         }
