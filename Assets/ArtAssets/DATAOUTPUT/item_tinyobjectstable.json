@@ -1,37 +1,42 @@
 [
   {
-    "ID": 1001,
+    "ID": 240001,
     "NAME": "无名指钥匙",
     "DESCRIBE": "0",
+    "prefabName": "RingFinger",
     "maxStackCount": 999,
-    "interactEffectID": 1001
+    "interactEffectID": 900001
   },
   {
-    "ID": 1002,
+    "ID": 240002,
     "NAME": "小指钥匙",
     "DESCRIBE": "0",
+    "prefabName": "LittleFinger",
     "maxStackCount": 999,
-    "interactEffectID": 1001
+    "interactEffectID": 900001
   },
   {
-    "ID": 1003,
+    "ID": 240003,
     "NAME": "拇指钥匙",
     "DESCRIBE": "0",
+    "prefabName": "Thumb",
     "maxStackCount": 999,
-    "interactEffectID": 1001
+    "interactEffectID": 900001
   },
   {
-    "ID": 1004,
+    "ID": 240004,
     "NAME": "手枪弹",
     "DESCRIBE": "0",
+    "prefabName": "Bullet",
     "maxStackCount": 999,
-    "interactEffectID": 1001
+    "interactEffectID": 900001
   },
   {
-    "ID": 1005,
+    "ID": 240005,
     "NAME": "霰弹",
     "DESCRIBE": "0",
+    "prefabName": "Shrapnel",
     "maxStackCount": 999,
-    "interactEffectID": 1001
+    "interactEffectID": 900001
   }
 ]

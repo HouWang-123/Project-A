@@ -14,53 +14,56 @@ namespace cfg
 {
 public partial class Tables
 {
-    public item.RewardTable RewardTable {get; }
-    public item.TinyObjectsTable TinyObjectsTable {get; }
-    public item.WeaponTable WeaponTable {get; }
-    public item.FoodTable FoodTable {get; }
-    public item.ThrowObjectsTable ThrowObjectsTable {get; }
-    public item.SceneObjectsTable SceneObjectsTable {get; }
-    public item.ToolsTable ToolsTable {get; }
-    public item.JewelryTable JewelryTable {get; }
+    public skill.ActiveSkillsTable ActiveSkillsTable {get; }
     public cha.CharacterTable CharacterTable {get; }
     public buff.ConditionsTable ConditionsTable {get; }
     public buff.PassiveSkillsTable PassiveSkillsTable {get; }
-    public skill.ActiveSkillsTable ActiveSkillsTable {get; }
     public interact.InteractEffectTable InteractEffectTable {get; }
+    public item.FoodTable FoodTable {get; }
+    public item.JewelryTable JewelryTable {get; }
+    public item.SceneObjectsTable SceneObjectsTable {get; }
+    public item.ThrowObjectsTable ThrowObjectsTable {get; }
+    public item.TinyObjectsTable TinyObjectsTable {get; }
+    public item.ToolsTable ToolsTable {get; }
+    public item.WeaponTable WeaponTable {get; }
+    public scene.DoorsTable DoorsTable {get; }
+    public scene.RoomsTable RoomsTable {get; }
 
     public Tables(System.Func<string, JSONNode> loader)
     {
-        RewardTable = new item.RewardTable(loader("item_rewardtable"));
-        TinyObjectsTable = new item.TinyObjectsTable(loader("item_tinyobjectstable"));
-        WeaponTable = new item.WeaponTable(loader("item_weapontable"));
-        FoodTable = new item.FoodTable(loader("item_foodtable"));
-        ThrowObjectsTable = new item.ThrowObjectsTable(loader("item_throwobjectstable"));
-        SceneObjectsTable = new item.SceneObjectsTable(loader("item_sceneobjectstable"));
-        ToolsTable = new item.ToolsTable(loader("item_toolstable"));
-        JewelryTable = new item.JewelryTable(loader("item_jewelrytable"));
+        ActiveSkillsTable = new skill.ActiveSkillsTable(loader("skill_activeskillstable"));
         CharacterTable = new cha.CharacterTable(loader("cha_charactertable"));
         ConditionsTable = new buff.ConditionsTable(loader("buff_conditionstable"));
         PassiveSkillsTable = new buff.PassiveSkillsTable(loader("buff_passiveskillstable"));
-        ActiveSkillsTable = new skill.ActiveSkillsTable(loader("skill_activeskillstable"));
         InteractEffectTable = new interact.InteractEffectTable(loader("interact_interacteffecttable"));
+        FoodTable = new item.FoodTable(loader("item_foodtable"));
+        JewelryTable = new item.JewelryTable(loader("item_jewelrytable"));
+        SceneObjectsTable = new item.SceneObjectsTable(loader("item_sceneobjectstable"));
+        ThrowObjectsTable = new item.ThrowObjectsTable(loader("item_throwobjectstable"));
+        TinyObjectsTable = new item.TinyObjectsTable(loader("item_tinyobjectstable"));
+        ToolsTable = new item.ToolsTable(loader("item_toolstable"));
+        WeaponTable = new item.WeaponTable(loader("item_weapontable"));
+        DoorsTable = new scene.DoorsTable(loader("scene_doorstable"));
+        RoomsTable = new scene.RoomsTable(loader("scene_roomstable"));
         ResolveRef();
     }
     
     private void ResolveRef()
     {
-        RewardTable.ResolveRef(this);
-        TinyObjectsTable.ResolveRef(this);
-        WeaponTable.ResolveRef(this);
-        FoodTable.ResolveRef(this);
-        ThrowObjectsTable.ResolveRef(this);
-        SceneObjectsTable.ResolveRef(this);
-        ToolsTable.ResolveRef(this);
-        JewelryTable.ResolveRef(this);
+        ActiveSkillsTable.ResolveRef(this);
         CharacterTable.ResolveRef(this);
         ConditionsTable.ResolveRef(this);
         PassiveSkillsTable.ResolveRef(this);
-        ActiveSkillsTable.ResolveRef(this);
         InteractEffectTable.ResolveRef(this);
+        FoodTable.ResolveRef(this);
+        JewelryTable.ResolveRef(this);
+        SceneObjectsTable.ResolveRef(this);
+        ThrowObjectsTable.ResolveRef(this);
+        TinyObjectsTable.ResolveRef(this);
+        ToolsTable.ResolveRef(this);
+        WeaponTable.ResolveRef(this);
+        DoorsTable.ResolveRef(this);
+        RoomsTable.ResolveRef(this);
     }
 }
 

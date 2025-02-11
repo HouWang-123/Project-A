@@ -36,7 +36,7 @@ public sealed partial class Jewelry : Luban.BeanBase
     /// </summary>
     public readonly string NAME;
     /// <summary>
-    /// 饰品功能描述
+    /// 饰品等其他功能做完后再做也可，饰品功能描述
     /// </summary>
     public readonly string DESCRIBE;
    

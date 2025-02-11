@@ -1,6 +1,6 @@
 [
   {
-    "ID": 1001,
+    "ID": 900001,
     "NAME": "E：捡起",
     "DESCRIBE": "0",
     "requiredWeaponID": [
@@ -17,7 +17,7 @@
     ]
   },
   {
-    "ID": 1002,
+    "ID": 900002,
     "NAME": "E：举起",
     "DESCRIBE": "0",
     "requiredWeaponID": [
@@ -34,7 +34,7 @@
     ]
   },
   {
-    "ID": 1003,
+    "ID": 900003,
     "NAME": "E：查看",
     "DESCRIBE": "0",
     "requiredWeaponID": [
@@ -51,11 +51,11 @@
     ]
   },
   {
-    "ID": 1004,
+    "ID": 900004,
     "NAME": "E：点燃",
     "DESCRIBE": "0",
     "requiredWeaponID": [
-      1015
+      260011
     ],
     "requiredFoodID": [
       0
@@ -68,7 +68,7 @@
     ]
   },
   {
-    "ID": 1005,
+    "ID": 900005,
     "NAME": "E：现在几点了？",
     "DESCRIBE": "0",
     "requiredWeaponID": [
@@ -85,18 +85,18 @@
     ]
   },
   {
-    "ID": 1006,
+    "ID": 900006,
     "NAME": "E：修缮",
     "DESCRIBE": "也许我可以拿武器来修",
     "requiredWeaponID": [
-      1001,
-      1002,
-      1003,
-      1004,
-      1005,
-      1006,
-      1007,
-      1008
+      260001,
+      260002,
+      260003,
+      260004,
+      260005,
+      260006,
+      260007,
+      260008
     ],
     "requiredFoodID": [
       0
@@ -109,7 +109,7 @@
     ]
   },
   {
-    "ID": 1007,
+    "ID": 900007,
     "NAME": "E：充电",
     "DESCRIBE": "也许我可以拿些什么来充电",
     "requiredWeaponID": [
@@ -122,16 +122,16 @@
       0
     ],
     "requiredToolID": [
-      1001,
-      1004
+      250001,
+      250002
     ]
   },
   {
-    "ID": 1008,
+    "ID": 900008,
     "NAME": "E：点燃",
     "DESCRIBE": "E:阅读",
     "requiredWeaponID": [
-      1015
+      260011
     ],
     "requiredFoodID": [
       0
@@ -144,7 +144,7 @@
     ]
   },
   {
-    "ID": 1009,
+    "ID": 900009,
     "NAME": "E：放入篮球",
     "DESCRIBE": "0",
     "requiredWeaponID": [
@@ -154,7 +154,7 @@
       0
     ],
     "requiredThrowID": [
-      1002
+      230002
     ],
     "requiredToolID": [
       0

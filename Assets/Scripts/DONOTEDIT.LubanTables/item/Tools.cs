@@ -20,6 +20,7 @@ public sealed partial class Tools : Luban.BeanBase
         { if(!_buf["ID"].IsNumber) { throw new SerializationException(); }  ID = _buf["ID"]; }
         { if(!_buf["NAME"].IsString) { throw new SerializationException(); }  NAME = _buf["NAME"]; }
         { if(!_buf["DESCRIBE"].IsString) { throw new SerializationException(); }  DESCRIBE = _buf["DESCRIBE"]; }
+        { if(!_buf["prefabName"].IsString) { throw new SerializationException(); }  PrefabName = _buf["prefabName"]; }
         { if(!_buf["interactEffectID"].IsNumber) { throw new SerializationException(); }  InteractEffectID = _buf["interactEffectID"]; }
         { if(!_buf["derubility"].IsNumber) { throw new SerializationException(); }  Derubility = _buf["derubility"]; }
         { if(!_buf["weight"].IsNumber) { throw new SerializationException(); }  Weight = _buf["weight"]; }
@@ -42,6 +43,10 @@ public sealed partial class Tools : Luban.BeanBase
     /// 描述
     /// </summary>
     public readonly string DESCRIBE;
+    /// <summary>
+    /// 预制体名称
+    /// </summary>
+    public readonly string PrefabName;
     /// <summary>
     /// 物品在地上时，玩家与其的交互是哪一种
     /// </summary>
@@ -68,6 +73,7 @@ public sealed partial class Tools : Luban.BeanBase
         + "ID:" + ID + ","
         + "NAME:" + NAME + ","
         + "DESCRIBE:" + DESCRIBE + ","
+        + "prefabName:" + PrefabName + ","
         + "interactEffectID:" + InteractEffectID + ","
         + "derubility:" + Derubility + ","
         + "weight:" + Weight + ","

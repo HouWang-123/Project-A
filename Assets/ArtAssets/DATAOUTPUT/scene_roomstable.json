@@ -1,0 +1,94 @@
+[
+  {
+    "ID": 300001,
+    "NAME": "一年级教师办公室",
+    "DESCRIBE": "0",
+    "prefabName": "Office1",
+    "iSeeDeadPeople": false,
+    "lastLeave": 0,
+    "doorList": [
+      310001,
+      310002
+    ],
+    "BGM": "0",
+    "visibility": 3,
+    "byTime": false
+  },
+  {
+    "ID": 300002,
+    "NAME": "一年级走廊",
+    "DESCRIBE": "0",
+    "prefabName": "Corridor1",
+    "iSeeDeadPeople": false,
+    "lastLeave": 0,
+    "doorList": [
+      310003,
+      310004,
+      310005,
+      310006,
+      310007
+    ],
+    "BGM": "0",
+    "visibility": 3,
+    "byTime": false
+  },
+  {
+    "ID": 300003,
+    "NAME": "超豪华大厕所",
+    "DESCRIBE": "0",
+    "prefabName": "Office2",
+    "iSeeDeadPeople": false,
+    "lastLeave": 0,
+    "doorList": [
+      310008,
+      310009
+    ],
+    "BGM": "0",
+    "visibility": 3,
+    "byTime": false
+  },
+  {
+    "ID": 300004,
+    "NAME": "一年二班",
+    "DESCRIBE": "0",
+    "prefabName": "ClassRoom1",
+    "iSeeDeadPeople": false,
+    "lastLeave": 0,
+    "doorList": [
+      310010,
+      310011
+    ],
+    "BGM": "0",
+    "visibility": 3,
+    "byTime": false
+  },
+  {
+    "ID": 300005,
+    "NAME": "一年一班",
+    "DESCRIBE": "0",
+    "prefabName": "ClassRoom2",
+    "iSeeDeadPeople": false,
+    "lastLeave": 0,
+    "doorList": [
+      310012,
+      310013
+    ],
+    "BGM": "0",
+    "visibility": 3,
+    "byTime": false
+  },
+  {
+    "ID": 300006,
+    "NAME": "“摇篮”",
+    "DESCRIBE": "0",
+    "prefabName": "SafetyRoom",
+    "iSeeDeadPeople": false,
+    "lastLeave": 0,
+    "doorList": [
+      310014
+    ],
+    "BGM": "0",
+    "visibility": 3,
+    "byTime": false
+  }
+]

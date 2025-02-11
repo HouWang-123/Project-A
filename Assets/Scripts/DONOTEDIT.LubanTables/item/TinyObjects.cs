@@ -20,6 +20,7 @@ public sealed partial class TinyObjects : Luban.BeanBase
         { if(!_buf["ID"].IsNumber) { throw new SerializationException(); }  ID = _buf["ID"]; }
         { if(!_buf["NAME"].IsString) { throw new SerializationException(); }  NAME = _buf["NAME"]; }
         { if(!_buf["DESCRIBE"].IsString) { throw new SerializationException(); }  DESCRIBE = _buf["DESCRIBE"]; }
+        { if(!_buf["prefabName"].IsString) { throw new SerializationException(); }  PrefabName = _buf["prefabName"]; }
         { if(!_buf["maxStackCount"].IsNumber) { throw new SerializationException(); }  MaxStackCount = _buf["maxStackCount"]; }
         { if(!_buf["interactEffectID"].IsNumber) { throw new SerializationException(); }  InteractEffectID = _buf["interactEffectID"]; }
     }
@@ -42,6 +43,10 @@ public sealed partial class TinyObjects : Luban.BeanBase
     /// </summary>
     public readonly string DESCRIBE;
     /// <summary>
+    /// 预制体名称
+    /// </summary>
+    public readonly string PrefabName;
+    /// <summary>
     /// 最大数量，这类物品在达到最大数量后无法再捡起同类物品，统一提示该物品持有量已达上限
     /// </summary>
     public readonly int MaxStackCount;
@@ -63,6 +68,7 @@ public sealed partial class TinyObjects : Luban.BeanBase
         + "ID:" + ID + ","
         + "NAME:" + NAME + ","
         + "DESCRIBE:" + DESCRIBE + ","
+        + "prefabName:" + PrefabName + ","
         + "maxStackCount:" + MaxStackCount + ","
         + "interactEffectID:" + InteractEffectID + ","
         + "}";

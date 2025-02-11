@@ -1,36 +1,40 @@
 [
   {
-    "ID": 1001,
+    "ID": 230001,
     "NAME": "木箱",
     "DESCRIBE": "破旧的空箱子，重量和硬度都很适合丢出去，砸坏后留下易燃的木屑",
-    "interactEffectID": 1002,
+    "prefabName": "WoodenCrate",
+    "interactEffectID": 900002,
     "isDestructible": true,
     "weight": 3,
     "attack": 16
   },
   {
-    "ID": 1002,
+    "ID": 230002,
     "NAME": "篮球",
     "DESCRIBE": "有弹性的球，可以反复丢而不会坏，可以被收纳进推车",
-    "interactEffectID": 1002,
+    "prefabName": "Basketball",
+    "interactEffectID": 900002,
     "isDestructible": true,
     "weight": 1,
     "attack": 4
   },
   {
-    "ID": 1003,
+    "ID": 230003,
     "NAME": "花瓶",
     "DESCRIBE": "丢出去会发出很大响声，摔碎后要注意扎脚",
-    "interactEffectID": 1002,
+    "prefabName": "Vase",
+    "interactEffectID": 900002,
     "isDestructible": true,
     "weight": 2,
     "attack": 8
   },
   {
-    "ID": 1004,
+    "ID": 230004,
     "NAME": "娃娃头",
     "DESCRIBE": "某个洋娃娃的头，好像他们都想要",
-    "interactEffectID": 0,
+    "prefabName": "DollHead",
+    "interactEffectID": 900002,
     "isDestructible": false,
     "weight": 0,
     "attack": 0

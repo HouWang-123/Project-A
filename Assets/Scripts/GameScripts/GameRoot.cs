@@ -71,12 +71,12 @@ public class GameRoot : MonoBehaviour
     private void ReadTableTest()
     {
         
-        Reward tableDataById = GameTableDataAgent.RewardTable.Get(1001);
+        //Reward tableDataById = GameTableDataAgent.RewardTable.Get(1001);
         
         
-        List<Reward> tableDataByIdtable = GameTableDataAgent.RewardTable.DataList;
+        //List<Reward> tableDataByIdtable = GameTableDataAgent.RewardTable.DataList;
         
-        ColorfulDebugger.Debug(tableDataById.ToString(),ColorfulDebugger.Instance.Data);
+        //ColorfulDebugger.Debug(tableDataById.ToString(),ColorfulDebugger.Instance.Data);
         
     }
 }

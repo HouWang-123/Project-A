@@ -1,6 +1,6 @@
 [
   {
-    "ID": 1001,
+    "ID": 110001,
     "NAME": "娜塔莉亚",
     "DESCRIBE": "角色简介",
     "spineID": "“Natlia.spine”",
@@ -26,11 +26,11 @@
     "itemList": [
       0
     ],
-    "activeSkillID": 1010,
-    "passiveSkillID": 1001
+    "activeSkillID": 100001,
+    "passiveSkillID": 130001
   },
   {
-    "ID": 1002,
+    "ID": 110002,
     "NAME": "Kira",
     "DESCRIBE": "角色简介",
     "spineID": "“Kira.spine”",
@@ -56,7 +56,7 @@
     "itemList": [
       0
     ],
-    "activeSkillID": 1011,
-    "passiveSkillID": 1002
+    "activeSkillID": 100002,
+    "passiveSkillID": 130002
   }
 ]

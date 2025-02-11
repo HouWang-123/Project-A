@@ -6,6 +6,7 @@ using cfg.cha;
 using cfg.interact;
 using cfg.item;
 using cfg.skill;
+using cfg.scene;
 using SimpleJSON;
 using UnityEngine;
 using YooAsset;
@@ -18,7 +19,7 @@ public class GameTableDataAgent
     private static Tables _Instance; // 所有表的集合
 
     // in case of CLASSNAME CHANGES, introduce the table alas variable, and bridge it to real table instance
-    public static RewardTable RewardTable;
+    //public static RewardTable RewardTable;
     public static TinyObjectsTable TinyObjectsTable;
     public static WeaponTable WeaponTable;
     public static FoodTable FoodTable;
@@ -31,15 +32,17 @@ public class GameTableDataAgent
     public static PassiveSkillsTable PassiveSkillsTable;
     public static ActiveSkillsTable ActiveSkillsTable;
     public static InteractEffectTable InteractEffectTable;
+    public static RoomsTable RoomsTable;
+    public static DoorsTable DoorsTable;
 
 
     public static void LoadAllTable()
     {
-        Tables tables = new cfg.Tables(LoadByteBuf);
+        Tables tables = new(LoadByteBuf);
         _Instance = tables;
 
         // bridge to shorter table usage, in case of CLASSNAME CHANGES
-        RewardTable = _Instance.RewardTable;
+        //RewardTable = _Instance.RewardTable;
         TinyObjectsTable = _Instance.TinyObjectsTable;
         WeaponTable = _Instance.WeaponTable;
         FoodTable = _Instance.FoodTable;
@@ -52,6 +55,8 @@ public class GameTableDataAgent
         PassiveSkillsTable = _Instance.PassiveSkillsTable;
         ActiveSkillsTable = _Instance.ActiveSkillsTable;
         InteractEffectTable = _Instance.InteractEffectTable;
+        RoomsTable = _Instance.RoomsTable;
+        DoorsTable = _Instance.DoorsTable;
 
         ColorfulDebugger.Debug(" All Game Data loaded", ColorfulDebugger.Instance.Data);
     }
