@@ -214,7 +214,6 @@ public class PlayerControl : MonoBehaviour
     {
         if (other.gameObject.tag.Equals("Obstacle"))
         {
-            Debug.Log("停止移动");
             stopmove = true;
             Vector3 reversedDirection;
             reversedDirection = InputControl.Instance.MovePoint;
@@ -238,7 +237,6 @@ public class PlayerControl : MonoBehaviour
     {
         if (other.gameObject.tag.Equals("Obstacle"))
         {
-            Debug.Log("可以移动");
             stopmove = false;
         }
     }
