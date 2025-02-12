@@ -191,11 +191,12 @@ public class PlayerControl : MonoBehaviour
         inputControl?.Dispose();
     }
 
+    private bool stopmove;
     private void PlayerMove(Vector3 vector, float speed)
     {
         vector.z = vector.y;
         vector.y = 0;
-        if(playerRG != null)
+        if(playerRG != null && !stopmove)
         {
             if((vector.x > 0 && playerRenderer.localScale.x < 0) || (vector.x < 0 && playerRenderer.localScale.x > 0))
             {
@@ -206,6 +207,39 @@ public class PlayerControl : MonoBehaviour
                 speed *= runeToB;
             }
             playerRG.Move(vector * speed + transform.position, Quaternion.identity);
+        }
+    }
+
+    public void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.tag.Equals("Obstacle"))
+        {
+            Debug.Log("停止移动");
+            stopmove = true;
+            Vector3 reversedDirection;
+            reversedDirection = InputControl.Instance.MovePoint;
+            reversedDirection.z = reversedDirection.y;
+            reversedDirection.y = 0;
+            float speed = Speed * Time.deltaTime;
+            if((reversedDirection.x > 0 && playerRenderer.localScale.x < 0) || (reversedDirection.x < 0 && playerRenderer.localScale.x > 0))
+            {
+                speed *= fToB;
+            }
+            else if(shiftButt)
+            {
+                speed *= runeToB;
+            }
+            
+            playerRG.Move( -reversedDirection * speed + transform.position, Quaternion.identity);
+        }
+    }
+
+    public void OnCollisionExit(Collision other)
+    {
+        if (other.gameObject.tag.Equals("Obstacle"))
+        {
+            Debug.Log("可以移动");
+            stopmove = false;
         }
     }
 

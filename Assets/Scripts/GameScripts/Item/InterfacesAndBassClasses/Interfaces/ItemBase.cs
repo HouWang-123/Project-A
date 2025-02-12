@@ -16,8 +16,8 @@ public abstract class ItemBase : MonoBehaviour , IPickUpable
     [HideInInspector] public GameItemType ItemType;  // 物品类型
     [Space]
     public SpriteRenderer ItemRenderer;              // 物品目标渲染
-    public Shader oulineShader;                      // 选中时的shader
-    public Shader DefaultSpriteShader;
+    public Shader oulineShader;                      // 选中时的 shader
+    public Shader DefaultSpriteShader;               // 默认     shader
     [Space]
     public ItemProperty ItemProperty;                // 物品属性
     private bool IsItemInPickupRange;                // 可否拾取

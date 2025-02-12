@@ -426,7 +426,7 @@
         {
             "BundleName": "assets_artassets_dataoutput.bundle",
             "UnityCRC": 0,
-            "FileHash": "31952c1f47596ceeac0251dbc981662a",
+            "FileHash": "1c8431051b42ea4ecae4787a1883c551",
             "FileCRC": "00000000",
             "FileSize": 28658,
             "Encrypted": false,
@@ -436,9 +436,9 @@
         {
             "BundleName": "assets_artassets_prefabs_items_weapons.bundle",
             "UnityCRC": 0,
-            "FileHash": "a40913eda34944a9800b027e34d36509",
+            "FileHash": "2b107f0b3e33e9242ae57fe27f0d9c29",
             "FileCRC": "00000000",
-            "FileSize": 5056,
+            "FileSize": 4885,
             "Encrypted": false,
             "Tags": [],
             "DependIDs": []
@@ -446,9 +446,9 @@
         {
             "BundleName": "assets_artassets_prefabs_map.bundle",
             "UnityCRC": 0,
-            "FileHash": "68447f3fc6378479591f8108a7b5c2c4",
+            "FileHash": "00d784d87d22c0627187c577f2ba19c2",
             "FileCRC": "00000000",
-            "FileSize": 108974,
+            "FileSize": 102031,
             "Encrypted": false,
             "Tags": [],
             "DependIDs": []
@@ -456,9 +456,9 @@
         {
             "BundleName": "assets_artassets_prefabs_object.bundle",
             "UnityCRC": 0,
-            "FileHash": "6fe7487c5dd813d5f17ddcb0b626e33f",
+            "FileHash": "de754db78dd9d98f95c70c695a3b9a6e",
             "FileCRC": "00000000",
-            "FileSize": 3595,
+            "FileSize": 3470,
             "Encrypted": false,
             "Tags": [],
             "DependIDs": []
@@ -466,9 +466,9 @@
         {
             "BundleName": "assets_artassets_prefabs_player.bundle",
             "UnityCRC": 0,
-            "FileHash": "99bb9b3d0e865096835421b0d121aca0",
+            "FileHash": "84222f36399f9b119af857c1cebe7a35",
             "FileCRC": "00000000",
-            "FileSize": 10132,
+            "FileSize": 10134,
             "Encrypted": false,
             "Tags": [],
             "DependIDs": []
@@ -476,9 +476,9 @@
         {
             "BundleName": "assets_artassets_prefabs_ui.bundle",
             "UnityCRC": 0,
-            "FileHash": "5c36c6f022cb628d54db36a3f7566c16",
+            "FileHash": "1227adc1c6265a9f0dc982af079fa552",
             "FileCRC": "00000000",
-            "FileSize": 77423,
+            "FileSize": 76992,
             "Encrypted": false,
             "Tags": [],
             "DependIDs": []
@@ -486,7 +486,7 @@
         {
             "BundleName": "assets_artassets_sprite_character.bundle",
             "UnityCRC": 0,
-            "FileHash": "6675cc1fa13f8dc63fbade23c53a3a2c",
+            "FileHash": "baad87eff6bf03ae8a8f52d05d769a12",
             "FileCRC": "00000000",
             "FileSize": 85038,
             "Encrypted": false,
@@ -496,7 +496,7 @@
         {
             "BundleName": "assets_artassets_sprite_items.bundle",
             "UnityCRC": 0,
-            "FileHash": "4a82deabc8493ec8fdbec9bc1480ea8a",
+            "FileHash": "5286972f19b0c993486bcbf80089f48c",
             "FileCRC": "00000000",
             "FileSize": 9835,
             "Encrypted": false,
@@ -506,7 +506,7 @@
         {
             "BundleName": "assets_artassets_sprite_items_weapon.bundle",
             "UnityCRC": 0,
-            "FileHash": "4d44eadbdb39c7345243ff3e8040d711",
+            "FileHash": "4433038612a0839a5b9dd139b7d2eb23",
             "FileCRC": "00000000",
             "FileSize": 2175,
             "Encrypted": false,
@@ -516,7 +516,7 @@
         {
             "BundleName": "assets_artassets_sprite_other.bundle",
             "UnityCRC": 0,
-            "FileHash": "7fd45b6a3324a8c99ccefa57acb448d7",
+            "FileHash": "1d1b677297e3ae7a96c21801226a0057",
             "FileCRC": "00000000",
             "FileSize": 281,
             "Encrypted": false,
@@ -526,7 +526,7 @@
         {
             "BundleName": "assets_artassets_sprite_scene.bundle",
             "UnityCRC": 0,
-            "FileHash": "7851f0b0f0c3890ffafa00d4884a975f",
+            "FileHash": "3c9727b59ced1f8e6dc58b5b65ce3193",
             "FileCRC": "00000000",
             "FileSize": 2744556,
             "Encrypted": false,
@@ -536,7 +536,7 @@
         {
             "BundleName": "assets_artassets_sprite_ui_icons.bundle",
             "UnityCRC": 0,
-            "FileHash": "defe4d18504dfecf83948e1e89a09eb9",
+            "FileHash": "7980827716c1b9ba1db9e00b49e0ea05",
             "FileCRC": "00000000",
             "FileSize": 286381,
             "Encrypted": false,
