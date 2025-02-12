@@ -134,7 +134,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ItemOnHand: {fileID: 0}
   ItemHoldPosition: {fileID: 0}
-  Speed: 7
+  Speed: 5
   PlayerPickupController: {fileID: 216033179984449701}
   PickUpPosition: {fileID: 8647076842524301750}
 --- !u!114 &216033179984449701
