@@ -88,6 +88,7 @@ public class ChaseState : BaseState
         }
         else
         {
+            Debug.Log(GetType() + " /Act()=> 玩家位置无效，退化为直线行走");
             var direction = (m_playerTransform.position - npc.transform.position).normalized;
             float speed = npc.GetComponent<MonsterFSM>().m_NPCDatas.speed;
             Vector3 newPos = npc.transform.position + speed * Time.deltaTime * direction;
@@ -106,6 +107,7 @@ public class ChaseState : BaseState
                 }
                 else
                 {
+                    Debug.Log(GetType() + " /Act()=> 玩家位置无效，退化为直线行走");
                     var direction = (m_playerTransform.position - npc.transform.position).normalized;
                     float speed = npc.GetComponent<MonsterFSM>().m_NPCDatas.speed;
                     Vector3 newPos = npc.transform.position + speed * Time.deltaTime * direction;
@@ -141,12 +143,12 @@ public class ChaseState : BaseState
         }
         // 玩家出了巡逻范围，就进行游荡
         // 在玩家位置周围检测NavMesh
-        bool isInside = NavMesh.SamplePosition(m_playerTransform.position, out _, checkDistance, NavMesh.AllAreas);
+        bool isInside = m_playerTransform.gameObject.GetComponent<NavMeshAgent>().isOnNavMesh;
 
         if (!isInside)
         {
             Debug.Log("玩家已走出NavMesh范围！");
-            m_finiteStateMachine.PerformTransition(TransitionEnum.SeePlayer);
+            m_finiteStateMachine.PerformTransition(TransitionEnum.LostPlayer);
         }
     }
     /// <summary>

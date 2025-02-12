@@ -48,10 +48,14 @@ public class MonsterFSM : MonoBehaviour
         chaseState.AddTransition(TransitionEnum.SeePlayer, StateEnum.LookAt);
         // ¹¥»÷Íæ¼Ò
         chaseState.AddTransition(TransitionEnum.AttackPlayer, StateEnum.Attack);
+        // ¶ªÊ§Íæ¼Ò
+        chaseState.AddTransition(TransitionEnum.LostPlayer, StateEnum.Patrol);
 
         AttackState attackState = new(m_fsm, playerObj.transform);
         // ×·ÖðÍæ¼Ò
         attackState.AddTransition(TransitionEnum.ChasePlayer, StateEnum.Chase);
+        // ¶ªÊ§Íæ¼Ò
+        attackState.AddTransition(TransitionEnum.LostPlayer, StateEnum.Patrol);
 
         m_fsm.AddState(patrolState);
         m_fsm.AddState(lookAtState);

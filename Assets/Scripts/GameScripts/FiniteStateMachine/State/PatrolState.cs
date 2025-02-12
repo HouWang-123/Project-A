@@ -1,7 +1,6 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.AI;
-using YooAsset;
 using Random = UnityEngine.Random;
 using Transform = UnityEngine.Transform;
 /// <summary>
