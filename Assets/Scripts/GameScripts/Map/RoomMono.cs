@@ -12,6 +12,8 @@ public class RoomMono : MonoBehaviour
 
     private Dictionary<int, DoorMono> doorDic = new Dictionary<int, DoorMono>();
 
+    public Transform monsterPoint;
+
     private void Awake()
     {
 
@@ -22,6 +24,10 @@ public class RoomMono : MonoBehaviour
         if(PlayerPoint != null)
         {
             GameControl.Instance.GetGamePlayer().transform.position = PlayerPoint.position;
+        }
+        if (monsterPoint != null)
+        {
+            GameControl.Instance.GetGameMonster(0).transform.position = monsterPoint.position;
         }
         GameControl.Instance.SetSceneItemList(SceneItemNode);
     }

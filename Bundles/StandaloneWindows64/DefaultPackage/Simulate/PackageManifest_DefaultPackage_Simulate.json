@@ -135,6 +135,13 @@
             "BundleID": 2
         },
         {
+            "Address": "NavMesh-NavMesh",
+            "AssetPath": "Assets/ArtAssets/Prefabs/Map/NavMesh-NavMesh.asset",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 2
+        },
+        {
             "Address": "SafetyRoom",
             "AssetPath": "Assets/ArtAssets/Prefabs/Map/SafetyRoom.prefab",
             "AssetGUID": "",
@@ -142,291 +149,298 @@
             "BundleID": 2
         },
         {
+            "Address": "Monster000",
+            "AssetPath": "Assets/ArtAssets/Prefabs/NPCs/Monster/Monster000.prefab",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 3
+        },
+        {
             "Address": "ZiDan",
             "AssetPath": "Assets/ArtAssets/Prefabs/Object/ZiDan.prefab",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 3
+            "BundleID": 4
         },
         {
             "Address": "Player000",
             "AssetPath": "Assets/ArtAssets/Prefabs/Player/Player000.prefab",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 4
+            "BundleID": 5
         },
         {
             "Address": "GamePanel",
             "AssetPath": "Assets/ArtAssets/Prefabs/UI/GamePanel.prefab",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 5
+            "BundleID": 6
         },
         {
             "Address": "MainPanel",
             "AssetPath": "Assets/ArtAssets/Prefabs/UI/MainPanel.prefab",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 5
+            "BundleID": 6
         },
         {
             "Address": "SaveDataPanel",
             "AssetPath": "Assets/ArtAssets/Prefabs/UI/SaveDataPanel.prefab",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 5
+            "BundleID": 6
         },
         {
             "Address": "Kira",
             "AssetPath": "Assets/ArtAssets/Sprite/Character/Kira.png",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 6
+            "BundleID": 7
         },
         {
             "Address": "Natalia",
             "AssetPath": "Assets/ArtAssets/Sprite/Character/Natalia.png",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 6
+            "BundleID": 7
         },
         {
             "Address": "Flashlight",
             "AssetPath": "Assets/ArtAssets/Sprite/Items/Flashlight.png",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 7
+            "BundleID": 8
         },
         {
             "Address": "Knife",
             "AssetPath": "Assets/ArtAssets/Sprite/Items/Knife.png",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 7
+            "BundleID": 8
         },
         {
             "Address": "Gun",
             "AssetPath": "Assets/ArtAssets/Sprite/Items/Weapon/Gun.png",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 8
+            "BundleID": 9
         },
         {
             "Address": "Bullet",
             "AssetPath": "Assets/ArtAssets/Sprite/Other/Bullet.png",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 9
+            "BundleID": 10
         },
         {
             "Address": "医务室地板 1200 800",
             "AssetPath": "Assets/ArtAssets/Sprite/Scene/医务室地板 1200 800.png",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 10
+            "BundleID": 11
         },
         {
             "Address": "医务室长墙面 1200 400",
             "AssetPath": "Assets/ArtAssets/Sprite/Scene/医务室长墙面 1200 400.png",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 10
+            "BundleID": 11
         },
         {
             "Address": "危险的门 120 200",
             "AssetPath": "Assets/ArtAssets/Sprite/Scene/危险的门 120 200.png",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 10
+            "BundleID": 11
         },
         {
             "Address": "干净的门 120 200",
             "AssetPath": "Assets/ArtAssets/Sprite/Scene/干净的门 120 200.png",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 10
+            "BundleID": 11
         },
         {
             "Address": "教室地板 1800 1200",
             "AssetPath": "Assets/ArtAssets/Sprite/Scene/教室地板 1800 1200.png",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 10
+            "BundleID": 11
         },
         {
             "Address": "教室长墙面 1800 400",
             "AssetPath": "Assets/ArtAssets/Sprite/Scene/教室长墙面 1800 400.png",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 10
+            "BundleID": 11
         },
         {
             "Address": "素材 医务室单色地砖 灰色",
             "AssetPath": "Assets/ArtAssets/Sprite/Scene/素材 医务室单色地砖 灰色.png",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 10
+            "BundleID": 11
         },
         {
             "Address": "素材 医务室单色地砖 青色",
             "AssetPath": "Assets/ArtAssets/Sprite/Scene/素材 医务室单色地砖 青色.png",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 10
+            "BundleID": 11
         },
         {
             "Address": "素材 医务室墙面",
             "AssetPath": "Assets/ArtAssets/Sprite/Scene/素材 医务室墙面.png",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 10
+            "BundleID": 11
         },
         {
             "Address": "素材 医务室墙面带门",
             "AssetPath": "Assets/ArtAssets/Sprite/Scene/素材 医务室墙面带门.png",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 10
+            "BundleID": 11
         },
         {
             "Address": "素材 教室地板1",
             "AssetPath": "Assets/ArtAssets/Sprite/Scene/素材 教室地板1.png",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 10
+            "BundleID": 11
         },
         {
             "Address": "素材 教室地板2",
             "AssetPath": "Assets/ArtAssets/Sprite/Scene/素材 教室地板2.png",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 10
+            "BundleID": 11
         },
         {
             "Address": "素材 教室墙面",
             "AssetPath": "Assets/ArtAssets/Sprite/Scene/素材 教室墙面.png",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 10
+            "BundleID": 11
         },
         {
             "Address": "san值",
             "AssetPath": "Assets/ArtAssets/Sprite/UI/Icons/san值.png",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 11
+            "BundleID": 12
         },
         {
             "Address": "口渴值",
             "AssetPath": "Assets/ArtAssets/Sprite/UI/Icons/口渴值.png",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 11
+            "BundleID": 12
         },
         {
             "Address": "大圆",
             "AssetPath": "Assets/ArtAssets/Sprite/UI/Icons/大圆.png",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 11
+            "BundleID": 12
         },
         {
             "Address": "寄生",
             "AssetPath": "Assets/ArtAssets/Sprite/UI/Icons/寄生.png",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 11
+            "BundleID": 12
         },
         {
             "Address": "弹药",
             "AssetPath": "Assets/ArtAssets/Sprite/UI/Icons/弹药.png",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 11
+            "BundleID": 12
         },
         {
             "Address": "惊恐",
             "AssetPath": "Assets/ArtAssets/Sprite/UI/Icons/惊恐.png",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 11
+            "BundleID": 12
         },
         {
             "Address": "椭圆 2",
             "AssetPath": "Assets/ArtAssets/Sprite/UI/Icons/椭圆 2.png",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 11
+            "BundleID": 12
         },
         {
             "Address": "洞开",
             "AssetPath": "Assets/ArtAssets/Sprite/UI/Icons/洞开.png",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 11
+            "BundleID": 12
         },
         {
             "Address": "灵视",
             "AssetPath": "Assets/ArtAssets/Sprite/UI/Icons/灵视.png",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 11
+            "BundleID": 12
         },
         {
             "Address": "状态环",
             "AssetPath": "Assets/ArtAssets/Sprite/UI/Icons/状态环.png",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 11
+            "BundleID": 12
         },
         {
             "Address": "生命值",
             "AssetPath": "Assets/ArtAssets/Sprite/UI/Icons/生命值.png",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 11
+            "BundleID": 12
         },
         {
             "Address": "疯狂",
             "AssetPath": "Assets/ArtAssets/Sprite/UI/Icons/疯狂.png",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 11
+            "BundleID": 12
         },
         {
             "Address": "精准射击",
             "AssetPath": "Assets/ArtAssets/Sprite/UI/Icons/精准射击.png",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 11
+            "BundleID": 12
         },
         {
             "Address": "美德",
             "AssetPath": "Assets/ArtAssets/Sprite/UI/Icons/美德.png",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 11
+            "BundleID": 12
         },
         {
             "Address": "飞奔",
             "AssetPath": "Assets/ArtAssets/Sprite/UI/Icons/飞奔.png",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 11
+            "BundleID": 12
         },
         {
             "Address": "饱腹值",
             "AssetPath": "Assets/ArtAssets/Sprite/UI/Icons/饱腹值.png",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 11
+            "BundleID": 12
         }
     ],
     "BundleList": [
         {
             "BundleName": "assets_artassets_dataoutput.bundle",
             "UnityCRC": 0,
-            "FileHash": "1c8431051b42ea4ecae4787a1883c551",
+            "FileHash": "65762c23fb787038360cd24bf6d14c35",
             "FileCRC": "00000000",
             "FileSize": 28658,
             "Encrypted": false,
@@ -436,9 +450,9 @@
         {
             "BundleName": "assets_artassets_prefabs_items_weapons.bundle",
             "UnityCRC": 0,
-            "FileHash": "2b107f0b3e33e9242ae57fe27f0d9c29",
+            "FileHash": "72aa3ae4d66013dc040c1a4259b84b0b",
             "FileCRC": "00000000",
-            "FileSize": 4885,
+            "FileSize": 5056,
             "Encrypted": false,
             "Tags": [],
             "DependIDs": []
@@ -446,9 +460,19 @@
         {
             "BundleName": "assets_artassets_prefabs_map.bundle",
             "UnityCRC": 0,
-            "FileHash": "00d784d87d22c0627187c577f2ba19c2",
+            "FileHash": "424b7b852e818e2445b0b5eefee40d8c",
             "FileCRC": "00000000",
-            "FileSize": 102031,
+            "FileSize": 121015,
+            "Encrypted": false,
+            "Tags": [],
+            "DependIDs": []
+        },
+        {
+            "BundleName": "assets_artassets_prefabs_npcs_monster.bundle",
+            "UnityCRC": 0,
+            "FileHash": "e80f3d95d49197699477c77b444df24d",
+            "FileCRC": "00000000",
+            "FileSize": 6482,
             "Encrypted": false,
             "Tags": [],
             "DependIDs": []
@@ -456,9 +480,9 @@
         {
             "BundleName": "assets_artassets_prefabs_object.bundle",
             "UnityCRC": 0,
-            "FileHash": "de754db78dd9d98f95c70c695a3b9a6e",
+            "FileHash": "f9a2985e3802a2ea530949a082c424f6",
             "FileCRC": "00000000",
-            "FileSize": 3470,
+            "FileSize": 3595,
             "Encrypted": false,
             "Tags": [],
             "DependIDs": []
@@ -466,9 +490,9 @@
         {
             "BundleName": "assets_artassets_prefabs_player.bundle",
             "UnityCRC": 0,
-            "FileHash": "84222f36399f9b119af857c1cebe7a35",
+            "FileHash": "7f803001e73f354f794ac2973057604d",
             "FileCRC": "00000000",
-            "FileSize": 10134,
+            "FileSize": 10490,
             "Encrypted": false,
             "Tags": [],
             "DependIDs": []
@@ -476,9 +500,9 @@
         {
             "BundleName": "assets_artassets_prefabs_ui.bundle",
             "UnityCRC": 0,
-            "FileHash": "1227adc1c6265a9f0dc982af079fa552",
+            "FileHash": "8c784155784c811f682aa9b4d0b44153",
             "FileCRC": "00000000",
-            "FileSize": 76992,
+            "FileSize": 78483,
             "Encrypted": false,
             "Tags": [],
             "DependIDs": []
@@ -486,7 +510,7 @@
         {
             "BundleName": "assets_artassets_sprite_character.bundle",
             "UnityCRC": 0,
-            "FileHash": "baad87eff6bf03ae8a8f52d05d769a12",
+            "FileHash": "f210f5da4e2ce649615c4f331933c82d",
             "FileCRC": "00000000",
             "FileSize": 85038,
             "Encrypted": false,
@@ -496,7 +520,7 @@
         {
             "BundleName": "assets_artassets_sprite_items.bundle",
             "UnityCRC": 0,
-            "FileHash": "5286972f19b0c993486bcbf80089f48c",
+            "FileHash": "41e4543231c7af699ff6e2ac90a2ae8c",
             "FileCRC": "00000000",
             "FileSize": 9835,
             "Encrypted": false,
@@ -506,7 +530,7 @@
         {
             "BundleName": "assets_artassets_sprite_items_weapon.bundle",
             "UnityCRC": 0,
-            "FileHash": "4433038612a0839a5b9dd139b7d2eb23",
+            "FileHash": "169ea2737341829051e17f9f40997a7f",
             "FileCRC": "00000000",
             "FileSize": 2175,
             "Encrypted": false,
@@ -516,7 +540,7 @@
         {
             "BundleName": "assets_artassets_sprite_other.bundle",
             "UnityCRC": 0,
-            "FileHash": "1d1b677297e3ae7a96c21801226a0057",
+            "FileHash": "223885c0ba54e7ad32477aafa431fb97",
             "FileCRC": "00000000",
             "FileSize": 281,
             "Encrypted": false,
@@ -526,7 +550,7 @@
         {
             "BundleName": "assets_artassets_sprite_scene.bundle",
             "UnityCRC": 0,
-            "FileHash": "3c9727b59ced1f8e6dc58b5b65ce3193",
+            "FileHash": "97922b11c3a843c1c120b4bde50cb985",
             "FileCRC": "00000000",
             "FileSize": 2744556,
             "Encrypted": false,
@@ -536,7 +560,7 @@
         {
             "BundleName": "assets_artassets_sprite_ui_icons.bundle",
             "UnityCRC": 0,
-            "FileHash": "7980827716c1b9ba1db9e00b49e0ea05",
+            "FileHash": "7a43a9d0a4d4806164d0d065647f5835",
             "FileCRC": "00000000",
             "FileSize": 286381,
             "Encrypted": false,

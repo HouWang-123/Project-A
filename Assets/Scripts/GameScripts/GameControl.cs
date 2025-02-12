@@ -1,6 +1,7 @@
 using UnityEngine;
 using YooAsset;
 using cfg.scene;
+using System.Collections.Generic;
 
 public class GameControl
 {
@@ -14,6 +15,7 @@ public class GameControl
     private GameObject playerObj;
     private GameObject roomObj;
 
+    private List<GameObject> monsterList;
 
 
     static GameControl()
@@ -88,8 +90,25 @@ public class GameControl
         {
             AssetHandle handle = YooAssets.LoadAssetSync<GameObject>("Player000");
             playerObj = Object.Instantiate(handle.AssetObject) as GameObject;
+            playerObj.name = "Player000";
         }
         return playerObj;
     }
 
+    public GameObject GetGameMonster(int i)
+    {
+        int monsterCount = 1; // 怪物数量，根据数据表调整
+        if (monsterList == null)
+        {
+            monsterList = new ();
+            for (int j = 0; j < monsterCount; ++j)
+            {
+                AssetHandle handle = YooAssets.LoadAssetSync<GameObject>("Monster" + j.ToString("D3"));
+                var monsterObj = Object.Instantiate(handle.AssetObject) as GameObject;
+                monsterObj.name = "Monster" + j.ToString("D3");
+                monsterList.Add(monsterObj);
+            }
+        }
+        return monsterList[i];
+    }
 }
