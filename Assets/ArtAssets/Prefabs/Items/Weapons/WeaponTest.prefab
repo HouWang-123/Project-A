@@ -27,7 +27,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.43, y: 2.43, z: 2.43}
+  m_LocalScale: {x: 1.4, y: 1.4, z: 1.4}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 7396498991645650676}
@@ -140,8 +140,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.4519237, y: 0.4821086, z: 0.20717245}
-  m_Center: {x: 0.57100123, y: 0.049236774, z: 0.014853273}
+  m_Size: {x: 0.77146703, y: 0.4821086, z: 0.20717245}
+  m_Center: {x: 0.23077294, y: 0.049236774, z: 0.014853269}
 --- !u!114 &5214231938801745321
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,7 +154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 950d8354f79e7ab46a062abf0c6af97e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ItemID: 1101
+  ItemID: 260010
   ItemType: 0
   ItemRenderer: {fileID: 5502388850923554619}
   oulineShader: {fileID: -6465566751694194690, guid: 098b3234e69aa004eae9c50eabd09355, type: 3}
