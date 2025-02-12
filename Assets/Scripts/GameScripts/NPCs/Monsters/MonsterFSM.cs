@@ -1,14 +1,24 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 public class MonsterFSM : MonoBehaviour
 {
     private FiniteStateMachine m_fsm;
     // 怪物数据
-    public NPCDataBase NPCDatas;
+    public NPCDataBase m_NPCDatas;
+    // 头顶信息
+    public SpriteRenderer m_infoRenderer;
     private void Start()
     {
         InitFSM();
-        NPCDatas = new MonsterData();
+        m_NPCDatas = new MonsterData
+        {
+            speed = GetComponent<NavMeshAgent>().speed
+        };
+        if (m_infoRenderer == null)
+        {
+            m_infoRenderer = transform.GetChild(1).GetComponent<SpriteRenderer>();
+        }
     }
 
     private void Update()
@@ -33,7 +43,7 @@ public class MonsterFSM : MonoBehaviour
         // 丢失玩家，转换到巡逻
         lookAtState.AddTransition(TransitionEnum.LostPlayer, StateEnum.Patrol);
 
-        ChaseState chaseState = new(m_fsm, playerObj.transform);
+        ChaseState chaseState = new(m_fsm, gameObject, playerObj.transform);
         // 看见玩家，转换到看着
         chaseState.AddTransition(TransitionEnum.SeePlayer, StateEnum.LookAt);
         // 攻击玩家

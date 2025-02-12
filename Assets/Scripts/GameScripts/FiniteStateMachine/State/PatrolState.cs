@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.AI;
+using YooAsset;
 using Random = UnityEngine.Random;
 using Transform = UnityEngine.Transform;
 /// <summary>
@@ -11,7 +12,7 @@ public class PatrolState : BaseState
     // NPC随机游荡的最大半径
     public float wanderRadius = 10f;
     // NPC重新选择目标点的时间间隔
-    public float wanderInterval = 3f;
+    public float wanderInterval = 8f;
     // 判断NPC是否卡住的阈值时间
     public float stuckThreshold = 2f;
     // 射线检测的层级，设置为“Obstacle”层后，射线只会检测该层物体
@@ -33,17 +34,17 @@ public class PatrolState : BaseState
     private readonly float m_2LookAtTime = 15f;
     // 玩家的位置
     private readonly Transform m_playerTransform;
-    public PatrolState(FiniteStateMachine finiteStateMachine, GameObject gameObject, Transform playerTransform = null) : base(finiteStateMachine)
+    public PatrolState(FiniteStateMachine finiteStateMachine, GameObject NPCObj, Transform playerTransform = null) : base(finiteStateMachine)
     {
         // 设置状态
         m_stateEnum = StateEnum.Patrol;
-        if (gameObject == null)
+        if (NPCObj == null)
         {
             Debug.LogError(GetType() + "/PatrolState/ gameObject can not be null!");
             throw new ArgumentException();
         }
-        NPC = gameObject;
-        agent = gameObject.GetComponent<NavMeshAgent>();
+        NPC = NPCObj;
+        agent = NPCObj.GetComponent<NavMeshAgent>();
         // lastPosition = gameObject.transform.position;
         // 初始位置强制校正
         if (NavMesh.SamplePosition(NPC.transform.position, out NavMeshHit hit, 2.0f, NavMesh.AllAreas))
@@ -106,6 +107,18 @@ public class PatrolState : BaseState
         if (IsPathValid(newPos))
         {
             agent.SetDestination(newPos);
+            float newPosX = newPos.x;
+            float npcPosX = NPC.transform.position.x;
+            // 点在右边，看向右边
+            SpriteRenderer spriteRenderer = NPC.transform.GetChild(0).GetComponent<SpriteRenderer>();
+            if (newPosX - npcPosX > 0)
+            {
+                spriteRenderer.flipX = false;
+            }
+            else
+            {
+                spriteRenderer.flipX = true;
+            }
         }
         else
         {
@@ -188,6 +201,7 @@ public class PatrolState : BaseState
         base.DoAfterLeaving();
         // 停止移动
         agent.isStopped = true;
+        agent.destination = agent.transform.position;
     }
 }
 

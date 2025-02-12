@@ -2,11 +2,11 @@
 public class NPCDataBase
 {
     // 速度
-    public float velocity = 3.5f;
+    public float speed = 3.5f;
 
-    public NPCDataBase(float velocity)
+    public NPCDataBase(float speed)
     {
-        this.velocity = velocity;
+        this.speed = speed;
     }
 }
 

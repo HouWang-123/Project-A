@@ -1,6 +1,6 @@
 ﻿internal class MonsterData : NPCDataBase
 {
-    public MonsterData(float velocity = 3.5f) : base(velocity)
+    public MonsterData(float speed = 3.5f) : base(speed)
     {
 
     }
