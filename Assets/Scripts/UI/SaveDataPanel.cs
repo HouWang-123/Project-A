@@ -16,7 +16,7 @@ public class SaveDataPanel : UIBase
         {
             UIManager.Instance.GetPanel("MainPanel").GetComponent<UIBase>().Hide();
             Hide();
-            UIManager.Instance.GetPanel("GamePanel").GetComponent<UIBase>().Show();
+            UIManager.Instance.GetPanel("GameHUD").GetComponent<UIBase>().Show();
             GameControl.Instance.GameStart();
         });
         AddButtonListen("CancelButton_N", () =>

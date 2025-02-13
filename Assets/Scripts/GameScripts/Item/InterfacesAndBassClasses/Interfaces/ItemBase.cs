@@ -9,10 +9,12 @@ public class ItemProperty
     public bool Stackable;               // 可否堆叠
     public bool Equipable;               // 可否装备上手
     public bool EquipOnHand;             // 是否正在装备在手上
+    public bool RotateWithMouse;         // 是否跟随鼠标旋转
 }
 public abstract class ItemBase : MonoBehaviour , IPickUpable
 {
     public int ItemID;                               // 物品ID
+    public Sprite SlotSprite;                        // 新增，道具栏上显示的icon;
     [HideInInspector] public GameItemType ItemType;  // 物品类型
     [Space]
     public SpriteRenderer ItemRenderer;              // 物品目标渲染
@@ -115,4 +117,5 @@ public abstract class ItemBase : MonoBehaviour , IPickUpable
         DropState = true;
         transform.DOLocalRotate(Vector3.zero, 0f);
     }
+    public virtual void OnInteract(){}
 }

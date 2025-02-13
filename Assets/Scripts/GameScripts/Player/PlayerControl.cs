@@ -297,7 +297,7 @@ public class PlayerControl : MonoBehaviour
         _pickupController.currentPickup.transform.SetParent(ItemHoldPosition);
         _pickupController.currentPickup.CheckReverse(playerReversed);
         _pickupController.PlayerPickupItem();
-        ItemHoldPosition.GetChild(0).transform.DOLocalMove(Vector3.zero, 0.3f).OnComplete(() =>
+        ItemHoldPosition.GetChild(0).transform.DOLocalMove(Vector3.zero, 0.05f).OnComplete(() =>
         {
             ItemOnHand = ItemHoldPosition.GetChild(0).GetComponent<ItemBase>();
             pickupLock = false;

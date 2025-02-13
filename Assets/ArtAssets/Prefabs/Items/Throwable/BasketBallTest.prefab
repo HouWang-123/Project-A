@@ -27,7 +27,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.4, y: 1.4, z: 1.4}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 7396498991645650676}
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: 6879118450950661895, guid: a3eed76beea914c45ad2dffa4407dce8, type: 3}
+  m_Sprite: {fileID: -5835082598870868234, guid: 75ebfa6dd47dd0e419b9893684370edd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -96,10 +96,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7396498991645650676}
-  - component: {fileID: 983395914922150801}
-  - component: {fileID: 5214231938801745321}
+  - component: {fileID: 3776630394268781759}
+  - component: {fileID: 4908607580027242537}
+  - component: {fileID: 5100713009477282301}
   m_Layer: 12
-  m_Name: WeaponTest
+  m_Name: BasketBallTest
   m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -121,8 +122,8 @@ Transform:
   - {fileID: 6474370564130402078}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &983395914922150801
-BoxCollider:
+--- !u!135 &3776630394268781759
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -136,13 +137,13 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.77146703, y: 0.4821086, z: 0.20717245}
-  m_Center: {x: 0.23077294, y: 0.049236774, z: 0.014853269}
---- !u!114 &5214231938801745321
+  m_Radius: 0.4709316
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4908607580027242537
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -151,10 +152,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 7601832128168043183}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 950d8354f79e7ab46a062abf0c6af97e, type: 3}
+  m_Script: {fileID: 11500000, guid: 4c82e3a579761ef4caaf36d136e90984, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ItemID: 260010
+  ItemID: 230002
   SlotSprite: {fileID: 0}
   ItemType: 0
   ItemRenderer: {fileID: 5502388850923554619}
@@ -162,12 +163,40 @@ MonoBehaviour:
   DefaultSpriteShader: {fileID: 10753, guid: 0000000000000000f000000000000000, type: 0}
   ItemProperty:
     Stackable: 0
-    Equipable: 1
-    EquipOnHand: 0
-    RotateWithMouse: 1
+    Equipable: 0
+    EquipOnHand: 1
+    RotateWithMouse: 0
   DropState: 0
   gravity: -9.81
   groundCheckDistance: 0.2
   groundLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 0
+  throwRigid: {fileID: 5100713009477282301}
+--- !u!54 &5100713009477282301
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7601832128168043183}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
