@@ -9,10 +9,10 @@ public class RoomMono : MonoBehaviour
     public GameObject SceneItemNode; // 场景道具物品节点
 
     private Transform doorParent;
-
+    
     private Dictionary<int, DoorMono> doorDic = new Dictionary<int, DoorMono>();
 
-    public Transform monsterPoint;
+    //public Transform monsterPoint;    // 怪物生成点（测试用）
 
     private void Awake()
     {
@@ -25,16 +25,19 @@ public class RoomMono : MonoBehaviour
         {
             GameControl.Instance.GetGamePlayer().transform.position = PlayerPoint.position;
         }
-        if (monsterPoint != null)
-        {
-            GameControl.Instance.GetGameMonster(0).transform.position = monsterPoint.position;
-        }
+        // 怪物生成
+        // if (monsterPoint != null)
+        // {
+        //     GameControl.Instance.GetGameMonster(0).transform.position = monsterPoint.position;
+        // }
+        
         GameControl.Instance.SetSceneItemList(SceneItemNode);
     }
 
-
+    private bool doorInited;
     public void SetData(Rooms room)
     {
+        GameControl.Instance.SetSceneItemList(SceneItemNode);
         roomData = room;
         doorParent = transform.Find("Door");
         if(doorParent != null)
@@ -43,6 +46,8 @@ public class RoomMono : MonoBehaviour
             {
                 Debug.LogWarning("room数据所含door数量与实际预制体的door不同，请检查问题！！！");
             }
+            
+            if (doorInited) return;
             for(int i = 0; i < roomData.DoorList.Count && i < doorParent.childCount; i++)
             {
                 DoorMono mono = doorParent.GetChild(i).GetComponent<DoorMono>();
@@ -53,6 +58,7 @@ public class RoomMono : MonoBehaviour
                 mono.SetData(roomData.DoorList[i]);
                 doorDic.Add(roomData.DoorList[i], mono);
             }
+            doorInited = true;
         }
     }
 
@@ -60,5 +66,6 @@ public class RoomMono : MonoBehaviour
     public void SetPlayPoint(int doorId)
     {
         PlayerPoint = doorDic[doorId].GetPlayerPoint();
+        GameControl.Instance.GetGamePlayer().transform.position = PlayerPoint.position;
     }
 }

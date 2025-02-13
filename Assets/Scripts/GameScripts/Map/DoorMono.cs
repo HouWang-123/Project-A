@@ -4,8 +4,9 @@ using cfg.scene;
 
 public class DoorMono : MonoBehaviour
 {
+    public Transform DoorEnterPlayerPoint;
     private Doors doorData;
-
+    
     private bool doorEnabled = true;
 
     public void SetData(int v)
@@ -39,6 +40,6 @@ public class DoorMono : MonoBehaviour
     public Transform GetPlayerPoint()
     {
         doorEnabled = false;
-        return transform;
+        return DoorEnterPlayerPoint;
     }
 }

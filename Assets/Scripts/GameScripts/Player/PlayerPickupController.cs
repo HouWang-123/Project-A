@@ -94,9 +94,8 @@ public class PlayerPickupController : MonoBehaviour
             Item2PickList.Add(currentPickup);
             currentPickup.SetPickupable(true);
             currentPickup.setTargerted(true);
+            UpdateCurrentPickup();
         }
-
-        UpdateCurrentPickup();
     }
 
     private void OnTriggerExit(Collider other) // 物品离开拾取范围
@@ -108,9 +107,8 @@ public class PlayerPickupController : MonoBehaviour
             itemBase.setTargerted(false);
             Item2PickList.Remove(itemBase);
             ChangePickupTarget(); // 重新设定一个目标拾取
+            UpdateCurrentPickup();
         }
-
-        UpdateCurrentPickup();
     }
 
     public void PlayerPickupItem()

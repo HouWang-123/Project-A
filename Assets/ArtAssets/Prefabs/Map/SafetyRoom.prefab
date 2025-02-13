@@ -76,7 +76,7 @@ GameObject:
   m_Layer: 9
   m_Name: PlayerPoint
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -93,7 +93,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7562373079979976702}
+  m_Father: {fileID: 8206831356080259998}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2873215207962608016
 GameObject:
@@ -119,12 +119,44 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2873215207962608016}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.39, y: 1, z: 7.69}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 7.11, y: 1, z: 0.96}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7562373079979976702}
+  m_Father: {fileID: 6620673906910432197}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3169434161897221234
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6620673906910432197}
+  m_Layer: 0
+  m_Name: Monster Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6620673906910432197
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3169434161897221234}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 7711264405204588319}
+  m_Father: {fileID: 8206831356080259998}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3871548720154804658
 GameObject:
@@ -297,6 +329,8 @@ Transform:
   - {fileID: 7562373079979976702}
   - {fileID: 1433497231272455615}
   - {fileID: 3263613612566177828}
+  - {fileID: 6620673906910432197}
+  - {fileID: 5195512948736910907}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6178767148014686312
@@ -313,7 +347,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerPoint: {fileID: 5195512948736910907}
   SceneItemNode: {fileID: 5660459224320369618}
-  monsterPoint: {fileID: 7711264405204588319}
 --- !u!1 &4551766514687104378
 GameObject:
   m_ObjectHideFlags: 0
@@ -538,11 +571,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5195512948736910907}
   - {fileID: 8194122646567277950}
   - {fileID: 9141749529872248355}
   - {fileID: 3251643341128147036}
-  - {fileID: 7711264405204588319}
   m_Father: {fileID: 8206831356080259998}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5666653500775124217
@@ -1063,7 +1094,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6025751555970231679, guid: afe0f3b375b88c0458b803bb42174318, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -35.74
+      value: -33.94
       objectReference: {fileID: 0}
     - target: {fileID: 6025751555970231679, guid: afe0f3b375b88c0458b803bb42174318, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1092,6 +1123,10 @@ PrefabInstance:
     - target: {fileID: 6025751555970231679, guid: afe0f3b375b88c0458b803bb42174318, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6162437493179374286, guid: afe0f3b375b88c0458b803bb42174318, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.467
       objectReference: {fileID: 0}
     - target: {fileID: 7304085915643888516, guid: afe0f3b375b88c0458b803bb42174318, type: 3}
       propertyPath: m_Name
