@@ -4,9 +4,7 @@ using UnityEngine;
 public abstract class Throwable : ItemBase
 {
     public cfg.item.ThrowObjects ItemData;
-    
-    public Rigidbody throwRigid;
-    
+    public Rigidbody ThrowableRigidbody;
     public void Awake()
     {
         InitItem();
@@ -31,6 +29,5 @@ public abstract class Throwable : ItemBase
     public override void OnItemPickUp()
     {
         base.OnItemPickUp();
-        throwRigid.Sleep();
     }
 }

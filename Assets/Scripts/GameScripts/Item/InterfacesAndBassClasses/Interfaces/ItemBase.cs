@@ -68,11 +68,9 @@ public abstract class ItemBase : MonoBehaviour , IPickUpable
     //dorp Item Test
 
     // 重力加速度（负数表示向下）
-    public float gravity = -9.81f;
+    private float gravity = -9.81f;
     // 检测射线的长度（根据物体尺寸和实际需求调整）
-    public float groundCheckDistance = 0.2f;
-    // 只检测“floor”层级，确保 Inspector 中 groundLayer 只包含这一层
-    public LayerMask groundLayer;
+    private float groundCheckDistance = 0.2f;
     
     // 物体当前的速度（包括垂直方向）
     private Vector3 velocity = Vector3.zero;
@@ -84,7 +82,7 @@ public abstract class ItemBase : MonoBehaviour , IPickUpable
             // 以物体当前位置为射线原点（如果物体中心不合适，可加上一个偏移量，如物体底部）
             Vector3 origin = transform.position;
             // 发射一条向下的射线检测地面
-            bool isGrounded = Physics.Raycast(origin, Vector3.down, groundCheckDistance, groundLayer);
+            bool isGrounded = Physics.Raycast(origin, Vector3.down, groundCheckDistance, GameRoot.Instance.FloorLayer);
         
             if (!isGrounded)
             {
@@ -99,7 +97,7 @@ public abstract class ItemBase : MonoBehaviour , IPickUpable
                 velocity = Vector3.zero;
                 // 可选：通过射线获取准确的地面高度，将物体位置修正到地面
                 RaycastHit hit;
-                if (Physics.Raycast(origin, Vector3.down, out hit, groundCheckDistance, groundLayer))
+                if (Physics.Raycast(origin, Vector3.down, out hit, groundCheckDistance, GameRoot.Instance.FloorLayer))
                 {
                     transform.position = new Vector3(transform.position.x, hit.point.y, transform.position.z);
                 }

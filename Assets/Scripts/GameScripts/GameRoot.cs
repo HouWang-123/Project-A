@@ -8,11 +8,13 @@ using YooAsset;
 
 public class GameRoot : MonoBehaviour
 {
+    [HideInInspector] public static GameRoot Instance;
     public EPlayMode PlayMode = EPlayMode.EditorSimulateMode;
     ResourcePackage package;
-
+    public LayerMask FloorLayer;
     private void Awake()
     {
+        Instance = this;
         Instantiate(Resources.Load<GameObject>("LoadingPanel"), UIManager.Instance.transform);
         YooAssets.Initialize();
         package = YooAssets.CreatePackage("DefaultPackage");

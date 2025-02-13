@@ -372,6 +372,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayMode: 0
+  FloorLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!114 &605675692
 MonoBehaviour:
   m_ObjectHideFlags: 0
