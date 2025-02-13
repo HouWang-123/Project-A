@@ -764,7 +764,7 @@ PlayerSettings:
   webGLCloseOnQuit: 0
   webWasm2023: 0
   scriptingDefineSymbols:
-    Android: DOTWEEN;TMP_PRESENT
+    Android: DOTWEEN;TMP_PRESENT;USE_NEW_INPUT;USE_TIMELINE;USE_NAVMESH
     EmbeddedLinux: DOTWEEN
     GameCoreScarlett: DOTWEEN
     GameCoreXboxOne: DOTWEEN
@@ -774,12 +774,12 @@ PlayerSettings:
     PS5: DOTWEEN
     QNX: DOTWEEN
     ReservedCFE: DOTWEEN
-    Standalone: DOTWEEN;TMP_PRESENT;USE_CINEMACHINE_3
+    Standalone: DOTWEEN;TMP_PRESENT;USE_CINEMACHINE_3;USE_NEW_INPUT;USE_TIMELINE;USE_NAVMESH
     VisionOS: DOTWEEN
     WebGL: DOTWEEN
     Windows Store Apps: DOTWEEN
     XboxOne: DOTWEEN
-    iPhone: DOTWEEN
+    iPhone: DOTWEEN;USE_NEW_INPUT;USE_TIMELINE;USE_NAVMESH
     tvOS: DOTWEEN
   additionalCompilerArguments: {}
   platformArchitecture: {}
@@ -892,7 +892,7 @@ PlayerSettings:
   qnxGraphicConfPath: 
   apiCompatibilityLevel: 3
   captureStartupLogs: {}
-  activeInputHandler: 1
+  activeInputHandler: 2
   windowsGamepadBackendHint: 0
   cloudProjectId: 58212f1d-174e-42fc-8620-ba0e2862ab1d
   framebufferDepthMemorylessMode: 0

@@ -2,7 +2,7 @@ using UnityEngine;
 using YooAsset;
 using cfg.scene;
 using System.Collections.Generic;
-
+using Unity.Cinemachine;
 public class GameControl
 {
     public readonly static GameControl Instance;
@@ -10,6 +10,7 @@ public class GameControl
     //data
     private Rooms room;
 
+    private CinemachineCamera mainCam;
     //mono
     private GameObject sceneItemNode;            //场景物品节点
     private GameObject playerObj;
@@ -39,9 +40,10 @@ public class GameControl
         roomCache = new Dictionary<int, GameObject>();
         roomList = new GameObject();
         roomList.name = "===RoomList===";
-        
+                
         room = GameTableDataAgent.RoomsTable.Get(300006); // 初始房间
         AssetHandle handle = YooAssets.LoadAssetSync<GameObject>(room.PrefabName);
+        mainCam = GameObject.Find("CinemachineCamera").GetComponent<CinemachineCamera>();
         roomObj = Object.Instantiate(handle.AssetObject) as GameObject;
         RoomMono mono = roomObj.GetComponent<RoomMono>();
         if(mono == null)
@@ -116,6 +118,8 @@ public class GameControl
             AssetHandle handle = YooAssets.LoadAssetSync<GameObject>("Player000");
             playerObj = Object.Instantiate(handle.AssetObject) as GameObject;
             playerObj.name = "Player000";
+            mainCam.Follow = playerObj.transform;
+            mainCam.LookAt = playerObj.transform;
         }
         return playerObj;
     }
