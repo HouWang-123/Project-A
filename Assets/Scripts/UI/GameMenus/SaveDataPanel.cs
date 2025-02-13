@@ -14,15 +14,15 @@ public class SaveDataPanel : UIBase
     {
         AddButtonListen("LoadButton_N", () =>
         {
-            UIManager.Instance.GetPanel("MainPanel").GetComponent<UIBase>().Hide();
+            UIManager.Instance.GetPanel(UIPanelConfig.MainPanel).GetComponent<UIBase>().Hide();
             Hide();
-            UIManager.Instance.GetPanel("GameHUD").GetComponent<UIBase>().Show();
+            UIManager.Instance.GetPanel(UIPanelConfig.HUD_MainGameHUD).GetComponent<UIBase>().Show();
             GameControl.Instance.GameStart();
         });
         AddButtonListen("CancelButton_N", () =>
         {
             //UIManager.Instance.GetGameObject("MainPanel", "GameStartButton_N").GetComponent<UIBehaviour>().SetSelect();
-            UIManager.Instance.GetPanel("MainPanel").GetComponent<UIBase>().SetSelect("GameStartButton_N");
+            UIManager.Instance.GetPanel(UIPanelConfig.MainPanel).GetComponent<UIBase>().SetSelect("GameStartButton_N");
             Hide();
         });
     }

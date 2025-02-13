@@ -66,8 +66,8 @@ public class GameRoot : MonoBehaviour
         
         //AssetHandle handle2 = YooAssets.LoadAssetSync<GameObject>("GameObject");
         //GameObject @object = Instantiate(handle2.AssetObject) as GameObject;
-        UIManager.Instance.GetPanel("MainPanel");
-        UIManager.Instance.GetPanel("LoadingPanel").GetComponent<UIBase>().Hide();
+        UIManager.Instance.GetPanel(UIPanelConfig.MainPanel);
+        UIManager.Instance.GetPanel(UIPanelConfig.LoadingPanel).GetComponent<UIBase>().Hide();
     }
 
     private void ReadTableTest()

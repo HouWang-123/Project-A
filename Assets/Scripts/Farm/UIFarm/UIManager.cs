@@ -28,8 +28,9 @@ public class UIManager : MonoBehaviour
         allWedgate[PanleName].Add(wedgateName, obj);
     }
 
-    public GameObject GetPanel(string panelName)
+    public GameObject GetPanel(UIPanelConfig configname)
     {
+        string panelName = configname.ToString();
         if(allWedgate.ContainsKey(panelName))
         {
             return allWedgate[panelName][panelName];

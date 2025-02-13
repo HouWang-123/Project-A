@@ -11,7 +11,7 @@ public class MainPanel : UIBase
     {
         AddButtonListen("GameStartButton_N", () =>
         {
-            UIManager.Instance.GetPanel("SaveDataPanel").GetComponent<UIBase>().Show();
+            UIManager.Instance.GetPanel(UIPanelConfig.SaveDataPanel).GetComponent<UIBase>().Show();
         });
     }
 
