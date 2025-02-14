@@ -26,4 +26,10 @@ public class SaveDataPanel : UIBase
             Hide();
         });
     }
+
+    public override void Show()
+    {
+        base.Show();
+        SetSelect("GameSaveData1_N");
+    }
 }

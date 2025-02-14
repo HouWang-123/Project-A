@@ -252,40 +252,41 @@ public class PlayerControl : MonoBehaviour
             {
                 speed *= runeToB;
             }
-            playerRG.Move(vector * speed + transform.position, Quaternion.identity);
+            //playerRG.Move(vector * speed + transform.position, Quaternion.identity);
+            playerRG.linearVelocity = vector * speed;
         }
     }
 
-    public void OnCollisionEnter(Collision other)
-    {
-        if (other.gameObject.tag.Equals("Obstacle"))
-        {
-            stopmove = true;
-            Vector3 reversedDirection;
-            reversedDirection = InputControl.Instance.MovePoint;
-            reversedDirection.z = reversedDirection.y;
-            reversedDirection.y = 0;
-            float speed = Speed * Time.deltaTime;
-            if((reversedDirection.x > 0 && playerRenderer.localScale.x < 0) || (reversedDirection.x < 0 && playerRenderer.localScale.x > 0))
-            {
-                speed *= fToB;
-            }
-            else if(shiftButt)
-            {
-                speed *= runeToB;
-            }
+    //public void OnCollisionEnter(Collision other)
+    //{
+    //    if (other.gameObject.tag.Equals("Obstacle"))
+    //    {
+    //        stopmove = true;
+    //        Vector3 reversedDirection;
+    //        reversedDirection = InputControl.Instance.MovePoint;
+    //        reversedDirection.z = reversedDirection.y;
+    //        reversedDirection.y = 0;
+    //        float speed = Speed * Time.deltaTime;
+    //        if((reversedDirection.x > 0 && playerRenderer.localScale.x < 0) || (reversedDirection.x < 0 && playerRenderer.localScale.x > 0))
+    //        {
+    //            speed *= fToB;
+    //        }
+    //        else if(shiftButt)
+    //        {
+    //            speed *= runeToB;
+    //        }
             
-            playerRG.Move( -reversedDirection * speed + transform.position, Quaternion.identity);
-        }
-    }
+    //        playerRG.Move( -reversedDirection * speed + transform.position, Quaternion.identity);
+    //    }
+    //}
 
-    public void OnCollisionExit(Collision other)
-    {
-        if (other.gameObject.tag.Equals("Obstacle"))
-        {
-            stopmove = false;
-        }
-    }
+    //public void OnCollisionExit(Collision other)
+    //{
+    //    if (other.gameObject.tag.Equals("Obstacle"))
+    //    {
+    //        stopmove = false;
+    //    }
+    //}
 
     public void SetMouseAction(UnityAction leftAction =null,UnityAction rightAction = null)
     {

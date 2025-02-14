@@ -5,12 +5,11 @@ using UnityEngine;
 public class RoomMono : MonoBehaviour
 {
     private Rooms roomData;
-    public Transform PlayerPoint;
-    public GameObject monsterList;
+    private Transform playerPoint;
     public GameObject SceneItemNode; // 场景道具物品节点
+    public GameObject monsterList;
 
     private Transform doorParent;
-    
     private Dictionary<int, DoorMono> doorDic = new Dictionary<int, DoorMono>();
 
     //public Transform monsterPoint;    // 怪物生成点（测试用）
@@ -22,9 +21,13 @@ public class RoomMono : MonoBehaviour
 
     private void Start()
     {
-        if(PlayerPoint != null)
+        if(playerPoint != null)
         {
-            GameControl.Instance.GetGamePlayer().transform.position = PlayerPoint.position;
+            GameControl.Instance.GetGamePlayer().transform.position = playerPoint.position;
+        }
+        else
+        {
+            GameControl.Instance.GetGamePlayer().transform.position = Vector3.zero;
         }
 
         GameControl.Instance.SetSceneItemList(SceneItemNode);
@@ -61,7 +64,7 @@ public class RoomMono : MonoBehaviour
 
     public void SetPlayPoint(int doorId)
     {
-        PlayerPoint = doorDic[doorId].GetPlayerPoint();
-        GameControl.Instance.GetGamePlayer().transform.position = PlayerPoint.position;
+        playerPoint = doorDic[doorId].GetPlayerPoint();
+        GameControl.Instance.GetGamePlayer().transform.position = playerPoint.position;
     }
 }

@@ -4,7 +4,15 @@ using cfg.scene;
 
 public class DoorMono : MonoBehaviour
 {
-    public Transform DoorEnterPlayerPoint;
+    [Header("通向的门ID")]
+    public int ToDoorID;
+    [Header("通向的RoomID")]
+    public int ToRoomID;
+    [Header("门的锁定状态")]
+    [Tooltip("UnLock 未锁定;.....")]
+    public EDoorLock DoorState;
+
+
     private Doors doorData;
     
     private bool doorEnabled = true;
@@ -40,6 +48,15 @@ public class DoorMono : MonoBehaviour
     public Transform GetPlayerPoint()
     {
         doorEnabled = false;
-        return DoorEnterPlayerPoint;
+        return transform;
+    }
+
+
+
+
+    public enum EDoorLock
+    {
+        UnLock = 1,
+
     }
 }
