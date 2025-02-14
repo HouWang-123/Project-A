@@ -65,7 +65,7 @@ public sealed partial class Character : Luban.BeanBase
     /// </summary>
     public readonly string VoicePackID;
     /// <summary>
-    /// 走路速度
+    /// 走路速度（米每秒）
     /// </summary>
     public readonly float WalkSpeed;
     /// <summary>

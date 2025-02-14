@@ -86,6 +86,13 @@
             "BundleID": 0
         },
         {
+            "Address": "mon_monstertable",
+            "AssetPath": "Assets/ArtAssets/DATAOUTPUT/mon_monstertable.json",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 0
+        },
+        {
             "Address": "scene_doorstable",
             "AssetPath": "Assets/ArtAssets/DATAOUTPUT/scene_doorstable.json",
             "AssetGUID": "",
@@ -149,8 +156,8 @@
             "BundleID": 4
         },
         {
-            "Address": "NavMesh-NavMesh",
-            "AssetPath": "Assets/ArtAssets/Prefabs/Map/NavMesh-NavMesh.asset",
+            "Address": "NavMesh-NavMesh 1",
+            "AssetPath": "Assets/ArtAssets/Prefabs/Map/NavMesh-NavMesh 1.asset",
             "AssetGUID": "",
             "AssetTags": [],
             "BundleID": 4
@@ -163,8 +170,15 @@
             "BundleID": 4
         },
         {
-            "Address": "Monster000",
-            "AssetPath": "Assets/ArtAssets/Prefabs/NPCs/Monster/Monster000.prefab",
+            "Address": "DrownedOnes",
+            "AssetPath": "Assets/ArtAssets/Prefabs/NPCs/Monster/DrownedOnes.prefab",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 5
+        },
+        {
+            "Address": "HoundTindalos",
+            "AssetPath": "Assets/ArtAssets/Prefabs/NPCs/Monster/HoundTindalos.prefab",
             "AssetGUID": "",
             "AssetTags": [],
             "BundleID": 5
@@ -468,9 +482,9 @@
         {
             "BundleName": "assets_artassets_dataoutput.bundle",
             "UnityCRC": 0,
-            "FileHash": "667a1314a7eafb327a6e3a4ac5d3fe9f",
+            "FileHash": "65762c23fb787038360cd24bf6d14c35",
             "FileCRC": "00000000",
-            "FileSize": 28658,
+            "FileSize": 29527,
             "Encrypted": false,
             "Tags": [],
             "DependIDs": []
@@ -478,9 +492,9 @@
         {
             "BundleName": "assets_artassets_dialogueasset.bundle",
             "UnityCRC": 0,
-            "FileHash": "d5fb973a484fe5eaeed957b6dad6a8f2",
+            "FileHash": "07507b99614224b0c164a9d2235cabf9",
             "FileCRC": "00000000",
-            "FileSize": 9063,
+            "FileSize": 9342,
             "Encrypted": false,
             "Tags": [],
             "DependIDs": []
@@ -488,9 +502,9 @@
         {
             "BundleName": "assets_artassets_prefabs_items_throwable.bundle",
             "UnityCRC": 0,
-            "FileHash": "556eb6e0482d158c1be43cc2b85f51e3",
+            "FileHash": "c7398e1ddbbec9718b9649684dd0d915",
             "FileCRC": "00000000",
-            "FileSize": 4982,
+            "FileSize": 4980,
             "Encrypted": false,
             "Tags": [],
             "DependIDs": []
@@ -498,7 +512,7 @@
         {
             "BundleName": "assets_artassets_prefabs_items_weapons.bundle",
             "UnityCRC": 0,
-            "FileHash": "ec397a4236cd0e122a2b9ef67013905c",
+            "FileHash": "72aa3ae4d66013dc040c1a4259b84b0b",
             "FileCRC": "00000000",
             "FileSize": 5002,
             "Encrypted": false,
@@ -508,9 +522,9 @@
         {
             "BundleName": "assets_artassets_prefabs_map.bundle",
             "UnityCRC": 0,
-            "FileHash": "8d74a72c0dd9b337590124fcd495521a",
+            "FileHash": "424b7b852e818e2445b0b5eefee40d8c",
             "FileCRC": "00000000",
-            "FileSize": 121455,
+            "FileSize": 124120,
             "Encrypted": false,
             "Tags": [],
             "DependIDs": []
@@ -518,9 +532,9 @@
         {
             "BundleName": "assets_artassets_prefabs_npcs_monster.bundle",
             "UnityCRC": 0,
-            "FileHash": "38bf36cddd947d6d96da50593c21b44a",
+            "FileHash": "e80f3d95d49197699477c77b444df24d",
             "FileCRC": "00000000",
-            "FileSize": 9042,
+            "FileSize": 18168,
             "Encrypted": false,
             "Tags": [],
             "DependIDs": []
@@ -528,7 +542,7 @@
         {
             "BundleName": "assets_artassets_prefabs_object.bundle",
             "UnityCRC": 0,
-            "FileHash": "aec275d6072cf97dac3eb794c19978e3",
+            "FileHash": "f9a2985e3802a2ea530949a082c424f6",
             "FileCRC": "00000000",
             "FileSize": 3595,
             "Encrypted": false,
@@ -538,7 +552,7 @@
         {
             "BundleName": "assets_artassets_prefabs_player.bundle",
             "UnityCRC": 0,
-            "FileHash": "275a631020a7bc9f7857d0e691097107",
+            "FileHash": "7f803001e73f354f794ac2973057604d",
             "FileCRC": "00000000",
             "FileSize": 10493,
             "Encrypted": false,
@@ -548,7 +562,7 @@
         {
             "BundleName": "assets_artassets_prefabs_ui_hud_buttonprefabs.bundle",
             "UnityCRC": 0,
-            "FileHash": "c0b0f56764e3171af2946cbc52e0f3be",
+            "FileHash": "257da15453af1c56dbfda7140245ad15",
             "FileCRC": "00000000",
             "FileSize": 7986,
             "Encrypted": false,
@@ -558,9 +572,9 @@
         {
             "BundleName": "assets_artassets_prefabs_ui_hud.bundle",
             "UnityCRC": 0,
-            "FileHash": "fc87af85622cdba5a63b79639526aa76",
+            "FileHash": "69c8681ef149cdf4bbae3a7cbc04c9e3",
             "FileCRC": "00000000",
-            "FileSize": 24685,
+            "FileSize": 25148,
             "Encrypted": false,
             "Tags": [],
             "DependIDs": []
@@ -568,7 +582,7 @@
         {
             "BundleName": "assets_artassets_prefabs_ui_hud_hud_prefabs.bundle",
             "UnityCRC": 0,
-            "FileHash": "9e43d00348c2c7c0ad247f6ba291f747",
+            "FileHash": "a2cf2f76b324e366bb51871334b4a4ce",
             "FileCRC": "00000000",
             "FileSize": 42555,
             "Encrypted": false,
@@ -578,7 +592,7 @@
         {
             "BundleName": "assets_artassets_prefabs_ui.bundle",
             "UnityCRC": 0,
-            "FileHash": "b602cec301144c047ff04a28751dd51c",
+            "FileHash": "8c784155784c811f682aa9b4d0b44153",
             "FileCRC": "00000000",
             "FileSize": 76673,
             "Encrypted": false,
@@ -588,7 +602,7 @@
         {
             "BundleName": "assets_artassets_sprite_character.bundle",
             "UnityCRC": 0,
-            "FileHash": "ab6ef9fffbb0b56dd8175d36e4027b62",
+            "FileHash": "f210f5da4e2ce649615c4f331933c82d",
             "FileCRC": "00000000",
             "FileSize": 85038,
             "Encrypted": false,
@@ -598,7 +612,7 @@
         {
             "BundleName": "assets_artassets_sprite_items.bundle",
             "UnityCRC": 0,
-            "FileHash": "5e450f092a4c8503a4d250ac89731b3d",
+            "FileHash": "41e4543231c7af699ff6e2ac90a2ae8c",
             "FileCRC": "00000000",
             "FileSize": 9835,
             "Encrypted": false,
@@ -608,7 +622,7 @@
         {
             "BundleName": "assets_artassets_sprite_other.bundle",
             "UnityCRC": 0,
-            "FileHash": "39bc00db9b4feaee4ddcbc94fed514c9",
+            "FileHash": "223885c0ba54e7ad32477aafa431fb97",
             "FileCRC": "00000000",
             "FileSize": 281,
             "Encrypted": false,
@@ -618,7 +632,7 @@
         {
             "BundleName": "assets_artassets_sprite_scene.bundle",
             "UnityCRC": 0,
-            "FileHash": "bb653fc4d6cbb58b3caa22ea33b42af4",
+            "FileHash": "97922b11c3a843c1c120b4bde50cb985",
             "FileCRC": "00000000",
             "FileSize": 2744556,
             "Encrypted": false,
@@ -628,7 +642,7 @@
         {
             "BundleName": "assets_artassets_sprite_ui_icons.bundle",
             "UnityCRC": 0,
-            "FileHash": "bbfd8c9b1e64925740c06ca18fe5b127",
+            "FileHash": "7a43a9d0a4d4806164d0d065647f5835",
             "FileCRC": "00000000",
             "FileSize": 286381,
             "Encrypted": false,

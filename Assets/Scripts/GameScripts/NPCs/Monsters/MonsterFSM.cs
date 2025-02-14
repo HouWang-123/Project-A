@@ -1,3 +1,4 @@
+using cfg.mon;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -5,19 +6,36 @@ public class MonsterFSM : MonoBehaviour
 {
     private FiniteStateMachine m_fsm;
     // 怪物数据
-    public NPCDataBase m_NPCDatas;
+    public Monster m_NPCDatas;
+    // 怪物的Sprite
+    public SpriteRenderer m_spriteRenderer;
     // 头顶信息
     public SpriteRenderer m_infoRenderer;
     private void Start()
     {
         InitFSM();
-        m_NPCDatas = new MonsterData
+        foreach (var monster in GameTableDataAgent.MonsterTable.DataList)
         {
-            speed = GetComponent<NavMeshAgent>().speed
-        };
+            // 根据预制体名称获取不同的怪物数据
+            if (gameObject.name == monster.PrefabName)
+            {
+                m_NPCDatas = monster;
+                break;
+            }
+        }
+        if (m_NPCDatas == null)
+        {
+            Debug.LogError(GetType() + " /Start() => 请检查怪物的预制体名称是否和表格一致！");
+        }
+        GetComponent<NavMeshAgent>().speed = m_NPCDatas.Speed;
+        
         if (m_infoRenderer == null)
         {
             m_infoRenderer = transform.GetChild(1).GetComponent<SpriteRenderer>();
+        }
+        if (m_spriteRenderer == null)
+        {
+            m_spriteRenderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
         }
     }
 

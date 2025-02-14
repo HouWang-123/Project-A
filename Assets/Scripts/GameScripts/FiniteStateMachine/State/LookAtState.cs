@@ -33,7 +33,7 @@ public class LookAtState : BaseState
         float npcX = npc.transform.position.x;
         float playerX = m_playerTransform.position.x;
         // 玩家在NPC左边，看向左边
-        SpriteRenderer spriteRenderer = npc.transform.GetChild(0).GetComponent<SpriteRenderer>();
+        SpriteRenderer spriteRenderer = npc.GetComponent<MonsterFSM>().m_spriteRenderer;
         if (playerX - npcX > 0)
         {
             spriteRenderer.flipX = false;

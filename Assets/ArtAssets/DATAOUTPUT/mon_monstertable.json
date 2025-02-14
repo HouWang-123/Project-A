@@ -1,0 +1,28 @@
+[
+  {
+    "ID": 400001,
+    "NAME": "溺亡者",
+    "DESCRIBE": " 受不可名状的力量影响，溺亡者从水中的尸体孵化而来，以其扭曲的身体和冰冷的动作猎杀猎物，渴望着吞噬一切活物。",
+    "prefabName": "DrownedOnes",
+    "maxHP": 100,
+    "attack": 14,
+    "speed": 1.2,
+    "warnRange": 8,
+    "inPeace": "Empty",
+    "toBattle": "Empty",
+    "inBattle": "Empty"
+  },
+  {
+    "ID": 400002,
+    "NAME": "猎犬",
+    "DESCRIBE": "它是穿越时空的幽影，体态扭曲如几何恶梦，锋锐的身体散发出诡异的蓝光，悄然地追寻每一位敢窥探时间奥秘的灵魂，致命无声。",
+    "prefabName": "HoundTindalos",
+    "maxHP": 1000,
+    "attack": 49,
+    "speed": 1.5,
+    "warnRange": 100,
+    "inPeace": "Empty",
+    "toBattle": "Empty",
+    "inBattle": "Empty"
+  }
+]

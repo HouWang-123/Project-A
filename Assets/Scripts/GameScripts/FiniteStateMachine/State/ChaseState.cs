@@ -72,7 +72,7 @@ public class ChaseState : BaseState
         float npcX = npc.transform.position.x;
         float playerX = m_playerTransform.position.x;
         // 玩家在NPC左边，看向左边
-        SpriteRenderer spriteRenderer = npc.transform.GetChild(0).GetComponent<SpriteRenderer>();
+        SpriteRenderer spriteRenderer = npc.GetComponent<MonsterFSM>().m_spriteRenderer;
         if (playerX - npcX > 0)
         {
             spriteRenderer.flipX = false;
@@ -90,7 +90,7 @@ public class ChaseState : BaseState
         {
             Debug.Log(GetType() + " /Act()=> 玩家位置无效，退化为直线行走");
             var direction = (m_playerTransform.position - npc.transform.position).normalized;
-            float speed = npc.GetComponent<MonsterFSM>().m_NPCDatas.speed;
+            float speed = npc.GetComponent<MonsterFSM>().m_NPCDatas.Speed;
             Vector3 newPos = npc.transform.position + speed * Time.deltaTime * direction;
             npc.transform.position = newPos;
         }
@@ -109,7 +109,7 @@ public class ChaseState : BaseState
                 {
                     Debug.Log(GetType() + " /Act()=> 玩家位置无效，退化为直线行走");
                     var direction = (m_playerTransform.position - npc.transform.position).normalized;
-                    float speed = npc.GetComponent<MonsterFSM>().m_NPCDatas.speed;
+                    float speed = npc.GetComponent<MonsterFSM>().m_NPCDatas.Speed;
                     Vector3 newPos = npc.transform.position + speed * Time.deltaTime * direction;
                     npc.transform.position = newPos;
                 }
@@ -143,12 +143,14 @@ public class ChaseState : BaseState
         }
         // 玩家出了巡逻范围，就进行游荡
         // 在玩家位置周围检测NavMesh
-        bool isInside = m_playerTransform.gameObject.GetComponent<NavMeshAgent>().isOnNavMesh;
-
-        if (!isInside)
+        if (m_playerTransform.gameObject.TryGetComponent<NavMeshAgent>(out var navAgentPlayer))
         {
-            Debug.Log("玩家已走出NavMesh范围！");
-            m_finiteStateMachine.PerformTransition(TransitionEnum.LostPlayer);
+            bool isInside = navAgentPlayer.isOnNavMesh;
+            if (!isInside)
+            {
+                Debug.Log("玩家已走出NavMesh范围！");
+                m_finiteStateMachine.PerformTransition(TransitionEnum.LostPlayer);
+            }
         }
     }
     /// <summary>

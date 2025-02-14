@@ -28,6 +28,7 @@ public partial class Tables
     public item.WeaponTable WeaponTable {get; }
     public scene.DoorsTable DoorsTable {get; }
     public scene.RoomsTable RoomsTable {get; }
+    public mon.MonsterTable MonsterTable {get; }
 
     public Tables(System.Func<string, JSONNode> loader)
     {
@@ -45,6 +46,7 @@ public partial class Tables
         WeaponTable = new item.WeaponTable(loader("item_weapontable"));
         DoorsTable = new scene.DoorsTable(loader("scene_doorstable"));
         RoomsTable = new scene.RoomsTable(loader("scene_roomstable"));
+        MonsterTable = new mon.MonsterTable(loader("mon_monstertable"));
         ResolveRef();
     }
     
@@ -64,6 +66,7 @@ public partial class Tables
         WeaponTable.ResolveRef(this);
         DoorsTable.ResolveRef(this);
         RoomsTable.ResolveRef(this);
+        MonsterTable.ResolveRef(this);
     }
 }
 

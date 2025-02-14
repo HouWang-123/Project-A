@@ -109,7 +109,7 @@ public class PatrolState : BaseState
             float newPosX = newPos.x;
             float npcPosX = NPC.transform.position.x;
             // 点在右边，看向右边
-            SpriteRenderer spriteRenderer = NPC.transform.GetChild(0).GetComponent<SpriteRenderer>();
+            SpriteRenderer spriteRenderer = NPC.GetComponent<MonsterFSM>().m_spriteRenderer;
             if (newPosX - npcPosX > 0)
             {
                 spriteRenderer.flipX = false;
