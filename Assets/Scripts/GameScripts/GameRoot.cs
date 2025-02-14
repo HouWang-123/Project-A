@@ -18,7 +18,6 @@ public class GameRoot : MonoBehaviour
         Instantiate(Resources.Load<GameObject>("LoadingPanel"), UIManager.Instance.transform);
         YooAssets.Initialize();
         package = YooAssets.CreatePackage("DefaultPackage");
-
         YooAssets.SetDefaultPackage(package);
 
         switch (PlayMode)
