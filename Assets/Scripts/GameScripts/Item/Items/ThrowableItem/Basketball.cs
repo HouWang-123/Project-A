@@ -5,9 +5,9 @@ public class Basketball : Throwable
         throw new System.NotImplementedException();
     }
 
-    public override void OnInteract()
+    public override void OnLeftInteract()
     {
-        base.OnInteract();
+        base.OnLeftInteract();
         // Throw away
     }
 }

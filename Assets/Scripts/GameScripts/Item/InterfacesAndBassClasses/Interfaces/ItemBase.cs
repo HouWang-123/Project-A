@@ -9,7 +9,6 @@ public class ItemProperty
     public bool Stackable;               // 可否堆叠
     public bool Equipable;               // 可否装备上手
     public bool EquipOnHand;             // 是否正在装备在手上
-    public bool RotateWithMouse;         // 是否跟随鼠标旋转
 }
 public abstract class ItemBase : MonoBehaviour , IPickUpable
 {
@@ -110,10 +109,25 @@ public abstract class ItemBase : MonoBehaviour , IPickUpable
     {
         
     }
-    public virtual void OnItemDrop()
+    public virtual void OnItemDrop(bool fastDrop)
     {
         DropState = true;
         transform.DOLocalRotate(Vector3.zero, 0f);
+        if (fastDrop)
+        {
+            Vector3 groundLocation = transform.position;
+            groundLocation.y = 0;
+            DropState = true;
+        }
     }
-    public virtual void OnInteract(){}
+
+    public virtual void OnRightInteract()
+    {
+        
+    }
+
+    public virtual void OnLeftInteract()
+    {
+        
+    }
 }

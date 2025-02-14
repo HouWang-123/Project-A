@@ -8,7 +8,7 @@ using UnityEngine.Events;
 
 public class PlayerControl : MonoBehaviour
 {
-    public ItemBase ItemOnHand;             // 玩家当前手中的物品
+    public ItemBase ItemOnHand;// 玩家当前手中的物品
     public Transform ItemHoldPosition;      // 玩家拿取物品位置
     private PlayerInputControl inputControl;
     private Rigidbody playerRG;
@@ -260,17 +260,9 @@ public class PlayerControl : MonoBehaviour
         }
         if(Keyboard.current.gKey.isPressed)
         {
-            if(dropKeyPressed)
-            {
-                return;
-            }
-            if(ItemOnHand != null)
-            {
-                ItemOnHand.CheckReverse(playerReversed);
-                ItemOnHand.transform.SetParent(GameControl.Instance.GetSceneItemList().transform);
-                ItemOnHand.OnItemDrop();
-                ItemOnHand = null;
-            }
+            if(dropKeyPressed) { return; }
+            
+            if(ItemOnHand != null) { DropItem(false); }
             else
             {
                 PickItem();
@@ -283,6 +275,13 @@ public class PlayerControl : MonoBehaviour
         }
     }
 
+    public void DropItem(bool fastDrop)
+    {
+        ItemOnHand.CheckReverse(playerReversed);
+        ItemOnHand.transform.SetParent(GameControl.Instance.GetSceneItemList().transform);
+        ItemOnHand.OnItemDrop(fastDrop);
+        ItemOnHand = null;
+    }
     public void PickItem() // 拾取物品
     {
         if(playerReversed)
@@ -297,7 +296,7 @@ public class PlayerControl : MonoBehaviour
         _pickupController.currentPickup.transform.SetParent(ItemHoldPosition);
         _pickupController.currentPickup.CheckReverse(playerReversed);
         _pickupController.PlayerPickupItem();
-        ItemHoldPosition.GetChild(0).transform.DOLocalMove(Vector3.zero, 0.05f).OnComplete(() =>
+        ItemHoldPosition.GetChild(0).transform.DOLocalMove(Vector3.zero, 0.01f).OnComplete(() =>
         {
             ItemOnHand = ItemHoldPosition.GetChild(0).GetComponent<ItemBase>();
             pickupLock = false;

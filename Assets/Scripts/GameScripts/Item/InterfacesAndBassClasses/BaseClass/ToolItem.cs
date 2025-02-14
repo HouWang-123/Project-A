@@ -2,7 +2,7 @@ using System;
 
 public abstract class ToolItem : ItemBase
 {
-    public cfg.item.SceneObjects ItemData;
+    public cfg.item.Tools ItemData;
     public void Awake()
     {
         InitItem();
@@ -13,10 +13,10 @@ public abstract class ToolItem : ItemBase
     protected override void InitItem()
     {
         ItemType = GameItemType.ToolItem;
-        ItemData = GameTableDataAgent.SceneObjectsTable.Get(ItemID);
+        ItemData = GameTableDataAgent.ToolsTable.Get(ItemID);
         try
         {
-            ItemData = GameTableDataAgent.SceneObjectsTable.Get(ItemID);
+            ItemData = GameTableDataAgent.ToolsTable.Get(ItemID);
         }
         catch (Exception e)
         {

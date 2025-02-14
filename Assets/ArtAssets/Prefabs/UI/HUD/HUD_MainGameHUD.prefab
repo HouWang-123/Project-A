@@ -75,6 +75,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 4.8153
       objectReference: {fileID: 0}
+    - target: {fileID: 6062590856331440013, guid: e1773f474b2d57e4f9c34d32c6eb55eb, type: 3}
+      propertyPath: ItemSlots.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6062590856331440013, guid: e1773f474b2d57e4f9c34d32c6eb55eb, type: 3}
+      propertyPath: 'ItemSlots.Array.data[6]'
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 6692172086091346366, guid: e1773f474b2d57e4f9c34d32c6eb55eb, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -160,7 +168,8 @@ PrefabInstance:
       value: ItemSlotDock
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 2972160469822034688, guid: e1773f474b2d57e4f9c34d32c6eb55eb, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e1773f474b2d57e4f9c34d32c6eb55eb, type: 3}

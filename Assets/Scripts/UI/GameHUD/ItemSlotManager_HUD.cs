@@ -39,6 +39,10 @@ namespace UI
         }
         public override void Show()
         {
+            if (isplayingOpeningOrClosing)
+            {
+                return;
+            }
             gameObject.SetActive(true);
             foreach (var go in ItemSlots)
             {
@@ -50,6 +54,10 @@ namespace UI
 
         public override void Hide()
         {
+            if (isplayingOpeningOrClosing)
+            {
+                return;
+            }
             HUDDisable(true,() => { gameObject.SetActive(false); });
         }
         
