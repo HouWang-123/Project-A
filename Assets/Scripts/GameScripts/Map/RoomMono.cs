@@ -6,6 +6,7 @@ public class RoomMono : MonoBehaviour
 {
     private Rooms roomData;
     public Transform PlayerPoint;
+    public GameObject monsterList;
     public GameObject SceneItemNode; // 场景道具物品节点
 
     private Transform doorParent;
@@ -25,12 +26,7 @@ public class RoomMono : MonoBehaviour
         {
             GameControl.Instance.GetGamePlayer().transform.position = PlayerPoint.position;
         }
-        // 怪物生成
-        // if (monsterPoint != null)
-        // {
-        //     GameControl.Instance.GetGameMonster(0).transform.position = monsterPoint.position;
-        // }
-        
+
         GameControl.Instance.SetSceneItemList(SceneItemNode);
     }
 

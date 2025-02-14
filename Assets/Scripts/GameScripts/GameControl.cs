@@ -17,7 +17,7 @@ public class GameControl
     private GameObject roomObj;                  // 当前房间Go
     private Dictionary<int, GameObject> roomCache;
 
-    private List<GameObject> monsterList;
+    private Dictionary<int, List<GameObject>> roomWithMonsterList; // 房间对应的怪物
     private GameObject roomList;
 
     static GameControl()
@@ -93,6 +93,16 @@ public class GameControl
         //Object.Destroy(roomObj);
         room = r;
         roomObj = o;
+
+        // 房间切换后，检查怪物生成
+        if (mono.monsterList != null)
+        {
+            foreach (var monster in GetGameMonsterList(r.ID))
+            {
+                monster.transform.SetParent(mono.monsterList.transform);
+                monster.transform.position = mono.monsterList.transform.position;
+            }
+        }
     }
 
     public void GameSave()
@@ -124,20 +134,56 @@ public class GameControl
         return playerObj;
     }
     // 怪物测试代码
-    public GameObject GetGameMonster(int i)
+    public List<GameObject> GetGameMonsterList(int roomId)
     {
-        int monsterCount = 1; // 怪物数量，根据数据表调整
-        if (monsterList == null)
+        if (roomWithMonsterList == null)
         {
-            monsterList = new ();
-            for (int j = 0; j < monsterCount; ++j)
+            var monsterTable = GameTableDataAgent.MonsterTable;
+            int monsterCount = monsterTable.DataList.Count; // 怪物数量，根据房间对应的怪物数量调整
+            roomWithMonsterList = new();
+            if (roomCache.ContainsKey(roomId))
             {
-                AssetHandle handle = YooAssets.LoadAssetSync<GameObject>("Monster" + j.ToString("D3"));
-                var monsterObj = Object.Instantiate(handle.AssetObject) as GameObject;
-                monsterObj.name = "Monster" + j.ToString("D3");
-                monsterList.Add(monsterObj);
+                List<GameObject> monsterList = new();
+                for (int j = 0; j < monsterCount; ++j)
+                {
+                    AssetHandle handle = YooAssets.LoadAssetSync<GameObject>(monsterTable.DataList[j].PrefabName);
+                    var monsterObj = Object.Instantiate(handle.AssetObject) as GameObject;
+                    monsterObj.name = monsterTable.DataList[j].PrefabName;
+                    monsterList.Add(monsterObj);
+                }
+                roomWithMonsterList.Add(roomId, monsterList);
+            }
+            else
+            {
+                Debug.LogError(GetType() + " /GetGameMonsterList => 没有找到对应的房间！");
             }
         }
-        return monsterList[i];
+        return roomWithMonsterList[roomId];
+    }
+    public GameObject GetGameMonster(int roomId, int i)
+    {
+        if (roomWithMonsterList == null)
+        {
+            var monsterTable = GameTableDataAgent.MonsterTable;
+            int monsterCount = monsterTable.DataList.Count; // 怪物数量，根据房间对应的怪物数量调整
+            roomWithMonsterList = new();
+            if (roomCache.ContainsKey(roomId))
+            {
+                List<GameObject> monsterList = new();
+                for (int j = 0; j < monsterCount; ++j)
+                {
+                    AssetHandle handle = YooAssets.LoadAssetSync<GameObject>(monsterTable.DataList[j].PrefabName);
+                    var monsterObj = Object.Instantiate(handle.AssetObject) as GameObject;
+                    monsterObj.name = monsterTable.DataList[j].PrefabName;
+                    monsterList.Add(monsterObj);
+                }
+                roomWithMonsterList.Add(roomId, monsterList);
+            }
+            else
+            {
+                Debug.LogError(GetType() + " /GetGameMonsterList => 没有找到对应的房间！");
+            }
+        }
+        return roomWithMonsterList[roomId][i];
     }
 }

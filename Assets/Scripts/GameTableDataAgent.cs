@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using cfg;
 using cfg.buff;
 using cfg.cha;
@@ -7,6 +5,7 @@ using cfg.interact;
 using cfg.item;
 using cfg.skill;
 using cfg.scene;
+using cfg.mon;
 using SimpleJSON;
 using UnityEngine;
 using YooAsset;
@@ -34,7 +33,7 @@ public class GameTableDataAgent
     public static InteractEffectTable InteractEffectTable;
     public static RoomsTable RoomsTable;
     public static DoorsTable DoorsTable;
-
+    public static MonsterTable MonsterTable;
 
     public static void LoadAllTable()
     {
@@ -57,6 +56,7 @@ public class GameTableDataAgent
         InteractEffectTable = _Instance.InteractEffectTable;
         RoomsTable = _Instance.RoomsTable;
         DoorsTable = _Instance.DoorsTable;
+        MonsterTable = _Instance.MonsterTable;
 
         ColorfulDebugger.Debug(" All Game Data loaded", ColorfulDebugger.Instance.Data);
     }
