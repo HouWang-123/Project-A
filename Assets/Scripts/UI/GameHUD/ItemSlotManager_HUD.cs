@@ -19,7 +19,45 @@ namespace UI
         public static GameItemSlot_HUD_Behavior ACTIVE_ITEM_SLOT;
         public float ItemSlotAnimationInterval;
         public float ItemSlotAnimationTime;
-        
+        /// <summary>
+        /// Next为true则切换为下一个物品否则切换为上一个物品
+        /// </summary>
+        /// <param name="Next"></param>
+        public void ChangeFocus(bool Next)
+        {
+            int i = ItemSlots.IndexOf(ACTIVE_ITEM_SLOT);
+            if (Next)
+            {
+                i++;
+            }
+            else
+            {
+                i--;
+            }
+            
+            if (i == -1)
+            {
+                i = ItemSlots.Count -1;
+            }
+            if (i == ItemSlots.Count)
+            {
+                i = 0;
+            }
+            ACTIVE_ITEM_SLOT.SetAsNonActiveItem();
+            ItemSlots[i].SetAsActiveItem();
+            ACTIVE_ITEM_SLOT = ItemSlots[i];
+        }
+        public void ChangeFocus(int Number)
+        {
+            Number--;
+            if (ItemSlots[Number] == ACTIVE_ITEM_SLOT)
+            {
+                return;
+            }
+            ACTIVE_ITEM_SLOT.SetAsNonActiveItem();
+            ItemSlots[Number].SetAsActiveItem();
+            ACTIVE_ITEM_SLOT = ItemSlots[Number];
+        }
         private void Start()
         {
             Instance = this;
@@ -158,7 +196,10 @@ namespace UI
 #region Listeners
         protected override void AddListen()
         {
-            ItemSlotsHUDSwitch_N.onClick.AddListener(SwitchHUD);
+            ItemSlotsHUDSwitch_N.onClick.AddListener(()=>
+            {
+                ChangeFocus(false);
+            });
         }
         public void OnItemSwitch()
         {

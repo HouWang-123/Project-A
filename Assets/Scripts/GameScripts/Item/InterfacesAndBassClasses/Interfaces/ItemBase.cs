@@ -24,6 +24,9 @@ public abstract class ItemBase : MonoBehaviour , IPickUpable
     private bool IsItemInPickupRange;                // 可否拾取
     private bool Targeted;                           // 是否被拾取系统选中
     private bool ItemReversed;
+    
+    private int TTL;
+    
     public bool DropState;
     Vector3 OriginalRendererScale;
     public void Start()

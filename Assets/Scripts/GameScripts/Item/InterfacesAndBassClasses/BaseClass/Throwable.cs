@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public abstract class Throwable : ItemBase
+public class Throwable : ItemBase
 {
     public cfg.item.ThrowObjects ItemData;
     public Rigidbody ThrowableRigidbody;
@@ -10,7 +10,10 @@ public abstract class Throwable : ItemBase
         InitItem();
     }
     // 可能存在的抽象方法，子类实现方法体
-    protected abstract void Throw();
+    protected void Throw()
+    {
+        
+    }
     // 物品初始化
     protected override void InitItem()
     {

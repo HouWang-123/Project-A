@@ -134,6 +134,69 @@ public partial class @PlayerInputControl: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""_1Key"",
+                    ""type"": ""Button"",
+                    ""id"": ""1442fa40-1e92-433a-89de-407d4566d1fe"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""_2Key"",
+                    ""type"": ""Button"",
+                    ""id"": ""35396ad6-0368-4eac-9748-ea4035cd6a9a"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""_3Key"",
+                    ""type"": ""Button"",
+                    ""id"": ""d6b4e7f4-7ca4-41e3-b9c5-5bebaf2a12a2"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""_4Key"",
+                    ""type"": ""Button"",
+                    ""id"": ""550c900b-23d9-4a78-93f0-73bd729dc43e"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""_5Key"",
+                    ""type"": ""Button"",
+                    ""id"": ""e0796557-447f-4a06-a03a-6db1ac05dc0d"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""_6Key"",
+                    ""type"": ""Button"",
+                    ""id"": ""4026b05b-e630-4309-9e89-d1b4ae02884c"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MouseScroll"",
+                    ""type"": ""Value"",
+                    ""id"": ""3c17627d-ff85-4545-9b90-bb2b24bc0ac7"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -442,6 +505,83 @@ public partial class @PlayerInputControl: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": "";Gamepad"",
                     ""action"": ""Tab"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f3a07b45-f6fe-402f-802e-589da362d1b2"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""_1Key"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""45983129-b48b-4c66-97b1-01e81c159a8a"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""_2Key"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""10fa5bd8-a66f-4285-84af-8d1716139e0b"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""_3Key"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5d03d6d0-3b3f-4a0f-afc1-93fdf04fa3fc"",
+                    ""path"": ""<Keyboard>/4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""_4Key"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e569624f-8bf3-4c6c-a861-310d89bc4cde"",
+                    ""path"": ""<Keyboard>/5"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""_5Key"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""167d2805-a23e-4be2-a104-a3683fb74b71"",
+                    ""path"": ""<Keyboard>/6"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""_6Key"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d11a5f34-3616-4ed9-a526-bca64ab261a7"",
+                    ""path"": ""<Mouse>/scroll"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MouseScroll"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -887,6 +1027,13 @@ public partial class @PlayerInputControl: IInputActionCollection2, IDisposable
         m_GamePlayer_QButton = m_GamePlayer.FindAction("QButton", throwIfNotFound: true);
         m_GamePlayer_Esc = m_GamePlayer.FindAction("Esc", throwIfNotFound: true);
         m_GamePlayer_Tab = m_GamePlayer.FindAction("Tab", throwIfNotFound: true);
+        m_GamePlayer__1Key = m_GamePlayer.FindAction("_1Key", throwIfNotFound: true);
+        m_GamePlayer__2Key = m_GamePlayer.FindAction("_2Key", throwIfNotFound: true);
+        m_GamePlayer__3Key = m_GamePlayer.FindAction("_3Key", throwIfNotFound: true);
+        m_GamePlayer__4Key = m_GamePlayer.FindAction("_4Key", throwIfNotFound: true);
+        m_GamePlayer__5Key = m_GamePlayer.FindAction("_5Key", throwIfNotFound: true);
+        m_GamePlayer__6Key = m_GamePlayer.FindAction("_6Key", throwIfNotFound: true);
+        m_GamePlayer_MouseScroll = m_GamePlayer.FindAction("MouseScroll", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -978,6 +1125,13 @@ public partial class @PlayerInputControl: IInputActionCollection2, IDisposable
     private readonly InputAction m_GamePlayer_QButton;
     private readonly InputAction m_GamePlayer_Esc;
     private readonly InputAction m_GamePlayer_Tab;
+    private readonly InputAction m_GamePlayer__1Key;
+    private readonly InputAction m_GamePlayer__2Key;
+    private readonly InputAction m_GamePlayer__3Key;
+    private readonly InputAction m_GamePlayer__4Key;
+    private readonly InputAction m_GamePlayer__5Key;
+    private readonly InputAction m_GamePlayer__6Key;
+    private readonly InputAction m_GamePlayer_MouseScroll;
     public struct GamePlayerActions
     {
         private @PlayerInputControl m_Wrapper;
@@ -994,6 +1148,13 @@ public partial class @PlayerInputControl: IInputActionCollection2, IDisposable
         public InputAction @QButton => m_Wrapper.m_GamePlayer_QButton;
         public InputAction @Esc => m_Wrapper.m_GamePlayer_Esc;
         public InputAction @Tab => m_Wrapper.m_GamePlayer_Tab;
+        public InputAction @_1Key => m_Wrapper.m_GamePlayer__1Key;
+        public InputAction @_2Key => m_Wrapper.m_GamePlayer__2Key;
+        public InputAction @_3Key => m_Wrapper.m_GamePlayer__3Key;
+        public InputAction @_4Key => m_Wrapper.m_GamePlayer__4Key;
+        public InputAction @_5Key => m_Wrapper.m_GamePlayer__5Key;
+        public InputAction @_6Key => m_Wrapper.m_GamePlayer__6Key;
+        public InputAction @MouseScroll => m_Wrapper.m_GamePlayer_MouseScroll;
         public InputActionMap Get() { return m_Wrapper.m_GamePlayer; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1039,6 +1200,27 @@ public partial class @PlayerInputControl: IInputActionCollection2, IDisposable
             @Tab.started += instance.OnTab;
             @Tab.performed += instance.OnTab;
             @Tab.canceled += instance.OnTab;
+            @_1Key.started += instance.On_1Key;
+            @_1Key.performed += instance.On_1Key;
+            @_1Key.canceled += instance.On_1Key;
+            @_2Key.started += instance.On_2Key;
+            @_2Key.performed += instance.On_2Key;
+            @_2Key.canceled += instance.On_2Key;
+            @_3Key.started += instance.On_3Key;
+            @_3Key.performed += instance.On_3Key;
+            @_3Key.canceled += instance.On_3Key;
+            @_4Key.started += instance.On_4Key;
+            @_4Key.performed += instance.On_4Key;
+            @_4Key.canceled += instance.On_4Key;
+            @_5Key.started += instance.On_5Key;
+            @_5Key.performed += instance.On_5Key;
+            @_5Key.canceled += instance.On_5Key;
+            @_6Key.started += instance.On_6Key;
+            @_6Key.performed += instance.On_6Key;
+            @_6Key.canceled += instance.On_6Key;
+            @MouseScroll.started += instance.OnMouseScroll;
+            @MouseScroll.performed += instance.OnMouseScroll;
+            @MouseScroll.canceled += instance.OnMouseScroll;
         }
 
         private void UnregisterCallbacks(IGamePlayerActions instance)
@@ -1079,6 +1261,27 @@ public partial class @PlayerInputControl: IInputActionCollection2, IDisposable
             @Tab.started -= instance.OnTab;
             @Tab.performed -= instance.OnTab;
             @Tab.canceled -= instance.OnTab;
+            @_1Key.started -= instance.On_1Key;
+            @_1Key.performed -= instance.On_1Key;
+            @_1Key.canceled -= instance.On_1Key;
+            @_2Key.started -= instance.On_2Key;
+            @_2Key.performed -= instance.On_2Key;
+            @_2Key.canceled -= instance.On_2Key;
+            @_3Key.started -= instance.On_3Key;
+            @_3Key.performed -= instance.On_3Key;
+            @_3Key.canceled -= instance.On_3Key;
+            @_4Key.started -= instance.On_4Key;
+            @_4Key.performed -= instance.On_4Key;
+            @_4Key.canceled -= instance.On_4Key;
+            @_5Key.started -= instance.On_5Key;
+            @_5Key.performed -= instance.On_5Key;
+            @_5Key.canceled -= instance.On_5Key;
+            @_6Key.started -= instance.On_6Key;
+            @_6Key.performed -= instance.On_6Key;
+            @_6Key.canceled -= instance.On_6Key;
+            @MouseScroll.started -= instance.OnMouseScroll;
+            @MouseScroll.performed -= instance.OnMouseScroll;
+            @MouseScroll.canceled -= instance.OnMouseScroll;
         }
 
         public void RemoveCallbacks(IGamePlayerActions instance)
@@ -1273,6 +1476,13 @@ public partial class @PlayerInputControl: IInputActionCollection2, IDisposable
         void OnQButton(InputAction.CallbackContext context);
         void OnEsc(InputAction.CallbackContext context);
         void OnTab(InputAction.CallbackContext context);
+        void On_1Key(InputAction.CallbackContext context);
+        void On_2Key(InputAction.CallbackContext context);
+        void On_3Key(InputAction.CallbackContext context);
+        void On_4Key(InputAction.CallbackContext context);
+        void On_5Key(InputAction.CallbackContext context);
+        void On_6Key(InputAction.CallbackContext context);
+        void OnMouseScroll(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

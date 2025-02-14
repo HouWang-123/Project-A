@@ -97,7 +97,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7396498991645650676}
   - component: {fileID: 3776630394268781759}
-  - component: {fileID: 4908607580027242537}
+  - component: {fileID: 1388640392635303795}
   m_Layer: 12
   m_Name: BasketBallTest
   m_TagString: Item
@@ -142,7 +142,7 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.4709316
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4908607580027242537
+--- !u!114 &1388640392635303795
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -151,7 +151,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7601832128168043183}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c82e3a579761ef4caaf36d136e90984, type: 3}
+  m_Script: {fileID: 11500000, guid: 609e14423eed9eb40874530bce01ba9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ItemID: 230002
@@ -163,7 +163,6 @@ MonoBehaviour:
   ItemProperty:
     Stackable: 0
     Equipable: 0
-    EquipOnHand: 1
-    RotateWithMouse: 0
+    EquipOnHand: 0
   DropState: 0
   ThrowableRigidbody: {fileID: 0}

@@ -1,6 +1,6 @@
 using System;
 
-public abstract class SceneObjects : ItemBase
+public class SceneObjects : ItemBase
 {
     public cfg.item.SceneObjects ItemData;
     public void Awake()
@@ -13,7 +13,6 @@ public abstract class SceneObjects : ItemBase
     protected override void InitItem()
     {
         ItemType = GameItemType.SceneObject;
-
         try
         {
             ItemData = GameTableDataAgent.SceneObjectsTable.Get(ItemID);

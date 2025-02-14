@@ -1,7 +1,7 @@
 using System;
 using cfg.interact;
 
-public abstract class Food : ItemBase
+public class Food : ItemBase
 {
     public cfg.item.Food ItemData;
     public void Awake()
@@ -9,7 +9,10 @@ public abstract class Food : ItemBase
         InitItem();
     }
     // 可能存在的抽象方法，子类实现方法体
-    public abstract void Eat();
+    public void Eat()
+    {
+        
+    }
     
     // 物品初始化
     protected override void InitItem()

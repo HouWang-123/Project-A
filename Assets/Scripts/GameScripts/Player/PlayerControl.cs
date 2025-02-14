@@ -30,7 +30,9 @@ public class PlayerControl : MonoBehaviour
     private bool shiftButt = false;
     private void Awake() { inputControl = new PlayerInputControl(); }
     private void OnEnable() { inputControl?.Enable(); }
-
+    
+    private float ScrollActionTimer;
+    
     private void Start()
     {
         _pickupController = GetComponent<PlayerPickupController>();
@@ -81,6 +83,47 @@ public class PlayerControl : MonoBehaviour
         {
             shiftButt = false;
         };
+        InputControl.Instance._1Key.started += (item) =>
+        {
+            GameHUD.Instance.SetFocus(1);
+        };
+        InputControl.Instance._2Key.started += (item) =>
+        {
+            GameHUD.Instance.SetFocus(2);
+        };
+        InputControl.Instance._3Key.started += (item) =>
+        {
+            GameHUD.Instance.SetFocus(3);
+        };
+        InputControl.Instance._4Key.started += (item) =>
+        {
+            GameHUD.Instance.SetFocus(4);
+        };
+        InputControl.Instance._5Key.started += (item) =>
+        {
+            GameHUD.Instance.SetFocus(5);
+        };
+        InputControl.Instance._6Key.started += (item) =>
+        {
+            GameHUD.Instance.SetFocus(6);
+        };
+        InputControl.Instance.MouseScroll.started += (item) =>
+        {
+            if (ScrollActionTimer <= 0.2f)
+            {
+                return;
+            }
+            Vector2 readValue = item.ReadValue<Vector2>();
+            if (readValue.y > 0)
+            {
+                GameHUD.Instance.LastFocusItem();
+            }
+            else if (readValue.y < 0)
+            {
+                GameHUD.Instance.NextFocusItem();
+            }
+            ScrollActionTimer = 0f;
+        };
     }
     //AssetHandle asset;
     //float time = 0;
@@ -123,6 +166,7 @@ public class PlayerControl : MonoBehaviour
         l.y *= 1.4f;
         a = -Vector3.up * Mathf.Atan2(l.y, l.x) * Mathf.Rad2Deg;
     }
+    
     private void FixedUpdate()
     {
         PlayerMove(InputControl.Instance.MovePoint, Speed * Time.deltaTime);
@@ -131,7 +175,9 @@ public class PlayerControl : MonoBehaviour
             CalculateUseObjectRotation();
             useObjParent.localEulerAngles = a;
         }
-
+        
+        ScrollActionTimer += Time.deltaTime;
+        
         // Rotate WeaponTr
         Transform weaponTr = useObjParent.GetChild(0);
         angle = a.y;

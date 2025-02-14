@@ -20,13 +20,21 @@ public class InputControl
     public InputAction QButton => inputActions.GamePlayer.QButton;
     public InputAction EscZButton => inputActions.GamePlayer.Esc;    
     public InputAction TabButton => inputActions.GamePlayer.Tab;
+    public InputAction _1Key => inputActions.GamePlayer._1Key;
+    public InputAction _2Key => inputActions.GamePlayer._2Key;
+    public InputAction _3Key => inputActions.GamePlayer._3Key;
+    public InputAction _4Key => inputActions.GamePlayer._4Key;
+    public InputAction _5Key => inputActions.GamePlayer._5Key;
+    public InputAction _6Key => inputActions.GamePlayer._6Key;
+    public InputAction MouseScroll => inputActions.GamePlayer.MouseScroll;
+    
+    
     //UI
     public Vector2 NavigatePoint => inputActions.UI.Navigate.ReadValue<Vector2>();
     public InputAction LeftPage => inputActions.UI.LeftPage;
     public InputAction RightPage => inputActions.UI.RightPage;
     public InputAction Submit => inputActions.UI.Submit;
     public InputAction Cancel => inputActions.UI.Cancel;
-
     static InputControl()
     {
         Instance = new InputControl();

@@ -3,7 +3,7 @@ using DG.Tweening;
 using Spine.Unity.Examples;
 using UnityEngine;
 
-public abstract class Weapon : ItemBase
+public class Weapon : ItemBase
 {
     public cfg.item.Weapon ItemData;
     private void Awake()
@@ -11,7 +11,10 @@ public abstract class Weapon : ItemBase
         InitItem();
     }
     // 可能存在的抽象方法，子类实现方法体
-    public abstract void Fire();
+    public void Fire()
+    {
+        
+    }
     // 物品初始化
     protected override void InitItem()
     {

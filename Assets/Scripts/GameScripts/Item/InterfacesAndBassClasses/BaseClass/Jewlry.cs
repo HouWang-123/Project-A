@@ -1,6 +1,6 @@
 using System;
 
-public abstract class Jewlry : ItemBase
+public class Jewlry : ItemBase
 {
     public cfg.item.Jewelry ItemData;
     public void Awake()
@@ -8,7 +8,10 @@ public abstract class Jewlry : ItemBase
         InitItem();
     }
     // 可能存在的抽象方法，子类实现方法体
-    public abstract void Equip();
+    public void Equip()
+    {
+        
+    }
     // 物品初始化
     protected override void InitItem()
     {

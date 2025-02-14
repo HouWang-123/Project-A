@@ -1,6 +1,6 @@
 using System;
 
-public abstract class ToolItem : ItemBase
+public class ToolItem : ItemBase
 {
     public cfg.item.Tools ItemData;
     public void Awake()
@@ -8,7 +8,10 @@ public abstract class ToolItem : ItemBase
         InitItem();
     }
     // 可能存在的抽象方法，子类实现方法体
-    public abstract void Use();
+    public void Use()
+    {
+        
+    }
     // 物品初始化
     protected override void InitItem()
     {

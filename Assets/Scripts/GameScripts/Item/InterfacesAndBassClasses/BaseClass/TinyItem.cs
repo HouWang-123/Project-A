@@ -1,6 +1,6 @@
 using System;
 
-public  abstract  class TinyItem : ItemBase
+public class TinyItem : ItemBase
 {
     public cfg.item.TinyObjects ItemData;
     public void Awake()
