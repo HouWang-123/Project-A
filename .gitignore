@@ -9,6 +9,7 @@
 /[Bb]uilds/
 /[Ll]ogs/
 /[Uu]ser[Ss]ettings/
+/[Bb]undles/
 
 # MemoryCaptures can get excessive in size.
 # They also could contain extremely sensitive data
@@ -78,3 +79,4 @@ ProjectSettings/ProjectSettings.asset
 UserSettings/EditorUserSettings.asset
 /UserSettings/Layouts
 UserSettings/Layouts/default-6000.dwlt
+
