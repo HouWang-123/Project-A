@@ -113,7 +113,7 @@ public sealed partial class Character : Luban.BeanBase
     /// </summary>
     public readonly int InventorySlots;
     /// <summary>
-    /// 角色装备列表，默认为空
+    /// 角色道具列表，默认为空
     /// </summary>
     public readonly System.Collections.Generic.List<int> ItemList;
     /// <summary>

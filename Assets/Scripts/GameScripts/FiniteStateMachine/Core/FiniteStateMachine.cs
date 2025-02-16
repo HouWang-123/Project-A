@@ -20,6 +20,15 @@ public class FiniteStateMachine
         m_currentState.Item2.Act(gameObject);
         m_currentState.Item2.Condition(gameObject);
     }
+    /// <summary>
+    /// 进行固定更新
+    /// </summary>
+    /// <param name="gameObject">游戏物体</param>
+    public void DoFixedUpdate(GameObject gameObject)
+    {
+        m_currentState.Item2.FixedAct(gameObject);
+        m_currentState.Item2.FixedCondition(gameObject);
+    }
 
     /// <summary>
     /// 添加状态到字典中

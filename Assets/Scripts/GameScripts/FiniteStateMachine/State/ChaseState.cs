@@ -1,20 +1,13 @@
-using cfg.scene;
 using System;
-using Unity.AI.Navigation;
 using UnityEngine;
 using UnityEngine.AI;
-using YooAsset;
 /// <summary>
 /// 追逐状态
 /// </summary>
 public class ChaseState : BaseState
 {
     // 判断NPC是否卡住的阈值时间
-    public float stuckThreshold = 2f;
-    // 射线检测的层级，设置为“Obstacle”层后，射线只会检测该层物体
-    public LayerMask obstacleLayer;
-    // 射线检测前方障碍物的最大距离
-    public float raycastDistance = 5f;
+    public float stuckThreshold = 4f;
 
     // NPC游戏对象
     private readonly GameObject NPC;
@@ -24,13 +17,16 @@ public class ChaseState : BaseState
     private float stuckTimer;
     // 玩家的位置
     private readonly Transform m_playerTransform;
-    // 调整检测距离
-    public float checkDistance = 0.1f;
     // 转换为看向玩家状态的最小距离
-    private readonly float m_2LookAtTime = 10f;
+    private readonly float m_2LookAtDistance = -1f;
+    // 远程攻击距离
+    private readonly float m_2RangedAttack = -1f;
     // 转换为攻击玩家的距离
-    private readonly float m_2Attack = 1.5f;
-    public ChaseState(FiniteStateMachine finiteStateMachine, GameObject NPCObj, Transform playerTransform = null) : base(finiteStateMachine)
+    private readonly float m_2MeleeAttack = -1f;
+    // 转为逃跑的光源距离
+    private readonly float m_fleeDistance = -1f;
+    public ChaseState(FiniteStateMachine finiteStateMachine, GameObject NPCObj, Transform playerTransform = null)
+        : base(finiteStateMachine, NPCObj)
     {
         // 设置当前的状态
         m_stateEnum = StateEnum.Chase;
@@ -40,10 +36,13 @@ public class ChaseState : BaseState
             throw new ArgumentException();
         }
         NPC = NPCObj;
-        agent = NPCObj.GetComponent<NavMeshAgent>();
+        agent = NPCObj.GetComponent<MonsterFSM>().NavMeshAgent;
+        m_2LookAtDistance = NPC.GetComponent<MonsterFSM>().NPCDatas.WarnRange;
+        m_2RangedAttack = NPC.GetComponent<MonsterFSM>().NPCDatas.ShootRange;
+        m_2MeleeAttack = NPC.GetComponent<MonsterFSM>().NPCDatas.HitRange;
         // lastPosition = gameObject.transform.position;
         // 初始位置强制校正
-        if (NavMesh.SamplePosition(NPC.transform.position, out NavMeshHit hit, 2.0f, NavMesh.AllAreas))
+        if (NavMesh.SamplePosition(NPCObj.transform.position, out NavMeshHit hit, 2.0f, NavMesh.AllAreas))
         {
             agent.Warp(hit.position); // 确保Agent位置正确
         }
@@ -60,6 +59,7 @@ public class ChaseState : BaseState
         {
             m_playerTransform = GameObject.Find("Player000").transform;
         }
+        m_fleeDistance = 3f;
     }
 
     /// <summary>
@@ -72,7 +72,7 @@ public class ChaseState : BaseState
         float npcX = npc.transform.position.x;
         float playerX = m_playerTransform.position.x;
         // 玩家在NPC左边，看向左边
-        SpriteRenderer spriteRenderer = npc.GetComponent<MonsterFSM>().m_spriteRenderer;
+        SpriteRenderer spriteRenderer = npc.GetComponent<MonsterFSM>().SpriteRenderer;
         if (playerX - npcX > 0)
         {
             spriteRenderer.flipX = false;
@@ -90,13 +90,13 @@ public class ChaseState : BaseState
         {
             Debug.Log(GetType() + " /Act()=> 玩家位置无效，退化为直线行走");
             var direction = (m_playerTransform.position - npc.transform.position).normalized;
-            float speed = npc.GetComponent<MonsterFSM>().m_NPCDatas.Speed;
+            float speed = npc.GetComponent<MonsterFSM>().NPCDatas.Speed;
             Vector3 newPos = npc.transform.position + speed * Time.deltaTime * direction;
             npc.transform.position = newPos;
         }
         
         // 卡顿检测
-        if (agent.velocity.sqrMagnitude < 0.1f)// 取平方比取模快
+        if (agent.velocity.sqrMagnitude < 0.05f)// 取平方比取模快
         {
             stuckTimer += Time.deltaTime;
             if (stuckTimer >= stuckThreshold)
@@ -109,7 +109,7 @@ public class ChaseState : BaseState
                 {
                     Debug.Log(GetType() + " /Act()=> 玩家位置无效，退化为直线行走");
                     var direction = (m_playerTransform.position - npc.transform.position).normalized;
-                    float speed = npc.GetComponent<MonsterFSM>().m_NPCDatas.Speed;
+                    float speed = npc.GetComponent<MonsterFSM>().NPCDatas.Speed;
                     Vector3 newPos = npc.transform.position + speed * Time.deltaTime * direction;
                     npc.transform.position = newPos;
                 }
@@ -120,9 +120,6 @@ public class ChaseState : BaseState
         {
             stuckTimer = 0;
         }
-
-        // 实时射线检测动态障碍物
-        CheckObstacle();
     }
 
     /// <summary>
@@ -131,15 +128,21 @@ public class ChaseState : BaseState
     /// <param name="npc">游戏对象</param>
     public override void Condition(GameObject npc)
     {
-        // 大于10米就转为看向玩家状态
-        if (Vector3.Distance(npc.transform.position, m_playerTransform.position) > m_2LookAtTime)
+        float distance = Vector3.Distance(npc.transform.position, m_playerTransform.position);
+        // 大于m_2LookAtDistance米就转为看向玩家状态
+        if (distance > m_2LookAtDistance)
         {
             m_finiteStateMachine.PerformTransition(TransitionEnum.SeePlayer);
         }
-        // 小于1.5米就转为攻击玩家状态
-        if (Vector3.Distance(npc.transform.position, m_playerTransform.position) <= m_2Attack)
+        // 小于m_2Attack米就转为近战攻击玩家状态
+        if (m_2MeleeAttack != -1 && distance <= m_2MeleeAttack)
         {
-            m_finiteStateMachine.PerformTransition(TransitionEnum.AttackPlayer);
+            m_finiteStateMachine.PerformTransition(TransitionEnum.MeleeAttackPlayer);
+        }
+        // 小于m_2Attack米就转为远程攻击玩家状态
+        if (m_2RangedAttack != -1 && distance <= m_2RangedAttack)
+        {
+            m_finiteStateMachine.PerformTransition(TransitionEnum.RangedAttackPlayer);
         }
         // 玩家出了巡逻范围，就进行游荡
         // 在玩家位置周围检测NavMesh
@@ -150,6 +153,15 @@ public class ChaseState : BaseState
             {
                 Debug.Log("玩家已走出NavMesh范围！");
                 m_finiteStateMachine.PerformTransition(TransitionEnum.LostPlayer);
+            }
+        }
+        // 发现光源直接逃跑
+        var lightTransform = m_gameObject.GetComponent<MonsterFSM>().LightTransform;
+        if (lightTransform != null)
+        {
+            if (Vector3.Distance(lightTransform.position, m_gameObject.transform.position) <= m_fleeDistance)
+            {
+                m_finiteStateMachine.PerformTransition(TransitionEnum.FleeAction);
             }
         }
     }
@@ -173,19 +185,6 @@ public class ChaseState : BaseState
         return false;
     }
 
-    /// <summary>
-    /// 实时射线检测前方障碍物
-    /// </summary>
-    private void CheckObstacle()
-    {
-        if (Physics.Raycast(NPC.transform.position, agent.velocity.normalized, raycastDistance, obstacleLayer))
-        {
-            if (IsPathValid(m_playerTransform.position))
-            {
-                agent.SetDestination(m_playerTransform.position);
-            }
-        }
-    }
     public override void DoBeforeEntering()
     {
         base.DoBeforeEntering();

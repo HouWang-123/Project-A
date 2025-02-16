@@ -25,6 +25,8 @@ public sealed partial class Monster : Luban.BeanBase
         { if(!_buf["attack"].IsNumber) { throw new SerializationException(); }  Attack = _buf["attack"]; }
         { if(!_buf["speed"].IsNumber) { throw new SerializationException(); }  Speed = _buf["speed"]; }
         { if(!_buf["warnRange"].IsNumber) { throw new SerializationException(); }  WarnRange = _buf["warnRange"]; }
+        { if(!_buf["hitRange"].IsNumber) { throw new SerializationException(); }  HitRange = _buf["hitRange"]; }
+        { if(!_buf["shootRange"].IsNumber) { throw new SerializationException(); }  ShootRange = _buf["shootRange"]; }
         { if(!_buf["inPeace"].IsString) { throw new SerializationException(); }  InPeace = _buf["inPeace"]; }
         { if(!_buf["toBattle"].IsString) { throw new SerializationException(); }  ToBattle = _buf["toBattle"]; }
         { if(!_buf["inBattle"].IsString) { throw new SerializationException(); }  InBattle = _buf["inBattle"]; }
@@ -68,6 +70,14 @@ public sealed partial class Monster : Luban.BeanBase
     /// </summary>
     public readonly float WarnRange;
     /// <summary>
+    /// 近战攻击范围(m)
+    /// </summary>
+    public readonly float HitRange;
+    /// <summary>
+    /// 远程攻击范围(m)
+    /// </summary>
+    public readonly float ShootRange;
+    /// <summary>
     /// 闲置状态AI
     /// </summary>
     public readonly string InPeace;
@@ -98,6 +108,8 @@ public sealed partial class Monster : Luban.BeanBase
         + "attack:" + Attack + ","
         + "speed:" + Speed + ","
         + "warnRange:" + WarnRange + ","
+        + "hitRange:" + HitRange + ","
+        + "shootRange:" + ShootRange + ","
         + "inPeace:" + InPeace + ","
         + "toBattle:" + ToBattle + ","
         + "inBattle:" + InBattle + ","

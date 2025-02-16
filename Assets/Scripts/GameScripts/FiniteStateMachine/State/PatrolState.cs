@@ -10,43 +10,41 @@ public class PatrolState : BaseState
 {
     // NPC随机游荡的最大半径
     public float wanderRadius = 10f;
-    // NPC重新选择目标点的时间间隔
-    public float wanderInterval = 8f;
     // 判断NPC是否卡住的阈值时间
-    public float stuckThreshold = 2f;
-    // 射线检测的层级，设置为“Obstacle”层后，射线只会检测该层物体
-    public LayerMask obstacleLayer;
-    // 射线检测前方障碍物的最大距离
-    public float raycastDistance = 5f;
-
-    // NPC游戏对象
-    private readonly GameObject NPC;
+    public float stuckThreshold = 4f;
+    // 是否可以重新移动
+    private bool m_canMove = true;
+    // 等待时间
+    private float m_waitTime = 0f;
     // NPC的NavMeshAgent组件
     private readonly NavMeshAgent agent;
     // 记录距离上一次目标点生成的时间
-    private float timer = 0f;
+    // private float timer = 0f;
     // 记录NPC卡住的时间，用于触发强制重新寻路
     private float stuckTimer;
     // NPC上一帧的位置，用于计算是否卡住
     // private Vector3 lastPosition;
     // 转换为看向玩家状态的最小距离
-    private readonly float m_2LookAtTime = 15f;
+    private readonly float m_warnDistance = -1f;
     // 玩家的位置
     private readonly Transform m_playerTransform;
-    public PatrolState(FiniteStateMachine finiteStateMachine, GameObject NPCObj, Transform playerTransform = null) : base(finiteStateMachine)
+    // 转为逃跑的光源距离
+    private readonly float m_fleeDistance = -1f;
+    public PatrolState(FiniteStateMachine finiteStateMachine, GameObject NPCObj, Transform playerTransform = null)
+        : base(finiteStateMachine, NPCObj)
     {
         // 设置状态
         m_stateEnum = StateEnum.Patrol;
         if (NPCObj == null)
         {
-            Debug.LogError(GetType() + "/PatrolState/ gameObject can not be null!");
+            Debug.LogError(GetType() + "/PatrolState/ gameObject 不能为空!");
             throw new ArgumentException();
         }
-        NPC = NPCObj;
-        agent = NPCObj.GetComponent<NavMeshAgent>();
+        agent = NPCObj.GetComponent<MonsterFSM>().NavMeshAgent;
+        m_warnDistance = NPCObj.GetComponent<MonsterFSM>().NPCDatas.WarnRange + 5f;
         // lastPosition = gameObject.transform.position;
         // 初始位置强制校正
-        if (NavMesh.SamplePosition(NPC.transform.position, out NavMeshHit hit, 2.0f, NavMesh.AllAreas))
+        if (NavMesh.SamplePosition(NPCObj.transform.position, out NavMeshHit hit, 2.0f, NavMesh.AllAreas))
         {
             agent.Warp(hit.position); // 确保Agent位置正确
         }
@@ -62,6 +60,7 @@ public class PatrolState : BaseState
         {
             m_playerTransform = GameObject.Find("Player000").transform;
         }
+        m_fleeDistance = 3f;
     }
 
     /// <summary>
@@ -70,31 +69,26 @@ public class PatrolState : BaseState
     /// <param name="npc">游戏对象</param>
     public override void Act(GameObject npc)
     {
-        // 随机游荡逻辑
-        timer += Time.deltaTime;
-        if (timer >= wanderInterval)
+        // 开始移动
+        if (m_canMove)
         {
             TryFindNewDestination();
-            timer = 0;
         }
 
         // 卡顿检测
-        if (agent.velocity.sqrMagnitude < 0.1f)// 取平方比取模快
+        if (!m_canMove && agent.velocity.sqrMagnitude < 0.05f)// 取平方比取模快
         {
             stuckTimer += Time.deltaTime;
             if (stuckTimer >= stuckThreshold)
             {
                 TryFindNewDestination();
-                stuckTimer = 0;
+                stuckTimer = 0f;
             }
         }
         else
         {
-            stuckTimer = 0;
+            stuckTimer = 0f;
         }
-
-        // 实时射线检测动态障碍物
-        CheckObstacle();
 
     }
     /// <summary>
@@ -102,15 +96,16 @@ public class PatrolState : BaseState
     /// </summary>
     private void TryFindNewDestination()
     {
-        Vector3 newPos = RandomNavSphere(NPC.transform.position, wanderRadius, -1);
+        Vector3 newPos = RandomNavSphere(m_gameObject.transform.position, wanderRadius, -1);
         if (IsPathValid(newPos))
         {
+            var monsterFSM = m_gameObject.GetComponent<MonsterFSM>();
             agent.SetDestination(newPos);
             float newPosX = newPos.x;
-            float npcPosX = NPC.transform.position.x;
+            float npcPosX = m_gameObject.transform.position.x;
             // 点在右边，看向右边
-            SpriteRenderer spriteRenderer = NPC.GetComponent<MonsterFSM>().m_spriteRenderer;
-            if (newPosX - npcPosX > 0)
+            SpriteRenderer spriteRenderer = monsterFSM.SpriteRenderer;
+            if (newPosX - npcPosX > 0f)
             {
                 spriteRenderer.flipX = false;
             }
@@ -118,10 +113,12 @@ public class PatrolState : BaseState
             {
                 spriteRenderer.flipX = true;
             }
+            m_canMove = false;
         }
         else
         {
             Debug.Log($"目标点 {newPos} 不可达，已忽略。");
+            m_canMove = true;
         }
     }
     /// <summary>
@@ -136,7 +133,7 @@ public class PatrolState : BaseState
         {
             if (path.status != NavMeshPathStatus.PathComplete)
             {
-                Debug.DrawLine(NPC.transform.position, target, Color.red, 2f); // 绘制不可达路径
+                Debug.DrawLine(m_gameObject.transform.position, target, Color.red, 2f); // 绘制不可达路径
                 return false;
             }
             return true;
@@ -163,29 +160,46 @@ public class PatrolState : BaseState
         else
         {
             Debug.LogWarning("随机点生成失败，使用当前位置。");
-            return NPC.transform.position;
+            return m_gameObject.transform.position;
         }
     }
-    /// <summary>
-    /// 实时射线检测前方障碍物
-    /// </summary>
-    private void CheckObstacle()
-    {
-        if (Physics.Raycast(NPC.transform.position, agent.velocity.normalized, raycastDistance, obstacleLayer))
-        {
-            TryFindNewDestination();
-        }
-    }
+
     /// <summary>
     /// 判断状态是否转换为看向玩家
     /// </summary>
     /// <param name="npc">游戏对象</param>
     public override void Condition(GameObject npc)
-    {
-        // 如果距离小于等于15，就看向玩家
-        if (Vector3.Distance(npc.transform.position, m_playerTransform.position) <= m_2LookAtTime)
+    {        
+        // 如果NPC到达目的地
+        if (agent.remainingDistance <= agent.stoppingDistance)
         {
+            m_waitTime += Time.deltaTime;
+            // 等待了两秒
+            if (m_waitTime >= 2f)
+            {
+                Debug.Log(GetType() + " /Act() => 等待了两秒，判断是否需要跳转状态到idle");
+                m_canMove = true;
+                // 0.3的概率转换为待机
+                if (Random.value <= 0.3f)
+                {
+                    m_finiteStateMachine.PerformTransition(TransitionEnum.ToIdle);
+                }
+            }
+        }
+        // 如果距离小于等于m_2LookAtDistance，就看向玩家
+        if (Vector3.Distance(npc.transform.position, m_playerTransform.position) <= m_warnDistance)
+        {
+            // agent.SetDestination(agent.transform.position);
             m_finiteStateMachine.PerformTransition(TransitionEnum.SeePlayer);
+        }
+        // 发现光源直接逃跑
+        var lightTransform = m_gameObject.GetComponent<MonsterFSM>().LightTransform;
+        if (lightTransform != null)
+        {
+            if (Vector3.Distance(lightTransform.position, m_gameObject.transform.position) <= m_fleeDistance)
+            {
+                m_finiteStateMachine.PerformTransition(TransitionEnum.FleeAction);
+            }
         }
     }
 
@@ -193,6 +207,10 @@ public class PatrolState : BaseState
     {
         base.DoBeforeEntering();
         agent.isStopped = false;
+
+        var monsterFSM = m_gameObject.GetComponent<MonsterFSM>();
+        // 巡逻速度是0.5倍的移动速度
+        agent.speed = 0.5f * monsterFSM.NPCDatas.Speed;
     }
 
     public override void DoAfterLeaving()
@@ -200,7 +218,11 @@ public class PatrolState : BaseState
         base.DoAfterLeaving();
         // 停止移动
         agent.isStopped = true;
-        agent.destination = agent.transform.position;
+        agent.SetDestination(agent.transform.position);
+
+        var monsterFSM = m_gameObject.GetComponent<MonsterFSM>();
+        // 恢复正常移动速度
+        agent.speed = monsterFSM.NPCDatas.Speed;
     }
 }
 

@@ -7,10 +7,13 @@ public class LookAtState : BaseState
     // 玩家的位置
     private readonly Transform m_playerTransform;
     // 转换到追逐玩家的距离
-    private readonly float m_2ChaseDistance = 10f;
+    private readonly float m_2ChaseDistance = -1f;
     // 转换到丢失玩家的距离
-    private readonly float m_2LostDistance = 15f;
-    public LookAtState(FiniteStateMachine finiteStateMachine, Transform playerTransform = null) : base(finiteStateMachine)
+    private readonly float m_2LostDistance = -1f;
+    // 转为逃跑的光源距离
+    private readonly float m_fleeDistance = -1f;
+    public LookAtState(FiniteStateMachine finiteStateMachine, GameObject npcObj, Transform playerTransform = null)
+        : base(finiteStateMachine, npcObj)
     {
         // 设置当前的状态
         m_stateEnum = StateEnum.LookAt;
@@ -22,6 +25,9 @@ public class LookAtState : BaseState
         {
             m_playerTransform = GameObject.Find("Player000").transform;
         }
+        m_2ChaseDistance = npcObj.GetComponent<MonsterFSM>().NPCDatas.WarnRange;
+        m_2LostDistance = npcObj.GetComponent<MonsterFSM>().NPCDatas.WarnRange + 5f;
+        m_fleeDistance = 3f;
     }
     /// <summary>
     /// 执行看向玩家的动作
@@ -33,7 +39,7 @@ public class LookAtState : BaseState
         float npcX = npc.transform.position.x;
         float playerX = m_playerTransform.position.x;
         // 玩家在NPC左边，看向左边
-        SpriteRenderer spriteRenderer = npc.GetComponent<MonsterFSM>().m_spriteRenderer;
+        SpriteRenderer spriteRenderer = npc.GetComponent<MonsterFSM>().SpriteRenderer;
         if (playerX - npcX > 0)
         {
             spriteRenderer.flipX = false;
@@ -49,15 +55,25 @@ public class LookAtState : BaseState
     /// <param name="npc">游戏对象</param>
     public override void Condition(GameObject npc)
     {
-        // 小于10米就追逐玩家
-        if (Vector3.Distance(npc.transform.position, m_playerTransform.position) <= m_2ChaseDistance)
+        float distance = Vector3.Distance(npc.transform.position, m_playerTransform.position);
+        // 小于m_2ChaseDistance米就追逐玩家
+        if (distance <= m_2ChaseDistance)
         {
             m_finiteStateMachine.PerformTransition(TransitionEnum.ChasePlayer);
         }
-        // 大于15米就丢失玩家
-        if (Vector3.Distance(npc.transform.position, m_playerTransform.position) > m_2LostDistance)
+        // 大于m_2LostDistance米就丢失玩家
+        if (distance > m_2LostDistance)
         {
             m_finiteStateMachine.PerformTransition(TransitionEnum.LostPlayer);
+        }
+        // 发现光源直接逃跑
+        var lightTransform = m_gameObject.GetComponent<MonsterFSM>().LightTransform;
+        if (lightTransform != null)
+        {
+            if (Vector3.Distance(lightTransform.position, m_gameObject.transform.position) <= m_fleeDistance)
+            {
+                m_finiteStateMachine.PerformTransition(TransitionEnum.FleeAction);
+            }
         }
     }
 }

@@ -8,6 +8,8 @@
     "attack": 14,
     "speed": 1.2,
     "warnRange": 8,
+    "hitRange": 1.5,
+    "shootRange": 7,
     "inPeace": "Empty",
     "toBattle": "Empty",
     "inBattle": "Empty"
@@ -21,6 +23,8 @@
     "attack": 49,
     "speed": 1.5,
     "warnRange": 100,
+    "hitRange": 5,
+    "shootRange": -1,
     "inPeace": "Empty",
     "toBattle": "Empty",
     "inBattle": "Empty"

@@ -15,10 +15,13 @@ public abstract class BaseState
     protected Dictionary<TransitionEnum, StateEnum> m_keyValuePairs = new ();
     // 有限状态机，方便Condition()函数满足后进行状态转换
     protected FiniteStateMachine m_finiteStateMachine;
+    // 所挂载对象的引用
+    protected GameObject m_gameObject;
 
-    public BaseState(FiniteStateMachine finiteStateMachine)
+    public BaseState(FiniteStateMachine finiteStateMachine, GameObject gameObject)
     {
         m_finiteStateMachine = finiteStateMachine;
+        m_gameObject = gameObject;
     }
     /// <summary>
     /// 添加状态过渡对应的状态到字典中
@@ -93,6 +96,10 @@ public abstract class BaseState
     public virtual void DoBeforeEntering() { }
     // 状态切换退出的状态的回调
     public virtual void DoAfterLeaving() { }
+    // 固定帧速率的回调，用于物理相关的逻辑
+    public virtual void FixedAct(GameObject npc) { }
+    // 固定帧速率的条件
+    public virtual void FixedCondition(GameObject npc) { }
     // 执行的回调
     public abstract void Act(GameObject npc);
     // 转换条件

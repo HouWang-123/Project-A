@@ -1,0 +1,146 @@
+﻿using System.Collections.Generic;
+using UnityEngine;
+using YooAsset;
+/// <summary>
+/// 远程攻击状态
+/// </summary>
+public class RangedAttackState : BaseState
+{
+    // 玩家的位置
+    private readonly Transform m_playerTransform;
+    // 伤害帧
+    private readonly float m_2DamageFrame = 0.5f;
+    // 近战攻击范围
+    private readonly float m_MeleeDistance = -1f;
+    // 远程攻击范围
+    private readonly float m_RangedDistance = -1f;
+    // 动画播放的时候攻击了一次
+    private bool m_attacked = false;
+    // 攻击CD
+    private readonly float m_attackOnceTimes = 5f;
+    // 发射物内存池
+    private readonly Queue<GameObject> m_projectileQueue;
+    // 发射物内存池容量
+    private readonly int m_projectileListCapacity = 16;
+    // 记录发射物总共内存块的个数
+    private int m_projectileCount = 0;
+    // 记录距离开始的时间
+    private float m_timer = 0f;
+    // 子弹预制体的引用
+    private readonly AssetHandle m_assetHandle;
+    // 转为逃跑的光源距离
+    private readonly float m_fleeDistance = -1f;
+    public RangedAttackState(FiniteStateMachine finiteStateMachine, GameObject npcObj, Transform playerTransform = null)
+        : base(finiteStateMachine, npcObj)
+    {
+        // 设置状态
+        m_stateEnum = StateEnum.RangedAttack;
+        if (playerTransform != null)
+        {
+            m_playerTransform = playerTransform;
+        }
+        else
+        {
+            m_playerTransform = GameObject.Find("Player000").transform;
+        }
+        m_2DamageFrame = 0.5f;
+        m_RangedDistance = npcObj.GetComponent<MonsterFSM>().NPCDatas.ShootRange; // 应该获取表中的远程范围
+        m_MeleeDistance = npcObj.GetComponent <MonsterFSM>().NPCDatas.HitRange;
+        m_fleeDistance = 3f;
+
+        // 提前生成发射物
+        m_projectileQueue = new(m_projectileListCapacity);
+        // 读取发射物预制体
+        m_assetHandle = YooAssets.LoadAssetSync<GameObject>("BlueMucus");
+
+        for (int i = 0; i < m_projectileListCapacity; ++i)
+        {
+            GameObject go = Object.Instantiate(m_assetHandle.AssetObject) as GameObject;
+            go.name = "发射物_" + i;
+            go.transform.SetParent(m_gameObject.GetComponent<MonsterFSM>().ProjectileTransform);
+            go.transform.SetPositionAndRotation(go.transform.parent.position, go.transform.parent.rotation);
+            go.GetComponent<ProjectileControl>().ReturnFunc = ReturnProjectile;
+            go.SetActive(false);
+            m_projectileQueue.Enqueue(go);
+            ++m_projectileCount;
+        }
+        
+    }
+
+    public GameObject GetProjectile()
+    {
+        if (m_projectileQueue.Count > 0)
+        {
+            var projectile = m_projectileQueue.Dequeue();
+            projectile.SetActive(true);
+            return projectile;
+        }
+        else
+        {
+            GameObject go = Object.Instantiate(m_assetHandle.AssetObject) as GameObject;
+            go.name = "发射物_" + m_projectileCount;
+            go.transform.SetParent(m_gameObject.GetComponent<MonsterFSM>().ProjectileTransform);
+            go.transform.SetPositionAndRotation(go.transform.parent.position, go.transform.parent.rotation);
+            go.GetComponent<ProjectileControl>().ReturnFunc = ReturnProjectile;
+            go.SetActive(false);
+            ++m_projectileCount;
+            return go;
+        }
+    }
+
+    public void ReturnProjectile(GameObject projectile)
+    {
+        projectile.SetActive(false);
+        projectile.transform.SetPositionAndRotation(projectile.transform.parent.position, projectile.transform.parent.rotation);
+        m_projectileQueue.Enqueue(projectile);
+    }
+
+    public override void Act(GameObject npc)
+    {
+        // 模拟播放攻击动画
+        m_timer += Time.deltaTime;
+        if (m_timer >= m_2DamageFrame && !m_attacked)
+        {
+            Debug.Log(GetType() + " /Act() => 动画播放完成，并生成发射物");
+            GameObject projectileGo = GetProjectile();
+            if (projectileGo != null)
+            {
+                var com = projectileGo.GetComponent<ProjectileControl>();
+                com.Direction = (m_playerTransform.position + new Vector3(0, 1, 0) - npc.GetComponent<MonsterFSM>().ProjectileTransform.position).normalized;
+            }
+            m_attacked = true;
+            
+        }
+        if (m_timer >= m_attackOnceTimes + m_2DamageFrame)
+        {
+            // 重置CD
+            m_timer = 0f;
+            m_attacked = false;
+        }
+    }
+
+    public override void Condition(GameObject npc)
+    {
+        float distance = Vector3.Distance(npc.transform.position, m_playerTransform.position);
+        // 大于m_RangedDistance米就转为追逐玩家
+        if (distance > m_RangedDistance)
+        {
+            m_finiteStateMachine.PerformTransition(TransitionEnum.ChasePlayer);
+        }
+        // 转为近战
+        if (m_gameObject.GetComponent<MonsterFSM>().NPCDatas.HitRange != -1f && distance <= m_MeleeDistance)
+        {
+            m_finiteStateMachine.PerformTransition(TransitionEnum.MeleeAttackPlayer);
+        }
+        // 发现光源直接逃跑
+        var lightTransform = m_gameObject.GetComponent<MonsterFSM>().LightTransform;
+        if (lightTransform != null)
+        {
+            if (Vector3.Distance(lightTransform.position, m_gameObject.transform.position) <= m_fleeDistance)
+            {
+                m_finiteStateMachine.PerformTransition(TransitionEnum.FleeAction);
+            }
+        }
+    }
+}
+
