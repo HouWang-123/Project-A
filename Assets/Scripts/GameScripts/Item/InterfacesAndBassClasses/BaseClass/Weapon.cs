@@ -2,8 +2,9 @@ using System;
 using DG.Tweening;
 using Spine.Unity.Examples;
 using UnityEngine;
+using YooAsset;
 
-public class Weapon : ItemBase
+public class Weapon : ItemBase, IItemSlotable
 {
     public cfg.item.Weapon ItemData;
     private void Awake()
@@ -27,5 +28,30 @@ public class Weapon : ItemBase
         {
             ColorfulDebugger.DebugError("武器物品ID" + ItemID +"不存在，物品名称" + gameObject.name,ColorfulDebugger.Instance.Data);
         }
+    }
+    // 动态生成物品
+    protected override void InitItem( int ID)
+    {
+        ItemType = GameItemType.Weapon;
+        try
+        {
+            ItemData = GameTableDataAgent.WeaponTable.Get(ID);
+            ItemID = ItemData.ID;
+        }
+        catch (Exception e)
+        {
+            ColorfulDebugger.DebugError("武器物品ID" + ID +"不存在，物品名称" + gameObject.name,ColorfulDebugger.Instance.Data);
+        }
+    }
+
+    public override Sprite GetItemIcon()
+    {
+        AssetHandle loadAssetSync = YooAssets.LoadAssetSync<Sprite>(ItemData.IconName);
+        return Instantiate(loadAssetSync.AssetObject, transform) as Sprite;
+    }
+
+    public void UpdateItemSlot()
+    {
+        
     }
 }

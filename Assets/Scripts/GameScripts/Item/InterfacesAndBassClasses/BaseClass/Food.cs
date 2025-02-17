@@ -1,7 +1,9 @@
 using System;
 using cfg.interact;
+using UnityEngine;
+using YooAsset;
 
-public class Food : ItemBase
+public class Food : ItemBase, IItemSlotable,IStackable
 {
     public cfg.item.Food ItemData;
     public void Awake()
@@ -26,5 +28,29 @@ public class Food : ItemBase
         {
             ColorfulDebugger.DebugError("食物ID" + ItemID +"不存在，物品名称" + gameObject.name,ColorfulDebugger.Instance.Data);
         }
+    }
+    protected override void InitItem(int id)
+    {
+        ItemType = GameItemType.Food;
+        try
+        {
+            ItemData = GameTableDataAgent.FoodTable.Get(id);
+            ItemID = ItemData.ID;
+        }
+        catch (Exception e)
+        {
+            ColorfulDebugger.DebugError("食物ID" + id +"不存在，物品名称" + gameObject.name,ColorfulDebugger.Instance.Data);
+        }
+    }
+
+    public override Sprite GetItemIcon()
+    {
+        AssetHandle loadAssetSync = YooAssets.LoadAssetSync<Sprite>(ItemData.IconName);
+        return Instantiate(loadAssetSync.AssetObject, transform) as Sprite;
+    }
+
+    public int GetMaxStackValue()
+    {
+        return ItemData.MaxStackCount;
     }
 }

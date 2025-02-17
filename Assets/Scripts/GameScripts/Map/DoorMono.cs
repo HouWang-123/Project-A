@@ -33,6 +33,7 @@ public class DoorMono : MonoBehaviour
         if(doorEnabled && other.gameObject.CompareTag("Player"))
         {
             Debug.Log("Player Comming!!!!");
+            
             GameControl.Instance.ChangeRoom(doorData.ToRoomID,doorData.ToDoorID);
         }
     }

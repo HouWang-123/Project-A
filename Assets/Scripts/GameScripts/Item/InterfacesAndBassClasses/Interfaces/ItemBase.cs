@@ -3,29 +3,19 @@ using DG.Tweening;
 using Spine.Unity.Examples;
 using UnityEngine;
 using UnityEngine.Serialization;
-[Serializable]
-public class ItemProperty
-{
-    public bool Stackable;               // 可否堆叠
-    public bool Equipable;               // 可否装备上手
-    public bool EquipOnHand;             // 是否正在装备在手上
-}
+
 public abstract class ItemBase : MonoBehaviour , IPickUpable
 {
     public int ItemID;                               // 物品ID
-    public Sprite SlotSprite;                        // 新增，道具栏上显示的icon;
     [HideInInspector] public GameItemType ItemType;  // 物品类型
     [Space]
     public SpriteRenderer ItemRenderer;              // 物品目标渲染
     public Shader oulineShader;                      // 选中时的 shader
     public Shader DefaultSpriteShader;               // 默认     shader
-    [Space]
-    public ItemProperty ItemProperty;                // 物品属性
-    private bool IsItemInPickupRange;                // 可否拾取
+    
+    
     private bool Targeted;                           // 是否被拾取系统选中
     private bool ItemReversed;
-    
-    private int TTL;
     
     public bool DropState;
     Vector3 OriginalRendererScale;
@@ -35,6 +25,8 @@ public abstract class ItemBase : MonoBehaviour , IPickUpable
         RendererTr.localEulerAngles = GameConstData.DefAngles;
         OriginalRendererScale = RendererTr.localScale;
     }
+    
+    private bool IsItemInPickupRange;                // 可否拾取
     public void SetPickupable( bool v) { IsItemInPickupRange = v; }
     public void setTargerted(bool v)              // 拾取系统相关功能，与拾取标识相关
     {
@@ -48,6 +40,7 @@ public abstract class ItemBase : MonoBehaviour , IPickUpable
             ItemRenderer.material.shader = DefaultSpriteShader;
         }
     }
+    
     // 拾取接口相关控制
     public void CheckReverse(bool reversed)
     {
@@ -64,8 +57,12 @@ public abstract class ItemBase : MonoBehaviour , IPickUpable
             ItemRenderer.transform.localScale = OriginalRendererScale;
             ItemReversed = false;
         }
-    }          
+    }
+    
     protected abstract void InitItem();           // 物品数据初始化
+    protected abstract void InitItem(int id);     // 物品数据初始化
+    public abstract Sprite GetItemIcon();
+    
     
     //dorp Item Test
 
@@ -81,23 +78,17 @@ public abstract class ItemBase : MonoBehaviour , IPickUpable
     {
         if (DropState)
         {
-            // 以物体当前位置为射线原点（如果物体中心不合适，可加上一个偏移量，如物体底部）
             Vector3 origin = transform.position;
-            // 发射一条向下的射线检测地面
             bool isGrounded = Physics.Raycast(origin, Vector3.down, groundCheckDistance, GameRoot.Instance.FloorLayer);
         
             if (!isGrounded)
             {
-                // 如果未接触到地面，则累加重力（模拟自由落体）
                 velocity.y += gravity * Time.deltaTime;
-                // 更新物体位置
                 transform.position += velocity * Time.deltaTime;
             }
             else
             {
-                // 如果检测到地面，则重置速度
                 velocity = Vector3.zero;
-                // 可选：通过射线获取准确的地面高度，将物体位置修正到地面
                 RaycastHit hit;
                 if (Physics.Raycast(origin, Vector3.down, out hit, groundCheckDistance, GameRoot.Instance.FloorLayer))
                 {
@@ -120,7 +111,7 @@ public abstract class ItemBase : MonoBehaviour , IPickUpable
         {
             Vector3 groundLocation = transform.position;
             groundLocation.y = 0;
-            DropState = true;
+            DropState = false;
         }
     }
 

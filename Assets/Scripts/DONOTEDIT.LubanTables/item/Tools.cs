@@ -24,6 +24,7 @@ public sealed partial class Tools : Luban.BeanBase
         { if(!_buf["interactEffectID"].IsNumber) { throw new SerializationException(); }  InteractEffectID = _buf["interactEffectID"]; }
         { if(!_buf["derubility"].IsNumber) { throw new SerializationException(); }  Derubility = _buf["derubility"]; }
         { if(!_buf["weight"].IsNumber) { throw new SerializationException(); }  Weight = _buf["weight"]; }
+        { if(!_buf["IconName"].IsString) { throw new SerializationException(); }  IconName = _buf["IconName"]; }
     }
 
     public static Tools DeserializeTools(JSONNode _buf)
@@ -59,6 +60,10 @@ public sealed partial class Tools : Luban.BeanBase
     /// 注意，更详细的功能效果并未配进该表中
     /// </summary>
     public readonly int Weight;
+    /// <summary>
+    /// 图标名称
+    /// </summary>
+    public readonly string IconName;
    
     public const int __ID__ = 911370016;
     public override int GetTypeId() => __ID__;
@@ -77,6 +82,7 @@ public sealed partial class Tools : Luban.BeanBase
         + "interactEffectID:" + InteractEffectID + ","
         + "derubility:" + Derubility + ","
         + "weight:" + Weight + ","
+        + "IconName:" + IconName + ","
         + "}";
     }
 }

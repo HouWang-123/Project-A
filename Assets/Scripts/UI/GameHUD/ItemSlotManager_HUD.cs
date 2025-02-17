@@ -2,13 +2,19 @@ using System;
 using System.Collections.Generic;
 using DG.Tweening;
 using FEVM.Timmer;
+using NUnit.Framework;
+using PixelCrushers;
 using Spine;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class ItemSlotManager_HUD : UIBase
 {
+    
+    public List<SlotItem> _SlotItemData = new List<SlotItem>();
+    
     private bool switchHUD;
     public static ItemSlotManager_HUD Instance;
     [SerializeField] private List<GameItemSlot_HUD_Behavior> ItemSlots;
@@ -25,6 +31,17 @@ public class ItemSlotManager_HUD : UIBase
         SetDisplayHotKeys();
     }
 
+    public void UpdateItem(Dictionary<int,SlotItem> SlotItemData)
+    {
+        foreach (var V in ItemSlots)
+        {
+            V.EmptySlot();
+        }
+        foreach (var V in SlotItemData)
+        {
+            ItemSlots[V.Key -1].SetSlotItem(V.Value.ItemBase,V.Value.StackValue);
+        }
+    }
     private void SetDisplayHotKeys()
     {
         int i = 1;
@@ -206,7 +223,7 @@ public class ItemSlotManager_HUD : UIBase
 
     protected override void AddListen()
     {
-        ItemSlotsHUDSwitch_N.onClick.AddListener(() => { ChangeFocus(false); });
+        //ItemSlotsHUDSwitch_N.onClick.AddListener(() => { ChangeFocus(false); });
     }
 
     public void OnItemSwitch()

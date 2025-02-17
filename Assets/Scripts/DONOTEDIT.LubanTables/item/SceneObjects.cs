@@ -25,6 +25,7 @@ public sealed partial class SceneObjects : Luban.BeanBase
         { if(!_buf["isDestructible"].IsBoolean) { throw new SerializationException(); }  IsDestructible = _buf["isDestructible"]; }
         { if(!_buf["durability"].IsNumber) { throw new SerializationException(); }  Durability = _buf["durability"]; }
         { if(!_buf["attack"].IsNumber) { throw new SerializationException(); }  Attack = _buf["attack"]; }
+        { if(!_buf["IconName"].IsString) { throw new SerializationException(); }  IconName = _buf["IconName"]; }
     }
 
     public static SceneObjects DeserializeSceneObjects(JSONNode _buf)
@@ -64,6 +65,10 @@ public sealed partial class SceneObjects : Luban.BeanBase
     /// 注意，更详细的功能效果并未配进该表中
     /// </summary>
     public readonly int Attack;
+    /// <summary>
+    /// 图标
+    /// </summary>
+    public readonly string IconName;
    
     public const int __ID__ = -337794557;
     public override int GetTypeId() => __ID__;
@@ -83,6 +88,7 @@ public sealed partial class SceneObjects : Luban.BeanBase
         + "isDestructible:" + IsDestructible + ","
         + "durability:" + Durability + ","
         + "attack:" + Attack + ","
+        + "IconName:" + IconName + ","
         + "}";
     }
 }

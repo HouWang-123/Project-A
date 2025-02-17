@@ -8,7 +8,7 @@ using UnityEngine.Events;
 
 public class PlayerControl : MonoBehaviour
 {
-    public ItemBase ItemOnHand;// 玩家当前手中的物品
+    
     public Transform ItemHoldPosition;      // 玩家拿取物品位置
     private PlayerInputControl inputControl;
     private Rigidbody playerRG;
@@ -35,6 +35,7 @@ public class PlayerControl : MonoBehaviour
     
     private void Start()
     {
+        GameRunTimeData.Instance.CharacterItemSlotData.ChangeFocusSlotNumber(1); // 默认启用道具栏
         _pickupController = GetComponent<PlayerPickupController>();
         playerRG = GetComponent<Rigidbody>();
         playerRenderer = transform.GetChild(0);
@@ -43,7 +44,7 @@ public class PlayerControl : MonoBehaviour
         ItemHoldPosition = useObjParent.GetChild(0);
         if(ItemHoldPosition.childCount > 0)
         {
-            ItemOnHand = ItemHoldPosition.GetChild(0).GetComponent<ItemBase>();
+            GameRunTimeData.Instance.CharacterItemSlotData.InsertOrUpdateItemSlotData(ItemHoldPosition.GetChild(0).GetComponent<ItemBase>());
         }
         InputControl.Instance.GamePlayerEnable();
         InputControl.Instance.UIDisable();
@@ -86,26 +87,38 @@ public class PlayerControl : MonoBehaviour
         InputControl.Instance._1Key.started += (item) =>
         {
             GameHUD.Instance.ISM_SetFocus(1);
+            GameRunTimeData.Instance.CharacterItemSlotData.ChangeFocusSlotNumber(1);
+            GameRunTimeData.Instance.CharacterItemSlotData.ActiveCurrentItem();
         };
         InputControl.Instance._2Key.started += (item) =>
         {
             GameHUD.Instance.ISM_SetFocus(2);
+            GameRunTimeData.Instance.CharacterItemSlotData.ChangeFocusSlotNumber(2);
+            GameRunTimeData.Instance.CharacterItemSlotData.ActiveCurrentItem();
         };
         InputControl.Instance._3Key.started += (item) =>
         {
             GameHUD.Instance.ISM_SetFocus(3);
+            GameRunTimeData.Instance.CharacterItemSlotData.ChangeFocusSlotNumber(3);
+            GameRunTimeData.Instance.CharacterItemSlotData.ActiveCurrentItem();
         };
         InputControl.Instance._4Key.started += (item) =>
         {
             GameHUD.Instance.ISM_SetFocus(4);
+            GameRunTimeData.Instance.CharacterItemSlotData.ChangeFocusSlotNumber(4);
+            GameRunTimeData.Instance.CharacterItemSlotData.ActiveCurrentItem();
         };
         InputControl.Instance._5Key.started += (item) =>
         {
             GameHUD.Instance.ISM_SetFocus(5);
+            GameRunTimeData.Instance.CharacterItemSlotData.ChangeFocusSlotNumber(5);
+            GameRunTimeData.Instance.CharacterItemSlotData.ActiveCurrentItem();
         };
         InputControl.Instance._6Key.started += (item) =>
         {
             GameHUD.Instance.ISM_SetFocus(6);
+            GameRunTimeData.Instance.CharacterItemSlotData.ChangeFocusSlotNumber(6);
+            GameRunTimeData.Instance.CharacterItemSlotData.ActiveCurrentItem();
         };
         InputControl.Instance.MouseScroll.started += (item) =>
         {
@@ -117,10 +130,14 @@ public class PlayerControl : MonoBehaviour
             if (readValue.y > 0)
             {
                 GameHUD.Instance.ISM_LastFocusItem();
+                GameRunTimeData.Instance.CharacterItemSlotData.ChangeFocusSlotNumber(false);
+                GameRunTimeData.Instance.CharacterItemSlotData.ActiveCurrentItem();
             }
             else if (readValue.y < 0)
             {
                 GameHUD.Instance.ISM_NextFocusItem();
+                GameRunTimeData.Instance.CharacterItemSlotData.ChangeFocusSlotNumber(true);
+                GameRunTimeData.Instance.CharacterItemSlotData.ActiveCurrentItem();
             }
             ScrollActionTimer = 0f;
         };
@@ -293,10 +310,7 @@ public class PlayerControl : MonoBehaviour
         leftMouseAction = leftAction;
         rightMouseAction = rightAction;
     }
-
-    // 物品拾取
-    public PlayerPickupController PlayerPickupController;
-    public GameObject PickUpPosition;
+    
     private bool dropKeyPressed = false;
     private bool pickupLock;      // 拾取锁
     private void DropItemDetection()
@@ -305,11 +319,15 @@ public class PlayerControl : MonoBehaviour
         {
             return;
         }
-        if(Keyboard.current.gKey.isPressed)
+        
+        if(Keyboard.current.eKey.isPressed)
         {
             if(dropKeyPressed) { return; }
-            
-            if(ItemOnHand != null) { DropItem(false); }
+            // 需要进行物品判断逻辑的修改
+            if (GameRunTimeData.Instance.CharacterItemSlotData.GetCharacterInUseItem() != null)
+            {
+                DropItem(false);
+            }
             else
             {
                 PickItem();
@@ -324,13 +342,14 @@ public class PlayerControl : MonoBehaviour
 
     public void DropItem(bool fastDrop)
     {
-        ItemOnHand.CheckReverse(playerReversed);
-        ItemOnHand.transform.SetParent(GameControl.Instance.GetSceneItemList().transform);
-        ItemOnHand.OnItemDrop(fastDrop);
-        ItemOnHand = null;
+        Debug.Log("丢下");
+        // 表现  // 背包数据更新
+        GameRunTimeData.Instance.CharacterItemSlotData.ClearHandItem(fastDrop,playerReversed);
     }
     public void PickItem() // 拾取物品
     {
+        Debug.Log("拾取");
+        // 表现层
         if(playerReversed)
         { useObjParent.localEulerAngles = GameConstData.ReversedRotation; }
         else
@@ -340,13 +359,23 @@ public class PlayerControl : MonoBehaviour
         if(_pickupController.currentPickup.DropState)
         { return; }
         pickupLock = true;
-        _pickupController.currentPickup.transform.SetParent(ItemHoldPosition);
-        _pickupController.currentPickup.CheckReverse(playerReversed);
-        _pickupController.PlayerPickupItem();
-        ItemHoldPosition.GetChild(0).transform.DOLocalMove(Vector3.zero, 0.01f).OnComplete(() =>
+        
+        ItemBase characterInUseItem;
+        characterInUseItem = _pickupController.currentPickup;
+        // 背包数据更新
+        bool Restult = GameRunTimeData.Instance.CharacterItemSlotData.InsertOrUpdateItemSlotData(characterInUseItem);
+
+        if (Restult)
         {
-            ItemOnHand = ItemHoldPosition.GetChild(0).GetComponent<ItemBase>();
-            pickupLock = false;
-        });
+            _pickupController.currentPickup.transform.SetParent(ItemHoldPosition);
+            
+            _pickupController.currentPickup.CheckReverse(playerReversed);
+            _pickupController.PlayerPickupItem();
+            Vector3 transformLocalEulerAngles = characterInUseItem.gameObject.transform.localEulerAngles;
+            transformLocalEulerAngles.x = -45;
+            characterInUseItem.gameObject.transform.localEulerAngles = transformLocalEulerAngles;
+            characterInUseItem.gameObject.transform.localPosition = Vector3.zero;
+        }
+        pickupLock = false;
     }
 }

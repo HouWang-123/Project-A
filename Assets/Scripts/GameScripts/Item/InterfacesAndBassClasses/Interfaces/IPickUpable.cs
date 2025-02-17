@@ -8,3 +8,14 @@ public interface IPickUpable            // 可否被拾取接口
                                        //        fastdrop:
                                        //        是否忽略物品下落动画（放在过场使用）
 }
+
+// 可否进入道具栏
+public interface IItemSlotable
+{
+    
+}
+// 可否进行堆叠
+public interface IStackable
+{
+    public int GetMaxStackValue();
+}

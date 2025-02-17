@@ -11,6 +11,7 @@ public class GameRoot : MonoBehaviour
     [HideInInspector] public static GameRoot Instance;
     public EPlayMode PlayMode = EPlayMode.EditorSimulateMode;
     ResourcePackage package;
+    
     public LayerMask FloorLayer;
     private void Awake()
     {
@@ -19,7 +20,9 @@ public class GameRoot : MonoBehaviour
         YooAssets.Initialize();
         package = YooAssets.CreatePackage("DefaultPackage");
         YooAssets.SetDefaultPackage(package);
-
+        
+        GameRunTimeData.Instance.CharacterItemSlotData.SetMaxSlotCount(GameConstData.DEFAULT_SLOTCOUNT);
+        
         switch (PlayMode)
         {
             case EPlayMode.EditorSimulateMode:
@@ -63,21 +66,7 @@ public class GameRoot : MonoBehaviour
         
         Invoke("ReadTableTest", 1f);
         
-        //AssetHandle handle2 = YooAssets.LoadAssetSync<GameObject>("GameObject");
-        //GameObject @object = Instantiate(handle2.AssetObject) as GameObject;
         UIManager.Instance.GetPanel(UIPanelConfig.MainPanel);
         UIManager.Instance.GetPanel(UIPanelConfig.LoadingPanel).GetComponent<UIBase>().Hide();
-    }
-
-    private void ReadTableTest()
-    {
-        
-        //Reward tableDataById = GameTableDataAgent.RewardTable.Get(1001);
-        
-        
-        //List<Reward> tableDataByIdtable = GameTableDataAgent.RewardTable.DataList;
-        
-        //ColorfulDebugger.Debug(tableDataById.ToString(),ColorfulDebugger.Instance.Data);
-        
     }
 }

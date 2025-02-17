@@ -3,20 +3,22 @@ using JetBrains.Annotations;
 using TMPro;
 
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class GameItemSlot_HUD_Behavior : UIBase
 {
-    public Image ItemImage;
+    public Image ItemIcon;
     public Button OverLappsButton;
     public GameObject ActiveTip;
     public Animator FocusAnimator;
-    
+    public TextMeshProUGUI ItemCount;
     public TextMeshProUGUI ItemSlotNumber;
     private static readonly int IsFocus = Animator.StringToHash("IsFocus");
 
     void Start()
     {
+        ActiveTip.transform.localScale = Vector3.zero;
         EmptySlot();
     }
     protected override void AddListen()
@@ -38,21 +40,24 @@ public class GameItemSlot_HUD_Behavior : UIBase
     {
         ItemSlotNumber.text = number.ToString();
     }
-    public void SetSlotItem( [CanBeNull] ItemBase itemBase )
+    
+    public void SetSlotItem(ItemBase itemBase,int count)
     {
-        EmptySlot();
-        if (itemBase != null)
+        ItemIcon.sprite = itemBase.GetItemIcon();
+        ItemIcon.gameObject.SetActive(true);
+        ItemCount.gameObject.SetActive(true);
+        ItemCount.text = count.ToString();
+        if (count == 1)
         {
-            ItemImage.sprite = itemBase.SlotSprite;
-            ItemImage.gameObject.SetActive(true);
+            ItemCount.gameObject.SetActive(false);
         }
-
     }
-    private void EmptySlot()
+    
+    public void EmptySlot()
     {
-        ItemImage.sprite = null;
-        ItemImage.gameObject.SetActive(false);
-        ActiveTip.transform.localScale = Vector3.zero;
+        ItemIcon.sprite = null;
+        ItemIcon.gameObject.SetActive(false);
+        ItemCount.gameObject.SetActive(false);
     }
 
     public void SetAsActiveItem()

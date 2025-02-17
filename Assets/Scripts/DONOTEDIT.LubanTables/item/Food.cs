@@ -28,6 +28,7 @@ public sealed partial class Food : Luban.BeanBase
         { if(!_buf["SanGain"].IsNumber) { throw new SerializationException(); }  SanGain = _buf["SanGain"]; }
         { if(!_buf["StatusGain"].IsNumber) { throw new SerializationException(); }  StatusGain = _buf["StatusGain"]; }
         { if(!_buf["Weight"].IsNumber) { throw new SerializationException(); }  Weight = _buf["Weight"]; }
+        { if(!_buf["IconName"].IsString) { throw new SerializationException(); }  IconName = _buf["IconName"]; }
     }
 
     public static Food DeserializeFood(JSONNode _buf)
@@ -64,6 +65,7 @@ public sealed partial class Food : Luban.BeanBase
     public readonly int SanGain;
     public readonly int StatusGain;
     public readonly int Weight;
+    public readonly string IconName;
    
     public const int __ID__ = 2107191929;
     public override int GetTypeId() => __ID__;
@@ -86,6 +88,7 @@ public sealed partial class Food : Luban.BeanBase
         + "SanGain:" + SanGain + ","
         + "StatusGain:" + StatusGain + ","
         + "Weight:" + Weight + ","
+        + "IconName:" + IconName + ","
         + "}";
     }
 }

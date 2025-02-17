@@ -3,39 +3,42 @@
     "ID": 200001,
     "NAME": "瓶装水",
     "DESCRIBE": "虽然保质期已磨损，但是是校园里为数不多的干净水源，恢复35点水份值。",
-    "prefabName": "water",
+    "prefabName": "Food_water",
     "maxStackCount": 9,
     "interactEffectID": 900001,
     "WaterGain": 35,
     "FoodGain": 0,
     "SanGain": 0,
     "StatusGain": 0,
-    "Weight": 1
+    "Weight": 1,
+    "IconName": "Icon_Food_water"
   },
   {
     "ID": 200002,
     "NAME": "罐头",
     "DESCRIBE": "几辈子也等不到过期的食品，装载了美味预制菜，恢复35点饱腹度。",
-    "prefabName": "tin",
+    "prefabName": "Food_tin",
     "maxStackCount": 9,
     "interactEffectID": 900001,
     "WaterGain": 0,
     "FoodGain": 35,
     "SanGain": 0,
     "StatusGain": 0,
-    "Weight": 1
+    "Weight": 1,
+    "IconName": "Icon_Food_tin"
   },
   {
     "ID": 200003,
     "NAME": "蝌蚪汽水",
     "DESCRIBE": "冒泡的饮料，喝一口，好快乐！同时恢复15点水份值和饱腹度以及1点San值。",
-    "prefabName": "cola",
+    "prefabName": "Food_cola",
     "maxStackCount": 9,
     "interactEffectID": 900001,
     "WaterGain": 15,
     "FoodGain": 15,
     "SanGain": 1,
     "StatusGain": 0,
-    "Weight": 1
+    "Weight": 1,
+    "IconName": "Icon_Food_cola"
   }
 ]

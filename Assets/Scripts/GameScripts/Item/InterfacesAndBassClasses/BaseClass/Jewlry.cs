@@ -1,4 +1,6 @@
 using System;
+using UnityEngine;
+using YooAsset;
 
 public class Jewlry : ItemBase
 {
@@ -25,5 +27,23 @@ public class Jewlry : ItemBase
         {
             ColorfulDebugger.DebugError("饰品ID" + ItemID +"不存在，物品名称" + gameObject.name,ColorfulDebugger.Instance.Data);
         }
+    }
+    protected override void InitItem(int id)
+    {
+        ItemType = GameItemType.Jewelry;
+        
+        try
+        {
+            ItemData = GameTableDataAgent.JewelryTable.Get(id);
+            ItemID = ItemData.ID;
+        }
+        catch (Exception e)
+        {
+            ColorfulDebugger.DebugError("饰品ID" + id +"不存在，物品名称" + gameObject.name,ColorfulDebugger.Instance.Data);
+        }
+    }
+    public override Sprite GetItemIcon()
+    {
+        return null;
     }
 }

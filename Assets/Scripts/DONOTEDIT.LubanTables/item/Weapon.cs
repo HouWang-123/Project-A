@@ -27,6 +27,7 @@ public sealed partial class Weapon : Luban.BeanBase
         { if(!_buf["Weight"].IsNumber) { throw new SerializationException(); }  Weight = _buf["Weight"]; }
         { if(!_buf["Attack"].IsNumber) { throw new SerializationException(); }  Attack = _buf["Attack"]; }
         { if(!_buf["AttackCD"].IsNumber) { throw new SerializationException(); }  AttackCD = _buf["AttackCD"]; }
+        { if(!_buf["IconName"].IsString) { throw new SerializationException(); }  IconName = _buf["IconName"]; }
     }
 
     public static Weapon DeserializeWeapon(JSONNode _buf)
@@ -74,6 +75,7 @@ public sealed partial class Weapon : Luban.BeanBase
     /// 最小攻击间隔
     /// </summary>
     public readonly float AttackCD;
+    public readonly string IconName;
    
     public const int __ID__ = -1736061577;
     public override int GetTypeId() => __ID__;
@@ -95,6 +97,7 @@ public sealed partial class Weapon : Luban.BeanBase
         + "Weight:" + Weight + ","
         + "Attack:" + Attack + ","
         + "AttackCD:" + AttackCD + ","
+        + "IconName:" + IconName + ","
         + "}";
     }
 }

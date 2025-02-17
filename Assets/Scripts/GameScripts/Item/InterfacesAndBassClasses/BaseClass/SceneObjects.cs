@@ -1,4 +1,6 @@
 using System;
+using UnityEngine;
+using YooAsset;
 
 public class SceneObjects : ItemBase
 {
@@ -21,5 +23,23 @@ public class SceneObjects : ItemBase
         {
             ColorfulDebugger.DebugError("场景物品ID" + ItemID +"不存在，物品名称" + gameObject.name,ColorfulDebugger.Instance.Data);
         }
+    }
+    protected override void InitItem(int id)
+    {
+        ItemType = GameItemType.SceneObject;
+        try
+        {
+            ItemData = GameTableDataAgent.SceneObjectsTable.Get(id);
+            ItemID = ItemData.ID;
+        }
+        catch (Exception e)
+        {
+            ColorfulDebugger.DebugError("场景物品ID" + ItemID +"不存在，物品名称" + gameObject.name,ColorfulDebugger.Instance.Data);
+        }
+    }
+    public override Sprite GetItemIcon()
+    {
+        AssetHandle loadAssetSync = YooAssets.LoadAssetSync<Sprite>(ItemData.IconName);
+        return Instantiate(loadAssetSync.AssetObject, transform) as Sprite;
     }
 }

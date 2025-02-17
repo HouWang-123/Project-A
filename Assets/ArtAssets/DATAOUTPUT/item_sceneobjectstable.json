@@ -3,120 +3,132 @@
     "ID": 220001,
     "NAME": "木屑",
     "DESCRIBE": "0",
-    "prefabName": "Sawdust",
+    "prefabName": "SceneItem_Sawdust",
     "interactEffectID": 900004,
     "isDestructible": true,
     "durability": 1,
-    "attack": 0
+    "attack": 0,
+    "IconName": "Icon_SceneItem_Sawdust"
   },
   {
     "ID": 220002,
     "NAME": "燃烧的木屑",
     "DESCRIBE": "0",
-    "prefabName": "BurningSawdust",
+    "prefabName": "SceneItem_BurningSawdust",
     "interactEffectID": 0,
     "isDestructible": false,
     "durability": 8,
-    "attack": 14
+    "attack": 14,
+    "IconName": "Icon_SceneItem_BurningSawdust"
   },
   {
     "ID": 220003,
     "NAME": "陶瓷碎片",
     "DESCRIBE": "0",
-    "prefabName": "DeadVase",
+    "prefabName": "SceneItem_DeadVase",
     "interactEffectID": 0,
     "isDestructible": true,
     "durability": 3,
-    "attack": 8
+    "attack": 8,
+    "IconName": "Icon_SceneItem_DeadVase"
   },
   {
     "ID": 220004,
     "NAME": "座钟",
     "DESCRIBE": "0",
-    "prefabName": "BigBell",
+    "prefabName": "SceneItem_BigBell",
     "interactEffectID": 900005,
     "isDestructible": false,
     "durability": 0,
-    "attack": 0
+    "attack": 0,
+    "IconName": "Icon_SceneItem_BigBell"
   },
   {
     "ID": 220005,
     "NAME": "铁砧",
     "DESCRIBE": "0",
-    "prefabName": "Anvil",
+    "prefabName": "SceneItem_Anvil",
     "interactEffectID": 900006,
     "isDestructible": false,
     "durability": 0,
-    "attack": 0
+    "attack": 0,
+    "IconName": "Icon_SceneItem_Anvil"
   },
   {
     "ID": 220006,
     "NAME": "充电站",
     "DESCRIBE": "0",
-    "prefabName": "Charger",
+    "prefabName": "SceneItem_Charger",
     "interactEffectID": 900007,
     "isDestructible": false,
     "durability": 10,
-    "attack": 0
+    "attack": 0,
+    "IconName": "Icon_SceneItem_Charger"
   },
   {
     "ID": 220007,
     "NAME": "干枯藤蔓",
     "DESCRIBE": "0",
-    "prefabName": "Vine",
+    "prefabName": "SceneItem_Vine",
     "interactEffectID": 900004,
     "isDestructible": true,
     "durability": 3,
-    "attack": 0
+    "attack": 0,
+    "IconName": "Icon_SceneItem_Vine"
   },
   {
     "ID": 220008,
     "NAME": "储物柜",
     "DESCRIBE": "0",
-    "prefabName": "Locker",
+    "prefabName": "SceneItem_Locker",
     "interactEffectID": 900003,
     "isDestructible": false,
     "durability": 0,
-    "attack": 0
+    "attack": 0,
+    "IconName": "Icon_SceneItem_Locker"
   },
   {
     "ID": 220009,
     "NAME": "书",
     "DESCRIBE": "0",
-    "prefabName": "Book",
+    "prefabName": "SceneItem_Book",
     "interactEffectID": 900008,
     "isDestructible": false,
     "durability": 5,
-    "attack": 0
+    "attack": 0,
+    "IconName": "Icon_SceneItem_Book"
   },
   {
     "ID": 220010,
     "NAME": "尸骨堆",
     "DESCRIBE": "0",
-    "prefabName": "SkeletonPile",
+    "prefabName": "SceneItem_SkeletonPile",
     "interactEffectID": 900004,
     "isDestructible": true,
     "durability": 300,
-    "attack": 0
+    "attack": 0,
+    "IconName": "Icon_SceneItem_SkeletonPile"
   },
   {
     "ID": 220011,
     "NAME": "火焰",
     "DESCRIBE": "0",
-    "prefabName": "Fire",
+    "prefabName": "SceneItem_Fire",
     "interactEffectID": 0,
     "isDestructible": false,
     "durability": 5,
-    "attack": 14
+    "attack": 14,
+    "IconName": "Icon_SceneItem_Fire"
   },
   {
     "ID": 220012,
     "NAME": "篮球筐",
     "DESCRIBE": "0",
-    "prefabName": "Basket",
+    "prefabName": "SceneItem_Basket",
     "interactEffectID": 900009,
     "isDestructible": false,
     "durability": 0,
-    "attack": 0
+    "attack": 0,
+    "IconName": "Icon_SceneItem_Basket"
   }
 ]

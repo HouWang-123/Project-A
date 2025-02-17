@@ -23,6 +23,7 @@ public sealed partial class TinyObjects : Luban.BeanBase
         { if(!_buf["prefabName"].IsString) { throw new SerializationException(); }  PrefabName = _buf["prefabName"]; }
         { if(!_buf["maxStackCount"].IsNumber) { throw new SerializationException(); }  MaxStackCount = _buf["maxStackCount"]; }
         { if(!_buf["interactEffectID"].IsNumber) { throw new SerializationException(); }  InteractEffectID = _buf["interactEffectID"]; }
+        { if(!_buf["IconName"].IsString) { throw new SerializationException(); }  IconName = _buf["IconName"]; }
     }
 
     public static TinyObjects DeserializeTinyObjects(JSONNode _buf)
@@ -54,6 +55,7 @@ public sealed partial class TinyObjects : Luban.BeanBase
     /// 玩家与其的交互是哪一种
     /// </summary>
     public readonly int InteractEffectID;
+    public readonly string IconName;
    
     public const int __ID__ = 616726393;
     public override int GetTypeId() => __ID__;
@@ -71,6 +73,7 @@ public sealed partial class TinyObjects : Luban.BeanBase
         + "prefabName:" + PrefabName + ","
         + "maxStackCount:" + MaxStackCount + ","
         + "interactEffectID:" + InteractEffectID + ","
+        + "IconName:" + IconName + ","
         + "}";
     }
 }

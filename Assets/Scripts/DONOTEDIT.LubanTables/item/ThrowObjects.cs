@@ -25,6 +25,7 @@ public sealed partial class ThrowObjects : Luban.BeanBase
         { if(!_buf["isDestructible"].IsBoolean) { throw new SerializationException(); }  IsDestructible = _buf["isDestructible"]; }
         { if(!_buf["weight"].IsNumber) { throw new SerializationException(); }  Weight = _buf["weight"]; }
         { if(!_buf["attack"].IsNumber) { throw new SerializationException(); }  Attack = _buf["attack"]; }
+        { if(!_buf["IconName"].IsString) { throw new SerializationException(); }  IconName = _buf["IconName"]; }
     }
 
     public static ThrowObjects DeserializeThrowObjects(JSONNode _buf)
@@ -64,6 +65,10 @@ public sealed partial class ThrowObjects : Luban.BeanBase
     /// 攻击力
     /// </summary>
     public readonly int Attack;
+    /// <summary>
+    /// 物品图标名称
+    /// </summary>
+    public readonly string IconName;
    
     public const int __ID__ = 635118185;
     public override int GetTypeId() => __ID__;
@@ -83,6 +88,7 @@ public sealed partial class ThrowObjects : Luban.BeanBase
         + "isDestructible:" + IsDestructible + ","
         + "weight:" + Weight + ","
         + "attack:" + Attack + ","
+        + "IconName:" + IconName + ","
         + "}";
     }
 }

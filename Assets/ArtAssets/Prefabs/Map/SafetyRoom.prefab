@@ -164,7 +164,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 1
-  m_Interpolate: 2
+  m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 1
 --- !u!1 &4401809307798966719
@@ -216,9 +216,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10e438b2e0dbb584894d337df01b5f5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerPoint: {fileID: 5195512948736910907}
-  monsterPoint: {fileID: 0}
   SceneItemNode: {fileID: 5660459224320369618}
+  monsterList: {fileID: 0}
 --- !u!1 &4551766514687104378
 GameObject:
   m_ObjectHideFlags: 0
@@ -581,7 +580,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 1
-  m_Interpolate: 2
+  m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 1
 --- !u!1 &5925456168638149870
@@ -804,7 +803,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 1
-  m_Interpolate: 2
+  m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 1
 --- !u!1 &7133553399893401860
