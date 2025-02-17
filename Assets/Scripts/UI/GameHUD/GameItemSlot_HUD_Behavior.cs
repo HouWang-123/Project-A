@@ -1,7 +1,7 @@
 using DG.Tweening;
 using JetBrains.Annotations;
 using TMPro;
-using UI;
+
 using UnityEngine;
 using UnityEngine.UI;
 

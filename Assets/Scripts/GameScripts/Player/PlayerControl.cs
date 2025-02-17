@@ -85,27 +85,27 @@ public class PlayerControl : MonoBehaviour
         };
         InputControl.Instance._1Key.started += (item) =>
         {
-            GameHUD.Instance.SetFocus(1);
+            GameHUD.Instance.ISM_SetFocus(1);
         };
         InputControl.Instance._2Key.started += (item) =>
         {
-            GameHUD.Instance.SetFocus(2);
+            GameHUD.Instance.ISM_SetFocus(2);
         };
         InputControl.Instance._3Key.started += (item) =>
         {
-            GameHUD.Instance.SetFocus(3);
+            GameHUD.Instance.ISM_SetFocus(3);
         };
         InputControl.Instance._4Key.started += (item) =>
         {
-            GameHUD.Instance.SetFocus(4);
+            GameHUD.Instance.ISM_SetFocus(4);
         };
         InputControl.Instance._5Key.started += (item) =>
         {
-            GameHUD.Instance.SetFocus(5);
+            GameHUD.Instance.ISM_SetFocus(5);
         };
         InputControl.Instance._6Key.started += (item) =>
         {
-            GameHUD.Instance.SetFocus(6);
+            GameHUD.Instance.ISM_SetFocus(6);
         };
         InputControl.Instance.MouseScroll.started += (item) =>
         {
@@ -116,11 +116,11 @@ public class PlayerControl : MonoBehaviour
             Vector2 readValue = item.ReadValue<Vector2>();
             if (readValue.y > 0)
             {
-                GameHUD.Instance.LastFocusItem();
+                GameHUD.Instance.ISM_LastFocusItem();
             }
             else if (readValue.y < 0)
             {
-                GameHUD.Instance.NextFocusItem();
+                GameHUD.Instance.ISM_NextFocusItem();
             }
             ScrollActionTimer = 0f;
         };

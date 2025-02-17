@@ -57,8 +57,7 @@ public class GameTableDataAgent
         RoomsTable = _Instance.RoomsTable;
         DoorsTable = _Instance.DoorsTable;
         MonsterTable = _Instance.MonsterTable;
-
-        ColorfulDebugger.Debug(" All Game Data loaded", ColorfulDebugger.Instance.Data);
+        
     }
 
     private static JSONNode LoadByteBuf(string file)

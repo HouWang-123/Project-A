@@ -1,9 +1,9 @@
-using UI;
-using UnityEngine;
-
 public class GameHUD : UIBase
 {
     public static GameHUD Instance;
+    /// <summary>
+    /// ItemSlotManager 道具栏管理器，API 方法前缀: ISM
+    /// </summary>
     public ItemSlotManager_HUD SlotManagerHUD;
     protected override void Awake()
     {
@@ -23,18 +23,20 @@ public class GameHUD : UIBase
     {
         SlotManagerHUD.Hide();
     }
-
-    public void NextFocusItem()
+    
+#region ItemSlotManagerAPI
+    public void ISM_NextFocusItem()
     {
         SlotManagerHUD.ChangeFocus(true);
     }
 
-    public void SetFocus(int Number)
+    public void ISM_SetFocus(int Number)
     {
         SlotManagerHUD.ChangeFocus(Number);
     }
-    public void LastFocusItem()
+    public void ISM_LastFocusItem()
     {
         SlotManagerHUD.ChangeFocus(false);
     }
+#endregion
 }
