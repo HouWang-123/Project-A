@@ -20,7 +20,7 @@ public sealed partial class Character : Luban.BeanBase
         { if(!_buf["ID"].IsNumber) { throw new SerializationException(); }  ID = _buf["ID"]; }
         { if(!_buf["NAME"].IsString) { throw new SerializationException(); }  NAME = _buf["NAME"]; }
         { if(!_buf["DESCRIBE"].IsString) { throw new SerializationException(); }  DESCRIBE = _buf["DESCRIBE"]; }
-        { if(!_buf["spineID"].IsString) { throw new SerializationException(); }  SpineID = _buf["spineID"]; }
+        { if(!_buf["PrefabName"].IsString) { throw new SerializationException(); }  PrefabName = _buf["PrefabName"]; }
         { if(!_buf["voicePackID"].IsString) { throw new SerializationException(); }  VoicePackID = _buf["voicePackID"]; }
         { if(!_buf["walkSpeed"].IsNumber) { throw new SerializationException(); }  WalkSpeed = _buf["walkSpeed"]; }
         { if(!_buf["runSpeedScal"].IsNumber) { throw new SerializationException(); }  RunSpeedScal = _buf["runSpeedScal"]; }
@@ -57,9 +57,9 @@ public sealed partial class Character : Luban.BeanBase
     /// </summary>
     public readonly string DESCRIBE;
     /// <summary>
-    /// spine动画的名字
+    /// 预制体名称
     /// </summary>
-    public readonly string SpineID;
+    public readonly string PrefabName;
     /// <summary>
     /// 语音包
     /// </summary>
@@ -138,7 +138,7 @@ public sealed partial class Character : Luban.BeanBase
         + "ID:" + ID + ","
         + "NAME:" + NAME + ","
         + "DESCRIBE:" + DESCRIBE + ","
-        + "spineID:" + SpineID + ","
+        + "PrefabName:" + PrefabName + ","
         + "voicePackID:" + VoicePackID + ","
         + "walkSpeed:" + WalkSpeed + ","
         + "runSpeedScal:" + RunSpeedScal + ","
