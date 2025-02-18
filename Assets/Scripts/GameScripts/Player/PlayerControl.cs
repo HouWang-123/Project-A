@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 using YooAsset;
 using UnityEngine.InputSystem.Interactions;
 using UnityEngine.Events;
+using Spine.Unity;
 
 public class PlayerControl : MonoBehaviour
 {
@@ -15,6 +16,26 @@ public class PlayerControl : MonoBehaviour
     private Transform useObjParent;
     private PlayerPickupController _pickupController;
     private bool playerReversed;
+
+    private EPlayerAnimator animatorEnum = EPlayerAnimator.Idle;
+    public EPlayerAnimator PlayerAnimatorEnum
+    {
+        set
+        {
+            if(value == animatorEnum)
+            {
+                return;
+            }
+            animatorEnum = value;
+            var entry = playerSpin.AnimationState.SetAnimation(0, animatorEnum.ToString(), true);
+            playerSpin.timeScale = 1;
+        }
+        get
+        {
+            return animatorEnum;
+        }
+    }
+    private SkeletonAnimation playerSpin;
 
     public float Speed = 5f;
 
@@ -54,12 +75,16 @@ public class PlayerControl : MonoBehaviour
         playerRenderer.localEulerAngles = GameConstData.DefAngles;
         useObjParent = transform.GetChild(1);
         ItemHoldPosition = useObjParent.GetChild(0);
-        if (ItemHoldPosition.childCount > 0)
+        if(ItemHoldPosition.childCount > 0)
         {
-            GameRunTimeData.Instance.CharacterItemSlotData.InsertOrUpdateItemSlotData(ItemHoldPosition.GetChild(0)
-                .GetComponent<ItemBase>());
+            GameRunTimeData.Instance.CharacterItemSlotData.InsertOrUpdateItemSlotData(ItemHoldPosition.GetChild(0).GetComponent<ItemBase>());
         }
 
+        playerSpin = transform.Find("Renderer").GetComponentInChildren<SkeletonAnimation>();
+        if(playerSpin != null)
+        {
+            playerSpin.AnimationState.SetAnimation(0, animatorEnum.ToString(), true);
+        }
 
         #region InputSystem
 
@@ -75,7 +100,7 @@ public class PlayerControl : MonoBehaviour
         InputControl.Instance.ShiftButton.started += (item) => { shiftButt = true; };
         InputControl.Instance.ShiftButton.performed += (item) => { };
         InputControl.Instance.ShiftButton.canceled += (item) => { shiftButt = false; };
-        
+
         InputControl.Instance._1Key.started += (item) =>
         {
             ChangeMouseAction(1);
@@ -83,51 +108,51 @@ public class PlayerControl : MonoBehaviour
         InputControl.Instance._2Key.started += (item) =>
         {
             ChangeMouseAction(2);
-            
+
         };
         InputControl.Instance._3Key.started += (item) =>
         {
             ChangeMouseAction(3);
-            
+
         };
         InputControl.Instance._4Key.started += (item) =>
         {
             ChangeMouseAction(4);
-            
+
         };
         InputControl.Instance._5Key.started += (item) =>
         {
             ChangeMouseAction(5);
-            
+
         };
         InputControl.Instance._6Key.started += (item) =>
         {
             ChangeMouseAction(6);
-            
+
         };
         InputControl.Instance.MouseScroll.started += (item) =>
         {
-            if (ScrollActionTimer <= 0.1f)
+            if(ScrollActionTimer <= 0.1f)
             {
                 return;
             }
 
             Vector2 readValue = item.ReadValue<Vector2>();
-            if (readValue.y > 0)
+            if(readValue.y > 0)
             {
                 GameHUD.Instance.ISM_LastFocusItem();
                 GameRunTimeData.Instance.CharacterItemSlotData.ChangeFocusSlotNumber(false);
             }
-            else if (readValue.y < 0)
+            else if(readValue.y < 0)
             {
                 GameHUD.Instance.ISM_NextFocusItem();
                 GameRunTimeData.Instance.CharacterItemSlotData.ChangeFocusSlotNumber(true);
             }
             GameRunTimeData.Instance.CharacterItemSlotData.ActiveCurrentItem();
             ItemBase characterInUseItem = GameRunTimeData.Instance.CharacterItemSlotData.GetCharacterInUseItem();
-            if (characterInUseItem != null)
+            if(characterInUseItem != null)
             {
-                leftMouseAction =  characterInUseItem.OnLeftInteract;
+                leftMouseAction = characterInUseItem.OnLeftInteract;
                 rightMouseAction = characterInUseItem.OnRightInteract;
             }
             else
@@ -135,12 +160,14 @@ public class PlayerControl : MonoBehaviour
                 leftMouseAction = null;
                 rightMouseAction = null;
             }
-            
+
             ScrollActionTimer = 0f;
         };
-
+        //测试切换地面物品
+        //=================
         InputControl.Instance.QButton.started += (item) => { _pickupController.ChangeItemToogle(true); };
         InputControl.Instance.QButton.canceled += (item) => { _pickupController.ChangeItemToogle(false); };
+        //==================
         InputControl.Instance.EButton.started += (item) => { PickItem(); };
 
         InputControl.Instance.GButton.started += (item) =>
@@ -154,25 +181,8 @@ public class PlayerControl : MonoBehaviour
 
 
     }
-    //AssetHandle asset;
-    //float time = 0;
-    //bool fire = false;
-    //float Waitime = 0.3f;
-    //private void FireCancelTest(UnityEngine.InputSystem.InputAction.CallbackContext text)
-    //{
-    //    fire = false;
-    //    // Debug.Log("点击结束");
-    //}
-    //private void FireStarTest(UnityEngine.InputSystem.InputAction.CallbackContext text)
-    //{
-    //    asset = YooAssets.LoadAssetSync("ZiDan");
-    //    fire = true;
-    //    // Debug.Log("操作开始");
-    //}
-    //private void FireTest(UnityEngine.InputSystem.InputAction.CallbackContext text)
-    //{
-    //    // Debug.Log("点击");
-    //}
+
+
 
     Vector3 u, v, l, a, b;
     float angle;
@@ -181,7 +191,7 @@ public class PlayerControl : MonoBehaviour
     {
         v = Camera.main.WorldToScreenPoint(transform.position);
         l = InputControl.Instance.GetLook();
-        if (l.x < v.x)
+        if(l.x < v.x)
         {
             playerRenderer.localScale = GameConstData.ReverseScale;
             playerReversed = true;
@@ -204,9 +214,9 @@ public class PlayerControl : MonoBehaviour
         GameRunTimeData.Instance.CharacterItemSlotData.ChangeFocusSlotNumber(Number);
         GameRunTimeData.Instance.CharacterItemSlotData.ActiveCurrentItem();
         ItemBase characterInUseItem = GameRunTimeData.Instance.CharacterItemSlotData.GetCharacterInUseItem();
-        if (characterInUseItem != null)
+        if(characterInUseItem != null)
         {
-            leftMouseAction =  characterInUseItem.OnLeftInteract;
+            leftMouseAction = characterInUseItem.OnLeftInteract;
             rightMouseAction = characterInUseItem.OnRightInteract;
         }
         else
@@ -218,7 +228,7 @@ public class PlayerControl : MonoBehaviour
     private void FixedUpdate()
     {
         PlayerMove(InputControl.Instance.MovePoint, Speed * Time.deltaTime);
-        if (!pickupLock)
+        if(!pickupLock)
         {
             CalculateUseObjectRotation();
             useObjParent.localEulerAngles = a;
@@ -230,12 +240,12 @@ public class PlayerControl : MonoBehaviour
         Transform weaponTr = useObjParent.GetChild(0);
         angle = a.y;
         angle %= 360;
-        if (angle < 0)
+        if(angle < 0)
         {
             angle += 360;
         }
 
-        if (angle > 90f && angle <= 270f)
+        if(angle > 90f && angle <= 270f)
         {
             //-45cos(πx/180)-90
             angle = -45 * Mathf.Cos(Mathf.PI * angle / 180) - 90;
@@ -252,12 +262,12 @@ public class PlayerControl : MonoBehaviour
         b.z = 0;
         weaponTr.localEulerAngles = b;
         // 武器使用相关
-        if (leftMous)
+        if(leftMous)
         {
             leftMouseAction?.Invoke();
         }
 
-        if (rightMous)
+        if(rightMous)
         {
             rightMouseAction?.Invoke();
         }
@@ -286,24 +296,38 @@ public class PlayerControl : MonoBehaviour
         inputControl?.Dispose();
     }
 
-    private bool stopmove;
+    private bool stopmove = false;
 
     private void PlayerMove(Vector3 vector, float speed)
     {
         vector.z = vector.y;
         vector.y = 0;
-        if (playerRG != null && !stopmove)
+        if((vector - Vector3.zero).sqrMagnitude > 0.01)
         {
-            if ((vector.x > 0 && playerRenderer.localScale.x < 0) || (vector.x < 0 && playerRenderer.localScale.x > 0))
+            if((vector.x > 0 && playerRenderer.localScale.x < 0) || (vector.x < 0 && playerRenderer.localScale.x > 0))
             {
                 speed *= fToB;
+                PlayerAnimatorEnum = EPlayerAnimator.Walk;
+                playerSpin.timeScale = fToB;
             }
-            else if (shiftButt)
+            else if(shiftButt)
             {
                 speed *= runeToB;
+                PlayerAnimatorEnum = EPlayerAnimator.Run;
+            }
+            else
+            {
+                PlayerAnimatorEnum = EPlayerAnimator.Walk;
             }
 
             //playerRG.Move(vector * speed + transform.position, Quaternion.identity);
+        }
+        else
+        {
+            PlayerAnimatorEnum = EPlayerAnimator.Idle;
+        }
+        if(playerRG != null && !stopmove)
+        {
             playerRG.linearVelocity = vector * speed;
         }
     }
@@ -322,7 +346,7 @@ public class PlayerControl : MonoBehaviour
         Debug.Log("丢下");
         // 表现  // 背包数据更新
         bool removestack = GameRunTimeData.Instance.CharacterItemSlotData.ClearHandItem(fastDrop, playerReversed);
-        if (removestack)
+        if(removestack)
         {
             string uri = GameRunTimeData.Instance.CharacterItemSlotData.GetCharacterInUseItem().GetPrefabName();
             AssetHandle loadAssetAsync = YooAssets.LoadAssetAsync<GameObject>(uri);
@@ -338,12 +362,12 @@ public class PlayerControl : MonoBehaviour
 
     public void PickItem() // 拾取物品
     {
-        if (_pickupController.currentPickup == null)
+        if(_pickupController.currentPickup == null)
         {
             return;
         }
         // 表现层
-        if (playerReversed)
+        if(playerReversed)
         {
             useObjParent.localEulerAngles = GameConstData.ReversedRotation;
         }
@@ -351,7 +375,7 @@ public class PlayerControl : MonoBehaviour
         {
             useObjParent.localEulerAngles = Vector3.zero;
         }
-        if (_pickupController.currentPickup.DropState)
+        if(_pickupController.currentPickup.DropState)
         {
             return;
         }
@@ -363,19 +387,19 @@ public class PlayerControl : MonoBehaviour
         // 背包数据更新
         int Restult = GameRunTimeData.Instance.CharacterItemSlotData.InsertOrUpdateItemSlotData(characterInUseItem);
 
-        if (Restult != -1) // 可以拾取物品
+        if(Restult != -1) // 可以拾取物品
         {
             _pickupController.currentPickup.transform.SetParent(ItemHoldPosition);
             _pickupController.currentPickup.CheckReverse(playerReversed);
             _pickupController.PlayerPickupItem();
             SetItemBaseToPlayerHand(characterInUseItem);
 
-            if (Restult == 1) // 手中存在物品
+            if(Restult == 1) // 手中存在物品
             {
                 characterInUseItem.DisableRenderer();
             }
 
-            if (Restult == 2)
+            if(Restult == 2)
             {
                 Destroy(characterInUseItem.gameObject);
             }
@@ -397,4 +421,20 @@ public class PlayerControl : MonoBehaviour
             itemBase.gameObject.transform.localPosition = Vector3.zero;
         }
     }
+}
+
+public enum EPlayerAnimator
+{
+    Hurt,
+    Idle,
+    Idle_Hand,
+    Idle_Head,
+    OnDead,
+    OnUse_1,
+    Run,
+    Run_Hand,
+    Run_Head,
+    Walk,
+    Walk_Hand,
+    Walk_Head,
 }
