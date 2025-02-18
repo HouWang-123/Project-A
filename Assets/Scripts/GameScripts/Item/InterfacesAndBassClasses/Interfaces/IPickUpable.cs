@@ -14,8 +14,9 @@ public interface IItemSlotable
 {
     
 }
-// 可否进行堆叠
+// 道具栏中可否进行堆叠
 public interface IStackable
 {
     public int GetMaxStackValue();
+    public void ChangeStackCount(int Count);
 }

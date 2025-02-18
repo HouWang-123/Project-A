@@ -17,7 +17,9 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable
     
     public bool DropState;
     Vector3 OriginalRendererScale;
-
+    
+    protected int StackCount = 1;
+    
     public void Start()
     {
         var RendererTr = ItemRenderer.transform;

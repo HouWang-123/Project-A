@@ -53,6 +53,12 @@ public class Food : ItemBase, IItemSlotable,IStackable
     {
         return ItemData.MaxStackCount;
     }
+
+    public void ChangeStackCount(int Count)
+    {
+        StackCount = Count;
+    }
+
     public override string GetPrefabName()
     {
         return ItemData.PrefabName;
