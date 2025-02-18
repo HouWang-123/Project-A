@@ -60,10 +60,11 @@ public class PlayerControl : MonoBehaviour
                 .GetComponent<ItemBase>());
         }
 
-        InputControl.Instance.GamePlayerEnable();
-        InputControl.Instance.UIDisable();
 
         #region InputSystem
+
+        InputControl.Instance.GamePlayerEnable();
+        InputControl.Instance.UIDisable();
 
         InputControl.Instance.LeftMouse.started += (item) => { leftMous = true; };
         InputControl.Instance.LeftMouse.performed += (item) => { };
@@ -138,19 +139,20 @@ public class PlayerControl : MonoBehaviour
             ScrollActionTimer = 0f;
         };
 
-        #endregion
-
         InputControl.Instance.QButton.started += (item) => { _pickupController.ChangeItemToogle(true); };
         InputControl.Instance.QButton.canceled += (item) => { _pickupController.ChangeItemToogle(false); };
         InputControl.Instance.EButton.started += (item) => { PickItem(); };
 
         InputControl.Instance.GButton.started += (item) =>
         {
-            if (GameRunTimeData.Instance.CharacterItemSlotData.GetCharacterInUseItem() != null)
+            if(GameRunTimeData.Instance.CharacterItemSlotData.GetCharacterInUseItem() != null)
             {
                 DropItem(false);
             }
         };
+        #endregion
+
+
     }
     //AssetHandle asset;
     //float time = 0;

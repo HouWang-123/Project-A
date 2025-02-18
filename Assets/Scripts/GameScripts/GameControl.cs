@@ -3,6 +3,8 @@ using YooAsset;
 using cfg.scene;
 using System.Collections.Generic;
 using Unity.Cinemachine;
+using UnityEngine.Events;
+
 public class GameControl
 {
     public readonly static GameControl Instance;
@@ -95,14 +97,14 @@ public class GameControl
         roomObj = o;
 
         // 房间切换后，检查怪物生成
-        if (mono.monsterList != null)
-        {
-            foreach (var monster in GetGameMonsterList(r.ID))
-            {
-                monster.transform.SetParent(mono.monsterList.transform);
-                monster.transform.position = mono.monsterList.transform.position;
-            }
-        }
+        //if (mono.monsterList != null)
+        //{
+        //    foreach (var monster in GetGameMonsterList(r.ID))
+        //    {
+        //        monster.transform.SetParent(mono.monsterList.transform);
+        //        monster.transform.position = mono.monsterList.transform.position;
+        //    }
+        //}
     }
 
     public void GameSave()
@@ -133,6 +135,8 @@ public class GameControl
         }
         return playerObj;
     }
+
+
     // 怪物测试代码
     public List<GameObject> GetGameMonsterList(int roomId)
     {
