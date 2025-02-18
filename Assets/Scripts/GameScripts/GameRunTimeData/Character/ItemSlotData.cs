@@ -104,7 +104,9 @@ public class ItemSlotData
 
     /// <summary>
     /// 返回 -1 表示插入失败
-    /// 返回  0 表示
+    /// 返回  0 表示空手正常拾取
+    /// 返回  1 表示拾取后进入背包
+    /// 返回  2 表示拾取到可堆叠的物品
     /// </summary>
     /// <param name="item"></param>
     /// <returns></returns>
