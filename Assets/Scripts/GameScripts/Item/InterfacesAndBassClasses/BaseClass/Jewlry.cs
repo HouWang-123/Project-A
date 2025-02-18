@@ -4,7 +4,16 @@ using YooAsset;
 
 public class Jewlry : ItemBase
 {
+    
+    
+    
+    
     public cfg.item.Jewelry ItemData;
+    
+    
+    
+    
+    
     public void Awake()
     {
         InitItem();
@@ -52,12 +61,12 @@ public class Jewlry : ItemBase
     }
     
     
-    public override void OnRightInteract(InterActionData interActionData)
+    public override void OnRightInteract( )
     {
         throw new NotImplementedException();
     }
 
-    public override void OnLeftInteract(InterActionData interActionData)
+    public override void OnLeftInteract( )
     {
         throw new NotImplementedException();
     }

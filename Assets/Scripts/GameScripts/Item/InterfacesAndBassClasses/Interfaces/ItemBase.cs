@@ -142,6 +142,6 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable
         }
     }
 
-    public abstract void OnRightInteract(InterActionData interActionData);
-    public abstract void OnLeftInteract(InterActionData interActionData);
+    public abstract void OnRightInteract( );
+    public abstract void OnLeftInteract( );
 }

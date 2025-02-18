@@ -74,41 +74,35 @@ public class PlayerControl : MonoBehaviour
         InputControl.Instance.ShiftButton.started += (item) => { shiftButt = true; };
         InputControl.Instance.ShiftButton.performed += (item) => { };
         InputControl.Instance.ShiftButton.canceled += (item) => { shiftButt = false; };
+        
         InputControl.Instance._1Key.started += (item) =>
         {
-            GameHUD.Instance.ISM_SetFocus(1);
-            GameRunTimeData.Instance.CharacterItemSlotData.ChangeFocusSlotNumber(1);
-            GameRunTimeData.Instance.CharacterItemSlotData.ActiveCurrentItem();
+            ChangeMouseAction(1);
         };
         InputControl.Instance._2Key.started += (item) =>
         {
-            GameHUD.Instance.ISM_SetFocus(2);
-            GameRunTimeData.Instance.CharacterItemSlotData.ChangeFocusSlotNumber(2);
-            GameRunTimeData.Instance.CharacterItemSlotData.ActiveCurrentItem();
+            ChangeMouseAction(2);
+            
         };
         InputControl.Instance._3Key.started += (item) =>
         {
-            GameHUD.Instance.ISM_SetFocus(3);
-            GameRunTimeData.Instance.CharacterItemSlotData.ChangeFocusSlotNumber(3);
-            GameRunTimeData.Instance.CharacterItemSlotData.ActiveCurrentItem();
+            ChangeMouseAction(3);
+            
         };
         InputControl.Instance._4Key.started += (item) =>
         {
-            GameHUD.Instance.ISM_SetFocus(4);
-            GameRunTimeData.Instance.CharacterItemSlotData.ChangeFocusSlotNumber(4);
-            GameRunTimeData.Instance.CharacterItemSlotData.ActiveCurrentItem();
+            ChangeMouseAction(4);
+            
         };
         InputControl.Instance._5Key.started += (item) =>
         {
-            GameHUD.Instance.ISM_SetFocus(5);
-            GameRunTimeData.Instance.CharacterItemSlotData.ChangeFocusSlotNumber(5);
-            GameRunTimeData.Instance.CharacterItemSlotData.ActiveCurrentItem();
+            ChangeMouseAction(5);
+            
         };
         InputControl.Instance._6Key.started += (item) =>
         {
-            GameHUD.Instance.ISM_SetFocus(6);
-            GameRunTimeData.Instance.CharacterItemSlotData.ChangeFocusSlotNumber(6);
-            GameRunTimeData.Instance.CharacterItemSlotData.ActiveCurrentItem();
+            ChangeMouseAction(6);
+            
         };
         InputControl.Instance.MouseScroll.started += (item) =>
         {
@@ -122,15 +116,25 @@ public class PlayerControl : MonoBehaviour
             {
                 GameHUD.Instance.ISM_LastFocusItem();
                 GameRunTimeData.Instance.CharacterItemSlotData.ChangeFocusSlotNumber(false);
-                GameRunTimeData.Instance.CharacterItemSlotData.ActiveCurrentItem();
             }
             else if (readValue.y < 0)
             {
                 GameHUD.Instance.ISM_NextFocusItem();
                 GameRunTimeData.Instance.CharacterItemSlotData.ChangeFocusSlotNumber(true);
-                GameRunTimeData.Instance.CharacterItemSlotData.ActiveCurrentItem();
             }
-
+            GameRunTimeData.Instance.CharacterItemSlotData.ActiveCurrentItem();
+            ItemBase characterInUseItem = GameRunTimeData.Instance.CharacterItemSlotData.GetCharacterInUseItem();
+            if (characterInUseItem != null)
+            {
+                leftMouseAction =  characterInUseItem.OnLeftInteract;
+                rightMouseAction = characterInUseItem.OnRightInteract;
+            }
+            else
+            {
+                leftMouseAction = null;
+                rightMouseAction = null;
+            }
+            
             ScrollActionTimer = 0f;
         };
 
@@ -192,6 +196,23 @@ public class PlayerControl : MonoBehaviour
         a = -Vector3.up * Mathf.Atan2(l.y, l.x) * Mathf.Rad2Deg;
     }
 
+    private void ChangeMouseAction(int Number)
+    {
+        GameHUD.Instance.ISM_SetFocus(Number);
+        GameRunTimeData.Instance.CharacterItemSlotData.ChangeFocusSlotNumber(Number);
+        GameRunTimeData.Instance.CharacterItemSlotData.ActiveCurrentItem();
+        ItemBase characterInUseItem = GameRunTimeData.Instance.CharacterItemSlotData.GetCharacterInUseItem();
+        if (characterInUseItem != null)
+        {
+            leftMouseAction =  characterInUseItem.OnLeftInteract;
+            rightMouseAction = characterInUseItem.OnRightInteract;
+        }
+        else
+        {
+            leftMouseAction = null;
+            rightMouseAction = null;
+        }
+    }
     private void FixedUpdate()
     {
         PlayerMove(InputControl.Instance.MovePoint, Speed * Time.deltaTime);

@@ -50,12 +50,12 @@ public class TinyItem : ItemBase
     }
     
     
-    public override void OnRightInteract(InterActionData interActionData)
+    public override void OnRightInteract( )
     {
         throw new NotImplementedException();
     }
 
-    public override void OnLeftInteract(InterActionData interActionData)
+    public override void OnLeftInteract( )
     {
         throw new NotImplementedException();
     }

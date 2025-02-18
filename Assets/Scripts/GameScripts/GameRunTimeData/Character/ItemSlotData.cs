@@ -114,12 +114,10 @@ public class ItemSlotData
     {
         int slotNumber = CurrentFocusSlot; // 默认插入位置为当前焦点位置
         SlotItemStatus newItemStatus = new SlotItemStatus(item.ItemID, 1,item);
-        
         if (SlotItemDataList.ContainsKey(slotNumber))
         {
             slotNumber = FindEmptySlot();
         }
-        
         // 获取合适的 Key 包括可否堆叠位置
         if (ItemID2Key.ContainsValue(item.ItemID))
         {
@@ -128,14 +126,11 @@ public class ItemSlotData
                 slotNumber = GetItemProperStackKeyNumber(item);
             }
         }
-
-
         // 插入物品失败，取消拾取动作
         if (slotNumber == -1)
         {
             return -1;
         }
-        
         SlotItemStatus stackedItemStatusStatus = null;
         if (SlotItemDataList.TryGetValue(slotNumber, out stackedItemStatusStatus))
         {
@@ -148,26 +143,20 @@ public class ItemSlotData
             // 插入物品成功
             SlotItemDataList[slotNumber] = newItemStatus;
         }
-        
         GameHUD.Instance.SlotManagerHUD.UpdateItem(SlotItemDataList);
-        
         if (item is IStackable && stackedItemStatusStatus != null)
         {
             return 2; // 发生了堆叠物品操作
         }
-
         if (stackedItemStatusStatus == null)
         {
             AllCharacterItems.Add(slotNumber,item);
             ItemID2Key.Add(slotNumber,item.ItemID);
         }
-
-        
         if (slotNumber != CurrentFocusSlot)
         {
             return 1;
         }
-        
         SetCharacterInUseItem(item);
         return 0;
     }
