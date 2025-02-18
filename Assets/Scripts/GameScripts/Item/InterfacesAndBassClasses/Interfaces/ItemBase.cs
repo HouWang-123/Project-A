@@ -23,6 +23,7 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable
         var RendererTr = ItemRenderer.transform;
         RendererTr.localEulerAngles = GameConstData.DefAngles;
         OriginalRendererScale = RendererTr.localScale;
+        OnItemDrop(false);
     }
 
     public void SetReversed(bool v)
