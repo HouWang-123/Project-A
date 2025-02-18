@@ -76,6 +76,7 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 ProjectSettings/ProjectSettings.asset
+UserSettings/
 UserSettings/EditorUserSettings.asset
 /UserSettings/Layouts
 UserSettings/Layouts/default-6000.dwlt
