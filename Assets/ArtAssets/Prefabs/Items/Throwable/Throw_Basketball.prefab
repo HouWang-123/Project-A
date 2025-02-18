@@ -27,7 +27,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.4, y: 1.4, z: 1.4}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 7396498991645650676}
@@ -55,7 +55,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 6879118450950661895, guid: a3eed76beea914c45ad2dffa4407dce8, type: 3}
+  m_Sprite: {fileID: -5835082598870868234, guid: 75ebfa6dd47dd0e419b9893684370edd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -96,10 +96,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7396498991645650676}
-  - component: {fileID: 983395914922150801}
-  - component: {fileID: 7629216894913827763}
+  - component: {fileID: 3776630394268781759}
+  - component: {fileID: 1388640392635303795}
   m_Layer: 12
-  m_Name: WeaponTest
+  m_Name: Throw_Basketball
   m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -121,8 +121,8 @@ Transform:
   - {fileID: 6474370564130402078}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &983395914922150801
-BoxCollider:
+--- !u!135 &3776630394268781759
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -131,7 +131,7 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 320
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -140,9 +140,9 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.77146703, y: 0.4821086, z: 0.20717245}
-  m_Center: {x: 0.23077294, y: 0.049236774, z: 0.014853269}
---- !u!114 &7629216894913827763
+  m_Radius: 0.4709316
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1388640392635303795
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -151,10 +151,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 7601832128168043183}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d79fe90f6b4275f47bb504c29895b227, type: 3}
+  m_Script: {fileID: 11500000, guid: 609e14423eed9eb40874530bce01ba9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ItemID: 260010
+  ItemID: 230002
   SlotSprite: {fileID: 0}
   ItemType: 0
   ItemRenderer: {fileID: 5502388850923554619}
@@ -165,3 +165,4 @@ MonoBehaviour:
     Equipable: 0
     EquipOnHand: 0
   DropState: 0
+  ThrowableRigidbody: {fileID: 0}

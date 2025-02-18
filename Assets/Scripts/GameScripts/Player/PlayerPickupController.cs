@@ -18,7 +18,7 @@ public class PlayerPickupController : MonoBehaviour
         Item2PickList = new List<ItemBase>();
     }
 
-    public void Update()
+    private void Update()
     {
         PlayerChangePickupItem();
     }
@@ -28,7 +28,7 @@ public class PlayerPickupController : MonoBehaviour
 
     private void PlayerChangePickupItem()
     {
-        if (Keyboard.current.qKey.isPressed)
+        if (changeItemTooggle)
         {
             changekeyPressTime += Time.deltaTime;
             if (isfirstInput)
@@ -42,7 +42,7 @@ public class PlayerPickupController : MonoBehaviour
                 changekeyPressTime = 0;
                 isfirstInput = false;
             }
-
+            
             UpdateCurrentPickup();
         }
         else
@@ -52,7 +52,12 @@ public class PlayerPickupController : MonoBehaviour
         }
     }
 
-    private void ChangePickupTarget() // 拾取范围内目标拾取物品转换逻辑
+    private bool changeItemTooggle;
+    public void ChangeItemToogle(bool toggle)
+    {
+        changeItemTooggle = toggle;
+    }
+    public void ChangePickupTarget() // 拾取范围内目标拾取物品转换逻辑
     {
         if (Item2PickList.Count == 0)
         {
@@ -62,7 +67,7 @@ public class PlayerPickupController : MonoBehaviour
 
         if (currentPickup != null)
         {
-            currentPickup.setTargerted(false);
+            currentPickup.SetTargerted(false);
         }
         int RangeLength = Item2PickList.Count;
         int nextindex = Item2PickList.IndexOf(currentPickup) + 1;
@@ -73,6 +78,7 @@ public class PlayerPickupController : MonoBehaviour
 
         currentPickup = Item2PickList[nextindex];
         currentPickup.SetPickupable(true);
+        currentPickup.SetTargerted(true);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -81,7 +87,7 @@ public class PlayerPickupController : MonoBehaviour
         {
             if (currentPickup != null)
             {
-                currentPickup.setTargerted(false); // 新物品进入范围后取消之前的目标
+                currentPickup.SetTargerted(false); // 新物品进入范围后取消之前的目标
             }
 
             currentPickup = other.gameObject.GetComponent<ItemBase>();
@@ -93,7 +99,7 @@ public class PlayerPickupController : MonoBehaviour
 
             Item2PickList.Add(currentPickup);
             currentPickup.SetPickupable(true);
-            currentPickup.setTargerted(true);
+            currentPickup.SetTargerted(true);
             UpdateCurrentPickup();
         }
     }
@@ -104,7 +110,7 @@ public class PlayerPickupController : MonoBehaviour
         {
             ItemBase itemBase = other.gameObject.GetComponent<ItemBase>();
             itemBase.SetPickupable(false);
-            itemBase.setTargerted(false);
+            itemBase.SetTargerted(false);
             Item2PickList.Remove(itemBase);
             ChangePickupTarget(); // 重新设定一个目标拾取
             UpdateCurrentPickup();
@@ -113,7 +119,8 @@ public class PlayerPickupController : MonoBehaviour
 
     public void PlayerPickupItem()
     {
-        currentPickup.setTargerted(false);
+        if (currentPickup == null) return;
+        currentPickup.SetTargerted(false);
         Item2PickList.Remove(currentPickup);
         currentPickup = null;
     }
@@ -121,6 +128,6 @@ public class PlayerPickupController : MonoBehaviour
     private void UpdateCurrentPickup()
     {
         if (currentPickup == null) return;
-        currentPickup.setTargerted(true);
+        currentPickup.SetTargerted(true);
     }
 }

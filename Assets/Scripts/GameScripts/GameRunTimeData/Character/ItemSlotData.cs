@@ -24,7 +24,9 @@ public class ItemSlotData
 {
     private int CurrentMaxSlotCount;
     private ItemBase CurrentItem; // 玩家手中的物品
+    
     private Dictionary<int, ItemBase> AllSlotItems = new Dictionary<int, ItemBase>(); // Number,Item
+    
     private int CurrentFocusSlot; // 玩家手中的物品对应的Number Key
     
     public void SetMaxSlotCount(int number)
@@ -107,12 +109,13 @@ public class ItemSlotData
     }
 
     /// <summary>
-    /// 插入或更新结果为true则插入成功，否则失败
+    /// 返回 -1 表示插入失败
+    /// 返回  0 表示
     /// 已验证
     /// </summary>
     /// <param name="item"></param>
     /// <returns></returns>
-    public bool InsertOrUpdateItemSlotData(ItemBase item)
+    public int InsertOrUpdateItemSlotData(ItemBase item)
     {
         SlotItem NewItem = new SlotItem(item.ItemID, 1,item);
         int slotNumber = CurrentFocusSlot;
@@ -125,7 +128,7 @@ public class ItemSlotData
         // 插入物品失败
         if (slotNumber == -1)
         {
-            return false;
+            return -1;
         }
         
         SlotItem OldItem;
@@ -141,13 +144,17 @@ public class ItemSlotData
             ItemList[slotNumber] = NewItem;
         }
         
-        SetCharacterInUseItem(item);
+        
         AllSlotItems.Add(slotNumber,item);
         ItemID2Key.Add(slotNumber,item.ItemID);
-        
         GameHUD.Instance.SlotManagerHUD.UpdateItem(ItemList);
         
-        return true;
+        if (slotNumber != CurrentFocusSlot)
+        {
+            return 1;
+        }
+        SetCharacterInUseItem(item);
+        return 0;
     }
 
     private void SetCharacterInUseItem(ItemBase Item)

@@ -28,7 +28,7 @@ public abstract class ItemBase : MonoBehaviour , IPickUpable
     
     private bool IsItemInPickupRange;                // 可否拾取
     public void SetPickupable( bool v) { IsItemInPickupRange = v; }
-    public void setTargerted(bool v)              // 拾取系统相关功能，与拾取标识相关
+    public void SetTargerted(bool v)              // 拾取系统相关功能，与拾取标识相关
     {
         Targeted = v;
         if (Targeted)

@@ -48,7 +48,9 @@ public class PlayerControl : MonoBehaviour
         }
         InputControl.Instance.GamePlayerEnable();
         InputControl.Instance.UIDisable();
-        InputControl.Instance.LeftMouse.started += (item) =>
+
+#region InputSystem
+InputControl.Instance.LeftMouse.started += (item) =>
         {
             leftMous = true;
         };
@@ -141,6 +143,30 @@ public class PlayerControl : MonoBehaviour
             }
             ScrollActionTimer = 0f;
         };
+
+
+#endregion
+        InputControl.Instance.QButton.started += (item) =>
+        {
+            _pickupController.ChangeItemToogle(true);
+        };
+        InputControl.Instance.QButton.canceled += (item) =>
+        {
+            _pickupController.ChangeItemToogle(false);
+        };
+        InputControl.Instance.EButton.started += (item) =>
+        {
+            PickItem();
+        };
+        
+        InputControl.Instance.GButton.started += (item) =>
+        {
+            if (GameRunTimeData.Instance.CharacterItemSlotData.GetCharacterInUseItem() != null)
+            {
+                DropItem(false);
+            }
+        };
+        
     }
     //AssetHandle asset;
     //float time = 0;
@@ -246,7 +272,7 @@ public class PlayerControl : MonoBehaviour
         //        zidan.transform.position = weaponTr.position;
         //    }
         //}
-        DropItemDetection();
+        
     }
 
     private void OnDisable()
@@ -273,38 +299,7 @@ public class PlayerControl : MonoBehaviour
             playerRG.linearVelocity = vector * speed;
         }
     }
-
-    //public void OnCollisionEnter(Collision other)
-    //{
-    //    if (other.gameObject.tag.Equals("Obstacle"))
-    //    {
-    //        stopmove = true;
-    //        Vector3 reversedDirection;
-    //        reversedDirection = InputControl.Instance.MovePoint;
-    //        reversedDirection.z = reversedDirection.y;
-    //        reversedDirection.y = 0;
-    //        float speed = Speed * Time.deltaTime;
-    //        if((reversedDirection.x > 0 && playerRenderer.localScale.x < 0) || (reversedDirection.x < 0 && playerRenderer.localScale.x > 0))
-    //        {
-    //            speed *= fToB;
-    //        }
-    //        else if(shiftButt)
-    //        {
-    //            speed *= runeToB;
-    //        }
-            
-    //        playerRG.Move( -reversedDirection * speed + transform.position, Quaternion.identity);
-    //    }
-    //}
-
-    //public void OnCollisionExit(Collision other)
-    //{
-    //    if (other.gameObject.tag.Equals("Obstacle"))
-    //    {
-    //        stopmove = false;
-    //    }
-    //}
-
+    
     public void SetMouseAction(UnityAction leftAction =null,UnityAction rightAction = null)
     {
         leftMouseAction = leftAction;
@@ -313,33 +308,7 @@ public class PlayerControl : MonoBehaviour
     
     private bool dropKeyPressed = false;
     private bool pickupLock;      // 拾取锁
-    private void DropItemDetection()
-    {
-        if(pickupLock)
-        {
-            return;
-        }
-        
-        if(Keyboard.current.eKey.isPressed)
-        {
-            if(dropKeyPressed) { return; }
-            // 需要进行物品判断逻辑的修改
-            if (GameRunTimeData.Instance.CharacterItemSlotData.GetCharacterInUseItem() != null)
-            {
-                DropItem(false);
-            }
-            else
-            {
-                PickItem();
-            }
-            dropKeyPressed = true;
-        }
-        else
-        {
-            dropKeyPressed = false;
-        }
-    }
-
+    
     public void DropItem(bool fastDrop)
     {
         Debug.Log("丢下");
@@ -348,14 +317,18 @@ public class PlayerControl : MonoBehaviour
     }
     public void PickItem() // 拾取物品
     {
-        Debug.Log("拾取");
+        if(_pickupController.currentPickup == null) { return; }
         // 表现层
-        if(playerReversed)
-        { useObjParent.localEulerAngles = GameConstData.ReversedRotation; }
+        if (playerReversed)
+        {
+            useObjParent.localEulerAngles = GameConstData.ReversedRotation;
+        }
         else
-        { useObjParent.localEulerAngles = Vector3.zero; }
-        if(_pickupController.currentPickup == null)
-        { return; }
+        {
+            useObjParent.localEulerAngles = Vector3.zero;
+        }
+
+        
         if(_pickupController.currentPickup.DropState)
         { return; }
         pickupLock = true;
@@ -363,19 +336,25 @@ public class PlayerControl : MonoBehaviour
         ItemBase characterInUseItem;
         characterInUseItem = _pickupController.currentPickup;
         // 背包数据更新
-        bool Restult = GameRunTimeData.Instance.CharacterItemSlotData.InsertOrUpdateItemSlotData(characterInUseItem);
+        int Restult = GameRunTimeData.Instance.CharacterItemSlotData.InsertOrUpdateItemSlotData(characterInUseItem);
 
-        if (Restult)
+        _pickupController.currentPickup.transform.SetParent(ItemHoldPosition);
+        _pickupController.currentPickup.CheckReverse(playerReversed);
+        _pickupController.PlayerPickupItem();
+        Vector3 transformLocalEulerAngles = characterInUseItem.gameObject.transform.localEulerAngles;
+        transformLocalEulerAngles.x = -45;
+        characterInUseItem.gameObject.transform.localEulerAngles = transformLocalEulerAngles;
+        characterInUseItem.gameObject.transform.localPosition = Vector3.zero;
+        if (Restult != -1)        // 手中不存在物品
         {
-            _pickupController.currentPickup.transform.SetParent(ItemHoldPosition);
             
-            _pickupController.currentPickup.CheckReverse(playerReversed);
-            _pickupController.PlayerPickupItem();
-            Vector3 transformLocalEulerAngles = characterInUseItem.gameObject.transform.localEulerAngles;
-            transformLocalEulerAngles.x = -45;
-            characterInUseItem.gameObject.transform.localEulerAngles = transformLocalEulerAngles;
-            characterInUseItem.gameObject.transform.localPosition = Vector3.zero;
+        } 
+        if( Restult == 1)  // 手中存在物品
+        {
+            characterInUseItem.gameObject.SetActive(false);
         }
         pickupLock = false;
+        _pickupController.currentPickup = null;
+        _pickupController.ChangePickupTarget();
     }
 }
