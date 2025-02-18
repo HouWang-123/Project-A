@@ -329,7 +329,6 @@ public class PlayerControl : MonoBehaviour
                 GameObject instantiate = Instantiate(loadAssetAsync.AssetObject, ItemReleasePoint) as GameObject;
                 instantiate.transform.SetParent(GameControl.Instance.GetSceneItemList().transform);
                 ItemBase ib = instantiate.GetComponent<ItemBase>();
-                ib.SetReversed(playerReversed);
                 ib.OnItemDrop(false);
             };
         }

@@ -4,7 +4,7 @@ using Spine.Unity.Examples;
 using UnityEngine;
 using YooAsset;
 
-public class Weapon : ItemBase, IItemSlotable
+public class Weapon : ItemBase, IItemSlotable, IStackable
 {
     public cfg.item.Weapon ItemData;
     private void Awake()
@@ -68,4 +68,10 @@ public class Weapon : ItemBase, IItemSlotable
     {
         throw new NotImplementedException();
     }
+
+    public int GetMaxStackValue()
+    {
+        return ItemData.MaxStackCount;
+    }
+    
 }

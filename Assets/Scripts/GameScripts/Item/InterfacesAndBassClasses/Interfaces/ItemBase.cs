@@ -25,7 +25,7 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable
         OriginalRendererScale = RendererTr.localScale;
         OnItemDrop(false);
     }
-
+    
     public void SetReversed(bool v)
     {
         ItemReversed = v;
