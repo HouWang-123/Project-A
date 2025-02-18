@@ -5,8 +5,6 @@ using UnityEngine.AI;
 /// </summary>
 public class FleeState : BaseState
 {
-    // 逃跑速度
-    private readonly float m_fleeSpeed;
     // 逃跑时间
     private readonly float m_fleeTime = 3f;
     private float m_timer = 0f;
@@ -19,7 +17,6 @@ public class FleeState : BaseState
         m_stateEnum = StateEnum.Flee;
         m_fleeTime = 3f;
         var monsterFSM = gameObject.GetComponent<MonsterFSM>();
-        m_fleeSpeed = monsterFSM.NPCDatas.Speed;
         agent = gameObject.GetComponent<MonsterFSM>().NavMeshAgent;
     }
 
@@ -74,6 +71,9 @@ public class FleeState : BaseState
     {
         base.DoBeforeEntering();
         agent.isStopped = false;
+        var monsterFSM = m_gameObject.GetComponent<MonsterFSM>();
+        // 状态对应动画名称
+        monsterFSM.PlayAnimation(0, "Walk2", true);
     }
 
     public override void DoAfterLeaving()

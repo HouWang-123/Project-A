@@ -1,6 +1,10 @@
 using cfg.mon;
+using Spine;
+using Spine.Unity;
 using UnityEngine;
 using UnityEngine.AI;
+using static UnityEngine.EventSystems.EventTrigger;
+using Animation = Spine.Animation;
 
 public class MonsterFSM : MonoBehaviour
 {
@@ -12,10 +16,10 @@ public class MonsterFSM : MonoBehaviour
     [SerializeField]
     private NavMeshAgent m_NavMeshAgent;
     public NavMeshAgent NavMeshAgent { get { return m_NavMeshAgent; } }
-    // 怪物的Sprite
+    // 怪物的动画控制器
     [SerializeField]
-    private SpriteRenderer m_spriteRenderer;
-    public SpriteRenderer SpriteRenderer {  get { return m_spriteRenderer; } }
+    private SkeletonAnimation m_animRenderer;
+    public SkeletonAnimation SpriteRenderer {  get { return m_animRenderer; } }
     // 头顶信息
     [SerializeField]
     private SpriteRenderer m_infoRenderer;
@@ -50,9 +54,9 @@ public class MonsterFSM : MonoBehaviour
             m_infoRenderer = transform.GetChild(1).GetComponent<SpriteRenderer>();
         }
 
-        if (m_spriteRenderer == null)
+        if (m_animRenderer == null)
         {
-            m_spriteRenderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
+            m_animRenderer = transform.GetChild(0).GetComponent<SkeletonAnimation>();
         }
 
         if (m_NavMeshAgent == null)
@@ -74,7 +78,7 @@ public class MonsterFSM : MonoBehaviour
                 m_lightTransform = light.transform;
             }
         }
-
+        m_animRenderer.Initialize(true);
         InitFSM();
     }
 
@@ -197,5 +201,41 @@ public class MonsterFSM : MonoBehaviour
         // 转为Idle
         fleeState.AddTransition(TransitionEnum.ToIdle, StateEnum.Idle);
         m_fsm.AddState(fleeState);
+    }
+    /// <summary>
+    /// 播放动画
+    /// </summary>
+    /// <param name="trackIndex">轨道</param>
+    /// <param name="animName">动画名字</param>
+    /// <param name="loop">动画是否循环</param>
+    public void PlayAnimation(int trackIndex, string animName, bool loop)
+    {
+        if (!m_animRenderer.skeleton.Data.Animations.Exists(a => a.Name == animName))
+        {
+            Debug.LogError($"{GetType()} /PlayAnimation() => 找不到动画: {animName}");
+            return;
+        }
+        var trackEntry = m_animRenderer.state.SetAnimation(trackIndex, animName, loop);
+        Debug.Log($"{GetType()} /PlayAnimation() => 播放动画: {trackEntry.Animation.Name}");
+        trackEntry.MixDuration = 0.2f; // 动画混合防止突变
+        trackEntry.Complete += TrackEntry_Complete;
+        
+    }
+
+    private void TrackEntry_Complete(TrackEntry trackEntry)
+    {
+        Debug.Log($"{GetType()} /TrackEntry_Complete() => 动画: {trackEntry.Animation.Name} 播放完成");
+    }
+
+    public float AnimationTotalTime(int trackIndex = 0)
+    {
+        TrackEntry trackEntry = m_animRenderer.state.GetCurrent(trackIndex);
+        if (trackEntry != null)
+        {
+            Animation currentAnimation = trackEntry.Animation;
+            float animationDuration = currentAnimation.Duration;
+            return animationDuration;
+        }
+        return 0f;
     }
 }

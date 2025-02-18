@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Spine;
+using System.Collections.Generic;
 using UnityEngine;
 using YooAsset;
 /// <summary>
@@ -8,16 +9,18 @@ public class RangedAttackState : BaseState
 {
     // 玩家的位置
     private readonly Transform m_playerTransform;
-    // 伤害帧
-    private readonly float m_2DamageFrame = 0.5f;
     // 近战攻击范围
     private readonly float m_MeleeDistance = -1f;
     // 远程攻击范围
     private readonly float m_RangedDistance = -1f;
     // 动画播放的时候攻击了一次
+    private bool m_enterCD = false;
+    // 攻击了没有
     private bool m_attacked = false;
+    // 动画总时间
+    private float m_animTotalTime = 0f;
     // 攻击CD
-    private readonly float m_attackOnceTimes = 5f;
+    private readonly float m_attackCD = 5f;
     // 发射物内存池
     private readonly Queue<GameObject> m_projectileQueue;
     // 发射物内存池容量
@@ -30,6 +33,8 @@ public class RangedAttackState : BaseState
     private readonly AssetHandle m_assetHandle;
     // 转为逃跑的光源距离
     private readonly float m_fleeDistance = -1f;
+    // 弹道修正向量
+    private readonly Vector3 m_projectileFixVector3;
     public RangedAttackState(FiniteStateMachine finiteStateMachine, GameObject npcObj, Transform playerTransform = null)
         : base(finiteStateMachine, npcObj)
     {
@@ -43,9 +48,9 @@ public class RangedAttackState : BaseState
         {
             m_playerTransform = GameObject.Find("Player000").transform;
         }
-        m_2DamageFrame = 0.5f;
         m_RangedDistance = npcObj.GetComponent<MonsterFSM>().NPCDatas.ShootRange; // 应该获取表中的远程范围
         m_MeleeDistance = npcObj.GetComponent <MonsterFSM>().NPCDatas.HitRange;
+        m_projectileFixVector3 = new Vector3(0, 1, 0);
         m_fleeDistance = 3f;
 
         // 提前生成发射物
@@ -99,22 +104,29 @@ public class RangedAttackState : BaseState
     {
         // 模拟播放攻击动画
         m_timer += Time.deltaTime;
-        if (m_timer >= m_2DamageFrame && !m_attacked)
+        if (!m_enterCD)
+        {
+            m_gameObject.GetComponent<MonsterFSM>().PlayAnimation(0, "Attack_2", false);
+            m_enterCD = true;
+        }
+        if (m_timer >= m_animTotalTime && !m_attacked)
         {
             Debug.Log(GetType() + " /Act() => 动画播放完成，并生成发射物");
             GameObject projectileGo = GetProjectile();
             if (projectileGo != null)
             {
                 var com = projectileGo.GetComponent<ProjectileControl>();
-                com.Direction = (m_playerTransform.position + new Vector3(0, 1, 0) - npc.GetComponent<MonsterFSM>().ProjectileTransform.position).normalized;
+                // m_projectileFixVector3为弹道修正，往上打一点
+                com.Direction = (m_playerTransform.position + m_projectileFixVector3 - npc.GetComponent<MonsterFSM>().ProjectileTransform.position).normalized;
             }
             m_attacked = true;
-            
+            m_gameObject.GetComponent<MonsterFSM>().PlayAnimation(0, "Idle", false);
         }
-        if (m_timer >= m_attackOnceTimes + m_2DamageFrame)
+        if (m_timer >= m_attackCD + m_animTotalTime)
         {
             // 重置CD
             m_timer = 0f;
+            m_enterCD = false;
             m_attacked = false;
         }
     }
@@ -141,6 +153,15 @@ public class RangedAttackState : BaseState
                 m_finiteStateMachine.PerformTransition(TransitionEnum.FleeAction);
             }
         }
+    }
+
+    public override void DoBeforeEntering()
+    {
+        base.DoBeforeEntering();
+        var monsterFSM = m_gameObject.GetComponent<MonsterFSM>();
+        // 状态对应动画名称
+        monsterFSM.PlayAnimation(0, "Attack_2", true);
+        m_animTotalTime = monsterFSM.AnimationTotalTime();
     }
 }
 

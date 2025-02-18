@@ -104,7 +104,7 @@ MonoBehaviour:
   m_Center: {x: 0, y: 2, z: 0}
   m_LayerMask:
     serializedVersion: 2
-    m_Bits: 368
+    m_Bits: 369
   m_UseGeometry: 0
   m_DefaultArea: 0
   m_GenerateLinks: 0
@@ -115,7 +115,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.4
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: 4e94fa2099fc0e3428a81a72323b9c4f, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: be6851d78711ac743b8080dfed963473, type: 2}
   m_BuildHeightMesh: 0
 --- !u!1 &985088161831620746
 GameObject:
@@ -549,9 +549,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10e438b2e0dbb584894d337df01b5f5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerPoint: {fileID: 0}
-  monsterList: {fileID: 1418305433971824469}
   SceneItemNode: {fileID: 5660459224320369618}
+  monsterList: {fileID: 1418305433971824469}
 --- !u!1 &4551766514687104378
 GameObject:
   m_ObjectHideFlags: 0

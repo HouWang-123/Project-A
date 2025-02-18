@@ -1,16 +1,16 @@
 using System;
 using UnityEngine;
 using UnityEngine.AI;
+using Random = UnityEngine.Random;
 /// <summary>
 /// 追逐状态
 /// </summary>
 public class ChaseState : BaseState
 {
+    // 计时器
+    private float m_timer = 0f;
     // 判断NPC是否卡住的阈值时间
     public float stuckThreshold = 4f;
-
-    // NPC游戏对象
-    private readonly GameObject NPC;
     // NPC的NavMeshAgent组件
     private readonly NavMeshAgent agent;
     // 记录NPC卡住的时间，用于触发强制重新寻路
@@ -25,6 +25,12 @@ public class ChaseState : BaseState
     private readonly float m_2MeleeAttack = -1f;
     // 转为逃跑的光源距离
     private readonly float m_fleeDistance = -1f;
+    // 嘲讽动画的时间
+    private float m_fuckingTime = 0f;
+    // 嘲讽的CD时间
+    private float m_fuckingCD = 10f;
+    // 嘲讽中
+    private bool m_fucking = false;
     public ChaseState(FiniteStateMachine finiteStateMachine, GameObject NPCObj, Transform playerTransform = null)
         : base(finiteStateMachine, NPCObj)
     {
@@ -35,11 +41,11 @@ public class ChaseState : BaseState
             Debug.LogError(GetType() + "/PatrolState/ gameObject can not be null!");
             throw new ArgumentException();
         }
-        NPC = NPCObj;
+        m_gameObject = NPCObj;
         agent = NPCObj.GetComponent<MonsterFSM>().NavMeshAgent;
-        m_2LookAtDistance = NPC.GetComponent<MonsterFSM>().NPCDatas.WarnRange;
-        m_2RangedAttack = NPC.GetComponent<MonsterFSM>().NPCDatas.ShootRange;
-        m_2MeleeAttack = NPC.GetComponent<MonsterFSM>().NPCDatas.HitRange;
+        m_2LookAtDistance = m_gameObject.GetComponent<MonsterFSM>().NPCDatas.WarnRange;
+        m_2RangedAttack = m_gameObject.GetComponent<MonsterFSM>().NPCDatas.ShootRange;
+        m_2MeleeAttack = m_gameObject.GetComponent<MonsterFSM>().NPCDatas.HitRange;
         // lastPosition = gameObject.transform.position;
         // 初始位置强制校正
         if (NavMesh.SamplePosition(NPCObj.transform.position, out NavMeshHit hit, 2.0f, NavMesh.AllAreas))
@@ -72,29 +78,64 @@ public class ChaseState : BaseState
         float npcX = npc.transform.position.x;
         float playerX = m_playerTransform.position.x;
         // 玩家在NPC左边，看向左边
-        SpriteRenderer spriteRenderer = npc.GetComponent<MonsterFSM>().SpriteRenderer;
-        if (playerX - npcX > 0)
+        // 点在右边，看向右边
+        Vector3 scale;
+        if (playerX - npcX > 0f)
         {
-            spriteRenderer.flipX = false;
+            scale = new(1f, 1f, 1f);
         }
         else
         {
-            spriteRenderer.flipX = true;
+            scale = new(-1f, 1f, 1f);
         }
+        m_gameObject.transform.localScale = scale;
         // 跟着玩家
         if (IsPathValid(m_playerTransform.position))
         {
             agent.SetDestination(m_playerTransform.position);
         }
-        else
+        // 10%概率触发嘲讽
+        if (!m_fucking && Random.value <= 0.1f)
+        {
+            m_fucking = true;
+            agent.isStopped = true;
+            Debug.Log(GetType() + " /Act() => 触发了嘲讽动画");
+            m_gameObject.GetComponent<MonsterFSM>().PlayAnimation(0, "Idle", false);
+            m_fuckingTime = m_gameObject.GetComponent<MonsterFSM>().AnimationTotalTime();
+        }
+        if (m_fucking)
+        {
+            m_timer += Time.deltaTime;
+        }
+        if (m_timer > m_fuckingTime)
+        {
+            agent.isStopped = false;
+            var monsterFSM = m_gameObject.GetComponent<MonsterFSM>();
+            switch (monsterFSM.NPCDatas.PrefabName)
+            {
+                case "DrownedOnes":
+                    m_gameObject.GetComponent<MonsterFSM>().PlayAnimation(0, "Walk2", true);
+                    break;
+                case "HoundTindalos":
+                    m_gameObject.GetComponent<MonsterFSM>().PlayAnimation(0, "Walk", true);
+                    break;
+            }
+        }
+        // 十秒CD
+        if (m_timer > m_fuckingTime + m_fuckingCD)
+        {
+            m_timer = 0f;
+            m_fucking = false;
+        }
+        /*else
         {
             Debug.Log(GetType() + " /Act()=> 玩家位置无效，退化为直线行走");
             var direction = (m_playerTransform.position - npc.transform.position).normalized;
             float speed = npc.GetComponent<MonsterFSM>().NPCDatas.Speed;
             Vector3 newPos = npc.transform.position + speed * Time.deltaTime * direction;
             npc.transform.position = newPos;
-        }
-        
+        }*/
+
         // 卡顿检测
         if (agent.velocity.sqrMagnitude < 0.05f)// 取平方比取模快
         {
@@ -105,14 +146,14 @@ public class ChaseState : BaseState
                 {
                     agent.SetDestination(m_playerTransform.position);
                 }
-                else
+                /*else
                 {
                     Debug.Log(GetType() + " /Act()=> 玩家位置无效，退化为直线行走");
                     var direction = (m_playerTransform.position - npc.transform.position).normalized;
                     float speed = npc.GetComponent<MonsterFSM>().NPCDatas.Speed;
                     Vector3 newPos = npc.transform.position + speed * Time.deltaTime * direction;
                     npc.transform.position = newPos;
-                }
+                }*/
                 stuckTimer = 0;
             }
         }
@@ -177,7 +218,7 @@ public class ChaseState : BaseState
         {
             if (path.status != NavMeshPathStatus.PathComplete)
             {
-                Debug.DrawLine(NPC.transform.position, target, Color.red, 2f); // 绘制不可达路径
+                Debug.DrawLine(m_gameObject.transform.position, target, Color.red, 2f); // 绘制不可达路径
                 return false;
             }
             return true;
@@ -189,6 +230,17 @@ public class ChaseState : BaseState
     {
         base.DoBeforeEntering();
         agent.isStopped = false;
+        var monsterFSM = m_gameObject.GetComponent<MonsterFSM>();
+        // 状态对应动画名称，根据怪物调整
+        switch (monsterFSM.NPCDatas.PrefabName)
+        {
+            case "DrownedOnes":
+                monsterFSM.PlayAnimation(0, "Walk2", true);
+                break;
+            case "HoundTindalos":
+                monsterFSM.PlayAnimation(0, "Walk", true);
+                break;
+        }
     }
 
     public override void DoAfterLeaving()

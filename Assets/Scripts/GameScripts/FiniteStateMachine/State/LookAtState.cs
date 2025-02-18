@@ -39,15 +39,16 @@ public class LookAtState : BaseState
         float npcX = npc.transform.position.x;
         float playerX = m_playerTransform.position.x;
         // 玩家在NPC左边，看向左边
-        SpriteRenderer spriteRenderer = npc.GetComponent<MonsterFSM>().SpriteRenderer;
-        if (playerX - npcX > 0)
+        Vector3 scale;
+        if (playerX - npcX > 0f)
         {
-            spriteRenderer.flipX = false;
+            scale = new Vector3(1f, 1f, 1f);
         }
         else
         {
-            spriteRenderer.flipX = true;
+            scale = new Vector3(-1f, 1f, 1f);
         }
+        m_gameObject.transform.localScale = scale;
     }
     /// <summary>
     /// 判断是否切换到追逐玩家或者丢失玩家的状态
@@ -74,6 +75,21 @@ public class LookAtState : BaseState
             {
                 m_finiteStateMachine.PerformTransition(TransitionEnum.FleeAction);
             }
+        }
+    }
+    public override void DoBeforeEntering()
+    {
+        base.DoBeforeEntering();
+        var monsterFSM = m_gameObject.GetComponent<MonsterFSM>();
+        // 状态对应动画名称，根据怪物调整
+        switch (monsterFSM.NPCDatas.PrefabName)
+        {
+            case "DrownedOnes":
+                monsterFSM.PlayAnimation(0, "Walk", true);
+                break;
+            case "HoundTindalos":
+                monsterFSM.PlayAnimation(0, "Idle", true);
+                break;
         }
     }
 }

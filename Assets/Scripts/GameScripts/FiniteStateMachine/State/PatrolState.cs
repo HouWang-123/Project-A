@@ -89,7 +89,6 @@ public class PatrolState : BaseState
         {
             stuckTimer = 0f;
         }
-
     }
     /// <summary>
     /// 尝试生成新的目标点
@@ -99,21 +98,22 @@ public class PatrolState : BaseState
         Vector3 newPos = RandomNavSphere(m_gameObject.transform.position, wanderRadius, -1);
         if (IsPathValid(newPos))
         {
-            var monsterFSM = m_gameObject.GetComponent<MonsterFSM>();
             agent.SetDestination(newPos);
             float newPosX = newPos.x;
             float npcPosX = m_gameObject.transform.position.x;
             // 点在右边，看向右边
-            SpriteRenderer spriteRenderer = monsterFSM.SpriteRenderer;
+            Vector3 scale;
             if (newPosX - npcPosX > 0f)
             {
-                spriteRenderer.flipX = false;
+                scale = new(1f, 1f, 1f);
             }
             else
             {
-                spriteRenderer.flipX = true;
+                scale = new(-1f, 1f, 1f);
             }
+            m_gameObject.transform.localScale = scale;
             m_canMove = false;
+            var monsterFSM = m_gameObject.GetComponent<MonsterFSM>();
         }
         else
         {
@@ -173,6 +173,7 @@ public class PatrolState : BaseState
         // 如果NPC到达目的地
         if (agent.remainingDistance <= agent.stoppingDistance)
         {
+            m_gameObject.GetComponent<MonsterFSM>().PlayAnimation(0, "Idle", true);
             m_waitTime += Time.deltaTime;
             // 等待了两秒
             if (m_waitTime >= 2f)
@@ -183,6 +184,20 @@ public class PatrolState : BaseState
                 if (Random.value <= 0.3f)
                 {
                     m_finiteStateMachine.PerformTransition(TransitionEnum.ToIdle);
+                }
+                else
+                {
+                    var monsterFSM = m_gameObject.GetComponent<MonsterFSM>();
+                    switch (monsterFSM.NPCDatas.PrefabName)
+                    {
+                        case "DrownedOnes":
+                            m_gameObject.GetComponent<MonsterFSM>().PlayAnimation(0, "Walk2", true);
+                            break;
+                        case "HoundTindalos":
+                            m_gameObject.GetComponent<MonsterFSM>().PlayAnimation(0, "Walk", true);
+                            break;
+                    }
+                    
                 }
             }
         }
@@ -211,6 +226,16 @@ public class PatrolState : BaseState
         var monsterFSM = m_gameObject.GetComponent<MonsterFSM>();
         // 巡逻速度是0.5倍的移动速度
         agent.speed = 0.5f * monsterFSM.NPCDatas.Speed;
+        // 状态对应动画名称，根据怪物调整
+        switch (monsterFSM.NPCDatas.PrefabName)
+        {
+            case "DrownedOnes":
+                monsterFSM.PlayAnimation(0, "Walk2", true);
+                break;
+            case "HoundTindalos":
+                monsterFSM.PlayAnimation(0, "Walk", true);
+                break;
+        }
     }
 
     public override void DoAfterLeaving()
