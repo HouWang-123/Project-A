@@ -91,12 +91,22 @@ public class PlayerPickupController : MonoBehaviour
             }
 
             currentPickup = other.gameObject.GetComponent<ItemBase>();
+            if (Item2PickList.Contains(currentPickup))
+            {
+                return;
+            }
+
+            if (currentPickup.DropState)
+            {
+                currentPickup = null;
+                return;
+            }
             if (currentPickup == null)
             {
                 Debug.LogWarning("no ItemBase component assigned to " + other.gameObject.name);
                 return;
             }
-
+            
             Item2PickList.Add(currentPickup);
             currentPickup.SetPickupable(true);
             currentPickup.SetTargerted(true);

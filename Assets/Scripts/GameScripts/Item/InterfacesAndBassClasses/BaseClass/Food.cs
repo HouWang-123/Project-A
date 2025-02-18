@@ -53,4 +53,19 @@ public class Food : ItemBase, IItemSlotable,IStackable
     {
         return ItemData.MaxStackCount;
     }
+    public override string GetPrefabName()
+    {
+        return ItemData.PrefabName;
+    }
+    
+    
+    public override void OnRightInteract(InterActionData interActionData)
+    {
+        throw new NotImplementedException();
+    }
+
+    public override void OnLeftInteract(InterActionData interActionData)
+    {
+        throw new NotImplementedException();
+    }
 }

@@ -121,7 +121,7 @@
     "NAME": "霰弹枪",
     "DESCRIBE": "扇形设计，且距离越近伤害越高，在印象里是匪徒的武器。",
     "prefabName": "Weapon_Shotgun",
-    "maxStackCount": 1,
+    "maxStackCount": 9,
     "interactEffectID": 900001,
     "duribility": 5000,
     "Weight": 2,

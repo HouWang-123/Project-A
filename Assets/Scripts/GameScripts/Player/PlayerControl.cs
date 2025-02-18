@@ -8,19 +8,23 @@ using UnityEngine.Events;
 
 public class PlayerControl : MonoBehaviour
 {
-    
-    public Transform ItemHoldPosition;      // 玩家拿取物品位置
+    public Transform ItemHoldPosition; // 玩家拿取物品位置
     private PlayerInputControl inputControl;
     private Rigidbody playerRG;
     private Transform playerRenderer;
     private Transform useObjParent;
     private PlayerPickupController _pickupController;
     private bool playerReversed;
+
     public float Speed = 5f;
+
     //前后移动的速度比率
     private float fToB = 0.6f;
+
     //奔跑速度比率
     private float runeToB = 1.5f;
+
+    public Transform ItemReleasePoint;
 
     //Action
     private UnityAction leftMouseAction = null;
@@ -28,11 +32,19 @@ public class PlayerControl : MonoBehaviour
     private UnityAction rightMouseAction = null;
     private bool rightMous = false;
     private bool shiftButt = false;
-    private void Awake() { inputControl = new PlayerInputControl(); }
-    private void OnEnable() { inputControl?.Enable(); }
-    
+
+    private void Awake()
+    {
+        inputControl = new PlayerInputControl();
+    }
+
+    private void OnEnable()
+    {
+        inputControl?.Enable();
+    }
+
     private float ScrollActionTimer;
-    
+
     private void Start()
     {
         GameRunTimeData.Instance.CharacterItemSlotData.ChangeFocusSlotNumber(1); // 默认启用道具栏
@@ -42,50 +54,26 @@ public class PlayerControl : MonoBehaviour
         playerRenderer.localEulerAngles = GameConstData.DefAngles;
         useObjParent = transform.GetChild(1);
         ItemHoldPosition = useObjParent.GetChild(0);
-        if(ItemHoldPosition.childCount > 0)
+        if (ItemHoldPosition.childCount > 0)
         {
-            GameRunTimeData.Instance.CharacterItemSlotData.InsertOrUpdateItemSlotData(ItemHoldPosition.GetChild(0).GetComponent<ItemBase>());
+            GameRunTimeData.Instance.CharacterItemSlotData.InsertOrUpdateItemSlotData(ItemHoldPosition.GetChild(0)
+                .GetComponent<ItemBase>());
         }
+
         InputControl.Instance.GamePlayerEnable();
         InputControl.Instance.UIDisable();
 
-#region InputSystem
-InputControl.Instance.LeftMouse.started += (item) =>
-        {
-            leftMous = true;
-        };
-        InputControl.Instance.LeftMouse.performed += (item) =>
-        {
+        #region InputSystem
 
-        };
-        InputControl.Instance.LeftMouse.canceled += (item) =>
-        {
-            leftMous = false;
-        };
-        InputControl.Instance.RightMouse.started += (item) =>
-        {
-            rightMous = true;
-        };
-        InputControl.Instance.RightMouse.performed += (item) =>
-        {
-
-        };
-        InputControl.Instance.RightMouse.canceled += (item) =>
-        {
-            rightMous = false;
-        };
-        InputControl.Instance.ShiftButton.started += (item) =>
-        {
-            shiftButt = true;
-        };
-        InputControl.Instance.ShiftButton.performed += (item) =>
-        {
-
-        };
-        InputControl.Instance.ShiftButton.canceled += (item) =>
-        {
-            shiftButt = false;
-        };
+        InputControl.Instance.LeftMouse.started += (item) => { leftMous = true; };
+        InputControl.Instance.LeftMouse.performed += (item) => { };
+        InputControl.Instance.LeftMouse.canceled += (item) => { leftMous = false; };
+        InputControl.Instance.RightMouse.started += (item) => { rightMous = true; };
+        InputControl.Instance.RightMouse.performed += (item) => { };
+        InputControl.Instance.RightMouse.canceled += (item) => { rightMous = false; };
+        InputControl.Instance.ShiftButton.started += (item) => { shiftButt = true; };
+        InputControl.Instance.ShiftButton.performed += (item) => { };
+        InputControl.Instance.ShiftButton.canceled += (item) => { shiftButt = false; };
         InputControl.Instance._1Key.started += (item) =>
         {
             GameHUD.Instance.ISM_SetFocus(1);
@@ -124,10 +112,11 @@ InputControl.Instance.LeftMouse.started += (item) =>
         };
         InputControl.Instance.MouseScroll.started += (item) =>
         {
-            if (ScrollActionTimer <= 0.2f)
+            if (ScrollActionTimer <= 0.1f)
             {
                 return;
             }
+
             Vector2 readValue = item.ReadValue<Vector2>();
             if (readValue.y > 0)
             {
@@ -141,24 +130,16 @@ InputControl.Instance.LeftMouse.started += (item) =>
                 GameRunTimeData.Instance.CharacterItemSlotData.ChangeFocusSlotNumber(true);
                 GameRunTimeData.Instance.CharacterItemSlotData.ActiveCurrentItem();
             }
+
             ScrollActionTimer = 0f;
         };
 
+        #endregion
 
-#endregion
-        InputControl.Instance.QButton.started += (item) =>
-        {
-            _pickupController.ChangeItemToogle(true);
-        };
-        InputControl.Instance.QButton.canceled += (item) =>
-        {
-            _pickupController.ChangeItemToogle(false);
-        };
-        InputControl.Instance.EButton.started += (item) =>
-        {
-            PickItem();
-        };
-        
+        InputControl.Instance.QButton.started += (item) => { _pickupController.ChangeItemToogle(true); };
+        InputControl.Instance.QButton.canceled += (item) => { _pickupController.ChangeItemToogle(false); };
+        InputControl.Instance.EButton.started += (item) => { PickItem(); };
+
         InputControl.Instance.GButton.started += (item) =>
         {
             if (GameRunTimeData.Instance.CharacterItemSlotData.GetCharacterInUseItem() != null)
@@ -166,7 +147,6 @@ InputControl.Instance.LeftMouse.started += (item) =>
                 DropItem(false);
             }
         };
-        
     }
     //AssetHandle asset;
     //float time = 0;
@@ -190,11 +170,12 @@ InputControl.Instance.LeftMouse.started += (item) =>
 
     Vector3 u, v, l, a, b;
     float angle;
+
     private void CalculateUseObjectRotation()
     {
         v = Camera.main.WorldToScreenPoint(transform.position);
         l = InputControl.Instance.GetLook();
-        if(l.x < v.x)
+        if (l.x < v.x)
         {
             playerRenderer.localScale = GameConstData.ReverseScale;
             playerReversed = true;
@@ -204,32 +185,34 @@ InputControl.Instance.LeftMouse.started += (item) =>
             playerRenderer.localScale = Vector3.one;
             playerReversed = false;
         }
+
         u = Camera.main.WorldToScreenPoint(useObjParent.position);
         l = l - u;
         l.y *= 1.4f;
         a = -Vector3.up * Mathf.Atan2(l.y, l.x) * Mathf.Rad2Deg;
     }
-    
+
     private void FixedUpdate()
     {
         PlayerMove(InputControl.Instance.MovePoint, Speed * Time.deltaTime);
-        if(!pickupLock)
+        if (!pickupLock)
         {
             CalculateUseObjectRotation();
             useObjParent.localEulerAngles = a;
         }
-        
+
         ScrollActionTimer += Time.deltaTime;
-        
+
         // Rotate WeaponTr
         Transform weaponTr = useObjParent.GetChild(0);
         angle = a.y;
         angle %= 360;
-        if(angle < 0)
+        if (angle < 0)
         {
             angle += 360;
         }
-        if(angle > 90f && angle <= 270f)
+
+        if (angle > 90f && angle <= 270f)
         {
             //-45cos(πx/180)-90
             angle = -45 * Mathf.Cos(Mathf.PI * angle / 180) - 90;
@@ -239,18 +222,19 @@ InputControl.Instance.LeftMouse.started += (item) =>
             //-45cos(πx/180)+90
             angle = -45 * Mathf.Cos(Mathf.PI * angle / 180) + 90;
         }
+
         b = weaponTr.localEulerAngles;
         b.x = angle;
         b.y = 0;
         b.z = 0;
         weaponTr.localEulerAngles = b;
         // 武器使用相关
-        if(leftMous)
+        if (leftMous)
         {
             leftMouseAction?.Invoke();
         }
 
-        if(rightMous)
+        if (rightMous)
         {
             rightMouseAction?.Invoke();
         }
@@ -272,7 +256,6 @@ InputControl.Instance.LeftMouse.started += (item) =>
         //        zidan.transform.position = weaponTr.position;
         //    }
         //}
-        
     }
 
     private void OnDisable()
@@ -281,43 +264,62 @@ InputControl.Instance.LeftMouse.started += (item) =>
     }
 
     private bool stopmove;
+
     private void PlayerMove(Vector3 vector, float speed)
     {
         vector.z = vector.y;
         vector.y = 0;
-        if(playerRG != null && !stopmove)
+        if (playerRG != null && !stopmove)
         {
-            if((vector.x > 0 && playerRenderer.localScale.x < 0) || (vector.x < 0 && playerRenderer.localScale.x > 0))
+            if ((vector.x > 0 && playerRenderer.localScale.x < 0) || (vector.x < 0 && playerRenderer.localScale.x > 0))
             {
                 speed *= fToB;
             }
-            else if(shiftButt)
+            else if (shiftButt)
             {
                 speed *= runeToB;
             }
+
             //playerRG.Move(vector * speed + transform.position, Quaternion.identity);
             playerRG.linearVelocity = vector * speed;
         }
     }
-    
-    public void SetMouseAction(UnityAction leftAction =null,UnityAction rightAction = null)
+
+    public void SetMouseAction(UnityAction leftAction = null, UnityAction rightAction = null)
     {
         leftMouseAction = leftAction;
         rightMouseAction = rightAction;
     }
-    
+
     private bool dropKeyPressed = false;
-    private bool pickupLock;      // 拾取锁
-    
+    private bool pickupLock; // 拾取锁
+
     public void DropItem(bool fastDrop)
     {
         Debug.Log("丢下");
         // 表现  // 背包数据更新
-        GameRunTimeData.Instance.CharacterItemSlotData.ClearHandItem(fastDrop,playerReversed);
+        bool removestack = GameRunTimeData.Instance.CharacterItemSlotData.ClearHandItem(fastDrop, playerReversed);
+        if (removestack)
+        {
+            string uri = GameRunTimeData.Instance.CharacterItemSlotData.GetCharacterInUseItem().GetPrefabName();
+            AssetHandle loadAssetAsync = YooAssets.LoadAssetAsync<GameObject>(uri);
+            loadAssetAsync.Completed += handle =>
+            {
+                GameObject instantiate = Instantiate(loadAssetAsync.AssetObject, ItemReleasePoint) as GameObject;
+                instantiate.transform.SetParent(GameControl.Instance.GetSceneItemList().transform);
+                ItemBase ib = instantiate.GetComponent<ItemBase>();
+                ib.SetReversed(playerReversed);
+                ib.OnItemDrop(false);
+            };
+        }
     }
+
     public void PickItem() // 拾取物品
     {
-        if(_pickupController.currentPickup == null) { return; }
+        if (_pickupController.currentPickup == null)
+        {
+            return;
+        }
         // 表现层
         if (playerReversed)
         {
@@ -327,34 +329,50 @@ InputControl.Instance.LeftMouse.started += (item) =>
         {
             useObjParent.localEulerAngles = Vector3.zero;
         }
+        if (_pickupController.currentPickup.DropState)
+        {
+            return;
+        }
 
-        
-        if(_pickupController.currentPickup.DropState)
-        { return; }
         pickupLock = true;
-        
+
         ItemBase characterInUseItem;
         characterInUseItem = _pickupController.currentPickup;
         // 背包数据更新
         int Restult = GameRunTimeData.Instance.CharacterItemSlotData.InsertOrUpdateItemSlotData(characterInUseItem);
 
-        _pickupController.currentPickup.transform.SetParent(ItemHoldPosition);
-        _pickupController.currentPickup.CheckReverse(playerReversed);
-        _pickupController.PlayerPickupItem();
-        Vector3 transformLocalEulerAngles = characterInUseItem.gameObject.transform.localEulerAngles;
-        transformLocalEulerAngles.x = -45;
-        characterInUseItem.gameObject.transform.localEulerAngles = transformLocalEulerAngles;
-        characterInUseItem.gameObject.transform.localPosition = Vector3.zero;
-        if (Restult != -1)        // 手中不存在物品
+        if (Restult != -1) // 可以拾取物品
         {
-            
-        } 
-        if( Restult == 1)  // 手中存在物品
-        {
-            characterInUseItem.gameObject.SetActive(false);
+            _pickupController.currentPickup.transform.SetParent(ItemHoldPosition);
+            _pickupController.currentPickup.CheckReverse(playerReversed);
+            _pickupController.PlayerPickupItem();
+            SetItemBaseToPlayerHand(characterInUseItem);
+
+            if (Restult == 1) // 手中存在物品
+            {
+                characterInUseItem.DisableRenderer();
+            }
+
+            if (Restult == 2)
+            {
+                Destroy(characterInUseItem.gameObject);
+            }
+
+            pickupLock = false;
+            _pickupController.currentPickup = null;
+            _pickupController.ChangePickupTarget();
         }
-        pickupLock = false;
-        _pickupController.currentPickup = null;
-        _pickupController.ChangePickupTarget();
+        else
+        {
+            pickupLock = false;
+        }
+
+        void SetItemBaseToPlayerHand(ItemBase itemBase)
+        {
+            Vector3 transformLocalEulerAngles = itemBase.gameObject.transform.localEulerAngles;
+            transformLocalEulerAngles.x = -45;
+            itemBase.gameObject.transform.localEulerAngles = transformLocalEulerAngles;
+            itemBase.gameObject.transform.localPosition = Vector3.zero;
+        }
     }
 }

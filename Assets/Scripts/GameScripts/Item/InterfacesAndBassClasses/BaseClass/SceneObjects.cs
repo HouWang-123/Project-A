@@ -42,4 +42,19 @@ public class SceneObjects : ItemBase
         AssetHandle loadAssetSync = YooAssets.LoadAssetSync<Sprite>(ItemData.IconName);
         return Instantiate(loadAssetSync.AssetObject, transform) as Sprite;
     }
+    public override string GetPrefabName()
+    {
+        return ItemData.PrefabName;
+    }
+    
+    
+    public override void OnRightInteract(InterActionData interActionData)
+    {
+        throw new NotImplementedException();
+    }
+
+    public override void OnLeftInteract(InterActionData interActionData)
+    {
+        throw new NotImplementedException();
+    }
 }

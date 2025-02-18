@@ -13,7 +13,7 @@ using UnityEngine.UI;
 public class ItemSlotManager_HUD : UIBase
 {
     
-    public List<SlotItem> _SlotItemData = new List<SlotItem>();
+    public List<SlotItemStatus> _SlotItemData = new List<SlotItemStatus>();
     
     private bool switchHUD;
     public static ItemSlotManager_HUD Instance;
@@ -31,7 +31,7 @@ public class ItemSlotManager_HUD : UIBase
         SetDisplayHotKeys();
     }
 
-    public void UpdateItem(Dictionary<int,SlotItem> SlotItemData)
+    public void UpdateItem(Dictionary<int,SlotItemStatus> SlotItemData)
     {
         foreach (var V in ItemSlots)
         {

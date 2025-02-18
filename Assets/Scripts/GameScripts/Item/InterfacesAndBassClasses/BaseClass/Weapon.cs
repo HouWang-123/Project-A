@@ -29,8 +29,9 @@ public class Weapon : ItemBase, IItemSlotable
             ColorfulDebugger.DebugError("武器物品ID" + ItemID +"不存在，物品名称" + gameObject.name,ColorfulDebugger.Instance.Data);
         }
     }
+    
     // 动态生成物品
-    protected override void InitItem( int ID)
+    protected override void InitItem( int ID )
     {
         ItemType = GameItemType.Weapon;
         try
@@ -50,8 +51,21 @@ public class Weapon : ItemBase, IItemSlotable
         return Instantiate(loadAssetSync.AssetObject, transform) as Sprite;
     }
 
+    public override string GetPrefabName()
+    {
+        return ItemData.PrefabName;
+    }
     public void UpdateItemSlot()
     {
         
+    }
+    public override void OnRightInteract(InterActionData interActionData)
+    {
+        throw new NotImplementedException();
+    }
+
+    public override void OnLeftInteract(InterActionData interActionData)
+    {
+        throw new NotImplementedException();
     }
 }

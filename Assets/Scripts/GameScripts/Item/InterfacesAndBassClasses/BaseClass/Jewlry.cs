@@ -46,4 +46,19 @@ public class Jewlry : ItemBase
     {
         return null;
     }
+    public override string GetPrefabName()
+    {
+        throw new NotImplementedException();
+    }
+    
+    
+    public override void OnRightInteract(InterActionData interActionData)
+    {
+        throw new NotImplementedException();
+    }
+
+    public override void OnLeftInteract(InterActionData interActionData)
+    {
+        throw new NotImplementedException();
+    }
 }
