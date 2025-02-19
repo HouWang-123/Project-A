@@ -222,7 +222,7 @@ public class ItemSlotData
     private void SetCharacterInUseItem(ItemBase Item) { CurrentItem = Item; }
     public ItemBase GetCharacterInUseItem() { return CurrentItem; }
 
-    // todo 堆叠清空逻辑
+    // todo 批量堆叠清空逻辑
     public bool ClearHandItem(bool fastDrop , bool playerReversed)
     {
         // 初步检查
