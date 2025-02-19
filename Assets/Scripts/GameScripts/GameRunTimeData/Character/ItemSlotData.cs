@@ -115,7 +115,6 @@ public class ItemSlotData
     /// 返回  0 表示空手正常拾取
     /// 返回  1 表示拾取后进入背包
     /// 返回  2 表示插入堆叠物品
-    /// 返回  3 表示第一个进入背包的堆叠物品
     /// </summary>
     /// <param name="item"></param>
     /// <returns></returns>
@@ -229,8 +228,6 @@ public class ItemSlotData
         // 初步检查
         if (SlotItemDataList.ContainsKey(CurrentFocusSlot))
         {
-            bool removeStack = false;
-            
             if (SlotItemDataList[CurrentFocusSlot].StackValue>1)
             {
                 SlotItemStatus tempItemStatus = SlotItemDataList[CurrentFocusSlot];
@@ -247,6 +244,7 @@ public class ItemSlotData
             ItemID2Key.Remove(CurrentFocusSlot);
             AllCharacterItems.Remove(CurrentFocusSlot);
             GameHUD.Instance.SlotManagerHUD.UpdateItem(SlotItemDataList);
+            
             return false;
         }
         return false;
