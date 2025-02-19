@@ -60,11 +60,11 @@ public class Throwable : ItemBase
     
     public override void OnRightInteract()
     {
-        throw new NotImplementedException();
+        Debug.Log("投掷右键");
     }
 
     public override void OnLeftInteract()
     {
-        throw new NotImplementedException();
+        Debug.Log("投掷左键");
     }
 }

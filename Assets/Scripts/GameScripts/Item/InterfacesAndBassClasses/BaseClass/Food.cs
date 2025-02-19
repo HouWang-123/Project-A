@@ -57,6 +57,16 @@ public class Food : ItemBase, IItemSlotable,IStackable
     public void ChangeStackCount(int Count)
     {
         StackCount = Count;
+        StackNuberText.text = "X " + Count;
+        if (Count == 1)
+        {
+            HideStackNumber();
+        }
+    }
+
+    public int GetStackCount()
+    {
+        return StackCount;
     }
 
     public override string GetPrefabName()
@@ -67,11 +77,11 @@ public class Food : ItemBase, IItemSlotable,IStackable
     
     public override void OnRightInteract( )
     {
-        throw new NotImplementedException();
+        Debug.Log("食物右键");
     }
 
     public override void OnLeftInteract( )
     {
-        throw new NotImplementedException();
+        Debug.Log("食物左键");
     }
 }

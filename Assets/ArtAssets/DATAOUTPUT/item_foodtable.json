@@ -1,5 +1,19 @@
 [
   {
+    "ID": 200000,
+    "NAME": "测试食物",
+    "DESCRIBE": "测试食物",
+    "prefabName": "Food_TestFood",
+    "maxStackCount": 9,
+    "interactEffectID": 900001,
+    "WaterGain": 100,
+    "FoodGain": 100,
+    "SanGain": 100,
+    "StatusGain": 0,
+    "Weight": 1,
+    "IconName": "Icon_Food_TestItem"
+  },
+  {
     "ID": 200001,
     "NAME": "瓶装水",
     "DESCRIBE": "虽然保质期已磨损，但是是校园里为数不多的干净水源，恢复35点水份值。",

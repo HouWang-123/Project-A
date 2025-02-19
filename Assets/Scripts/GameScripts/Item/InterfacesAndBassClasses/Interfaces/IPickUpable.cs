@@ -19,4 +19,6 @@ public interface IStackable
 {
     public int GetMaxStackValue();
     public void ChangeStackCount(int Count);
+    public int GetStackCount();
+    
 }

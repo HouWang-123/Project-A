@@ -358,6 +358,7 @@ public class PlayerControl : MonoBehaviour
                 ib.OnItemDrop(false);
             };
         }
+        ChangeMouseAction(GameRunTimeData.Instance.CharacterItemSlotData.GetCurrentFocusSlot());
     }
 
     public void PickItem() // 拾取物品
@@ -385,7 +386,16 @@ public class PlayerControl : MonoBehaviour
         ItemBase characterInUseItem;
         characterInUseItem = _pickupController.currentPickup;
         // 背包数据更新
-        int Restult = GameRunTimeData.Instance.CharacterItemSlotData.InsertOrUpdateItemSlotData(characterInUseItem);
+        int  Restult = GameRunTimeData.Instance.CharacterItemSlotData.InsertOrUpdateItemSlotData(characterInUseItem);
+
+        if (characterInUseItem is IStackable)
+        {
+            if (Restult != -1)
+            {
+                IStackable stackable = characterInUseItem as IStackable;
+                stackable.ChangeStackCount(1);
+            }
+        }
 
         if(Restult != -1) // 可以拾取物品
         {
@@ -398,21 +408,24 @@ public class PlayerControl : MonoBehaviour
             {
                 characterInUseItem.DisableRenderer();
             }
-
-            if(Restult == 2)
+            
+            if (Restult == 2) // 堆叠物品
             {
                 Destroy(characterInUseItem.gameObject);
             }
-
+            
             pickupLock = false;
             _pickupController.currentPickup = null;
             _pickupController.ChangePickupTarget();
+            
         }
         else
         {
             pickupLock = false;
         }
-
+        
+        ChangeMouseAction(GameRunTimeData.Instance.CharacterItemSlotData.GetCurrentFocusSlot());
+        
         void SetItemBaseToPlayerHand(ItemBase itemBase)
         {
             Vector3 transformLocalEulerAngles = itemBase.gameObject.transform.localEulerAngles;
