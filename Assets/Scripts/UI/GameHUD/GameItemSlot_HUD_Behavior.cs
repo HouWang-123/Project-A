@@ -16,6 +16,8 @@ public class GameItemSlot_HUD_Behavior : UIBase
     public TextMeshProUGUI ItemSlotNumber;
     private static readonly int IsFocus = Animator.StringToHash("IsFocus");
 
+    private int Key;
+    
     void Start()
     {
         ActiveTip.transform.localScale = Vector3.zero;
@@ -29,6 +31,7 @@ public class GameItemSlot_HUD_Behavior : UIBase
     public void OnFocus()
     {
         ItemSlotManager_HUD.ACTIVE_ITEM_SLOT = this;
+        GameControl.Instance.PlayerControl.ChangeMouseAction(Key);
         SetAsActiveItem();
         ItemSlotManager_HUD.Instance.OnItemSwitch();
     }
@@ -38,6 +41,7 @@ public class GameItemSlot_HUD_Behavior : UIBase
     }
     public void SetItemSlotNumber(int number)
     {
+        Key = number;
         ItemSlotNumber.text = number.ToString();
     }
     

@@ -18,7 +18,7 @@ public class GameControl
     private GameObject playerObj;
     private GameObject roomObj;                  // 当前房间Go
     private Dictionary<int, GameObject> roomCache;
-
+    public  PlayerControl PlayerControl;
     private Dictionary<int, List<GameObject>> roomWithMonsterList; // 房间对应的怪物
     private GameObject roomList;
 
@@ -133,6 +133,7 @@ public class GameControl
             mainCam.Follow = playerObj.transform;
             mainCam.LookAt = playerObj.transform;
         }
+        PlayerControl = playerObj.GetComponent<PlayerControl>();
         return playerObj;
     }
 

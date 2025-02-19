@@ -175,7 +175,10 @@ public class ItemSlotData
         }
         else
         {
-            slotNumber = FindEmptySlot();
+            if (SlotItemDataList.ContainsKey(slotNumber))
+            {
+                slotNumber = FindEmptySlot();
+            }
             SetCharacterInUseItem(item);
             AllCharacterItems.Add(slotNumber,item);
             ItemID2Key.Add(slotNumber,item.ItemID);
