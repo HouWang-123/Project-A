@@ -105,6 +105,11 @@ public class ItemSlotManager_HUD : UIBase
 
     private bool isplayingOpeningOrClosing;
 
+    protected override void AddListen()
+    {
+        
+    }
+
     public override void Show()
     {
         if (isplayingOpeningOrClosing)
@@ -220,12 +225,7 @@ public class ItemSlotManager_HUD : UIBase
     #endregion
 
     #region Listeners
-
-    protected override void AddListen()
-    {
-        //ItemSlotsHUDSwitch_N.onClick.AddListener(() => { ChangeFocus(false); });
-    }
-
+    
     public void OnItemSwitch()
     {
         foreach (var ItemSlot in ItemSlots)

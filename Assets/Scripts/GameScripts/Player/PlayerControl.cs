@@ -118,7 +118,6 @@ public class PlayerControl : MonoBehaviour
         InputControl.Instance._4Key.started += (item) =>
         {
             ChangeMouseAction(4);
-
         };
         InputControl.Instance._5Key.started += (item) =>
         {
@@ -208,7 +207,7 @@ public class PlayerControl : MonoBehaviour
         a = -Vector3.up * Mathf.Atan2(l.y, l.x) * Mathf.Rad2Deg;
     }
 
-    private void ChangeMouseAction(int Number)
+    public void ChangeMouseAction(int Number)
     {
         GameHUD.Instance.ISM_SetFocus(Number);
         GameRunTimeData.Instance.CharacterItemSlotData.ChangeFocusSlotNumber(Number);
