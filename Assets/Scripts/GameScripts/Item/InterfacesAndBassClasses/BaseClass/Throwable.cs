@@ -4,7 +4,7 @@ using YooAsset;
 
 public class Throwable : ItemBase
 {
-    public cfg.item.ThrowObjects ItemData;
+    public cfg.item.ThrowObjects data;
     public Rigidbody ThrowableRigidbody;
     
     // 可能存在的抽象方法，子类实现方法体
@@ -20,13 +20,14 @@ public class Throwable : ItemBase
         try
         {
             ItemData = GameTableDataAgent.ThrowObjectsTable.Get(id);
-            ItemID = ItemData.ID;
+            data = ItemData as cfg.item.ThrowObjects;
+            ItemID = data.ID;
         }
         catch (Exception e)
         {
             ColorfulDebugger.DebugError("可投掷物品ID" + id +"不存在，物品名称" + gameObject.name,ColorfulDebugger.Instance.Data);
         }
-        ItemSpriteName = ItemData.SpriteName;
+        ItemSpriteName = data.SpriteName;
     }
     public override void OnItemPickUp()
     {
@@ -34,7 +35,7 @@ public class Throwable : ItemBase
     }
     public override Sprite GetItemIcon()
     {
-        AssetHandle loadAssetSync = YooAssets.LoadAssetSync<Sprite>(ItemData.IconName);
+        AssetHandle loadAssetSync = YooAssets.LoadAssetSync<Sprite>(data.IconName);
         if (loadAssetSync.AssetObject == null)
         {
             loadAssetSync = YooAssets.LoadAssetSync<Sprite>("SpriteNotFound_Default");
@@ -43,7 +44,7 @@ public class Throwable : ItemBase
     }
     public override string GetPrefabName()
     {
-        return ItemData.PrefabName;
+        return data.PrefabName;
     }
     
     

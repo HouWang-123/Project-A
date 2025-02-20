@@ -4,14 +4,13 @@ using YooAsset;
 
 public class Jewlry : ItemBase
 {
-    public cfg.item.Jewelry ItemData;
+    public cfg.item.Jewelry data;
     
     // 可能存在的抽象方法，子类实现方法体
     public void Equip()
     {
         
     }
-
     public override void InitItem(int id)
     {
         ItemType = GameItemType.Jewelry;
@@ -19,7 +18,8 @@ public class Jewlry : ItemBase
         try
         {
             ItemData = GameTableDataAgent.JewelryTable.Get(id);
-            ItemID = ItemData.ID;
+            data = ItemData as cfg.item.Jewelry;
+            ItemID = data.ID;
         }
         catch (Exception e)
         {

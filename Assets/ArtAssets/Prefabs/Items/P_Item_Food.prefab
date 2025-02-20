@@ -350,5 +350,6 @@ MonoBehaviour:
   oulineShader: {fileID: -6465566751694194690, guid: 098b3234e69aa004eae9c50eabd09355, type: 3}
   DefaultSpriteShader: {fileID: 10753, guid: 0000000000000000f000000000000000, type: 0}
   StackNuberText: {fileID: 8367716075992862460}
+  ItemSpriteName: 
   DropState: 0
   StackCount: 1

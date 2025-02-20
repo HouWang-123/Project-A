@@ -4,7 +4,7 @@ using YooAsset;
 
 public class TinyItem : ItemBase
 {
-    public cfg.item.TinyObjects ItemData;
+    public cfg.item.TinyObjects data;
     
     // 可能存在的抽象方法，子类实现方法体
     
@@ -17,17 +17,18 @@ public class TinyItem : ItemBase
         try
         {
             ItemData = GameTableDataAgent.TinyObjectsTable.Get(id);
-            ItemID = ItemData.ID;
+            data = ItemData as cfg.item.TinyObjects;
+            ItemID = data.ID;
         }
         catch (Exception e)
         {
             ColorfulDebugger.DebugError("小物品ID" + id +"不存在，物品名称" + gameObject.name,ColorfulDebugger.Instance.Data);
         }
-        ItemSpriteName = ItemData.SpriteName;
+        ItemSpriteName = data.SpriteName;
     }
     public override Sprite GetItemIcon()
     {
-        AssetHandle loadAssetSync = YooAssets.LoadAssetSync<Sprite>(ItemData.IconName);
+        AssetHandle loadAssetSync = YooAssets.LoadAssetSync<Sprite>(data.IconName);
         if (loadAssetSync.AssetObject == null)
         {
             loadAssetSync = YooAssets.LoadAssetSync<Sprite>("SpriteNotFound_Default");
@@ -36,7 +37,7 @@ public class TinyItem : ItemBase
     }
     public override string GetPrefabName()
     {
-        return ItemData.PrefabName;
+        return data.PrefabName;
     }
     
     

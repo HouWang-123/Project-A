@@ -4,10 +4,7 @@ using YooAsset;
 
 public class ToolItem : ItemBase, IItemSlotable
 {
-    public cfg.item.Tools ItemData;
-    public void Awake()
-    {
-    }
+    public cfg.item.Tools data;
     // 可能存在的抽象方法，子类实现方法体
     public void Use()
     {
@@ -22,18 +19,19 @@ public class ToolItem : ItemBase, IItemSlotable
         try
         {
             ItemData = GameTableDataAgent.ToolsTable.Get(id);
-            ItemID = ItemData.ID;
+            data = ItemData as cfg.item.Tools;
+            ItemID = data.ID;
         }
         catch (Exception e)
         {
             ColorfulDebugger.DebugError("工具物品ID" + id +"不存在，物品名称" + gameObject.name,ColorfulDebugger.Instance.Data);
         }
-        ItemSpriteName = ItemData.SpriteName;
+        ItemSpriteName = data.SpriteName;
     }
 
     public override Sprite GetItemIcon()
     {
-        AssetHandle loadAssetSync = YooAssets.LoadAssetSync<Sprite>(ItemData.IconName);
+        AssetHandle loadAssetSync = YooAssets.LoadAssetSync<Sprite>(data.IconName);
         if (loadAssetSync.AssetObject == null)
         {
             loadAssetSync = YooAssets.LoadAssetSync<Sprite>("SpriteNotFound_Default");
@@ -42,7 +40,7 @@ public class ToolItem : ItemBase, IItemSlotable
     }
     public override string GetPrefabName()
     {
-        return ItemData.PrefabName;
+        return data.PrefabName;
     }
     
     public override void OnRightInteract( )
@@ -54,4 +52,5 @@ public class ToolItem : ItemBase, IItemSlotable
     {
         throw new NotImplementedException();
     }
+
 }

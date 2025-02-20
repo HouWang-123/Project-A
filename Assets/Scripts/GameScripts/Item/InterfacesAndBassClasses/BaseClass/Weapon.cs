@@ -6,13 +6,7 @@ using YooAsset;
 
 public class Weapon : ItemBase, IItemSlotable
 {
-    public cfg.item.Weapon ItemData;
-    
-    // 可能存在的抽象方法，子类实现方法体
-    public void Fire()
-    {
-        
-    }
+    public cfg.item.Weapon data;
     
     // 动态生成物品
     public override void InitItem( int ID )
@@ -21,18 +15,19 @@ public class Weapon : ItemBase, IItemSlotable
         try
         {
             ItemData = GameTableDataAgent.WeaponTable.Get(ID);
-            ItemID = ItemData.ID;
+            data = ItemData as cfg.item.Weapon;
+            ItemID = data.ID;
         }
         catch (Exception e)
         {
             ColorfulDebugger.DebugError("武器物品ID" + ID +"不存在，物品名称" + gameObject.name,ColorfulDebugger.Instance.Data);
         }
-        ItemSpriteName = ItemData.SpriteName;
+        ItemSpriteName = data.SpriteName;
     }
 
     public override Sprite GetItemIcon()
     {
-        AssetHandle loadAssetSync = YooAssets.LoadAssetSync<Sprite>(ItemData.IconName);
+        AssetHandle loadAssetSync = YooAssets.LoadAssetSync<Sprite>(data.IconName);
         if (loadAssetSync.AssetObject == null)
         {
              loadAssetSync = YooAssets.LoadAssetSync<Sprite>("SpriteNotFound_Default");
@@ -42,7 +37,7 @@ public class Weapon : ItemBase, IItemSlotable
 
     public override string GetPrefabName()
     {
-        return ItemData.PrefabName;
+        return data.PrefabName;
     }
     public void UpdateItemSlot()
     {
@@ -60,7 +55,7 @@ public class Weapon : ItemBase, IItemSlotable
 
     public int GetMaxStackValue()
     {
-        return ItemData.MaxStackCount;
+        return data.MaxStackCount;
     }
 
     public void ChangeStackCount(int Count)
