@@ -443,9 +443,13 @@ public enum EPlayerAnimator
     OnDead,
     OnUse_1,
     Run,
+    Run_Blink,
     Run_Hand,
     Run_Head,
     Walk,
+    Walk_Backwards,
+    Walk_B_Hand,
+    Walk_B_Head,
     Walk_Hand,
     Walk_Head,
 }
