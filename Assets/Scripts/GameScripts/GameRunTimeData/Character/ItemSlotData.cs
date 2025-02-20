@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 [Serializable]
 public class SlotItemStatus
@@ -59,32 +60,35 @@ public class ItemSlotData
     /// </summary>
     /// <param name="InsertItem"></param>
     /// <returns></returns>
-    private int GetItemProperStackKeyNumber(ItemBase InsertItem, int Count, out bool outOfBound, out int extraVal)
+    private int GetItemProperStackKeyNumberAndStackItem(ItemBase InsertItem, int Count, out bool outOfBound, out int extraVal)
     {
+        //   5  5  5           9   
+        //   9  9  6
         IStackable iStackable = InsertItem as IStackable;
+        int maxStacksize = iStackable.GetMaxStackValue();
         // 遍历道具栏
-        foreach (var VARIABLE in SlotItemDataList)
+        foreach (var SlotData in SlotItemDataList)
         {
             // 判断是否同一个物品
-            if (VARIABLE.Value.ItemID == InsertItem.ItemID)
+            if (SlotData.Value.ItemID == InsertItem.ItemID)
             {
                 // 是否满载
-                if (VARIABLE.Value.StackValue == iStackable.GetMaxStackValue()) { continue; }
+                if (SlotData.Value.StackValue == maxStacksize) { continue; }
                 // 堆叠超出
-                if (VARIABLE.Value.StackValue + Count >= iStackable.GetMaxStackValue())
+                if (SlotData.Value.StackValue + Count >= maxStacksize)
                 {
-                    extraVal = VARIABLE.Value.StackValue + Count - iStackable.GetMaxStackValue();
-                    VARIABLE.Value.StackValue = iStackable.GetMaxStackValue();
+                    int putted = maxStacksize - SlotData.Value.StackValue;     // 计算已经放入的量
+                    SlotData.Value.StackValue = maxStacksize;                  // 设置当前槽为最大
+                    Count -= putted;                                           // 数量减去已经放入的
+                    extraVal =  Count;
                     outOfBound = true;
-                    return FindEmptySlot();
                 }
-                // 堆叠没超出
-                if (iStackable.GetMaxStackValue() > VARIABLE.Value.StackValue + Count)
+                else if (iStackable.GetMaxStackValue() > SlotData.Value.StackValue + Count)
                 {
-                    VARIABLE.Value.StackValue += iStackable.GetStackCount();
+                    SlotData.Value.StackValue += iStackable.GetStackCount();
                     outOfBound = false;
                     extraVal = 0;
-                    return VARIABLE.Key;
+                    return SlotData.Key;
                 }
             }
         }
@@ -143,7 +147,8 @@ public class ItemSlotData
         int extralVal = 0;
         if (ItemID2Key.ContainsValue(item.ItemID))
         {
-            slotNumber = GetItemProperStackKeyNumber(item,stackable.GetStackCount(),out outofBound,out extralVal);
+            slotNumber = GetItemProperStackKeyNumberAndStackItem(item,stackable.GetStackCount(),out outofBound,out extralVal);
+            
             if (slotNumber == -1)
             {
                 stackable.ChangeStackCount(extralVal);
@@ -175,19 +180,26 @@ public class ItemSlotData
         }
         else
         {
-            if (SlotItemDataList.ContainsKey(slotNumber))
+            if (stackable.GetMaxStackValue() < stackable.GetStackCount())
             {
-                slotNumber = FindEmptySlot();
+                throw new Exception("场景物品堆叠量禁止大于已配置的最大堆叠量");
             }
-            SetCharacterInUseItem(item);
-            AllCharacterItems.Add(slotNumber,item);
-            ItemID2Key.Add(slotNumber,item.ItemID);
-            SlotItemDataList[slotNumber] = newItemStatus;
-            if (slotNumber != CurrentFocusSlot)
+            else
             {
-                return 1;
+                if (SlotItemDataList.ContainsKey(slotNumber))
+                {
+                    slotNumber = FindEmptySlot();
+                }
+                SetCharacterInUseItem(item);
+                AllCharacterItems.Add(slotNumber,item);
+                ItemID2Key.Add(slotNumber,item.ItemID);
+                SlotItemDataList[slotNumber] = newItemStatus;
+                if (slotNumber != CurrentFocusSlot)
+                {
+                    return 1;
+                }
+                return 0;
             }
-            return 0;
         }
         return 1;
     }
