@@ -39,10 +39,6 @@ public class Weapon : ItemBase, IItemSlotable
     {
         return data.PrefabName;
     }
-    public void UpdateItemSlot()
-    {
-        
-    }
     public override void OnRightInteract( )
     {
 

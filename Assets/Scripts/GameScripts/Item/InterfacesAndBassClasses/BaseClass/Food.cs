@@ -7,11 +7,6 @@ public class Food : ItemBase, IItemSlotable,IStackable
 {
     public cfg.item.Food data;
     // 可能存在的抽象方法，子类实现方法体
-    public void Eat()
-    {
-        
-    }
-
     public cfg.item.Food GetItemData()
     {
         return data;
@@ -62,14 +57,12 @@ public class Food : ItemBase, IItemSlotable,IStackable
     {
         return data.PrefabName;
     }
-    
-    
-    public override void OnRightInteract( )
+    public override void OnRightInteract()
     {
         Debug.Log("食物右键");
     }
 
-    public override void OnLeftInteract( )
+    public override void OnLeftInteract()
     {
         Debug.Log("食物左键");
     }

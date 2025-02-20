@@ -75,7 +75,7 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable
     private bool IsItemInPickupRange; // 可否拾取
 
     public void SetPickupable(bool v) { IsItemInPickupRange = v; }
-    
+    // 物品拾取器，shader
     public void SetTargerted(bool v) // 拾取系统相关功能，与拾取标识相关
     {
         Targeted = v;
@@ -88,7 +88,7 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable
             ItemRenderer.material.shader = DefaultSpriteShader;
         }
     }
-    // 拾取接口相关控制
+    // 拾取后物品方向控制
     public void CheckReverse(bool reversed)
     {
         if (reversed && !ItemReversed)
@@ -110,9 +110,11 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable
     public abstract void InitItem(int id); // 物品数据初始化
     public abstract Sprite GetItemIcon();
     public abstract string GetPrefabName();
+    
     private float gravity = -9.81f;
     private float groundCheckDistance = 0.2f;
     private Vector3 velocity = Vector3.zero;
+    // 物品掉落相关物理逻辑
     public void FixedUpdate()
     {
         if (DropState)
@@ -133,7 +135,7 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable
                 {
                     transform.position = new Vector3(transform.position.x, hit.point.y, transform.position.z);
                 }
-
+                
                 DropState = false;
             }
         }
@@ -144,6 +146,7 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable
             transform.position = new Vector3(transform.position.x, 0, transform.position.z);
         }
     }
+    // 物品拾取和丢弃
     public virtual void OnItemPickUp() { }
     public virtual void OnItemDrop(bool fastDrop)
     {
@@ -156,6 +159,9 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable
             DropState = false;
         }
     }
+    // 交互逻辑
+    // Fixed Update 调用
     public abstract void OnRightInteract();
+    // Fixed Update 调用
     public abstract void OnLeftInteract();
 }

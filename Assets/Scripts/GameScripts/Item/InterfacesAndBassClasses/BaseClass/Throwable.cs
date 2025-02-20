@@ -6,12 +6,7 @@ public class Throwable : ItemBase
 {
     public cfg.item.ThrowObjects data;
     public Rigidbody ThrowableRigidbody;
-    
-    // 可能存在的抽象方法，子类实现方法体
-    protected void Throw()
-    {
-        
-    }
+
     // 物品初始化
     public override void InitItem(int id)
     {

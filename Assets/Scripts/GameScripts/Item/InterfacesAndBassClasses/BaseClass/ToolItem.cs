@@ -5,11 +5,6 @@ using YooAsset;
 public class ToolItem : ItemBase, IItemSlotable
 {
     public cfg.item.Tools data;
-    // 可能存在的抽象方法，子类实现方法体
-    public void Use()
-    {
-        
-    }
     // 物品初始化
 
     public override void InitItem(int id)
