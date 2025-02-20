@@ -16,13 +16,12 @@ public class FleeState : BaseState
         // 设置状态
         m_stateEnum = StateEnum.Flee;
         m_fleeTime = 3f;
-        var monsterFSM = gameObject.GetComponent<MonsterFSM>();
-        agent = gameObject.GetComponent<MonsterFSM>().NavMeshAgent;
+        agent = gameObject.GetComponent<MonsterBaseFSM>().NavMeshAgent;
     }
 
     public override void Act(GameObject npc)
     {
-        var lightTransfrom = npc.GetComponent<MonsterFSM>().LightTransform;
+        var lightTransfrom = npc.GetComponent<MonsterBaseFSM>().LightTransform;
         if (lightTransfrom)
         {
             Vector3 direction = 2f * (npc.transform.position - lightTransfrom.position);
@@ -56,7 +55,7 @@ public class FleeState : BaseState
 
     public override void Condition(GameObject npc)
     {
-        if (npc.GetComponent<MonsterFSM>().LightTransform)
+        if (npc.GetComponent<MonsterBaseFSM>().LightTransform)
         {
             m_timer += Time.deltaTime;
             // 超过逃跑时间
@@ -71,9 +70,8 @@ public class FleeState : BaseState
     {
         base.DoBeforeEntering();
         agent.isStopped = false;
-        var monsterFSM = m_gameObject.GetComponent<MonsterFSM>();
         // 状态对应动画名称
-        monsterFSM.PlayAnimation(0, "Walk2", true);
+        AnimationController.PlayAnim(m_gameObject, StateEnum.Flee, 0, false);
     }
 
     public override void DoAfterLeaving()

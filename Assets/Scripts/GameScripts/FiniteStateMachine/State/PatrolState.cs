@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
@@ -40,8 +41,8 @@ public class PatrolState : BaseState
             Debug.LogError(GetType() + "/PatrolState/ gameObject 不能为空!");
             throw new ArgumentException();
         }
-        agent = NPCObj.GetComponent<MonsterFSM>().NavMeshAgent;
-        m_warnDistance = NPCObj.GetComponent<MonsterFSM>().NPCDatas.WarnRange + 5f;
+        agent = NPCObj.GetComponent<MonsterBaseFSM>().NavMeshAgent;
+        m_warnDistance = NPCObj.GetComponent<MonsterBaseFSM>().MonsterDatas.WarnRange + 5f;
         // lastPosition = gameObject.transform.position;
         // 初始位置强制校正
         if (NavMesh.SamplePosition(NPCObj.transform.position, out NavMeshHit hit, 2.0f, NavMesh.AllAreas))
@@ -111,9 +112,9 @@ public class PatrolState : BaseState
             {
                 scale = new(-1f, 1f, 1f);
             }
+            
             m_gameObject.transform.localScale = scale;
             m_canMove = false;
-            var monsterFSM = m_gameObject.GetComponent<MonsterFSM>();
         }
         else
         {
@@ -171,9 +172,10 @@ public class PatrolState : BaseState
     public override void Condition(GameObject npc)
     {        
         // 如果NPC到达目的地
-        if (agent.remainingDistance <= agent.stoppingDistance)
+        if (agent.transform.position == agent.destination)
         {
-            m_gameObject.GetComponent<MonsterFSM>().PlayAnimation(0, "Idle", true);
+            m_canMove = false;
+            AnimationController.PlayAnim(m_gameObject, StateEnum.Idle, 0, true);
             m_waitTime += Time.deltaTime;
             // 等待了两秒
             if (m_waitTime >= 2f)
@@ -187,17 +189,7 @@ public class PatrolState : BaseState
                 }
                 else
                 {
-                    var monsterFSM = m_gameObject.GetComponent<MonsterFSM>();
-                    switch (monsterFSM.NPCDatas.PrefabName)
-                    {
-                        case "DrownedOnes":
-                            m_gameObject.GetComponent<MonsterFSM>().PlayAnimation(0, "Walk2", true);
-                            break;
-                        case "HoundTindalos":
-                            m_gameObject.GetComponent<MonsterFSM>().PlayAnimation(0, "Walk", true);
-                            break;
-                    }
-                    
+                    AnimationController.PlayAnim(m_gameObject, StateEnum.Patrol, 0, true);
                 }
             }
         }
@@ -208,7 +200,7 @@ public class PatrolState : BaseState
             m_finiteStateMachine.PerformTransition(TransitionEnum.SeePlayer);
         }
         // 发现光源直接逃跑
-        var lightTransform = m_gameObject.GetComponent<MonsterFSM>().LightTransform;
+        var lightTransform = m_gameObject.GetComponent<MonsterBaseFSM>().LightTransform;
         if (lightTransform != null)
         {
             if (Vector3.Distance(lightTransform.position, m_gameObject.transform.position) <= m_fleeDistance)
@@ -223,19 +215,11 @@ public class PatrolState : BaseState
         base.DoBeforeEntering();
         agent.isStopped = false;
 
-        var monsterFSM = m_gameObject.GetComponent<MonsterFSM>();
+        var monsterFSM = m_gameObject.GetComponent<MonsterBaseFSM>();
         // 巡逻速度是0.5倍的移动速度
-        agent.speed = 0.5f * monsterFSM.NPCDatas.Speed;
-        // 状态对应动画名称，根据怪物调整
-        switch (monsterFSM.NPCDatas.PrefabName)
-        {
-            case "DrownedOnes":
-                monsterFSM.PlayAnimation(0, "Walk2", true);
-                break;
-            case "HoundTindalos":
-                monsterFSM.PlayAnimation(0, "Walk", true);
-                break;
-        }
+        agent.speed = 0.5f * monsterFSM.MonsterDatas.Speed;
+        // 动画播放速度为0.5倍
+        AnimationController.PlayAnim(m_gameObject, StateEnum.Patrol, 0, true, 0.5f);
     }
 
     public override void DoAfterLeaving()
@@ -245,9 +229,9 @@ public class PatrolState : BaseState
         agent.isStopped = true;
         agent.SetDestination(agent.transform.position);
 
-        var monsterFSM = m_gameObject.GetComponent<MonsterFSM>();
+        var monsterFSM = m_gameObject.GetComponent<MonsterBaseFSM>();
         // 恢复正常移动速度
-        agent.speed = monsterFSM.NPCDatas.Speed;
+        agent.speed = monsterFSM.MonsterDatas.Speed;
     }
 }
 

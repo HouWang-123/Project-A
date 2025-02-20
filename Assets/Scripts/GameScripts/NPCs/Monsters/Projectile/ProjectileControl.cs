@@ -46,7 +46,7 @@ public class ProjectileControl : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.TryGetComponent<PlayerControl>(out PlayerControl playerControl) || other.gameObject.TryGetComponent<MonsterFSM>(out MonsterFSM monsterFSM))
+        if (other.gameObject.TryGetComponent<PlayerControl>(out PlayerControl playerControl) || other.gameObject.TryGetComponent<DrownedOnesFSM>(out DrownedOnesFSM monsterFSM))
         {
             Debug.Log(GetType() + "OnCollisionEnter() => 对 " + other.gameObject.name + " 造成了伤害");
         }

@@ -1,5 +1,4 @@
-﻿using Spine;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using YooAsset;
 /// <summary>
@@ -21,6 +20,8 @@ public class RangedAttackState : BaseState
     private float m_animTotalTime = 0f;
     // 攻击CD
     private readonly float m_attackCD = 5f;
+    // 发射物的初始位置
+    private readonly Transform m_projectileTransform;
     // 发射物内存池
     private readonly Queue<GameObject> m_projectileQueue;
     // 发射物内存池容量
@@ -35,11 +36,13 @@ public class RangedAttackState : BaseState
     private readonly float m_fleeDistance = -1f;
     // 弹道修正向量
     private readonly Vector3 m_projectileFixVector3;
-    public RangedAttackState(FiniteStateMachine finiteStateMachine, GameObject npcObj, Transform playerTransform = null)
+    public RangedAttackState(FiniteStateMachine finiteStateMachine, GameObject npcObj,Transform projectileTrans, Transform playerTransform)
         : base(finiteStateMachine, npcObj)
     {
         // 设置状态
         m_stateEnum = StateEnum.RangedAttack;
+        m_projectileTransform = projectileTrans;
+        
         if (playerTransform != null)
         {
             m_playerTransform = playerTransform;
@@ -48,8 +51,9 @@ public class RangedAttackState : BaseState
         {
             m_playerTransform = GameObject.Find("Player000").transform;
         }
-        m_RangedDistance = npcObj.GetComponent<MonsterFSM>().NPCDatas.ShootRange; // 应该获取表中的远程范围
-        m_MeleeDistance = npcObj.GetComponent <MonsterFSM>().NPCDatas.HitRange;
+        var monsterBaseFSM = npcObj.GetComponent<MonsterBaseFSM>();
+        m_RangedDistance = monsterBaseFSM.MonsterDatas.ShootRange; // 应该获取表中的远程范围
+        m_MeleeDistance = monsterBaseFSM.MonsterDatas.HitRange;
         m_projectileFixVector3 = new Vector3(0, 1, 0);
         m_fleeDistance = 3f;
 
@@ -62,7 +66,7 @@ public class RangedAttackState : BaseState
         {
             GameObject go = Object.Instantiate(m_assetHandle.AssetObject) as GameObject;
             go.name = "发射物_" + i;
-            go.transform.SetParent(m_gameObject.GetComponent<MonsterFSM>().ProjectileTransform);
+            go.transform.SetParent(m_projectileTransform);
             go.transform.SetPositionAndRotation(go.transform.parent.position, go.transform.parent.rotation);
             go.GetComponent<ProjectileControl>().ReturnFunc = ReturnProjectile;
             go.SetActive(false);
@@ -84,7 +88,7 @@ public class RangedAttackState : BaseState
         {
             GameObject go = Object.Instantiate(m_assetHandle.AssetObject) as GameObject;
             go.name = "发射物_" + m_projectileCount;
-            go.transform.SetParent(m_gameObject.GetComponent<MonsterFSM>().ProjectileTransform);
+            go.transform.SetParent(m_projectileTransform);
             go.transform.SetPositionAndRotation(go.transform.parent.position, go.transform.parent.rotation);
             go.GetComponent<ProjectileControl>().ReturnFunc = ReturnProjectile;
             go.SetActive(false);
@@ -106,7 +110,9 @@ public class RangedAttackState : BaseState
         m_timer += Time.deltaTime;
         if (!m_enterCD)
         {
-            m_gameObject.GetComponent<MonsterFSM>().PlayAnimation(0, "Attack_2", false);
+            var monsterFSM = m_gameObject.GetComponent<MonsterBaseFSM>();
+            AnimationController.PlayAnim(m_gameObject, StateEnum.RangedAttack, 0, false);
+            m_animTotalTime = AnimationController.AnimationTotalTime(monsterFSM.SkeletonAnim);
             m_enterCD = true;
         }
         if (m_timer >= m_animTotalTime && !m_attacked)
@@ -117,10 +123,10 @@ public class RangedAttackState : BaseState
             {
                 var com = projectileGo.GetComponent<ProjectileControl>();
                 // m_projectileFixVector3为弹道修正，往上打一点
-                com.Direction = (m_playerTransform.position + m_projectileFixVector3 - npc.GetComponent<MonsterFSM>().ProjectileTransform.position).normalized;
+                com.Direction = (m_playerTransform.position + m_projectileFixVector3 - m_projectileTransform.position).normalized;
             }
             m_attacked = true;
-            m_gameObject.GetComponent<MonsterFSM>().PlayAnimation(0, "Idle", false);
+            AnimationController.PlayAnim(m_gameObject, StateEnum.Idle, 0, false);
         }
         if (m_timer >= m_attackCD + m_animTotalTime)
         {
@@ -140,12 +146,12 @@ public class RangedAttackState : BaseState
             m_finiteStateMachine.PerformTransition(TransitionEnum.ChasePlayer);
         }
         // 转为近战
-        if (m_gameObject.GetComponent<MonsterFSM>().NPCDatas.HitRange != -1f && distance <= m_MeleeDistance)
+        if (m_gameObject.GetComponent<MonsterBaseFSM>().MonsterDatas.HitRange != -1f && distance <= m_MeleeDistance)
         {
             m_finiteStateMachine.PerformTransition(TransitionEnum.MeleeAttackPlayer);
         }
         // 发现光源直接逃跑
-        var lightTransform = m_gameObject.GetComponent<MonsterFSM>().LightTransform;
+        var lightTransform = m_gameObject.GetComponent<MonsterBaseFSM>().LightTransform;
         if (lightTransform != null)
         {
             if (Vector3.Distance(lightTransform.position, m_gameObject.transform.position) <= m_fleeDistance)
@@ -158,10 +164,7 @@ public class RangedAttackState : BaseState
     public override void DoBeforeEntering()
     {
         base.DoBeforeEntering();
-        var monsterFSM = m_gameObject.GetComponent<MonsterFSM>();
-        // 状态对应动画名称
-        monsterFSM.PlayAnimation(0, "Attack_2", true);
-        m_animTotalTime = monsterFSM.AnimationTotalTime();
+        AnimationController.PlayAnim(m_gameObject, StateEnum.RangedAttack, 0, false);
     }
 }
 

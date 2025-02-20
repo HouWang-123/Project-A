@@ -25,8 +25,8 @@ public class LookAtState : BaseState
         {
             m_playerTransform = GameObject.Find("Player000").transform;
         }
-        m_2ChaseDistance = npcObj.GetComponent<MonsterFSM>().NPCDatas.WarnRange;
-        m_2LostDistance = npcObj.GetComponent<MonsterFSM>().NPCDatas.WarnRange + 5f;
+        m_2ChaseDistance = npcObj.GetComponent<MonsterBaseFSM>().MonsterDatas.WarnRange;
+        m_2LostDistance = npcObj.GetComponent<MonsterBaseFSM>().MonsterDatas.WarnRange + 5f;
         m_fleeDistance = 3f;
     }
     /// <summary>
@@ -68,7 +68,7 @@ public class LookAtState : BaseState
             m_finiteStateMachine.PerformTransition(TransitionEnum.LostPlayer);
         }
         // 发现光源直接逃跑
-        var lightTransform = m_gameObject.GetComponent<MonsterFSM>().LightTransform;
+        var lightTransform = m_gameObject.GetComponent<MonsterBaseFSM>().LightTransform;
         if (lightTransform != null)
         {
             if (Vector3.Distance(lightTransform.position, m_gameObject.transform.position) <= m_fleeDistance)
@@ -80,17 +80,7 @@ public class LookAtState : BaseState
     public override void DoBeforeEntering()
     {
         base.DoBeforeEntering();
-        var monsterFSM = m_gameObject.GetComponent<MonsterFSM>();
-        // 状态对应动画名称，根据怪物调整
-        switch (monsterFSM.NPCDatas.PrefabName)
-        {
-            case "DrownedOnes":
-                monsterFSM.PlayAnimation(0, "Walk", true);
-                break;
-            case "HoundTindalos":
-                monsterFSM.PlayAnimation(0, "Idle", true);
-                break;
-        }
+        AnimationController.PlayAnim(m_gameObject, StateEnum.LookAt, 0, true);
     }
 }
 

@@ -130,7 +130,7 @@ GameObject:
   - component: {fileID: 2481095608045472997}
   - component: {fileID: 3464225367448648368}
   m_Layer: 6
-  m_Name: Cube
+  m_Name: FloorCube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1659,6 +1659,10 @@ PrefabInstance:
     - target: {fileID: 4796188336913571997, guid: eb04acb455ebf2b478d26c048e87c885, type: 3}
       propertyPath: m_Name
       value: MonsterPoint (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4796188336913571997, guid: eb04acb455ebf2b478d26c048e87c885, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4836535254626058870, guid: eb04acb455ebf2b478d26c048e87c885, type: 3}
       propertyPath: MonsterID

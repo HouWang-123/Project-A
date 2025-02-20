@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 /// <summary>
 /// 待机状态
@@ -19,7 +20,7 @@ public class IdleState : BaseState
         // 状态设置
         m_stateEnum = StateEnum.Idle;
         m_playerTransform = playerTransform;
-        m_warnDistance = gameObject.GetComponent<MonsterFSM>().NPCDatas.WarnRange + 5f;
+        m_warnDistance = gameObject.GetComponent<MonsterBaseFSM>().MonsterDatas.WarnRange + 5f;
         m_fleeDistance = 3f;
     }
 
@@ -50,7 +51,7 @@ public class IdleState : BaseState
             m_finiteStateMachine.PerformTransition(TransitionEnum.SeePlayer);
         }
         // 发现光源直接逃跑
-        var lightTransform = m_gameObject.GetComponent<MonsterFSM>().LightTransform;
+        var lightTransform = m_gameObject.GetComponent<MonsterBaseFSM>().LightTransform;
         if (lightTransform != null)
         {
             if (Vector3.Distance(lightTransform.position, m_gameObject.transform.position) <= m_fleeDistance)
@@ -63,7 +64,6 @@ public class IdleState : BaseState
     public override void DoBeforeEntering()
     {
         base.DoBeforeEntering();
-        // 状态对应动画
-        m_gameObject.GetComponent<MonsterFSM>().PlayAnimation(0, "Idle", true);
+        AnimationController.PlayAnim(m_gameObject, StateEnum.Idle, 0, true);
     }
 }
