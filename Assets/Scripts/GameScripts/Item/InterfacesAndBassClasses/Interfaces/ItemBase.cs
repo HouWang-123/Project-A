@@ -4,6 +4,7 @@ using Spine.Unity.Examples;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
+using YooAsset;
 
 public abstract class ItemBase : MonoBehaviour, IPickUpable
 {
@@ -13,7 +14,7 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable
     public Shader oulineShader; // 选中时的 shader
     public Shader DefaultSpriteShader; // 默认     shader
     public TextMeshPro StackNuberText;
-    
+    public String ItemSpriteName;
     private bool Targeted; // 是否被拾取系统选中
     private bool ItemReversed;
     
@@ -27,7 +28,17 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable
         var RendererTr = ItemRenderer.transform;
         RendererTr.localEulerAngles = GameConstData.DefAngles;
         OriginalRendererScale = RendererTr.localScale;
-        OnItemDrop(false);
+        AssetHandle loadAssetSync;
+
+         loadAssetSync = YooAssets.LoadAssetSync<Sprite>(ItemSpriteName);
+         if (loadAssetSync.AssetObject == null)
+         {
+             loadAssetSync = YooAssets.LoadAssetSync<Sprite>("SpriteNotFound_Default");
+         }
+            
+        
+        
+        ItemRenderer.sprite = loadAssetSync.AssetObject as Sprite;
         
         if (this is IStackable)
         {
@@ -41,6 +52,13 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable
         }
     }
 
+    // 新添加接口，通过设置id定义物品
+    public void SetItemId(int id)
+    {
+        InitItem(id);
+    }
+    
+    
     public void HideStackNumber()
     {
         StackNuberText.gameObject.SetActive(false);
@@ -98,9 +116,8 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable
             ItemReversed = false;
         }
     }
-
-    protected abstract void InitItem(); // 物品数据初始化
-    protected abstract void InitItem(int id); // 物品数据初始化
+    //必须调用
+    public abstract void InitItem(int id); // 物品数据初始化
     public abstract Sprite GetItemIcon();
     public abstract string GetPrefabName();
 

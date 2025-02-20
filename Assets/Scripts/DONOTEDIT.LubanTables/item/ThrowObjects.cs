@@ -20,12 +20,13 @@ public sealed partial class ThrowObjects : Luban.BeanBase
         { if(!_buf["ID"].IsNumber) { throw new SerializationException(); }  ID = _buf["ID"]; }
         { if(!_buf["NAME"].IsString) { throw new SerializationException(); }  NAME = _buf["NAME"]; }
         { if(!_buf["DESCRIBE"].IsString) { throw new SerializationException(); }  DESCRIBE = _buf["DESCRIBE"]; }
-        { if(!_buf["prefabName"].IsString) { throw new SerializationException(); }  PrefabName = _buf["prefabName"]; }
         { if(!_buf["interactEffectID"].IsNumber) { throw new SerializationException(); }  InteractEffectID = _buf["interactEffectID"]; }
         { if(!_buf["isDestructible"].IsBoolean) { throw new SerializationException(); }  IsDestructible = _buf["isDestructible"]; }
         { if(!_buf["weight"].IsNumber) { throw new SerializationException(); }  Weight = _buf["weight"]; }
         { if(!_buf["attack"].IsNumber) { throw new SerializationException(); }  Attack = _buf["attack"]; }
         { if(!_buf["IconName"].IsString) { throw new SerializationException(); }  IconName = _buf["IconName"]; }
+        { if(!_buf["SpriteName"].IsString) { throw new SerializationException(); }  SpriteName = _buf["SpriteName"]; }
+        { if(!_buf["PrefabName"].IsString) { throw new SerializationException(); }  PrefabName = _buf["PrefabName"]; }
     }
 
     public static ThrowObjects DeserializeThrowObjects(JSONNode _buf)
@@ -46,10 +47,6 @@ public sealed partial class ThrowObjects : Luban.BeanBase
     /// </summary>
     public readonly string DESCRIBE;
     /// <summary>
-    /// 预制体名称
-    /// </summary>
-    public readonly string PrefabName;
-    /// <summary>
     /// 玩家与其的交互是哪一种
     /// </summary>
     public readonly int InteractEffectID;
@@ -69,6 +66,11 @@ public sealed partial class ThrowObjects : Luban.BeanBase
     /// 物品图标名称
     /// </summary>
     public readonly string IconName;
+    public readonly string SpriteName;
+    /// <summary>
+    /// 预制体名称
+    /// </summary>
+    public readonly string PrefabName;
    
     public const int __ID__ = 635118185;
     public override int GetTypeId() => __ID__;
@@ -83,12 +85,13 @@ public sealed partial class ThrowObjects : Luban.BeanBase
         + "ID:" + ID + ","
         + "NAME:" + NAME + ","
         + "DESCRIBE:" + DESCRIBE + ","
-        + "prefabName:" + PrefabName + ","
         + "interactEffectID:" + InteractEffectID + ","
         + "isDestructible:" + IsDestructible + ","
         + "weight:" + Weight + ","
         + "attack:" + Attack + ","
         + "IconName:" + IconName + ","
+        + "SpriteName:" + SpriteName + ","
+        + "PrefabName:" + PrefabName + ","
         + "}";
     }
 }

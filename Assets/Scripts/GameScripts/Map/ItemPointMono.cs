@@ -1,7 +1,9 @@
+using System;
 using cfg.item;
 using System.Collections.Generic;
 using UnityEngine;
 using YooAsset;
+using Random = UnityEngine.Random;
 
 public class ItemPointMono : MonoBehaviour
 {
@@ -68,6 +70,7 @@ public class ItemPointMono : MonoBehaviour
                         obj.name = objName;
                         obj.transform.position = transform.position;
                         obj.GetComponent<IStackable>()?.ChangeStackCount(tip.Number);
+                        obj.GetComponent<ItemBase>()?.InitItem(int.Parse(ID));
                     };
                 }
             }

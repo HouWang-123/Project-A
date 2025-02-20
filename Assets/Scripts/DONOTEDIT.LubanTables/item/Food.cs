@@ -18,9 +18,8 @@ public sealed partial class Food : Luban.BeanBase
     public Food(JSONNode _buf) 
     {
         { if(!_buf["ID"].IsNumber) { throw new SerializationException(); }  ID = _buf["ID"]; }
-        { if(!_buf["NAME"].IsString) { throw new SerializationException(); }  NAME = _buf["NAME"]; }
-        { if(!_buf["DESCRIBE"].IsString) { throw new SerializationException(); }  DESCRIBE = _buf["DESCRIBE"]; }
-        { if(!_buf["prefabName"].IsString) { throw new SerializationException(); }  PrefabName = _buf["prefabName"]; }
+        { if(!_buf["NAME"].IsNumber) { throw new SerializationException(); }  NAME = _buf["NAME"]; }
+        { if(!_buf["DESCRIBE"].IsNumber) { throw new SerializationException(); }  DESCRIBE = _buf["DESCRIBE"]; }
         { if(!_buf["maxStackCount"].IsNumber) { throw new SerializationException(); }  MaxStackCount = _buf["maxStackCount"]; }
         { if(!_buf["interactEffectID"].IsNumber) { throw new SerializationException(); }  InteractEffectID = _buf["interactEffectID"]; }
         { if(!_buf["WaterGain"].IsNumber) { throw new SerializationException(); }  WaterGain = _buf["WaterGain"]; }
@@ -29,6 +28,8 @@ public sealed partial class Food : Luban.BeanBase
         { if(!_buf["StatusGain"].IsNumber) { throw new SerializationException(); }  StatusGain = _buf["StatusGain"]; }
         { if(!_buf["Weight"].IsNumber) { throw new SerializationException(); }  Weight = _buf["Weight"]; }
         { if(!_buf["IconName"].IsString) { throw new SerializationException(); }  IconName = _buf["IconName"]; }
+        { if(!_buf["SpriteName"].IsString) { throw new SerializationException(); }  SpriteName = _buf["SpriteName"]; }
+        { if(!_buf["PrefabName"].IsString) { throw new SerializationException(); }  PrefabName = _buf["PrefabName"]; }
     }
 
     public static Food DeserializeFood(JSONNode _buf)
@@ -43,15 +44,11 @@ public sealed partial class Food : Luban.BeanBase
     /// <summary>
     /// 名称
     /// </summary>
-    public readonly string NAME;
+    public readonly int NAME;
     /// <summary>
     /// 描述
     /// </summary>
-    public readonly string DESCRIBE;
-    /// <summary>
-    /// 预制体名称
-    /// </summary>
-    public readonly string PrefabName;
+    public readonly int DESCRIBE;
     /// <summary>
     /// 最大数量，食品类物品在达到最大数量后，
     /// </summary>
@@ -65,7 +62,15 @@ public sealed partial class Food : Luban.BeanBase
     public readonly int SanGain;
     public readonly int StatusGain;
     public readonly int Weight;
+    /// <summary>
+    /// 道具栏小图标图片名
+    /// </summary>
     public readonly string IconName;
+    /// <summary>
+    /// 道具物品渲染图片
+    /// </summary>
+    public readonly string SpriteName;
+    public readonly string PrefabName;
    
     public const int __ID__ = 2107191929;
     public override int GetTypeId() => __ID__;
@@ -80,7 +85,6 @@ public sealed partial class Food : Luban.BeanBase
         + "ID:" + ID + ","
         + "NAME:" + NAME + ","
         + "DESCRIBE:" + DESCRIBE + ","
-        + "prefabName:" + PrefabName + ","
         + "maxStackCount:" + MaxStackCount + ","
         + "interactEffectID:" + InteractEffectID + ","
         + "WaterGain:" + WaterGain + ","
@@ -89,6 +93,8 @@ public sealed partial class Food : Luban.BeanBase
         + "StatusGain:" + StatusGain + ","
         + "Weight:" + Weight + ","
         + "IconName:" + IconName + ","
+        + "SpriteName:" + SpriteName + ","
+        + "PrefabName:" + PrefabName + ","
         + "}";
     }
 }

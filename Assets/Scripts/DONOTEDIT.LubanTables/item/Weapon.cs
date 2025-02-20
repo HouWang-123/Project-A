@@ -20,7 +20,6 @@ public sealed partial class Weapon : Luban.BeanBase
         { if(!_buf["ID"].IsNumber) { throw new SerializationException(); }  ID = _buf["ID"]; }
         { if(!_buf["NAME"].IsString) { throw new SerializationException(); }  NAME = _buf["NAME"]; }
         { if(!_buf["DESCRIBE"].IsString) { throw new SerializationException(); }  DESCRIBE = _buf["DESCRIBE"]; }
-        { if(!_buf["prefabName"].IsString) { throw new SerializationException(); }  PrefabName = _buf["prefabName"]; }
         { if(!_buf["maxStackCount"].IsNumber) { throw new SerializationException(); }  MaxStackCount = _buf["maxStackCount"]; }
         { if(!_buf["interactEffectID"].IsNumber) { throw new SerializationException(); }  InteractEffectID = _buf["interactEffectID"]; }
         { if(!_buf["duribility"].IsNumber) { throw new SerializationException(); }  Duribility = _buf["duribility"]; }
@@ -28,6 +27,8 @@ public sealed partial class Weapon : Luban.BeanBase
         { if(!_buf["Attack"].IsNumber) { throw new SerializationException(); }  Attack = _buf["Attack"]; }
         { if(!_buf["AttackCD"].IsNumber) { throw new SerializationException(); }  AttackCD = _buf["AttackCD"]; }
         { if(!_buf["IconName"].IsString) { throw new SerializationException(); }  IconName = _buf["IconName"]; }
+        { if(!_buf["SpriteName"].IsString) { throw new SerializationException(); }  SpriteName = _buf["SpriteName"]; }
+        { if(!_buf["PrefabName"].IsString) { throw new SerializationException(); }  PrefabName = _buf["PrefabName"]; }
     }
 
     public static Weapon DeserializeWeapon(JSONNode _buf)
@@ -47,10 +48,6 @@ public sealed partial class Weapon : Luban.BeanBase
     /// 描述
     /// </summary>
     public readonly string DESCRIBE;
-    /// <summary>
-    /// 预制体名称
-    /// </summary>
-    public readonly string PrefabName;
     /// <summary>
     /// 在背包栏的最大堆叠数量，相当于武器必占一格
     /// </summary>
@@ -76,6 +73,8 @@ public sealed partial class Weapon : Luban.BeanBase
     /// </summary>
     public readonly float AttackCD;
     public readonly string IconName;
+    public readonly string SpriteName;
+    public readonly string PrefabName;
    
     public const int __ID__ = -1736061577;
     public override int GetTypeId() => __ID__;
@@ -90,7 +89,6 @@ public sealed partial class Weapon : Luban.BeanBase
         + "ID:" + ID + ","
         + "NAME:" + NAME + ","
         + "DESCRIBE:" + DESCRIBE + ","
-        + "prefabName:" + PrefabName + ","
         + "maxStackCount:" + MaxStackCount + ","
         + "interactEffectID:" + InteractEffectID + ","
         + "duribility:" + Duribility + ","
@@ -98,6 +96,8 @@ public sealed partial class Weapon : Luban.BeanBase
         + "Attack:" + Attack + ","
         + "AttackCD:" + AttackCD + ","
         + "IconName:" + IconName + ","
+        + "SpriteName:" + SpriteName + ","
+        + "PrefabName:" + PrefabName + ","
         + "}";
     }
 }

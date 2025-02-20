@@ -3,60 +3,66 @@
     "ID": 250001,
     "NAME": "聚光手电",
     "DESCRIBE": "开启后，以扇形照亮鼠标指示方向（最多生效一个），每秒消耗1点耐久，归0时自动销毁，被丢掉后，以玩家丢掉时的角色朝向放置（只有左右），并保持丢掉时的开启或关闭状态",
-    "prefabName": "Tool_FlashLight",
     "interactEffectID": 900001,
     "derubility": 200,
     "weight": 1,
-    "IconName": "Icon_Tool_FlashLight"
+    "IconName": "Icon_Item_Tool_FlashLight",
+    "SpriteName": "Sprite_Item_Tool_FlashLight",
+    "PrefabName": "P_Item_Tool"
   },
   {
     "ID": 250002,
     "NAME": "萤火虫",
     "DESCRIBE": "开启后，场景里会冒出1只小萤火虫，在场景内随意飞行，照亮极小的区域，会跟随玩家移动到下一间\n如果玩家将其丢掉，则萤火虫会存在于这个房间内，一个房间内最多6只萤火虫\n（玩家靠近时可以按E捕捉，但萤火虫在白天是不可见也不可交互的）",
-    "prefabName": "Tool_Firefly",
     "interactEffectID": 900001,
     "derubility": 0,
     "weight": 0,
-    "IconName": "Icon_Tool_Firefly"
+    "IconName": "Icon_Item_Tool_Firefly",
+    "SpriteName": "Sprite_Item_Tool_Firefly",
+    "PrefabName": "P_Item_Tool"
   },
   {
     "ID": 250003,
     "NAME": "奇妙触手",
     "DESCRIBE": "如果玩家持有，每秒对身边小范围内的单位造成伤害，每秒消耗1点耐久并降低1点San值，耐久归0时自动销毁\n如果散落在地，每秒对身边小范围内的单位造成伤害（包含玩家），耐久归0时自动销毁",
-    "prefabName": "Tool_WowTentacle",
     "interactEffectID": 900001,
     "derubility": 100,
     "weight": 0,
-    "IconName": "Icon_Tool_WowTentacle"
+    "IconName": "Icon_Item_Tool_WowTentacle",
+    "SpriteName": "Sprite_Item_Tool_WowTentacle",
+    "PrefabName": "P_Item_Tool"
   },
   {
     "ID": 250004,
     "NAME": "怀表",
     "DESCRIBE": "使用时，会显示当前的时间，耐久-1",
-    "prefabName": "Tool_PocketWatch",
     "interactEffectID": 900001,
     "derubility": 10,
     "weight": 0,
-    "IconName": "Icon_Tool_PocketWatch"
+    "IconName": "Icon_Item_Tool_PocketWatch",
+    "SpriteName": "Sprite_Item_Tool_PocketWatch",
+    "PrefabName": "P_Item_Tool"
   },
   {
     "ID": 250005,
     "NAME": "燃液补充瓶",
     "DESCRIBE": "开启后，每秒消耗1耐久，使玩家手中的打火机耐久+1",
-    "prefabName": "Tool_FuelCan",
     "interactEffectID": 900001,
     "derubility": 50,
     "weight": 1,
-    "IconName": "Icon_Tool_FuelCan"
+    "IconName": "Icon_Item_Tool_FuelCan",
+    "SpriteName": "Sprite_Item_Tool_FuelCan",
+    "PrefabName": "P_Item_Tool"
   },
   {
     "ID": 250006,
     "NAME": "八音盒",
     "DESCRIBE": "开启后，随身响起八音盒的音乐，角色每秒恢复1点San值，最多生效1个。",
-    "prefabName": "Tool_MusicBox",
     "interactEffectID": 900001,
     "derubility": 120,
     "weight": 1,
-    "IconName": "Icon_Tool_MusicBox"
+    "IconName": "Icon_Item_Tool_MusicBox",
+    "SpriteName": "Sprite_Item_Tool_MusicBox",
+    "PrefabName": "P_Item_Tool"
   }
 ]

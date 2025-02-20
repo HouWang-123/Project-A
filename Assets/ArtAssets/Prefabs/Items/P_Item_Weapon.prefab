@@ -99,7 +99,7 @@ GameObject:
   - component: {fileID: 983395914922150801}
   - component: {fileID: 7629216894913827763}
   m_Layer: 12
-  m_Name: Weapon_Shotgun
+  m_Name: P_Item_Weapon
   m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

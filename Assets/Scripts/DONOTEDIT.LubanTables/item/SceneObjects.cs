@@ -20,12 +20,13 @@ public sealed partial class SceneObjects : Luban.BeanBase
         { if(!_buf["ID"].IsNumber) { throw new SerializationException(); }  ID = _buf["ID"]; }
         { if(!_buf["NAME"].IsString) { throw new SerializationException(); }  NAME = _buf["NAME"]; }
         { if(!_buf["DESCRIBE"].IsString) { throw new SerializationException(); }  DESCRIBE = _buf["DESCRIBE"]; }
-        { if(!_buf["prefabName"].IsString) { throw new SerializationException(); }  PrefabName = _buf["prefabName"]; }
         { if(!_buf["interactEffectID"].IsNumber) { throw new SerializationException(); }  InteractEffectID = _buf["interactEffectID"]; }
         { if(!_buf["isDestructible"].IsBoolean) { throw new SerializationException(); }  IsDestructible = _buf["isDestructible"]; }
         { if(!_buf["durability"].IsNumber) { throw new SerializationException(); }  Durability = _buf["durability"]; }
         { if(!_buf["attack"].IsNumber) { throw new SerializationException(); }  Attack = _buf["attack"]; }
         { if(!_buf["IconName"].IsString) { throw new SerializationException(); }  IconName = _buf["IconName"]; }
+        { if(!_buf["SpriteName"].IsString) { throw new SerializationException(); }  SpriteName = _buf["SpriteName"]; }
+        { if(!_buf["PrefabName"].IsString) { throw new SerializationException(); }  PrefabName = _buf["PrefabName"]; }
     }
 
     public static SceneObjects DeserializeSceneObjects(JSONNode _buf)
@@ -46,10 +47,6 @@ public sealed partial class SceneObjects : Luban.BeanBase
     /// </summary>
     public readonly string DESCRIBE;
     /// <summary>
-    /// 预制体名称
-    /// </summary>
-    public readonly string PrefabName;
-    /// <summary>
     /// 玩家与其的交互是哪一种
     /// </summary>
     public readonly int InteractEffectID;
@@ -69,6 +66,11 @@ public sealed partial class SceneObjects : Luban.BeanBase
     /// 图标
     /// </summary>
     public readonly string IconName;
+    /// <summary>
+    /// 图片渲染
+    /// </summary>
+    public readonly string SpriteName;
+    public readonly string PrefabName;
    
     public const int __ID__ = -337794557;
     public override int GetTypeId() => __ID__;
@@ -83,12 +85,13 @@ public sealed partial class SceneObjects : Luban.BeanBase
         + "ID:" + ID + ","
         + "NAME:" + NAME + ","
         + "DESCRIBE:" + DESCRIBE + ","
-        + "prefabName:" + PrefabName + ","
         + "interactEffectID:" + InteractEffectID + ","
         + "isDestructible:" + IsDestructible + ","
         + "durability:" + Durability + ","
         + "attack:" + Attack + ","
         + "IconName:" + IconName + ","
+        + "SpriteName:" + SpriteName + ","
+        + "PrefabName:" + PrefabName + ","
         + "}";
     }
 }
