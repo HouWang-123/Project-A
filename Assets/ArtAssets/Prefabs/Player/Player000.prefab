@@ -166,7 +166,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_characterID: 110001
   ItemHoldPosition: {fileID: 0}
-  Speed: 100
+  Speed: 1
   ItemReleasePoint: {fileID: 304942487821736792}
 --- !u!114 &216033179984449701
 MonoBehaviour:

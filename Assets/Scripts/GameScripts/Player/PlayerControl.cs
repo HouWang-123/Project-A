@@ -246,7 +246,7 @@ public class PlayerControl : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        PlayerMove(InputControl.Instance.MovePoint, Speed * Time.deltaTime);
+        PlayerMove(InputControl.Instance.MovePoint, Speed);
         if(!pickupLock)
         {
             CalculateUseObjectRotation();
@@ -326,8 +326,8 @@ public class PlayerControl : MonoBehaviour
             if((vector.x > 0 && playerRenderer.localScale.x < 0) || (vector.x < 0 && playerRenderer.localScale.x > 0))
             {
                 speed *= fToB;
-                PlayerAnimatorEnum = EPlayerAnimator.Walk;
-                playerSpin.timeScale = fToB;
+                PlayerAnimatorEnum = EPlayerAnimator.Walk_Backwards;
+                //playerSpin.timeScale = fToB;
             }
             else if(shiftButt)
             {
@@ -470,6 +470,7 @@ public enum EPlayerAnimator
     Run_Head,
     Walk,
     Walk_Backwards,
+    Walk_Blink,
     Walk_B_Hand,
     Walk_B_Head,
     Walk_Hand,
