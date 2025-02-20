@@ -2,15 +2,30 @@
 
 public class HoundTindalosFSM : MonsterBaseFSM
 {
+    // 近战攻击位置
+    [Header("近战攻击位置")]
+    [SerializeField]
+    private Transform m_meleeTransform;
     protected override void Init()
     {
         base.Init();
+        if (m_meleeTransform == null)
+        {
+            m_meleeTransform = transform.Find("Melee");
+        }
         m_animationEnumWithName.Add(StateEnum.Patrol, new() { "Walk" });
         m_animationEnumWithName.Add(StateEnum.LookAt, new() { "Idle" });
         m_animationEnumWithName.Add(StateEnum.Chase, new() { "Walk" });
         m_animationEnumWithName.Add(StateEnum.MeleeAttack, new() { "Attack_1", "Attack_2" });
         m_animationEnumWithName.Add(StateEnum.Flee, new() { "Walk" });
         InitFSM();
+        // 注册玩家受伤的事件
+        EventManager.Instance.RegistEvent(EventConstName.PLAYER_HURTED_BY_HOUND_TINDALOS_MELEE, HurtPlayer);
+    }
+
+    private void OnDestroy()
+    {
+        EventManager.Instance.RemoveEvent(EventConstName.PLAYER_HURTED_BY_HOUND_TINDALOS_MELEE, HurtPlayer);
     }
 
     private void Start()
@@ -86,7 +101,7 @@ public class HoundTindalosFSM : MonsterBaseFSM
             rangedAttackState.AddTransition(TransitionEnum.FleeAction, StateEnum.Flee);
             m_fsm.AddState(rangedAttackState);
         }*/
-        MeleeAttackState meleeAttackState = new(m_fsm, gameObject, playerObj.transform);
+        MeleeAttackState meleeAttackState = new(m_fsm, gameObject, m_meleeTransform, playerObj.transform);
         // 追逐玩家
         meleeAttackState.AddTransition(TransitionEnum.ChasePlayer, StateEnum.Chase);
         // 丢失玩家
@@ -100,6 +115,14 @@ public class HoundTindalosFSM : MonsterBaseFSM
         fleeState.AddTransition(TransitionEnum.ToIdle, StateEnum.Idle);
         m_fsm.AddState(fleeState);
     }
+    protected override void HurtPlayer()
+    {
+        base.HurtPlayer();
 
+        var playerObj = GameObject.Find("Player000");
+        var playerData = playerObj.GetComponent<PlayerControl>().PlayerData;
+        playerData.CurrentHP -= m_monsterDatas.Attack;
+        Debug.Log(GetType() + " /HurtPlayer() => 玩家受到 " + m_monsterDatas.Attack + " 点伤害");
+    }
 }
 

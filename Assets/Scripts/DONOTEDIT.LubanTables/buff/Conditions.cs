@@ -20,7 +20,6 @@ public sealed partial class Conditions : Luban.BeanBase
         { if(!_buf["ID"].IsNumber) { throw new SerializationException(); }  ID = _buf["ID"]; }
         { if(!_buf["NAME"].IsString) { throw new SerializationException(); }  NAME = _buf["NAME"]; }
         { if(!_buf["DESCRIBE"].IsString) { throw new SerializationException(); }  DESCRIBE = _buf["DESCRIBE"]; }
-        { if(!_buf["isTimed"].IsBoolean) { throw new SerializationException(); }  IsTimed = _buf["isTimed"]; }
         { if(!_buf["canTimeStack"].IsBoolean) { throw new SerializationException(); }  CanTimeStack = _buf["canTimeStack"]; }
         { if(!_buf["maxTime"].IsNumber) { throw new SerializationException(); }  MaxTime = _buf["maxTime"]; }
     }
@@ -43,10 +42,6 @@ public sealed partial class Conditions : Luban.BeanBase
     /// </summary>
     public readonly string DESCRIBE;
     /// <summary>
-    /// 是否有倒计时（持续时间，倒计时结束后消失）
-    /// </summary>
-    public readonly bool IsTimed;
-    /// <summary>
     /// 再次获得时，是否叠加持续时间，如果不叠加，则取持续时间更长的那一个
     /// </summary>
     public readonly bool CanTimeStack;
@@ -68,7 +63,6 @@ public sealed partial class Conditions : Luban.BeanBase
         + "ID:" + ID + ","
         + "NAME:" + NAME + ","
         + "DESCRIBE:" + DESCRIBE + ","
-        + "isTimed:" + IsTimed + ","
         + "canTimeStack:" + CanTimeStack + ","
         + "maxTime:" + MaxTime + ","
         + "}";

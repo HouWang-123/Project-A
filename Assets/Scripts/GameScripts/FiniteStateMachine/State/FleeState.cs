@@ -57,7 +57,7 @@ public class FleeState : BaseState
     {
         if (npc.GetComponent<MonsterBaseFSM>().LightTransform)
         {
-            m_timer += Time.deltaTime;
+            m_timer += Time.deltaTime * m_timeScale;
             // 超过逃跑时间
             if (m_timer > m_fleeTime)
             {
@@ -70,8 +70,10 @@ public class FleeState : BaseState
     {
         base.DoBeforeEntering();
         agent.isStopped = false;
+        var monsterFSM = m_gameObject.GetComponent<MonsterBaseFSM>();
+        agent.speed = monsterFSM.MonsterDatas.Speed * m_timeScale;
         // 状态对应动画名称
-        AnimationController.PlayAnim(m_gameObject, StateEnum.Flee, 0, false);
+        AnimationController.PlayAnim(m_gameObject, StateEnum.Flee, 0, false, m_timeScale);
     }
 
     public override void DoAfterLeaving()
@@ -79,6 +81,8 @@ public class FleeState : BaseState
         base.DoAfterLeaving();
         // 停止移动
         agent.isStopped = true;
+        var monsterFSM = m_gameObject.GetComponent<MonsterBaseFSM>();
+        agent.speed = monsterFSM.MonsterDatas.Speed * m_timeScale;
         agent.destination = agent.transform.position;
     }
 }

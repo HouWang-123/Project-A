@@ -53,6 +53,7 @@ MonoBehaviour:
   m_skeletonAnim: {fileID: 6416146041462596601}
   m_infoRenderer: {fileID: 4906414598371161004}
   m_projectileTransform: {fileID: 1168053493862167232}
+  m_meleeTransform: {fileID: 5439699109162860848}
 --- !u!114 &2160751101551506776
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -241,6 +242,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1168053493862167232}
+  - {fileID: 5439699109162860848}
   m_Father: {fileID: 1233375662946168701}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &1152428284143817772
@@ -362,3 +364,34 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!1 &8029394009178932561
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5439699109162860848}
+  m_Layer: 13
+  m_Name: MeleePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5439699109162860848
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8029394009178932561}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.1, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2548820568462937015}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

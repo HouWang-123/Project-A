@@ -27,9 +27,7 @@ public sealed partial class Monster : Luban.BeanBase
         { if(!_buf["warnRange"].IsNumber) { throw new SerializationException(); }  WarnRange = _buf["warnRange"]; }
         { if(!_buf["hitRange"].IsNumber) { throw new SerializationException(); }  HitRange = _buf["hitRange"]; }
         { if(!_buf["shootRange"].IsNumber) { throw new SerializationException(); }  ShootRange = _buf["shootRange"]; }
-        { if(!_buf["inPeace"].IsString) { throw new SerializationException(); }  InPeace = _buf["inPeace"]; }
-        { if(!_buf["toBattle"].IsString) { throw new SerializationException(); }  ToBattle = _buf["toBattle"]; }
-        { if(!_buf["inBattle"].IsString) { throw new SerializationException(); }  InBattle = _buf["inBattle"]; }
+        { if(!_buf["hitDegree"].IsNumber) { throw new SerializationException(); }  HitDegree = _buf["hitDegree"]; }
     }
 
     public static Monster DeserializeMonster(JSONNode _buf)
@@ -78,17 +76,9 @@ public sealed partial class Monster : Luban.BeanBase
     /// </summary>
     public readonly float ShootRange;
     /// <summary>
-    /// 闲置状态AI
+    /// 近战角度
     /// </summary>
-    public readonly string InPeace;
-    /// <summary>
-    /// 入战逻辑
-    /// </summary>
-    public readonly string ToBattle;
-    /// <summary>
-    /// 战斗状态AI
-    /// </summary>
-    public readonly string InBattle;
+    public readonly int HitDegree;
    
     public const int __ID__ = 1577306840;
     public override int GetTypeId() => __ID__;
@@ -110,9 +100,7 @@ public sealed partial class Monster : Luban.BeanBase
         + "warnRange:" + WarnRange + ","
         + "hitRange:" + HitRange + ","
         + "shootRange:" + ShootRange + ","
-        + "inPeace:" + InPeace + ","
-        + "toBattle:" + ToBattle + ","
-        + "inBattle:" + InBattle + ","
+        + "hitDegree:" + HitDegree + ","
         + "}";
     }
 }

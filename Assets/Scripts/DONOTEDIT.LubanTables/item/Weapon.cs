@@ -29,6 +29,7 @@ public sealed partial class Weapon : Luban.BeanBase
         { if(!_buf["IconName"].IsString) { throw new SerializationException(); }  IconName = _buf["IconName"]; }
         { if(!_buf["SpriteName"].IsString) { throw new SerializationException(); }  SpriteName = _buf["SpriteName"]; }
         { if(!_buf["PrefabName"].IsString) { throw new SerializationException(); }  PrefabName = _buf["PrefabName"]; }
+        { if(!_buf["WeaponType"].IsNumber) { throw new SerializationException(); }  WeaponType = _buf["WeaponType"]; }
     }
 
     public static Weapon DeserializeWeapon(JSONNode _buf)
@@ -37,7 +38,7 @@ public sealed partial class Weapon : Luban.BeanBase
     }
 
     /// <summary>
-    /// 序号
+    /// 序号<br/>近战：260001-264999<br/>远程：265000-269999
     /// </summary>
     public readonly int ID;
     /// <summary>
@@ -75,6 +76,10 @@ public sealed partial class Weapon : Luban.BeanBase
     public readonly string IconName;
     public readonly string SpriteName;
     public readonly string PrefabName;
+    /// <summary>
+    /// 0表示近战，1表示远程
+    /// </summary>
+    public readonly int WeaponType;
    
     public const int __ID__ = -1736061577;
     public override int GetTypeId() => __ID__;
@@ -98,6 +103,7 @@ public sealed partial class Weapon : Luban.BeanBase
         + "IconName:" + IconName + ","
         + "SpriteName:" + SpriteName + ","
         + "PrefabName:" + PrefabName + ","
+        + "WeaponType:" + WeaponType + ","
         + "}";
     }
 }

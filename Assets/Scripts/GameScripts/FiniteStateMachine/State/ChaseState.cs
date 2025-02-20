@@ -84,11 +84,11 @@ public class ChaseState : BaseState
         Vector3 scale;
         if (playerX - npcX > 0f)
         {
-            scale = new(1f, 1f, 1f);
+            scale = GameConstData.NormalScale;
         }
         else
         {
-            scale = new(-1f, 1f, 1f);
+            scale = GameConstData.ReverseScale;
         }
         m_gameObject.transform.localScale = scale;
         // ¸ú×ÅÍæ¼Ò
@@ -109,13 +109,13 @@ public class ChaseState : BaseState
         }
         if (m_fucking)
         {
-            m_timer += Time.deltaTime;
+            m_timer += Time.deltaTime * m_timeScale;
         }
         if (m_fuckedAnimPlayed && m_timer > m_fuckingTime)
         {
             m_fuckedAnimPlayed = false;
             agent.isStopped = false;
-            AnimationController.PlayAnim(m_gameObject, StateEnum.Chase, 0, true);
+            AnimationController.PlayAnim(m_gameObject, StateEnum.Chase, 0, true, m_timeScale);
         }
         // Ê®ÃëCD
         if (m_timer > m_fuckingTime + m_fuckingCD)
@@ -226,7 +226,7 @@ public class ChaseState : BaseState
     {
         base.DoBeforeEntering();
         agent.isStopped = false;
-        AnimationController.PlayAnim(m_gameObject, StateEnum.Chase, 0, true);
+        AnimationController.PlayAnim(m_gameObject, StateEnum.Chase, 0, true, m_timeScale);
     }
 
     public override void DoAfterLeaving()

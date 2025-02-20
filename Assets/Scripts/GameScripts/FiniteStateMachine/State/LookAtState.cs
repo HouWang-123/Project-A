@@ -42,11 +42,11 @@ public class LookAtState : BaseState
         Vector3 scale;
         if (playerX - npcX > 0f)
         {
-            scale = new Vector3(1f, 1f, 1f);
+            scale = GameConstData.NormalScale;
         }
         else
         {
-            scale = new Vector3(-1f, 1f, 1f);
+            scale = GameConstData.ReverseScale;
         }
         m_gameObject.transform.localScale = scale;
     }
@@ -80,7 +80,7 @@ public class LookAtState : BaseState
     public override void DoBeforeEntering()
     {
         base.DoBeforeEntering();
-        AnimationController.PlayAnim(m_gameObject, StateEnum.LookAt, 0, true);
+        AnimationController.PlayAnim(m_gameObject, StateEnum.LookAt, 0, true, m_timeScale);
     }
 }
 

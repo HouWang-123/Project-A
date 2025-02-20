@@ -31,7 +31,7 @@ public class IdleState : BaseState
 
     public override void Condition(GameObject npc)
     {
-        m_TimeToWait += Time.deltaTime;
+        m_TimeToWait += Time.deltaTime * m_timeScale;
         // µÈ´ý5Ãë
         if (m_TimeToWait >= 5f)
         {
@@ -64,6 +64,6 @@ public class IdleState : BaseState
     public override void DoBeforeEntering()
     {
         base.DoBeforeEntering();
-        AnimationController.PlayAnim(m_gameObject, StateEnum.Idle, 0, true);
+        AnimationController.PlayAnim(m_gameObject, StateEnum.Idle, 0, true, m_timeScale);
     }
 }

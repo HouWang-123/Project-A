@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
@@ -106,11 +105,11 @@ public class PatrolState : BaseState
             Vector3 scale;
             if (newPosX - npcPosX > 0f)
             {
-                scale = new(1f, 1f, 1f);
+                scale = GameConstData.NormalScale;
             }
             else
             {
-                scale = new(-1f, 1f, 1f);
+                scale = GameConstData.ReverseScale;
             }
             
             m_gameObject.transform.localScale = scale;
@@ -175,8 +174,8 @@ public class PatrolState : BaseState
         if (agent.transform.position == agent.destination)
         {
             m_canMove = false;
-            AnimationController.PlayAnim(m_gameObject, StateEnum.Idle, 0, true);
-            m_waitTime += Time.deltaTime;
+            AnimationController.PlayAnim(m_gameObject, StateEnum.Idle, 0, true, m_timeScale);
+            m_waitTime += Time.deltaTime * m_timeScale;
             // 等待了两秒
             if (m_waitTime >= 2f)
             {
@@ -189,7 +188,7 @@ public class PatrolState : BaseState
                 }
                 else
                 {
-                    AnimationController.PlayAnim(m_gameObject, StateEnum.Patrol, 0, true);
+                    AnimationController.PlayAnim(m_gameObject, StateEnum.Patrol, 0, true, m_timeScale);
                 }
             }
         }
@@ -217,9 +216,9 @@ public class PatrolState : BaseState
 
         var monsterFSM = m_gameObject.GetComponent<MonsterBaseFSM>();
         // 巡逻速度是0.5倍的移动速度
-        agent.speed = 0.5f * monsterFSM.MonsterDatas.Speed;
+        agent.speed = 0.5f * monsterFSM.MonsterDatas.Speed * m_timeScale;
         // 动画播放速度为0.5倍
-        AnimationController.PlayAnim(m_gameObject, StateEnum.Patrol, 0, true, 0.5f);
+        AnimationController.PlayAnim(m_gameObject, StateEnum.Patrol, 0, true, 0.5f * m_timeScale);
     }
 
     public override void DoAfterLeaving()
@@ -231,7 +230,7 @@ public class PatrolState : BaseState
 
         var monsterFSM = m_gameObject.GetComponent<MonsterBaseFSM>();
         // 恢复正常移动速度
-        agent.speed = monsterFSM.MonsterDatas.Speed;
+        agent.speed = monsterFSM.MonsterDatas.Speed * m_timeScale;
     }
 }
 

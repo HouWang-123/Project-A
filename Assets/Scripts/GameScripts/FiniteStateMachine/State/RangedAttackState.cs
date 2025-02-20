@@ -36,7 +36,7 @@ public class RangedAttackState : BaseState
     private readonly float m_fleeDistance = -1f;
     // 弹道修正向量
     private readonly Vector3 m_projectileFixVector3;
-    public RangedAttackState(FiniteStateMachine finiteStateMachine, GameObject npcObj,Transform projectileTrans, Transform playerTransform)
+    public RangedAttackState(FiniteStateMachine finiteStateMachine, GameObject npcObj, Transform projectileTrans, Transform playerTransform)
         : base(finiteStateMachine, npcObj)
     {
         // 设置状态
@@ -69,13 +69,12 @@ public class RangedAttackState : BaseState
             go.transform.SetParent(m_projectileTransform);
             go.transform.SetPositionAndRotation(go.transform.parent.position, go.transform.parent.rotation);
             go.GetComponent<ProjectileControl>().ReturnFunc = ReturnProjectile;
+            go.GetComponent<ProjectileControl>().MonsterBaseFSM = monsterBaseFSM;
             go.SetActive(false);
             m_projectileQueue.Enqueue(go);
             ++m_projectileCount;
         }
-        
     }
-
     public GameObject GetProjectile()
     {
         if (m_projectileQueue.Count > 0)
@@ -107,11 +106,11 @@ public class RangedAttackState : BaseState
     public override void Act(GameObject npc)
     {
         // 模拟播放攻击动画
-        m_timer += Time.deltaTime;
+        m_timer += Time.deltaTime * m_timeScale;
         if (!m_enterCD)
         {
             var monsterFSM = m_gameObject.GetComponent<MonsterBaseFSM>();
-            AnimationController.PlayAnim(m_gameObject, StateEnum.RangedAttack, 0, false);
+            AnimationController.PlayAnim(m_gameObject, StateEnum.RangedAttack, 0, false, m_timeScale);
             m_animTotalTime = AnimationController.AnimationTotalTime(monsterFSM.SkeletonAnim);
             m_enterCD = true;
         }
@@ -126,7 +125,7 @@ public class RangedAttackState : BaseState
                 com.Direction = (m_playerTransform.position + m_projectileFixVector3 - m_projectileTransform.position).normalized;
             }
             m_attacked = true;
-            AnimationController.PlayAnim(m_gameObject, StateEnum.Idle, 0, false);
+            AnimationController.PlayAnim(m_gameObject, StateEnum.Idle, 0, false, m_timeScale);
         }
         if (m_timer >= m_attackCD + m_animTotalTime)
         {
@@ -164,7 +163,7 @@ public class RangedAttackState : BaseState
     public override void DoBeforeEntering()
     {
         base.DoBeforeEntering();
-        AnimationController.PlayAnim(m_gameObject, StateEnum.RangedAttack, 0, false);
+        AnimationController.PlayAnim(m_gameObject, StateEnum.RangedAttack, 0, false, m_timeScale);
     }
 }
 

@@ -97,5 +97,8 @@ public class MonsterBaseFSM : MonoBehaviour
         // 构建有限状态机
         m_fsm = new();
     }
+    protected virtual void HurtPlayer()
+    {
+    }
 }
 

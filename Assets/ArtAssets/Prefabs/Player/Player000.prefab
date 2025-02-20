@@ -164,6 +164,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c6efc537bab072479445223435f15d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_characterID: 110001
   ItemHoldPosition: {fileID: 0}
   Speed: 100
   ItemReleasePoint: {fileID: 304942487821736792}

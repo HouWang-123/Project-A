@@ -5,6 +5,7 @@ using UnityEngine;
 /// </summary>
 public class ProjectileControl : MonoBehaviour
 {
+    public MonsterBaseFSM MonsterBaseFSM;
     // 速度大小
     public float m_speed = 0f;
     // 发射方向
@@ -46,9 +47,12 @@ public class ProjectileControl : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.TryGetComponent<PlayerControl>(out PlayerControl playerControl) || other.gameObject.TryGetComponent<DrownedOnesFSM>(out DrownedOnesFSM monsterFSM))
+        if (other.gameObject.TryGetComponent<PlayerControl>(out _) || other.gameObject.TryGetComponent<MonsterBaseFSM>(out _))
         {
-            Debug.Log(GetType() + "OnCollisionEnter() => 对 " + other.gameObject.name + " 造成了伤害");
+            if (MonsterBaseFSM is DrownedOnesFSM)
+            {
+                EventManager.Instance.RunEvent(EventConstName.PLAYER_HURTED_BY_DROWNED_ONES_RANGED);
+            }
         }
         if (ReturnFunc != null)
         {
