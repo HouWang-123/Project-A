@@ -118,11 +118,8 @@ public class HoundTindalosFSM : MonsterBaseFSM
     protected override void HurtPlayer()
     {
         base.HurtPlayer();
-
-        var playerObj = GameObject.Find("Player000");
-        var playerData = playerObj.GetComponent<PlayerControl>().PlayerData;
-        playerData.CurrentHP -= m_monsterDatas.Attack;
-        Debug.Log(GetType() + " /HurtPlayer() => 玩家受到 " + m_monsterDatas.Attack + " 点伤害");
+        GameRunTimeData.Instance.CharacterBasicStat.HurdPlayer(m_monsterDatas.Attack);
+        return;
     }
 }
 

@@ -6,26 +6,9 @@ using YooAsset;
 using UnityEngine.InputSystem.Interactions;
 using UnityEngine.Events;
 using Spine.Unity;
-using cfg.cha;
-
-public class BasicPlayerData
-{
-    // 当前生命值
-    public int CurrentHP;
-}
 
 public class PlayerControl : MonoBehaviour
 {
-    // 角色ID
-    [Header("要读取数据的角色ID")]
-    [SerializeField]
-    private int m_characterID;
-    // 角色表属性
-    private Character m_characterData;
-    public Character Character { get { return m_characterData; } }
-    // 角色当前属性
-    private BasicPlayerData m_playerData;
-    public BasicPlayerData PlayerData {  get { return m_playerData; } }
     public Transform ItemHoldPosition; // 玩家拿取物品位置
     private PlayerInputControl inputControl;
     private Rigidbody playerRG;
@@ -194,13 +177,6 @@ public class PlayerControl : MonoBehaviour
             }
         };
         #endregion
-
-        // 读取角色属性
-        m_characterData = GameTableDataAgent.CharacterTable.Get(m_characterID);
-        m_playerData = new()
-        {
-            CurrentHP = m_characterData.MaxHP
-        };
     }
     
     Vector3 u, v, l, a, b;

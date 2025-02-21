@@ -28,7 +28,7 @@ public sealed partial class Character : Luban.BeanBase
         { if(!_buf["runRestore"].IsNumber) { throw new SerializationException(); }  RunRestore = _buf["runRestore"]; }
         { if(!_buf["maxHP"].IsNumber) { throw new SerializationException(); }  MaxHP = _buf["maxHP"]; }
         { if(!_buf["maxFood"].IsNumber) { throw new SerializationException(); }  MaxFood = _buf["maxFood"]; }
-        { var __json0 = _buf["digestRate"]; if(!__json0.IsArray) { throw new SerializationException(); } DigestRate = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  DigestRate.Add(__v0); }   }
+        { var __json0 = _buf["digestRate"]; if(!__json0.IsArray) { throw new SerializationException(); } DigestRate = new System.Collections.Generic.List<float>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { float __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  DigestRate.Add(__v0); }   }
         { if(!_buf["maxThirsty"].IsNumber) { throw new SerializationException(); }  MaxThirsty = _buf["maxThirsty"]; }
         { if(!_buf["maxSan"].IsNumber) { throw new SerializationException(); }  MaxSan = _buf["maxSan"]; }
         { if(!_buf["strength"].IsNumber) { throw new SerializationException(); }  Strength = _buf["strength"]; }
@@ -91,7 +91,7 @@ public sealed partial class Character : Luban.BeanBase
     /// <summary>
     /// 消化效率（消化机制见策划表）
     /// </summary>
-    public readonly System.Collections.Generic.List<int> DigestRate;
+    public readonly System.Collections.Generic.List<float> DigestRate;
     /// <summary>
     /// 最大水份值
     /// </summary>
