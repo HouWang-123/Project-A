@@ -192,12 +192,12 @@ GameObject:
   m_Component:
   - component: {fileID: 2874328539975630756}
   m_Layer: 0
-  m_Name: bag
+  m_Name: Bag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2874328539975630756
 Transform:
   m_ObjectHideFlags: 0
