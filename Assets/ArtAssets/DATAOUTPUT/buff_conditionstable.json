@@ -63,37 +63,23 @@
     "maxTime": 120
   },
   {
-    "ID": 120010,
-    "NAME": "无界通行",
-    "DESCRIBE": "San值-25，下一次解锁被缠绕的物件时将无视代价",
-    "canTimeStack": false,
-    "maxTime": 60
-  },
-  {
-    "ID": 120011,
-    "NAME": "膛线与真理",
-    "DESCRIBE": "San值-5.下一次通过枪械的造成的伤害+50%",
-    "canTimeStack": false,
-    "maxTime": 60
-  },
-  {
     "ID": 120012,
     "NAME": "癫狂1",
-    "DESCRIBE": "San值在(40,60]",
+    "DESCRIBE": "San值在(40,60]时获得",
     "canTimeStack": false,
     "maxTime": 999
   },
   {
     "ID": 120013,
     "NAME": "癫狂2",
-    "DESCRIBE": "San值在(20-40]",
+    "DESCRIBE": "San值在(20-40]时获得",
     "canTimeStack": false,
     "maxTime": 999
   },
   {
     "ID": 120014,
     "NAME": "癫狂3",
-    "DESCRIBE": "San值在[0,20]",
+    "DESCRIBE": "San值在[0,20]时获得",
     "canTimeStack": false,
     "maxTime": 999
   }

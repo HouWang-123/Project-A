@@ -30,6 +30,7 @@ public partial class Tables
     public scene.DoorsTable DoorsTable {get; }
     public scene.RoomsTable RoomsTable {get; }
     public mon.MonsterTable MonsterTable {get; }
+    public text.LocalizationTable LocalizationTable {get; }
 
     public Tables(System.Func<string, JSONNode> loader)
     {
@@ -49,6 +50,7 @@ public partial class Tables
         DoorsTable = new scene.DoorsTable(loader("scene_doorstable"));
         RoomsTable = new scene.RoomsTable(loader("scene_roomstable"));
         MonsterTable = new mon.MonsterTable(loader("mon_monstertable"));
+        LocalizationTable = new text.LocalizationTable(loader("text_localizationtable"));
         ResolveRef();
     }
     
@@ -70,6 +72,7 @@ public partial class Tables
         DoorsTable.ResolveRef(this);
         RoomsTable.ResolveRef(this);
         MonsterTable.ResolveRef(this);
+        LocalizationTable.ResolveRef(this);
     }
 }
 
