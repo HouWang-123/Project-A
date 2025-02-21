@@ -3,7 +3,7 @@ using cfg.interact;
 using UnityEngine;
 using YooAsset;
 
-public class Food : ItemBase, IItemSlotable,IStackable
+public class Food : ItemBase, IItemSlotable,IStackable,IBuffedItem
 {
     public cfg.item.Food data;
     // 可能存在的抽象方法，子类实现方法体
@@ -65,5 +65,10 @@ public class Food : ItemBase, IItemSlotable,IStackable
     public override void OnLeftInteract()
     {
         Debug.Log("食物左键");
+    }
+    // todo
+    public int GetBuffId()
+    {
+        throw new NotImplementedException();
     }
 }
