@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using YooAsset;
 
-public class ToolItem : ItemBase, IItemSlotable
+public class Tool : ItemBase, ISlotable
 {
     public cfg.item.Tools data;
     // 物品初始化

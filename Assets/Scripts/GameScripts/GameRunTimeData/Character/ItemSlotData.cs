@@ -62,8 +62,6 @@ public class ItemSlotData
     /// <returns></returns>
     private int GetItemProperStackKeyNumberAndStackItem(ItemBase InsertItem, int Count, out bool outOfBound, out int extraVal)
     {
-        //   5  5  5           9   
-        //   9  9  6
         IStackable iStackable = InsertItem as IStackable;
         int maxStacksize = iStackable.GetMaxStackValue();
         // 遍历道具栏

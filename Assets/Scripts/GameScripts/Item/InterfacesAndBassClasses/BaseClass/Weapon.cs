@@ -4,7 +4,7 @@ using Spine.Unity.Examples;
 using UnityEngine;
 using YooAsset;
 
-public class Weapon : ItemBase, IItemSlotable
+public class Weapon : ItemBase, ISlotable
 {
     public cfg.item.Weapon data;
     

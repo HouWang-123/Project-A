@@ -10,6 +10,9 @@ public class GameConstData
     //反向
     internal static readonly Vector3 ReverseScale = new(-1,1,1);
     public static readonly Vector3 ReversedRotation = new(0, -180, 0);
-    public static readonly int DEFAULT_SLOTCOUNT = 6;
     
+    public static readonly int DEFAULT_SLOTCOUNT = 6;
+    public static readonly int DEFAULT_CHARACTER_ID = 110001;
+    public static readonly float DecimalNumbers = 100f;         // 游戏数据保留两位小数
+
 }

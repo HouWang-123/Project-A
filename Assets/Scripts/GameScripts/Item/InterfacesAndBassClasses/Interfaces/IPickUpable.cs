@@ -10,7 +10,7 @@ public interface IPickUpable            // 可否被拾取接口
 }
 
 // 可否进入道具栏
-public interface IItemSlotable
+public interface ISlotable
 {
     
 }

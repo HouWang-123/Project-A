@@ -1,6 +1,10 @@
+using System;
+
 public class GameHUD : UIBase
 {
     public static GameHUD Instance;
+    public int GameTics;
+    
     /// <summary>
     /// ItemSlotManager 道具栏管理器，API 方法前缀: ISM
     /// </summary>
@@ -23,8 +27,26 @@ public class GameHUD : UIBase
     {
         SlotManagerHUD.Hide();
     }
-    
-#region ItemSlotManagerAPI
+    public static CharacterStat CharacterStatHUDStat;
+
+    public void SetHUDStat(CharacterStat s)
+    {
+        CharacterStatHUDStat = s;
+    }
+
+    private void RefreshHUDs()    // 界面数据刷新
+    {
+        
+    }
+    private void FixedUpdate()
+    {
+        if (GameTics % 2 == 0)
+        {
+            RefreshHUDs(); // 每秒界面更新频率为 25
+        }
+        GameTics++;
+    }
+    #region ItemSlotManagerAPI
     public void ISM_NextFocusItem()
     {
         SlotManagerHUD.ChangeFocus(true);

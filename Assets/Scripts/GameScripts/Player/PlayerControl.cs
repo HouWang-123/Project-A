@@ -217,6 +217,7 @@ public class PlayerControl : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        GameRunTimeData.Instance.CharacterBasicStat.UpdatePlayerStat();
         PlayerMove(InputControl.Instance.MovePoint, Speed);
         if(!pickupLock)
         {
@@ -261,24 +262,7 @@ public class PlayerControl : MonoBehaviour
         {
             rightMouseAction?.Invoke();
         }
-        //if(fire)
-        //{
-        //    if (ItemOnHand == null)
-        //    {
-        //        return;
-        //    }
-        //    if(time > 0)
-        //    {
-        //        time -= Time.deltaTime;
-        //    }
-        //    else
-        //    {   // 实例化子弹
-        //        time = Waitime;
-        //        GameObject zidan = Instantiate(asset.AssetObject, null) as GameObject;
-        //        zidan.transform.eulerAngles = weaponTr.eulerAngles;
-        //        zidan.transform.position = weaponTr.position;
-        //    }
-        //}
+        
     }
     
     private void OnDisable()
@@ -373,7 +357,7 @@ public class PlayerControl : MonoBehaviour
         
         ///////////可堆叠或者不可堆叠物品进入背包并更新HUD和人物渲染的逻辑 /////////////
         
-        if (characterInUseItem is IItemSlotable)
+        if (characterInUseItem is ISlotable)
         {
             // 背包数据更新
             bool stackOverFlowed;
@@ -437,6 +421,7 @@ public class PlayerControl : MonoBehaviour
         else
         {
             ///// todo 举起物品逻辑  /////////
+            
         }
         
     }
