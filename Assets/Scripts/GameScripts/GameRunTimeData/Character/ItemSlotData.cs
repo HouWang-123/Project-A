@@ -124,10 +124,33 @@ public class ItemSlotData
     /// <returns></returns>
     public int InsertOrUpdateItemSlotData(ItemBase item)
     {
-        int res;
+        int res = -1;
         if (item is IStackable)
         {
-            res =  InsertOrUpdateItemSlotData_Stack(item);
+            IStackable s = item as IStackable;
+            if (s.GetStackCount() > s.GetMaxStackValue())
+            {
+                int iteration = s.GetStackCount() / s.GetMaxStackValue() + 1;
+                int lastcount = s.GetStackCount() % s.GetMaxStackValue();
+                
+                for (int i = 0; i < iteration; i++)
+                {
+                    if (i == iteration -1) // 最后一次迭代
+                    {
+                        s.ChangeStackCount(lastcount);
+                        res = InsertOrUpdateItemSlotData_Stack(item);
+                    }
+                    else
+                    {
+                        s.ChangeStackCount(s.GetMaxStackValue());
+                        res =  InsertOrUpdateItemSlotData_Stack(item);
+                    }
+                }
+            }
+            else
+            {
+                res =  InsertOrUpdateItemSlotData_Stack(item);
+            }
         }
         else
         {
@@ -180,26 +203,19 @@ public class ItemSlotData
         }
         else
         {
-            if (stackable.GetMaxStackValue() < stackable.GetStackCount())
+            if (SlotItemDataList.ContainsKey(slotNumber))
             {
-                throw new Exception("场景物品堆叠量禁止大于已配置的最大堆叠量");
+                slotNumber = FindEmptySlot();
             }
-            else
+            SetCharacterInUseItem(item);
+            AllCharacterItems.Add(slotNumber,item);
+            ItemID2Key.Add(slotNumber,item.ItemID);
+            SlotItemDataList[slotNumber] = newItemStatus;
+            if (slotNumber != CurrentFocusSlot)
             {
-                if (SlotItemDataList.ContainsKey(slotNumber))
-                {
-                    slotNumber = FindEmptySlot();
-                }
-                SetCharacterInUseItem(item);
-                AllCharacterItems.Add(slotNumber,item);
-                ItemID2Key.Add(slotNumber,item.ItemID);
-                SlotItemDataList[slotNumber] = newItemStatus;
-                if (slotNumber != CurrentFocusSlot)
-                {
-                    return 1;
-                }
-                return 0;
+                return 1;
             }
+            return 0;
         }
         return 1;
     }

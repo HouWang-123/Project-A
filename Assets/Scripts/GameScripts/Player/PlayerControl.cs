@@ -32,7 +32,7 @@ public class PlayerControl : MonoBehaviour
     private Transform playerRenderer;
     private Transform useObjParent;
     private PlayerPickupController _pickupController;
-    private bool playerReversed;
+    private bool playerReversed; // 判断角色是否发生了偏转，与拾取和丢弃道具物品有关系
 
     private EPlayerAnimator animatorEnum = EPlayerAnimator.Idle;
     public EPlayerAnimator PlayerAnimatorEnum
@@ -102,8 +102,8 @@ public class PlayerControl : MonoBehaviour
         {
             playerSpin.AnimationState.SetAnimation(0, animatorEnum.ToString(), true);
         }
-
-        #region InputSystem
+        
+#region InputSystem
 
         InputControl.Instance.GamePlayerEnable();
         InputControl.Instance.UIDisable();
@@ -406,6 +406,7 @@ public class PlayerControl : MonoBehaviour
         {
             // 背包数据更新
             int  Restult = GameRunTimeData.Instance.CharacterItemSlotData.InsertOrUpdateItemSlotData(characterInUseItem);
+            
             if (characterInUseItem is IStackable)
             {
                 if (Restult != -1)
@@ -431,7 +432,6 @@ public class PlayerControl : MonoBehaviour
                 pickupLock = false;
                 _pickupController.currentPickup = null;
                 _pickupController.ChangePickupTarget();
-            
             }
             else
             {
@@ -439,7 +439,6 @@ public class PlayerControl : MonoBehaviour
             }
         
             ChangeMouseAction(GameRunTimeData.Instance.CharacterItemSlotData.GetCurrentFocusSlot());
-        
             void SetItemBaseToPlayerHand(ItemBase itemBase)
             {
                 Vector3 transformLocalEulerAngles = itemBase.gameObject.transform.localEulerAngles;

@@ -1,5 +1,6 @@
 
 public class GameRunTimeData : SingleDataMgr<GameRunTimeData>
 {
-    public ItemSlotData CharacterItemSlotData = new ItemSlotData();
+    public ItemSlotData CharacterItemSlotData = new ();
+    public CharacterBasicStat CharacterBasicStat = new ();
 }
