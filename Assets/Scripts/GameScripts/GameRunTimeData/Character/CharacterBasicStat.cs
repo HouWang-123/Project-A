@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Unity.Mathematics.Geometry;
 using UnityEngine;
@@ -45,8 +46,11 @@ public class CharacterBasicStat
 
     public void InitCharacter(int m_characterID)
     {
-        m_characterData = GameTableDataAgent.CharacterTable.Get(m_characterID);
-        if (m_characterData == null)
+        try
+        {
+            m_characterData = GameTableDataAgent.CharacterTable.Get(m_characterID);
+        }
+        catch (Exception e)
         {
             m_characterData = GameTableDataAgent.CharacterTable.Get(GameConstData.DEFAULT_CHARACTER_ID);
             Debug.LogWarning("==========================角色数据不存在，使用默认数据=============================");
