@@ -22,3 +22,8 @@ public interface IStackable
     public int GetStackCount();
     
 }
+
+public interface IBuffedItem
+{
+    public int GetBuffId();
+}

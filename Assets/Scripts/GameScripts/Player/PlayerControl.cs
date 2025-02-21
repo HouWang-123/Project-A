@@ -75,11 +75,6 @@ public class PlayerControl : MonoBehaviour
         playerRenderer.localEulerAngles = GameConstData.DefAngles;
         useObjParent = transform.GetChild(1);
         ItemHoldPosition = useObjParent.GetChild(0);
-        if(ItemHoldPosition.childCount > 0)
-        {
-            GameRunTimeData.Instance.CharacterItemSlotData.InsertOrUpdateItemSlotData(ItemHoldPosition.GetChild(0).GetComponent<ItemBase>());
-        }
-
         playerSpin = transform.Find("Renderer").GetComponentInChildren<SkeletonAnimation>();
         if(playerSpin != null)
         {
@@ -381,13 +376,29 @@ public class PlayerControl : MonoBehaviour
         if (characterInUseItem is IItemSlotable)
         {
             // 背包数据更新
-            int  Restult = GameRunTimeData.Instance.CharacterItemSlotData.InsertOrUpdateItemSlotData(characterInUseItem);
+            bool stackOverFlowed;
+            int  Restult = GameRunTimeData.Instance.CharacterItemSlotData.InsertOrUpdateItemSlotData(characterInUseItem, out stackOverFlowed);
             
             if (characterInUseItem is IStackable)
             {
-                if (Restult != -1)
+                if (Restult != -1) // 进入手中
                 {
                     IStackable stackable = characterInUseItem as IStackable;
+                    int overFlowedCount = stackable.GetStackCount();
+                    if (stackOverFlowed)
+                    {
+                        string uri = characterInUseItem.GetPrefabName();
+                        AssetHandle loadAssetAsync = YooAssets.LoadAssetAsync<GameObject>(uri);
+                        loadAssetAsync.Completed += handle =>
+                        {
+                            GameObject instantiate = Instantiate(loadAssetAsync.AssetObject, ItemReleasePoint) as GameObject;
+                            instantiate.transform.SetParent(GameControl.Instance.GetSceneItemList().transform);
+                            ItemBase ib = instantiate.GetComponent<ItemBase>();
+                            IStackable ib1 = ib as IStackable;
+                            ib1.ChangeStackCount(overFlowedCount);
+                            ib.OnItemDrop(false);
+                        };
+                    }
                     stackable.ChangeStackCount(1);
                 }
             }
