@@ -272,7 +272,13 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Sprite_Item_Scene_VaseFragment_0: -8755357469257808497
+      Sprite_Item_Scene_VaseFragment_1: 4633752628376060715
+      Sprite_Item_Scene_VaseFragment_2: -7176975797471861675
+      Sprite_Item_Scene_VaseFragment_3: 2337920532433008878
+      Sprite_Item_Scene_VaseFragment_4: -472294143233602700
+      Sprite_Item_Scene_VaseFragment_5: 5734253339767396786
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

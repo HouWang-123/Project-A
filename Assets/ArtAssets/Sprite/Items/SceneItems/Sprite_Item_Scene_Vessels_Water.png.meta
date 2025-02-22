@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Sprite_Item_Scene_Vessels_Water_0: 2860260709466261876
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

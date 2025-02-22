@@ -139,8 +139,8 @@ public class RangedAttackState : BaseState
     public override void Condition(GameObject npc)
     {
         float distance = Vector3.Distance(npc.transform.position, m_playerTransform.position);
-        // 大于m_RangedDistance米就转为追逐玩家
-        if (distance > m_RangedDistance)
+        // 不处于攻击CD，大于m_RangedDistance米就转为追逐玩家
+        if (!m_enterCD && distance > m_RangedDistance)
         {
             m_finiteStateMachine.PerformTransition(TransitionEnum.ChasePlayer);
         }

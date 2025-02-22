@@ -119,8 +119,8 @@ public class MeleeAttackState : BaseState
 
     public override void Condition(GameObject npc)
     {
-        // 大于m_MeleeDistance米
-        if (Vector3.Distance(npc.transform.position, m_playerTransform.position) > m_MeleeDistance)
+        // 不处于攻击CD，大于m_MeleeDistance米
+        if (!m_enterCD && Vector3.Distance(npc.transform.position, m_playerTransform.position) > m_MeleeDistance)
         {
             // 具有远程攻击，转为远程攻击状态
             if (m_gameObject.GetComponent<MonsterBaseFSM>().MonsterDatas.ShootRange != -1f)

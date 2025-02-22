@@ -4,9 +4,11 @@ public class BitMap
 {
     // 每个uint元素包含的位数
     private const int BitsPerElement = 32;
-    private readonly uint[] bits;
+    private uint[] bits;
     // 位图的总位数
-    private readonly int size;
+    private int size;
+    // 扩容的比例
+    private readonly int resizeRatio = 2;
 
     public BitMap(int size)
     {
@@ -17,6 +19,23 @@ public class BitMap
         bits = new uint[elementCount];
     }
 
+    private void Expansion(int currentSize)
+    {
+        while (currentSize >= size)
+        {
+            size *= resizeRatio;
+        }
+        // 计算需要的uint元素数量，向上取整
+        int elementCount = (size + BitsPerElement - 1) / BitsPerElement;
+        uint[] temp = new uint[elementCount];
+        // 拷贝原有数组
+        for (int i = 0; i < size; ++i)
+        {
+            temp[i] = bits[i];
+        }
+        bits = temp;
+    }
+
     /// <summary>
     /// 设置指定索引处的位为1
     /// </summary>
@@ -24,7 +43,8 @@ public class BitMap
     /// <exception cref="ArgumentOutOfRangeException">索引越界异常</exception>
     public void Set(int index)
     {
-        if (index < 0 || index >= size) throw new ArgumentOutOfRangeException(nameof(index), "索引越界。");
+        if (index < 0) throw new ArgumentOutOfRangeException(nameof(index), "索引越界。");
+        if (index >= size) Expansion(index);
         int elementIndex = index / BitsPerElement;
         int bitIndex = index % BitsPerElement;
         // 按位或和左移设置位

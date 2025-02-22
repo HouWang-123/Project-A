@@ -19,9 +19,10 @@ public class MonsterPointMono : MonoBehaviour
                 AssetHandle handle = YooAssets.LoadAssetAsync(data.PrefabName);
                 handle.Completed += (obj) =>
                 {
-                    GameObject mouster = Instantiate(obj.AssetObject, transform) as GameObject;
-                    mouster.name = data.PrefabName;
-                    mouster.transform.position = Vector3.zero;
+                    GameObject monster = Instantiate(obj.AssetObject, transform) as GameObject;
+                    monster.name = data.PrefabName;
+                    monster.transform.position = transform.position;
+                    monster.transform.parent = transform;
                 };
             }
             catch(System.Exception)

@@ -1,11 +1,8 @@
-using System;
-using DG.Tweening;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using YooAsset;
-using UnityEngine.InputSystem.Interactions;
 using UnityEngine.Events;
 using Spine.Unity;
+using static TimeSystemManager;
 
 public class PlayerControl : MonoBehaviour
 {
@@ -80,6 +77,17 @@ public class PlayerControl : MonoBehaviour
         {
             playerSpin.AnimationState.SetAnimation(0, animatorEnum.ToString(), true);
         }
+
+        // 模拟添加时间段改变的事件
+        PhasedChangedEvent phasedEvent = new()
+        {
+            phase = TimePhaseEnum.Day,
+            onTrigger = () =>
+            {
+                Debug.Log(GetType() + "/ 触发了主角拉屎");
+            }
+        };
+        Instance.PhasedChangedScheduledEvents.Add(phasedEvent);
         
 #region InputSystem
 

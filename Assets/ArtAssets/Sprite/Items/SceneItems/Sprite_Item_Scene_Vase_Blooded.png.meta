@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Sprite_Item_Scene_Vase_Blooded_0: -2270865604860340396
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
