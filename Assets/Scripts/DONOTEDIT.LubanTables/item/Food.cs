@@ -25,7 +25,8 @@ public sealed partial class Food : Luban.BeanBase
         { if(!_buf["WaterGain"].IsNumber) { throw new SerializationException(); }  WaterGain = _buf["WaterGain"]; }
         { if(!_buf["FoodGain"].IsNumber) { throw new SerializationException(); }  FoodGain = _buf["FoodGain"]; }
         { if(!_buf["SanGain"].IsNumber) { throw new SerializationException(); }  SanGain = _buf["SanGain"]; }
-        { if(!_buf["StatusGain"].IsNumber) { throw new SerializationException(); }  StatusGain = _buf["StatusGain"]; }
+        { if(!_buf["buffID"].IsNumber) { throw new SerializationException(); }  BuffID = _buf["buffID"]; }
+        { if(!_buf["time"].IsNumber) { throw new SerializationException(); }  Time = _buf["time"]; }
         { if(!_buf["Weight"].IsNumber) { throw new SerializationException(); }  Weight = _buf["Weight"]; }
         { if(!_buf["IconName"].IsString) { throw new SerializationException(); }  IconName = _buf["IconName"]; }
         { if(!_buf["SpriteName"].IsString) { throw new SerializationException(); }  SpriteName = _buf["SpriteName"]; }
@@ -57,10 +58,29 @@ public sealed partial class Food : Luban.BeanBase
     /// 当这个物品在地上时，玩家与其的交互是哪一种
     /// </summary>
     public readonly int InteractEffectID;
+    /// <summary>
+    /// 提供多少水份值
+    /// </summary>
     public readonly int WaterGain;
+    /// <summary>
+    /// 提供多少饱腹度
+    /// </summary>
     public readonly int FoodGain;
+    /// <summary>
+    /// 提供多少San值
+    /// </summary>
     public readonly int SanGain;
-    public readonly int StatusGain;
+    /// <summary>
+    /// 食用后提供哪一种buff
+    /// </summary>
+    public readonly int BuffID;
+    /// <summary>
+    /// buff持续多久
+    /// </summary>
+    public readonly float Time;
+    /// <summary>
+    /// 重量
+    /// </summary>
     public readonly int Weight;
     /// <summary>
     /// 道具栏小图标图片名
@@ -90,7 +110,8 @@ public sealed partial class Food : Luban.BeanBase
         + "WaterGain:" + WaterGain + ","
         + "FoodGain:" + FoodGain + ","
         + "SanGain:" + SanGain + ","
-        + "StatusGain:" + StatusGain + ","
+        + "buffID:" + BuffID + ","
+        + "time:" + Time + ","
         + "Weight:" + Weight + ","
         + "IconName:" + IconName + ","
         + "SpriteName:" + SpriteName + ","
