@@ -154,11 +154,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d79fe90f6b4275f47bb504c29895b227, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ItemID: 260010
+  ItemID: 265001
   ItemType: 0
   ItemRenderer: {fileID: 5502388850923554619}
   oulineShader: {fileID: -6465566751694194690, guid: 098b3234e69aa004eae9c50eabd09355, type: 3}
   DefaultSpriteShader: {fileID: 10753, guid: 0000000000000000f000000000000000, type: 0}
   StackNuberText: {fileID: 0}
+  ItemSpriteName: 
   DropState: 0
   StackCount: 1

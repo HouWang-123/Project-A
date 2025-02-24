@@ -17,7 +17,7 @@ public class CharacterStat
 
     public float MaxSan;
     public float CurrentSan;
-    
+
     public float MaxFood;
     public float CurrentFood;
     public List<float> DigestRate;
@@ -110,25 +110,20 @@ public class CharacterBasicStat
         {
             // 死亡检测
             LifeChecker();
-            
-            LivePlayerStatUpdater();// 玩家存活时执行的更新
-            DeadPlayerStatUpdater();// 玩家死亡时数据执行的更新
-            
+
+            LivePlayerStatUpdater(); // 玩家存活时执行的更新
+            DeadPlayerStatUpdater(); // 玩家死亡时数据执行的更新
+
             // 其他更新
             // 生命值合理范围检测
             HpCorrector();
         }
     }
-    
+
     private void LivePlayerStatUpdater()
     {
-        if (!CharacterStat.Dead) 
+        if (!CharacterStat.Dead)
         {
-            
-            
-            
-            
-            
         }
     }
 
@@ -139,13 +134,13 @@ public class CharacterBasicStat
             Debug.Log("PlayerDead");
         }
     }
-    
+
     // 保证 HP 在合理的范围内
-    
+
     private void HpCorrector()
     {
         CharacterStat.CurrentHp =
-        Mathf.Clamp(CharacterStat.CurrentHp, 0f, CharacterStat.MaxHP);
+            Mathf.Clamp(CharacterStat.CurrentHp, 0f, CharacterStat.MaxHP);
     }
 
     private void LifeChecker()
