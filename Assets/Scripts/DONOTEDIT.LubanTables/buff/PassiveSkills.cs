@@ -18,8 +18,8 @@ public sealed partial class PassiveSkills : Luban.BeanBase
     public PassiveSkills(JSONNode _buf) 
     {
         { if(!_buf["ID"].IsNumber) { throw new SerializationException(); }  ID = _buf["ID"]; }
-        { if(!_buf["NAME"].IsString) { throw new SerializationException(); }  NAME = _buf["NAME"]; }
-        { if(!_buf["DESCRIBE"].IsString) { throw new SerializationException(); }  DESCRIBE = _buf["DESCRIBE"]; }
+        { if(!_buf["NAME"].IsNumber) { throw new SerializationException(); }  NAME = _buf["NAME"]; }
+        { if(!_buf["DESCRIBE"].IsNumber) { throw new SerializationException(); }  DESCRIBE = _buf["DESCRIBE"]; }
     }
 
     public static PassiveSkills DeserializePassiveSkills(JSONNode _buf)
@@ -28,8 +28,8 @@ public sealed partial class PassiveSkills : Luban.BeanBase
     }
 
     public readonly int ID;
-    public readonly string NAME;
-    public readonly string DESCRIBE;
+    public readonly int NAME;
+    public readonly int DESCRIBE;
    
     public const int __ID__ = -1740320818;
     public override int GetTypeId() => __ID__;

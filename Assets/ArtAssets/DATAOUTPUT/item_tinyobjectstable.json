@@ -1,7 +1,7 @@
 [
   {
     "ID": 240001,
-    "NAME": "无名指钥匙",
+    "NAME": 706001,
     "DESCRIBE": "0",
     "maxStackCount": 999,
     "interactEffectID": 900001,
@@ -11,7 +11,7 @@
   },
   {
     "ID": 240002,
-    "NAME": "小指钥匙",
+    "NAME": 706002,
     "DESCRIBE": "0",
     "maxStackCount": 999,
     "interactEffectID": 900001,
@@ -21,7 +21,7 @@
   },
   {
     "ID": 240003,
-    "NAME": "拇指钥匙",
+    "NAME": 706003,
     "DESCRIBE": "0",
     "maxStackCount": 999,
     "interactEffectID": 900001,
@@ -31,7 +31,7 @@
   },
   {
     "ID": 240004,
-    "NAME": "手枪弹",
+    "NAME": 706004,
     "DESCRIBE": "0",
     "maxStackCount": 999,
     "interactEffectID": 900001,
@@ -41,7 +41,7 @@
   },
   {
     "ID": 240005,
-    "NAME": "霰弹",
+    "NAME": 706005,
     "DESCRIBE": "0",
     "maxStackCount": 999,
     "interactEffectID": 900001,

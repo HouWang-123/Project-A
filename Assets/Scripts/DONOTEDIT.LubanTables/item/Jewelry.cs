@@ -18,8 +18,8 @@ public sealed partial class Jewelry : Luban.BeanBase
     public Jewelry(JSONNode _buf) 
     {
         { if(!_buf["ID"].IsNumber) { throw new SerializationException(); }  ID = _buf["ID"]; }
-        { if(!_buf["NAME"].IsString) { throw new SerializationException(); }  NAME = _buf["NAME"]; }
-        { if(!_buf["DESCRIBE"].IsString) { throw new SerializationException(); }  DESCRIBE = _buf["DESCRIBE"]; }
+        { if(!_buf["NAME"].IsNumber) { throw new SerializationException(); }  NAME = _buf["NAME"]; }
+        { if(!_buf["DESCRIBE"].IsNumber) { throw new SerializationException(); }  DESCRIBE = _buf["DESCRIBE"]; }
     }
 
     public static Jewelry DeserializeJewelry(JSONNode _buf)
@@ -34,11 +34,11 @@ public sealed partial class Jewelry : Luban.BeanBase
     /// <summary>
     /// 饰品名称
     /// </summary>
-    public readonly string NAME;
+    public readonly int NAME;
     /// <summary>
     /// 饰品等其他功能做完后再做也可，饰品功能描述
     /// </summary>
-    public readonly string DESCRIBE;
+    public readonly int DESCRIBE;
    
     public const int __ID__ = -910960177;
     public override int GetTypeId() => __ID__;

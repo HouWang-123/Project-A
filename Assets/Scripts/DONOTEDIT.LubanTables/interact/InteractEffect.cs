@@ -18,8 +18,8 @@ public sealed partial class InteractEffect : Luban.BeanBase
     public InteractEffect(JSONNode _buf) 
     {
         { if(!_buf["ID"].IsNumber) { throw new SerializationException(); }  ID = _buf["ID"]; }
-        { if(!_buf["NAME"].IsString) { throw new SerializationException(); }  NAME = _buf["NAME"]; }
-        { if(!_buf["DESCRIBE"].IsString) { throw new SerializationException(); }  DESCRIBE = _buf["DESCRIBE"]; }
+        { if(!_buf["NAME"].IsNumber) { throw new SerializationException(); }  NAME = _buf["NAME"]; }
+        { if(!_buf["DESCRIBE"].IsNumber) { throw new SerializationException(); }  DESCRIBE = _buf["DESCRIBE"]; }
         { var __json0 = _buf["requiredWeaponID"]; if(!__json0.IsArray) { throw new SerializationException(); } RequiredWeaponID = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  RequiredWeaponID.Add(__v0); }   }
         { var __json0 = _buf["requiredFoodID"]; if(!__json0.IsArray) { throw new SerializationException(); } RequiredFoodID = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  RequiredFoodID.Add(__v0); }   }
         { var __json0 = _buf["requiredThrowID"]; if(!__json0.IsArray) { throw new SerializationException(); } RequiredThrowID = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  RequiredThrowID.Add(__v0); }   }
@@ -36,13 +36,13 @@ public sealed partial class InteractEffect : Luban.BeanBase
     /// </summary>
     public readonly int ID;
     /// <summary>
-    /// 名称
+    /// 这里存放的是当满足条件时显示什么
     /// </summary>
-    public readonly string NAME;
+    public readonly int NAME;
     /// <summary>
-    /// 描述
+    /// 这里存放的是不满足条件时显示什么
     /// </summary>
-    public readonly string DESCRIBE;
+    public readonly int DESCRIBE;
     /// <summary>
     /// 当玩家接近交互为这个表的【ID】字段的物品时，如果持有这个列表中任一一个ID的物品，就会显示Name字段的内容，否则出现【描述】字段的内容
     /// </summary>

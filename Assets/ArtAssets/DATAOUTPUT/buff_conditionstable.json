@@ -1,85 +1,85 @@
 [
   {
     "ID": 120001,
-    "NAME": "中毒",
-    "DESCRIBE": "每秒受到2点伤害",
+    "NAME": 730001,
+    "DESCRIBE": 830001,
     "canTimeStack": true,
     "maxTime": 60
   },
   {
     "ID": 120002,
-    "NAME": "灵视",
-    "DESCRIBE": "能看到隐形的东西",
+    "NAME": 730002,
+    "DESCRIBE": 830002,
     "canTimeStack": false,
     "maxTime": 999
   },
   {
     "ID": 120003,
-    "NAME": "寄生",
-    "DESCRIBE": "消化效率降低为[2:2:1]，当再次被寄生时，会变为【严重寄生】",
+    "NAME": 730003,
+    "DESCRIBE": 830003,
     "canTimeStack": false,
     "maxTime": 999
   },
   {
     "ID": 120004,
-    "NAME": "严重寄生",
-    "DESCRIBE": "消化效率降低为[3:3:1]]，当再次被寄生时，会变为【完全寄生】",
+    "NAME": 730004,
+    "DESCRIBE": 830004,
     "canTimeStack": false,
     "maxTime": 999
   },
   {
     "ID": 120005,
-    "NAME": "完全寄生",
-    "DESCRIBE": "消化效率降低为[4:4:1]，当再次被寄生时，立即受到20点伤害",
+    "NAME": 730005,
+    "DESCRIBE": 830005,
     "canTimeStack": false,
     "maxTime": 999
   },
   {
     "ID": 120006,
-    "NAME": "美德",
-    "DESCRIBE": "在此期间，反转San值的变化量",
+    "NAME": 730006,
+    "DESCRIBE": 830006,
     "canTimeStack": true,
     "maxTime": 120
   },
   {
     "ID": 120007,
-    "NAME": "疯狂",
-    "DESCRIBE": "通过武器造成的最终伤害提升，值为最大San值与当前San值差值的一半",
+    "NAME": 730007,
+    "DESCRIBE": 830007,
     "canTimeStack": true,
     "maxTime": 120
   },
   {
     "ID": 120008,
-    "NAME": "惊恐",
-    "DESCRIBE": "角色力量值+1，近战武器造成的伤害-30% ",
+    "NAME": 730008,
+    "DESCRIBE": 830008,
     "canTimeStack": false,
     "maxTime": 999
   },
   {
     "ID": 120009,
-    "NAME": "飞奔",
-    "DESCRIBE": "基础移动速度+0.5m/S",
+    "NAME": 730009,
+    "DESCRIBE": 830009,
     "canTimeStack": true,
     "maxTime": 120
   },
   {
     "ID": 120012,
-    "NAME": "癫狂1",
-    "DESCRIBE": "San值在(40,60]时获得",
+    "NAME": 730010,
+    "DESCRIBE": 830010,
     "canTimeStack": false,
     "maxTime": 999
   },
   {
     "ID": 120013,
-    "NAME": "癫狂2",
-    "DESCRIBE": "San值在(20-40]时获得",
+    "NAME": 730011,
+    "DESCRIBE": 830011,
     "canTimeStack": false,
     "maxTime": 999
   },
   {
     "ID": 120014,
-    "NAME": "癫狂3",
-    "DESCRIBE": "San值在[0,20]时获得",
+    "NAME": 730012,
+    "DESCRIBE": 830012,
     "canTimeStack": false,
     "maxTime": 999
   }

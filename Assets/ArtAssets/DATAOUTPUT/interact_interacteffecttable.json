@@ -1,8 +1,8 @@
 [
   {
     "ID": 900001,
-    "NAME": "E：捡起",
-    "DESCRIBE": "0",
+    "NAME": 860001,
+    "DESCRIBE": 865000,
     "requiredWeaponID": [
       0
     ],
@@ -18,8 +18,8 @@
   },
   {
     "ID": 900002,
-    "NAME": "E：举起",
-    "DESCRIBE": "0",
+    "NAME": 860002,
+    "DESCRIBE": 865000,
     "requiredWeaponID": [
       0
     ],
@@ -35,8 +35,8 @@
   },
   {
     "ID": 900003,
-    "NAME": "E：查看",
-    "DESCRIBE": "0",
+    "NAME": 860003,
+    "DESCRIBE": 865000,
     "requiredWeaponID": [
       0
     ],
@@ -52,8 +52,8 @@
   },
   {
     "ID": 900004,
-    "NAME": "E：点燃",
-    "DESCRIBE": "0",
+    "NAME": 860004,
+    "DESCRIBE": 865000,
     "requiredWeaponID": [
       260011
     ],
@@ -69,8 +69,8 @@
   },
   {
     "ID": 900005,
-    "NAME": "E：现在几点了？",
-    "DESCRIBE": "0",
+    "NAME": 860005,
+    "DESCRIBE": 865000,
     "requiredWeaponID": [
       0
     ],
@@ -86,8 +86,8 @@
   },
   {
     "ID": 900006,
-    "NAME": "E：修缮",
-    "DESCRIBE": "也许我可以拿武器来修",
+    "NAME": 860006,
+    "DESCRIBE": 865001,
     "requiredWeaponID": [
       260001,
       260002,
@@ -110,8 +110,8 @@
   },
   {
     "ID": 900007,
-    "NAME": "E：充电",
-    "DESCRIBE": "也许我可以拿些什么来充电",
+    "NAME": 860007,
+    "DESCRIBE": 865002,
     "requiredWeaponID": [
       0
     ],
@@ -128,8 +128,8 @@
   },
   {
     "ID": 900008,
-    "NAME": "E：点燃",
-    "DESCRIBE": "E:阅读",
+    "NAME": 860008,
+    "DESCRIBE": 865003,
     "requiredWeaponID": [
       260011
     ],
@@ -145,8 +145,8 @@
   },
   {
     "ID": 900009,
-    "NAME": "E：放入篮球",
-    "DESCRIBE": "0",
+    "NAME": 860009,
+    "DESCRIBE": 865000,
     "requiredWeaponID": [
       0
     ],

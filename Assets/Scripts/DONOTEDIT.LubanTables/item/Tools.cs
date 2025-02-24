@@ -18,8 +18,8 @@ public sealed partial class Tools : Luban.BeanBase
     public Tools(JSONNode _buf) 
     {
         { if(!_buf["ID"].IsNumber) { throw new SerializationException(); }  ID = _buf["ID"]; }
-        { if(!_buf["NAME"].IsString) { throw new SerializationException(); }  NAME = _buf["NAME"]; }
-        { if(!_buf["DESCRIBE"].IsString) { throw new SerializationException(); }  DESCRIBE = _buf["DESCRIBE"]; }
+        { if(!_buf["NAME"].IsNumber) { throw new SerializationException(); }  NAME = _buf["NAME"]; }
+        { if(!_buf["DESCRIBE"].IsNumber) { throw new SerializationException(); }  DESCRIBE = _buf["DESCRIBE"]; }
         { if(!_buf["interactEffectID"].IsNumber) { throw new SerializationException(); }  InteractEffectID = _buf["interactEffectID"]; }
         { if(!_buf["derubility"].IsNumber) { throw new SerializationException(); }  Derubility = _buf["derubility"]; }
         { if(!_buf["weight"].IsNumber) { throw new SerializationException(); }  Weight = _buf["weight"]; }
@@ -40,11 +40,11 @@ public sealed partial class Tools : Luban.BeanBase
     /// <summary>
     /// 名称
     /// </summary>
-    public readonly string NAME;
+    public readonly int NAME;
     /// <summary>
     /// 描述
     /// </summary>
-    public readonly string DESCRIBE;
+    public readonly int DESCRIBE;
     /// <summary>
     /// 物品在地上时，玩家与其的交互是哪一种
     /// </summary>

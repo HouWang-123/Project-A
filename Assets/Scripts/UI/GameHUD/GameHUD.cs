@@ -7,7 +7,7 @@ public class GameHUD : UIBase
     /// ItemSlotManager 道具栏管理器，API 方法前缀: ISM
     /// </summary>
     public ItemSlotManager_HUD SlotManagerHUD;
-
+    
 
     protected override void Awake()
     {
@@ -32,6 +32,11 @@ public class GameHUD : UIBase
     public void SetHUDStat(CharacterStat s)
     {
         CharacterStatHUDStat = s;
+    }
+
+    public void SetHUDTime()
+    {
+        
     }
     
 #region UpdateHUD

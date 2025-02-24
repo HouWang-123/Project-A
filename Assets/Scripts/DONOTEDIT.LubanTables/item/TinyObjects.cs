@@ -18,7 +18,7 @@ public sealed partial class TinyObjects : Luban.BeanBase
     public TinyObjects(JSONNode _buf) 
     {
         { if(!_buf["ID"].IsNumber) { throw new SerializationException(); }  ID = _buf["ID"]; }
-        { if(!_buf["NAME"].IsString) { throw new SerializationException(); }  NAME = _buf["NAME"]; }
+        { if(!_buf["NAME"].IsNumber) { throw new SerializationException(); }  NAME = _buf["NAME"]; }
         { if(!_buf["DESCRIBE"].IsString) { throw new SerializationException(); }  DESCRIBE = _buf["DESCRIBE"]; }
         { if(!_buf["maxStackCount"].IsNumber) { throw new SerializationException(); }  MaxStackCount = _buf["maxStackCount"]; }
         { if(!_buf["interactEffectID"].IsNumber) { throw new SerializationException(); }  InteractEffectID = _buf["interactEffectID"]; }
@@ -39,7 +39,7 @@ public sealed partial class TinyObjects : Luban.BeanBase
     /// <summary>
     /// 名称
     /// </summary>
-    public readonly string NAME;
+    public readonly int NAME;
     /// <summary>
     /// 描述
     /// </summary>

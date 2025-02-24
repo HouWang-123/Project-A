@@ -1,16 +1,16 @@
 [
   {
     "ID": 100001,
-    "NAME": "无界通行",
-    "DESCRIBE": "San值-25，下一次解锁被缠绕的物件时将无视代价",
+    "NAME": 740001,
+    "DESCRIBE": 840001,
     "skillCD": 10,
     "SkillSanCost": -25,
     "SkillEffectID": 1010
   },
   {
     "ID": 100002,
-    "NAME": "膛线与真理",
-    "DESCRIBE": "San值-5.下一次通过枪械的造成的伤害+50%",
+    "NAME": 740002,
+    "DESCRIBE": 840002,
     "skillCD": 10,
     "SkillSanCost": -5,
     "SkillEffectID": 1011

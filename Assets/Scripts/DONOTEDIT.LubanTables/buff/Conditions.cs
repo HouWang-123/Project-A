@@ -18,8 +18,8 @@ public sealed partial class Conditions : Luban.BeanBase
     public Conditions(JSONNode _buf) 
     {
         { if(!_buf["ID"].IsNumber) { throw new SerializationException(); }  ID = _buf["ID"]; }
-        { if(!_buf["NAME"].IsString) { throw new SerializationException(); }  NAME = _buf["NAME"]; }
-        { if(!_buf["DESCRIBE"].IsString) { throw new SerializationException(); }  DESCRIBE = _buf["DESCRIBE"]; }
+        { if(!_buf["NAME"].IsNumber) { throw new SerializationException(); }  NAME = _buf["NAME"]; }
+        { if(!_buf["DESCRIBE"].IsNumber) { throw new SerializationException(); }  DESCRIBE = _buf["DESCRIBE"]; }
         { if(!_buf["canTimeStack"].IsBoolean) { throw new SerializationException(); }  CanTimeStack = _buf["canTimeStack"]; }
         { if(!_buf["maxTime"].IsNumber) { throw new SerializationException(); }  MaxTime = _buf["maxTime"]; }
     }
@@ -36,11 +36,11 @@ public sealed partial class Conditions : Luban.BeanBase
     /// <summary>
     /// 名称
     /// </summary>
-    public readonly string NAME;
+    public readonly int NAME;
     /// <summary>
     /// 描述
     /// </summary>
-    public readonly string DESCRIBE;
+    public readonly int DESCRIBE;
     /// <summary>
     /// 再次获得时，是否叠加持续时间，如果不叠加，则取持续时间更长的那一个
     /// </summary>

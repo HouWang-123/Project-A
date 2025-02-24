@@ -18,8 +18,8 @@ public sealed partial class ActiveSkills : Luban.BeanBase
     public ActiveSkills(JSONNode _buf) 
     {
         { if(!_buf["ID"].IsNumber) { throw new SerializationException(); }  ID = _buf["ID"]; }
-        { if(!_buf["NAME"].IsString) { throw new SerializationException(); }  NAME = _buf["NAME"]; }
-        { if(!_buf["DESCRIBE"].IsString) { throw new SerializationException(); }  DESCRIBE = _buf["DESCRIBE"]; }
+        { if(!_buf["NAME"].IsNumber) { throw new SerializationException(); }  NAME = _buf["NAME"]; }
+        { if(!_buf["DESCRIBE"].IsNumber) { throw new SerializationException(); }  DESCRIBE = _buf["DESCRIBE"]; }
         { if(!_buf["skillCD"].IsNumber) { throw new SerializationException(); }  SkillCD = _buf["skillCD"]; }
         { if(!_buf["SkillSanCost"].IsNumber) { throw new SerializationException(); }  SkillSanCost = _buf["SkillSanCost"]; }
         { if(!_buf["SkillEffectID"].IsNumber) { throw new SerializationException(); }  SkillEffectID = _buf["SkillEffectID"]; }
@@ -31,8 +31,8 @@ public sealed partial class ActiveSkills : Luban.BeanBase
     }
 
     public readonly int ID;
-    public readonly string NAME;
-    public readonly string DESCRIBE;
+    public readonly int NAME;
+    public readonly int DESCRIBE;
     public readonly int SkillCD;
     public readonly int SkillSanCost;
     /// <summary>

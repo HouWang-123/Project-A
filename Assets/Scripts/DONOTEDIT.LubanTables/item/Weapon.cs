@@ -18,8 +18,8 @@ public sealed partial class Weapon : Luban.BeanBase
     public Weapon(JSONNode _buf) 
     {
         { if(!_buf["ID"].IsNumber) { throw new SerializationException(); }  ID = _buf["ID"]; }
-        { if(!_buf["NAME"].IsString) { throw new SerializationException(); }  NAME = _buf["NAME"]; }
-        { if(!_buf["DESCRIBE"].IsString) { throw new SerializationException(); }  DESCRIBE = _buf["DESCRIBE"]; }
+        { if(!_buf["NAME"].IsNumber) { throw new SerializationException(); }  NAME = _buf["NAME"]; }
+        { if(!_buf["DESCRIBE"].IsNumber) { throw new SerializationException(); }  DESCRIBE = _buf["DESCRIBE"]; }
         { if(!_buf["maxStackCount"].IsNumber) { throw new SerializationException(); }  MaxStackCount = _buf["maxStackCount"]; }
         { if(!_buf["interactEffectID"].IsNumber) { throw new SerializationException(); }  InteractEffectID = _buf["interactEffectID"]; }
         { if(!_buf["duribility"].IsNumber) { throw new SerializationException(); }  Duribility = _buf["duribility"]; }
@@ -44,11 +44,11 @@ public sealed partial class Weapon : Luban.BeanBase
     /// <summary>
     /// 名称
     /// </summary>
-    public readonly string NAME;
+    public readonly int NAME;
     /// <summary>
     /// 描述
     /// </summary>
-    public readonly string DESCRIBE;
+    public readonly int DESCRIBE;
     /// <summary>
     /// 在背包栏的最大堆叠数量，相当于武器必占一格
     /// </summary>

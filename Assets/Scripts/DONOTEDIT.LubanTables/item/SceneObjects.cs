@@ -18,8 +18,8 @@ public sealed partial class SceneObjects : Luban.BeanBase
     public SceneObjects(JSONNode _buf) 
     {
         { if(!_buf["ID"].IsNumber) { throw new SerializationException(); }  ID = _buf["ID"]; }
-        { if(!_buf["NAME"].IsString) { throw new SerializationException(); }  NAME = _buf["NAME"]; }
-        { if(!_buf["DESCRIBE"].IsString) { throw new SerializationException(); }  DESCRIBE = _buf["DESCRIBE"]; }
+        { if(!_buf["NAME"].IsNumber) { throw new SerializationException(); }  NAME = _buf["NAME"]; }
+        { if(!_buf["DESCRIBE"].IsNumber) { throw new SerializationException(); }  DESCRIBE = _buf["DESCRIBE"]; }
         { if(!_buf["interactEffectID"].IsNumber) { throw new SerializationException(); }  InteractEffectID = _buf["interactEffectID"]; }
         { if(!_buf["isDestructible"].IsBoolean) { throw new SerializationException(); }  IsDestructible = _buf["isDestructible"]; }
         { if(!_buf["durability"].IsNumber) { throw new SerializationException(); }  Durability = _buf["durability"]; }
@@ -43,13 +43,13 @@ public sealed partial class SceneObjects : Luban.BeanBase
     /// <summary>
     /// 名称
     /// </summary>
-    public readonly string NAME;
+    public readonly int NAME;
     /// <summary>
     /// 描述
     /// </summary>
-    public readonly string DESCRIBE;
+    public readonly int DESCRIBE;
     /// <summary>
-    /// 玩家与其的交互是哪一种
+    /// 玩家与其的交互是哪一种<br/>也就是说，在这个表里添加东西的话，要去func_InteractEffect.xlsx表里查询或添加交互显示
     /// </summary>
     public readonly int InteractEffectID;
     /// <summary>
