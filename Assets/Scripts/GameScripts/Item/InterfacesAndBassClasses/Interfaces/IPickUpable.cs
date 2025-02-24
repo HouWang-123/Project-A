@@ -10,17 +10,14 @@ public interface IPickUpable            // 可否被拾取接口
 }
 
 // 可否进入道具栏
-public interface ISlotable
-{
-    
-}
+public interface ISlotable { }
+
 // 道具栏中可否进行堆叠
 public interface IStackable
 {
     public int GetMaxStackValue();
     public void ChangeStackCount(int Count);
     public int GetStackCount();
-    
 }
 
 public interface IBuffedItem

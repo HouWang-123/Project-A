@@ -5,36 +5,37 @@ using UnityEngine;
 
 public class CharacterStat
 {
-    public int ID;
-    public string NAME;
-    public string DESCRIBE;
+    public int ID;                
+    public string NAME;          
+    public string DESCRIBE;       
 
-    public string VoicePackID;
+    public string VoicePackID; 
     public string PrefabName;
-
+    // Hp
     public float MaxHP;
     public float CurrentHp;
-
+    // San
     public float MaxSan;
     public float CurrentSan;
-
+    // Food
     public float MaxFood;
     public float CurrentFood;
     public List<float> DigestRate;
+    // Thirsty
+    public float MaxThirsty;
+    public float CurrentThirsty;
+    // Run
     public float RunSpeedScale;
     public float RunReduce;
     public float RunRestore;
-
-    public float MaxThirsty;
-    public float CurrentThirsty;
-
+    
     public float Strength;
 
     public int InventorySlots;
-
+    // Skill
     public int ActiveSkillID;
     public int PassiveSkillID;
-
+    // Other Character Stat
     public bool Dead;
 }
 
