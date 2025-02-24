@@ -3,12 +3,12 @@ using System;
 public class GameHUD : UIBase
 {
     public static GameHUD Instance;
-    public int GameTics;
-    
     /// <summary>
     /// ItemSlotManager 道具栏管理器，API 方法前缀: ISM
     /// </summary>
     public ItemSlotManager_HUD SlotManagerHUD;
+
+
     protected override void Awake()
     {
         base.Awake();
@@ -33,11 +33,14 @@ public class GameHUD : UIBase
     {
         CharacterStatHUDStat = s;
     }
-
+    
+#region UpdateHUD
+    public GameHUD_HpIndicator HpIndicator;
     private void RefreshHUDs()    // 界面数据刷新
     {
-        
+        HpIndicator.UpdateHp();
     }
+    private int GameTics;
     private void FixedUpdate()
     {
         if (GameTics % 2 == 0)
@@ -46,7 +49,9 @@ public class GameHUD : UIBase
         }
         GameTics++;
     }
-    #region ItemSlotManagerAPI
+#endregion
+
+#region ItemSlotManagerAPI
     public void ISM_NextFocusItem()
     {
         SlotManagerHUD.ChangeFocus(true);

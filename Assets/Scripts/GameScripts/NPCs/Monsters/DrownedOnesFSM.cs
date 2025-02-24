@@ -136,6 +136,7 @@ public class DrownedOnesFSM : MonsterBaseFSM
         // var playerObj = GameObject.Find("Player000");
         // var playerData = playerObj.GetComponent<PlayerControl>().PlayerData;
         // playerData.CurrentHP -= m_monsterDatas.Attack;
+        GameRunTimeData.Instance.CharacterBasicStat.HurdPlayer(m_monsterDatas.Attack);
         Debug.Log(GetType() + " /HurtPlayer() => 玩家受到 " + m_monsterDatas.Attack + " 点伤害");
     }
 }
