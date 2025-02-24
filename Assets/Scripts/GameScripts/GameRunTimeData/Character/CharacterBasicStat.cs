@@ -5,36 +5,37 @@ using UnityEngine;
 
 public class CharacterStat
 {
-    public int ID;
-    public string NAME;
-    public string DESCRIBE;
+    public int ID;                
+    public string NAME;          
+    public string DESCRIBE;       
 
-    public string VoicePackID;
+    public string VoicePackID; 
     public string PrefabName;
-
+    // Hp
     public float MaxHP;
     public float CurrentHp;
-
+    // San
     public float MaxSan;
     public float CurrentSan;
-    
+    // Food
     public float MaxFood;
     public float CurrentFood;
     public List<float> DigestRate;
+    // Thirsty
+    public float MaxThirsty;
+    public float CurrentThirsty;
+    // Run
     public float RunSpeedScale;
     public float RunReduce;
     public float RunRestore;
-
-    public float MaxThirsty;
-    public float CurrentThirsty;
-
+    
     public float Strength;
 
     public int InventorySlots;
-
+    // Skill
     public int ActiveSkillID;
     public int PassiveSkillID;
-
+    // Other Character Stat
     public bool Dead;
 }
 
@@ -110,25 +111,20 @@ public class CharacterBasicStat
         {
             // 死亡检测
             LifeChecker();
-            
-            LivePlayerStatUpdater();// 玩家存活时执行的更新
-            DeadPlayerStatUpdater();// 玩家死亡时数据执行的更新
-            
+
+            LivePlayerStatUpdater(); // 玩家存活时执行的更新
+            DeadPlayerStatUpdater(); // 玩家死亡时数据执行的更新
+
             // 其他更新
             // 生命值合理范围检测
             HpCorrector();
         }
     }
-    
+
     private void LivePlayerStatUpdater()
     {
-        if (!CharacterStat.Dead) 
+        if (!CharacterStat.Dead)
         {
-            
-            
-            
-            
-            
         }
     }
 
@@ -139,13 +135,13 @@ public class CharacterBasicStat
             Debug.Log("PlayerDead");
         }
     }
-    
+
     // 保证 HP 在合理的范围内
-    
+
     private void HpCorrector()
     {
         CharacterStat.CurrentHp =
-        Mathf.Clamp(CharacterStat.CurrentHp, 0f, CharacterStat.MaxHP);
+            Mathf.Clamp(CharacterStat.CurrentHp, 0f, CharacterStat.MaxHP);
     }
 
     private void LifeChecker()

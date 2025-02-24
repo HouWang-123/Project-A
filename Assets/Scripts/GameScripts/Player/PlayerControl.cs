@@ -322,7 +322,9 @@ public class PlayerControl : MonoBehaviour
         Debug.Log("丢下");
         // 表现  // 背包数据更新
         // todo : 丢弃堆叠物品
-        bool removestack = GameRunTimeData.Instance.CharacterItemSlotData.ClearHandItem(fastDrop, playerReversed);
+
+        bool removestack = GameRunTimeData.Instance.CharacterItemSlotData.ClearHandItem(fastDrop, playerReversed,ItemReleasePoint);
+        
         if(removestack)
         {
             string uri = GameRunTimeData.Instance.CharacterItemSlotData.GetCharacterInUseItem().GetPrefabName();
