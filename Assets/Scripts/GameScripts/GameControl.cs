@@ -122,11 +122,16 @@ public class GameControl
 
     }
 
-
-    public GameObject GetGamePlayer()
+    // 传入 PlayerID 控制角色切换
+    public GameObject GetGamePlayer(int PlayerId = 0)
     {
         if(playerObj == null)
         {
+            
+            // 角色数据设置
+            GameRunTimeData.Instance.CharacterBasicStat.InitCharacter(PlayerId);
+            
+            
             AssetHandle handle = YooAssets.LoadAssetSync<GameObject>("Player000");
             playerObj = Object.Instantiate(handle.AssetObject) as GameObject;
             playerObj.name = "Player000";

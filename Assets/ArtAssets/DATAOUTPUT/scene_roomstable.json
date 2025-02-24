@@ -12,7 +12,9 @@
     ],
     "BGM": "0",
     "visibility": 3,
-    "byTime": false
+    "byTime": false,
+    "monstersIDList": [],
+    "dropRuleIDList": []
   },
   {
     "ID": 300002,
@@ -30,7 +32,9 @@
     ],
     "BGM": "0",
     "visibility": 3,
-    "byTime": false
+    "byTime": false,
+    "monstersIDList": [],
+    "dropRuleIDList": []
   },
   {
     "ID": 300003,
@@ -45,7 +49,9 @@
     ],
     "BGM": "0",
     "visibility": 3,
-    "byTime": false
+    "byTime": false,
+    "monstersIDList": [],
+    "dropRuleIDList": []
   },
   {
     "ID": 300004,
@@ -60,7 +66,9 @@
     ],
     "BGM": "0",
     "visibility": 3,
-    "byTime": false
+    "byTime": false,
+    "monstersIDList": [],
+    "dropRuleIDList": []
   },
   {
     "ID": 300005,
@@ -75,7 +83,9 @@
     ],
     "BGM": "0",
     "visibility": 3,
-    "byTime": false
+    "byTime": false,
+    "monstersIDList": [],
+    "dropRuleIDList": []
   },
   {
     "ID": 300006,
@@ -89,6 +99,8 @@
     ],
     "BGM": "0",
     "visibility": 3,
-    "byTime": false
+    "byTime": false,
+    "monstersIDList": [],
+    "dropRuleIDList": []
   }
 ]

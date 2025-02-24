@@ -7,6 +7,9 @@ using UnityEngine;
 /// </summary>
 public abstract class BaseState
 {
+    // 时间缩放
+    protected float m_timeScale;
+    public float TimeScale { get { return m_timeScale; } set { m_timeScale = value; } }
     // 一个状态对应一个state的枚举
     protected StateEnum m_stateEnum;
 
@@ -20,6 +23,7 @@ public abstract class BaseState
 
     public BaseState(FiniteStateMachine finiteStateMachine, GameObject gameObject)
     {
+        m_timeScale = 1f;
         m_finiteStateMachine = finiteStateMachine;
         m_gameObject = gameObject;
     }

@@ -116,4 +116,9 @@ public class FiniteStateMachine
         // 切换后当前状态的进入前的回调
         m_currentState.Item2?.DoBeforeEntering();
     }
+
+    public void TimeScale(float scale)
+    {
+        m_currentState.Item2.TimeScale = scale;
+    }
 }

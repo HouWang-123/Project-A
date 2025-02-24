@@ -36,6 +36,8 @@ public class GameRoot : MonoBehaviour
             case EPlayMode.WebPlayMode:
                 break;
         }
+        // 默认语言
+        LocalizationTool.Instance.InitLocal(Localizations.Zh);
     }
 
     private IEnumerator EditorInitPackage()

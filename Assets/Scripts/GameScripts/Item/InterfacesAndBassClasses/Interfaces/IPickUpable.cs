@@ -10,7 +10,7 @@ public interface IPickUpable            // 可否被拾取接口
 }
 
 // 可否进入道具栏
-public interface IItemSlotable
+public interface ISlotable
 {
     
 }
@@ -21,4 +21,9 @@ public interface IStackable
     public void ChangeStackCount(int Count);
     public int GetStackCount();
     
+}
+
+public interface IBuffedItem
+{
+    public int GetBuffId();
 }

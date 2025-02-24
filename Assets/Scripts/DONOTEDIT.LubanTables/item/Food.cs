@@ -18,17 +18,19 @@ public sealed partial class Food : Luban.BeanBase
     public Food(JSONNode _buf) 
     {
         { if(!_buf["ID"].IsNumber) { throw new SerializationException(); }  ID = _buf["ID"]; }
-        { if(!_buf["NAME"].IsString) { throw new SerializationException(); }  NAME = _buf["NAME"]; }
-        { if(!_buf["DESCRIBE"].IsString) { throw new SerializationException(); }  DESCRIBE = _buf["DESCRIBE"]; }
-        { if(!_buf["prefabName"].IsString) { throw new SerializationException(); }  PrefabName = _buf["prefabName"]; }
+        { if(!_buf["NAME"].IsNumber) { throw new SerializationException(); }  NAME = _buf["NAME"]; }
+        { if(!_buf["DESCRIBE"].IsNumber) { throw new SerializationException(); }  DESCRIBE = _buf["DESCRIBE"]; }
         { if(!_buf["maxStackCount"].IsNumber) { throw new SerializationException(); }  MaxStackCount = _buf["maxStackCount"]; }
         { if(!_buf["interactEffectID"].IsNumber) { throw new SerializationException(); }  InteractEffectID = _buf["interactEffectID"]; }
         { if(!_buf["WaterGain"].IsNumber) { throw new SerializationException(); }  WaterGain = _buf["WaterGain"]; }
         { if(!_buf["FoodGain"].IsNumber) { throw new SerializationException(); }  FoodGain = _buf["FoodGain"]; }
         { if(!_buf["SanGain"].IsNumber) { throw new SerializationException(); }  SanGain = _buf["SanGain"]; }
-        { if(!_buf["StatusGain"].IsNumber) { throw new SerializationException(); }  StatusGain = _buf["StatusGain"]; }
+        { if(!_buf["buffID"].IsNumber) { throw new SerializationException(); }  BuffID = _buf["buffID"]; }
+        { if(!_buf["time"].IsNumber) { throw new SerializationException(); }  Time = _buf["time"]; }
         { if(!_buf["Weight"].IsNumber) { throw new SerializationException(); }  Weight = _buf["Weight"]; }
         { if(!_buf["IconName"].IsString) { throw new SerializationException(); }  IconName = _buf["IconName"]; }
+        { if(!_buf["SpriteName"].IsString) { throw new SerializationException(); }  SpriteName = _buf["SpriteName"]; }
+        { if(!_buf["PrefabName"].IsString) { throw new SerializationException(); }  PrefabName = _buf["PrefabName"]; }
     }
 
     public static Food DeserializeFood(JSONNode _buf)
@@ -43,15 +45,11 @@ public sealed partial class Food : Luban.BeanBase
     /// <summary>
     /// 名称
     /// </summary>
-    public readonly string NAME;
+    public readonly int NAME;
     /// <summary>
     /// 描述
     /// </summary>
-    public readonly string DESCRIBE;
-    /// <summary>
-    /// 预制体名称
-    /// </summary>
-    public readonly string PrefabName;
+    public readonly int DESCRIBE;
     /// <summary>
     /// 最大数量，食品类物品在达到最大数量后，
     /// </summary>
@@ -60,12 +58,39 @@ public sealed partial class Food : Luban.BeanBase
     /// 当这个物品在地上时，玩家与其的交互是哪一种
     /// </summary>
     public readonly int InteractEffectID;
+    /// <summary>
+    /// 提供多少水份值
+    /// </summary>
     public readonly int WaterGain;
+    /// <summary>
+    /// 提供多少饱腹度
+    /// </summary>
     public readonly int FoodGain;
+    /// <summary>
+    /// 提供多少San值
+    /// </summary>
     public readonly int SanGain;
-    public readonly int StatusGain;
+    /// <summary>
+    /// 食用后提供哪一种buff
+    /// </summary>
+    public readonly int BuffID;
+    /// <summary>
+    /// buff持续多久
+    /// </summary>
+    public readonly float Time;
+    /// <summary>
+    /// 重量
+    /// </summary>
     public readonly int Weight;
+    /// <summary>
+    /// 道具栏小图标图片名
+    /// </summary>
     public readonly string IconName;
+    /// <summary>
+    /// 道具物品渲染图片
+    /// </summary>
+    public readonly string SpriteName;
+    public readonly string PrefabName;
    
     public const int __ID__ = 2107191929;
     public override int GetTypeId() => __ID__;
@@ -80,15 +105,17 @@ public sealed partial class Food : Luban.BeanBase
         + "ID:" + ID + ","
         + "NAME:" + NAME + ","
         + "DESCRIBE:" + DESCRIBE + ","
-        + "prefabName:" + PrefabName + ","
         + "maxStackCount:" + MaxStackCount + ","
         + "interactEffectID:" + InteractEffectID + ","
         + "WaterGain:" + WaterGain + ","
         + "FoodGain:" + FoodGain + ","
         + "SanGain:" + SanGain + ","
-        + "StatusGain:" + StatusGain + ","
+        + "buffID:" + BuffID + ","
+        + "time:" + Time + ","
         + "Weight:" + Weight + ","
         + "IconName:" + IconName + ","
+        + "SpriteName:" + SpriteName + ","
+        + "PrefabName:" + PrefabName + ","
         + "}";
     }
 }

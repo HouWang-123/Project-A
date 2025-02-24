@@ -19,6 +19,7 @@ public partial class Tables
     public buff.ConditionsTable ConditionsTable {get; }
     public buff.PassiveSkillsTable PassiveSkillsTable {get; }
     public interact.InteractEffectTable InteractEffectTable {get; }
+    public func.DropRuleTable DropRuleTable {get; }
     public item.FoodTable FoodTable {get; }
     public item.JewelryTable JewelryTable {get; }
     public item.SceneObjectsTable SceneObjectsTable {get; }
@@ -29,6 +30,7 @@ public partial class Tables
     public scene.DoorsTable DoorsTable {get; }
     public scene.RoomsTable RoomsTable {get; }
     public mon.MonsterTable MonsterTable {get; }
+    public text.LocalizationTable LocalizationTable {get; }
 
     public Tables(System.Func<string, JSONNode> loader)
     {
@@ -37,6 +39,7 @@ public partial class Tables
         ConditionsTable = new buff.ConditionsTable(loader("buff_conditionstable"));
         PassiveSkillsTable = new buff.PassiveSkillsTable(loader("buff_passiveskillstable"));
         InteractEffectTable = new interact.InteractEffectTable(loader("interact_interacteffecttable"));
+        DropRuleTable = new func.DropRuleTable(loader("func_dropruletable"));
         FoodTable = new item.FoodTable(loader("item_foodtable"));
         JewelryTable = new item.JewelryTable(loader("item_jewelrytable"));
         SceneObjectsTable = new item.SceneObjectsTable(loader("item_sceneobjectstable"));
@@ -47,6 +50,7 @@ public partial class Tables
         DoorsTable = new scene.DoorsTable(loader("scene_doorstable"));
         RoomsTable = new scene.RoomsTable(loader("scene_roomstable"));
         MonsterTable = new mon.MonsterTable(loader("mon_monstertable"));
+        LocalizationTable = new text.LocalizationTable(loader("text_localizationtable"));
         ResolveRef();
     }
     
@@ -57,6 +61,7 @@ public partial class Tables
         ConditionsTable.ResolveRef(this);
         PassiveSkillsTable.ResolveRef(this);
         InteractEffectTable.ResolveRef(this);
+        DropRuleTable.ResolveRef(this);
         FoodTable.ResolveRef(this);
         JewelryTable.ResolveRef(this);
         SceneObjectsTable.ResolveRef(this);
@@ -67,6 +72,7 @@ public partial class Tables
         DoorsTable.ResolveRef(this);
         RoomsTable.ResolveRef(this);
         MonsterTable.ResolveRef(this);
+        LocalizationTable.ResolveRef(this);
     }
 }
 

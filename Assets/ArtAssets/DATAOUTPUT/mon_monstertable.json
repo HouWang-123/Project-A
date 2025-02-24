@@ -10,9 +10,7 @@
     "warnRange": 8,
     "hitRange": 1.5,
     "shootRange": 7,
-    "inPeace": "Empty",
-    "toBattle": "Empty",
-    "inBattle": "Empty"
+    "hitDegree": 90
   },
   {
     "ID": 400002,
@@ -22,11 +20,9 @@
     "maxHP": 1000,
     "attack": 49,
     "speed": 1.5,
-    "warnRange": 100,
+    "warnRange": 15,
     "hitRange": 5,
     "shootRange": -1,
-    "inPeace": "Empty",
-    "toBattle": "Empty",
-    "inBattle": "Empty"
+    "hitDegree": 90
   }
 ]

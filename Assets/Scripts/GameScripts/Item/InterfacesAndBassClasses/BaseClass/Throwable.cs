@@ -4,44 +4,25 @@ using YooAsset;
 
 public class Throwable : ItemBase
 {
-    public cfg.item.ThrowObjects ItemData;
+    public cfg.item.ThrowObjects data;
     public Rigidbody ThrowableRigidbody;
-    public void Awake()
-    {
-        InitItem();
-    }
-    // 可能存在的抽象方法，子类实现方法体
-    protected void Throw()
-    {
-        
-    }
-    // 物品初始化
-    protected override void InitItem()
-    {
-        ItemType = GameItemType.Throwable;
 
-        try
-        {
-            ItemData = GameTableDataAgent.ThrowObjectsTable.Get(ItemID);
-        }
-        catch (Exception e)
-        {
-            ColorfulDebugger.DebugError("可投掷物品ID" + ItemID +"不存在，物品名称" + gameObject.name,ColorfulDebugger.Instance.Data);
-        }
-    }
-    protected override void InitItem(int id)
+    // 物品初始化
+    public override void InitItem(int id)
     {
         ItemType = GameItemType.Throwable;
 
         try
         {
             ItemData = GameTableDataAgent.ThrowObjectsTable.Get(id);
-            ItemID = ItemData.ID;
+            data = ItemData as cfg.item.ThrowObjects;
+            ItemID = data.ID;
         }
         catch (Exception e)
         {
             ColorfulDebugger.DebugError("可投掷物品ID" + id +"不存在，物品名称" + gameObject.name,ColorfulDebugger.Instance.Data);
         }
+        ItemSpriteName = data.SpriteName;
     }
     public override void OnItemPickUp()
     {
@@ -49,12 +30,16 @@ public class Throwable : ItemBase
     }
     public override Sprite GetItemIcon()
     {
-        AssetHandle loadAssetSync = YooAssets.LoadAssetSync<Sprite>(ItemData.IconName);
+        AssetHandle loadAssetSync = YooAssets.LoadAssetSync<Sprite>(data.IconName);
+        if (loadAssetSync.AssetObject == null)
+        {
+            loadAssetSync = YooAssets.LoadAssetSync<Sprite>("SpriteNotFound_Default");
+        }
         return Instantiate(loadAssetSync.AssetObject, transform) as Sprite;
     }
     public override string GetPrefabName()
     {
-        return ItemData.PrefabName;
+        return data.PrefabName;
     }
     
     

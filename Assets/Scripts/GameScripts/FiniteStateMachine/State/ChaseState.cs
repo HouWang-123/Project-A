@@ -28,9 +28,11 @@ public class ChaseState : BaseState
     // 嘲讽动画的时间
     private float m_fuckingTime = 0f;
     // 嘲讽的CD时间
-    private float m_fuckingCD = 10f;
+    private readonly float m_fuckingCD = 10f;
     // 嘲讽中
     private bool m_fucking = false;
+    // 触发了嘲讽
+    private bool m_fuckedAnimPlayed = false;
     public ChaseState(FiniteStateMachine finiteStateMachine, GameObject NPCObj, Transform playerTransform = null)
         : base(finiteStateMachine, NPCObj)
     {
@@ -42,10 +44,10 @@ public class ChaseState : BaseState
             throw new ArgumentException();
         }
         m_gameObject = NPCObj;
-        agent = NPCObj.GetComponent<MonsterFSM>().NavMeshAgent;
-        m_2LookAtDistance = m_gameObject.GetComponent<MonsterFSM>().NPCDatas.WarnRange;
-        m_2RangedAttack = m_gameObject.GetComponent<MonsterFSM>().NPCDatas.ShootRange;
-        m_2MeleeAttack = m_gameObject.GetComponent<MonsterFSM>().NPCDatas.HitRange;
+        agent = NPCObj.GetComponent<MonsterBaseFSM>().NavMeshAgent;
+        m_2LookAtDistance = m_gameObject.GetComponent<MonsterBaseFSM>().MonsterDatas.WarnRange;
+        m_2RangedAttack = m_gameObject.GetComponent<MonsterBaseFSM>().MonsterDatas.ShootRange;
+        m_2MeleeAttack = m_gameObject.GetComponent<MonsterBaseFSM>().MonsterDatas.HitRange;
         // lastPosition = gameObject.transform.position;
         // 初始位置强制校正
         if (NavMesh.SamplePosition(NPCObj.transform.position, out NavMeshHit hit, 2.0f, NavMesh.AllAreas))
@@ -82,11 +84,11 @@ public class ChaseState : BaseState
         Vector3 scale;
         if (playerX - npcX > 0f)
         {
-            scale = new(1f, 1f, 1f);
+            scale = GameConstData.NormalScale;
         }
         else
         {
-            scale = new(-1f, 1f, 1f);
+            scale = GameConstData.ReverseScale;
         }
         m_gameObject.transform.localScale = scale;
         // 跟着玩家
@@ -98,28 +100,22 @@ public class ChaseState : BaseState
         if (!m_fucking && Random.value <= 0.1f)
         {
             m_fucking = true;
+            m_fuckedAnimPlayed = true;
             agent.isStopped = true;
             Debug.Log(GetType() + " /Act() => 触发了嘲讽动画");
-            m_gameObject.GetComponent<MonsterFSM>().PlayAnimation(0, "Idle", false);
-            m_fuckingTime = m_gameObject.GetComponent<MonsterFSM>().AnimationTotalTime();
+            AnimationController.PlayAnim(m_gameObject, StateEnum.Idle, 0, false);
+            var monsterFSM = m_gameObject.GetComponent<MonsterBaseFSM>();
+            m_fuckingTime = AnimationController.AnimationTotalTime(monsterFSM.SkeletonAnim);
         }
         if (m_fucking)
         {
-            m_timer += Time.deltaTime;
+            m_timer += Time.deltaTime * m_timeScale;
         }
-        if (m_timer > m_fuckingTime)
+        if (m_fuckedAnimPlayed && m_timer > m_fuckingTime)
         {
+            m_fuckedAnimPlayed = false;
             agent.isStopped = false;
-            var monsterFSM = m_gameObject.GetComponent<MonsterFSM>();
-            switch (monsterFSM.NPCDatas.PrefabName)
-            {
-                case "DrownedOnes":
-                    m_gameObject.GetComponent<MonsterFSM>().PlayAnimation(0, "Walk2", true);
-                    break;
-                case "HoundTindalos":
-                    m_gameObject.GetComponent<MonsterFSM>().PlayAnimation(0, "Walk", true);
-                    break;
-            }
+            AnimationController.PlayAnim(m_gameObject, StateEnum.Chase, 0, true, m_timeScale);
         }
         // 十秒CD
         if (m_timer > m_fuckingTime + m_fuckingCD)
@@ -197,7 +193,7 @@ public class ChaseState : BaseState
             }
         }
         // 发现光源直接逃跑
-        var lightTransform = m_gameObject.GetComponent<MonsterFSM>().LightTransform;
+        var lightTransform = m_gameObject.GetComponent<MonsterBaseFSM>().LightTransform;
         if (lightTransform != null)
         {
             if (Vector3.Distance(lightTransform.position, m_gameObject.transform.position) <= m_fleeDistance)
@@ -230,17 +226,7 @@ public class ChaseState : BaseState
     {
         base.DoBeforeEntering();
         agent.isStopped = false;
-        var monsterFSM = m_gameObject.GetComponent<MonsterFSM>();
-        // 状态对应动画名称，根据怪物调整
-        switch (monsterFSM.NPCDatas.PrefabName)
-        {
-            case "DrownedOnes":
-                monsterFSM.PlayAnimation(0, "Walk2", true);
-                break;
-            case "HoundTindalos":
-                monsterFSM.PlayAnimation(0, "Walk", true);
-                break;
-        }
+        AnimationController.PlayAnim(m_gameObject, StateEnum.Chase, 0, true, m_timeScale);
     }
 
     public override void DoAfterLeaving()

@@ -27,6 +27,8 @@ public sealed partial class Rooms : Luban.BeanBase
         { if(!_buf["BGM"].IsString) { throw new SerializationException(); }  BGM = _buf["BGM"]; }
         { if(!_buf["visibility"].IsNumber) { throw new SerializationException(); }  Visibility = _buf["visibility"]; }
         { if(!_buf["byTime"].IsBoolean) { throw new SerializationException(); }  ByTime = _buf["byTime"]; }
+        { var __json0 = _buf["monstersIDList"]; if(!__json0.IsArray) { throw new SerializationException(); } MonstersIDList = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  MonstersIDList.Add(__v0); }   }
+        { var __json0 = _buf["dropRuleIDList"]; if(!__json0.IsArray) { throw new SerializationException(); } DropRuleIDList = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  DropRuleIDList.Add(__v0); }   }
     }
 
     public static Rooms DeserializeRooms(JSONNode _buf)
@@ -74,6 +76,14 @@ public sealed partial class Rooms : Luban.BeanBase
     /// 可见度是否按环境（时间）变化
     /// </summary>
     public readonly bool ByTime;
+    /// <summary>
+    /// 房间里有哪些怪物
+    /// </summary>
+    public readonly System.Collections.Generic.List<int> MonstersIDList;
+    /// <summary>
+    /// 房间里有哪些交互规则
+    /// </summary>
+    public readonly System.Collections.Generic.List<int> DropRuleIDList;
    
     public const int __ID__ = -1359997194;
     public override int GetTypeId() => __ID__;
@@ -95,6 +105,8 @@ public sealed partial class Rooms : Luban.BeanBase
         + "BGM:" + BGM + ","
         + "visibility:" + Visibility + ","
         + "byTime:" + ByTime + ","
+        + "monstersIDList:" + Luban.StringUtil.CollectionToString(MonstersIDList) + ","
+        + "dropRuleIDList:" + Luban.StringUtil.CollectionToString(DropRuleIDList) + ","
         + "}";
     }
 }
