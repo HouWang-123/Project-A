@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Sprite_SceneObject_TeacherDeskLeft_0: -2501382354405087491
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

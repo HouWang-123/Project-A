@@ -4,8 +4,7 @@ using UnityEngine;
 
 public partial class TimeSystemManager : MonoBehaviour
 {
-    [System.Serializable]
-    public struct TimedEvent
+    public struct GameHourEvent
     {
         public float triggerTime; // 游戏内时间（小时）
         public Action onTrigger;
@@ -15,39 +14,69 @@ public partial class TimeSystemManager : MonoBehaviour
         public TimePhaseEnum phase; // 时间段
         public Action onTrigger;
     }
-    
-    public List<TimedEvent> TimeScheduledEvents;
-    private BitMap m_timeTriggeredFlags; // 触发状态标记
+    public struct GameMinuteEvent
+    {
+        public float triggerTime; // 游戏内时间（分钟）
+        public Action onTrigger;
+    }
+
+    public List<GameHourEvent> HourScheduledEvents;
+    private BitMap m_hourTriggeredFlags; // 触发状态标记
+    public List<GameMinuteEvent> MinuteScheduledEvents;
+    private BitMap m_minuteTriggeredFlags; // 触发状态标记
     public List<PhasedChangedEvent> PhasedChangedScheduledEvents;
     private BitMap m_phaseTriggeredFlags; // 触发状态标记
 
     // 每天开始时重置所有标记
     private void ResetFlags()
     {
-        for (int i = 0; i < TimeScheduledEvents.Count; i++)
+        for (int i = 0; i < MinuteScheduledEvents.Count; i++)
         {
-            m_timeTriggeredFlags.Clear(i);
+            m_minuteTriggeredFlags.Clear(i);
         }
         for (int i = 0; i < PhasedChangedScheduledEvents.Count; i++)
         {
             m_phaseTriggeredFlags.Clear(i);
+        }
+        for (int i = 0; i < HourScheduledEvents.Count; ++i)
+        {
+            m_hourTriggeredFlags.Clear(i);
+        }
+    }
+
+    private void CheckHoursEvents(float gameHours)
+    {
+        float gameMinutes = gameHours * 60f;
+        if (HourScheduledEvents != null)
+        {
+            int i = 0;
+            foreach (var e in HourScheduledEvents)
+            {
+                if (!m_hourTriggeredFlags.Get(i) && Mathf.Abs(gameHours - e.triggerTime) < 0.0001f) // 误差范围
+                {
+                    Debug.Log(GetType() + "当前游戏内时间：[ 小时: " + gameHours + " ,分钟: " + gameMinutes + " ]");
+                    e.onTrigger?.Invoke();
+                }
+                m_hourTriggeredFlags.Set(i);
+                ++i;
+            }
         }
     }
 
     private void CheckMinuteEvents(float gameMinutes)
     {
         float gameHours = gameMinutes / 60f;
-        if (TimeScheduledEvents != null)
+        if (MinuteScheduledEvents != null)
         {
             int i = 0;
-            foreach (var e in TimeScheduledEvents)
+            foreach (var e in MinuteScheduledEvents)
             {
-                if (!m_timeTriggeredFlags.Get(i) && Mathf.Abs(gameHours - e.triggerTime) < 0.0001f) // 误差范围
+                if (!m_minuteTriggeredFlags.Get(i) && Mathf.Abs(gameMinutes - e.triggerTime) < 0.0001f) // 误差范围
                 {
-                    Debug.Log(GetType() + "当前游戏内时间：" + gameMinutes);
+                    Debug.Log(GetType() + "当前游戏内时间：[ 小时: " + gameHours + " ,分钟: " + gameMinutes + " ]");
                     e.onTrigger?.Invoke();
                 }
-                m_timeTriggeredFlags.Set(i);
+                m_minuteTriggeredFlags.Set(i);
                 ++i;
             }
         }

@@ -2,7 +2,6 @@ using UnityEngine;
 using YooAsset;
 using UnityEngine.Events;
 using Spine.Unity;
-using static TimeSystemManager;
 
 public class PlayerControl : MonoBehaviour
 {
@@ -79,17 +78,23 @@ public class PlayerControl : MonoBehaviour
         }
 
         // 模拟添加时间段改变的事件
-        PhasedChangedEvent phasedEvent = new()
+        TimeSystemManager.PhasedChangedEvent phasedEvent = new()
         {
             phase = TimePhaseEnum.Day,
             onTrigger = () =>
             {
+                int gameDay = TimeSystemManager.Instance.GameDay;
+                int gameHour = TimeSystemManager.Instance.GameHour;
+                int gameMinute = TimeSystemManager.Instance.GameMinute;
+                Debug.Log(GetType() + "/ 现在是游戏时间[天数: " + gameDay + " ,小时: " + gameHour + " ,分钟: " + gameMinute + " ]");
                 Debug.Log(GetType() + "/ 触发了主角拉屎");
             }
         };
-        Instance.PhasedChangedScheduledEvents.Add(phasedEvent);
-        
-#region InputSystem
+        TimeSystemManager.Instance.PhasedChangedScheduledEvents.Add(phasedEvent);
+
+        // 分钟改变时间：TimeSystemManager.GameMinuteEvent， 小时改变时间：GameHourEvent
+
+        #region InputSystem
 
         InputControl.Instance.GamePlayerEnable();
         InputControl.Instance.UIDisable();

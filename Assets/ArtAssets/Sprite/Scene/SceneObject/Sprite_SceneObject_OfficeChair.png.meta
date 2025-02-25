@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Sprite_SceneObject_OfficeChair_0: 3224689868311566913
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

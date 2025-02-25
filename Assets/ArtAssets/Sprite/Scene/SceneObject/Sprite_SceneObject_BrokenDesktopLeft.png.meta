@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Sprite_SceneObject_BrokenDesktopLeft_0: 4372283201947165457
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

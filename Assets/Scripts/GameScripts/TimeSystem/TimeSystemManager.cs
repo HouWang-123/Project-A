@@ -31,7 +31,7 @@ public partial class TimeSystemManager : MonoBehaviour
         }
     }
 
-    // 时间配置
+    // 时间配置，不同阶段对应的现实的秒数。十五分钟为游戏内一天，这里转化为秒处理
     private readonly Dictionary<TimePhaseEnum, float> phaseDurations = 
         new() 
         { 
@@ -47,15 +47,27 @@ public partial class TimeSystemManager : MonoBehaviour
     // 时间相关的事件
     private readonly UnityEvent<TimePhaseEnum, TimePhaseEnum> onTimePhaseChanged = new();
     public UnityEvent<TimePhaseEnum, TimePhaseEnum> OnTimePhaseChanged { get { return onTimePhaseChanged; } }
-    private readonly UnityEvent<float> onMinutePassed = new(); // 参数为游戏内时间
-    public UnityEvent<float> OnMinutePassed {  get { return onMinutePassed; } }
-    private readonly UnityEvent onDayPassed = new(); // 每日结束事件
+    // 每天结束的事件
+    private readonly UnityEvent onDayPassed = new();
     public UnityEvent OnDayPassed { get { return onDayPassed; } }
+    // 小时结束的事件
+    private readonly UnityEvent<float> onHourPassed = new();
+    public UnityEvent<float> OnHourPassed { get { return onHourPassed; } }
+    // 分钟结束的事件
+    private readonly UnityEvent<float> onMinutePassed = new();
+    public UnityEvent<float> OnMinutePassed {  get { return onMinutePassed; } }
 
     private float elapsedRealSeconds;
+    // 当前游戏时间的天数
+    private int gameDay = 0;
+    public int GameDay { get { return gameDay; } }
+    // 当前游戏时间的小时数，计算真实的秒数占游戏一小时对应的现实秒(游戏一天的总秒数除以24)的比例
+    public int GameHour { get { return Mathf.FloorToInt(24f * elapsedRealSeconds / realSecondsPerGameDay) % 24; } }
+    public int GameMinute { get { return Mathf.FloorToInt(60f * 24f * elapsedRealSeconds / realSecondsPerGameDay) % 60; } }
     private TimePhaseEnum oldPhase = TimePhaseEnum.Night1;
     private TimePhaseEnum currentPhase = TimePhaseEnum.Night1;
     private float phaseProgress;
+    private readonly float timeSpeed = 5f;
 
     private void Awake()
     {
@@ -78,11 +90,14 @@ public partial class TimeSystemManager : MonoBehaviour
             phaseStartSeconds.Add((TimePhaseEnum)i, totalSeconds);
         }
 
-        m_timeTriggeredFlags = new(128);
+        m_hourTriggeredFlags = new(128);
+        m_minuteTriggeredFlags = new(128);
         m_phaseTriggeredFlags = new(128);
-        TimeScheduledEvents = new();
+        HourScheduledEvents = new();
+        MinuteScheduledEvents = new();
         PhasedChangedScheduledEvents = new();
 
+        OnHourPassed.AddListener(CheckHoursEvents);
         OnMinutePassed.AddListener(CheckMinuteEvents);
         OnTimePhaseChanged.AddListener(CheckPhaseEvents);
         OnDayPassed.AddListener(ResetFlags);
@@ -90,6 +105,7 @@ public partial class TimeSystemManager : MonoBehaviour
 
     private void OnDestroy()
     {
+        OnHourPassed.RemoveAllListeners();
         OnMinutePassed.RemoveAllListeners();
         OnTimePhaseChanged.RemoveAllListeners();
         OnDayPassed.RemoveAllListeners();
@@ -106,7 +122,7 @@ public partial class TimeSystemManager : MonoBehaviour
         float delta;
         if (Input.GetKey(KeyCode.T))
         {
-            delta = Time.deltaTime * 5f;
+            delta = Time.deltaTime * timeSpeed;
             Debug.Log(GetType() + "按下了时间加速");
         }
         else
@@ -131,11 +147,18 @@ public partial class TimeSystemManager : MonoBehaviour
         if (elapsedRealSeconds >= realSecondsPerGameDay)
         {
             elapsedRealSeconds = 0f;
+            ++gameDay;
             OnDayPassed.Invoke(); // 触发新一天事件
+        }
+        // 每小时事件，到小时改变的时候
+        // 24 * t / C > 24 * (t - C1) / C
+        if (Mathf.FloorToInt(24f * elapsedRealSeconds / realSecondsPerGameDay) > Mathf.FloorToInt(24f * (elapsedRealSeconds - delta) / realSecondsPerGameDay))
+        {
+            onHourPassed.Invoke(gameTimeNormalized * 24f);
         }
 
         // 每分钟事件，到分钟改变的时候
-        if (Mathf.FloorToInt(elapsedRealSeconds / 60f) > Mathf.FloorToInt((elapsedRealSeconds - delta) / 60f))
+        if (Mathf.FloorToInt(60f * 24f * elapsedRealSeconds / realSecondsPerGameDay) > Mathf.FloorToInt(60f * 24f * (elapsedRealSeconds - delta) / realSecondsPerGameDay))
         {
             onMinutePassed.Invoke(gameTimeNormalized * 24f * 60f);
         }

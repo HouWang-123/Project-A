@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Sprite_SceneObject_BrokenStudentChairLeft_0: 4320582477138862265
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
