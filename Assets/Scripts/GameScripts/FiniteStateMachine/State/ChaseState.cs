@@ -3,40 +3,40 @@ using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
 /// <summary>
-/// ×·Öğ×´Ì¬
+/// è¿½é€çŠ¶æ€
 /// </summary>
 public class ChaseState : BaseState
 {
-    // ¼ÆÊ±Æ÷
+    // è®¡æ—¶å™¨
     private float m_timer = 0f;
-    // ÅĞ¶ÏNPCÊÇ·ñ¿¨×¡µÄãĞÖµÊ±¼ä
+    // åˆ¤æ–­NPCæ˜¯å¦å¡ä½çš„é˜ˆå€¼æ—¶é—´
     public float stuckThreshold = 4f;
-    // NPCµÄNavMeshAgent×é¼ş
+    // NPCçš„NavMeshAgentç»„ä»¶
     private readonly NavMeshAgent agent;
-    // ¼ÇÂ¼NPC¿¨×¡µÄÊ±¼ä£¬ÓÃÓÚ´¥·¢Ç¿ÖÆÖØĞÂÑ°Â·
+    // è®°å½•NPCå¡ä½çš„æ—¶é—´ï¼Œç”¨äºè§¦å‘å¼ºåˆ¶é‡æ–°å¯»è·¯
     private float stuckTimer;
-    // Íæ¼ÒµÄÎ»ÖÃ
+    // ç©å®¶çš„ä½ç½®
     private readonly Transform m_playerTransform;
-    // ×ª»»Îª¿´ÏòÍæ¼Ò×´Ì¬µÄ×îĞ¡¾àÀë
+    // è½¬æ¢ä¸ºçœ‹å‘ç©å®¶çŠ¶æ€çš„æœ€å°è·ç¦»
     private readonly float m_2LookAtDistance = -1f;
-    // Ô¶³Ì¹¥»÷¾àÀë
+    // è¿œç¨‹æ”»å‡»è·ç¦»
     private readonly float m_2RangedAttack = -1f;
-    // ×ª»»Îª¹¥»÷Íæ¼ÒµÄ¾àÀë
+    // è½¬æ¢ä¸ºæ”»å‡»ç©å®¶çš„è·ç¦»
     private readonly float m_2MeleeAttack = -1f;
-    // ×ªÎªÌÓÅÜµÄ¹âÔ´¾àÀë
+    // è½¬ä¸ºé€ƒè·‘çš„å…‰æºè·ç¦»
     private readonly float m_fleeDistance = -1f;
-    // ³°·í¶¯»­µÄÊ±¼ä
+    // å˜²è®½åŠ¨ç”»çš„æ—¶é—´
     private float m_fuckingTime = 0f;
-    // ³°·íµÄCDÊ±¼ä
+    // å˜²è®½çš„CDæ—¶é—´
     private readonly float m_fuckingCD = 10f;
-    // ³°·íÖĞ
+    // å˜²è®½ä¸­
     private bool m_fucking = false;
-    // ´¥·¢ÁË³°·í
+    // è§¦å‘äº†å˜²è®½
     private bool m_fuckedAnimPlayed = false;
     public ChaseState(FiniteStateMachine finiteStateMachine, GameObject NPCObj, Transform playerTransform = null)
         : base(finiteStateMachine, NPCObj)
     {
-        // ÉèÖÃµ±Ç°µÄ×´Ì¬
+        // è®¾ç½®å½“å‰çš„çŠ¶æ€
         m_stateEnum = StateEnum.Chase;
         if (NPCObj == null)
         {
@@ -49,14 +49,14 @@ public class ChaseState : BaseState
         m_2RangedAttack = m_gameObject.GetComponent<MonsterBaseFSM>().MonsterDatas.ShootRange;
         m_2MeleeAttack = m_gameObject.GetComponent<MonsterBaseFSM>().MonsterDatas.HitRange;
         // lastPosition = gameObject.transform.position;
-        // ³õÊ¼Î»ÖÃÇ¿ÖÆĞ£Õı
+        // åˆå§‹ä½ç½®å¼ºåˆ¶æ ¡æ­£
         if (NavMesh.SamplePosition(NPCObj.transform.position, out NavMeshHit hit, 2.0f, NavMesh.AllAreas))
         {
-            agent.Warp(hit.position); // È·±£AgentÎ»ÖÃÕıÈ·
+            agent.Warp(hit.position); // ç¡®ä¿Agentä½ç½®æ­£ç¡®
         }
         else
         {
-            Debug.LogError("NPC³õÊ¼Î»ÖÃÎŞĞ§£¡Çë¼ì²éNavMeshºæ±º¡£");
+            Debug.LogError("NPCåˆå§‹ä½ç½®æ— æ•ˆï¼è¯·æ£€æŸ¥NavMeshçƒ˜ç„™ã€‚");
         }
 
         if (playerTransform != null)
@@ -71,16 +71,16 @@ public class ChaseState : BaseState
     }
 
     /// <summary>
-    /// Ö´ĞĞ×·Öğ¶¯×÷
+    /// æ‰§è¡Œè¿½é€åŠ¨ä½œ
     /// </summary>
-    /// <param name="npc">ÓÎÏ·¶ÔÏó</param>
+    /// <param name="npc">æ¸¸æˆå¯¹è±¡</param>
     public override void Act(GameObject npc)
     {
         // npc.transform.LookAt(m_playerTransform);
         float npcX = npc.transform.position.x;
         float playerX = m_playerTransform.position.x;
-        // Íæ¼ÒÔÚNPC×ó±ß£¬¿´Ïò×ó±ß
-        // µãÔÚÓÒ±ß£¬¿´ÏòÓÒ±ß
+        // ç©å®¶åœ¨NPCå·¦è¾¹ï¼Œçœ‹å‘å·¦è¾¹
+        // ç‚¹åœ¨å³è¾¹ï¼Œçœ‹å‘å³è¾¹
         Vector3 scale;
         if (playerX - npcX > 0f)
         {
@@ -91,18 +91,18 @@ public class ChaseState : BaseState
             scale = GameConstData.ReverseScale;
         }
         m_gameObject.transform.localScale = scale;
-        // ¸ú×ÅÍæ¼Ò
+        // è·Ÿç€ç©å®¶
         if (IsPathValid(m_playerTransform.position))
         {
             agent.SetDestination(m_playerTransform.position);
         }
-        // 10%¸ÅÂÊ´¥·¢³°·í
+        // 10%æ¦‚ç‡è§¦å‘å˜²è®½
         if (!m_fucking && Random.value <= 0.1f)
         {
             m_fucking = true;
             m_fuckedAnimPlayed = true;
             agent.isStopped = true;
-            Debug.Log(GetType() + " /Act() => ´¥·¢ÁË³°·í¶¯»­");
+            Debug.Log(GetType() + " /Act() => è§¦å‘äº†å˜²è®½åŠ¨ç”»");
             AnimationController.PlayAnim(m_gameObject, StateEnum.Idle, 0, false);
             var monsterFSM = m_gameObject.GetComponent<MonsterBaseFSM>();
             m_fuckingTime = AnimationController.AnimationTotalTime(monsterFSM.SkeletonAnim);
@@ -117,7 +117,7 @@ public class ChaseState : BaseState
             agent.isStopped = false;
             AnimationController.PlayAnim(m_gameObject, StateEnum.Chase, 0, true, m_timeScale);
         }
-        // Ê®ÃëCD
+        // åç§’CD
         if (m_timer > m_fuckingTime + m_fuckingCD)
         {
             m_timer = 0f;
@@ -125,15 +125,15 @@ public class ChaseState : BaseState
         }
         /*else
         {
-            Debug.Log(GetType() + " /Act()=> Íæ¼ÒÎ»ÖÃÎŞĞ§£¬ÍË»¯ÎªÖ±ÏßĞĞ×ß");
+            Debug.Log(GetType() + " /Act()=> ç©å®¶ä½ç½®æ— æ•ˆï¼Œé€€åŒ–ä¸ºç›´çº¿è¡Œèµ°");
             var direction = (m_playerTransform.position - npc.transform.position).normalized;
             float speed = npc.GetComponent<MonsterFSM>().NPCDatas.Speed;
             Vector3 newPos = npc.transform.position + speed * Time.deltaTime * direction;
             npc.transform.position = newPos;
         }*/
 
-        // ¿¨¶Ù¼ì²â
-        if (agent.velocity.sqrMagnitude < 0.05f)// È¡Æ½·½±ÈÈ¡Ä£¿ì
+        // å¡é¡¿æ£€æµ‹
+        if (agent.velocity.sqrMagnitude < 0.05f)// å–å¹³æ–¹æ¯”å–æ¨¡å¿«
         {
             stuckTimer += Time.deltaTime;
             if (stuckTimer >= stuckThreshold)
@@ -144,7 +144,7 @@ public class ChaseState : BaseState
                 }
                 /*else
                 {
-                    Debug.Log(GetType() + " /Act()=> Íæ¼ÒÎ»ÖÃÎŞĞ§£¬ÍË»¯ÎªÖ±ÏßĞĞ×ß");
+                    Debug.Log(GetType() + " /Act()=> ç©å®¶ä½ç½®æ— æ•ˆï¼Œé€€åŒ–ä¸ºç›´çº¿è¡Œèµ°");
                     var direction = (m_playerTransform.position - npc.transform.position).normalized;
                     float speed = npc.GetComponent<MonsterFSM>().NPCDatas.Speed;
                     Vector3 newPos = npc.transform.position + speed * Time.deltaTime * direction;
@@ -160,39 +160,39 @@ public class ChaseState : BaseState
     }
 
     /// <summary>
-    /// ÅĞ¶ÏÊÇ·ñÇĞ»»¿´ÏòÍæ¼ÒµÄÌõ¼ş¼àÌı
+    /// åˆ¤æ–­æ˜¯å¦åˆ‡æ¢çœ‹å‘ç©å®¶çš„æ¡ä»¶ç›‘å¬
     /// </summary>
-    /// <param name="npc">ÓÎÏ·¶ÔÏó</param>
+    /// <param name="npc">æ¸¸æˆå¯¹è±¡</param>
     public override void Condition(GameObject npc)
     {
         float distance = Vector3.Distance(npc.transform.position, m_playerTransform.position);
-        // ´óÓÚm_2LookAtDistanceÃ×¾Í×ªÎª¿´ÏòÍæ¼Ò×´Ì¬
+        // å¤§äºm_2LookAtDistanceç±³å°±è½¬ä¸ºçœ‹å‘ç©å®¶çŠ¶æ€
         if (distance > m_2LookAtDistance)
         {
             m_finiteStateMachine.PerformTransition(TransitionEnum.SeePlayer);
         }
-        // Ğ¡ÓÚm_2AttackÃ×¾Í×ªÎª½üÕ½¹¥»÷Íæ¼Ò×´Ì¬
+        // å°äºm_2Attackç±³å°±è½¬ä¸ºè¿‘æˆ˜æ”»å‡»ç©å®¶çŠ¶æ€
         if (m_2MeleeAttack != -1 && distance <= m_2MeleeAttack)
         {
             m_finiteStateMachine.PerformTransition(TransitionEnum.MeleeAttackPlayer);
         }
-        // Ğ¡ÓÚm_2AttackÃ×¾Í×ªÎªÔ¶³Ì¹¥»÷Íæ¼Ò×´Ì¬
+        // å°äºm_2Attackç±³å°±è½¬ä¸ºè¿œç¨‹æ”»å‡»ç©å®¶çŠ¶æ€
         if (m_2RangedAttack != -1 && distance <= m_2RangedAttack)
         {
             m_finiteStateMachine.PerformTransition(TransitionEnum.RangedAttackPlayer);
         }
-        // Íæ¼Ò³öÁËÑ²Âß·¶Î§£¬¾Í½øĞĞÓÎµ´
-        // ÔÚÍæ¼ÒÎ»ÖÃÖÜÎ§¼ì²âNavMesh
+        // ç©å®¶å‡ºäº†å·¡é€»èŒƒå›´ï¼Œå°±è¿›è¡Œæ¸¸è¡
+        // åœ¨ç©å®¶ä½ç½®å‘¨å›´æ£€æµ‹NavMesh
         if (m_playerTransform.gameObject.TryGetComponent<NavMeshAgent>(out var navAgentPlayer))
         {
             bool isInside = navAgentPlayer.isOnNavMesh;
             if (!isInside)
             {
-                Debug.Log("Íæ¼ÒÒÑ×ß³öNavMesh·¶Î§£¡");
+                Debug.Log("ç©å®¶å·²èµ°å‡ºNavMeshèŒƒå›´ï¼");
                 m_finiteStateMachine.PerformTransition(TransitionEnum.LostPlayer);
             }
         }
-        // ·¢ÏÖ¹âÔ´Ö±½ÓÌÓÅÜ
+        // å‘ç°å…‰æºç›´æ¥é€ƒè·‘
         var lightTransform = m_gameObject.GetComponent<MonsterBaseFSM>().LightTransform;
         if (lightTransform != null)
         {
@@ -203,9 +203,9 @@ public class ChaseState : BaseState
         }
     }
     /// <summary>
-    /// ¼ì²éÄ¿±êµãÊÇ·ñ¿É´ï
+    /// æ£€æŸ¥ç›®æ ‡ç‚¹æ˜¯å¦å¯è¾¾
     /// </summary>
-    /// <param name="target">Ä¿±êµã</param>
+    /// <param name="target">ç›®æ ‡ç‚¹</param>
     /// <returns></returns>
     private bool IsPathValid(Vector3 target)
     {
@@ -214,7 +214,7 @@ public class ChaseState : BaseState
         {
             if (path.status != NavMeshPathStatus.PathComplete)
             {
-                Debug.DrawLine(m_gameObject.transform.position, target, Color.red, 2f); // »æÖÆ²»¿É´ïÂ·¾¶
+                Debug.DrawLine(m_gameObject.transform.position, target, Color.red, 2f); // ç»˜åˆ¶ä¸å¯è¾¾è·¯å¾„
                 return false;
             }
             return true;
@@ -232,7 +232,7 @@ public class ChaseState : BaseState
     public override void DoAfterLeaving()
     {
         base.DoAfterLeaving();
-        // Í£Ö¹ÒÆ¶¯
+        // åœæ­¢ç§»åŠ¨
         agent.isStopped = true;
         agent.destination = agent.transform.position;
     }

@@ -2,28 +2,28 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 /// <summary>
-/// ÓĞÏŞ×´Ì¬»ú
+/// æœ‰é™çŠ¶æ€æœº
 /// </summary>
 public class FiniteStateMachine
 {
-    // ËùÓĞ×´Ì¬
+    // æ‰€æœ‰çŠ¶æ€
     private readonly Dictionary<StateEnum, BaseState> m_keyValuePairs = new ();
-    // µ±Ç°×´Ì¬
+    // å½“å‰çŠ¶æ€
     private (StateEnum, BaseState) m_currentState;
 
     /// <summary>
-    /// ½øĞĞ¸üĞÂ
+    /// è¿›è¡Œæ›´æ–°
     /// </summary>
-    /// <param name="gameObject">ÓÎÏ·ÎïÌå</param>
+    /// <param name="gameObject">æ¸¸æˆç‰©ä½“</param>
     public void DoUpdate(GameObject gameObject)
     {
         m_currentState.Item2.Act(gameObject);
         m_currentState.Item2.Condition(gameObject);
     }
     /// <summary>
-    /// ½øĞĞ¹Ì¶¨¸üĞÂ
+    /// è¿›è¡Œå›ºå®šæ›´æ–°
     /// </summary>
-    /// <param name="gameObject">ÓÎÏ·ÎïÌå</param>
+    /// <param name="gameObject">æ¸¸æˆç‰©ä½“</param>
     public void DoFixedUpdate(GameObject gameObject)
     {
         m_currentState.Item2.FixedAct(gameObject);
@@ -31,9 +31,9 @@ public class FiniteStateMachine
     }
 
     /// <summary>
-    /// Ìí¼Ó×´Ì¬µ½×ÖµäÖĞ
+    /// æ·»åŠ çŠ¶æ€åˆ°å­—å…¸ä¸­
     /// </summary>
-    /// <param name="fsmState">×´Ì¬</param>
+    /// <param name="fsmState">çŠ¶æ€</param>
     public void AddState(BaseState fsmState)
     {
         if (fsmState == null)
@@ -49,7 +49,7 @@ public class FiniteStateMachine
             throw new ArgumentException();
         }
 
-        // ÉèÖÃÄ¬ÈÏ×´Ì¬
+        // è®¾ç½®é»˜è®¤çŠ¶æ€
         if (m_currentState.Item2 == null)
         {
             m_currentState.Item2 = fsmState;
@@ -60,9 +60,9 @@ public class FiniteStateMachine
     }
 
     /// <summary>
-    /// É¾³ı×´Ì¬
+    /// åˆ é™¤çŠ¶æ€
     /// </summary>
-    /// <param name="StateEnum">×´Ì¬Ã¶¾Ù</param>
+    /// <param name="StateEnum">çŠ¶æ€æšä¸¾</param>
     public void DeleteState(StateEnum StateEnum)
     {
         if (StateEnum == StateEnum.None)
@@ -82,9 +82,9 @@ public class FiniteStateMachine
     }
 
     /// <summary>
-    /// Ö´ĞĞ×ª»»µ½Ä³¸ö×´Ì¬
+    /// æ‰§è¡Œè½¬æ¢åˆ°æŸä¸ªçŠ¶æ€
     /// </summary>
-    /// <param name="transition">×´Ì¬¹ı¶É</param>
+    /// <param name="transition">çŠ¶æ€è¿‡æ¸¡</param>
     public void PerformTransition(TransitionEnum transition)
     {
         if (transition == TransitionEnum.None)
@@ -93,7 +93,7 @@ public class FiniteStateMachine
             throw new ArgumentException();
         }
 
-        // »ñÈ¡µ±Ç°×´Ì¬ÏÂ¶ÔÓ¦×ª»»µÄ×´Ì¬
+        // è·å–å½“å‰çŠ¶æ€ä¸‹å¯¹åº”è½¬æ¢çš„çŠ¶æ€
         StateEnum stateEnum = m_currentState.Item2.GetStateWithTransition(transition);
         if (stateEnum == StateEnum.None)
         {
@@ -102,18 +102,18 @@ public class FiniteStateMachine
         }
         if (!m_keyValuePairs.ContainsKey(stateEnum))
         {
-            Debug.LogError(GetType() + "/PerformTransition()/ m_keyValuePairs have not stateEnum£¬stateEnum = " + stateEnum);
+            Debug.LogError(GetType() + "/PerformTransition()/ m_keyValuePairs have not stateEnumï¼ŒstateEnum = " + stateEnum);
             throw new ArgumentException();
         }
 
-        // ÍË³öµ±Ç°×´Ì¬Ç°µÄ»Øµ÷
+        // é€€å‡ºå½“å‰çŠ¶æ€å‰çš„å›è°ƒ
         m_currentState.Item2?.DoAfterLeaving();
-        // ¸üĞÂ×´Ì¬
+        // æ›´æ–°çŠ¶æ€
         BaseState state = m_keyValuePairs[stateEnum];
         m_currentState.Item1 = stateEnum;
         m_currentState.Item2 = state;
-        Debug.Log(GetType() + "/PerformTransition()/ µ±Ç°×´Ì¬Îª£º" + stateEnum.ToString());
-        // ÇĞ»»ºóµ±Ç°×´Ì¬µÄ½øÈëÇ°µÄ»Øµ÷
+        Debug.Log(GetType() + "/PerformTransition()/ å½“å‰çŠ¶æ€ä¸ºï¼š" + stateEnum.ToString());
+        // åˆ‡æ¢åå½“å‰çŠ¶æ€çš„è¿›å…¥å‰çš„å›è°ƒ
         m_currentState.Item2?.DoBeforeEntering();
     }
 
