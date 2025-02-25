@@ -2,12 +2,12 @@ using UnityEngine;
 
 public class DrownedOnesFSM : MonsterBaseFSM
 {
-    // ·¢ÉäÎïÎ»ÖÃ
-    [Header("·¢ÉäÎïÎ»ÖÃ")]
+    // å‘å°„ç‰©ä½ç½®
+    [Header("å‘å°„ç‰©ä½ç½®")]
     [SerializeField]
     private Transform m_projectileTransform;
-    // ½üÕ½¹¥»÷Î»ÖÃ
-    [Header("½üÕ½¹¥»÷Î»ÖÃ")]
+    // è¿‘æˆ˜æ”»å‡»ä½ç½®
+    [Header("è¿‘æˆ˜æ”»å‡»ä½ç½®")]
     [SerializeField]
     private Transform m_meleeTransform;
     protected override void Init()
@@ -30,7 +30,7 @@ public class DrownedOnesFSM : MonsterBaseFSM
         m_animationEnumWithName.Add(StateEnum.Flee, new() { "Walk2" });
         InitFSM();
 
-        // ×¢²áÍæ¼ÒÊÜÉËµÄÊÂ¼ş
+        // æ³¨å†Œç©å®¶å—ä¼¤çš„äº‹ä»¶
         EventManager.Instance.RegistEvent(EventConstName.PLAYER_HURTED_BY_DROWNED_ONES_MELEE, HurtPlayer);
         EventManager.Instance.RegistEvent(EventConstName.PLAYER_HURTED_BY_DROWNED_ONES_RANGED, HurtPlayer);
     }
@@ -38,7 +38,7 @@ public class DrownedOnesFSM : MonsterBaseFSM
     private void OnDestroy()
     {
 
-        // È¡ÏûÍæ¼ÒÊÜÉËµÄÊÂ¼ş
+        // å–æ¶ˆç©å®¶å—ä¼¤çš„äº‹ä»¶
         EventManager.Instance.RemoveEvent(EventConstName.PLAYER_HURTED_BY_DROWNED_ONES_MELEE, HurtPlayer);
         EventManager.Instance.RemoveEvent(EventConstName.PLAYER_HURTED_BY_DROWNED_ONES_RANGED, HurtPlayer);
     }
@@ -63,69 +63,69 @@ public class DrownedOnesFSM : MonsterBaseFSM
         base.InitFSM();
         var playerObj = GameObject.Find("Player000");
         Debug.Log("obj:" + playerObj.ToString());
-        // ³õÊ¼»¯¸÷¸ö×´Ì¬
+        // åˆå§‹åŒ–å„ä¸ªçŠ¶æ€
         IdleState idleState = new(m_fsm, gameObject, playerObj.transform);
-        // ×ªÏòÑ²Âß×´Ì¬
+        // è½¬å‘å·¡é€»çŠ¶æ€
         idleState.AddTransition(TransitionEnum.LostPlayer, StateEnum.Patrol);
-        // ×ªÏò¿´ÏòÍæ¼Ò
+        // è½¬å‘çœ‹å‘ç©å®¶
         idleState.AddTransition(TransitionEnum.SeePlayer, StateEnum.LookAt);
-        // ×ªÎªÌÓÅÜ×´Ì¬
+        // è½¬ä¸ºé€ƒè·‘çŠ¶æ€
         idleState.AddTransition(TransitionEnum.FleeAction, StateEnum.Flee);
         m_fsm.AddState(idleState);
 
         PatrolState patrolState = new(m_fsm, gameObject, playerObj.transform);
-        // ×ªÏò´ı»ú×´Ì¬
+        // è½¬å‘å¾…æœºçŠ¶æ€
         patrolState.AddTransition(TransitionEnum.ToIdle, StateEnum.Idle);
-        // ¿´¼ûÍæ¼Ò£¬×ª»»µ½¿´×ÅÍæ¼ÒµÄ×´Ì¬
+        // çœ‹è§ç©å®¶ï¼Œè½¬æ¢åˆ°çœ‹ç€ç©å®¶çš„çŠ¶æ€
         patrolState.AddTransition(TransitionEnum.SeePlayer, StateEnum.LookAt);
-        // ×ªÎªÌÓÅÜ×´Ì¬
+        // è½¬ä¸ºé€ƒè·‘çŠ¶æ€
         patrolState.AddTransition(TransitionEnum.FleeAction, StateEnum.Flee);
         m_fsm.AddState(patrolState);
 
         LookAtState lookAtState = new(m_fsm, gameObject, playerObj.transform);
-        // ×·ÖğÍæ¼Ò£¬×ª»»µ½×·Öğ
+        // è¿½é€ç©å®¶ï¼Œè½¬æ¢åˆ°è¿½é€
         lookAtState.AddTransition(TransitionEnum.ChasePlayer, StateEnum.Chase);
-        // ¶ªÊ§Íæ¼Ò£¬×ª»»µ½Ñ²Âß
+        // ä¸¢å¤±ç©å®¶ï¼Œè½¬æ¢åˆ°å·¡é€»
         lookAtState.AddTransition(TransitionEnum.LostPlayer, StateEnum.Patrol);
-        // ×ªÎªÌÓÅÜ×´Ì¬
+        // è½¬ä¸ºé€ƒè·‘çŠ¶æ€
         lookAtState.AddTransition(TransitionEnum.FleeAction, StateEnum.Flee);
         m_fsm.AddState(lookAtState);
 
         ChaseState chaseState = new(m_fsm, gameObject, playerObj.transform);
-        // ¿´¼ûÍæ¼Ò£¬×ª»»µ½¿´×Å
+        // çœ‹è§ç©å®¶ï¼Œè½¬æ¢åˆ°çœ‹ç€
         chaseState.AddTransition(TransitionEnum.SeePlayer, StateEnum.LookAt);
-        // ¶ªÊ§Íæ¼Ò
+        // ä¸¢å¤±ç©å®¶
         chaseState.AddTransition(TransitionEnum.LostPlayer, StateEnum.Patrol);
-        // ×ªÎªÌÓÅÜ×´Ì¬
+        // è½¬ä¸ºé€ƒè·‘çŠ¶æ€
         chaseState.AddTransition(TransitionEnum.FleeAction, StateEnum.Flee);
-        // ½üÕ½¹¥»÷Íæ¼Ò
+        // è¿‘æˆ˜æ”»å‡»ç©å®¶
         chaseState.AddTransition(TransitionEnum.MeleeAttackPlayer, StateEnum.MeleeAttack);
-        // Ô¶³Ì¹¥»÷Íæ¼Ò
+        // è¿œç¨‹æ”»å‡»ç©å®¶
         chaseState.AddTransition(TransitionEnum.RangedAttackPlayer, StateEnum.RangedAttack);
         m_fsm.AddState(chaseState);
 
         MeleeAttackState meleeAttackState = new(m_fsm, gameObject, m_meleeTransform, playerObj.transform);
-        // Ô¶³Ì¹¥»÷Íæ¼Ò
+        // è¿œç¨‹æ”»å‡»ç©å®¶
         meleeAttackState.AddTransition(TransitionEnum.RangedAttackPlayer, StateEnum.RangedAttack);
-        // ×·ÖğÍæ¼Ò
+        // è¿½é€ç©å®¶
         meleeAttackState.AddTransition(TransitionEnum.ChasePlayer, StateEnum.Chase);
-        // ¶ªÊ§Íæ¼Ò
+        // ä¸¢å¤±ç©å®¶
         meleeAttackState.AddTransition(TransitionEnum.LostPlayer, StateEnum.Patrol);
-        // ×ªÎªÌÓÅÜ×´Ì¬
+        // è½¬ä¸ºé€ƒè·‘çŠ¶æ€
         meleeAttackState.AddTransition(TransitionEnum.FleeAction, StateEnum.Flee);
         m_fsm.AddState(meleeAttackState);
 
         RangedAttackState rangedAttackState = new(m_fsm, gameObject, m_projectileTransform, playerObj.transform);
-        // ½üÕ½Íæ¼Ò
+        // è¿‘æˆ˜ç©å®¶
         rangedAttackState.AddTransition(TransitionEnum.MeleeAttackPlayer, StateEnum.MeleeAttack);
-        // ×·ÖğÍæ¼Ò
+        // è¿½é€ç©å®¶
         rangedAttackState.AddTransition(TransitionEnum.ChasePlayer, StateEnum.Chase);
-        // ×ªÎªÌÓÅÜ×´Ì¬
+        // è½¬ä¸ºé€ƒè·‘çŠ¶æ€
         rangedAttackState.AddTransition(TransitionEnum.FleeAction, StateEnum.Flee);
         m_fsm.AddState(rangedAttackState);
 
         FleeState fleeState = new(m_fsm, gameObject);
-        // ×ªÎªIdle
+        // è½¬ä¸ºIdle
         fleeState.AddTransition(TransitionEnum.ToIdle, StateEnum.Idle);
         m_fsm.AddState(fleeState);
     }
@@ -136,7 +136,7 @@ public class DrownedOnesFSM : MonsterBaseFSM
         // var playerObj = GameObject.Find("Player000");
         // var playerData = playerObj.GetComponent<PlayerControl>().PlayerData;
         // playerData.CurrentHP -= m_monsterDatas.Attack;
-        GameRunTimeData.Instance.CharacterBasicStat.HurdPlayer(m_monsterDatas.Attack);
-        Debug.Log(GetType() + " /HurtPlayer() => Íæ¼ÒÊÜµ½ " + m_monsterDatas.Attack + " µãÉËº¦");
+        GameRunTimeData.Instance.CharacterBasicStat.HurtPlayer(m_monsterDatas.Attack);
+        Debug.Log(GetType() + " /HurtPlayer() => ç©å®¶å—åˆ° " + m_monsterDatas.Attack + " ç‚¹ä¼¤å®³");
     }
 }
