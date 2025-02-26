@@ -45,7 +45,7 @@ public class RoomMono : MonoBehaviour
             {
                 Debug.LogWarning("room数据所含door数量与实际预制体的door不同，请检查问题！！！");
             }
-
+            SetUpCamCollider();
             if (doorInited) return;
             for (int i = 0; i < roomData.DoorList.Count && i < doorParent.childCount; i++)
             {
@@ -61,7 +61,10 @@ public class RoomMono : MonoBehaviour
 
             doorInited = true;
         }
+    }
 
+    private void SetUpCamCollider()
+    {
         Collider camCollider = GameRoot.Instance.camCollider;
         float roomDataRoomX = roomData.RoomX;
         float roomDataRoomY = roomData.RoomY;
@@ -90,7 +93,6 @@ public class RoomMono : MonoBehaviour
             boxCollider.size = new Vector3(camSizeX, boxCollider.size.y, camSizeZ);
         }
     }
-
 
     public void SetPlayPoint(int doorId)
     {
