@@ -371,6 +371,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3e9755ed5e89b944bee01ad077723c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  camCollider: {fileID: 2137585997}
   PlayMode: 0
   FloorLayer:
     serializedVersion: 2

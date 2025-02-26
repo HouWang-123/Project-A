@@ -14,7 +14,9 @@
     "visibility": 3,
     "byTime": false,
     "monstersIDList": [],
-    "dropRuleIDList": []
+    "dropRuleIDList": [],
+    "roomX": 12,
+    "roomY": 8
   },
   {
     "ID": 300002,
@@ -34,7 +36,9 @@
     "visibility": 3,
     "byTime": false,
     "monstersIDList": [],
-    "dropRuleIDList": []
+    "dropRuleIDList": [],
+    "roomX": 30,
+    "roomY": 8
   },
   {
     "ID": 300003,
@@ -51,7 +55,9 @@
     "visibility": 3,
     "byTime": false,
     "monstersIDList": [],
-    "dropRuleIDList": []
+    "dropRuleIDList": [],
+    "roomX": 12,
+    "roomY": 8
   },
   {
     "ID": 300004,
@@ -68,7 +74,9 @@
     "visibility": 3,
     "byTime": false,
     "monstersIDList": [],
-    "dropRuleIDList": []
+    "dropRuleIDList": [],
+    "roomX": 18,
+    "roomY": 12
   },
   {
     "ID": 300005,
@@ -85,7 +93,9 @@
     "visibility": 3,
     "byTime": false,
     "monstersIDList": [],
-    "dropRuleIDList": []
+    "dropRuleIDList": [],
+    "roomX": 18,
+    "roomY": 12
   },
   {
     "ID": 300006,
@@ -101,6 +111,8 @@
     "visibility": 3,
     "byTime": false,
     "monstersIDList": [],
-    "dropRuleIDList": []
+    "dropRuleIDList": [],
+    "roomX": 12,
+    "roomY": 8
   }
 ]

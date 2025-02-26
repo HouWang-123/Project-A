@@ -29,6 +29,8 @@ public sealed partial class Rooms : Luban.BeanBase
         { if(!_buf["byTime"].IsBoolean) { throw new SerializationException(); }  ByTime = _buf["byTime"]; }
         { var __json0 = _buf["monstersIDList"]; if(!__json0.IsArray) { throw new SerializationException(); } MonstersIDList = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  MonstersIDList.Add(__v0); }   }
         { var __json0 = _buf["dropRuleIDList"]; if(!__json0.IsArray) { throw new SerializationException(); } DropRuleIDList = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  DropRuleIDList.Add(__v0); }   }
+        { if(!_buf["roomX"].IsNumber) { throw new SerializationException(); }  RoomX = _buf["roomX"]; }
+        { if(!_buf["roomY"].IsNumber) { throw new SerializationException(); }  RoomY = _buf["roomY"]; }
     }
 
     public static Rooms DeserializeRooms(JSONNode _buf)
@@ -84,6 +86,14 @@ public sealed partial class Rooms : Luban.BeanBase
     /// 房间里有哪些交互规则
     /// </summary>
     public readonly System.Collections.Generic.List<int> DropRuleIDList;
+    /// <summary>
+    /// 房间宽度
+    /// </summary>
+    public readonly float RoomX;
+    /// <summary>
+    /// 房间长度
+    /// </summary>
+    public readonly float RoomY;
    
     public const int __ID__ = -1359997194;
     public override int GetTypeId() => __ID__;
@@ -107,6 +117,8 @@ public sealed partial class Rooms : Luban.BeanBase
         + "byTime:" + ByTime + ","
         + "monstersIDList:" + Luban.StringUtil.CollectionToString(MonstersIDList) + ","
         + "dropRuleIDList:" + Luban.StringUtil.CollectionToString(DropRuleIDList) + ","
+        + "roomX:" + RoomX + ","
+        + "roomY:" + RoomY + ","
         + "}";
     }
 }

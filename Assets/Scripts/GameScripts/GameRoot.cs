@@ -9,6 +9,7 @@ using YooAsset;
 public class GameRoot : MonoBehaviour
 {
     [HideInInspector] public static GameRoot Instance;
+    public Collider camCollider;
     public EPlayMode PlayMode = EPlayMode.EditorSimulateMode;
     ResourcePackage package;
     
