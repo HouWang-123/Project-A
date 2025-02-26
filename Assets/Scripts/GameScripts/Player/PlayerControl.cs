@@ -345,6 +345,7 @@ public class PlayerControl : MonoBehaviour
         // 丢下举起的物品逻辑
         if (characterStat.LiftedItem != null)
         {
+            GameRunTimeData.Instance.CharacterItemSlotData.GetCharacterInUseItem()?.EnableRenderer();
             characterStat.LiftedItem.gameObject.transform.SetParent(GameControl.Instance.GetSceneItemList().transform);
             characterStat.LiftedItem.OnItemDrop(false);
             characterStat.LiftedItem.ChangeRendererSortingOrder(GameConstData.BelowPlayerOrder);
@@ -470,6 +471,7 @@ public class PlayerControl : MonoBehaviour
             if (toPickUpItem is ILiftable)
             {
                 ///// todo 举起物品逻辑  /////////
+                GameRunTimeData.Instance.CharacterItemSlotData.GetCharacterInUseItem()?.DisableRenderer();
                 characterStat.LiftedItem = toPickUpItem;
                 toPickUpItem.ChangeRendererSortingOrder(GameConstData.OverPlayerOrder);
                 toPickUpItem.gameObject.transform.SetParent(ItemLiftPostion);
