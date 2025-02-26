@@ -33,13 +33,10 @@ public class PlayerControl : MonoBehaviour
     }
     private SkeletonAnimation playerSpin;
 
-    public float Speed = 5f;
+
 
     //前后移动的速度比率
     private float fToB = 0.6f;
-
-    //奔跑速度比率
-    private float runeToB = 1.5f;
 
     public Transform ItemReleasePoint;
 
@@ -49,7 +46,7 @@ public class PlayerControl : MonoBehaviour
     private UnityAction rightMouseAction = null;
     private bool rightMous = false;
     private bool shiftButt = false;
-
+    private CharacterStat characterStat;
     private void Awake()
     {
         inputControl = new PlayerInputControl();
@@ -65,6 +62,7 @@ public class PlayerControl : MonoBehaviour
     private void Start()
     {
         GameRunTimeData.Instance.CharacterItemSlotData.ChangeFocusSlotNumber(1); // 默认启用道具栏
+        characterStat = GameRunTimeData.Instance.CharacterBasicStat.GetStat();
         _pickupController = GetComponent<PlayerPickupController>();
         playerRG = GetComponent<Rigidbody>();
         playerRenderer = transform.GetChild(0);
@@ -231,7 +229,9 @@ public class PlayerControl : MonoBehaviour
     private void FixedUpdate()
     {
         GameRunTimeData.Instance.CharacterBasicStat.UpdatePlayerStat();
-        PlayerMove(InputControl.Instance.MovePoint, Speed);
+        
+        PlayerMove(InputControl.Instance.MovePoint, characterStat.WalkSpeed);
+        
         if(!pickupLock)
         {
             CalculateUseObjectRotation();
@@ -299,7 +299,7 @@ public class PlayerControl : MonoBehaviour
             }
             else if(shiftButt)
             {
-                speed *= runeToB;
+                speed *= characterStat.RunSpeedScale;
                 PlayerAnimatorEnum = EPlayerAnimator.Run;
                 playerSpin.timeScale = speed * 0.6f;        //匹配动画速度
             }
@@ -328,7 +328,7 @@ public class PlayerControl : MonoBehaviour
     {
         Debug.Log("丢下");
         // 表现  // 背包数据更新
-        // todo : 丢弃堆叠物品
+        // todo : 批量丢弃堆叠物品
 
         bool removestack = GameRunTimeData.Instance.CharacterItemSlotData.ClearHandItem(fastDrop, playerReversed,ItemReleasePoint);
         

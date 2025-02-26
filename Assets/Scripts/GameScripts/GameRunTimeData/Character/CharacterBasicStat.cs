@@ -25,6 +25,7 @@ public class CharacterStat
     public float MaxThirsty;
     public float CurrentThirsty;
     // Run
+    public float WalkSpeed;
     public float RunSpeedScale;
     public float RunReduce;
     public float RunRestore;
@@ -39,6 +40,8 @@ public class CharacterStat
     public bool Dead;
     public ItemBase ItemOnHand; // 手中的物品
     public ItemBase LiftedItem; // 举起的物品
+    
+
 }
 
 public class CharacterBasicStat
@@ -92,6 +95,7 @@ public class CharacterBasicStat
             RunReduce = m_characterData.RunReduce,
             RunRestore = m_characterData.RunRestore,
             RunSpeedScale = m_characterData.RunSpeedScal,
+            WalkSpeed = m_characterData.WalkSpeed,
             Dead = false
         };
         playerDataInited = true;
