@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Sprite_Scene_Dungeon_MedRoom_WallDeco_1200_100_2_0: -8740449241220396830
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

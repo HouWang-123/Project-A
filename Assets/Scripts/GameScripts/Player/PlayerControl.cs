@@ -295,16 +295,18 @@ public class PlayerControl : MonoBehaviour
             {
                 speed *= fToB;
                 PlayerAnimatorEnum = EPlayerAnimator.Walk_Backwards;
-                //playerSpin.timeScale = fToB;
+                //playerSpin.timeScale = fToB;              //匹配动画速度
             }
             else if(shiftButt)
             {
                 speed *= runeToB;
                 PlayerAnimatorEnum = EPlayerAnimator.Run;
+                playerSpin.timeScale = speed * 0.6f;        //匹配动画速度
             }
             else
             {
                 PlayerAnimatorEnum = EPlayerAnimator.Walk;
+                playerSpin.timeScale = speed / 0.6f;      //匹配动画速度
             }
 
             //playerRG.Move(vector * speed + transform.position, Quaternion.identity);
