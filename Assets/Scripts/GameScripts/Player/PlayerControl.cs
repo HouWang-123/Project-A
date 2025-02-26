@@ -6,13 +6,16 @@ using Spine.Unity;
 public class PlayerControl : MonoBehaviour
 {
     public Transform ItemHoldPosition; // 玩家拿取物品位置
+    public Transform ItemLiftPostion; // 举起物品的位置
     private PlayerInputControl inputControl;
     private Rigidbody playerRG;
     private Transform playerRenderer;
     private Transform useObjParent;
     private PlayerPickupController _pickupController;
     private bool playerReversed; // 判断角色是否发生了偏转，与拾取和丢弃道具物品有关系
-
+    
+    private CharacterStat characterStat;
+    
     private EPlayerAnimator animatorEnum = EPlayerAnimator.Idle;
     public EPlayerAnimator PlayerAnimatorEnum
     {
@@ -46,7 +49,7 @@ public class PlayerControl : MonoBehaviour
     private UnityAction rightMouseAction = null;
     private bool rightMous = false;
     private bool shiftButt = false;
-    private CharacterStat characterStat;
+    
     private void Awake()
     {
         inputControl = new PlayerInputControl();
@@ -137,6 +140,10 @@ public class PlayerControl : MonoBehaviour
         };
         InputControl.Instance.MouseScroll.started += (item) =>
         {
+            if (characterStat.LiftedItem != null)
+            {
+                return;
+            }
             if(ScrollActionTimer <= 0.1f)
             {
                 return;
@@ -181,6 +188,10 @@ public class PlayerControl : MonoBehaviour
             {
                 DropItem(false);
             }
+            if (characterStat.LiftedItem != null)
+            {
+                DropItem(false);
+            }
         };
         #endregion
     }
@@ -211,6 +222,11 @@ public class PlayerControl : MonoBehaviour
 
     public void ChangeMouseAction(int Number)
     {
+        if (characterStat.LiftedItem != null)
+        {
+            Debug.Log("手中存在举起的道具时无法切换物品");
+            return;
+        }
         GameHUD.Instance.ISM_SetFocus(Number);
         GameRunTimeData.Instance.CharacterItemSlotData.ChangeFocusSlotNumber(Number);
         GameRunTimeData.Instance.CharacterItemSlotData.ActiveCurrentItem();
@@ -326,6 +342,15 @@ public class PlayerControl : MonoBehaviour
 
     public void DropItem(bool fastDrop)
     {
+        // 丢下举起的物品逻辑
+        if (characterStat.LiftedItem != null)
+        {
+            characterStat.LiftedItem.gameObject.transform.SetParent(GameControl.Instance.GetSceneItemList().transform);
+            characterStat.LiftedItem.OnItemDrop(false);
+            characterStat.LiftedItem.ChangeRendererSortingOrder(GameConstData.BelowPlayerOrder);
+            characterStat.LiftedItem = null;
+            return;
+        }
         Debug.Log("丢下");
         // 表现  // 背包数据更新
         // todo : 批量丢弃堆叠物品
@@ -367,28 +392,33 @@ public class PlayerControl : MonoBehaviour
             return;
         }
 
-        pickupLock = true;
+        if (characterStat.LiftedItem != null)
+        {
+            return;
+        }
 
-        ItemBase characterInUseItem;
-        characterInUseItem = _pickupController.currentPickup;
+        pickupLock = true;
+        
+        ItemBase toPickUpItem;
+        toPickUpItem = _pickupController.currentPickup;
         
         ///////////可堆叠或者不可堆叠物品进入背包并更新HUD和人物渲染的逻辑 /////////////
         
-        if (characterInUseItem is ISlotable)
+        if (toPickUpItem is ISlotable)
         {
             // 背包数据更新
             bool stackOverFlowed;
-            int  Restult = GameRunTimeData.Instance.CharacterItemSlotData.InsertOrUpdateItemSlotData(characterInUseItem, out stackOverFlowed);
+            int  Restult = GameRunTimeData.Instance.CharacterItemSlotData.InsertOrUpdateItemSlotData(toPickUpItem, out stackOverFlowed);
             
-            if (characterInUseItem is IStackable)
+            if (toPickUpItem is IStackable)
             {
                 if (Restult != -1) // 进入手中
                 {
-                    IStackable stackable = characterInUseItem as IStackable;
+                    IStackable stackable = toPickUpItem as IStackable;
                     int overFlowedCount = stackable.GetStackCount();
                     if (stackOverFlowed)
                     {
-                        string uri = characterInUseItem.GetPrefabName();
+                        string uri = toPickUpItem.GetPrefabName();
                         AssetHandle loadAssetAsync = YooAssets.LoadAssetAsync<GameObject>(uri);
                         loadAssetAsync.Completed += handle =>
                         {
@@ -408,14 +438,14 @@ public class PlayerControl : MonoBehaviour
                 _pickupController.currentPickup.transform.SetParent(ItemHoldPosition);
                 _pickupController.currentPickup.CheckReverse(playerReversed);
                 _pickupController.PlayerPickupItem();
-                SetItemBaseToPlayerHand(characterInUseItem);
+                SetItemBaseToPlayerHand(toPickUpItem);
                 if(Restult == 1) // 手中存在物品
                 {
-                    characterInUseItem.DisableRenderer();
+                    toPickUpItem.DisableRenderer();
                 }
                 if (Restult == 2) // 堆叠物品
                 {
-                    Destroy(characterInUseItem.gameObject);
+                    Destroy(toPickUpItem.gameObject);
                 }
                 pickupLock = false;
                 _pickupController.currentPickup = null;
@@ -437,10 +467,20 @@ public class PlayerControl : MonoBehaviour
         }
         else
         {
-            ///// todo 举起物品逻辑  /////////
-            
+            if (toPickUpItem is ILiftable)
+            {
+                ///// todo 举起物品逻辑  /////////
+                characterStat.LiftedItem = toPickUpItem;
+                toPickUpItem.ChangeRendererSortingOrder(GameConstData.OverPlayerOrder);
+                toPickUpItem.gameObject.transform.SetParent(ItemLiftPostion);
+                toPickUpItem.CheckReverse(playerReversed);
+                toPickUpItem.gameObject.transform.localPosition = Vector3.zero;
+                leftMouseAction = toPickUpItem.OnLeftInteract;
+                rightMouseAction = toPickUpItem.OnRightInteract;
+                _pickupController.PlayerPickupItem();
+                pickupLock = false;
+            }
         }
-        
     }
 }
 

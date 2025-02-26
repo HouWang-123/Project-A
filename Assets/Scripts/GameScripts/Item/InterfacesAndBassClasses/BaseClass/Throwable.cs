@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using YooAsset;
 
-public class Throwable : ItemBase
+public class Throwable : ItemBase,ILiftable
 {
     public cfg.item.ThrowObjects data;
     public Rigidbody ThrowableRigidbody;

@@ -14,5 +14,11 @@ public class GameConstData
     public static readonly int DEFAULT_SLOTCOUNT = 6;
     public static readonly int DEFAULT_CHARACTER_ID = 110001;
     public static readonly float DecimalNumbers = 100f;         // 游戏数据保留两位小数
+    
+    
+    // 渲染顺序
+    public static readonly int OverPlayerOrder = 10;
+    public static readonly int PlayerOrder = 5;
+    public static readonly int BelowPlayerOrder = 0;
 
 }

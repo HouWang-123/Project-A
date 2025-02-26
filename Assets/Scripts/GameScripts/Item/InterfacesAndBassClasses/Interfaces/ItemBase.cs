@@ -88,6 +88,11 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable
             ItemRenderer.material.shader = DefaultSpriteShader;
         }
     }
+
+    public void ChangeRendererSortingOrder(int OrderNumber)
+    {
+        ItemRenderer.sortingOrder = OrderNumber;
+    }
     // 拾取后物品方向控制
     public void CheckReverse(bool reversed)
     {
