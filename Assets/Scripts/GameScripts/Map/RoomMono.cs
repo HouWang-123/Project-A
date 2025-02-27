@@ -67,10 +67,18 @@ public class RoomMono : MonoBehaviour
     {
         Collider camCollider = GameRoot.Instance.camCollider;
         float roomDataRoomX = roomData.RoomX;
-        float roomDataRoomY = roomData.RoomY;
-
+        float roomDataRoomY = roomData.RoomY + 3;
+        float camSizeZ = 0f;
 // 计算摄像机的Y轴大小
-        float camSizeZ = roomDataRoomY / 2f;
+        if (roomDataRoomY > 8)
+        {
+            camSizeZ = (roomDataRoomY - 3) / 2f;
+        }
+        else
+        {
+            camSizeZ = 0;
+        }
+        
 
 // 计算摄像机的X轴大小，根据房间X的大小来调整
         float camSizeX = 0f;
