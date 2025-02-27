@@ -55,7 +55,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -155,14 +155,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ItemID: 230002
-  SlotSprite: {fileID: 0}
   ItemType: 0
   ItemRenderer: {fileID: 5502388850923554619}
   oulineShader: {fileID: -6465566751694194690, guid: 098b3234e69aa004eae9c50eabd09355, type: 3}
-  DefaultSpriteShader: {fileID: 10753, guid: 0000000000000000f000000000000000, type: 0}
-  ItemProperty:
-    Stackable: 0
-    Equipable: 0
-    EquipOnHand: 0
+  DefaultSpriteShader: {fileID: 4800000, guid: e260cfa7296ee7642b167f1eb5be5023, type: 3}
+  StackNuberText: {fileID: 0}
+  ItemSpriteName: 
   DropState: 0
+  StackCount: 1
   ThrowableRigidbody: {fileID: 0}

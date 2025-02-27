@@ -441,6 +441,7 @@ public class PlayerControl : MonoBehaviour
                 _pickupController.currentPickup.CheckReverse(playerReversed);
                 _pickupController.PlayerPickupItem();
                 SetItemBaseToPlayerHand(toPickUpItem);
+                toPickUpItem.ChangeRendererSortingOrder(GameConstData.PlayerOrder);
                 if(Restult == 1) // 手中存在物品
                 {
                     toPickUpItem.DisableRenderer();
@@ -452,6 +453,7 @@ public class PlayerControl : MonoBehaviour
                 pickupLock = false;
                 _pickupController.currentPickup = null;
                 _pickupController.ChangePickupTarget();
+                
             }
             else
             {

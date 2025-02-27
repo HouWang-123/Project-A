@@ -366,7 +366,7 @@ public class ItemSlotData
             SlotItemDataList.Remove(CurrentFocusSlot); // 对于一个的情况
             ItemID2Key.Remove(CurrentFocusSlot);
             AllCharacterItems.Remove(CurrentFocusSlot);
-
+            
             if (ItemID2Key.ContainsValue(CurrentItem.ItemID))
             {
                 CurrentItem.DisableRenderer();
@@ -382,6 +382,7 @@ public class ItemSlotData
 
                 CurrentItem.transform.SetParent(GameControl.Instance.GetSceneItemList().transform);
                 CurrentItem.OnItemDrop(fastDrop);
+                CurrentItem.ChangeRendererSortingOrder(GameConstData.BelowPlayerOrder);
                 CurrentItem = null;
             }
 
