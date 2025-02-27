@@ -93,11 +93,11 @@ public class ItemSlotManager_HUD : UIBase
         if (isplayingOpeningOrClosing) return;
         if (switchHUD)
         {
-            HUDDisable(false, null);
+            DisableHud(false, null);
         }
         else
         {
-            HUDEnable();
+            EnableHud();
         }
     }
 
@@ -124,7 +124,7 @@ public class ItemSlotManager_HUD : UIBase
         }
 
         // MakesureHUD ShowUp Always Play Animation
-        HUDEnable();
+        EnableHud();
     }
 
     public override void Hide()
@@ -134,10 +134,10 @@ public class ItemSlotManager_HUD : UIBase
             return;
         }
 
-        HUDDisable(true, () => { gameObject.SetActive(false); });
+        DisableHud(true, () => { gameObject.SetActive(false); });
     }
 
-    private void HUDEnable()
+    public void EnableHud()
     {
         if (switchHUD)
         {
@@ -149,7 +149,7 @@ public class ItemSlotManager_HUD : UIBase
         switchHUD = true;
     }
 
-    private void HUDDisable(bool isClose, UnityAction cb)
+    public void DisableHud(bool isClose, UnityAction cb)
     {
         if (!switchHUD)
         {

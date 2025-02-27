@@ -350,6 +350,7 @@ public class PlayerControl : MonoBehaviour
             characterStat.LiftedItem.OnItemDrop(false);
             characterStat.LiftedItem.ChangeRendererSortingOrder(GameConstData.BelowPlayerOrder);
             characterStat.LiftedItem = null;
+            GameHUD.Instance.SlotManagerHUD.EnableHud();
             return;
         }
         Debug.Log("丢下");
@@ -481,6 +482,7 @@ public class PlayerControl : MonoBehaviour
                 rightMouseAction = toPickUpItem.OnRightInteract;
                 _pickupController.PlayerPickupItem();
                 pickupLock = false;
+                GameHUD.Instance.SlotManagerHUD.DisableHud(false,null);
             }
         }
     }
