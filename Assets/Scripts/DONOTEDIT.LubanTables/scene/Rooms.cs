@@ -29,6 +29,7 @@ public sealed partial class Rooms : Luban.BeanBase
         { if(!_buf["byTime"].IsBoolean) { throw new SerializationException(); }  ByTime = _buf["byTime"]; }
         { var __json0 = _buf["monstersIDList"]; if(!__json0.IsArray) { throw new SerializationException(); } MonstersIDList = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  MonstersIDList.Add(__v0); }   }
         { var __json0 = _buf["dropRuleIDList"]; if(!__json0.IsArray) { throw new SerializationException(); } DropRuleIDList = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  DropRuleIDList.Add(__v0); }   }
+        { var __json0 = _buf["dropType"]; if(!__json0.IsArray) { throw new SerializationException(); } DropType = new System.Collections.Generic.List<bool>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { bool __v0;  { if(!__e0.IsBoolean) { throw new SerializationException(); }  __v0 = __e0; }  DropType.Add(__v0); }   }
         { if(!_buf["roomX"].IsNumber) { throw new SerializationException(); }  RoomX = _buf["roomX"]; }
         { if(!_buf["roomY"].IsNumber) { throw new SerializationException(); }  RoomY = _buf["roomY"]; }
     }
@@ -83,9 +84,13 @@ public sealed partial class Rooms : Luban.BeanBase
     /// </summary>
     public readonly System.Collections.Generic.List<int> MonstersIDList;
     /// <summary>
-    /// 房间里有哪些交互规则
+    /// 这里放：<br/>①交互后掉落的规则（比如翻箱倒柜），哪怕只掉一个<br/>②房间里有哪些随机生成在地板上的东西<br/>③对于不随机生成在地板上的物品，直接写物品ID
     /// </summary>
     public readonly System.Collections.Generic.List<int> DropRuleIDList;
+    /// <summary>
+    /// 1为交互掉落,0为独立掉落
+    /// </summary>
+    public readonly System.Collections.Generic.List<bool> DropType;
     /// <summary>
     /// 房间宽度
     /// </summary>
@@ -117,6 +122,7 @@ public sealed partial class Rooms : Luban.BeanBase
         + "byTime:" + ByTime + ","
         + "monstersIDList:" + Luban.StringUtil.CollectionToString(MonstersIDList) + ","
         + "dropRuleIDList:" + Luban.StringUtil.CollectionToString(DropRuleIDList) + ","
+        + "dropType:" + Luban.StringUtil.CollectionToString(DropType) + ","
         + "roomX:" + RoomX + ","
         + "roomY:" + RoomY + ","
         + "}";

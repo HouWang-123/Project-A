@@ -14,7 +14,20 @@
     "visibility": 3,
     "byTime": false,
     "monstersIDList": [],
-    "dropRuleIDList": [],
+    "dropRuleIDList": [
+      230002,
+      230002,
+      230002,
+      230002,
+      230001
+    ],
+    "dropType": [
+      false,
+      false,
+      false,
+      false,
+      false
+    ],
     "roomX": 12,
     "roomY": 8
   },
@@ -36,7 +49,16 @@
     "visibility": 3,
     "byTime": false,
     "monstersIDList": [],
-    "dropRuleIDList": [],
+    "dropRuleIDList": [
+      240001,
+      910001,
+      910001
+    ],
+    "dropType": [
+      false,
+      true,
+      true
+    ],
     "roomX": 30,
     "roomY": 5
   },
@@ -55,7 +77,13 @@
     "visibility": 3,
     "byTime": false,
     "monstersIDList": [],
-    "dropRuleIDList": [],
+    "dropRuleIDList": [
+      910001
+    ],
+    "dropType": [
+      false,
+      true
+    ],
     "roomX": 12,
     "roomY": 8
   },
@@ -73,8 +101,23 @@
     "BGM": "0",
     "visibility": 3,
     "byTime": false,
-    "monstersIDList": [],
-    "dropRuleIDList": [],
+    "monstersIDList": [
+      400001,
+      400001,
+      400001
+    ],
+    "dropRuleIDList": [
+      910015,
+      910008,
+      910010,
+      910027
+    ],
+    "dropType": [
+      true,
+      true,
+      true,
+      true
+    ],
     "roomX": 18,
     "roomY": 12
   },
@@ -92,8 +135,23 @@
     "BGM": "0",
     "visibility": 3,
     "byTime": false,
-    "monstersIDList": [],
-    "dropRuleIDList": [],
+    "monstersIDList": [
+      400001,
+      400001,
+      400001
+    ],
+    "dropRuleIDList": [
+      910015,
+      910008,
+      910010,
+      910027
+    ],
+    "dropType": [
+      true,
+      true,
+      true,
+      true
+    ],
     "roomX": 18,
     "roomY": 12
   },
@@ -112,6 +170,7 @@
     "byTime": false,
     "monstersIDList": [],
     "dropRuleIDList": [],
+    "dropType": [],
     "roomX": 12,
     "roomY": 8
   }
