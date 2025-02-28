@@ -22,6 +22,7 @@ public sealed partial class Conditions : Luban.BeanBase
         { if(!_buf["DESCRIBE"].IsNumber) { throw new SerializationException(); }  DESCRIBE = _buf["DESCRIBE"]; }
         { if(!_buf["canTimeStack"].IsBoolean) { throw new SerializationException(); }  CanTimeStack = _buf["canTimeStack"]; }
         { if(!_buf["maxTime"].IsNumber) { throw new SerializationException(); }  MaxTime = _buf["maxTime"]; }
+        { if(!_buf["nextCondition"].IsNumber) { throw new SerializationException(); }  NextCondition = _buf["nextCondition"]; }
     }
 
     public static Conditions DeserializeConditions(JSONNode _buf)
@@ -49,6 +50,10 @@ public sealed partial class Conditions : Luban.BeanBase
     /// 可堆叠的最大时间上限<br/>
     /// </summary>
     public readonly int MaxTime;
+    /// <summary>
+    /// 下一级BUFF
+    /// </summary>
+    public readonly int NextCondition;
    
     public const int __ID__ = -1178173613;
     public override int GetTypeId() => __ID__;
@@ -65,6 +70,7 @@ public sealed partial class Conditions : Luban.BeanBase
         + "DESCRIBE:" + DESCRIBE + ","
         + "canTimeStack:" + CanTimeStack + ","
         + "maxTime:" + MaxTime + ","
+        + "nextCondition:" + NextCondition + ","
         + "}";
     }
 }

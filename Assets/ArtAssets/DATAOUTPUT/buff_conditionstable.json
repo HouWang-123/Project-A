@@ -4,83 +4,95 @@
     "NAME": 730001,
     "DESCRIBE": 830001,
     "canTimeStack": true,
-    "maxTime": 60
+    "maxTime": 60,
+    "nextCondition": -1
   },
   {
     "ID": 120002,
     "NAME": 730002,
     "DESCRIBE": 830002,
     "canTimeStack": false,
-    "maxTime": 999
+    "maxTime": 999,
+    "nextCondition": -1
   },
   {
     "ID": 120003,
     "NAME": 730003,
     "DESCRIBE": 830003,
     "canTimeStack": false,
-    "maxTime": 999
+    "maxTime": 999,
+    "nextCondition": 120004
   },
   {
     "ID": 120004,
     "NAME": 730004,
     "DESCRIBE": 830004,
     "canTimeStack": false,
-    "maxTime": 999
+    "maxTime": 999,
+    "nextCondition": 120005
   },
   {
     "ID": 120005,
     "NAME": 730005,
     "DESCRIBE": 830005,
     "canTimeStack": false,
-    "maxTime": 999
+    "maxTime": 999,
+    "nextCondition": -1
   },
   {
     "ID": 120006,
     "NAME": 730006,
     "DESCRIBE": 830006,
     "canTimeStack": true,
-    "maxTime": 120
+    "maxTime": 120,
+    "nextCondition": -1
   },
   {
     "ID": 120007,
     "NAME": 730007,
     "DESCRIBE": 830007,
     "canTimeStack": true,
-    "maxTime": 120
+    "maxTime": 120,
+    "nextCondition": -1
   },
   {
     "ID": 120008,
     "NAME": 730008,
     "DESCRIBE": 830008,
     "canTimeStack": false,
-    "maxTime": 999
+    "maxTime": 999,
+    "nextCondition": -1
   },
   {
     "ID": 120009,
     "NAME": 730009,
     "DESCRIBE": 830009,
     "canTimeStack": true,
-    "maxTime": 120
+    "maxTime": 120,
+    "nextCondition": -1
   },
   {
     "ID": 120012,
     "NAME": 730010,
     "DESCRIBE": 830010,
     "canTimeStack": false,
-    "maxTime": 999
+    "maxTime": 999,
+    "nextCondition": 120013
   },
   {
     "ID": 120013,
     "NAME": 730011,
     "DESCRIBE": 830011,
     "canTimeStack": false,
-    "maxTime": 999
+    "maxTime": 999,
+    "nextCondition": 120014
   },
   {
     "ID": 120014,
     "NAME": 730012,
     "DESCRIBE": 830012,
     "canTimeStack": false,
-    "maxTime": 999
+    "maxTime": 999,
+    "nextCondition": -1
   }
 ]
