@@ -56,8 +56,8 @@ public partial class TimeSystemManager : MonoBehaviour
                 {
                     Debug.Log(GetType() + "当前游戏内时间：[ 小时: " + gameHours + " ,分钟: " + gameMinutes + " ]");
                     e.onTrigger?.Invoke();
+                    m_hourTriggeredFlags.Set(i);
                 }
-                m_hourTriggeredFlags.Set(i);
                 ++i;
             }
         }
@@ -75,8 +75,8 @@ public partial class TimeSystemManager : MonoBehaviour
                 {
                     Debug.Log(GetType() + "当前游戏内时间：[ 小时: " + gameHours + " ,分钟: " + gameMinutes + " ]");
                     e.onTrigger?.Invoke();
+                    m_minuteTriggeredFlags.Set(i);
                 }
-                m_minuteTriggeredFlags.Set(i);
                 ++i;
             }
         }
@@ -93,8 +93,8 @@ public partial class TimeSystemManager : MonoBehaviour
                 {
                     Debug.Log(GetType() + "当前时间段：" + currentValue);
                     e.onTrigger?.Invoke();
+                    m_phaseTriggeredFlags.Set(i);
                 }
-                m_phaseTriggeredFlags.Set(i);
                 ++i;
             }
         }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -101,6 +102,8 @@ public partial class TimeSystemManager : MonoBehaviour
         OnMinutePassed.AddListener(CheckMinuteEvents);
         OnTimePhaseChanged.AddListener(CheckPhaseEvents);
         OnDayPassed.AddListener(ResetFlags);
+        // 默认白天开始
+        elapsedRealSeconds = phaseStartSeconds[TimePhaseEnum.Day];
     }
 
     private void OnDestroy()
@@ -134,9 +137,9 @@ public partial class TimeSystemManager : MonoBehaviour
         // 游戏时间计算
         float gameTimeNormalized = elapsedRealSeconds / realSecondsPerGameDay;
         currentPhase = CurrentTimePhase(elapsedRealSeconds);
-        if (Mathf.Abs(currentPhase - oldPhase) == 2)
+        if (CycleCalculator.Subtract((int)currentPhase, (int)oldPhase, (int)TimePhaseEnum.END) == 2)
         {
-            oldPhase = currentPhase;
+            oldPhase = (TimePhaseEnum)CycleCalculator.Subtract((int)currentPhase, 1, (int)TimePhaseEnum.END);
         }
         if (currentPhase != oldPhase)
         {

@@ -4,6 +4,7 @@ using cfg.scene;
 using System.Collections.Generic;
 using Unity.Cinemachine;
 using UnityEngine.Events;
+using UnityEngine.Rendering.Universal;
 
 public class GameControl
 {
@@ -55,6 +56,9 @@ public class GameControl
         mono.SetData(room);
         mono.transform.SetParent(roomList.transform);
         roomCache.Add(300006,roomObj);
+
+        // 添加全局光
+        CreateGlobalLight();
     }
 
     public void ChangeRoom(int RoomId, int DoorId)
@@ -140,6 +144,14 @@ public class GameControl
         }
         PlayerControl = playerObj.GetComponent<PlayerControl>();
         return playerObj;
+    }
+
+    private void CreateGlobalLight()
+    {
+        GameObject globalLight2D = new() { name = "GlobalLight_2D" };
+        globalLight2D.AddComponent<Light2D>();
+        globalLight2D.AddComponent<GlobalLightController>();
+        Object.DontDestroyOnLoad(globalLight2D);
     }
 
 

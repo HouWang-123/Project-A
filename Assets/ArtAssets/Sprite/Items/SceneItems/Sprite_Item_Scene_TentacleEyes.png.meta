@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Sprite_Item_Scene_TentacleEyes_0: -2928396737647388651
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
