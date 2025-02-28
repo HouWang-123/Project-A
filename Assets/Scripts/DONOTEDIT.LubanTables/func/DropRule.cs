@@ -21,6 +21,7 @@ public sealed partial class DropRule : Luban.BeanBase
         { if(!_buf["NAME"].IsString) { throw new SerializationException(); }  NAME = _buf["NAME"]; }
         { if(!_buf["DESCRIBE"].IsString) { throw new SerializationException(); }  DESCRIBE = _buf["DESCRIBE"]; }
         { var __json0 = _buf["dropIDlist"]; if(!__json0.IsArray) { throw new SerializationException(); } DropIDlist = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  DropIDlist.Add(__v0); }   }
+        { if(!_buf["dropType"].IsNumber) { throw new SerializationException(); }  DropType = _buf["dropType"]; }
         { var __json0 = _buf["dropRate"]; if(!__json0.IsArray) { throw new SerializationException(); } DropRate = new System.Collections.Generic.List<float>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { float __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  DropRate.Add(__v0); }   }
     }
 
@@ -46,6 +47,10 @@ public sealed partial class DropRule : Luban.BeanBase
     /// </summary>
     public readonly System.Collections.Generic.List<int> DropIDlist;
     /// <summary>
+    /// 为多个物品配置概率：<br/>1：以争抢单个掉落名额，加和为1，与1的差值为不掉落的概率<br/>2：各个物品以各自概率独立出现，一般不超过3个<br/>3：默认掉落概率相同，争夺一个名额，一般用作一个区间内全部物品的掉落,但只有两个值比如001,003，就包含001,002,003三个值<br/>
+    /// </summary>
+    public readonly int DropType;
+    /// <summary>
     /// 掉落物品概率列表，与物品ID一一对应,1代表100%,如果只有一个0，则是全部等概率<br/><br/>注意，如果是第一种掉落逻辑的话，概率加和不能超过1，（可以小于）
     /// </summary>
     public readonly System.Collections.Generic.List<float> DropRate;
@@ -64,6 +69,7 @@ public sealed partial class DropRule : Luban.BeanBase
         + "NAME:" + NAME + ","
         + "DESCRIBE:" + DESCRIBE + ","
         + "dropIDlist:" + Luban.StringUtil.CollectionToString(DropIDlist) + ","
+        + "dropType:" + DropType + ","
         + "dropRate:" + Luban.StringUtil.CollectionToString(DropRate) + ","
         + "}";
     }

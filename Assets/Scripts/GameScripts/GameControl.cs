@@ -21,7 +21,7 @@ public class GameControl
     private GameObject sceneItemNode;            //场景物品节点
     private GameObject playerObj;
     private GameObject roomObj;                  // 当前房间Go
-    private Dictionary<int, GameObject> roomCache;
+    //private Dictionary<int, GameObject> roomCache;
     public  PlayerControl PlayerControl;
     private Dictionary<int, List<GameObject>> roomWithMonsterList; // 房间对应的怪物
     private GameObject roomList;
@@ -43,7 +43,7 @@ public class GameControl
 
     public void GameStart()
     {
-        roomCache = new Dictionary<int, GameObject>();
+        //roomCache = new Dictionary<int, GameObject>();
         roomList = new GameObject();
         roomList.name = "===RoomList===";
                 
@@ -58,7 +58,7 @@ public class GameControl
         }
         mono.SetData(room);
         mono.transform.SetParent(roomList.transform);
-        roomCache.Add(300006,roomObj);
+        //roomCache.Add(300006,roomObj);
 
         // 添加全局光
         CreateGlobalLight();
@@ -72,17 +72,17 @@ public class GameControl
             return;
         }
         GameObject o;
-        if (!roomCache.ContainsKey(RoomId))
-        {
+        //if (!roomCache.ContainsKey(RoomId))
+        //{
             AssetHandle handle = YooAssets.LoadAssetSync<GameObject>(r.PrefabName);
             o = Object.Instantiate(handle.AssetObject) as GameObject;
             o.transform.SetParent(roomList.transform);
-        }
-        else
-        {
-            o = roomCache[RoomId];
-            o.SetActive(true);
-        }
+        //}
+        //else
+        //{
+        //    o = roomCache[RoomId];
+        //    o.SetActive(true);
+        //}
         
         RoomMono mono = o.GetComponent<RoomMono>();
         if(mono == null)
@@ -93,13 +93,13 @@ public class GameControl
         mono.SetPlayPoint(DoorId);
         
         
-        if(!roomCache.ContainsKey(RoomId))
-        {
-            roomCache.Add(RoomId,o); // 加载的房间进入缓存
-        }
+        //if(!roomCache.ContainsKey(RoomId))
+        //{
+        //    roomCache.Add(RoomId,o); // 加载的房间进入缓存
+        //}
         
         roomObj.SetActive(false);
-        //Object.Destroy(roomObj);
+        Object.Destroy(roomObj);
         room = r;
         roomObj = o;
 
@@ -166,7 +166,7 @@ public class GameControl
             var monsterTable = GameTableDataAgent.MonsterTable;
             int monsterCount = monsterTable.DataList.Count; // 怪物数量，根据房间对应的怪物数量调整
             roomWithMonsterList = new();
-            if (roomCache.ContainsKey(roomId))
+            //if (roomCache.ContainsKey(roomId))
             {
                 List<GameObject> monsterList = new();
                 for (int j = 0; j < monsterCount; ++j)
@@ -178,10 +178,10 @@ public class GameControl
                 }
                 roomWithMonsterList.Add(roomId, monsterList);
             }
-            else
-            {
-                Debug.LogError(GetType() + " /GetGameMonsterList => 没有找到对应的房间！");
-            }
+            //else
+            //{
+            //    Debug.LogError(GetType() + " /GetGameMonsterList => 没有找到对应的房间！");
+            //}
         }
         return roomWithMonsterList[roomId];
     }
@@ -192,7 +192,7 @@ public class GameControl
             var monsterTable = GameTableDataAgent.MonsterTable;
             int monsterCount = monsterTable.DataList.Count; // 怪物数量，根据房间对应的怪物数量调整
             roomWithMonsterList = new();
-            if (roomCache.ContainsKey(roomId))
+            //if (roomCache.ContainsKey(roomId))
             {
                 List<GameObject> monsterList = new();
                 for (int j = 0; j < monsterCount; ++j)
@@ -204,10 +204,10 @@ public class GameControl
                 }
                 roomWithMonsterList.Add(roomId, monsterList);
             }
-            else
-            {
-                Debug.LogError(GetType() + " /GetGameMonsterList => 没有找到对应的房间！");
-            }
+            //else
+            //{
+            //    Debug.LogError(GetType() + " /GetGameMonsterList => 没有找到对应的房间！");
+            //}
         }
         return roomWithMonsterList[roomId][i];
     }

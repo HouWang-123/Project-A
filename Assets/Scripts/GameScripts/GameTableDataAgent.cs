@@ -7,6 +7,7 @@ using cfg.skill;
 using cfg.scene;
 using cfg.mon;
 using cfg.text;
+using cfg.func;
 using SimpleJSON;
 using UnityEngine;
 using YooAsset;
@@ -36,6 +37,7 @@ public class GameTableDataAgent
     public static DoorsTable DoorsTable;
     public static MonsterTable MonsterTable;
     public static LocalizationTable LocalizationTable;
+    public static DropRuleTable DropRuleTable;
     public static void LoadAllTable()
     {
         Tables tables = new(LoadByteBuf);
@@ -59,6 +61,7 @@ public class GameTableDataAgent
         DoorsTable = _Instance.DoorsTable;
         MonsterTable = _Instance.MonsterTable;
         LocalizationTable = _Instance.LocalizationTable;
+        DropRuleTable = _Instance.DropRuleTable;
     }
 
     private static JSONNode LoadByteBuf(string file)

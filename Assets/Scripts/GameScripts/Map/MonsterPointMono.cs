@@ -1,11 +1,13 @@
 using cfg.mon;
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 using YooAsset;
 
 public class MonsterPointMono : MonoBehaviour
 {
-    [Header("将要生成的怪物ID")]
-    public int MonsterID;
+
+    private int MonsterID;
 
     private Monster data;
 
@@ -32,6 +34,8 @@ public class MonsterPointMono : MonoBehaviour
         }
     }
 
-
-
+    public void SetData(int id)
+    {
+        MonsterID = id;
+    }
 }

@@ -7,6 +7,7 @@
       200001,
       209999
     ],
+    "dropType": 3,
     "dropRate": [
       0
     ]
@@ -19,6 +20,7 @@
       230001,
       230003
     ],
+    "dropType": 3,
     "dropRate": [
       0
     ]
@@ -30,6 +32,7 @@
     "dropIDlist": [
       230001
     ],
+    "dropType": 1,
     "dropRate": [
       1
     ]
@@ -41,6 +44,7 @@
     "dropIDlist": [
       230002
     ],
+    "dropType": 1,
     "dropRate": [
       1
     ]
@@ -52,6 +56,7 @@
     "dropIDlist": [
       230003
     ],
+    "dropType": 1,
     "dropRate": [
       1
     ]
@@ -63,6 +68,7 @@
     "dropIDlist": [
       230004
     ],
+    "dropType": 1,
     "dropRate": [
       1
     ]
@@ -75,6 +81,7 @@
       240004,
       240005
     ],
+    "dropType": 2,
     "dropRate": [
       1,
       1
@@ -89,6 +96,7 @@
       240004,
       240004
     ],
+    "dropType": 2,
     "dropRate": [
       1,
       1,
@@ -102,6 +110,7 @@
     "dropIDlist": [
       240005
     ],
+    "dropType": 2,
     "dropRate": [
       1,
       1
@@ -115,6 +124,7 @@
       240001,
       240003
     ],
+    "dropType": 3,
     "dropRate": [
       0
     ]
@@ -126,6 +136,7 @@
     "dropIDlist": [
       240001
     ],
+    "dropType": 1,
     "dropRate": [
       1
     ]
@@ -137,6 +148,7 @@
     "dropIDlist": [
       240002
     ],
+    "dropType": 1,
     "dropRate": [
       1
     ]
@@ -148,6 +160,7 @@
     "dropIDlist": [
       240003
     ],
+    "dropType": 1,
     "dropRate": [
       1
     ]
@@ -160,6 +173,7 @@
       250001,
       250006
     ],
+    "dropType": 3,
     "dropRate": [
       0
     ]
@@ -171,6 +185,7 @@
     "dropIDlist": [
       250001
     ],
+    "dropType": 1,
     "dropRate": [
       1
     ]
@@ -182,6 +197,7 @@
     "dropIDlist": [
       250002
     ],
+    "dropType": 1,
     "dropRate": [
       1
     ]
@@ -193,6 +209,7 @@
     "dropIDlist": [
       250003
     ],
+    "dropType": 1,
     "dropRate": [
       1
     ]
@@ -204,6 +221,7 @@
     "dropIDlist": [
       250004
     ],
+    "dropType": 1,
     "dropRate": [
       1
     ]
@@ -215,6 +233,7 @@
     "dropIDlist": [
       250005
     ],
+    "dropType": 1,
     "dropRate": [
       1
     ]
@@ -226,6 +245,7 @@
     "dropIDlist": [
       250006
     ],
+    "dropType": 1,
     "dropRate": [
       1
     ]
@@ -238,6 +258,7 @@
       260001,
       269999
     ],
+    "dropType": 3,
     "dropRate": [
       0
     ]
@@ -250,6 +271,7 @@
       260001,
       264999
     ],
+    "dropType": 3,
     "dropRate": [
       0
     ]
@@ -261,6 +283,7 @@
     "dropIDlist": [
       260001
     ],
+    "dropType": 1,
     "dropRate": [
       1
     ]
@@ -272,6 +295,7 @@
     "dropIDlist": [
       260002
     ],
+    "dropType": 1,
     "dropRate": [
       1
     ]
@@ -283,6 +307,7 @@
     "dropIDlist": [
       260003
     ],
+    "dropType": 1,
     "dropRate": [
       1
     ]
@@ -294,6 +319,7 @@
     "dropIDlist": [
       260004
     ],
+    "dropType": 1,
     "dropRate": [
       1
     ]
@@ -305,6 +331,7 @@
     "dropIDlist": [
       260005
     ],
+    "dropType": 1,
     "dropRate": [
       1
     ]
@@ -316,6 +343,7 @@
     "dropIDlist": [
       260006
     ],
+    "dropType": 1,
     "dropRate": [
       1
     ]
@@ -327,6 +355,7 @@
     "dropIDlist": [
       260007
     ],
+    "dropType": 1,
     "dropRate": [
       1
     ]
@@ -338,6 +367,7 @@
     "dropIDlist": [
       260008
     ],
+    "dropType": 1,
     "dropRate": [
       1
     ]
@@ -350,6 +380,7 @@
       265000,
       269999
     ],
+    "dropType": 3,
     "dropRate": [
       0
     ]
@@ -361,6 +392,7 @@
     "dropIDlist": [
       265000
     ],
+    "dropType": 1,
     "dropRate": [
       1
     ]
@@ -372,6 +404,7 @@
     "dropIDlist": [
       265001
     ],
+    "dropType": 1,
     "dropRate": [
       1
     ]
@@ -383,6 +416,7 @@
     "dropIDlist": [
       265002
     ],
+    "dropType": 1,
     "dropRate": [
       1
     ]
