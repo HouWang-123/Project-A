@@ -20,6 +20,8 @@ public class SceneObjects : ItemBase
             ColorfulDebugger.DebugError("场景物品ID" + ItemID +"不存在，物品名称" + gameObject.name,ColorfulDebugger.Instance.Data);
         }
         ItemSpriteName = data.SpriteName;
+        
+        GameRunTimeData.Instance.ItemManager.RegistItem(this);
     }
     public override Sprite GetItemIcon()
     {

@@ -26,6 +26,7 @@ public class Food : ItemBase, ISlotable,IStackable,IBuffedItem
             ColorfulDebugger.DebugError("食物ID" + id +"不存在，物品名称" + gameObject.name,ColorfulDebugger.Instance.Data);
         }
         ItemSpriteName = data.SpriteName;
+        GameRunTimeData.Instance.ItemManager.RegistItem(this);
     }
     public override Sprite GetItemIcon()
     {

@@ -238,8 +238,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6062590856331440013, guid: e1773f474b2d57e4f9c34d32c6eb55eb, type: 3}
+      propertyPath: ItemSlotAnimationTime
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6062590856331440013, guid: e1773f474b2d57e4f9c34d32c6eb55eb, type: 3}
       propertyPath: 'ItemSlots.Array.data[6]'
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6062590856331440013, guid: e1773f474b2d57e4f9c34d32c6eb55eb, type: 3}
+      propertyPath: ItemSlotAnimationInterval
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 6391217078393825627, guid: e1773f474b2d57e4f9c34d32c6eb55eb, type: 3}
       propertyPath: m_IsActive

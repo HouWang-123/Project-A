@@ -376,11 +376,8 @@ public class ItemSlotData
             else
             {
                 CurrentItem.CheckReverse(playerReversed);
-
-                CurrentItem.transform.SetParent(releasPoint);
-                CurrentItem.transform.localPosition = Vector3.zero;
-
                 CurrentItem.transform.SetParent(GameControl.Instance.GetSceneItemList().transform);
+                GameRunTimeData.Instance.ItemManager.RegistItem(CurrentItem);
                 CurrentItem.OnItemDrop(fastDrop);
                 CurrentItem.ChangeRendererSortingOrder(GameConstData.BelowPlayerOrder);
                 CurrentItem = null;

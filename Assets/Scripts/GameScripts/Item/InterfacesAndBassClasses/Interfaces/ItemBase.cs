@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
 using YooAsset;
+using Random = UnityEngine.Random;
 
 public abstract class ItemBase : MonoBehaviour, IPickUpable
 {
@@ -22,23 +23,43 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable
     public bool DropState;
     Vector3 OriginalRendererScale;
     public int StackCount = 1;
-    public void Start()
+
+    private void SetRendererImage()
     {
-        var RendererTr = ItemRenderer.transform;
-        RendererTr.localEulerAngles = GameConstData.DefAngles;
-        OriginalRendererScale = RendererTr.localScale;
         AssetHandle loadAssetSync;
-        
-        if (ItemData == null)
-        {
-            InitItem(ItemID); // 非动态生成的物品，拖拽进入的物品
-        }
         loadAssetSync = YooAssets.LoadAssetSync<Sprite>(ItemSpriteName);
         if (loadAssetSync.AssetObject == null)
         {
             loadAssetSync = YooAssets.LoadAssetSync<Sprite>("SpriteNotFound_Default");
         }
         ItemRenderer.sprite = loadAssetSync.AssetObject as Sprite;
+    }
+    public void Start()
+    {
+        var RendererTr = ItemRenderer.transform;
+        RendererTr.localEulerAngles = GameConstData.DefAngles;
+        OriginalRendererScale = RendererTr.localScale;
+        if (ItemData == null)
+        {
+            InitItem(ItemID); // 非动态生成的物品，拖拽进入的物品
+        }
+        CheckIsStackedItem();
+        SetRendererImage();
+    }
+
+    public void OnDestroy()
+    {
+        GameRunTimeData.Instance.ItemManager.UnRegistItem(this);
+    }
+
+    // 新添加接口，通过设置id定义物品
+    public void SetItemId(int id)
+    {
+        InitItem(id);
+        SetRendererImage();
+    }
+    private void CheckIsStackedItem()
+    {
         if (this is IStackable)
         {
             HideStackNumber();
@@ -49,11 +70,6 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable
                 ShowStackNumber();
             }
         }
-    }
-    // 新添加接口，通过设置id定义物品
-    public void SetItemId(int id)
-    {
-        InitItem(id);
     }
     public void HideStackNumber()
     {
@@ -117,31 +133,83 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable
     public abstract string GetPrefabName();
     
     private float gravity = -9.81f;
+    private float upspeed = 20f;
+    private float damp = 60f;
     private float groundCheckDistance = 0.2f;
-    private Vector3 velocity = Vector3.zero;
+    private Vector3 velocity = GameConstData.VthrowSpeed;
+    private float H_BiasSpeed;
+    private float V_BiasSpeed;
     // 物品掉落相关物理逻辑
     public void FixedUpdate()
     {
         if (DropState)
         {
+            if (upspeed > 0)
+            {
+                upspeed -= damp * Time.deltaTime;
+            }
+
+            if (Math.Abs(H_BiasSpeed) > 0f)
+            {
+                if (H_BiasSpeed > 0)
+                {
+                    H_BiasSpeed -= damp * Time.deltaTime;
+                    if (H_BiasSpeed < 0)
+                    {
+                        H_BiasSpeed = 0;
+                    }
+                }
+
+                if (H_BiasSpeed < 0)
+                {
+                    H_BiasSpeed += damp * Time.deltaTime;
+                    if (H_BiasSpeed > 0)
+                    {
+                        H_BiasSpeed = 0;
+                    }
+                }
+            }
+            if (Math.Abs(V_BiasSpeed) > 0f)
+            {
+                if (V_BiasSpeed > 0)
+                {
+                    V_BiasSpeed -= damp * Time.deltaTime;
+                    if (V_BiasSpeed < 0)
+                    {
+                        V_BiasSpeed = 0;
+                    }
+                }
+                
+                if (V_BiasSpeed < 0)
+                {
+                    V_BiasSpeed += damp * Time.deltaTime;
+                    if (V_BiasSpeed > 0)
+                    {
+                        V_BiasSpeed = 0;
+                    }
+                }
+            }
+            
             Vector3 origin = transform.position;
             bool isGrounded = Physics.Raycast(origin, Vector3.down, groundCheckDistance, GameRoot.Instance.FloorLayer);
 
             if (!isGrounded)
             {
-                velocity.y += gravity * Time.deltaTime;
+                velocity.y += (gravity + upspeed) * Time.deltaTime;
+                velocity.x += H_BiasSpeed * Time.deltaTime;
+                velocity.z += V_BiasSpeed * Time.deltaTime;
                 transform.position += velocity * Time.deltaTime;
             }
             else
             {
-                velocity = Vector3.zero;
+                velocity =  GameConstData.VthrowSpeed;
                 RaycastHit hit;
                 if (Physics.Raycast(origin, Vector3.down, out hit, groundCheckDistance, GameRoot.Instance.FloorLayer))
                 {
                     transform.position = new Vector3(transform.position.x, hit.point.y, transform.position.z);
                 }
-                
                 DropState = false;
+                upspeed = 20f;
             }
         }
         //防止物品掉出世界
@@ -155,6 +223,7 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable
     public virtual void OnItemPickUp() { }
     public virtual void OnItemDrop(bool fastDrop)
     {
+        H_BiasSpeed = Random.Range(-18,18);
         DropState = true;
         transform.DOLocalRotate(Vector3.zero, 0f);
         if (fastDrop)

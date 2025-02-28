@@ -12,6 +12,10 @@ public class GameControl
     //data
     private Rooms room;
 
+    public Rooms GetRoomData()
+    {
+        return room;
+    }
     private CinemachineCamera mainCam;
     //mono
     private GameObject sceneItemNode;            //场景物品节点

@@ -23,6 +23,8 @@ public class Throwable : ItemBase,ILiftable
             ColorfulDebugger.DebugError("可投掷物品ID" + id +"不存在，物品名称" + gameObject.name,ColorfulDebugger.Instance.Data);
         }
         ItemSpriteName = data.SpriteName;
+        
+        GameRunTimeData.Instance.ItemManager.RegistItem(this);
     }
     public override void OnItemPickUp()
     {

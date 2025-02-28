@@ -21,4 +21,6 @@ public class GameConstData
     public static readonly int PlayerOrder = 5;
     public static readonly int BelowPlayerOrder = 0;
 
+    // 物品垂直丢弃速度
+    public static readonly Vector3 VthrowSpeed = new (0, 1.5f, 0);
 }

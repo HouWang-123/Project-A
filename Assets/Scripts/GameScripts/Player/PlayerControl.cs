@@ -347,6 +347,7 @@ public class PlayerControl : MonoBehaviour
         {
             GameRunTimeData.Instance.CharacterItemSlotData.GetCharacterInUseItem()?.EnableRenderer();
             characterStat.LiftedItem.gameObject.transform.SetParent(GameControl.Instance.GetSceneItemList().transform);
+            GameRunTimeData.Instance.ItemManager.RegistItem(characterStat.LiftedItem);
             characterStat.LiftedItem.OnItemDrop(false);
             characterStat.LiftedItem.ChangeRendererSortingOrder(GameConstData.BelowPlayerOrder);
             characterStat.LiftedItem = null;
@@ -368,6 +369,7 @@ public class PlayerControl : MonoBehaviour
                 GameObject instantiate = Instantiate(loadAssetAsync.AssetObject, ItemReleasePoint) as GameObject;
                 instantiate.transform.SetParent(GameControl.Instance.GetSceneItemList().transform);
                 ItemBase ib = instantiate.GetComponent<ItemBase>();
+                GameRunTimeData.Instance.ItemManager.RegistItem(ib);
                 ib.OnItemDrop(false);
             };
         }
@@ -403,7 +405,7 @@ public class PlayerControl : MonoBehaviour
         
         ItemBase toPickUpItem;
         toPickUpItem = _pickupController.currentPickup;
-        
+        GameRunTimeData.Instance.ItemManager.UnRegistItem(toPickUpItem);
         ///////////可堆叠或者不可堆叠物品进入背包并更新HUD和人物渲染的逻辑 /////////////
         
         if (toPickUpItem is ISlotable)
@@ -429,6 +431,7 @@ public class PlayerControl : MonoBehaviour
                             ItemBase ib = instantiate.GetComponent<ItemBase>();
                             IStackable ib1 = ib as IStackable;
                             ib1.ChangeStackCount(overFlowedCount);
+                            GameRunTimeData.Instance.ItemManager.RegistItem(ib);
                             ib.OnItemDrop(false);
                         };
                     }
