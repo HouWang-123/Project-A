@@ -41,12 +41,12 @@ public class Weapon : ItemBase, ISlotable
     }
     public override void OnRightInteract( )
     {
-
+        
     }
 
     public override void OnLeftInteract( )
     {
-
+        
     }
 
     public int GetMaxStackValue()

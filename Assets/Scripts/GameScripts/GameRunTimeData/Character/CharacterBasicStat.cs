@@ -25,6 +25,7 @@ public class CharacterStat
     public float MaxThirsty;
     public float CurrentThirsty;
     // Run
+    public float WalkSpeed;
     public float RunSpeedScale;
     public float RunReduce;
     public float RunRestore;
@@ -37,6 +38,10 @@ public class CharacterStat
     public int PassiveSkillID;
     // Other Character Stat
     public bool Dead;
+    public ItemBase ItemOnHand; // 手中的物品
+    public ItemBase LiftedItem; // 举起的物品
+    
+
 }
 
 public class CharacterBasicStat
@@ -44,7 +49,15 @@ public class CharacterBasicStat
     private cfg.cha.Character m_characterData;
     private CharacterStat CharacterStat;
     private bool playerDataInited;
-
+    // 提供给存档使用
+    public void InitCharacter(CharacterStat stat)
+    {
+        CharacterStat = stat;
+        m_characterData = GameTableDataAgent.CharacterTable.Get(CharacterStat.ID);
+        playerDataInited = true;
+        GameHUD.Instance.SetHUDStat(CharacterStat);
+    }
+    
     public void InitCharacter(int m_characterID)
     {
         try
@@ -82,28 +95,27 @@ public class CharacterBasicStat
             RunReduce = m_characterData.RunReduce,
             RunRestore = m_characterData.RunRestore,
             RunSpeedScale = m_characterData.RunSpeedScal,
+            WalkSpeed = m_characterData.WalkSpeed,
             Dead = false
         };
         playerDataInited = true;
         GameHUD.Instance.SetHUDStat(CharacterStat);
     }
-
-    public void HurdPlayer(int number)
+    public void HurtPlayer(int number)
     {
         if (CharacterStat.Dead) return;
         CharacterStat.CurrentHp -= number;
     }
-
-    public void HurdPlayer(float number)
+    public void HurtPlayer(float number)
     {
         CharacterStat.CurrentHp -= number;
     }
-
     public ref CharacterStat GetStat()
     {
         return ref CharacterStat;
     }
-
+    
+#region RunTimeUpdate
     // 在 FxiedUpdate中进行调用
     public void UpdatePlayerStat()
     {
@@ -151,4 +163,5 @@ public class CharacterBasicStat
             CharacterStat.Dead = true;
         }
     }
+#endregion
 }

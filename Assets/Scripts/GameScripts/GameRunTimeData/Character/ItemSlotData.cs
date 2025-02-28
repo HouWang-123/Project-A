@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-
 public class SlotItemStatus
 {
     public SlotItemStatus(int itemID, int stackValue, ItemBase itemBase)
@@ -12,9 +11,19 @@ public class SlotItemStatus
         StackValue = stackValue;
         ItemBase = itemBase;
     }
+
+    public SlotItemStatus(int itemID, int stackValue, ItemBase itemBase, int key)
+    {
+        Key = key;
+        ItemID = itemID;
+        StackValue = stackValue;
+        ItemBase = itemBase;
+    }
+
     public ItemBase ItemBase;
     public int ItemID;
     public int StackValue; // 最小为1
+    public int Key; // 对应道具栏格位
 }
 
 public class ItemSlotData
@@ -48,6 +57,7 @@ public class ItemSlotData
 
     public void ActiveCurrentItem()
     {
+        
         foreach (var V in AllCharacterItems)
         {
             V.Value.DisableRenderer();
@@ -55,11 +65,13 @@ public class ItemSlotData
 
         if (SlotItemDataList.ContainsKey(CurrentFocusSlot))
         {
+            GameRunTimeData.Instance.CharacterBasicStat.GetStat().ItemOnHand = CurrentItem;
             AllCharacterItems[CurrentFocusSlot].EnableRenderer();
             SetCharacterInUseItem(AllCharacterItems[CurrentFocusSlot]);
         }
         else
         {
+            GameRunTimeData.Instance.CharacterBasicStat.GetStat().ItemOnHand = null;
             SetCharacterInUseItem(null);
         }
     }
@@ -257,6 +269,7 @@ public class ItemSlotData
                 SlotItemDataList[slotNumber] = newItemStatus;
                 ItemID2Key.Add(slotNumber, item.ItemID);
                 AllCharacterItems.Add(slotNumber, item);
+                newItemStatus.Key = slotNumber;
                 if (keepStackItemOnHand)
                 {
                     SetCharacterInUseItem(item);
@@ -292,8 +305,6 @@ public class ItemSlotData
 
     private int InsertOrUpdateItemSlotData_Non_Stack(ItemBase item)
     {
-        SlotItemStatus newItemStatus = new SlotItemStatus(item.ItemID, 1, item);
-
         // 默认插入位置为当前焦点位置
         int slotNumber = CurrentFocusSlot;
         if (SlotItemDataList.ContainsKey(slotNumber))
@@ -309,6 +320,7 @@ public class ItemSlotData
 
         AllCharacterItems.Add(slotNumber, item);
         ItemID2Key.Add(slotNumber, item.ItemID);
+        SlotItemStatus newItemStatus = new SlotItemStatus(item.ItemID, 1, item, slotNumber);
         SlotItemDataList[slotNumber] = newItemStatus;
         if (slotNumber != CurrentFocusSlot)
         {
@@ -349,12 +361,12 @@ public class ItemSlotData
                 GameHUD.Instance.SlotManagerHUD.UpdateItem(SlotItemDataList);
                 return true; // 对于多个的情况
             }
-
-
+            
+            
             SlotItemDataList.Remove(CurrentFocusSlot); // 对于一个的情况
             ItemID2Key.Remove(CurrentFocusSlot);
             AllCharacterItems.Remove(CurrentFocusSlot);
-
+            
             if (ItemID2Key.ContainsValue(CurrentItem.ItemID))
             {
                 CurrentItem.DisableRenderer();
@@ -364,12 +376,13 @@ public class ItemSlotData
             else
             {
                 CurrentItem.CheckReverse(playerReversed);
-                
+
                 CurrentItem.transform.SetParent(releasPoint);
                 CurrentItem.transform.localPosition = Vector3.zero;
-                
+
                 CurrentItem.transform.SetParent(GameControl.Instance.GetSceneItemList().transform);
                 CurrentItem.OnItemDrop(fastDrop);
+                CurrentItem.ChangeRendererSortingOrder(GameConstData.BelowPlayerOrder);
                 CurrentItem = null;
             }
 

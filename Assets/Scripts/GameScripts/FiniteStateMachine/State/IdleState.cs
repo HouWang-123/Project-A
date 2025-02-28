@@ -1,23 +1,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 /// <summary>
-/// ´ı»ú×´Ì¬
+/// å¾…æœºçŠ¶æ€
 /// </summary>
 public class IdleState : BaseState
 {
-    // µÈ´ı¼ÆÊ±Æ÷
+    // ç­‰å¾…è®¡æ—¶å™¨
     private float m_TimeToWait = 0f;
-    // Íæ¼ÒÎ»ÖÃ
+    // ç©å®¶ä½ç½®
     private readonly Transform m_playerTransform;
-    // ×ª»»Îª¿´ÏòÍæ¼Ò×´Ì¬µÄ×îĞ¡¾àÀë
+    // è½¬æ¢ä¸ºçœ‹å‘ç©å®¶çŠ¶æ€çš„æœ€å°è·ç¦»
     private readonly float m_warnDistance = -1f;
-    // ×ªÎªÌÓÅÜµÄ¹âÔ´¾àÀë
+    // è½¬ä¸ºé€ƒè·‘çš„å…‰æºè·ç¦»
     private readonly float m_fleeDistance = -1f;
 
     public IdleState(FiniteStateMachine finiteStateMachine, GameObject gameObject, Transform playerTransform)
         : base(finiteStateMachine, gameObject)
     {
-        // ×´Ì¬ÉèÖÃ
+        // çŠ¶æ€è®¾ç½®
         m_stateEnum = StateEnum.Idle;
         m_playerTransform = playerTransform;
         m_warnDistance = gameObject.GetComponent<MonsterBaseFSM>().MonsterDatas.WarnRange + 5f;
@@ -32,25 +32,25 @@ public class IdleState : BaseState
     public override void Condition(GameObject npc)
     {
         m_TimeToWait += Time.deltaTime * m_timeScale;
-        // µÈ´ı5Ãë
+        // ç­‰å¾…5ç§’
         if (m_TimeToWait >= 5f)
         {
-            // ¼ÆÊ±Æ÷ÇåÁã
+            // è®¡æ—¶å™¨æ¸…é›¶
             m_TimeToWait = 0f;
-            Debug.Log(GetType() + " /Condition() => °´¸ÅÂÊ×ª»»×´Ì¬Îª´ı»ú»òÕßÑ²Âß");
-            // °´¸ÅÂÊÇĞ»»×´Ì¬£¬0.7µÄ¸ÅÂÊÇĞ»»µ½Ñ²Âß
+            Debug.Log(GetType() + " /Condition() => æŒ‰æ¦‚ç‡è½¬æ¢çŠ¶æ€ä¸ºå¾…æœºæˆ–è€…å·¡é€»");
+            // æŒ‰æ¦‚ç‡åˆ‡æ¢çŠ¶æ€ï¼Œ0.7çš„æ¦‚ç‡åˆ‡æ¢åˆ°å·¡é€»
             if (Random.value > 0.3f)
             {
-                // ÇĞ»»µ½Ñ²Âß×´Ì¬
+                // åˆ‡æ¢åˆ°å·¡é€»çŠ¶æ€
                 m_finiteStateMachine.PerformTransition(TransitionEnum.LostPlayer);
             }
         }
-        // ×ªÎª¿´ÏòÍæ¼Ò
+        // è½¬ä¸ºçœ‹å‘ç©å®¶
         if (Vector3.Distance(m_playerTransform.position, m_gameObject.transform.position) <= m_warnDistance)
         {
             m_finiteStateMachine.PerformTransition(TransitionEnum.SeePlayer);
         }
-        // ·¢ÏÖ¹âÔ´Ö±½ÓÌÓÅÜ
+        // å‘ç°å…‰æºç›´æ¥é€ƒè·‘
         var lightTransform = m_gameObject.GetComponent<MonsterBaseFSM>().LightTransform;
         if (lightTransform != null)
         {

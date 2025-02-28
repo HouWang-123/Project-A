@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 5101711556415047503}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.106, z: 0}
   m_LocalScale: {x: 1.4, y: 1.4, z: 1.4}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -76,12 +76,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 6879118450950661895, guid: a3eed76beea914c45ad2dffa4407dce8, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a3eed76beea914c45ad2dffa4407dce8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.19, y: 0.32}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -158,7 +158,7 @@ MonoBehaviour:
   ItemType: 0
   ItemRenderer: {fileID: 5502388850923554619}
   oulineShader: {fileID: -6465566751694194690, guid: 098b3234e69aa004eae9c50eabd09355, type: 3}
-  DefaultSpriteShader: {fileID: 10753, guid: 0000000000000000f000000000000000, type: 0}
+  DefaultSpriteShader: {fileID: 4800000, guid: e260cfa7296ee7642b167f1eb5be5023, type: 3}
   StackNuberText: {fileID: 0}
   ItemSpriteName: 
   DropState: 0

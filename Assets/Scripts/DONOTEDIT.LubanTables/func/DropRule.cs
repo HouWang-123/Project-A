@@ -38,7 +38,7 @@ public sealed partial class DropRule : Luban.BeanBase
     /// </summary>
     public readonly string NAME;
     /// <summary>
-    /// 本来用作描述，但在这里更像是备注（）
+    /// 别的表用作描述，但在这里更像是备注，方便配掉落时寻找。<br/>对了，这里没有怪物的掉落<br/>
     /// </summary>
     public readonly string DESCRIBE;
     /// <summary>
@@ -46,7 +46,7 @@ public sealed partial class DropRule : Luban.BeanBase
     /// </summary>
     public readonly System.Collections.Generic.List<int> DropIDlist;
     /// <summary>
-    /// 掉落物品概率列表，与物品ID一一对应,1代表100%,如果只有一个0，则是全部等概率，通常用在第三种掉落逻辑上<br/><br/>注意，如果是第一种掉落逻辑的话，概率加和不能超过1，（可以小于）
+    /// 掉落物品概率列表，与物品ID一一对应,1代表100%,如果只有一个0，则是全部等概率<br/><br/>注意，如果是第一种掉落逻辑的话，概率加和不能超过1，（可以小于）
     /// </summary>
     public readonly System.Collections.Generic.List<float> DropRate;
    

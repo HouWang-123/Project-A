@@ -2,18 +2,20 @@ using UnityEngine;
 using YooAsset;
 using UnityEngine.Events;
 using Spine.Unity;
-using static TimeSystemManager;
 
 public class PlayerControl : MonoBehaviour
 {
     public Transform ItemHoldPosition; // 玩家拿取物品位置
+    public Transform ItemLiftPostion; // 举起物品的位置
     private PlayerInputControl inputControl;
     private Rigidbody playerRG;
     private Transform playerRenderer;
     private Transform useObjParent;
     private PlayerPickupController _pickupController;
     private bool playerReversed; // 判断角色是否发生了偏转，与拾取和丢弃道具物品有关系
-
+    
+    private CharacterStat characterStat;
+    
     private EPlayerAnimator animatorEnum = EPlayerAnimator.Idle;
     public EPlayerAnimator PlayerAnimatorEnum
     {
@@ -34,13 +36,10 @@ public class PlayerControl : MonoBehaviour
     }
     private SkeletonAnimation playerSpin;
 
-    public float Speed = 5f;
+
 
     //前后移动的速度比率
     private float fToB = 0.6f;
-
-    //奔跑速度比率
-    private float runeToB = 1.5f;
 
     public Transform ItemReleasePoint;
 
@@ -50,7 +49,7 @@ public class PlayerControl : MonoBehaviour
     private UnityAction rightMouseAction = null;
     private bool rightMous = false;
     private bool shiftButt = false;
-
+    
     private void Awake()
     {
         inputControl = new PlayerInputControl();
@@ -66,6 +65,7 @@ public class PlayerControl : MonoBehaviour
     private void Start()
     {
         GameRunTimeData.Instance.CharacterItemSlotData.ChangeFocusSlotNumber(1); // 默认启用道具栏
+        characterStat = GameRunTimeData.Instance.CharacterBasicStat.GetStat();
         _pickupController = GetComponent<PlayerPickupController>();
         playerRG = GetComponent<Rigidbody>();
         playerRenderer = transform.GetChild(0);
@@ -79,17 +79,23 @@ public class PlayerControl : MonoBehaviour
         }
 
         // 模拟添加时间段改变的事件
-        PhasedChangedEvent phasedEvent = new()
+        TimeSystemManager.PhasedChangedEvent phasedEvent = new()
         {
             phase = TimePhaseEnum.Day,
             onTrigger = () =>
             {
+                int gameDay = TimeSystemManager.Instance.GameDay;
+                int gameHour = TimeSystemManager.Instance.GameHour;
+                int gameMinute = TimeSystemManager.Instance.GameMinute;
+                Debug.Log(GetType() + "/ 现在是游戏时间[天数: " + gameDay + " ,小时: " + gameHour + " ,分钟: " + gameMinute + " ]");
                 Debug.Log(GetType() + "/ 触发了主角拉屎");
             }
         };
-        Instance.PhasedChangedScheduledEvents.Add(phasedEvent);
-        
-#region InputSystem
+        TimeSystemManager.Instance.PhasedChangedScheduledEvents.Add(phasedEvent);
+
+        // 分钟改变时间：TimeSystemManager.GameMinuteEvent， 小时改变时间：GameHourEvent
+
+        #region InputSystem
 
         InputControl.Instance.GamePlayerEnable();
         InputControl.Instance.UIDisable();
@@ -134,6 +140,10 @@ public class PlayerControl : MonoBehaviour
         };
         InputControl.Instance.MouseScroll.started += (item) =>
         {
+            if (characterStat.LiftedItem != null)
+            {
+                return;
+            }
             if(ScrollActionTimer <= 0.1f)
             {
                 return;
@@ -178,6 +188,10 @@ public class PlayerControl : MonoBehaviour
             {
                 DropItem(false);
             }
+            if (characterStat.LiftedItem != null)
+            {
+                DropItem(false);
+            }
         };
         #endregion
     }
@@ -208,6 +222,11 @@ public class PlayerControl : MonoBehaviour
 
     public void ChangeMouseAction(int Number)
     {
+        if (characterStat.LiftedItem != null)
+        {
+            Debug.Log("手中存在举起的道具时无法切换物品");
+            return;
+        }
         GameHUD.Instance.ISM_SetFocus(Number);
         GameRunTimeData.Instance.CharacterItemSlotData.ChangeFocusSlotNumber(Number);
         GameRunTimeData.Instance.CharacterItemSlotData.ActiveCurrentItem();
@@ -226,7 +245,9 @@ public class PlayerControl : MonoBehaviour
     private void FixedUpdate()
     {
         GameRunTimeData.Instance.CharacterBasicStat.UpdatePlayerStat();
-        PlayerMove(InputControl.Instance.MovePoint, Speed);
+        
+        PlayerMove(InputControl.Instance.MovePoint, characterStat.WalkSpeed);
+        
         if(!pickupLock)
         {
             CalculateUseObjectRotation();
@@ -290,16 +311,18 @@ public class PlayerControl : MonoBehaviour
             {
                 speed *= fToB;
                 PlayerAnimatorEnum = EPlayerAnimator.Walk_Backwards;
-                //playerSpin.timeScale = fToB;
+                //playerSpin.timeScale = fToB;              //匹配动画速度
             }
             else if(shiftButt)
             {
-                speed *= runeToB;
+                speed *= characterStat.RunSpeedScale;
                 PlayerAnimatorEnum = EPlayerAnimator.Run;
+                playerSpin.timeScale = speed * 0.6f;        //匹配动画速度
             }
             else
             {
                 PlayerAnimatorEnum = EPlayerAnimator.Walk;
+                playerSpin.timeScale = speed / 0.6f;      //匹配动画速度
             }
 
             //playerRG.Move(vector * speed + transform.position, Quaternion.identity);
@@ -319,9 +342,20 @@ public class PlayerControl : MonoBehaviour
 
     public void DropItem(bool fastDrop)
     {
+        // 丢下举起的物品逻辑
+        if (characterStat.LiftedItem != null)
+        {
+            GameRunTimeData.Instance.CharacterItemSlotData.GetCharacterInUseItem()?.EnableRenderer();
+            characterStat.LiftedItem.gameObject.transform.SetParent(GameControl.Instance.GetSceneItemList().transform);
+            characterStat.LiftedItem.OnItemDrop(false);
+            characterStat.LiftedItem.ChangeRendererSortingOrder(GameConstData.BelowPlayerOrder);
+            characterStat.LiftedItem = null;
+            GameHUD.Instance.SlotManagerHUD.EnableHud();
+            return;
+        }
         Debug.Log("丢下");
         // 表现  // 背包数据更新
-        // todo : 丢弃堆叠物品
+        // todo : 批量丢弃堆叠物品
 
         bool removestack = GameRunTimeData.Instance.CharacterItemSlotData.ClearHandItem(fastDrop, playerReversed,ItemReleasePoint);
         
@@ -360,28 +394,33 @@ public class PlayerControl : MonoBehaviour
             return;
         }
 
-        pickupLock = true;
+        if (characterStat.LiftedItem != null)
+        {
+            return;
+        }
 
-        ItemBase characterInUseItem;
-        characterInUseItem = _pickupController.currentPickup;
+        pickupLock = true;
+        
+        ItemBase toPickUpItem;
+        toPickUpItem = _pickupController.currentPickup;
         
         ///////////可堆叠或者不可堆叠物品进入背包并更新HUD和人物渲染的逻辑 /////////////
         
-        if (characterInUseItem is ISlotable)
+        if (toPickUpItem is ISlotable)
         {
             // 背包数据更新
             bool stackOverFlowed;
-            int  Restult = GameRunTimeData.Instance.CharacterItemSlotData.InsertOrUpdateItemSlotData(characterInUseItem, out stackOverFlowed);
+            int  Restult = GameRunTimeData.Instance.CharacterItemSlotData.InsertOrUpdateItemSlotData(toPickUpItem, out stackOverFlowed);
             
-            if (characterInUseItem is IStackable)
+            if (toPickUpItem is IStackable)
             {
                 if (Restult != -1) // 进入手中
                 {
-                    IStackable stackable = characterInUseItem as IStackable;
+                    IStackable stackable = toPickUpItem as IStackable;
                     int overFlowedCount = stackable.GetStackCount();
                     if (stackOverFlowed)
                     {
-                        string uri = characterInUseItem.GetPrefabName();
+                        string uri = toPickUpItem.GetPrefabName();
                         AssetHandle loadAssetAsync = YooAssets.LoadAssetAsync<GameObject>(uri);
                         loadAssetAsync.Completed += handle =>
                         {
@@ -401,18 +440,20 @@ public class PlayerControl : MonoBehaviour
                 _pickupController.currentPickup.transform.SetParent(ItemHoldPosition);
                 _pickupController.currentPickup.CheckReverse(playerReversed);
                 _pickupController.PlayerPickupItem();
-                SetItemBaseToPlayerHand(characterInUseItem);
+                SetItemBaseToPlayerHand(toPickUpItem);
+                toPickUpItem.ChangeRendererSortingOrder(GameConstData.PlayerOrder);
                 if(Restult == 1) // 手中存在物品
                 {
-                    characterInUseItem.DisableRenderer();
+                    toPickUpItem.DisableRenderer();
                 }
                 if (Restult == 2) // 堆叠物品
                 {
-                    Destroy(characterInUseItem.gameObject);
+                    Destroy(toPickUpItem.gameObject);
                 }
                 pickupLock = false;
                 _pickupController.currentPickup = null;
                 _pickupController.ChangePickupTarget();
+                
             }
             else
             {
@@ -430,10 +471,22 @@ public class PlayerControl : MonoBehaviour
         }
         else
         {
-            ///// todo 举起物品逻辑  /////////
-            
+            if (toPickUpItem is ILiftable)
+            {
+                ///// todo 举起物品逻辑  /////////
+                GameRunTimeData.Instance.CharacterItemSlotData.GetCharacterInUseItem()?.DisableRenderer();
+                characterStat.LiftedItem = toPickUpItem;
+                toPickUpItem.ChangeRendererSortingOrder(GameConstData.OverPlayerOrder);
+                toPickUpItem.gameObject.transform.SetParent(ItemLiftPostion);
+                toPickUpItem.CheckReverse(playerReversed);
+                toPickUpItem.gameObject.transform.localPosition = Vector3.zero;
+                leftMouseAction = toPickUpItem.OnLeftInteract;
+                rightMouseAction = toPickUpItem.OnRightInteract;
+                _pickupController.PlayerPickupItem();
+                pickupLock = false;
+                GameHUD.Instance.SlotManagerHUD.DisableHud(false,null);
+            }
         }
-        
     }
 }
 

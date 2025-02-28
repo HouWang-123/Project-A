@@ -24,3 +24,8 @@ public interface IBuffedItem
 {
     public int GetBuffId();
 }
+// 可否举起
+public interface ILiftable
+{
+    
+}
