@@ -3,7 +3,6 @@ using YooAsset;
 using cfg.scene;
 using System.Collections.Generic;
 using Unity.Cinemachine;
-using UnityEngine.Events;
 using UnityEngine.Rendering.Universal;
 
 public class GameControl
@@ -151,7 +150,7 @@ public class GameControl
         GameObject globalLight2D = new() { name = "GlobalLight_2D" };
         globalLight2D.AddComponent<Light2D>();
         globalLight2D.AddComponent<GlobalLightController>();
-        Object.DontDestroyOnLoad(globalLight2D);
+        //Object.DontDestroyOnLoad(globalLight2D);
     }
 
 

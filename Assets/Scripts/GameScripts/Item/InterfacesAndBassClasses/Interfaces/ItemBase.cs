@@ -28,7 +28,7 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable
         RendererTr.localEulerAngles = GameConstData.DefAngles;
         OriginalRendererScale = RendererTr.localScale;
         AssetHandle loadAssetSync;
-        Debug.Log(ItemID);
+        
         if (ItemData == null)
         {
             InitItem(ItemID); // 非动态生成的物品，拖拽进入的物品
