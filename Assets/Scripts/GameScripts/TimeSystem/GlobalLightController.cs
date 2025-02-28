@@ -5,17 +5,17 @@ using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using static TimeSystemManager;
 /// <summary>
-/// È«¾Ö¹â¿ØÖÆÆ÷
+/// å…¨å±€å…‰æ§åˆ¶å™¨
 /// </summary>
 public class GlobalLightController : MonoBehaviour
 {
-    // ¹âÔ´ÇĞ»»¹ı¶ÉÊ±¼ä
+    // å…‰æºåˆ‡æ¢è¿‡æ¸¡æ—¶é—´
     [SerializeField] private float transitionSpeed = 1.5f;
     [SerializeField] private Light2D m_globalLight2D;
     public Light2D GlobalLight2D { get { return m_globalLight2D; } set { m_globalLight2D = value; } }
-    // Ê±¼ä¶Î¶ÔÓ¦µÄÊÂ¼ş
+    // æ—¶é—´æ®µå¯¹åº”çš„äº‹ä»¶
     private readonly List<PhasedChangedEvent> phasedEvents;
-    // Ê±¼ä¶Î¶ÔÓ¦µÄ¹âµÄÑÕÉ«
+    // æ—¶é—´æ®µå¯¹åº”çš„å…‰çš„é¢œè‰²
     readonly Dictionary<TimePhaseEnum, Color> timePhaseToColor;
 
     public GlobalLightController()
@@ -44,7 +44,7 @@ public class GlobalLightController : MonoBehaviour
 
     private void Start()
     {
-        // Ìí¼ÓÊ±¼ä¶Î¸Ä±äµÄÊÂ¼ş
+        // æ·»åŠ æ—¶é—´æ®µæ”¹å˜çš„äº‹ä»¶
         for (int i = 1; i <= 3; ++i)
         {
             int currentPhaseIndex = i;
@@ -76,21 +76,21 @@ public class GlobalLightController : MonoBehaviour
     {
         if (!Enum.IsDefined(typeof(TimePhaseEnum), timePhaseEnum))
         {
-            throw new ArgumentOutOfRangeException($"Ê±¼ä¶ÎÃ¶¾ÙÀàĞÍ²¢Ã»ÓĞÕâÑùµÄÃ¶¾Ù[{timePhaseEnum}]");
+            throw new ArgumentOutOfRangeException($"æ—¶é—´æ®µæšä¸¾ç±»å‹å¹¶æ²¡æœ‰è¿™æ ·çš„æšä¸¾[{timePhaseEnum}]");
         }
         if (timePhaseToColor.TryGetValue(timePhaseEnum, out Color color))
         {
-            Debug.Log($"{GetType()}/ HandleColor=> µ±Ç°Ê±¶Î[{timePhaseEnum}]£¬×ª»»¹âÏßµÄÑÕÉ«ÖĞ");
+            Debug.Log($"{GetType()}/ HandleColor=> å½“å‰æ—¶æ®µ[{timePhaseEnum}]ï¼Œè½¬æ¢å…‰çº¿çš„é¢œè‰²ä¸­");
             StartCoroutine(TransitionColor(color));
         }
         else
         {
-            Debug.LogError($"{GetType()}/ onTrigger=> ¶ªÊ§Ê±¼ä¶ÎµÄÑÕÉ«ĞÅÏ¢: {timePhaseEnum}");
+            Debug.LogError($"{GetType()}/ onTrigger=> ä¸¢å¤±æ—¶é—´æ®µçš„é¢œè‰²ä¿¡æ¯: {timePhaseEnum}");
             return;
         }
     }
 
-    // Ê¹ÓÃ²åÖµÊµÏÖÑÕÉ«Æ½»¬¹ı¶É
+    // ä½¿ç”¨æ’å€¼å®ç°é¢œè‰²å¹³æ»‘è¿‡æ¸¡
     protected IEnumerator TransitionColor(Color targetColor)
     {
         float t = 0;
@@ -100,7 +100,7 @@ public class GlobalLightController : MonoBehaviour
             t += Time.deltaTime * transitionSpeed;
             m_globalLight2D.color = Color.Lerp(start, targetColor, t);
 
-            // Ìí¼Ó0.5%Ëæ»úÔëµã
+            // æ·»åŠ 0.5%éšæœºå™ªç‚¹
             if (Time.frameCount % 3 == 0)
             {
                 m_globalLight2D.color += UnityEngine.Random.Range(-0.005f, 0.005f) * Color.white;
