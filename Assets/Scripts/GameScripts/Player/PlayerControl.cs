@@ -171,7 +171,7 @@ public class PlayerControl : MonoBehaviour
         // 物品丢弃
         InputControl.Instance.GButton.started += (item) =>
         {
-            if(GameRunTimeData.Instance.CharacterBasicStat.GetStat().ItemOnHand != null)
+            if(characterStat.ItemOnHand != null)
             {
                 DropItem(false);
             }
@@ -319,12 +319,13 @@ public class PlayerControl : MonoBehaviour
         // 丢下举起的物品逻辑
         if (characterStat.LiftedItem != null)
         {
-            GameRunTimeData.Instance.CharacterBasicStat.GetStat().ItemOnHand.EnableRenderer();
             characterStat.LiftedItem.gameObject.transform.SetParent(GameControl.Instance.GetSceneItemList().transform);
             GameRunTimeData.Instance.ItemManager.RegistItem(characterStat.LiftedItem);
             characterStat.LiftedItem.OnItemDrop(false,true);
             characterStat.LiftedItem.ChangeRendererSortingOrder(GameConstData.BelowPlayerOrder);
             characterStat.LiftedItem = null;
+            int currentFocusedItemId = GameRunTimeData.Instance.CharacterItemSlotData.GetCurrentFocusedItemId();
+            RefreshItemOnHand(currentFocusedItemId);
             GameHUD.Instance.SlotManagerHUD.EnableHud();
             return;
         }
@@ -336,7 +337,7 @@ public class PlayerControl : MonoBehaviour
         
         if(removestack)
         {
-            string uri = GameRunTimeData.Instance.CharacterBasicStat.GetStat().ItemOnHand.GetPrefabName();
+            string uri = characterStat.ItemOnHand.GetPrefabName();
             AssetHandle loadAssetAsync = YooAssets.LoadAssetAsync<GameObject>(uri);
             loadAssetAsync.Completed += handle =>
             {
@@ -426,14 +427,14 @@ public class PlayerControl : MonoBehaviour
             // 举起物体
             if (toPickUpItem is ILiftable)
             {
-                GameRunTimeData.Instance.CharacterBasicStat.GetStat().ItemOnHand.DisableRenderer();
-                characterStat.LiftedItem = toPickUpItem;
-                toPickUpItem.ChangeRendererSortingOrder(GameConstData.OverPlayerOrder);
-                toPickUpItem.gameObject.transform.SetParent(ItemLiftPostion);
-                toPickUpItem.gameObject.transform.localPosition = Vector3.zero;
-                leftMouseAction = toPickUpItem.OnLeftInteract;
-                rightMouseAction = toPickUpItem.OnRightInteract;
+                if (characterStat.ItemOnHand != null)
+                {
+                    Destroy(characterStat.ItemOnHand.gameObject);
+                    characterStat.ItemOnHand = null;
+                }
                 _pickupController.PlayerPickupItem();
+                characterStat.LiftedItem = toPickUpItem;
+                RefreshItemLifted(toPickUpItem.ItemID);
                 pickupLock = false;
                 GameHUD.Instance.SlotManagerHUD.DisableHud(false,null);
             }
@@ -442,13 +443,13 @@ public class PlayerControl : MonoBehaviour
     
     public void RefreshItemOnHand(int ItemId)
     {
-        if (GameRunTimeData.Instance.CharacterBasicStat.GetStat().ItemOnHand != null)
+        if (characterStat.ItemOnHand != null)
         {
-            if (GameRunTimeData.Instance.CharacterBasicStat.GetStat().ItemOnHand.ItemID == ItemId)
+            if (characterStat.ItemOnHand.ItemID == ItemId)
             {
                 return;
             }
-            Destroy(GameRunTimeData.Instance.CharacterBasicStat.GetStat().ItemOnHand.gameObject);
+            Destroy(characterStat.ItemOnHand.gameObject);
         }
 
         if (ItemId != -1)
@@ -456,13 +457,36 @@ public class PlayerControl : MonoBehaviour
             GameItemTool.GenerateItemAtTransform(ItemId, ItemHoldPosition, true, 
                 (item)=> 
                 {
-                    GameRunTimeData.Instance.CharacterBasicStat.GetStat().ItemOnHand = item;
+                    characterStat.ItemOnHand = item;
                     item.ChangeRendererSortingOrder(GameConstData.PlayerOrder);
                     leftMouseAction = item.OnLeftInteract;
                     rightMouseAction = item.OnRightInteract;
                 }
             );
-            
+        }
+    }
+    public void RefreshItemLifted(int ItemId)
+    {
+        if (characterStat.ItemOnHand != null)
+        {
+            if (characterStat.ItemOnHand.ItemID == ItemId)
+            {
+                return;
+            }
+            Destroy(characterStat.ItemOnHand.gameObject);
+        }
+
+        if (ItemId != -1)
+        {
+            GameItemTool.GenerateItemAtTransform(ItemId, ItemLiftPostion, false, 
+                (item)=> 
+                {
+                    characterStat.LiftedItem = item;
+                    item.ChangeRendererSortingOrder(GameConstData.PlayerOrder);
+                    leftMouseAction = item.OnLeftInteract;
+                    rightMouseAction = item.OnRightInteract;
+                }
+            );
         }
     }
 }

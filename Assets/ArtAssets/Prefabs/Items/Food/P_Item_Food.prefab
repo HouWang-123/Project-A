@@ -351,5 +351,6 @@ MonoBehaviour:
   DefaultSpriteShader: {fileID: 4800000, guid: e260cfa7296ee7642b167f1eb5be5023, type: 3}
   StackNuberText: {fileID: 8367716075992862460}
   ItemSpriteName: 
+  ignoreAngleCorrect: 0
   DropState: 0
-  StackCount: 9
+  StackCount: 1
