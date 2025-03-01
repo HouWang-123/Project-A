@@ -321,7 +321,7 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 832
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -352,4 +352,4 @@ MonoBehaviour:
   StackNuberText: {fileID: 8367716075992862460}
   ItemSpriteName: 
   DropState: 0
-  StackCount: 1
+  StackCount: 9

@@ -39,7 +39,7 @@ public class ItemSlotManager_HUD : UIBase
         }
         foreach (var V in SlotItemData)
         {
-            ItemSlots[V.Key -1].SetSlotItem(V.Value.ItemBase,V.Value.StackValue);
+            ItemSlots[V.Key -1].SetSlotItem(V.Value.ItemID,V.Value.StackValue);
         }
     }
     private void SetDisplayHotKeys()
@@ -51,7 +51,7 @@ public class ItemSlotManager_HUD : UIBase
             i++;
         }
     }
-
+    
     #region 控制层API
 
     /// <summary>

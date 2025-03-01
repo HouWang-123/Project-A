@@ -19,9 +19,9 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable
     public String ItemSpriteName;
     private bool Targeted; // 是否被拾取系统选中
     private bool ItemReversed;
-
+    public bool ignoreAngleCorrect;
     public bool DropState;
-    Vector3 OriginalRendererScale;
+
     public int StackCount = 1;
 
     private void SetRendererImage()
@@ -36,12 +36,14 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable
         ItemRenderer.sprite = loadAssetSync.AssetObject as Sprite;
         loadAssetSync.Release();
     }
-
+    
     public void Start()
     {
         var RendererTr = ItemRenderer.transform;
-        RendererTr.localEulerAngles = GameConstData.DefAngles;
-        OriginalRendererScale = RendererTr.localScale;
+        if (!ignoreAngleCorrect)
+        {
+            RendererTr.localEulerAngles = GameConstData.DefAngles;
+        }
         if (ItemData == null)
         {
             InitItem(ItemID); // 非动态生成的物品，拖拽进入的物品
@@ -61,6 +63,11 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable
     {
         InitItem(id);
         SetRendererImage();
+    }
+
+    public void SetIgnoreAngle(bool val)
+    {
+        ignoreAngleCorrect = val;
     }
 
     private void CheckIsStackedItem()
@@ -122,25 +129,7 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable
     {
         ItemRenderer.sortingOrder = OrderNumber;
     }
-
-    // 拾取后物品方向控制
-    public void CheckReverse(bool reversed)
-    {
-        if (reversed && !ItemReversed)
-        {
-            Vector3 ReversedScale = OriginalRendererScale;
-            ReversedScale.x = -ReversedScale.x;
-            ItemRenderer.transform.localScale = ReversedScale;
-            ItemReversed = true;
-            return;
-        }
-
-        if (!reversed && ItemReversed)
-        {
-            ItemRenderer.transform.localScale = OriginalRendererScale;
-            ItemReversed = false;
-        }
-    }
+    
 
     // 动态生成时必须调用一次初始化，用来设置物品数据
     public abstract void InitItem(int id); // 物品数据初始化
@@ -157,60 +146,13 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable
     private float V_BiasSpeed;
 
     // 物品掉落相关物理逻辑
-    public void FixedUpdate()
+    private void FixedUpdate()
     {
         if (DropState)
         {
-            if (upspeed > 0)
-            {
-                upspeed -= damp * Time.deltaTime;
-            }
-
-            if (Math.Abs(H_BiasSpeed) > 0f)
-            {
-                if (H_BiasSpeed > 0)
-                {
-                    H_BiasSpeed -= damp * Time.deltaTime;
-                    if (H_BiasSpeed < 0)
-                    {
-                        H_BiasSpeed = 0;
-                    }
-                }
-
-                if (H_BiasSpeed < 0)
-                {
-                    H_BiasSpeed += damp * Time.deltaTime;
-                    if (H_BiasSpeed > 0)
-                    {
-                        H_BiasSpeed = 0;
-                    }
-                }
-            }
-
-            if (Math.Abs(V_BiasSpeed) > 0f)
-            {
-                if (V_BiasSpeed > 0)
-                {
-                    V_BiasSpeed -= damp * Time.deltaTime;
-                    if (V_BiasSpeed < 0)
-                    {
-                        V_BiasSpeed = 0;
-                    }
-                }
-
-                if (V_BiasSpeed < 0)
-                {
-                    V_BiasSpeed += damp * Time.deltaTime;
-                    if (V_BiasSpeed > 0)
-                    {
-                        V_BiasSpeed = 0;
-                    }
-                }
-            }
-
+            SpeedDamp();
             Vector3 origin = transform.position;
             bool isGrounded = Physics.Raycast(origin, Vector3.down, groundCheckDistance, GameRoot.Instance.FloorLayer);
-
             if (!isGrounded)
             {
                 velocity.y += (gravity + upspeed) * Time.deltaTime;
@@ -224,14 +166,15 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable
                 RaycastHit hit;
                 if (Physics.Raycast(origin, Vector3.down, out hit, groundCheckDistance, GameRoot.Instance.FloorLayer))
                 {
-                    transform.position = new Vector3(transform.position.x, hit.point.y, transform.position.z);
+                    var position = transform.position;
+                    position = new Vector3(position.x, hit.point.y, position.z);
+                    transform.position = position;
                 }
 
                 DropState = false;
                 upspeed = 20f;
             }
         }
-
         //防止物品掉出世界
         if (transform.position.y < 0)
         {
@@ -247,8 +190,10 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable
 
     public virtual void OnItemDrop(bool fastDrop, bool IgnoreBias = false)
     {
-        H_BiasSpeed = Random.Range(-18, 18);
-        V_BiasSpeed = Random.Range(-18, 18);
+        var RendererTr = ItemRenderer.transform;
+        RendererTr.localEulerAngles = GameConstData.DefAngles;
+        H_BiasSpeed = Random.Range(-10, 10);
+        V_BiasSpeed = Random.Range(-10, 10);
         if (IgnoreBias)
         {
             H_BiasSpeed = 0f;
@@ -271,4 +216,67 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable
 
     // Fixed Update 调用
     public abstract void OnLeftInteract();
+
+
+
+    /// 运动阻力
+    private void SpeedDamp()
+    {
+        // UpSpeed
+        if (upspeed > 0)
+        {
+            upspeed -= damp * Time.deltaTime;
+        }
+        // LeftOrRight
+        if (Math.Abs(H_BiasSpeed) > 0f)
+        {
+            if (H_BiasSpeed > 0)
+            {
+                H_BiasSpeed -= damp * Time.deltaTime;
+                if (H_BiasSpeed < 0)
+                {
+                    H_BiasSpeed = 0;
+                }
+            }
+
+            if (H_BiasSpeed < 0)
+            {
+                H_BiasSpeed += damp * Time.deltaTime;
+                if (H_BiasSpeed > 0)
+                {
+                    H_BiasSpeed = 0;
+                }
+            }
+        }
+        // Upper Or Lower
+        if (Math.Abs(V_BiasSpeed) > 0f)
+        {
+            if (V_BiasSpeed > 0)
+            {
+                V_BiasSpeed -= damp * Time.deltaTime;
+                if (V_BiasSpeed < 0)
+                {
+                    V_BiasSpeed = 0;
+                }
+            }
+
+            if (V_BiasSpeed < 0)
+            {
+                V_BiasSpeed += damp * Time.deltaTime;
+                if (V_BiasSpeed > 0)
+                {
+                    V_BiasSpeed = 0;
+                }
+            }
+        }
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.layer == GameRoot.Instance.FloorLayer)
+        {
+            H_BiasSpeed = 0;
+            V_BiasSpeed = 0;
+        }
+    }
 }

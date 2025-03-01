@@ -130,8 +130,9 @@ public class PlayerPickupController : MonoBehaviour
     public void PlayerPickupItem()
     {
         if (currentPickup == null) return;
-        currentPickup.SetTargerted(false);
+        Destroy(currentPickup.gameObject);
         Item2PickList.Remove(currentPickup);
+        
         currentPickup = null;
     }
 

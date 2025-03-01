@@ -61,7 +61,7 @@ public class ItemPointMono : MonoBehaviour
     {
         for(int i = 0; i < itemIDs.Count; i++)
         {
-            GameTool.GenerateItemAtTransform(itemIDs[i], transform);
+            GameItemTool.GenerateItemAtTransform(itemIDs[i], transform);
         }
     }
 

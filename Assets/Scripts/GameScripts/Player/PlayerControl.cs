@@ -12,7 +12,6 @@ public class PlayerControl : MonoBehaviour
     private Transform playerRenderer;
     private Transform useObjParent;
     private PlayerPickupController _pickupController;
-    private bool playerReversed; // 判断角色是否发生了偏转，与拾取和丢弃道具物品有关系
     
     private CharacterStat characterStat;
     
@@ -35,9 +34,7 @@ public class PlayerControl : MonoBehaviour
         }
     }
     private SkeletonAnimation playerSpin;
-
-
-
+    
     //前后移动的速度比率
     private float fToB = 0.6f;
 
@@ -148,7 +145,6 @@ public class PlayerControl : MonoBehaviour
             {
                 return;
             }
-
             Vector2 readValue = item.ReadValue<Vector2>();
             if(readValue.y > 0)
             {
@@ -160,31 +156,22 @@ public class PlayerControl : MonoBehaviour
                 GameHUD.Instance.ISM_NextFocusItem();
                 GameRunTimeData.Instance.CharacterItemSlotData.ChangeFocusSlotNumber(true);
             }
-            GameRunTimeData.Instance.CharacterItemSlotData.ActiveCurrentItem();
-            ItemBase characterInUseItem = GameRunTimeData.Instance.CharacterItemSlotData.GetCharacterInUseItem();
-            if(characterInUseItem != null)
-            {
-                leftMouseAction = characterInUseItem.OnLeftInteract;
-                rightMouseAction = characterInUseItem.OnRightInteract;
-            }
-            else
-            {
-                leftMouseAction = null;
-                rightMouseAction = null;
-            }
-
+            int itemId = GameRunTimeData.Instance.CharacterItemSlotData.GetCurrentFocusedItemId();
+            RefreshItemOnHand(itemId);
             ScrollActionTimer = 0f;
         };
+        
         //测试切换地面物品
         //=================
         InputControl.Instance.QButton.started += (item) => { _pickupController.ChangeItemToogle(true); };
         InputControl.Instance.QButton.canceled += (item) => { _pickupController.ChangeItemToogle(false); };
         //==================
+        
         InputControl.Instance.EButton.started += (item) => { PickItem(); };
-
+        // 物品丢弃
         InputControl.Instance.GButton.started += (item) =>
         {
-            if(GameRunTimeData.Instance.CharacterItemSlotData.GetCharacterInUseItem() != null)
+            if(GameRunTimeData.Instance.CharacterBasicStat.GetStat().ItemOnHand != null)
             {
                 DropItem(false);
             }
@@ -206,12 +193,10 @@ public class PlayerControl : MonoBehaviour
         if(l.x < v.x)
         {
             playerRenderer.localScale = GameConstData.ReverseScale;
-            playerReversed = true;
         }
         else
         {
             playerRenderer.localScale = Vector3.one;
-            playerReversed = false;
         }
 
         u = Camera.main.WorldToScreenPoint(useObjParent.position);
@@ -229,18 +214,8 @@ public class PlayerControl : MonoBehaviour
         }
         GameHUD.Instance.ISM_SetFocus(Number);
         GameRunTimeData.Instance.CharacterItemSlotData.ChangeFocusSlotNumber(Number);
-        GameRunTimeData.Instance.CharacterItemSlotData.ActiveCurrentItem();
-        ItemBase characterInUseItem = GameRunTimeData.Instance.CharacterItemSlotData.GetCharacterInUseItem();
-        if(characterInUseItem != null)
-        {
-            leftMouseAction = characterInUseItem.OnLeftInteract;
-            rightMouseAction = characterInUseItem.OnRightInteract;
-        }
-        else
-        {
-            leftMouseAction = null;
-            rightMouseAction = null;
-        }
+        int currentFocusedItemId = GameRunTimeData.Instance.CharacterItemSlotData.GetCurrentFocusedItemId();
+        RefreshItemOnHand(currentFocusedItemId);
     }
     private void FixedUpdate()
     {
@@ -336,7 +311,6 @@ public class PlayerControl : MonoBehaviour
             playerRG.linearVelocity = vector * speed;
         }
     }
-
     private bool dropKeyPressed = false;
     private bool pickupLock; // 拾取锁
 
@@ -345,10 +319,10 @@ public class PlayerControl : MonoBehaviour
         // 丢下举起的物品逻辑
         if (characterStat.LiftedItem != null)
         {
-            GameRunTimeData.Instance.CharacterItemSlotData.GetCharacterInUseItem()?.EnableRenderer();
+            GameRunTimeData.Instance.CharacterBasicStat.GetStat().ItemOnHand.EnableRenderer();
             characterStat.LiftedItem.gameObject.transform.SetParent(GameControl.Instance.GetSceneItemList().transform);
             GameRunTimeData.Instance.ItemManager.RegistItem(characterStat.LiftedItem);
-            characterStat.LiftedItem.OnItemDrop(false);
+            characterStat.LiftedItem.OnItemDrop(false,true);
             characterStat.LiftedItem.ChangeRendererSortingOrder(GameConstData.BelowPlayerOrder);
             characterStat.LiftedItem = null;
             GameHUD.Instance.SlotManagerHUD.EnableHud();
@@ -358,11 +332,11 @@ public class PlayerControl : MonoBehaviour
         // 表现  // 背包数据更新
         // todo : 批量丢弃堆叠物品
 
-        bool removestack = GameRunTimeData.Instance.CharacterItemSlotData.ClearHandItem(fastDrop, playerReversed,ItemReleasePoint);
+        bool removestack = GameRunTimeData.Instance.CharacterItemSlotData.ClearHandItem(fastDrop);
         
         if(removestack)
         {
-            string uri = GameRunTimeData.Instance.CharacterItemSlotData.GetCharacterInUseItem().GetPrefabName();
+            string uri = GameRunTimeData.Instance.CharacterBasicStat.GetStat().ItemOnHand.GetPrefabName();
             AssetHandle loadAssetAsync = YooAssets.LoadAssetAsync<GameObject>(uri);
             loadAssetAsync.Completed += handle =>
             {
@@ -376,50 +350,46 @@ public class PlayerControl : MonoBehaviour
         ChangeMouseAction(GameRunTimeData.Instance.CharacterItemSlotData.GetCurrentFocusSlot());
     }
 
-    public void PickItem() // 拾取物品
+    private bool PickUpValidation()
     {
         if(_pickupController.currentPickup == null)
         {
-            return;
-        }
-        // 表现层
-        if(playerReversed)
-        {
-            useObjParent.localEulerAngles = GameConstData.ReversedRotation;
-        }
-        else
-        {
-            useObjParent.localEulerAngles = Vector3.zero;
+            return false;
         }
         if(_pickupController.currentPickup.DropState)
         {
-            return;
+            return false;
         }
-
         if (characterStat.LiftedItem != null)
         {
-            return;
+            return false;
         }
-
+        
+        return true;
+    }
+    public void PickItem() // 拾取物品
+    {
+        if (!PickUpValidation()) return;
+        
         pickupLock = true;
         
         ItemBase toPickUpItem;
         toPickUpItem = _pickupController.currentPickup;
         GameRunTimeData.Instance.ItemManager.UnRegistItem(toPickUpItem);
-        ///////////可堆叠或者不可堆叠物品进入背包并更新HUD和人物渲染的逻辑 /////////////
         
+        ////////// 2025.3.1 更新 通过数据改变表现层
         if (toPickUpItem is ISlotable)
         {
             // 背包数据更新
             bool stackOverFlowed;
             int  Restult = GameRunTimeData.Instance.CharacterItemSlotData.InsertOrUpdateItemSlotData(toPickUpItem, out stackOverFlowed);
-            
             if (toPickUpItem is IStackable)
             {
                 if (Restult != -1) // 进入手中
                 {
                     IStackable stackable = toPickUpItem as IStackable;
                     int overFlowedCount = stackable.GetStackCount();
+                    // stackable 插入失败后该值会自动变为溢出量
                     if (stackOverFlowed)
                     {
                         string uri = toPickUpItem.GetPrefabName();
@@ -438,50 +408,28 @@ public class PlayerControl : MonoBehaviour
                     stackable.ChangeStackCount(1);
                 }
             }
-            if(Restult != -1) // 可以拾取物品
+            // 一般逻辑
+            if (Restult != -1) // 可以拾取物品
             {
-                _pickupController.currentPickup.transform.SetParent(ItemHoldPosition);
-                _pickupController.currentPickup.CheckReverse(playerReversed);
                 _pickupController.PlayerPickupItem();
-                SetItemBaseToPlayerHand(toPickUpItem);
-                toPickUpItem.ChangeRendererSortingOrder(GameConstData.PlayerOrder);
-                if(Restult == 1) // 手中存在物品
-                {
-                    toPickUpItem.DisableRenderer();
-                }
-                if (Restult == 2) // 堆叠物品
-                {
-                    Destroy(toPickUpItem.gameObject);
-                }
-                pickupLock = false;
-                _pickupController.currentPickup = null;
                 _pickupController.ChangePickupTarget();
-                
+                pickupLock = false;
             }
             else
             {
                 pickupLock = false;
             }
-        
             ChangeMouseAction(GameRunTimeData.Instance.CharacterItemSlotData.GetCurrentFocusSlot());
-            void SetItemBaseToPlayerHand(ItemBase itemBase)
-            {
-                Vector3 transformLocalEulerAngles = itemBase.gameObject.transform.localEulerAngles;
-                transformLocalEulerAngles.x = -45;
-                itemBase.gameObject.transform.localEulerAngles = transformLocalEulerAngles;
-                itemBase.gameObject.transform.localPosition = Vector3.zero;
-            }
         }
         else
         {
+            // 举起物体
             if (toPickUpItem is ILiftable)
             {
-                ///// todo 举起物品逻辑  /////////
-                GameRunTimeData.Instance.CharacterItemSlotData.GetCharacterInUseItem()?.DisableRenderer();
+                GameRunTimeData.Instance.CharacterBasicStat.GetStat().ItemOnHand.DisableRenderer();
                 characterStat.LiftedItem = toPickUpItem;
                 toPickUpItem.ChangeRendererSortingOrder(GameConstData.OverPlayerOrder);
                 toPickUpItem.gameObject.transform.SetParent(ItemLiftPostion);
-                toPickUpItem.CheckReverse(playerReversed);
                 toPickUpItem.gameObject.transform.localPosition = Vector3.zero;
                 leftMouseAction = toPickUpItem.OnLeftInteract;
                 rightMouseAction = toPickUpItem.OnRightInteract;
@@ -489,6 +437,32 @@ public class PlayerControl : MonoBehaviour
                 pickupLock = false;
                 GameHUD.Instance.SlotManagerHUD.DisableHud(false,null);
             }
+        }
+    }
+    
+    public void RefreshItemOnHand(int ItemId)
+    {
+        if (GameRunTimeData.Instance.CharacterBasicStat.GetStat().ItemOnHand != null)
+        {
+            if (GameRunTimeData.Instance.CharacterBasicStat.GetStat().ItemOnHand.ItemID == ItemId)
+            {
+                return;
+            }
+            Destroy(GameRunTimeData.Instance.CharacterBasicStat.GetStat().ItemOnHand.gameObject);
+        }
+
+        if (ItemId != -1)
+        {
+            GameItemTool.GenerateItemAtTransform(ItemId, ItemHoldPosition, true, 
+                (item)=> 
+                {
+                    GameRunTimeData.Instance.CharacterBasicStat.GetStat().ItemOnHand = item;
+                    item.ChangeRendererSortingOrder(GameConstData.PlayerOrder);
+                    leftMouseAction = item.OnLeftInteract;
+                    rightMouseAction = item.OnRightInteract;
+                }
+            );
+            
         }
     }
 }

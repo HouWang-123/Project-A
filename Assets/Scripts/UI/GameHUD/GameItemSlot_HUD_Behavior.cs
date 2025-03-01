@@ -46,9 +46,13 @@ public class GameItemSlot_HUD_Behavior : UIBase
         ItemSlotNumber.text = number.ToString();
     }
     
-    public void SetSlotItem(ItemBase itemBase,int count)
+    public void SetSlotItem(int ItemId,int count)
     {
-        ItemIcon.sprite = itemBase.GetItemIcon();
+        GameItemTool.GetItemIcon(ItemId, (sprite) =>
+        {
+            ItemIcon.sprite = sprite;
+        });
+        
         ItemIcon.gameObject.SetActive(true);
         ItemCount.gameObject.SetActive(true);
         ItemCount.text = count.ToString();

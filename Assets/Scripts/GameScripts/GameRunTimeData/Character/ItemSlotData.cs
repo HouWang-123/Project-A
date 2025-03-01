@@ -1,26 +1,21 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
-
+[Serializable]
 public class SlotItemStatus
 {
-    public SlotItemStatus(int itemID, int stackValue, ItemBase itemBase)
+    
+    public SlotItemStatus(int itemID, int stackValue)
     {
         ItemID = itemID;
         StackValue = stackValue;
-        ItemBase = itemBase;
     }
-
-    public SlotItemStatus(int itemID, int stackValue, ItemBase itemBase, int key)
+    public SlotItemStatus(int itemID, int stackValue, int key)
     {
         Key = key;
         ItemID = itemID;
         StackValue = stackValue;
-        ItemBase = itemBase;
     }
-
-    public ItemBase ItemBase;
     public int ItemID;
     public int StackValue; // 最小为1
     public int Key; // 对应道具栏格位
@@ -29,61 +24,39 @@ public class SlotItemStatus
 public class ItemSlotData
 {
     private int CurrentMaxSlotCount;
-    private ItemBase CurrentItem; // 玩家手中的物品
-
-    private Dictionary<int, ItemBase> AllCharacterItems = new Dictionary<int, ItemBase>(); // Number,Item
-
+    
     /// <summary>
     /// 注：int下标从1开始，对应道具栏1~6
     /// </summary>
+    [SerializeField]
     private Dictionary<int, SlotItemStatus> SlotItemDataList = new();
-
-    /// <summary>
-    /// 物品id对应道具栏1~6对应的
-    /// </summary>
-    private Dictionary<int, int> ItemID2Key = new();
-
+    [SerializeField]
     private int CurrentFocusSlot; // 玩家手中的物品对应的Number Key
-
     public int GetCurrentFocusSlot()
     {
         return CurrentFocusSlot;
     }
-
+    // 设置最大道具栏数量
     public void SetMaxSlotCount(int number)
     {
         CurrentMaxSlotCount = number;
     }
-
-    public void ActiveCurrentItem()
+    // 用于激活当前使用的物品
+    public int GetCurrentFocusedItemId()
     {
-        
-        foreach (var V in AllCharacterItems)
+        if (SlotItemDataList.TryGetValue(CurrentFocusSlot, out var IslotItemStatus))
         {
-            V.Value.DisableRenderer();
+            return IslotItemStatus.ItemID;
         }
-
-        if (SlotItemDataList.ContainsKey(CurrentFocusSlot))
-        {
-            GameRunTimeData.Instance.CharacterBasicStat.GetStat().ItemOnHand = CurrentItem;
-            AllCharacterItems[CurrentFocusSlot].EnableRenderer();
-            SetCharacterInUseItem(AllCharacterItems[CurrentFocusSlot]);
-        }
-        else
-        {
-            GameRunTimeData.Instance.CharacterBasicStat.GetStat().ItemOnHand = null;
-            SetCharacterInUseItem(null);
-        }
+        return -1;
     }
-
-
+    
     /// <summary>
     /// 为可堆叠物品获取合适的SlotNumber，同时进行道具栏中冗余量的填充
     /// </summary>
     /// <param name="InsertItem"></param>
     /// <returns></returns>
-    private int GetItemProperStackKeyNumberAndStackItem(ItemBase InsertItem, int Count, out bool outOfBound,
-        out int extraVal)
+    private int GetItemProperStackKeyNumberAndStackItem(ItemBase InsertItem, int Count, out bool outOfBound, out int extraVal)
     {
         IStackable iStackable = InsertItem as IStackable;
         int maxStacksize = iStackable.GetMaxStackValue();
@@ -94,10 +67,7 @@ public class ItemSlotData
             if (SlotData.Value.ItemID == InsertItem.ItemID)
             {
                 // 是否满载
-                if (SlotData.Value.StackValue == maxStacksize)
-                {
-                    continue;
-                }
+                if (SlotData.Value.StackValue == maxStacksize) continue; 
 
                 // 堆叠超出
                 if (SlotData.Value.StackValue + Count >= maxStacksize)
@@ -117,7 +87,6 @@ public class ItemSlotData
                 }
             }
         }
-
         outOfBound = true;
         extraVal = Count;
         return Find_A_Empty_Slot();
@@ -129,15 +98,13 @@ public class ItemSlotData
     /// <returns></returns>
     private int Find_A_Empty_Slot()
     {
-        SlotItemStatus itemStatus;
         for (int index = 1; index <= CurrentMaxSlotCount; index++)
         {
-            if (!SlotItemDataList.TryGetValue(index, out itemStatus))
+            if (!SlotItemDataList.TryGetValue(index, out var itemStatus))
             {
                 return index;
             }
         }
-
         return -1; // 没有合适的空位置
     }
 
@@ -152,8 +119,7 @@ public class ItemSlotData
                 canInsert += MaxStackCount - V.Value.StackValue;
             }
         }
-
-
+        
         return eptSlot * MaxStackCount + canInsert;
     }
 
@@ -172,51 +138,51 @@ public class ItemSlotData
 
         if (item is IStackable)
         {
-            IStackable s = item as IStackable;
+            IStackable StackItem = item as IStackable;
+            // 当前可用数量
+            int currentPossibleCount = GetMaxPossibleStackableCount(item.ItemID, StackItem.GetMaxStackValue());
 
-            int currentPossibleCount = GetMaxPossibleStackableCount(item.ItemID, s.GetMaxStackValue());
-
-            if (s.GetStackCount() > s.GetMaxStackValue()) // 拾取起来的大于最大堆叠
+            if (StackItem.GetStackCount() > StackItem.GetMaxStackValue()) // 拾取起来的大于最大堆叠
             {
-                int InsertItemCount = s.GetStackCount();
+                int InsertItemCount = StackItem.GetStackCount();
                 int iteration = 0;
                 int lastcount = 0;
-                if (currentPossibleCount < s.GetStackCount()) // 应对全物品栏溢出情况
+                if (currentPossibleCount < StackItem.GetStackCount()) // 应对全物品栏溢出情况
                 {
                     StackOvered = true;
-                    iteration = currentPossibleCount / s.GetMaxStackValue() + 1;
-                    lastcount = currentPossibleCount % s.GetMaxStackValue();
+                    iteration = currentPossibleCount / StackItem.GetMaxStackValue() + 1;
+                    lastcount = currentPossibleCount % StackItem.GetMaxStackValue();
                     for (int i = 0; i < iteration; i++)
                     {
                         if (i == iteration - 1) // 最后一次迭代
                         {
-                            s.ChangeStackCount(lastcount);
+                            StackItem.ChangeStackCount(lastcount);
                             InsertOrUpdateItemSlotData_Stack(item);
                         }
                         else
                         {
-                            s.ChangeStackCount(s.GetMaxStackValue());
+                            StackItem.ChangeStackCount(StackItem.GetMaxStackValue());
                             InsertOrUpdateItemSlotData_Stack(item);
                         }
                     }
 
-                    s.ChangeStackCount(InsertItemCount - currentPossibleCount);
+                    StackItem.ChangeStackCount(InsertItemCount - currentPossibleCount);
                     res = 0;
                 }
                 else
                 {
-                    iteration = s.GetStackCount() / s.GetMaxStackValue() + 1;
-                    lastcount = s.GetStackCount() % s.GetMaxStackValue();
+                    iteration = StackItem.GetStackCount() / StackItem.GetMaxStackValue() + 1;
+                    lastcount = StackItem.GetStackCount() % StackItem.GetMaxStackValue();
                     for (int i = 0; i < iteration; i++)
                     {
                         if (i == iteration - 1) // 最后一次迭代
                         {
-                            s.ChangeStackCount(lastcount);
+                            StackItem.ChangeStackCount(lastcount);
                             res = InsertOrUpdateItemSlotData_Stack(item);
                         }
                         else
                         {
-                            s.ChangeStackCount(s.GetMaxStackValue());
+                            StackItem.ChangeStackCount(StackItem.GetMaxStackValue());
                             res = InsertOrUpdateItemSlotData_Stack(item);
                         }
                     }
@@ -231,24 +197,22 @@ public class ItemSlotData
         {
             res = InsertOrUpdateItemSlotData_Non_Stack(item);
         }
-
         GameHUD.Instance.SlotManagerHUD.UpdateItem(SlotItemDataList);
         return res;
     }
 
-    public int InsertOrUpdateItemSlotData_Stack(ItemBase item)
+    private int InsertOrUpdateItemSlotData_Stack(ItemBase item)
     {
         IStackable stackable = item as IStackable;
-        SlotItemStatus newItemStatus = new SlotItemStatus(item.ItemID, stackable.GetStackCount(), item);
+        SlotItemStatus newItemStatus = new SlotItemStatus(item.ItemID, stackable.GetStackCount());
         bool outofBound = false;
         // 默认插入位置为当前焦点位置
         int slotNumber = CurrentFocusSlot;
         int extralVal = 0;
-        if (ItemID2Key.ContainsValue(item.ItemID)) // 道具栏中可以进行堆叠整理
+        if ( PlayerHaveItem(item.ItemID) ) // 道具栏中可以进行堆叠整理
         {
-            slotNumber =
-                GetItemProperStackKeyNumberAndStackItem(item, stackable.GetStackCount(), out outofBound, out extralVal);
-
+            slotNumber = GetItemProperStackKeyNumberAndStackItem(item, stackable.GetStackCount(), out outofBound, out extralVal);
+            // 无法放入
             if (slotNumber == -1)
             {
                 stackable.ChangeStackCount(extralVal);
@@ -259,21 +223,23 @@ public class ItemSlotData
 
                 return -1;
             }
-
+            // 正常溢出到下一个道具槽位
             if (outofBound && extralVal > 0)
             {
                 // 判断当前焦点位置是否存在物品
                 newItemStatus.StackValue = extralVal;
-                newItemStatus.ItemBase = item;
                 bool keepStackItemOnHand = !SlotItemDataList.ContainsKey(CurrentFocusSlot);
+                // problem
                 SlotItemDataList[slotNumber] = newItemStatus;
-                ItemID2Key.Add(slotNumber, item.ItemID);
-                AllCharacterItems.Add(slotNumber, item);
                 newItemStatus.Key = slotNumber;
+                
                 if (keepStackItemOnHand)
                 {
-                    SetCharacterInUseItem(item);
-                    return 0;
+                    return 2;
+                }
+                else
+                {
+                    return 2;
                 }
             }
             else
@@ -287,10 +253,6 @@ public class ItemSlotData
             {
                 slotNumber = Find_A_Empty_Slot();
             }
-
-            SetCharacterInUseItem(item);
-            AllCharacterItems.Add(slotNumber, item);
-            ItemID2Key.Add(slotNumber, item.ItemID);
             SlotItemDataList[slotNumber] = newItemStatus;
             if (slotNumber != CurrentFocusSlot)
             {
@@ -299,7 +261,7 @@ public class ItemSlotData
 
             return 0;
         }
-
+        
         return 1;
     }
 
@@ -311,44 +273,14 @@ public class ItemSlotData
         {
             slotNumber = Find_A_Empty_Slot();
         }
-
         // 插入物品失败，取消拾取动作
-        if (slotNumber == -1)
-        {
-            return -1;
-        }
-
-        AllCharacterItems.Add(slotNumber, item);
-        ItemID2Key.Add(slotNumber, item.ItemID);
-        SlotItemStatus newItemStatus = new SlotItemStatus(item.ItemID, 1, item, slotNumber);
+        if (slotNumber == -1) { return -1; }
+        SlotItemStatus newItemStatus = new SlotItemStatus(item.ItemID, 1, slotNumber);
         SlotItemDataList[slotNumber] = newItemStatus;
-        if (slotNumber != CurrentFocusSlot)
-        {
-            if (SlotItemDataList.ContainsKey(CurrentFocusSlot))
-            {
-                return 1; // 手中存在物品
-            }
-
-            SetCharacterInUseItem(item);
-            return 0;
-        }
-
-        SetCharacterInUseItem(item);
         return 0;
     }
-
-    private void SetCharacterInUseItem(ItemBase Item)
-    {
-        CurrentItem = Item;
-    }
-
-    public ItemBase GetCharacterInUseItem()
-    {
-        return CurrentItem;
-    }
-
-    // todo 批量堆叠清空逻辑
-    public bool ClearHandItem(bool fastDrop, bool playerReversed, Transform releasPoint)
+    
+    public bool ClearHandItem(bool fastDrop)
     {
         // 初步检查
         if (SlotItemDataList.ContainsKey(CurrentFocusSlot))
@@ -361,32 +293,15 @@ public class ItemSlotData
                 GameHUD.Instance.SlotManagerHUD.UpdateItem(SlotItemDataList);
                 return true; // 对于多个的情况
             }
-            
-            
             SlotItemDataList.Remove(CurrentFocusSlot); // 对于一个的情况
-            ItemID2Key.Remove(CurrentFocusSlot);
-            AllCharacterItems.Remove(CurrentFocusSlot);
-            
-            if (ItemID2Key.ContainsValue(CurrentItem.ItemID))
-            {
-                CurrentItem.DisableRenderer();
-                GameHUD.Instance.SlotManagerHUD.UpdateItem(SlotItemDataList);
-                return true;
-            }
-            else
-            {
-                CurrentItem.CheckReverse(playerReversed);
-                CurrentItem.transform.SetParent(GameControl.Instance.GetSceneItemList().transform);
-                GameRunTimeData.Instance.ItemManager.RegistItem(CurrentItem);
-                CurrentItem.OnItemDrop(fastDrop);
-                CurrentItem.ChangeRendererSortingOrder(GameConstData.BelowPlayerOrder);
-                CurrentItem = null;
-            }
-
+            ItemBase itemOnHand = GameRunTimeData.Instance.CharacterBasicStat.GetStat().ItemOnHand;
+            itemOnHand.transform.SetParent(GameControl.Instance.GetSceneItemList().transform); // 移动节点
+            GameRunTimeData.Instance.ItemManager.RegistItem(itemOnHand);
+            itemOnHand.OnItemDrop(fastDrop);
+            itemOnHand.ChangeRendererSortingOrder(GameConstData.BelowPlayerOrder);
+            GameRunTimeData.Instance.CharacterBasicStat.GetStat().ItemOnHand = null;
             GameHUD.Instance.SlotManagerHUD.UpdateItem(SlotItemDataList);
-            return false;
         }
-
         return false;
     }
 
@@ -415,5 +330,18 @@ public class ItemSlotData
         {
             CurrentFocusSlot = 1;
         }
+    }
+
+    private bool PlayerHaveItem(int itemId)
+    {
+        foreach (var VARIABLE in SlotItemDataList.Values)
+        {
+            if (VARIABLE.ItemID == itemId)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

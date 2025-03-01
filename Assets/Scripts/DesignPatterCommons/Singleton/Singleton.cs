@@ -1,6 +1,7 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 
-public class Singleton<T>: MonoBehaviour where T:Component{
+public class Singleton<T>: SerializedMonoBehaviour where T:Component{
     protected static bool Destory = false;
     private static object _lock = new object ();
     private static T instance;
