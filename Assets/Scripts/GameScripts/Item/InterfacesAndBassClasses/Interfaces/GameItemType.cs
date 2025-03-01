@@ -1,6 +1,6 @@
 public enum GameItemType      // 物品类型
 {
-    NOTANITEM,
+    UNDEFINED,
     Weapon,
     Food,
     ToolItem,

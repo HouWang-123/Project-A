@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2160751101551506776}
   - component: {fileID: 879444317793477162}
   m_Layer: 13
-  m_Name: DrownedOnes
+  m_Name: P_Mon_DrownedOnes
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

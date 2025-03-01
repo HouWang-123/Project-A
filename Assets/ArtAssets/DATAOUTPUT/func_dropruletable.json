@@ -5,7 +5,7 @@
     "DESCRIBE": "食物表中随机掉落一个",
     "dropIDlist": [
       200001,
-      209999
+      200003
     ],
     "dropType": 3,
     "dropRate": [
@@ -27,54 +27,6 @@
   },
   {
     "ID": 910003,
-    "NAME": "0",
-    "DESCRIBE": "木箱",
-    "dropIDlist": [
-      230001
-    ],
-    "dropType": 1,
-    "dropRate": [
-      1
-    ]
-  },
-  {
-    "ID": 910004,
-    "NAME": "0",
-    "DESCRIBE": "篮球",
-    "dropIDlist": [
-      230002
-    ],
-    "dropType": 1,
-    "dropRate": [
-      1
-    ]
-  },
-  {
-    "ID": 910005,
-    "NAME": "0",
-    "DESCRIBE": "花瓶",
-    "dropIDlist": [
-      230003
-    ],
-    "dropType": 1,
-    "dropRate": [
-      1
-    ]
-  },
-  {
-    "ID": 910006,
-    "NAME": "0",
-    "DESCRIBE": "娃娃头",
-    "dropIDlist": [
-      230004
-    ],
-    "dropType": 1,
-    "dropRate": [
-      1
-    ]
-  },
-  {
-    "ID": 910007,
     "NAME": "钥匙与子弹类",
     "DESCRIBE": "一个手枪弹，一个霰弹",
     "dropIDlist": [
@@ -88,7 +40,7 @@
     ]
   },
   {
-    "ID": 910008,
+    "ID": 910004,
     "NAME": "0",
     "DESCRIBE": "三个手枪弹",
     "dropIDlist": [
@@ -104,7 +56,7 @@
     ]
   },
   {
-    "ID": 910009,
+    "ID": 910005,
     "NAME": "0",
     "DESCRIBE": "两个霰弹",
     "dropIDlist": [
@@ -117,7 +69,7 @@
     ]
   },
   {
-    "ID": 910010,
+    "ID": 910006,
     "NAME": "0",
     "DESCRIBE": "随机钥匙",
     "dropIDlist": [
@@ -130,43 +82,7 @@
     ]
   },
   {
-    "ID": 910011,
-    "NAME": "0",
-    "DESCRIBE": "掉落无名指钥匙",
-    "dropIDlist": [
-      240001
-    ],
-    "dropType": 1,
-    "dropRate": [
-      1
-    ]
-  },
-  {
-    "ID": 910012,
-    "NAME": "0",
-    "DESCRIBE": "掉落小指",
-    "dropIDlist": [
-      240002
-    ],
-    "dropType": 1,
-    "dropRate": [
-      1
-    ]
-  },
-  {
-    "ID": 910013,
-    "NAME": "0",
-    "DESCRIBE": "掉落拇指",
-    "dropIDlist": [
-      240003
-    ],
-    "dropType": 1,
-    "dropRate": [
-      1
-    ]
-  },
-  {
-    "ID": 910014,
+    "ID": 910007,
     "NAME": "工具类",
     "DESCRIBE": "随机工具",
     "dropIDlist": [
@@ -179,79 +95,7 @@
     ]
   },
   {
-    "ID": 910015,
-    "NAME": "0",
-    "DESCRIBE": "聚光手电",
-    "dropIDlist": [
-      250001
-    ],
-    "dropType": 1,
-    "dropRate": [
-      1
-    ]
-  },
-  {
-    "ID": 910016,
-    "NAME": "",
-    "DESCRIBE": "萤火虫",
-    "dropIDlist": [
-      250002
-    ],
-    "dropType": 1,
-    "dropRate": [
-      1
-    ]
-  },
-  {
-    "ID": 910017,
-    "NAME": "",
-    "DESCRIBE": "奇妙触手",
-    "dropIDlist": [
-      250003
-    ],
-    "dropType": 1,
-    "dropRate": [
-      1
-    ]
-  },
-  {
-    "ID": 910018,
-    "NAME": "",
-    "DESCRIBE": "怀表",
-    "dropIDlist": [
-      250004
-    ],
-    "dropType": 1,
-    "dropRate": [
-      1
-    ]
-  },
-  {
-    "ID": 910019,
-    "NAME": "",
-    "DESCRIBE": "燃液补充瓶",
-    "dropIDlist": [
-      250005
-    ],
-    "dropType": 1,
-    "dropRate": [
-      1
-    ]
-  },
-  {
-    "ID": 910020,
-    "NAME": "",
-    "DESCRIBE": "八音盒",
-    "dropIDlist": [
-      250006
-    ],
-    "dropType": 1,
-    "dropRate": [
-      1
-    ]
-  },
-  {
-    "ID": 910021,
+    "ID": 910008,
     "NAME": "武器类",
     "DESCRIBE": "全武器随机一个",
     "dropIDlist": [
@@ -264,7 +108,7 @@
     ]
   },
   {
-    "ID": 910022,
+    "ID": 910009,
     "NAME": "",
     "DESCRIBE": "近战武器随机掉一个",
     "dropIDlist": [
@@ -277,103 +121,7 @@
     ]
   },
   {
-    "ID": 910023,
-    "NAME": "",
-    "DESCRIBE": "匕首",
-    "dropIDlist": [
-      260001
-    ],
-    "dropType": 1,
-    "dropRate": [
-      1
-    ]
-  },
-  {
-    "ID": 910024,
-    "NAME": "",
-    "DESCRIBE": "刺剑",
-    "dropIDlist": [
-      260002
-    ],
-    "dropType": 1,
-    "dropRate": [
-      1
-    ]
-  },
-  {
-    "ID": 910025,
-    "NAME": "",
-    "DESCRIBE": "菜刀",
-    "dropIDlist": [
-      260003
-    ],
-    "dropType": 1,
-    "dropRate": [
-      1
-    ]
-  },
-  {
-    "ID": 910026,
-    "NAME": "",
-    "DESCRIBE": "唐刀",
-    "dropIDlist": [
-      260004
-    ],
-    "dropType": 1,
-    "dropRate": [
-      1
-    ]
-  },
-  {
-    "ID": 910027,
-    "NAME": "",
-    "DESCRIBE": "消防斧",
-    "dropIDlist": [
-      260005
-    ],
-    "dropType": 1,
-    "dropRate": [
-      1
-    ]
-  },
-  {
-    "ID": 910028,
-    "NAME": "",
-    "DESCRIBE": "榔头",
-    "dropIDlist": [
-      260006
-    ],
-    "dropType": 1,
-    "dropRate": [
-      1
-    ]
-  },
-  {
-    "ID": 910029,
-    "NAME": "",
-    "DESCRIBE": "大锤",
-    "dropIDlist": [
-      260007
-    ],
-    "dropType": 1,
-    "dropRate": [
-      1
-    ]
-  },
-  {
-    "ID": 910030,
-    "NAME": "",
-    "DESCRIBE": "棒球棍",
-    "dropIDlist": [
-      260008
-    ],
-    "dropType": 1,
-    "dropRate": [
-      1
-    ]
-  },
-  {
-    "ID": 910031,
+    "ID": 910010,
     "NAME": "",
     "DESCRIBE": "全远程武器随机一个",
     "dropIDlist": [
@@ -383,42 +131,6 @@
     "dropType": 3,
     "dropRate": [
       0
-    ]
-  },
-  {
-    "ID": 910032,
-    "NAME": "",
-    "DESCRIBE": "手枪",
-    "dropIDlist": [
-      265000
-    ],
-    "dropType": 1,
-    "dropRate": [
-      1
-    ]
-  },
-  {
-    "ID": 910033,
-    "NAME": "",
-    "DESCRIBE": "霰弹枪",
-    "dropIDlist": [
-      265001
-    ],
-    "dropType": 1,
-    "dropRate": [
-      1
-    ]
-  },
-  {
-    "ID": 910034,
-    "NAME": "",
-    "DESCRIBE": "打火机",
-    "dropIDlist": [
-      265002
-    ],
-    "dropType": 1,
-    "dropRate": [
-      1
     ]
   }
 ]

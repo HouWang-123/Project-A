@@ -83,12 +83,9 @@ public sealed partial class Rooms : Luban.BeanBase
     /// 房间里有哪些怪物
     /// </summary>
     public readonly System.Collections.Generic.List<int> MonstersIDList;
-    /// <summary>
-    /// 这里放：<br/>①交互后掉落的规则（比如翻箱倒柜），哪怕只掉一个<br/>②房间里有哪些随机生成在地板上的东西<br/>③对于不随机生成在地板上的物品，直接写物品ID
-    /// </summary>
     public readonly System.Collections.Generic.List<int> DropRuleIDList;
     /// <summary>
-    /// 1为交互掉落,0为独立掉落
+    /// 1为交互掉落，0为不是交互后掉落的
     /// </summary>
     public readonly System.Collections.Generic.List<bool> DropType;
     /// <summary>

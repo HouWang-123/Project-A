@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 2160751101551506776}
   - component: {fileID: 305623357642008596}
   m_Layer: 13
-  m_Name: HoundTindalos
+  m_Name: P_Mon_HoundTindalos
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

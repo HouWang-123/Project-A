@@ -15,11 +15,11 @@
     "byTime": false,
     "monstersIDList": [],
     "dropRuleIDList": [
+      230001,
       230002,
       230002,
       230002,
-      230002,
-      230001
+      230002
     ],
     "dropType": [
       false,
@@ -52,9 +52,11 @@
     "dropRuleIDList": [
       240001,
       910001,
-      910001
+      910001,
+      910008
     ],
     "dropType": [
+      false,
       false,
       true,
       true
@@ -78,7 +80,8 @@
     "byTime": false,
     "monstersIDList": [],
     "dropRuleIDList": [
-      910001
+      910001,
+      910003
     ],
     "dropType": [
       false,
@@ -107,10 +110,10 @@
       400001
     ],
     "dropRuleIDList": [
-      910015,
-      910008,
-      910010,
-      910027
+      250001,
+      250004,
+      250006,
+      260005
     ],
     "dropType": [
       true,
@@ -141,10 +144,10 @@
       400001
     ],
     "dropRuleIDList": [
-      910015,
-      910008,
-      910010,
-      910027
+      250001,
+      250004,
+      250006,
+      260005
     ],
     "dropType": [
       true,
