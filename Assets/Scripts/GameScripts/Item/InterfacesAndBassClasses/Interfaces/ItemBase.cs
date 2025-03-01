@@ -199,7 +199,6 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable
             H_BiasSpeed = 0f;
             V_BiasSpeed = 0f;
         }
-
         DropState = true;
         transform.DOLocalRotate(Vector3.zero, 0f);
         if (fastDrop)

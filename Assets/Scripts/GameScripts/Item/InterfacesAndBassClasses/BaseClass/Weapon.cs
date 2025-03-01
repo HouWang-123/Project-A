@@ -70,4 +70,9 @@ public class Weapon : ItemBase, ISlotable
     {
         return StackCount;
     }
+
+    public int GetItemId()
+    {
+        return ItemID;
+    }
 }

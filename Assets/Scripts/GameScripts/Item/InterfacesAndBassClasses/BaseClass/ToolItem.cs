@@ -50,4 +50,8 @@ public class Tool : ItemBase, ISlotable
         throw new NotImplementedException();
     }
 
+    public int GetItemId()
+    {
+        return ItemID;
+    }
 }

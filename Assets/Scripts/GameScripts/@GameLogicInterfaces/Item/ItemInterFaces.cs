@@ -16,10 +16,13 @@ public interface IPickUpable            // 可否被拾取接口
 }
 
 // 可否进入道具栏
-public interface ISlotable { }
+public interface ISlotable
+{
+    public int GetItemId();
+}
 
 // 道具栏中可否进行堆叠
-public interface IStackable
+public interface IStackable : ISlotable
 {
     /// <summary>
     /// 获取该物品的最大堆叠数量

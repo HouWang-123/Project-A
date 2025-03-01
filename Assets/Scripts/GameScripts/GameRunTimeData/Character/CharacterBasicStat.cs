@@ -49,6 +49,7 @@ public class CharacterBasicStat
     private cfg.cha.Character m_characterData;
     private CharacterStat CharacterStat;
     private bool playerDataInited;
+    
     // 提供给存档使用
     public void InitCharacter(CharacterStat stat)
     {
