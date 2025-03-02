@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using cfg.buff;
 using Unity.Mathematics.Geometry;
 using UnityEngine;
 
@@ -105,11 +106,49 @@ public class CharacterBasicStat
     public void HurtPlayer(int number)
     {
         if (CharacterStat.Dead) return;
-        CharacterStat.CurrentHp -= number;
+        float attack = number;
+        if (BuffManager.Instance.HasComponet(CharacterStat.ID, (int)BuffEnum.疯狂))
+        { 
+            attack = number + ((CharacterStat.MaxSan - CharacterStat.CurrentSan) / 2f);
+        }
+        //todo 如果还有其他增幅 在此处结算
+        CharacterStat.CurrentHp -= attack;
     }
     public void HurtPlayer(float number)
     {
         CharacterStat.CurrentHp -= number;
+    }
+
+    public void UpdatePlayerSan(float number)
+    {
+        if (BuffManager.Instance.HasComponet(CharacterStat.ID, (int)BuffEnum.美德))
+        {
+            CharacterStat.CurrentSan += -number;
+        }
+        CharacterStat.CurrentSan += number;
+        if (Tools.IsInRange(CharacterStat.CurrentSan, 40, 60))
+        {
+            if (!BuffManager.Instance.HasComponet(CharacterStat.ID, (int)BuffEnum.癫狂1))
+            {
+                BuffManager.Instance.AddBuff<ChaosI>(CharacterStat.ID,(int)BuffEnum.癫狂1,999);
+            }
+        }
+        else if (Tools.IsInRange(CharacterStat.CurrentSan, 20, 39))
+        {
+            if (!BuffManager.Instance.UpdateBuff(CharacterStat.ID, (int)BuffEnum.癫狂1))
+            {
+                //直接添加当前buff
+                BuffManager.Instance.AddBuff<ChaosI>(CharacterStat.ID,(int)BuffEnum.癫狂2,999);
+            }
+        }
+        else if (Tools.IsInRange(CharacterStat.CurrentSan, 0, 19))
+        {
+            if (!BuffManager.Instance.UpdateBuff(CharacterStat.ID, (int)BuffEnum.癫狂2))
+            {
+                //直接添加当前buff
+                BuffManager.Instance.AddBuff<ChaosI>(CharacterStat.ID,(int)BuffEnum.癫狂3,999);
+            }
+        }
     }
     public ref CharacterStat GetStat()
     {
@@ -131,6 +170,7 @@ public class CharacterBasicStat
             // 其他更新
             // 生命值合理范围检测
             HpCorrector();
+            SanCorrector();
         }
     }
 
@@ -155,6 +195,12 @@ public class CharacterBasicStat
     {
         CharacterStat.CurrentHp =
             Mathf.Clamp(CharacterStat.CurrentHp, 0f, CharacterStat.MaxHP);
+    }
+    
+    private void SanCorrector()
+    {
+        CharacterStat.CurrentSan =
+            Mathf.Clamp(CharacterStat.CurrentSan, 0f, CharacterStat.MaxSan);
     }
 
     private void LifeChecker()
