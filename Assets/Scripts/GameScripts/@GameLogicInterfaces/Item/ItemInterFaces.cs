@@ -4,7 +4,7 @@
 public interface IPickUpable            // 可否被拾取接口
 {
     void OnItemPickUp();  // 拾取
-    void OnItemDrop(bool fastdrop, bool ignoreBias);    
+    void OnItemDrop(bool fastdrop, bool ignoreBias);
                                                        //   在玩家丢弃物品后需要调用，用于将物品归还到场景物品节点，与Player分离
                                                        //        2025.2.14更新参数
                                                        //        fastdrop:
@@ -14,10 +14,13 @@ public interface IPickUpable            // 可否被拾取接口
                                                        //        是否忽略物品丢弃后的随机偏移
                                                        //        2025.3.1 OnItemDrop 后会强制修正物体角度
 }
+/// <summary>
+/// 2025年3.3日添加接口，用于纯数据道具
+/// </summary>
 // 用作仅对数据进行修改的物品
 public interface IDataItem
 {
-    
+    public void OnItemGet();
 }
 // 可否进入道具栏
 public interface ISlotable

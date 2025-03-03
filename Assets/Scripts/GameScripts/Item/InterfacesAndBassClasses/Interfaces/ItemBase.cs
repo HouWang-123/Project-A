@@ -211,10 +211,10 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable
 
     // 交互逻辑
     // Fixed Update 调用
-    public abstract void OnRightInteract();
+    public virtual void OnRightInteract(){}
 
     // Fixed Update 调用
-    public abstract void OnLeftInteract();
+    public virtual void OnLeftInteract(){}
 
 
 

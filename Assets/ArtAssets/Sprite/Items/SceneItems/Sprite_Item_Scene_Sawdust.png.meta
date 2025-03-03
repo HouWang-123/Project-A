@@ -1,19 +1,13 @@
 fileFormatVersion: 2
-guid: 39e89901a03c8124e94e6faa28469516
+guid: 5c00fbee065a07c40b91404a93429010
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3367048827831229599
-    second: Sprite_Item_Scene_BoneStack_0
+      213: 6806276267683198457
+    second: Sprite_Item_Scene_Sawdust_0
   - first:
-      213: 2976560000288200790
-    second: Sprite_Item_Scene_BoneStack_1
-  - first:
-      213: -8304754957185695287
-    second: Sprite_Item_Scene_BoneStack_2
-  - first:
-      213: 3107457716268846125
-    second: Sprite_Item_Scene_BoneStack_3
+      213: -1410152349169711346
+    second: Sprite_Item_Scene_Sawdust_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -55,12 +49,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 500
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -122,35 +116,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Sprite_Item_Scene_BoneStack_0
-      rect:
-        serializedVersion: 2
-        x: 39
-        y: 86
-        width: 42
-        height: 30
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 16369b33ee6d541d0800000000000000
-      internalID: -3367048827831229599
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Sprite_Item_Scene_BoneStack_1
+      name: Sprite_Item_Scene_Sawdust_0
       rect:
         serializedVersion: 2
         x: 67
-        y: 75
-        width: 351
-        height: 235
+        y: 68
+        width: 375
+        height: 139
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -159,20 +131,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 65890ddbc8dde4920800000000000000
-      internalID: 2976560000288200790
+      spriteID: 9f5bd6a4430c47e50800000000000000
+      internalID: 6806276267683198457
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sprite_Item_Scene_BoneStack_2
+      name: Sprite_Item_Scene_Sawdust_1
       rect:
         serializedVersion: 2
-        x: 421
-        y: 101
-        width: 31
-        height: 22
+        x: 261
+        y: 62
+        width: 56
+        height: 37
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -181,30 +153,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9c1484eed559fbc80800000000000000
-      internalID: -8304754957185695287
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Sprite_Item_Scene_BoneStack_3
-      rect:
-        serializedVersion: 2
-        x: 108
-        y: 74
-        width: 26
-        height: 13
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: d2c40c43458ef1b20800000000000000
-      internalID: 3107457716268846125
+      spriteID: e078e84e8e12e6ce0800000000000000
+      internalID: -1410152349169711346
       vertices: []
       indices: 
       edges: []
@@ -213,7 +163,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -222,11 +172,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      Sprite_Item_Scene_BoneStack_0: -3367048827831229599
-      Sprite_Item_Scene_BoneStack_1: 2976560000288200790
-      Sprite_Item_Scene_BoneStack_2: -8304754957185695287
-      Sprite_Item_Scene_BoneStack_3: 3107457716268846125
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

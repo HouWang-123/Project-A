@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using YooAsset;
 
-public class TinyItem : ItemBase
+public class TinyItem : ItemBase , IDataItem
 {
     public cfg.item.TinyObjects data;
     
@@ -42,14 +42,14 @@ public class TinyItem : ItemBase
         return data.PrefabName;
     }
     
-    
-    public override void OnRightInteract( )
+    public void OnItemGet()
     {
-        throw new NotImplementedException();
+        GameRunTimeData.Instance.InventoryManger.OnGetItem(ItemID,1);
     }
 
-    public override void OnLeftInteract( )
+    public override void OnItemPickUp()
     {
-        throw new NotImplementedException();
+        OnItemGet();
+        Destroy(gameObject);
     }
 }
