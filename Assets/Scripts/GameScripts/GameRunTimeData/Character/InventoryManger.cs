@@ -51,7 +51,7 @@ public class InventoryManger
     /// </summary>
     /// <param name="itemid"></param>
     /// <returns></returns>
-    private bool HasItem(int itemid)
+    public bool HasItem(int itemid)
     {
         if (_inventroyData.ItemData.ContainsKey(itemid))
         {

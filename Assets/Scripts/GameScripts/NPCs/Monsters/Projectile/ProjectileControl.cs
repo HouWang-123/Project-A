@@ -1,20 +1,20 @@
 using System;
 using UnityEngine;
 /// <summary>
-/// ·¢ÉäÎï¿ØÖÆ
+/// å‘å°„ç‰©æ§åˆ¶
 /// </summary>
 public class ProjectileControl : MonoBehaviour
 {
     public MonsterBaseFSM MonsterBaseFSM;
-    // ËÙ¶È´óĞ¡
+    // é€Ÿåº¦å¤§å°
     public float m_speed = 0f;
-    // ·¢Éä·½Ïò
+    // å‘å°„æ–¹å‘
     private Vector3 m_direction;
     public Vector3 Direction {  get { return m_direction; } set { m_direction = value; } }
-    // Éú´æÊ±¼ä
+    // ç”Ÿå­˜æ—¶é—´
     private readonly float m_survivalTime = 5f;
     private float m_timer;
-    // ·¢ÉäÎï»ØÊÕ·½·¨
+    // å‘å°„ç‰©å›æ”¶æ–¹æ³•
     public Action<GameObject> ReturnFunc = null;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

@@ -2,11 +2,14 @@ using System;
 using DG.Tweening;
 using Spine.Unity.Examples;
 using UnityEngine;
+using UnityEngine.Serialization;
 using YooAsset;
 
 public class Weapon : ItemBase, ISlotable
 {
     public cfg.item.Weapon data;
+    
+    [FormerlySerializedAs("BaseWeaponBehavior")] public BaseWeaponBehavior _weaponBeahaviour;
     
     // 动态生成物品
     public override void InitItem( int ID )
@@ -45,32 +48,40 @@ public class Weapon : ItemBase, ISlotable
     {
         
     }
-
+    
     public override void OnLeftInteract( )
     {
         
     }
-
-    public int GetMaxStackValue()
+    
+    public void OnWeaponAttack()
     {
-        return data.MaxStackCount;
-    }
-
-    public void ChangeStackCount(int Count)
-    {
-        StackNuberText.text = "X " + Count;
-        StackCount = Count;
-        if (Count == 1)
+        if (_weaponBeahaviour is ShotBehaviour)
         {
-            HideStackNumber();
+            if (GameRunTimeData.Instance.InventoryManger.HasItem(data.AmmoId))
+            {
+                GameRunTimeData.Instance.InventoryManger.UseItem(data.AmmoId, 1);
+                _weaponBeahaviour.OnWeaponAttack(CalculateShotDamage());
+            }
+        }
+
+        if (_weaponBeahaviour is SlashBehaviour)
+        {
+            CalculateSlashDamage();
+            _weaponBeahaviour.OnWeaponAttack(CalculateSlashDamage());
         }
     }
-
-    public int GetStackCount()
+    
+    public float CalculateSlashDamage()
     {
-        return StackCount;
+        return data.Attack;
     }
 
+    public float CalculateShotDamage()
+    {
+        return data.Attack;
+    }
+    
     public int GetItemId()
     {
         return ItemID;

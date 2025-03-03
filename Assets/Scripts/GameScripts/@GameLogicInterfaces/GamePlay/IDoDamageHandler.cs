@@ -3,7 +3,6 @@
 /// </summary>
 public interface IDoDamageHandler
 {
-    public int GetDamage();
     public void DoDamage(IDamageable obj);
 }
 /// <summary>
@@ -11,5 +10,5 @@ public interface IDoDamageHandler
 /// </summary>
 public interface IDamageable
 {
-    public void DamageReceive();
+    public void DamageReceive(float DamageAmount);
 }

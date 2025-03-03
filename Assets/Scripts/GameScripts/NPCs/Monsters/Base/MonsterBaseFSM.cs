@@ -5,10 +5,10 @@ using UnityEngine;
 using UnityEngine.AI;
 
 
-public class MonsterBaseFSM : MonoBehaviour
+public class MonsterBaseFSM : MonoBehaviour,IDamageable
 {
     protected FiniteStateMachine m_fsm;
-
+    protected float CurrentHp;
     [Header("将要生成的怪物的ID")]
     [SerializeField]
     protected int m_monsterID;
@@ -77,6 +77,7 @@ public class MonsterBaseFSM : MonoBehaviour
         {
             { StateEnum.Idle, new() { "Idle" } }
         };
+        CurrentHp = m_monsterDatas.MaxHP;
     }
 
     protected virtual void DoUpdate()
@@ -99,6 +100,23 @@ public class MonsterBaseFSM : MonoBehaviour
     }
     protected virtual void HurtPlayer()
     {
+    }
+    /// <summary>
+    ///  添加伤害接收接口
+    /// </summary>
+    /// <param name="DamageAmount"></param>
+    public void DamageReceive(float DamageAmount)
+    {
+        CurrentHp -= DamageAmount;
+        CheckDeath();
+    }
+
+    private void CheckDeath()
+    {
+        if (CurrentHp < 0)
+        {
+            Destroy(gameObject);
+        }
     }
 }
 
