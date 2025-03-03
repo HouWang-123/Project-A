@@ -26,7 +26,7 @@ public sealed partial class Food : Luban.BeanBase
         { if(!_buf["FoodGain"].IsNumber) { throw new SerializationException(); }  FoodGain = _buf["FoodGain"]; }
         { if(!_buf["SanGain"].IsNumber) { throw new SerializationException(); }  SanGain = _buf["SanGain"]; }
         { if(!_buf["buffID"].IsNumber) { throw new SerializationException(); }  BuffID = _buf["buffID"]; }
-        { if(!_buf["time"].IsNumber) { throw new SerializationException(); }  Time = _buf["time"]; }
+        { if(!_buf["buffTime"].IsNumber) { throw new SerializationException(); }  BuffTime = _buf["buffTime"]; }
         { if(!_buf["Weight"].IsNumber) { throw new SerializationException(); }  Weight = _buf["Weight"]; }
         { if(!_buf["IconName"].IsString) { throw new SerializationException(); }  IconName = _buf["IconName"]; }
         { if(!_buf["SpriteName"].IsString) { throw new SerializationException(); }  SpriteName = _buf["SpriteName"]; }
@@ -77,7 +77,7 @@ public sealed partial class Food : Luban.BeanBase
     /// <summary>
     /// buff持续多久
     /// </summary>
-    public readonly float Time;
+    public readonly float BuffTime;
     /// <summary>
     /// 重量
     /// </summary>
@@ -111,7 +111,7 @@ public sealed partial class Food : Luban.BeanBase
         + "FoodGain:" + FoodGain + ","
         + "SanGain:" + SanGain + ","
         + "buffID:" + BuffID + ","
-        + "time:" + Time + ","
+        + "buffTime:" + BuffTime + ","
         + "Weight:" + Weight + ","
         + "IconName:" + IconName + ","
         + "SpriteName:" + SpriteName + ","

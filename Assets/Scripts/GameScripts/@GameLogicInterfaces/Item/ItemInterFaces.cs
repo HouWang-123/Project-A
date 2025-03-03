@@ -14,7 +14,11 @@ public interface IPickUpable            // 可否被拾取接口
                                                        //        是否忽略物品丢弃后的随机偏移
                                                        //        2025.3.1 OnItemDrop 后会强制修正物体角度
 }
-
+// 用作仅对数据进行修改的物品
+public interface IDataItem
+{
+    
+}
 // 可否进入道具栏
 public interface ISlotable
 {

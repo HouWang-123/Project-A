@@ -24,7 +24,7 @@ public sealed partial class SceneObjects : Luban.BeanBase
         { if(!_buf["isDestructible"].IsBoolean) { throw new SerializationException(); }  IsDestructible = _buf["isDestructible"]; }
         { if(!_buf["durability"].IsNumber) { throw new SerializationException(); }  Durability = _buf["durability"]; }
         { if(!_buf["buffID"].IsNumber) { throw new SerializationException(); }  BuffID = _buf["buffID"]; }
-        { if(!_buf["time"].IsNumber) { throw new SerializationException(); }  Time = _buf["time"]; }
+        { if(!_buf["buffTime"].IsNumber) { throw new SerializationException(); }  BuffTime = _buf["buffTime"]; }
         { if(!_buf["attack"].IsNumber) { throw new SerializationException(); }  Attack = _buf["attack"]; }
         { if(!_buf["IconName"].IsString) { throw new SerializationException(); }  IconName = _buf["IconName"]; }
         { if(!_buf["SpriteName"].IsString) { throw new SerializationException(); }  SpriteName = _buf["SpriteName"]; }
@@ -67,7 +67,7 @@ public sealed partial class SceneObjects : Luban.BeanBase
     /// <summary>
     /// 赋予的buff有多长时间
     /// </summary>
-    public readonly float Time;
+    public readonly float BuffTime;
     /// <summary>
     /// 注意，更详细的功能效果并未配进该表中
     /// </summary>
@@ -99,7 +99,7 @@ public sealed partial class SceneObjects : Luban.BeanBase
         + "isDestructible:" + IsDestructible + ","
         + "durability:" + Durability + ","
         + "buffID:" + BuffID + ","
-        + "time:" + Time + ","
+        + "buffTime:" + BuffTime + ","
         + "attack:" + Attack + ","
         + "IconName:" + IconName + ","
         + "SpriteName:" + SpriteName + ","

@@ -441,7 +441,7 @@ public class PlayerControl : MonoBehaviour
         }
     }
     
-    public void RefreshItemOnHand(int ItemId)
+    private void RefreshItemOnHand(int ItemId)
     {
         if (characterStat.ItemOnHand != null)
         {
@@ -451,7 +451,6 @@ public class PlayerControl : MonoBehaviour
             }
             Destroy(characterStat.ItemOnHand.gameObject);
         }
-
         if (ItemId != -1)
         {
             GameItemTool.GenerateItemAtTransform(ItemId, ItemHoldPosition, true, 
@@ -465,7 +464,7 @@ public class PlayerControl : MonoBehaviour
             );
         }
     }
-    public void RefreshItemLifted(int ItemId)
+    private void RefreshItemLifted(int ItemId)
     {
         if (characterStat.ItemOnHand != null)
         {
@@ -475,7 +474,6 @@ public class PlayerControl : MonoBehaviour
             }
             Destroy(characterStat.ItemOnHand.gameObject);
         }
-
         if (ItemId != -1)
         {
             GameItemTool.GenerateItemAtTransform(ItemId, ItemLiftPostion, false, 
