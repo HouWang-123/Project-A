@@ -30,6 +30,7 @@ public sealed partial class Weapon : Luban.BeanBase
         { if(!_buf["SpriteName"].IsString) { throw new SerializationException(); }  SpriteName = _buf["SpriteName"]; }
         { if(!_buf["PrefabName"].IsString) { throw new SerializationException(); }  PrefabName = _buf["PrefabName"]; }
         { if(!_buf["WeaponType"].IsNumber) { throw new SerializationException(); }  WeaponType = _buf["WeaponType"]; }
+        { if(!_buf["AmmoId"].IsNumber) { throw new SerializationException(); }  AmmoId = _buf["AmmoId"]; }
     }
 
     public static Weapon DeserializeWeapon(JSONNode _buf)
@@ -80,6 +81,10 @@ public sealed partial class Weapon : Luban.BeanBase
     /// 0表示近战，1表示远程
     /// </summary>
     public readonly int WeaponType;
+    /// <summary>
+    /// 是否消耗弹药以及弹药ID，-1表示不消耗弹药
+    /// </summary>
+    public readonly int AmmoId;
    
     public const int __ID__ = -1736061577;
     public override int GetTypeId() => __ID__;
@@ -104,6 +109,7 @@ public sealed partial class Weapon : Luban.BeanBase
         + "SpriteName:" + SpriteName + ","
         + "PrefabName:" + PrefabName + ","
         + "WeaponType:" + WeaponType + ","
+        + "AmmoId:" + AmmoId + ","
         + "}";
     }
 }

@@ -14,7 +14,8 @@ public class InventroyData
 public class InventoryManger
 {
     private InventroyData _inventroyData = new InventroyData();
-
+    
+    // 预留存档功能使用
     public void InitManager(InventroyData inventroyData)
     {
         _inventroyData = inventroyData;
@@ -45,6 +46,11 @@ public class InventoryManger
             return false;
         }
     }
+    /// <summary>
+    /// 道具使用
+    /// </summary>
+    /// <param name="itemid"></param>
+    /// <returns></returns>
     private bool HasItem(int itemid)
     {
         if (_inventroyData.ItemData.ContainsKey(itemid))
