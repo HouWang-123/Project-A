@@ -814,8 +814,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10e438b2e0dbb584894d337df01b5f5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SceneItemNode: {fileID: 5660459224320369618}
-  monsterList: {fileID: 0}
 --- !u!1 &5660459224320369618
 GameObject:
   m_ObjectHideFlags: 0

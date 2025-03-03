@@ -1,5 +1,6 @@
 using cfg.scene;
 using System.Collections.Generic;
+using Unity.AI.Navigation;
 using UnityEngine;
 
 public class RoomMono : MonoBehaviour
@@ -88,7 +89,21 @@ public class RoomMono : MonoBehaviour
         monstersParent = transform.Find("Monsters");
         if(monstersParent != null)
         {
-            if(roomData.MonstersIDList.Count != monstersParent.childCount)
+            // 挂载NavMesh Surface
+            GameObject navGo = new("DynamicNavMesh");
+            navGo.transform.parent = transform;
+            // 创建
+            var navMeshSurface = navGo.AddComponent<NavMeshSurface>();
+            navMeshSurface.agentTypeID = 0;
+            navMeshSurface.collectObjects = CollectObjects.Children;
+            // 动态生成一个平台并加入导航网格
+            GameObject platform = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            platform.transform.position = new Vector3(0, 0, 0);
+            platform.transform.localScale = new Vector3(roomData.RoomX, 0.2f, roomData.RoomY);
+            platform.transform.parent = navMeshSurface.transform; // 设为NavMeshSurface的子物体
+            navMeshSurface.BuildNavMesh();
+            platform.SetActive(false);
+            if (roomData.MonstersIDList.Count != monstersParent.childCount)
             {
                 Debug.LogWarning("room数据所含Monsters数量与实际预制体的monsterPoint不同，请检查问题！！！");
             }

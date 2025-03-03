@@ -60,14 +60,6 @@ public class GlobalLightController : MonoBehaviour
 
     private void OnDestroy()
     {
-        var phasedChangedEvents = TimeSystemManager.Instance.PhasedChangedScheduledEvents;
-        foreach (var item in phasedEvents)
-        {
-            if (phasedChangedEvents.Contains(item))
-            {
-                phasedChangedEvents.Remove(item);
-            }
-        }
         phasedEvents.Clear();
         timePhaseToColor.Clear();
     }

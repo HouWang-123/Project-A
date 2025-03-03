@@ -172,7 +172,9 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Sprite_Item_Scene_Sawdust_0: 6806276267683198457
+      Sprite_Item_Scene_Sawdust_1: -1410152349169711346
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

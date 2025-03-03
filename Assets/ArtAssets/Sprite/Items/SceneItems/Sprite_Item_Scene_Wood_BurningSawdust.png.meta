@@ -172,7 +172,9 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Sprite_Item_Scene_Wood_BurningSawdust_0: -6231154224087789185
+      Sprite_Item_Scene_Wood_BurningSawdust_1: -7014307699574233006
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
