@@ -15,8 +15,8 @@ public class GameConstData
     public static readonly int DEFAULT_CHARACTER_ID = 110001;
     
     // 渲染顺序
-    public static readonly int OverPlayerOrder = 10;
-    public static readonly int PlayerOrder = 5;
+    public static readonly int OverPlayerOrder = 1;
+    public static readonly int PlayerOrder = 0;
     public static readonly int BelowPlayerOrder = 0;
 
     // 物品垂直丢弃速度
