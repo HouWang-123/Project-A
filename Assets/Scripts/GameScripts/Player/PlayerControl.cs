@@ -533,7 +533,7 @@ public class PlayerControl : MonoBehaviour
         }
         if(ItemId != -1)
         {
-            GameItemTool.GenerateItemAtTransform(ItemId, ItemHoldPosition, true,
+            GameItemTool.GenerateItemAtTransform(ItemId, ItemReleasePoint, true,
                 (item) =>
                 {
                     characterStat.ItemOnHand = item;

@@ -744,8 +744,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10e438b2e0dbb584894d337df01b5f5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SceneItemNode: {fileID: 5660459224320369618}
-  monsterList: {fileID: 0}
 --- !u!1 &5551414286773547926
 GameObject:
   m_ObjectHideFlags: 0
@@ -1541,7 +1539,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6436760882764040272}
   - component: {fileID: 7320622544584636311}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1582,8 +1580,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 11.706675, y: 17.049667, z: 3.7919407}
-  m_Center: {x: 0.35443878, y: 3.5484354, z: 11.166007}
+  m_Size: {x: 14.322847, y: 17.049667, z: 3.7919407}
+  m_Center: {x: -0.013461113, y: 3.5484352, z: 11.166007}
 --- !u!1001 &1372263732500651880
 PrefabInstance:
   m_ObjectHideFlags: 0
