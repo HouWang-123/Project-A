@@ -17,10 +17,15 @@ public class BulletBehaviour : MonoBehaviour,IDoDamageHandler
 
     private void OnCollisionEnter(Collision other)
     {
-        if (other is IDamageable)
+        IDamageable damageable = other.gameObject.GetComponentInChildren<IDamageable>();
+        if(damageable == null)
         {
-            DoDamage(other as IDamageable);
+            other.gameObject.GetComponentInParent<IDamageable>();
         }
+        damageable?.DamageReceive(DamageAmount);
+        //生成特效
+        //......
+        //********
         Destroy(gameObject);
     }
 
