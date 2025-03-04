@@ -285,18 +285,53 @@ public class PlayerControl : MonoBehaviour
             if((vector.x > 0 && playerRenderer.localScale.x < 0) || (vector.x < 0 && playerRenderer.localScale.x > 0))
             {
                 speed *= fToB;
-                PlayerAnimatorEnum = EPlayerAnimator.Walk_Backwards;
+                if (characterStat.LiftedItem != null)
+                {
+                    PlayerAnimatorEnum = EPlayerAnimator.Walk_B_Head;
+                }
+                else if (characterStat.ItemOnHand != null)
+                {
+                    PlayerAnimatorEnum = EPlayerAnimator.Walk_B_Hand;
+                }
+                else
+                {
+                    PlayerAnimatorEnum = EPlayerAnimator.Walk_Backwards;
+                }
                 //playerSpin.timeScale = fToB;              //匹配动画速度
             }
             else if(shiftButt)
             {
                 speed *= characterStat.RunSpeedScale;
+                if (characterStat.LiftedItem != null)
+                {
+                    PlayerAnimatorEnum = EPlayerAnimator.Run_Head;
+                }
+                else if (characterStat.ItemOnHand != null)
+                {
+                    PlayerAnimatorEnum = EPlayerAnimator.Run_Hand;
+                }
+                else
+                {
+                    
                 PlayerAnimatorEnum = EPlayerAnimator.Run;
+                }
                 playerSpin.timeScale = speed * 0.6f;        //匹配动画速度
             }
             else
             {
-                PlayerAnimatorEnum = EPlayerAnimator.Walk;
+                if (characterStat.LiftedItem != null)
+                {
+                    PlayerAnimatorEnum = EPlayerAnimator.Walk_Head;
+                }
+                else if (characterStat.ItemOnHand != null)
+                {
+                    PlayerAnimatorEnum = EPlayerAnimator.Walk_Hand;
+                }
+                else
+                {
+                    PlayerAnimatorEnum = EPlayerAnimator.Walk;
+                    
+                }
                 playerSpin.timeScale = speed / 0.6f;      //匹配动画速度
             }
 
@@ -304,7 +339,18 @@ public class PlayerControl : MonoBehaviour
         }
         else
         {
-            PlayerAnimatorEnum = EPlayerAnimator.Idle;
+            if (characterStat.LiftedItem != null)
+            {
+                PlayerAnimatorEnum = EPlayerAnimator.Idle_Head;
+            }
+            else if (characterStat.ItemOnHand != null)
+            {
+                PlayerAnimatorEnum = EPlayerAnimator.Idle_Hand;
+            }
+            else
+            {
+                PlayerAnimatorEnum = EPlayerAnimator.Idle;
+            }
         }
         if(playerRG != null && !stopmove)
         {
