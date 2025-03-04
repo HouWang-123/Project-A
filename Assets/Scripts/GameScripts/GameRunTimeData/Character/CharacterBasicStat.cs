@@ -39,9 +39,41 @@ public class CharacterStat
     public int PassiveSkillID;
     // Other Character Stat
     public bool Dead;
-    public ItemBase ItemOnHand; // 手中的物品
-    public ItemBase LiftedItem; // 举起的物品
-    
+    private ItemBase itemOnHand; // 手中的物品
+    public ItemBase ItemOnHand
+    {
+        get { return itemOnHand; }
+        set
+        {
+            itemOnHand = value;
+            if(itemOnHand != null)
+            {
+                EventManager.Instance.RunEvent<EPAHandState>(EventConstName.PlayerHandItem, EPAHandState.Hand);
+            }
+            else
+            {
+                EventManager.Instance.RunEvent<EPAHandState>(EventConstName.PlayerHandItem, EPAHandState.Default);
+            }
+        }
+    }
+    private ItemBase liftedItem; // 举起的物品
+    public ItemBase LiftedItem
+    {
+        get { return liftedItem; }
+        set
+        {
+            liftedItem = value;
+            if(liftedItem != null)
+            {
+                EventManager.Instance.RunEvent<EPAHandState>(EventConstName.PlayerHandItem, EPAHandState.Head);
+            }
+            else
+            {
+                EventManager.Instance.RunEvent<EPAHandState>(EventConstName.PlayerHandItem, EPAHandState.Default);
+            }
+        }
+    }
+
 }
 
 public class CharacterBasicStat

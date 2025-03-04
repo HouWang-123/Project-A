@@ -8,5 +8,9 @@
 
     //  游戏设置
     public const string GAME_SETTINGS_TRANSLATION_CHANGES = "gamesettings.translationChanges";
+
+
+    //玩家手中的物品变更事件
+    public const string PlayerHandItem = "PlayerHandItem";
 }
 

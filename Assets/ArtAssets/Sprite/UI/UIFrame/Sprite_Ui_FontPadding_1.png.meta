@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Sprite_Ui_FontPadding_1_0: -3999858599177690606
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
