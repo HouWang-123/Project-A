@@ -48,6 +48,7 @@ public class GameControl
         roomList.name = "===RoomList===";
                 
         room = GameTableDataAgent.RoomsTable.Get(300006); // 初始房间
+        GameHUD.Instance.OnAreaNotificaiton(room.NAME);
         AssetHandle handle = YooAssets.LoadAssetSync<GameObject>(room.PrefabName);
         mainCam = GameObject.Find("CinemachineCamera").GetComponent<CinemachineCamera>();
         roomObj = Object.Instantiate(handle.AssetObject) as GameObject;
@@ -67,6 +68,7 @@ public class GameControl
     public void ChangeRoom(int RoomId, int DoorId)
     {
         Rooms r = GameTableDataAgent.RoomsTable.Get(RoomId);
+        GameHUD.Instance.OnAreaNotificaiton(r.NAME);
         if(!YooAssets.CheckLocationValid(r.PrefabName))
         {
             return;

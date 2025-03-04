@@ -42,7 +42,6 @@ public class CharacterStat
     public ItemBase ItemOnHand; // 手中的物品
     public ItemBase LiftedItem; // 举起的物品
     
-
 }
 
 public class CharacterBasicStat

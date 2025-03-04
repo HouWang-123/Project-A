@@ -7,8 +7,12 @@ public class GameHUD : UIBase
     /// ItemSlotManager 道具栏管理器，API 方法前缀: ISM
     /// </summary>
     public ItemSlotManager_HUD SlotManagerHUD;
-    
 
+    public AreaNotificationBehaviour AreaNotificationBehaviour;
+    public void OnAreaNotificaiton(string Area_text)
+    {
+        AreaNotificationBehaviour.OnNotification(Area_text);
+    }
     protected override void Awake()
     {
         base.Awake();
