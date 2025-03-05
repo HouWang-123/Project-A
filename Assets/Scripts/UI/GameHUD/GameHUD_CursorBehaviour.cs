@@ -1,5 +1,6 @@
 
 using System;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -35,7 +36,7 @@ public class GameHUD_CursorBehaviour : MonoBehaviour
 
         if (RectTransformUtility.RectangleContainsScreenPoint(safeArea, Input.mousePosition))
         {
-            transform.position = Input.mousePosition;
+            transform.DOMove(Input.mousePosition,0.02f);
         }
     }
 }

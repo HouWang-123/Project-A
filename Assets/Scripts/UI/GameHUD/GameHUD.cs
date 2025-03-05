@@ -57,9 +57,13 @@ public class GameHUD : UIBase
     
 #region UpdateHUD
 
-    private void RefreshHUDs()    // 界面数据刷新
+    public void UpdateHp()
     {
         HpIndicator.UpdateHp();
+    }
+    private void RefreshHUDs()    // 界面数据刷新
+    {
+        
     }
     private int GameTics;
     private void FixedUpdate()

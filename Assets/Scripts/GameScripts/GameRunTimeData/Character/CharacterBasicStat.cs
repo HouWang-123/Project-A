@@ -144,6 +144,7 @@ public class CharacterBasicStat
         }
         //todo 如果还有其他增幅 在此处结算
         CharacterStat.CurrentHp -= attack;
+        GameHUD.Instance.UpdateHp();
     }
     public void HurtPlayer(float number)
     {
