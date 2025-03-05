@@ -138,7 +138,7 @@ public class ItemSlotData
         {
             res = InsertOrUpdateItemSlotData_Non_Stack(item);
         }
-        GameHUD.Instance.SlotManagerHUD.UpdateItem(SlotItemDataList);
+        GameHUD.Instance.slotManager.UpdateItem(SlotItemDataList);
         return res;
     }
     /// <summary>
@@ -256,7 +256,7 @@ public class ItemSlotData
                 SlotItemStatus tempItemStatus = SlotItemDataList[CurrentFocusSlot];
                 tempItemStatus.StackValue--;
                 SlotItemDataList[CurrentFocusSlot] = tempItemStatus;
-                GameHUD.Instance.SlotManagerHUD.UpdateItem(SlotItemDataList);
+                GameHUD.Instance.slotManager.UpdateItem(SlotItemDataList);
                 return true; // 对于多个的情况
             }
             SlotItemDataList.Remove(CurrentFocusSlot); // 对于一个的情况
@@ -266,7 +266,7 @@ public class ItemSlotData
             itemOnHand.OnItemDrop(fastDrop);
             itemOnHand.ChangeRendererSortingOrder(GameConstData.BelowPlayerOrder);
             GameRunTimeData.Instance.CharacterBasicStat.GetStat().ItemOnHand = null;
-            GameHUD.Instance.SlotManagerHUD.UpdateItem(SlotItemDataList);
+            GameHUD.Instance.slotManager.UpdateItem(SlotItemDataList);
         }
         return false;
     }

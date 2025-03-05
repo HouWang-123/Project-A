@@ -13,10 +13,15 @@ public class SlashBehaviour : BaseWeaponBehavior,IDoDamageHandler
 
     public void OnCollisionEnter(Collision other)
     {
-        if (other is IDamageable damageable)
+        IDamageable damageable = other.gameObject.GetComponentInChildren<IDamageable>();
+        if(damageable == null)
         {
-            DoDamage(damageable);
+            other.gameObject.GetComponentInParent<IDamageable>();
         }
+        damageable?.DamageReceive(DamageAmount);
+        //生成特效
+        //......
+        //********
     }
 
     public void SetDamageAmount(float amount)

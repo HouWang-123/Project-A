@@ -405,7 +405,7 @@ public class PlayerControl : MonoBehaviour
             characterStat.LiftedItem = null;
             int currentFocusedItemId = GameRunTimeData.Instance.CharacterItemSlotData.GetCurrentFocusedItemId();
             RefreshItemOnHand(currentFocusedItemId);
-            GameHUD.Instance.SlotManagerHUD.EnableHud();
+            GameHUD.Instance.slotManager.EnableHud();
             return;
         }
         Debug.Log("丢下");
@@ -473,20 +473,12 @@ public class PlayerControl : MonoBehaviour
                     // stackable 插入失败后该值会自动变为溢出量
                     if(stackOverFlowed)
                     {
-                        string uri = toPickUpItem.GetPrefabName();
-                        AssetHandle loadAssetAsync = YooAssets.LoadAssetAsync<GameObject>(uri);
-                        loadAssetAsync.Completed += handle =>
-                        {
-                            GameObject instantiate = Instantiate(loadAssetAsync.AssetObject, ItemReleasePoint) as GameObject;
-                            instantiate.transform.SetParent(GameControl.Instance.GetSceneItemList().transform);
-                            ItemBase ib = instantiate.GetComponent<ItemBase>();
-                            IStackable ib1 = ib as IStackable;
-                            ib1.ChangeStackCount(overFlowedCount);
-                            GameRunTimeData.Instance.ItemManager.RegistItem(ib);
-                            ib.OnItemDrop(false);
-                        };
+                        GameItemTool.GenerateStackableItemAtTransform(toPickUpItem.ItemID,overFlowedCount,ItemReleasePoint,false,
+                            (item) =>
+                            {
+                                item.OnItemDrop(false);
+                            });
                     }
-                    stackable.ChangeStackCount(1);
                 }
             }
             // 一般逻辑
@@ -516,7 +508,7 @@ public class PlayerControl : MonoBehaviour
                 characterStat.LiftedItem = toPickUpItem;
                 RefreshItemLifted(toPickUpItem.ItemID);
                 pickupLock = false;
-                GameHUD.Instance.SlotManagerHUD.DisableHud(false, null);
+                GameHUD.Instance.slotManager.DisableHud(false, null);
             }
         }
     }
@@ -533,7 +525,7 @@ public class PlayerControl : MonoBehaviour
         }
         if(ItemId != -1)
         {
-            GameItemTool.GenerateItemAtTransform(ItemId, ItemReleasePoint, true,
+            GameItemTool.GenerateItemAtTransform(ItemId, ItemHoldPosition, true,
                 (item) =>
                 {
                     characterStat.ItemOnHand = item;
@@ -571,7 +563,6 @@ public class PlayerControl : MonoBehaviour
     private void UpdatePlayerAnimatorEnum()
     {
         PlayerAnimatorEnum = (EPlayerAnimator)((int)MoveState + (int)HandState);
-        Debug.Log("============" + PlayerAnimatorEnum.ToString());
     }
 
 

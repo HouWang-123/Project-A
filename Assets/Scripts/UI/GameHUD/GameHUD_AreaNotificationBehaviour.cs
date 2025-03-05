@@ -2,7 +2,7 @@ using DG.Tweening;
 using TMPro;
 using UnityEngine;
 
-public class AreaNotificationBehaviour : MonoBehaviour
+public class GameHUD_AreaNotificationBehaviour : MonoBehaviour
 {
     public Animator _animation;
     public TextMeshProUGUI Text;

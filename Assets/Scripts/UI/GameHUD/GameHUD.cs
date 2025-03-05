@@ -1,4 +1,6 @@
 using System;
+using UnityEngine;
+using UnityEngine.Serialization;
 
 public class GameHUD : UIBase
 {
@@ -6,17 +8,27 @@ public class GameHUD : UIBase
     /// <summary>
     /// ItemSlotManager 道具栏管理器，API 方法前缀: ISM
     /// </summary>
-    public ItemSlotManager_HUD SlotManagerHUD;
+    public GameHUD_ItemSlotManager slotManager;
+    public GameHUD_AreaNotificationBehaviour gameHUDAreaNotificationBehaviour;
+    public GameHUD_HpIndicator HpIndicator;
+    public GameHUD_CursorBehaviour Cursor;
 
-    public AreaNotificationBehaviour AreaNotificationBehaviour;
+    public void SetGameCursor(Sprite sprite)
+    {
+        Cursor.SetCursor(sprite);
+    }
     public void OnAreaNotificaiton(string Area_text)
     {
-        AreaNotificationBehaviour.OnNotification(Area_text);
+        gameHUDAreaNotificationBehaviour.OnNotification(Area_text);
     }
     protected override void Awake()
     {
         base.Awake();
         Instance = this;
+        slotManager = GetComponentInChildren<GameHUD_ItemSlotManager>();
+        gameHUDAreaNotificationBehaviour = GetComponentInChildren<GameHUD_AreaNotificationBehaviour>();
+        HpIndicator = GetComponentInChildren<GameHUD_HpIndicator>();
+        Cursor = GetComponentInChildren<GameHUD_CursorBehaviour>();
     }
     protected override void AddListen()
     {
@@ -24,12 +36,12 @@ public class GameHUD : UIBase
 
     public override void Show()
     {
-        SlotManagerHUD.Show();
+        slotManager.Show();
     }
     // Do Not Call Base.Hide();
     public override void Hide()
     {
-        SlotManagerHUD.Hide();
+        slotManager.Hide();
     }
     public static CharacterStat CharacterStatHUDStat;
 
@@ -44,7 +56,7 @@ public class GameHUD : UIBase
     }
     
 #region UpdateHUD
-    public GameHUD_HpIndicator HpIndicator;
+
     private void RefreshHUDs()    // 界面数据刷新
     {
         HpIndicator.UpdateHp();
@@ -63,16 +75,16 @@ public class GameHUD : UIBase
 #region ItemSlotManagerAPI
     public void ISM_NextFocusItem()
     {
-        SlotManagerHUD.ChangeFocus(true);
+        slotManager.ChangeFocus(true);
     }
 
     public void ISM_SetFocus(int Number)
     {
-        SlotManagerHUD.ChangeFocus(Number);
+        slotManager.ChangeFocus(Number);
     }
     public void ISM_LastFocusItem()
     {
-        SlotManagerHUD.ChangeFocus(false);
+        slotManager.ChangeFocus(false);
     }
 #endregion
 }

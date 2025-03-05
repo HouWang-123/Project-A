@@ -10,13 +10,13 @@ using UnityEngine.Events;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-public class ItemSlotManager_HUD : UIBase
+public class GameHUD_ItemSlotManager : UIBase
 {
     
     public List<SlotItemStatus> _SlotItemData = new List<SlotItemStatus>();
     
     private bool switchHUD;
-    public static ItemSlotManager_HUD Instance;
+    public static GameHUD_ItemSlotManager Instance;
     [SerializeField] private List<GameItemSlot_HUD_Behavior> ItemSlots;
     public Button ItemSlotsHUDSwitch_N;
     [Space] public static GameItemSlot_HUD_Behavior ACTIVE_ITEM_SLOT;
