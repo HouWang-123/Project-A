@@ -6,6 +6,7 @@ using System;
 
 public class PlayerControl : MonoBehaviour
 {
+    public static PlayerControl Instance;
     public Transform ItemHoldPosition; // 玩家拿取物品位置
     public Transform ItemLiftPostion; // 举起物品的位置
     private PlayerInputControl inputControl;
@@ -13,7 +14,7 @@ public class PlayerControl : MonoBehaviour
     private Transform playerRenderer;
     private Transform useObjParent;
     private PlayerPickupController _pickupController;
-
+    
     private CharacterStat characterStat;
 
     private EPAMoveState moveState = EPAMoveState.Idle;
@@ -71,6 +72,7 @@ public class PlayerControl : MonoBehaviour
 
     private void Awake()
     {
+        Instance = this;
         inputControl = new PlayerInputControl();
     }
 
@@ -204,6 +206,8 @@ public class PlayerControl : MonoBehaviour
         };
         #endregion
         EventManager.Instance.RegistEvent<EPAHandState>(EventConstName.PlayerHandItem, SetHandState);
+        
+        GameHUD.Instance.SetPlayerItemTransform(useObjParent);
     }
 
 
@@ -300,6 +304,7 @@ public class PlayerControl : MonoBehaviour
 
     private void OnDestroy()
     {
+        Instance = null;
         EventManager.Instance.RemoveEvent<EPAHandState>(EventConstName.PlayerHandItem, SetHandState);
     }
 
