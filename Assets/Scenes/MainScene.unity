@@ -388,6 +388,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2626a7cfcc6c2442b32412f5b05c8b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
   Camera: {r: 0.7647059, g: 0.55803996, b: 0.12549019, a: 1}
   Collision: {r: 0.15593326, g: 0.764151, b: 0, a: 1}
   Battle: {r: 1, g: 0.3915094, b: 0.62023216, a: 1}
