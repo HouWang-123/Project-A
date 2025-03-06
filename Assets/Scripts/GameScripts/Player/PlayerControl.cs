@@ -209,8 +209,7 @@ public class PlayerControl : MonoBehaviour
         
         GameHUD.Instance.SetPlayerItemTransform(useObjParent);
     }
-
-
+    
     Vector3 u, v, l, a, b;
     float angle;
 
@@ -319,55 +318,17 @@ public class PlayerControl : MonoBehaviour
             if((vector.x > 0 && playerRenderer.localScale.x < 0) || (vector.x < 0 && playerRenderer.localScale.x > 0))
             {
                 speed *= fToB;
-                //if(characterStat.LiftedItem != null)
-                //{
-                //    PlayerAnimatorEnum = EPlayerAnimator.Walk_B_Head;
-                //}
-                //else if(characterStat.ItemOnHand != null)
-                //{
-                //    PlayerAnimatorEnum = EPlayerAnimator.Walk_B_Hand;
-                //}
-                //else
-                //{
-                //    PlayerAnimatorEnum = EPlayerAnimator.Walk_Backwards;
-                //}
                 MoveState = EPAMoveState.Walk_Backwards;
                 //playerSpin.timeScale = fToB;              //匹配动画速度
             }
             else if(shiftButt)
             {
                 speed *= characterStat.RunSpeedScale;
-                //if(characterStat.LiftedItem != null)
-                //{
-                //    PlayerAnimatorEnum = EPlayerAnimator.Run_Head;
-                //}
-                //else if(characterStat.ItemOnHand != null)
-                //{
-                //    PlayerAnimatorEnum = EPlayerAnimator.Run_Hand;
-                //}
-                //else
-                //{
-
-                //    PlayerAnimatorEnum = EPlayerAnimator.Run;
-                //}
                 MoveState = EPAMoveState.Run;
                 playerSpin.timeScale = speed * 0.6f;        //匹配动画速度
             }
             else
             {
-                //if(characterStat.LiftedItem != null)
-                //{
-                //    PlayerAnimatorEnum = EPlayerAnimator.Walk_Head;
-                //}
-                //else if(characterStat.ItemOnHand != null)
-                //{
-                //    PlayerAnimatorEnum = EPlayerAnimator.Walk_Hand;
-                //}
-                //else
-                //{
-                //    PlayerAnimatorEnum = EPlayerAnimator.Walk;
-
-                //}
                 MoveState = EPAMoveState.Walk;
                 playerSpin.timeScale = speed / 0.6f;      //匹配动画速度
             }
@@ -376,18 +337,6 @@ public class PlayerControl : MonoBehaviour
         }
         else
         {
-            //if(characterStat.LiftedItem != null)
-            //{
-            //    PlayerAnimatorEnum = EPlayerAnimator.Idle_Head;
-            //}
-            //else if(characterStat.ItemOnHand != null)
-            //{
-            //    PlayerAnimatorEnum = EPlayerAnimator.Idle_Hand;
-            //}
-            //else
-            //{
-            //    PlayerAnimatorEnum = EPlayerAnimator.Idle;
-            //}
             MoveState = EPAMoveState.Idle;
         }
         if(playerRG != null && !stopmove)
@@ -417,7 +366,7 @@ public class PlayerControl : MonoBehaviour
         // 表现  // 背包数据更新
         // todo : 批量丢弃堆叠物品
 
-        bool removestack = GameRunTimeData.Instance.CharacterItemSlotData.ClearHandItem(fastDrop);
+        bool removestack = GameRunTimeData.Instance.CharacterItemSlotData.ClearHandItem(fastDrop,ItemReleasePoint);
 
         if(removestack)
         {
@@ -462,8 +411,7 @@ public class PlayerControl : MonoBehaviour
         ItemBase toPickUpItem;
         toPickUpItem = _pickupController.currentPickup;
         GameRunTimeData.Instance.ItemManager.UnRegistItem(toPickUpItem);
-
-        ////////// 2025.3.1 更新 通过数据改变表现层
+        
         if(toPickUpItem is ISlotable)
         {
             // 背包数据更新
@@ -527,6 +475,7 @@ public class PlayerControl : MonoBehaviour
                 return;
             }
             Destroy(characterStat.ItemOnHand.gameObject);
+            characterStat.ItemOnHand = null;
         }
         if(ItemId != -1)
         {
@@ -550,6 +499,7 @@ public class PlayerControl : MonoBehaviour
                 return;
             }
             Destroy(characterStat.ItemOnHand.gameObject);
+            characterStat.ItemOnHand = null;
         }
         if(ItemId != -1)
         {

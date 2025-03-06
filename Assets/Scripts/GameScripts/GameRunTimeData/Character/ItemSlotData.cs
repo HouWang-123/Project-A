@@ -246,7 +246,7 @@ public class ItemSlotData
     // =================================================================================================================
     // ==============================================   DesertProcessor     ============================================
     // =================================================================================================================
-    public bool ClearHandItem(bool fastDrop)
+    public bool ClearHandItem(bool fastDrop,Transform releaspt)
     {
         // 初步检查
         if (SlotItemDataList.ContainsKey(CurrentFocusSlot))
@@ -261,6 +261,8 @@ public class ItemSlotData
             }
             SlotItemDataList.Remove(CurrentFocusSlot); // 对于一个的情况
             ItemBase itemOnHand = GameRunTimeData.Instance.CharacterBasicStat.GetStat().ItemOnHand;
+            itemOnHand.transform.SetParent(releaspt);
+            itemOnHand.transform.localPosition = Vector3.zero;
             itemOnHand.transform.SetParent(GameControl.Instance.GetSceneItemList().transform); // 移动节点
             GameRunTimeData.Instance.ItemManager.RegistItem(itemOnHand);
             itemOnHand.OnItemDrop(fastDrop);
