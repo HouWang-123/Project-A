@@ -12,5 +12,7 @@
 
     //玩家手中的物品变更事件
     public const string PlayerHandItem = "PlayerHandItem";
+
+    public const string OnChangeRoom = "Scene.OnChangeRoom";
 }
 

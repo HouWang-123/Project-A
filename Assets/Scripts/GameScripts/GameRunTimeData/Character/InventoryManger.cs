@@ -5,7 +5,7 @@ using UnityEngine;
 [Serializable]
 public class InventroyData
 {
-    public Dictionary<int, int> ItemData;
+    public Dictionary<int, int> ItemData = new Dictionary<int, int>();
 }
 
 /// <summary>

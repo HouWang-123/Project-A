@@ -362,10 +362,7 @@ public class PlayerControl : MonoBehaviour
             GameHUD.Instance.slotManager.EnableHud();
             return;
         }
-        Debug.Log("丢下");
-        // 表现  // 背包数据更新
-        // todo : 批量丢弃堆叠物品
-
+        
         bool removestack = GameRunTimeData.Instance.CharacterItemSlotData.ClearHandItem(fastDrop,ItemReleasePoint);
 
         if(removestack)
@@ -468,6 +465,8 @@ public class PlayerControl : MonoBehaviour
 
     private void RefreshItemOnHand(int ItemId)
     {
+        leftMouseAction = null;
+        rightMouseAction = null;
         if(characterStat.ItemOnHand != null)
         {
             if(characterStat.ItemOnHand.ItemID == ItemId)
@@ -492,6 +491,8 @@ public class PlayerControl : MonoBehaviour
     }
     private void RefreshItemLifted(int ItemId)
     {
+        leftMouseAction = null;
+        rightMouseAction = null;
         if(characterStat.ItemOnHand != null)
         {
             if(characterStat.ItemOnHand.ItemID == ItemId)

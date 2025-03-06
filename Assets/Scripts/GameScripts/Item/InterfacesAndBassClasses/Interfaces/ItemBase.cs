@@ -37,7 +37,7 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable
         loadAssetSync.Release();
     }
     
-    public void Start()
+    protected void Start()
     {
         var RendererTr = ItemRenderer.transform;
         if (!ignoreAngleCorrect)
@@ -48,11 +48,9 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable
         {
             InitItem(ItemID); // 非动态生成的物品，拖拽进入的物品
         }
-
         CheckIsStackedItem();
         SetRendererImage();
     }
-
     public void OnDestroy()
     {
         GameRunTimeData.Instance.ItemManager.UnRegistItem(this);
@@ -92,16 +90,6 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable
     public void ShowStackNumber()
     {
         StackNuberText.gameObject.SetActive(true);
-    }
-
-    public void DisableRenderer()
-    {
-        ItemRenderer.enabled = false;
-    }
-
-    public void EnableRenderer()
-    {
-        ItemRenderer.enabled = true;
     }
 
     private bool IsItemInPickupRange; // 可否拾取
@@ -148,6 +136,12 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable
     // 物品掉落相关物理逻辑
     private void FixedUpdate()
     {
+        F_Update_ItemDorp();
+        F_UpdateWeaponCDRecover();
+    }
+    protected virtual void F_UpdateWeaponCDRecover(){}
+    private void F_Update_ItemDorp()
+    {
         if (DropState)
         {
             SpeedDamp();
@@ -184,10 +178,7 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable
     }
 
     // 物品拾取和丢弃
-    public virtual void OnItemPickUp()
-    {
-    }
-
+    public virtual void OnItemPickUp(){}
     public virtual void OnItemDrop(bool fastDrop, bool IgnoreBias = false)
     {
         var RendererTr = ItemRenderer.transform;
@@ -208,16 +199,12 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable
             DropState = false;
         }
     }
-
     // 交互逻辑
     // Fixed Update 调用
     public virtual void OnRightInteract(){}
 
     // Fixed Update 调用
     public virtual void OnLeftInteract(){}
-
-
-
     /// 运动阻力
     private void SpeedDamp()
     {

@@ -3,7 +3,7 @@
 /// </summary>
 public interface IDoDamageHandler
 {
-    public void DoDamage(IDamageable obj);
+    public void SetInitialDamage(float damage);
 }
 /// <summary>
 /// 伤害接收

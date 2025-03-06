@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class AutoRecycledParticleSystem : MonoBehaviour, FT_IPoolable
 {
+    private int BucketID;
     public ParticleSystem MainSystem;
     // Start is called before the first frame update
     public ParticleSystem[] sys;
@@ -51,5 +52,15 @@ public class AutoRecycledParticleSystem : MonoBehaviour, FT_IPoolable
     public void OnRecycle()
     {
         gameObject.SetActive(false);
+    }
+
+    public void OnReEnable()
+    {
+        
+    }
+
+    public void SetBucketId(int ID)
+    {
+        BucketID = ID;
     }
 }

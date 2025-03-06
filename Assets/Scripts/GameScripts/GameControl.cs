@@ -114,6 +114,8 @@ public class GameControl
         //        monster.transform.position = mono.monsterList.transform.position;
         //    }
         //}
+        
+        EventManager.Instance.RunEvent(EventConstName.OnChangeRoom);
     }
 
     public void GameSave()

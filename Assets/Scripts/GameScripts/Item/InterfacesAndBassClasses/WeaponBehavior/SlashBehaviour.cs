@@ -8,7 +8,7 @@ public class SlashBehaviour : BaseWeaponBehavior,IDoDamageHandler
     public Collider DamageCollider;
     public override void OnWeaponAttack(float DamageAmount)
     {
-        SetDamageAmount(DamageAmount);
+        // Play Animations; Enable Coliders;
     }
 
     public void OnCollisionEnter(Collision other)
@@ -24,12 +24,8 @@ public class SlashBehaviour : BaseWeaponBehavior,IDoDamageHandler
         //********
     }
 
-    public void SetDamageAmount(float amount)
+    public void SetInitialDamage(float amount)
     {
         DamageAmount = amount;
-    }
-    public void DoDamage(IDamageable obj)
-    {
-        obj.DamageReceive(DamageAmount);
     }
 }

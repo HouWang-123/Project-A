@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.Serialization;
 using DG.Tweening;
 using Spine.Unity.Examples;
 using UnityEngine;
@@ -8,8 +9,10 @@ using YooAsset;
 public class Weapon : ItemBase, ISlotable
 {
     public cfg.item.Weapon data;
-    
-    [FormerlySerializedAs("BaseWeaponBehavior")] public BaseWeaponBehavior _weaponBeahaviour;
+    protected BaseWeaponBehavior _weaponBeahaviour;
+    protected ShotBehaviour _shotBehaviour;
+    protected SlashBehaviour _slashBehaviour;
+    private float currentCd;
     
     // 动态生成物品
     public override void InitItem( int ID )
@@ -28,8 +31,26 @@ public class Weapon : ItemBase, ISlotable
         ItemSpriteName = data.SpriteName;
         
         GameRunTimeData.Instance.ItemManager.RegistItem(this);
+        GetWeaponBehaviour();
     }
+    
+    public void GetWeaponBehaviour()
+    {
+        _weaponBeahaviour = GetComponent<BaseWeaponBehavior>();
+        if (_weaponBeahaviour is ShotBehaviour)
+        {
+            _shotBehaviour = _weaponBeahaviour as ShotBehaviour;
+            _shotBehaviour.WeaponID = ItemID;
+            _shotBehaviour.SetBulletPrefabURI();
+        }
 
+        if (_weaponBeahaviour is SlashBehaviour)
+        {
+            _slashBehaviour = _weaponBeahaviour as SlashBehaviour;
+            _slashBehaviour.WeaponID = ItemID;
+        }
+    }
+    
     public override Sprite GetItemIcon()
     {
         AssetHandle loadAssetSync = YooAssets.LoadAssetSync<Sprite>(data.IconName);
@@ -51,25 +72,34 @@ public class Weapon : ItemBase, ISlotable
     
     public override void OnLeftInteract( )
     {
-        
+        OnWeaponAttack();
     }
-    
+
+    protected override void F_UpdateWeaponCDRecover()
+    {
+        currentCd -= Time.deltaTime;
+    }
+
     public void OnWeaponAttack()
     {
-        if (_weaponBeahaviour is ShotBehaviour)
+        if (currentCd > 0) return;      // WEAPON CD
+        if (_shotBehaviour != null)
         {
-            if (GameRunTimeData.Instance.InventoryManger.HasItem(data.AmmoId))
+            if (GameRunTimeData.Instance.InventoryManger.HasItem(data.AmmoId)) ///  Requeired Ammos
             {
                 GameRunTimeData.Instance.InventoryManger.UseItem(data.AmmoId, 1);
-                _weaponBeahaviour.OnWeaponAttack(CalculateShotDamage());
+                _shotBehaviour.OnWeaponAttack(CalculateShotDamage());
             }
+            // TEST 
+            _shotBehaviour.OnWeaponAttack(CalculateShotDamage());
         }
 
-        if (_weaponBeahaviour is SlashBehaviour)
+        if (_slashBehaviour != null)
         {
             CalculateSlashDamage();
-            _weaponBeahaviour.OnWeaponAttack(CalculateSlashDamage());
+            _slashBehaviour.SetInitialDamage(CalculateSlashDamage());
         }
+        currentCd = data.AttackCD;
     }
     
     public float CalculateSlashDamage()
@@ -81,7 +111,6 @@ public class Weapon : ItemBase, ISlotable
     {
         return data.Attack;
     }
-    
     public int GetItemId()
     {
         return ItemID;
