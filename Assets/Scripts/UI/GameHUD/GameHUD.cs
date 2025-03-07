@@ -40,12 +40,12 @@ public class GameHUD : UIBase
 
     public override void Show()
     {
-        slotManager.Show();
+        slotManager?.Show();
     }
     // Do Not Call Base.Hide();
     public override void Hide()
     {
-        slotManager.Hide();
+        slotManager?.Hide();
     }
     public static CharacterStat CharacterStatHUDStat;
 

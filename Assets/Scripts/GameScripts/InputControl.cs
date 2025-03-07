@@ -84,6 +84,7 @@ public class InputControl
         else
         {
             LookPoint += inputActions.GamePlayer.Look.ReadValue<Vector2>();
+            Debug.Log("LLLLLLLLL" + LookPoint);
         }
         return LookPoint;
     }

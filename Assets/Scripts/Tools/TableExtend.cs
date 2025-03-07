@@ -6,7 +6,7 @@ namespace cfg
 {
     public static class TableExtend
     {
-
+        #region DropRule
         public static List<int> GetID(this func.DropRule dropRule)
         {
             List<int> ids = new List<int>();
@@ -69,6 +69,34 @@ namespace cfg
             return startID + tmp;
         }
 
+        #endregion
+
+
+        public static ELanguage GameLanguage = ELanguage.CN;
+        /// <summary>
+        /// 获取文本
+        /// </summary>
+        public static string GetText(this text.Localization obj)
+        {
+            switch(GameLanguage)
+            {
+                case ELanguage.CN:
+                    return obj.Zh;
+                case ELanguage.EN:
+                    return obj.En;
+                case ELanguage.JAP:
+                    return obj.Ja;
+            }
+            return "NULL";
+        }
+
+    }
+
+    public enum ELanguage
+    {
+        CN,
+        EN,
+        JAP,
     }
 }
 

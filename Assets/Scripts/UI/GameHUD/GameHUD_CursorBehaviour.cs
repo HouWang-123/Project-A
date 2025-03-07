@@ -42,14 +42,14 @@ public class GameHUD_CursorBehaviour : MonoBehaviour
         }
 
         Vector3 PlayerOnScreenPosition = Camera.main.WorldToScreenPoint(PlayerUseItemTransfrom.position);
-        float Dis_x = PlayerOnScreenPosition.x - Input.mousePosition.x;
-        float Dis_y = PlayerOnScreenPosition.y - Input.mousePosition.y;
+        float Dis_x = PlayerOnScreenPosition.x - InputControl.Instance.GetLook().x;
+        float Dis_y = PlayerOnScreenPosition.y - InputControl.Instance.GetLook().y;
         // 获取坐标计算距离
         float atan2 = Mathf.Atan2(Dis_y, Dis_x); // 计算 arctan 得到弧度
         float rotate = Mathf.Rad2Deg * atan2;    // 转换为角度
-        if (RectTransformUtility.RectangleContainsScreenPoint(safeArea, Input.mousePosition))
+        if (RectTransformUtility.RectangleContainsScreenPoint(safeArea, InputControl.Instance.GetLook()))
         {
-            transform.DOMove(Input.mousePosition,0.02f);
+            transform.DOMove(InputControl.Instance.GetLook(), 0.02f);
             transform.DORotate(new Vector3(0, 0, rotate), 0.02f);
         }
     }
