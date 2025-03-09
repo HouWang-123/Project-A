@@ -31,15 +31,15 @@ public class GameHUD_CursorBehaviour : MonoBehaviour
     void Update()
     {
         if (PlayerUseItemTransfrom == null) return;
-        // 检测左键按下
-        if (Input.GetMouseButtonDown(0))
-        {
-        }
-        
-        // 检测左键弹起
-        if (Input.GetMouseButtonUp(0))
-        {
-        }
+        //检测左键按下
+        //if(Input.GetMouseButtonDown(0))
+        //{
+        //}
+
+        //检测左键弹起
+        //if(Input.GetMouseButtonUp(0))
+        //{
+        //}
 
         Vector3 PlayerOnScreenPosition = Camera.main.WorldToScreenPoint(PlayerUseItemTransfrom.position);
         float Dis_x = PlayerOnScreenPosition.x - InputControl.Instance.GetLook().x;

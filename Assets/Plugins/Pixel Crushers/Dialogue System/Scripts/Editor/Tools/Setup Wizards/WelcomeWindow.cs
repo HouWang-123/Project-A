@@ -189,7 +189,7 @@ namespace PixelCrushers.DialogueSystem
             EditorGUILayout.LabelField("Current Build Target: " + ObjectNames.NicifyVariableName(EditorUserBuildSettings.activeBuildTarget.ToString()), EditorStyles.boldLabel);
 
             var define_USE_PHYSICS2D = false;
-            var define_USE_NEW_INPUT = false;
+            var define_ENABLE_INPUT_SYSTEM = false;
             var define_USE_ADDRESSABLES = false;
             var define_USE_TIMELINE = false;
             var define_USE_CINEMACHINE = false;
@@ -209,7 +209,7 @@ namespace PixelCrushers.DialogueSystem
             for (int i = 0; i < defines.Length; i++)
             {
                 if (string.Equals(ScriptingSymbolNames.USE_PHYSICS2D, defines[i].Trim())) define_USE_PHYSICS2D = true;
-                if (string.Equals(ScriptingSymbolNames.USE_NEW_INPUT, defines[i].Trim())) define_USE_NEW_INPUT = true;
+                if (string.Equals(ScriptingSymbolNames.ENABLE_INPUT_SYSTEM, defines[i].Trim())) define_ENABLE_INPUT_SYSTEM = true;
                 if (string.Equals(ScriptingSymbolNames.USE_ADDRESSABLES, defines[i].Trim())) define_USE_ADDRESSABLES = true;
                 if (string.Equals(ScriptingSymbolNames.USE_TIMELINE, defines[i].Trim())) define_USE_TIMELINE = true;
                 if (string.Equals(ScriptingSymbolNames.USE_CINEMACHINE, defines[i].Trim())) define_USE_CINEMACHINE = true;
@@ -228,7 +228,7 @@ namespace PixelCrushers.DialogueSystem
             }
 #if EVALUATION_VERSION || ACADEMIC
             define_USE_PHYSICS2D = true;
-            define_USE_NEW_INPUT = false;
+            define_ENABLE_INPUT_SYSTEM = false;
             define_USE_ADDRESSABLES = false;
             define_TMP_PRESENT = true;
             define_USE_STM = false;
@@ -251,12 +251,12 @@ namespace PixelCrushers.DialogueSystem
             var new_USE_PHYSICS2D = EditorGUILayout.ToggleLeft(define_USE_PHYSICS2D ? "2D Physics (USE_PHYSICS2D)" : "2D Physics (USE_PHYSICS2D) <- MAKING A 2D GAME?", define_USE_PHYSICS2D);
             var new_USE_NAVMESH = EditorGUILayout.ToggleLeft(new GUIContent(define_USE_NAVMESH ? "Navigation (USE_NAVMESH)" : "Navigation (USE_NAVMESH) <- USING NAVIGATION?", "Enable Dialogue System support for Unity's NavMesh Navigation system."), define_USE_NAVMESH);
             EditorGUILayout.ToggleLeft(new GUIContent("Addressables (USE_ADDRESSABLES)", "Addressables support not available in evaluation version."), define_USE_ADDRESSABLES);
-            EditorGUILayout.ToggleLeft(new GUIContent("New Input System (USE_NEW_INPUT)", "New Input System support not available in evaluation version."), define_USE_NEW_INPUT);
+            EditorGUILayout.ToggleLeft(new GUIContent("New Input System (ENABLE_INPUT_SYSTEM)", "New Input System support not available in evaluation version."), define_ENABLE_INPUT_SYSTEM);
             EditorGUI.EndDisabledGroup();
             //var new_USE_PHYSICS2D = define_USE_PHYSICS2D;
             var new_USE_CINEMACHINE = define_USE_CINEMACHINE;
             var new_USE_CINEMACHINE3 = define_USE_CINEMACHINE3;
-            var new_USE_NEW_INPUT = define_USE_NEW_INPUT;
+            var new_ENABLE_INPUT_SYSTEM = define_ENABLE_INPUT_SYSTEM;
             var new_USE_ADDRESSABLES = define_USE_ADDRESSABLES;
 #else
             var new_TMP_PRESENT = EditorGUILayout.ToggleLeft(new GUIContent(define_TMP_PRESENT ? "TextMesh Pro (TMP_PRESENT)" : "TextMesh Pro (TMP_PRESENT) <- USING TEXTMESH PRO?", "Enable Dialogue System support for TextMesh Pro. You must still enable TextMesh Pro in Package Manager."), define_TMP_PRESENT);
@@ -265,7 +265,7 @@ namespace PixelCrushers.DialogueSystem
             var new_USE_ADDRESSABLES = EditorGUILayout.ToggleLeft("Addressables (USE_ADDRESSABLES)", define_USE_ADDRESSABLES);
             var new_USE_CINEMACHINE = EditorGUILayout.ToggleLeft(new GUIContent("Cinemachine 2 (USE_CINEMACHINE)", "Enable Dialogue System support for Cinemachine 2. You must still enable Cinemachine 2 in Package Manager."), define_USE_CINEMACHINE);
             var new_USE_CINEMACHINE3 = EditorGUILayout.ToggleLeft(new GUIContent("Cinemachine 3 (USE_CINEMACHINE_3)", "Enable Dialogue System support for Cinemachine 3. You must still enable Cinemachine 3 in Package Manager."), define_USE_CINEMACHINE3);
-            var new_USE_NEW_INPUT = EditorGUILayout.ToggleLeft("New Input System (USE_NEW_INPUT)", define_USE_NEW_INPUT);
+            var new_ENABLE_INPUT_SYSTEM = EditorGUILayout.ToggleLeft("New Input System (ENABLE_INPUT_SYSTEM)", define_ENABLE_INPUT_SYSTEM);
 #endif
 
             var new_USE_TIMELINE = EditorGUILayout.ToggleLeft(new GUIContent("Timeline (USE_TIMELINE)", "Enable Dialogue System support for Timeline. You must still enable Timeline in Package Manager."), define_USE_TIMELINE);
@@ -321,13 +321,13 @@ namespace PixelCrushers.DialogueSystem
             if (new_TMP_PRESENT != define_TMP_PRESENT) MoreEditorUtility.ToggleScriptingDefineSymbol(ScriptingSymbolNames.TMP_PRESENT, new_TMP_PRESENT, true);
             if (new_USE_NAVMESH != define_USE_NAVMESH) MoreEditorUtility.ToggleScriptingDefineSymbol(ScriptingSymbolNames.USE_NAVMESH, new_USE_NAVMESH, true);
 
-            if (new_USE_NEW_INPUT != define_USE_NEW_INPUT)
+            if (new_ENABLE_INPUT_SYSTEM != define_ENABLE_INPUT_SYSTEM)
             {
-                if (new_USE_NEW_INPUT)
+                if (new_ENABLE_INPUT_SYSTEM)
                 {
                     if (EditorUtility.DisplayDialog("Enable New Input Package Support", "This will switch the Dialogue System to use the new Input System. You MUST have installed the new Input System package via the Package Manager window first. If you're using Unity's built-in input, click Cancel now.", "OK", "Cancel"))
                     {
-                        MoreEditorUtility.ToggleScriptingDefineSymbol(ScriptingSymbolNames.USE_NEW_INPUT, new_USE_NEW_INPUT);
+                        MoreEditorUtility.ToggleScriptingDefineSymbol(ScriptingSymbolNames.ENABLE_INPUT_SYSTEM, new_ENABLE_INPUT_SYSTEM);
                     }
                     else
                     {
@@ -336,7 +336,7 @@ namespace PixelCrushers.DialogueSystem
                 }
                 else
                 {
-                    MoreEditorUtility.ToggleScriptingDefineSymbol(ScriptingSymbolNames.USE_NEW_INPUT, new_USE_NEW_INPUT);
+                    MoreEditorUtility.ToggleScriptingDefineSymbol(ScriptingSymbolNames.ENABLE_INPUT_SYSTEM, new_ENABLE_INPUT_SYSTEM);
                 }
             }
             if (new_USE_ADDRESSABLES != define_USE_ADDRESSABLES)

@@ -329,7 +329,7 @@ namespace PixelCrushers.DialogueSystem
             // Exit if there's no camera:
             if (UnityEngine.Camera.main == null) return;
 
-#if !USE_NEW_INPUT // (In new Input System, IsPointerOverGameObject returns true for all GameObjects, not just UI objects, so skip this check until Input System is fixed.)
+#if !ENABLE_INPUT_SYSTEM // (In new Input System, IsPointerOverGameObject returns true for all GameObjects, not just UI objects, so skip this check until Input System is fixed.)
             // Exit if using mouse selection and is over a UI element:
             if ((selectAt == SelectAt.MousePosition) &&
                 !selectBehindUIObjects &&

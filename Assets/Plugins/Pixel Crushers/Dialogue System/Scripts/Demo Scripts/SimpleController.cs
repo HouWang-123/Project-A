@@ -95,7 +95,7 @@ namespace PixelCrushers.DialogueSystem.Demo
         {
             if (Time.timeScale <= 0) return;
 
-#if USE_NEW_INPUT
+#if ENABLE_INPUT_SYSTEM
             var mouseX = UnityEngine.InputSystem.Mouse.current.delta.x.ReadValue() * Time.deltaTime;
             var mouseY = UnityEngine.InputSystem.Mouse.current.delta.y.ReadValue() * Time.deltaTime;
 #else

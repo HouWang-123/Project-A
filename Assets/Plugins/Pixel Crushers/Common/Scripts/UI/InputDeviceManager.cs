@@ -7,7 +7,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 
-#if USE_NEW_INPUT
+#if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
 #endif
@@ -200,7 +200,7 @@ namespace PixelCrushers
         static void InitStaticVariables()
         {
             m_instance = null;
-#if USE_NEW_INPUT
+#if ENABLE_INPUT_SYSTEM
             inputActionDict = new Dictionary<string, InputAction>();
             m_specialKeyCodeDict = null;
 #endif
@@ -244,12 +244,12 @@ namespace PixelCrushers
             SetInputDevice(inputDevice);
             BrieflyIgnoreMouseMovement();
             SceneManager.sceneLoaded += OnSceneLoaded;
-#if USE_NEW_INPUT
+#if ENABLE_INPUT_SYSTEM
             InputSystem.onDeviceChange += OnInputSystemDeviceChange;
 #endif
         }
 
-#if USE_NEW_INPUT
+#if ENABLE_INPUT_SYSTEM
         private void OnInputSystemDeviceChange(UnityEngine.InputSystem.InputDevice device, InputDeviceChange change)
         {
             if (change == InputDeviceChange.Added ||
@@ -468,7 +468,7 @@ namespace PixelCrushers
             Cursor.lockState = visible ? CursorLockMode.None : cursorLockMode;
         }
 
-#if USE_NEW_INPUT
+#if ENABLE_INPUT_SYSTEM
         public static Dictionary<string, InputAction> inputActionDict = new Dictionary<string, InputAction>();
 
         public static void RegisterInputAction(string name, InputAction inputAction)
@@ -514,7 +514,7 @@ namespace PixelCrushers
 
         public static bool DefaultGetKeyDown(KeyCode keyCode)
         {
-#if USE_NEW_INPUT
+#if ENABLE_INPUT_SYSTEM
             if (Keyboard.current == null || keyCode == KeyCode.None) return false;
             if (keyCode == KeyCode.Return) return (Keyboard.current["enter"] as KeyControl).wasPressedThisFrame;
             var s = keyCode.ToString().ToLower();
@@ -540,7 +540,7 @@ namespace PixelCrushers
 
         public static bool DefaultGetAnyKeyDown()
         {
-#if USE_NEW_INPUT
+#if ENABLE_INPUT_SYSTEM
             return Keyboard.current != null && Keyboard.current.anyKey.wasPressedThisFrame;
 #else
             return Input.anyKeyDown;
@@ -551,7 +551,7 @@ namespace PixelCrushers
         {
             try
             {
-#if USE_NEW_INPUT
+#if ENABLE_INPUT_SYSTEM
                 InputAction inputAction;
                 if (inputActionDict.TryGetValue(buttonName, out inputAction))
                 {
@@ -579,7 +579,7 @@ namespace PixelCrushers
         {
             try
             {
-#if USE_NEW_INPUT
+#if ENABLE_INPUT_SYSTEM
                 InputAction inputAction;
                 if (inputActionDict.TryGetValue(buttonName, out inputAction))
                 {
@@ -607,7 +607,7 @@ namespace PixelCrushers
         {
             try
             {
-#if USE_NEW_INPUT
+#if ENABLE_INPUT_SYSTEM
                 InputAction inputAction;
                 if (inputActionDict.TryGetValue(axisName, out inputAction))
                 {
@@ -626,7 +626,7 @@ namespace PixelCrushers
 
         public static Vector3 DefaultGetMousePosition()
         {
-#if USE_NEW_INPUT
+#if ENABLE_INPUT_SYSTEM
             if (Mouse.current == null) return Vector3.zero;
             var pos = Mouse.current.position.ReadValue();
             return new Vector3(pos.x, pos.y, 0);
@@ -637,7 +637,7 @@ namespace PixelCrushers
 
         public static bool DefaultGetMouseButtonDown(int buttonNumber)
         {
-#if USE_NEW_INPUT
+#if ENABLE_INPUT_SYSTEM
             if (Mouse.current == null) return false;
             switch (buttonNumber)
             {

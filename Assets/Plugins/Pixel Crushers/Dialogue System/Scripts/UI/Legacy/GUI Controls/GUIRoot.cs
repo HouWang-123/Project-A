@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace PixelCrushers.DialogueSystem.UnityGUI
 {
@@ -33,7 +34,8 @@ namespace PixelCrushers.DialogueSystem.UnityGUI
         {
             UseGUISkin();
             if (!Application.isPlaying) ManualRefresh();
-            Vector2 screenMousePosition = new Vector2(Input.mousePosition.x, Screen.height - Input.mousePosition.y);
+            Vector2 mousePosition = Mouse.current.position.ReadValue(); 
+            Vector2 screenMousePosition = new Vector2(mousePosition.x, Screen.height - mousePosition.y);
             Draw(screenMousePosition);
         }
 

@@ -3,7 +3,7 @@ To make the demo work with Unity's optional new Input System package:
 1. Use the Package Manager window to install the new Input System.
 
 2. Select menu item Tools > Pixel Crushers > Dialogue System > Welcome Window.
-   Tick the USE_NEW_INPUT checkbox.
+   Tick the ENABLE_INPUT_SYSTEM checkbox.
    
 3. Open DemoScene1. 
    - Inspect EventSystem. Click the button to update it for the Input System.

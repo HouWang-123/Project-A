@@ -122,16 +122,16 @@ public partial class TimeSystemManager : MonoBehaviour
     void Update()
     {
         // 时间流逝计算，按T加快时间流速
-        float delta;
-        if (Input.GetKey(KeyCode.T))
-        {
-            delta = Time.deltaTime * timeSpeed;
-            Debug.Log(GetType() + "按下了时间加速");
-        }
-        else
-        {
-            delta = Time.deltaTime;
-        }
+        float delta = Time.deltaTime;
+        //if (Input.GetKey(KeyCode.T))
+        //{
+        //    delta = Time.deltaTime * timeSpeed;
+        //    Debug.Log(GetType() + "按下了时间加速");
+        //}
+        //else
+        //{
+        //    delta = Time.deltaTime;
+        //}
         elapsedRealSeconds += delta;
 
         // 游戏时间计算

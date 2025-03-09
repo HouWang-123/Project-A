@@ -45,10 +45,10 @@ namespace PixelCrushers.DialogueSystem.Demo
                 Debug.LogWarning("Dialogue System: NavigateOnMouseClick didn't find a NavMeshAgent on " + name + ". Disabling component.", this);
                 enabled = false;
             }
-#if USE_NEW_INPUT
+#if ENABLE_INPUT_SYSTEM
             Debug.LogWarning("Dialogue System: NavigateOnMouseClick doesn't support the new input system.");
             enabled = false;
-#endif // USE_NEW_INPUT
+#endif // ENABLE_INPUT_SYSTEM
         }
 
         void Update()
