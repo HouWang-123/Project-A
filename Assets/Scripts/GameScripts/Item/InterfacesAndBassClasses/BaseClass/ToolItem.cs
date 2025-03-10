@@ -1,12 +1,14 @@
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 using YooAsset;
 
 public class Tool : ItemBase, ISlotable
 {
     public cfg.item.Tools data;
     // 物品初始化
-
+    public ToolBehaviour m_ToolBehaviour;
+    public LightBehaviour m_LightBehaviour;
     public override void InitItem(int id)
     {
         ItemType = GameItemType.ToolItem;
@@ -24,6 +26,11 @@ public class Tool : ItemBase, ISlotable
         ItemSpriteName = data.SpriteName;
         
         GameRunTimeData.Instance.ItemManager.RegistItem(this);
+        m_ToolBehaviour = GetComponent<ToolBehaviour>();
+        if (m_ToolBehaviour is LightBehaviour)
+        {
+            m_LightBehaviour = m_ToolBehaviour as LightBehaviour;
+        }
     }
 
     public override Sprite GetItemIcon()
@@ -42,16 +49,34 @@ public class Tool : ItemBase, ISlotable
     
     public override void OnRightInteract( )
     {
-        throw new NotImplementedException();
+        
     }
 
     public override void OnLeftInteract( )
     {
-        throw new NotImplementedException();
+        
     }
 
     public int GetItemId()
     {
         return ItemID;
+    }
+
+    public override void OnItemPickUp()
+    {
+        base.OnItemPickUp();
+        if (m_LightBehaviour != null)
+        {
+            m_LightBehaviour.LightOn();
+        }
+    }
+
+    public override void OnItemDrop(bool fastDrop, bool IgnoreBias = false)
+    {
+        base.OnItemDrop(fastDrop, IgnoreBias);
+        if (m_LightBehaviour != null)
+        {
+            m_LightBehaviour.LightOff();
+        }
     }
 }

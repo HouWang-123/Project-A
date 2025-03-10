@@ -485,6 +485,7 @@ public class PlayerControl : MonoBehaviour
                     item.ChangeRendererSortingOrder(GameConstData.PlayerOrder);
                     leftMouseAction = item.OnLeftInteract;
                     rightMouseAction = item.OnRightInteract;
+                    item.OnItemPickUp();       // 拾取物体后立即完成xxxx
                 }
             );
         }
@@ -511,6 +512,7 @@ public class PlayerControl : MonoBehaviour
                     item.ChangeRendererSortingOrder(GameConstData.PlayerOrder);
                     leftMouseAction = item.OnLeftInteract;
                     rightMouseAction = item.OnRightInteract;
+                    item.OnItemPickUp(); // 举起物体后立即完成XXXXXX
                 }
             );
         }
