@@ -142,7 +142,7 @@ MonoBehaviour:
     - title: Description
       value: The evil emperor's guards. They have a note with the terminal password.
       type: 0
-      typeString: CustomFieldType_Text
+      typeString: 
     - title: IsPlayer
       value: False
       type: 2
@@ -165,7 +165,7 @@ MonoBehaviour:
       value: The Enemy actor is used for enemies to bark menacing one-off gameplay
         lines that threaten the Player.
       type: 0
-      typeString: CustomFieldType_Text
+      typeString: 
     - title: IsPlayer
       value: False
       type: 2
@@ -1112,31 +1112,31 @@ MonoBehaviour:
       - title: Title
         value: Quest Unassigned
         type: 0
-        typeString: CustomFieldType_Text
+        typeString: 
       - title: Actor
         value: 3
         type: 5
-        typeString: CustomFieldType_Actor
+        typeString: 
       - title: Conversant
         value: 1
         type: 5
-        typeString: CustomFieldType_Actor
+        typeString: 
       - title: Menu Text
         value: 
         type: 0
-        typeString: CustomFieldType_Text
+        typeString: 
       - title: Dialogue Text
         value: 
         type: 0
-        typeString: CustomFieldType_Text
+        typeString: 
       - title: Video File
         value: 
         type: 0
-        typeString: CustomFieldType_Text
+        typeString: 
       - title: Sequence
         value: 
         type: 0
-        typeString: CustomFieldType_Text
+        typeString: 
       conversationID: 2
       isRoot: 0
       isGroup: 1

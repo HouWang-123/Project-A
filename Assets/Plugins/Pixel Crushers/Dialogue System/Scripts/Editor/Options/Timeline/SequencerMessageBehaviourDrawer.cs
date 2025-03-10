@@ -1,6 +1,4 @@
-// Recompile at 2025/2/13 17:21:35
-
-#if USE_TIMELINE
+﻿#if USE_TIMELINE
 #if UNITY_2017_1_OR_NEWER
 using UnityEditor;
 using UnityEngine;

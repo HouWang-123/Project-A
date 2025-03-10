@@ -9,7 +9,7 @@ namespace PixelCrushers.DialogueSystem
     {
 
         public const string USE_PHYSICS2D = "USE_PHYSICS2D";
-        public const string ENABLE_INPUT_SYSTEM = "ENABLE_INPUT_SYSTEM";
+        public const string USE_NEW_INPUT = "USE_NEW_INPUT";
         public const string USE_ADDRESSABLES = "USE_ADDRESSABLES";
         public const string USE_TIMELINE= "USE_TIMELINE";
         public const string USE_CINEMACHINE = "USE_CINEMACHINE";

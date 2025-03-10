@@ -19,7 +19,7 @@ namespace PixelCrushers
             {
                 if (message != null) Debug.LogWarning(message);
                 eventSystem = new GameObject("EventSystem").AddComponent<UnityEngine.EventSystems.EventSystem>();
-#if ENABLE_INPUT_SYSTEM
+#if USE_NEW_INPUT
                 var inputModule = eventSystem.gameObject.AddComponent<UnityEngine.InputSystem.UI.InputSystemUIInputModule>();
 #else
                 var inputModule = eventSystem.gameObject.AddComponent<UnityEngine.EventSystems.StandaloneInputModule>();

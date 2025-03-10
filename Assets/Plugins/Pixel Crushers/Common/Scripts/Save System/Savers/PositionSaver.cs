@@ -1,7 +1,4 @@
-// Recompile at 2025/2/13 17:22:00
-
-
-// Copyright (c) Pixel Crushers. All rights reserved.
+﻿// Copyright (c) Pixel Crushers. All rights reserved.
 
 using UnityEngine;
 using UnityEngine.SceneManagement;

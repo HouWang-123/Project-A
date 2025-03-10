@@ -212,7 +212,7 @@ namespace PixelCrushers
         {
             if (EditorUtility.DisplayDialog("Use New Input System", "This will switch the Input Device Manager to read from Unity's new Input System. You must have already added the Input System package.\n\nSee the configuration manual in Plugins > Pixel Crushers > Common > Documentation.", "OK", "Cancel"))
             {
-                MoreEditorUtility.TryAddScriptingDefineSymbols("ENABLE_INPUT_SYSTEM");
+                MoreEditorUtility.TryAddScriptingDefineSymbols("USE_NEW_INPUT");
                 EditorUtility.DisplayDialog("Using New Input System", "See the configuration manual in Plugins > Pixel Crushers > Common > Documentation.", "OK");
             }
         }
@@ -220,7 +220,7 @@ namespace PixelCrushers
         [MenuItem("Tools/Pixel Crushers/Common/Misc/Use New Input System...", true)]
         static bool ValidateAddUSENEWINPUT()
         {
-            return !MoreEditorUtility.DoesScriptingDefineSymbolExist("ENABLE_INPUT_SYSTEM");
+            return !MoreEditorUtility.DoesScriptingDefineSymbolExist("USE_NEW_INPUT");
         }
 
         //=============================================================

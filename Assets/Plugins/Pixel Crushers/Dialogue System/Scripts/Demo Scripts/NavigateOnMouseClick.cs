@@ -1,7 +1,4 @@
-// Recompile at 2025/2/13 17:22:00
-
-
-
+// Recompile at 9/25/2023 11:33:17 AM
 // Based on: http://wiki.unity3d.com/index.php/Click_To_Move_C
 // By: Vinicius Rezendrix
 using UnityEngine;
@@ -45,10 +42,10 @@ namespace PixelCrushers.DialogueSystem.Demo
                 Debug.LogWarning("Dialogue System: NavigateOnMouseClick didn't find a NavMeshAgent on " + name + ". Disabling component.", this);
                 enabled = false;
             }
-#if ENABLE_INPUT_SYSTEM
+#if USE_NEW_INPUT
             Debug.LogWarning("Dialogue System: NavigateOnMouseClick doesn't support the new input system.");
             enabled = false;
-#endif // ENABLE_INPUT_SYSTEM
+#endif // USE_NEW_INPUT
         }
 
         void Update()

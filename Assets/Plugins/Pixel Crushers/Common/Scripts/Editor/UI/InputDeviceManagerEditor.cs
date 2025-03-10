@@ -189,7 +189,7 @@ namespace PixelCrushers
 
         private static bool AxisDefined(string axisName)
         {
-#if ENABLE_INPUT_SYSTEM
+#if USE_NEW_INPUT
             return true; // Assume InputActions will define axis.
 #else
             try
