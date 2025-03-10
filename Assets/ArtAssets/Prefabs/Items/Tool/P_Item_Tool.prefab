@@ -47,9 +47,9 @@ MonoBehaviour:
   m_ComponentVersion: 2
   m_LightType: 3
   m_BlendStyleIndex: 0
-  m_FalloffIntensity: 1
+  m_FalloffIntensity: 0.781
   m_Color: {r: 1, g: 0.8504688, b: 0.4764151, a: 1}
-  m_Intensity: 1.5
+  m_Intensity: 1
   m_LightVolumeIntensity: 0
   m_LightVolumeEnabled: 0
   m_ApplyToSortingLayers: 00000000
@@ -70,8 +70,8 @@ MonoBehaviour:
   m_LocalBounds:
     m_Center: {x: 0, y: -0.00000011920929, z: 0}
     m_Extent: {x: 0.9985302, y: 0.99853027, z: 0}
-  m_PointLightInnerAngle: 37.894737
-  m_PointLightOuterAngle: 164.21054
+  m_PointLightInnerAngle: 25.372997
+  m_PointLightOuterAngle: 85.94968
   m_PointLightInnerRadius: 0
   m_PointLightOuterRadius: 9.1
   m_ShapeLightParametricSides: 5
@@ -131,9 +131,9 @@ MonoBehaviour:
   m_ComponentVersion: 2
   m_LightType: 3
   m_BlendStyleIndex: 0
-  m_FalloffIntensity: 0.905
+  m_FalloffIntensity: 0.992
   m_Color: {r: 1, g: 0.89461637, b: 0.6084906, a: 1}
-  m_Intensity: 0.36
+  m_Intensity: 0.94
   m_LightVolumeIntensity: 1
   m_LightVolumeEnabled: 0
   m_ApplyToSortingLayers: 00000000
@@ -154,10 +154,10 @@ MonoBehaviour:
   m_LocalBounds:
     m_Center: {x: 0, y: -0.00000011920929, z: 0}
     m_Extent: {x: 0.9985302, y: 0.99853027, z: 0}
-  m_PointLightInnerAngle: 360
+  m_PointLightInnerAngle: 190.95657
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
-  m_PointLightOuterRadius: 6.53
+  m_PointLightOuterRadius: 11.02
   m_ShapeLightParametricSides: 5
   m_ShapeLightParametricAngleOffset: 0
   m_ShapeLightParametricRadius: 1
@@ -302,9 +302,9 @@ MonoBehaviour:
   m_ComponentVersion: 2
   m_LightType: 3
   m_BlendStyleIndex: 0
-  m_FalloffIntensity: 0.61
+  m_FalloffIntensity: 0.767
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0.86
+  m_Intensity: 3.92
   m_LightVolumeIntensity: 0
   m_LightVolumeEnabled: 0
   m_ApplyToSortingLayers: 00000000
@@ -326,9 +326,9 @@ MonoBehaviour:
     m_Center: {x: 0, y: -0.00000011920929, z: 0}
     m_Extent: {x: 0.9985302, y: 0.99853027, z: 0}
   m_PointLightInnerAngle: 0
-  m_PointLightOuterAngle: 41.052628
+  m_PointLightOuterAngle: 31.66134
   m_PointLightInnerRadius: 0
-  m_PointLightOuterRadius: 7.45
+  m_PointLightOuterRadius: 7.61
   m_ShapeLightParametricSides: 5
   m_ShapeLightParametricAngleOffset: 0
   m_ShapeLightParametricRadius: 1
@@ -418,6 +418,8 @@ MonoBehaviour:
   ignoreAngleCorrect: 0
   DropState: 0
   StackCount: 1
+  m_ToolBehaviour: {fileID: 0}
+  m_LightBehaviour: {fileID: 0}
 --- !u!114 &8449184726143135220
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -431,6 +433,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LightNode: {fileID: 8777771607010518713}
+  isOn: 0
 --- !u!1 &7788931241169227175
 GameObject:
   m_ObjectHideFlags: 0
@@ -478,9 +481,9 @@ MonoBehaviour:
   m_ComponentVersion: 2
   m_LightType: 3
   m_BlendStyleIndex: 0
-  m_FalloffIntensity: 0.905
+  m_FalloffIntensity: 1
   m_Color: {r: 1, g: 0.89461637, b: 0.6084906, a: 1}
-  m_Intensity: 3.95
+  m_Intensity: 13.79
   m_LightVolumeIntensity: 1
   m_LightVolumeEnabled: 0
   m_ApplyToSortingLayers: 00000000
@@ -504,7 +507,7 @@ MonoBehaviour:
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
-  m_PointLightOuterRadius: 0.42
+  m_PointLightOuterRadius: 0.25
   m_ShapeLightParametricSides: 5
   m_ShapeLightParametricAngleOffset: 0
   m_ShapeLightParametricRadius: 1
