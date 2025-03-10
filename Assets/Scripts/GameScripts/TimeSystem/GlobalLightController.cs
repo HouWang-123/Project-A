@@ -23,10 +23,10 @@ public class GlobalLightController : MonoBehaviour
         timePhaseToColor = new(4)
         {
 
-            { TimePhaseEnum.Night2, new (0 / 255f, 0 / 255f, 0 / 255f) },
-            { TimePhaseEnum.Day, new (180f / 255f, 190f / 255f, 210f / 255f) },
-            { TimePhaseEnum.Dusk, new (71 / 255f, 53 / 255f, 39 / 255f) },
-            { TimePhaseEnum.Night1, new (0 / 255f, 0 / 255f, 0 / 255f) }
+            { TimePhaseEnum.Night2, new (20 / 255f, 20 / 255f, 25 / 255f) },
+            { TimePhaseEnum.Day, new (190 / 255f, 190f / 255f, 220 / 255f) },
+            { TimePhaseEnum.Dusk, new (120 / 255f, 50 / 255f, 40 / 255f) },
+            { TimePhaseEnum.Night1, new (30 / 255f, 30 / 255f, 70 / 255f) }
         };
 
         phasedEvents = new(4);

@@ -43,5 +43,14 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: nolightwall
+    uniqueID: 2103151679
+    locked: 0
+  - name: haslightwall
+    uniqueID: 1463382531
+    locked: 0
+  - name: Entities
+    uniqueID: 517859215
+    locked: 0
   m_RenderingLayers:
   - Default
