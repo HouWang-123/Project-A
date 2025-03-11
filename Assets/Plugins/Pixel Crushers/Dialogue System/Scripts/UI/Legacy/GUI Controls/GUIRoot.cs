@@ -34,7 +34,7 @@ namespace PixelCrushers.DialogueSystem.UnityGUI
         {
             UseGUISkin();
             if (!Application.isPlaying) ManualRefresh();
-            Vector2 mousePosition = Mouse.current.position.ReadValue();
+            Vector2 mousePosition = Mouse.current.position.ReadValue(); 
             Vector2 screenMousePosition = new Vector2(mousePosition.x, Screen.height - mousePosition.y);
             Draw(screenMousePosition);
         }
