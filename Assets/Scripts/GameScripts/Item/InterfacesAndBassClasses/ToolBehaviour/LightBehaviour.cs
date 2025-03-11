@@ -16,5 +16,4 @@ public class LightBehaviour : ToolBehaviour
         LightNode.SetActive(false);
         isOn = false;
     }
-    
 }

@@ -449,11 +449,16 @@ public class PlayerControl : MonoBehaviour
                     // stackable 插入失败后该值会自动变为溢出量
                     if(stackOverFlowed)
                     {
-                        GameItemTool.GenerateStackableItemAtTransform(toPickUpItem.ItemID, overFlowedCount, ItemReleasePoint, false,
+                        GameItemTool.GenerateStackableItemAtTransform(
+                            toPickUpItem.ItemID,
+                            overFlowedCount,
+                            ItemReleasePoint,
+                            false,
                             (item) =>
                             {
                                 item.OnItemDrop(false);
-                            });
+                            }
+                        );
                     }
                 }
             }

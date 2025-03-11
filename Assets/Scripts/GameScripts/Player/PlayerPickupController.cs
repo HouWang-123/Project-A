@@ -42,7 +42,6 @@ public class PlayerPickupController : MonoBehaviour
                 changekeyPressTime = 0;
                 isfirstInput = false;
             }
-            
             UpdateCurrentPickup();
         }
         else
@@ -106,7 +105,6 @@ public class PlayerPickupController : MonoBehaviour
                 Debug.LogWarning("no ItemBase component assigned to " + other.gameObject.name);
                 return;
             }
-            
             Item2PickList.Add(currentPickup);
             currentPickup.SetPickupable(true);
             currentPickup.SetTargerted(true);

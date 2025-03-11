@@ -67,6 +67,7 @@ public class ShotBehaviour : BaseWeaponBehavior
         Debug.Log("Damage!" + damageAmount);
         void Process(BulletBehaviour bulletBehaviour)
         {
+            bulletBehaviour.SetInitialDamage(damageAmount);
             bulletBehaviour.transform.SetParent(transform);
             bulletBehaviour.transform.localEulerAngles = Vector3.zero;
             bulletBehaviour.gameObject.transform.position = BulletPostion.position;

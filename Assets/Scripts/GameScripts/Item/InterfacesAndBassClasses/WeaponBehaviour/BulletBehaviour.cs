@@ -51,7 +51,13 @@ public class BulletBehaviour : MonoBehaviour,IDoDamageHandler
         IDamageable damageable = other.gameObject.GetComponentInChildren<IDamageable>();
         if(damageable == null)
         {
-            other.gameObject.GetComponentInParent<IDamageable>();
+            damageable = other.gameObject.GetComponentInParent<IDamageable>();
+        }
+
+        if (damageable == null)
+        {
+            m_ShotBehaviour.RecycleBullet(this);
+            return;
         }
         damageable?.DamageReceive(DamageAmount);
         //生成特效
