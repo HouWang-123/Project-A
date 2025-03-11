@@ -180,11 +180,15 @@ public class ItemSlotData
                 return 2;
             }
         }
-        if (SlotItemDataList.ContainsKey(slotNumber))
+        else
         {
-            slotNumber = Find_A_Empty_Slot();
+            if (SlotItemDataList.ContainsKey(slotNumber))
+            {
+                slotNumber = Find_A_Empty_Slot();
+            }
+            SlotItemDataList[slotNumber] = newItemStatus;
         }
-        SlotItemDataList[slotNumber] = newItemStatus;
+        
         if (slotNumber != CurrentFocusSlot)
         {
             return 1;
