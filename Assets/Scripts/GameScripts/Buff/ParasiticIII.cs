@@ -7,6 +7,6 @@ public class ParasiticIII : BuffComponet
     public override void Execute()
     {
         base.Execute();
-        GameRunTimeData.Instance.CharacterBasicStat.HurtPlayer(20f);
+        GameRunTimeData.Instance.CharacterBasicStat.PlayerLifeMinus(20f);
     }
 }

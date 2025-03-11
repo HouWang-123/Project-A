@@ -151,6 +151,7 @@ public class GameControl
         }
         PlayerControl = playerObj.GetComponent<PlayerControl>();
         return playerObj;
+        
     }
 
     private void CreateGlobalLight()

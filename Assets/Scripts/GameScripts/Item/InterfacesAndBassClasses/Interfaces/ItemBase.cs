@@ -19,11 +19,15 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable
     public String ItemSpriteName;
     private bool Targeted; // 是否被拾取系统选中
     private bool ItemReversed;
-    public bool ignoreAngleCorrect;
+    private bool ignoreAngleCorrect;
     public bool DropState;
-
     public int StackCount = 1;
 
+    public virtual ItemStatus GetItemStatus()
+    {
+        return null;
+    }
+    public virtual void SetItemStatus(ItemStatus itemStatus) {}
     private void SetRendererImage()
     {
         AssetHandle loadAssetSync;
@@ -134,7 +138,7 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable
     private float V_BiasSpeed;
 
     // 物品掉落相关物理逻辑
-    private void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
         F_Update_ItemDorp();
         F_UpdateWeaponCDRecover();

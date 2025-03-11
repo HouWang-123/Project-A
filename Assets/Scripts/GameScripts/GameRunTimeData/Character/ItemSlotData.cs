@@ -4,20 +4,23 @@ using UnityEngine;
 [Serializable]
 public class SlotItemStatus
 {
-    public SlotItemStatus(int itemID, int stackValue)
+    public SlotItemStatus(int itemID, int stackValue,ItemStatus itemStatus)
     {
         ItemID = itemID;
         StackValue = stackValue;
+        ItemStatus = itemStatus;
     }
-    public SlotItemStatus(int itemID, int stackValue, int key)
+    public SlotItemStatus(int itemID, int stackValue, int key, ItemStatus itemStatus)
     {
         Key = key;
         ItemID = itemID;
         StackValue = stackValue;
+        ItemStatus = itemStatus;
     }
     public int ItemID;
     public int StackValue; // 最小为1
     public int Key; // 对应道具栏格位
+    public ItemStatus ItemStatus;
 }
 
 public class ItemSlotData
@@ -55,13 +58,13 @@ public class ItemSlotData
         CurrentMaxSlotCount = number;
     }
     // 获取当前道具栏焦点位置的物品ID
-    public int GetCurrentFocusedItemId()
+    public (int,ItemStatus) GetCurrentFocusedItemId()
     {
         if (SlotItemDataList.TryGetValue(CurrentFocusSlot, out var IslotItemStatus))
         {
-            return IslotItemStatus.ItemID;
+            return (IslotItemStatus.ItemID,IslotItemStatus.ItemStatus);
         }
-        return -1;
+        return (-1,null);
     }
     // =================================================================================================================
     // ==============================================   InsertProcessor    =============================================
@@ -149,7 +152,7 @@ public class ItemSlotData
     private int InsertOrUpdateItemSlotData_Stack(ItemBase item)
     {
         IStackable stackable = item as IStackable;
-        SlotItemStatus newItemStatus = new SlotItemStatus(item.ItemID, stackable.GetStackCount());
+        SlotItemStatus newItemStatus = new SlotItemStatus(item.ItemID, stackable.GetStackCount(),item.GetItemStatus());
         bool outofBound = false;
         // 默认插入位置为当前焦点位置
         int slotNumber = CurrentFocusSlot;
@@ -239,7 +242,7 @@ public class ItemSlotData
         }
         // 插入物品失败，取消拾取动作
         if (slotNumber == -1) { return -1; }
-        SlotItemStatus newItemStatus = new SlotItemStatus(item.ItemID, 1, slotNumber);
+        SlotItemStatus newItemStatus = new SlotItemStatus(item.ItemID, 1, slotNumber,item.GetItemStatus());
         SlotItemDataList[slotNumber] = newItemStatus;
         return 0;
     }

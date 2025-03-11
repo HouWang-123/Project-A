@@ -129,7 +129,10 @@ public class PlayerControl : MonoBehaviour
 
         InputControl.Instance.LeftMouse.started += (item) => { leftMous = true; };
         InputControl.Instance.LeftMouse.performed += (item) => { };
-        InputControl.Instance.LeftMouse.canceled += (item) => { leftMous = false; };
+        InputControl.Instance.LeftMouse.canceled += (item) =>
+        {
+            leftMous = false;
+        };
         InputControl.Instance.RightMouse.started += (item) => { rightMous = true; };
         InputControl.Instance.RightMouse.performed += (item) => { };
         InputControl.Instance.RightMouse.canceled += (item) => { rightMous = false; };
@@ -186,7 +189,7 @@ public class PlayerControl : MonoBehaviour
                 GameHUD.Instance.ISM_NextFocusItem();
                 GameRunTimeData.Instance.CharacterItemSlotData.ChangeFocusSlotNumber(true);
             }
-            int itemId = GameRunTimeData.Instance.CharacterItemSlotData.GetCurrentFocusedItemId();
+            (int,ItemStatus) itemId = GameRunTimeData.Instance.CharacterItemSlotData.GetCurrentFocusedItemId();
             RefreshItemOnHand(itemId);
             ScrollActionTimer = 0f;
         };
@@ -197,7 +200,14 @@ public class PlayerControl : MonoBehaviour
         InputControl.Instance.QButton.canceled += (item) => { _pickupController.ChangeItemToogle(false); };
         //==================
 
-        InputControl.Instance.EButton.started += (item) => { PickItem(); };
+        InputControl.Instance.EButton.started += (item) =>
+        {
+            bool actioned = false;
+            if (!actioned)
+            {
+                actioned = PickItem();
+            }
+        };
         // 物品丢弃
         InputControl.Instance.GButton.started += (item) =>
         {
@@ -251,7 +261,7 @@ public class PlayerControl : MonoBehaviour
         }
         GameHUD.Instance.ISM_SetFocus(Number);
         GameRunTimeData.Instance.CharacterItemSlotData.ChangeFocusSlotNumber(Number);
-        int currentFocusedItemId = GameRunTimeData.Instance.CharacterItemSlotData.GetCurrentFocusedItemId();
+        (int,ItemStatus) currentFocusedItemId = GameRunTimeData.Instance.CharacterItemSlotData.GetCurrentFocusedItemId();
         RefreshItemOnHand(currentFocusedItemId);
     }
     private void FixedUpdate()
@@ -372,7 +382,7 @@ public class PlayerControl : MonoBehaviour
             characterStat.LiftedItem.OnItemDrop(false, true);
             characterStat.LiftedItem.ChangeRendererSortingOrder(GameConstData.BelowPlayerOrder);
             characterStat.LiftedItem = null;
-            int currentFocusedItemId = GameRunTimeData.Instance.CharacterItemSlotData.GetCurrentFocusedItemId();
+            (int,ItemStatus) currentFocusedItemId = GameRunTimeData.Instance.CharacterItemSlotData.GetCurrentFocusedItemId();
             RefreshItemOnHand(currentFocusedItemId);
             GameHUD.Instance.slotManager.EnableHud();
             return;
@@ -410,13 +420,14 @@ public class PlayerControl : MonoBehaviour
         {
             return false;
         }
-
+        
         return true;
     }
-    public void PickItem() // 拾取物品
+
+    public bool PickItem() // 拾取物品
     {
         if(!PickUpValidation())
-            return;
+            return false;
 
         pickupLock = true;
 
@@ -476,21 +487,25 @@ public class PlayerControl : MonoBehaviour
                 GameHUD.Instance.slotManager.DisableHud(false, null);
             }
         }
+        return true;
     }
 
-    private void RefreshItemOnHand(int ItemId)
+    private void RefreshItemOnHand((int,ItemStatus) Item)
     {
-        leftMouseAction = null;
-        rightMouseAction = null;
+        int ItemId = Item.Item1;
+        ItemStatus itemStatus = Item.Item2;
         if(characterStat.ItemOnHand != null)
         {
-            if(characterStat.ItemOnHand.ItemID == ItemId)
+            if(characterStat.ItemOnHand.ItemID == Item.Item1)
             {
+                characterStat.ItemOnHand.SetItemStatus(itemStatus);
                 return;
             }
             Destroy(characterStat.ItemOnHand.gameObject);
             characterStat.ItemOnHand = null;
         }
+        leftMouseAction = null;
+        rightMouseAction = null;
         if(ItemId != -1)
         {
             GameItemTool.GenerateItemAtTransform(ItemId, ItemHoldPosition, true,
@@ -501,6 +516,7 @@ public class PlayerControl : MonoBehaviour
                     leftMouseAction = item.OnLeftInteract;
                     rightMouseAction = item.OnRightInteract;
                     item.OnItemPickUp();       // 拾取物体后立即完成xxxx
+                    item.SetItemStatus(itemStatus);
                 }
             );
         }

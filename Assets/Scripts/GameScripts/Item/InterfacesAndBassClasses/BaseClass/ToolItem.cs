@@ -9,6 +9,32 @@ public class Tool : ItemBase, ISlotable
     // 物品初始化
     public ToolBehaviour m_ToolBehaviour;
     public LightBehaviour m_LightBehaviour;
+
+    protected ToolStatus ToolStatus
+    {
+        set
+        {
+            _toolStatus = value;
+            if (_toolStatus.ToolOn)
+            {
+                m_LightBehaviour.LightOn();
+                ToolStatus.ToolOn = true;
+            }
+            else
+            {
+                m_LightBehaviour.LightOff();
+                ToolStatus.ToolOn = false;
+            }
+        }
+        get
+        {
+            return _toolStatus;
+        }
+    }
+
+    private ToolStatus _toolStatus;
+    private float SwitchCD = 0.2f;
+    
     public override void InitItem(int id)
     {
         ItemType = GameItemType.ToolItem;
@@ -31,8 +57,8 @@ public class Tool : ItemBase, ISlotable
         {
             m_LightBehaviour = m_ToolBehaviour as LightBehaviour;
         }
+        _toolStatus = new ToolStatus();
     }
-
     public override Sprite GetItemIcon()
     {
         AssetHandle loadAssetSync = YooAssets.LoadAssetSync<Sprite>(data.IconName);
@@ -52,31 +78,55 @@ public class Tool : ItemBase, ISlotable
         
     }
 
-    public override void OnLeftInteract( )
+    protected override void FixedUpdate()
     {
-        
+        base.FixedUpdate();
+        SwitchCD_2 += Time.deltaTime;
+        if (Mathf.Abs(SwitchCD - SwitchCD_2) > 0.2f)
+        {
+            SwitchCD_2 = 0f;
+            SwitchCD = 0f;
+            actioned = false;
+        }
     }
 
+    private float SwitchCD_2;
+    private bool actioned = false;
+    public override void OnLeftInteract( )
+    {
+        SwitchCD += Time.deltaTime;
+        if (actioned)
+        {
+            return;
+        }
+        if (m_LightBehaviour != null)
+        {
+            actioned = true;
+            SwitchCD_2 = SwitchCD;
+            if (m_LightBehaviour.isOn)
+            {
+                m_LightBehaviour.LightOff();
+                ToolStatus.ToolOn = false;
+            }
+            else
+            {
+                m_LightBehaviour.LightOn();
+                ToolStatus.ToolOn = true;
+            }
+        }
+    }
     public int GetItemId()
     {
         return ItemID;
     }
 
-    public override void OnItemPickUp()
+    public override void SetItemStatus(ItemStatus itemStatus)
     {
-        base.OnItemPickUp();
-        if (m_LightBehaviour != null)
-        {
-            m_LightBehaviour.LightOn();
-        }
+        ToolStatus = itemStatus as ToolStatus;
     }
 
-    public override void OnItemDrop(bool fastDrop, bool IgnoreBias = false)
+    public override ItemStatus GetItemStatus()
     {
-        base.OnItemDrop(fastDrop, IgnoreBias);
-        if (m_LightBehaviour != null)
-        {
-            m_LightBehaviour.LightOff();
-        }
+        return _toolStatus;
     }
 }

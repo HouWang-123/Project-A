@@ -145,12 +145,21 @@ public class CharacterBasicStat
         }
         //todo 如果还有其他增幅 在此处结算
         CharacterStat.CurrentHp -= attack;
+        if (CharacterStat.CurrentHp < 0)
+        {
+            EventManager.Instance.RunEvent(EventConstName.PlayerOnDeadAnimation);
+        }
+        else
+        {
+            EventManager.Instance.RunEvent(EventConstName.PlayerHurtAnimation);
+        }
         GameHUD.Instance.UpdateHp();
-        EventManager.Instance.RunEvent(EventConstName.PlayerHurtAnimation);
+        
     }
-    public void HurtPlayer(float number)
+    public void PlayerLifeMinus(float number)
     {
         CharacterStat.CurrentHp -= number;
+        GameHUD.Instance.UpdateHp();
     }
 
     public void UpdatePlayerSan(float number)
@@ -242,7 +251,6 @@ public class CharacterBasicStat
         if(CharacterStat.CurrentHp <= 0f)
         {
             CharacterStat.Dead = true;
-            EventManager.Instance.RunEvent(EventConstName.PlayerOnDeadAnimation);
         }
     }
     #endregion
