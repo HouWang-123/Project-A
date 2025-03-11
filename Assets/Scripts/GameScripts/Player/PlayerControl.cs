@@ -558,7 +558,7 @@ public class PlayerControl : MonoBehaviour
     private void PlayerDead()
     {
         isDead = true;
-        playerSpin.AnimationState.SetAnimation(0, EPlayerAnimator.OnDead.ToString(), true);
+        playerSpin.AnimationState.SetAnimation(0, EPlayerAnimator.OnDead.ToString(), false);
         playerSpin.timeScale = 1;
     }
 
