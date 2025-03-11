@@ -14,5 +14,10 @@
     public const string PlayerHandItem = "PlayerHandItem";
 
     public const string OnChangeRoom = "Scene.OnChangeRoom";
+
+    //玩家收到伤害动画事件
+    public const string PlayerHurtAnimation = "PlayerHurtAnimation";
+    //玩家死亡时动画事件
+    public const string PlayerOnDeadAnimation = "PlayerOnDeadAnimation";
 }
 

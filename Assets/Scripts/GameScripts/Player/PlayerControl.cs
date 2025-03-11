@@ -3,6 +3,7 @@ using YooAsset;
 using UnityEngine.Events;
 using Spine.Unity;
 using System;
+using Spine;
 
 public class PlayerControl : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class PlayerControl : MonoBehaviour
     private Transform playerRenderer;
     private Transform useObjParent;
     private PlayerPickupController _pickupController;
-    
+
     private CharacterStat characterStat;
 
     private EPAMoveState moveState = EPAMoveState.Idle;
@@ -22,6 +23,7 @@ public class PlayerControl : MonoBehaviour
     {
         set
         {
+            if(moveState == value) return;
             moveState = value;
             UpdatePlayerAnimatorEnum();
         }
@@ -32,6 +34,7 @@ public class PlayerControl : MonoBehaviour
     {
         set
         {
+            if(handState == value) return;
             handState = value;
             UpdatePlayerAnimatorEnum();
         }
@@ -43,13 +46,11 @@ public class PlayerControl : MonoBehaviour
     {
         set
         {
-            if(value == animatorEnum)
+            if(handState == EPAHandState.Default && (animatorEnum == EPlayerAnimator.Run_Blink || animatorEnum == EPlayerAnimator.Walk_Blink))
             {
                 return;
             }
-            animatorEnum = value;
-            var entry = playerSpin.AnimationState.SetAnimation(0, animatorEnum.ToString(), true);
-            playerSpin.timeScale = 1;
+            SetPlayerAnimatorEnum(value);
         }
         get
         {
@@ -63,6 +64,9 @@ public class PlayerControl : MonoBehaviour
 
     public Transform ItemReleasePoint;
 
+    private bool isMove = true;
+    private bool isDead = false;
+
     //Action
     private UnityAction leftMouseAction = null;
     private bool leftMous = false;
@@ -74,6 +78,7 @@ public class PlayerControl : MonoBehaviour
     {
         Instance = this;
         inputControl = new PlayerInputControl();
+        isDead = false;
     }
 
     private void OnEnable()
@@ -97,6 +102,7 @@ public class PlayerControl : MonoBehaviour
         if(playerSpin != null)
         {
             playerSpin.AnimationState.SetAnimation(0, animatorEnum.ToString(), true);
+            playerSpin.AnimationState.Complete += PlayerAnimationComplete;
         }
 
         // 模拟添加时间段改变的事件
@@ -206,10 +212,14 @@ public class PlayerControl : MonoBehaviour
         };
         #endregion
         EventManager.Instance.RegistEvent<EPAHandState>(EventConstName.PlayerHandItem, SetHandState);
-        
+        EventManager.Instance.RegistEvent(EventConstName.PlayerHurtAnimation, PlayerHurt);
+        EventManager.Instance.RegistEvent(EventConstName.PlayerOnDeadAnimation, PlayerDead);
+
         GameHUD.Instance.SetPlayerItemTransform(useObjParent);
     }
-    
+
+
+
     Vector3 u, v, l, a, b;
     float angle;
 
@@ -248,9 +258,12 @@ public class PlayerControl : MonoBehaviour
     {
         GameRunTimeData.Instance.CharacterBasicStat.UpdatePlayerStat();
 
-        PlayerMove(InputControl.Instance.MovePoint, characterStat.WalkSpeed);
+        if(isMove)
+        {
+            PlayerMove(InputControl.Instance.MovePoint, characterStat.WalkSpeed);
+        }
 
-        if(!pickupLock)
+        if(!isDead && !pickupLock)
         {
             CalculateUseObjectRotation();
             useObjParent.localEulerAngles = a;
@@ -305,6 +318,8 @@ public class PlayerControl : MonoBehaviour
     {
         Instance = null;
         EventManager.Instance.RemoveEvent<EPAHandState>(EventConstName.PlayerHandItem, SetHandState);
+        EventManager.Instance.RemoveEvent(EventConstName.PlayerHurtAnimation, PlayerHurt);
+        EventManager.Instance.RemoveEvent(EventConstName.PlayerOnDeadAnimation, PlayerDead);
     }
 
     private bool stopmove = false;
@@ -362,8 +377,8 @@ public class PlayerControl : MonoBehaviour
             GameHUD.Instance.slotManager.EnableHud();
             return;
         }
-        
-        bool removestack = GameRunTimeData.Instance.CharacterItemSlotData.ClearHandItem(fastDrop,ItemReleasePoint);
+
+        bool removestack = GameRunTimeData.Instance.CharacterItemSlotData.ClearHandItem(fastDrop, ItemReleasePoint);
 
         if(removestack)
         {
@@ -408,7 +423,7 @@ public class PlayerControl : MonoBehaviour
         ItemBase toPickUpItem;
         toPickUpItem = _pickupController.currentPickup;
         GameRunTimeData.Instance.ItemManager.UnRegistItem(toPickUpItem);
-        
+
         if(toPickUpItem is ISlotable)
         {
             // 背包数据更新
@@ -423,7 +438,7 @@ public class PlayerControl : MonoBehaviour
                     // stackable 插入失败后该值会自动变为溢出量
                     if(stackOverFlowed)
                     {
-                        GameItemTool.GenerateStackableItemAtTransform(toPickUpItem.ItemID,overFlowedCount,ItemReleasePoint,false,
+                        GameItemTool.GenerateStackableItemAtTransform(toPickUpItem.ItemID, overFlowedCount, ItemReleasePoint, false,
                             (item) =>
                             {
                                 item.OnItemDrop(false);
@@ -520,14 +535,69 @@ public class PlayerControl : MonoBehaviour
 
     private void UpdatePlayerAnimatorEnum()
     {
-        PlayerAnimatorEnum = (EPlayerAnimator)((int)MoveState + (int)HandState);
+        SetPlayerAnimatorEnum((EPlayerAnimator)((int)MoveState + (int)HandState));
     }
 
+    private void SetPlayerAnimatorEnum(EPlayerAnimator value)
+    {
+        if(!isDead && value == animatorEnum)
+        {
+            return;
+        }
+        animatorEnum = value;
+        var entry = playerSpin.AnimationState.SetAnimation(0, animatorEnum.ToString(), true);
+        playerSpin.timeScale = 1;
+    }
 
+    //设置手部状态
     private void SetHandState(EPAHandState arg0)
     {
         HandState = arg0;
     }
+
+    private void PlayerDead()
+    {
+        isDead = true;
+        playerSpin.AnimationState.SetAnimation(0, EPlayerAnimator.OnDead.ToString(), true);
+        playerSpin.timeScale = 1;
+    }
+
+    private void PlayerHurt()
+    {
+        PlayerAnimatorEnum = EPlayerAnimator.Hurt;
+        isMove = false;
+    }
+
+    private int blinkNum = 0, blinkNumber = 6;
+    private void PlayerAnimationComplete(TrackEntry trackEntry)
+    {
+        if(trackEntry.Animation.Name.Equals(EPlayerAnimator.Walk.ToString()) || trackEntry.Animation.Name.Equals(EPlayerAnimator.Run.ToString()))
+        {
+            blinkNum++;
+            if(blinkNum >= blinkNumber)
+            {
+                blinkNum = 0;
+                switch(moveState)
+                {
+                    case EPAMoveState.Run:
+                        PlayerAnimatorEnum = EPlayerAnimator.Run_Blink;
+                        break;
+                    case EPAMoveState.Walk:
+                        PlayerAnimatorEnum = EPlayerAnimator.Walk_Blink;
+                        break;
+                }
+            }
+        }
+        else if(trackEntry.Animation.Name.Equals(EPlayerAnimator.Run_Blink.ToString()) || trackEntry.Animation.Name.Equals(EPlayerAnimator.Walk_Blink.ToString()) || trackEntry.Animation.Name.Equals(EPlayerAnimator.Hurt.ToString()))
+        {
+            SetPlayerAnimatorEnum((EPlayerAnimator)((int)MoveState + (int)HandState));
+            if(trackEntry.Animation.Name.Equals(EPlayerAnimator.Hurt.ToString()))
+            {
+                isMove = true;
+            }
+        }
+    }
+
 
 }
 

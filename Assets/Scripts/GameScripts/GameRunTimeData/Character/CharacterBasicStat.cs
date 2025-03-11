@@ -6,11 +6,11 @@ using UnityEngine;
 
 public class CharacterStat
 {
-    public int ID;                
-    public string NAME;          
-    public string DESCRIBE;       
+    public int ID;
+    public string NAME;
+    public string DESCRIBE;
 
-    public string VoicePackID; 
+    public string VoicePackID;
     public string PrefabName;
     // Hp
     public float MaxHP;
@@ -30,7 +30,7 @@ public class CharacterStat
     public float RunSpeedScale;
     public float RunReduce;
     public float RunRestore;
-    
+
     public float Strength;
 
     public int InventorySlots;
@@ -81,7 +81,7 @@ public class CharacterBasicStat
     private cfg.cha.Character m_characterData;
     private CharacterStat CharacterStat;
     private bool playerDataInited;
-    
+
     // 提供给存档使用
     public void InitCharacter(CharacterStat stat)
     {
@@ -90,14 +90,14 @@ public class CharacterBasicStat
         playerDataInited = true;
         GameHUD.Instance.SetHUDStat(CharacterStat);
     }
-    
+
     public void InitCharacter(int m_characterID)
     {
         try
         {
             m_characterData = GameTableDataAgent.CharacterTable.Get(m_characterID);
         }
-        catch (Exception e)
+        catch(Exception e)
         {
             m_characterData = GameTableDataAgent.CharacterTable.Get(GameConstData.DEFAULT_CHARACTER_ID);
             Debug.LogWarning("==========================角色数据不存在，使用默认数据=============================");
@@ -136,15 +136,17 @@ public class CharacterBasicStat
     }
     public void HurtPlayer(int number)
     {
-        if (CharacterStat.Dead) return;
+        if(CharacterStat.Dead)
+            return;
         float attack = number;
-        if (BuffManager.Instance.HasComponet(CharacterStat.ID, (int)BuffEnum.疯狂))
-        { 
+        if(BuffManager.Instance.HasComponet(CharacterStat.ID, (int)BuffEnum.疯狂))
+        {
             attack = number + ((CharacterStat.MaxSan - CharacterStat.CurrentSan) / 2f);
         }
         //todo 如果还有其他增幅 在此处结算
         CharacterStat.CurrentHp -= attack;
         GameHUD.Instance.UpdateHp();
+        EventManager.Instance.RunEvent(EventConstName.PlayerHurtAnimation);
     }
     public void HurtPlayer(float number)
     {
@@ -153,32 +155,32 @@ public class CharacterBasicStat
 
     public void UpdatePlayerSan(float number)
     {
-        if (BuffManager.Instance.HasComponet(CharacterStat.ID, (int)BuffEnum.美德))
+        if(BuffManager.Instance.HasComponet(CharacterStat.ID, (int)BuffEnum.美德))
         {
             CharacterStat.CurrentSan += -number;
         }
         CharacterStat.CurrentSan += number;
-        if (Tools.IsInRange(CharacterStat.CurrentSan, 40, 60))
+        if(Tools.IsInRange(CharacterStat.CurrentSan, 40, 60))
         {
-            if (!BuffManager.Instance.HasComponet(CharacterStat.ID, (int)BuffEnum.癫狂1))
+            if(!BuffManager.Instance.HasComponet(CharacterStat.ID, (int)BuffEnum.癫狂1))
             {
-                BuffManager.Instance.AddBuff<ChaosI>(CharacterStat.ID,(int)BuffEnum.癫狂1,999);
+                BuffManager.Instance.AddBuff<ChaosI>(CharacterStat.ID, (int)BuffEnum.癫狂1, 999);
             }
         }
-        else if (Tools.IsInRange(CharacterStat.CurrentSan, 20, 39))
+        else if(Tools.IsInRange(CharacterStat.CurrentSan, 20, 39))
         {
-            if (!BuffManager.Instance.UpdateBuff(CharacterStat.ID, (int)BuffEnum.癫狂1))
+            if(!BuffManager.Instance.UpdateBuff(CharacterStat.ID, (int)BuffEnum.癫狂1))
             {
                 //直接添加当前buff
-                BuffManager.Instance.AddBuff<ChaosI>(CharacterStat.ID,(int)BuffEnum.癫狂2,999);
+                BuffManager.Instance.AddBuff<ChaosI>(CharacterStat.ID, (int)BuffEnum.癫狂2, 999);
             }
         }
-        else if (Tools.IsInRange(CharacterStat.CurrentSan, 0, 19))
+        else if(Tools.IsInRange(CharacterStat.CurrentSan, 0, 19))
         {
-            if (!BuffManager.Instance.UpdateBuff(CharacterStat.ID, (int)BuffEnum.癫狂2))
+            if(!BuffManager.Instance.UpdateBuff(CharacterStat.ID, (int)BuffEnum.癫狂2))
             {
                 //直接添加当前buff
-                BuffManager.Instance.AddBuff<ChaosI>(CharacterStat.ID,(int)BuffEnum.癫狂3,999);
+                BuffManager.Instance.AddBuff<ChaosI>(CharacterStat.ID, (int)BuffEnum.癫狂3, 999);
             }
         }
     }
@@ -186,12 +188,12 @@ public class CharacterBasicStat
     {
         return ref CharacterStat;
     }
-    
-#region RunTimeUpdate
+
+    #region RunTimeUpdate
     // 在 FxiedUpdate中进行调用
     public void UpdatePlayerStat()
     {
-        if (playerDataInited)
+        if(playerDataInited)
         {
             // 死亡检测
             LifeChecker();
@@ -208,14 +210,14 @@ public class CharacterBasicStat
 
     private void LivePlayerStatUpdater()
     {
-        if (!CharacterStat.Dead)
+        if(!CharacterStat.Dead)
         {
         }
     }
 
     private void DeadPlayerStatUpdater()
     {
-        if (CharacterStat.Dead)
+        if(CharacterStat.Dead)
         {
             Debug.Log("PlayerDead");
         }
@@ -228,7 +230,7 @@ public class CharacterBasicStat
         CharacterStat.CurrentHp =
             Mathf.Clamp(CharacterStat.CurrentHp, 0f, CharacterStat.MaxHP);
     }
-    
+
     private void SanCorrector()
     {
         CharacterStat.CurrentSan =
@@ -237,10 +239,11 @@ public class CharacterBasicStat
 
     private void LifeChecker()
     {
-        if (CharacterStat.CurrentHp <= 0f)
+        if(CharacterStat.CurrentHp <= 0f)
         {
             CharacterStat.Dead = true;
+            EventManager.Instance.RunEvent(EventConstName.PlayerOnDeadAnimation);
         }
     }
-#endregion
+    #endregion
 }
