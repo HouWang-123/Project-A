@@ -18,7 +18,7 @@ namespace PixelCrushers
 
         static CheckInputManagerSettings()
         {
-#if !USE_NEW_INPUT
+#if !ENABLE_INPUT_SYSTEM
             var alreadyAsked = EditorPrefs.GetBool(CheckedInputManagerSettingsEditorPrefsKey, false);
             EditorPrefs.SetBool(CheckedInputManagerSettingsEditorPrefsKey, true);
             if (InputDeviceManagerEditor.HasStandardInputDefinitions() || alreadyAsked) return;

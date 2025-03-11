@@ -11,7 +11,7 @@ namespace PixelCrushers.DialogueSystem
     public class DemoInputRegistration : MonoBehaviour
     {
 
-#if USE_NEW_INPUT
+#if ENABLE_INPUT_SYSTEM
 
         private DemoInputControls controls;
 
