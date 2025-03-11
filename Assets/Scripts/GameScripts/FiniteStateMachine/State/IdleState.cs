@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 /// <summary>
 /// 待机状态
@@ -51,12 +51,17 @@ public class IdleState : BaseState
             m_finiteStateMachine.PerformTransition(TransitionEnum.SeePlayer);
         }
         // 发现光源直接逃跑
-        var lightTransform = m_gameObject.GetComponent<MonsterBaseFSM>().LightTransform;
-        if (lightTransform != null)
+        var lightComponent = npc.GetComponent<MonsterBaseFSM>().LightComponent;
+        if (lightComponent != null)
         {
-            if (Vector3.Distance(lightTransform.position, m_gameObject.transform.position) <= m_fleeDistance)
+            // 光源打开着
+            if (lightComponent.isOn)
             {
-                m_finiteStateMachine.PerformTransition(TransitionEnum.FleeAction);
+                Transform lightTransform = lightComponent.transform;
+                if (Vector3.Distance(lightTransform.position, m_gameObject.transform.position) <= m_fleeDistance)
+                {
+                    m_finiteStateMachine.PerformTransition(TransitionEnum.FleeAction);
+                }
             }
         }
     }

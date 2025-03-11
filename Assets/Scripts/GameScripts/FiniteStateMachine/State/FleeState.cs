@@ -21,7 +21,7 @@ public class FleeState : BaseState
 
     public override void Act(GameObject npc)
     {
-        var lightTransfrom = npc.GetComponent<MonsterBaseFSM>().LightTransform;
+        var lightTransfrom = npc.GetComponent<MonsterBaseFSM>().LightComponent.transform;
         if (lightTransfrom)
         {
             Vector3 direction = 2f * (npc.transform.position - lightTransfrom.position);
@@ -55,7 +55,7 @@ public class FleeState : BaseState
 
     public override void Condition(GameObject npc)
     {
-        if (npc.GetComponent<MonsterBaseFSM>().LightTransform)
+        if (npc.GetComponent<MonsterBaseFSM>().LightComponent)
         {
             m_timer += Time.deltaTime * m_timeScale;
             // 超过逃跑时间

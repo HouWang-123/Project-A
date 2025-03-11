@@ -35,9 +35,9 @@ public class MonsterBaseFSM : MonoBehaviour,IDamageable
     [SerializeField]
     protected GameObject m_infoRenderer;
     public GameObject InfoRenderer { get { return m_infoRenderer; } }
-    // 光源位置
-    private Transform m_lightTransform;
-    public Transform LightTransform { get { return m_lightTransform; } }
+    // 玩家手上的光源
+    private LightBehaviour m_lightComponent;
+    public LightBehaviour LightComponent { get { return m_lightComponent; } }
 
     protected virtual void Init()
     {
@@ -58,12 +58,13 @@ public class MonsterBaseFSM : MonoBehaviour,IDamageable
         }
         m_NavMeshAgent.speed = m_monsterDatas.Speed;
 
-        if (m_lightTransform == null)
+        if (m_lightComponent == null)
         {
-            Light light = FindAnyObjectByType<Light>();
-            if (light != null)
+            // 获取手上的光源
+            var ItemOnHand = GameRunTimeData.Instance.CharacterBasicStat.GetStat().ItemOnHand;
+            if (ItemOnHand != null && ItemOnHand.TryGetComponent<LightBehaviour>(out LightBehaviour light))
             {
-                m_lightTransform = light.transform;
+                m_lightComponent = light;
             }
         }
 
@@ -75,7 +76,8 @@ public class MonsterBaseFSM : MonoBehaviour,IDamageable
 
         m_animationEnumWithName = new()
         {
-            { StateEnum.Idle, new() { "Idle" } }
+            { StateEnum.Idle, new() { "Idle" } },
+            { StateEnum.Death, new() { "OnDead" } }
         };
         CurrentHp = m_monsterDatas.MaxHP;
     }
@@ -85,11 +87,11 @@ public class MonsterBaseFSM : MonoBehaviour,IDamageable
         m_fsm.DoUpdate(gameObject);
 
         // 检测附近是否存在光源
-        Light light = FindAnyObjectByType<Light>();
-        if (light != null)
+        // 获取手上的光源
+        var ItemOnHand = GameRunTimeData.Instance.CharacterBasicStat.GetStat().ItemOnHand;
+        if (ItemOnHand != null && ItemOnHand.TryGetComponent<LightBehaviour>(out LightBehaviour light))
         {
-            m_lightTransform = light.transform;
-
+            m_lightComponent = light;
         }
     }
 
@@ -115,7 +117,7 @@ public class MonsterBaseFSM : MonoBehaviour,IDamageable
     {
         if (CurrentHp < 0)
         {
-            Destroy(gameObject);
+            m_fsm.PerformTransition(TransitionEnum.ToDeath);
         }
     }
 }

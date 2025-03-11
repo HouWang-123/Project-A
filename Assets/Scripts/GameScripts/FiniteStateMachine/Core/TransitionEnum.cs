@@ -17,6 +17,8 @@ public enum TransitionEnum
     // 远程攻击玩家
     RangedAttackPlayer,
     // 该逃避了
-    FleeAction
+    FleeAction,
+    // 死亡
+    ToDeath
 }
 

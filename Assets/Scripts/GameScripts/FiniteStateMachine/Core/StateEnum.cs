@@ -17,6 +17,8 @@ public enum StateEnum
     // 远程攻击
     RangedAttack,
     // 逃避
-    Flee
+    Flee,
+    // 死亡
+    Death
 }
 

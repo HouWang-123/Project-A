@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class DrownedOnesFSM : MonsterBaseFSM
 {
@@ -10,10 +10,16 @@ public class DrownedOnesFSM : MonsterBaseFSM
     [Header("近战攻击位置")]
     [SerializeField]
     private Transform m_meleeTransform;
+    // 事件编码
+    private string rangedAttackHurtEventName;
+    private string meleeAttackHurtEventName;
+    public string RangedAttackHurtEventName { get { return rangedAttackHurtEventName; } }
+    public string MeleeAttackHurtEventName { get { return meleeAttackHurtEventName; } }
     protected override void Init()
     {
         base.Init();
-
+        rangedAttackHurtEventName = GetHashCode().ToString();
+        meleeAttackHurtEventName = (GetHashCode() + 1).ToString();
         if (m_projectileTransform == null)
         {
             m_projectileTransform = transform.Find("Projectile");
@@ -31,16 +37,16 @@ public class DrownedOnesFSM : MonsterBaseFSM
         InitFSM();
 
         // 注册玩家受伤的事件
-        EventManager.Instance.RegistEvent(EventConstName.PLAYER_HURTED_BY_DROWNED_ONES_MELEE, HurtPlayer);
-        EventManager.Instance.RegistEvent(EventConstName.PLAYER_HURTED_BY_DROWNED_ONES_RANGED, HurtPlayer);
+        EventManager.Instance.RegistEvent(rangedAttackHurtEventName, HurtPlayer);
+        EventManager.Instance.RegistEvent(meleeAttackHurtEventName, HurtPlayer);
     }
 
     private void OnDestroy()
     {
 
         // 取消玩家受伤的事件
-        EventManager.Instance.RemoveEvent(EventConstName.PLAYER_HURTED_BY_DROWNED_ONES_MELEE, HurtPlayer);
-        EventManager.Instance.RemoveEvent(EventConstName.PLAYER_HURTED_BY_DROWNED_ONES_RANGED, HurtPlayer);
+        EventManager.Instance.RemoveEvent(rangedAttackHurtEventName, HurtPlayer);
+        EventManager.Instance.RemoveEvent(meleeAttackHurtEventName, HurtPlayer);
     }
 
     private void Start()
@@ -71,6 +77,8 @@ public class DrownedOnesFSM : MonsterBaseFSM
         idleState.AddTransition(TransitionEnum.SeePlayer, StateEnum.LookAt);
         // 转为逃跑状态
         idleState.AddTransition(TransitionEnum.FleeAction, StateEnum.Flee);
+        // 转为死亡状态
+        idleState.AddTransition(TransitionEnum.ToDeath, StateEnum.Death);
         m_fsm.AddState(idleState);
 
         PatrolState patrolState = new(m_fsm, gameObject, playerObj.transform);
@@ -80,6 +88,8 @@ public class DrownedOnesFSM : MonsterBaseFSM
         patrolState.AddTransition(TransitionEnum.SeePlayer, StateEnum.LookAt);
         // 转为逃跑状态
         patrolState.AddTransition(TransitionEnum.FleeAction, StateEnum.Flee);
+        // 转为死亡状态
+        patrolState.AddTransition(TransitionEnum.ToDeath, StateEnum.Death);
         m_fsm.AddState(patrolState);
 
         LookAtState lookAtState = new(m_fsm, gameObject, playerObj.transform);
@@ -89,6 +99,8 @@ public class DrownedOnesFSM : MonsterBaseFSM
         lookAtState.AddTransition(TransitionEnum.LostPlayer, StateEnum.Patrol);
         // 转为逃跑状态
         lookAtState.AddTransition(TransitionEnum.FleeAction, StateEnum.Flee);
+        // 转为死亡状态
+        lookAtState.AddTransition(TransitionEnum.ToDeath, StateEnum.Death);
         m_fsm.AddState(lookAtState);
 
         ChaseState chaseState = new(m_fsm, gameObject, playerObj.transform);
@@ -102,6 +114,8 @@ public class DrownedOnesFSM : MonsterBaseFSM
         chaseState.AddTransition(TransitionEnum.MeleeAttackPlayer, StateEnum.MeleeAttack);
         // 远程攻击玩家
         chaseState.AddTransition(TransitionEnum.RangedAttackPlayer, StateEnum.RangedAttack);
+        // 转为死亡状态
+        chaseState.AddTransition(TransitionEnum.ToDeath, StateEnum.Death);
         m_fsm.AddState(chaseState);
 
         MeleeAttackState meleeAttackState = new(m_fsm, gameObject, m_meleeTransform, playerObj.transform);
@@ -113,6 +127,8 @@ public class DrownedOnesFSM : MonsterBaseFSM
         meleeAttackState.AddTransition(TransitionEnum.LostPlayer, StateEnum.Patrol);
         // 转为逃跑状态
         meleeAttackState.AddTransition(TransitionEnum.FleeAction, StateEnum.Flee);
+        // 转为死亡状态
+        meleeAttackState.AddTransition(TransitionEnum.ToDeath, StateEnum.Death);
         m_fsm.AddState(meleeAttackState);
 
         RangedAttackState rangedAttackState = new(m_fsm, gameObject, m_projectileTransform, playerObj.transform);
@@ -122,11 +138,15 @@ public class DrownedOnesFSM : MonsterBaseFSM
         rangedAttackState.AddTransition(TransitionEnum.ChasePlayer, StateEnum.Chase);
         // 转为逃跑状态
         rangedAttackState.AddTransition(TransitionEnum.FleeAction, StateEnum.Flee);
+        // 转为死亡状态
+        rangedAttackState.AddTransition(TransitionEnum.ToDeath, StateEnum.Death);
         m_fsm.AddState(rangedAttackState);
 
         FleeState fleeState = new(m_fsm, gameObject);
         // 转为Idle
         fleeState.AddTransition(TransitionEnum.ToIdle, StateEnum.Idle);
+        // 转为死亡状态
+        fleeState.AddTransition(TransitionEnum.ToDeath, StateEnum.Death);
         m_fsm.AddState(fleeState);
     }
     protected override void HurtPlayer()

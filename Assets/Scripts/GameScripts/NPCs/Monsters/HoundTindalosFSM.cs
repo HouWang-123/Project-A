@@ -6,9 +6,13 @@ public class HoundTindalosFSM : MonsterBaseFSM
     [Header("近战攻击位置")]
     [SerializeField]
     private Transform m_meleeTransform;
+    // 事件编码
+    private string thisClassHashCode;
+    public string HurtEventName { get { return thisClassHashCode; } }
     protected override void Init()
     {
         base.Init();
+        thisClassHashCode = GetHashCode().ToString();
         if (m_meleeTransform == null)
         {
             m_meleeTransform = transform.Find("Melee");
@@ -20,12 +24,12 @@ public class HoundTindalosFSM : MonsterBaseFSM
         m_animationEnumWithName.Add(StateEnum.Flee, new() { "Walk" });
         InitFSM();
         // 注册玩家受伤的事件
-        EventManager.Instance.RegistEvent(EventConstName.PLAYER_HURTED_BY_HOUND_TINDALOS_MELEE, HurtPlayer);
+        EventManager.Instance.RegistEvent(thisClassHashCode, HurtPlayer);
     }
 
     private void OnDestroy()
     {
-        EventManager.Instance.RemoveEvent(EventConstName.PLAYER_HURTED_BY_HOUND_TINDALOS_MELEE, HurtPlayer);
+        EventManager.Instance.RemoveEvent(thisClassHashCode, HurtPlayer);
     }
 
     private void Start()
@@ -56,6 +60,8 @@ public class HoundTindalosFSM : MonsterBaseFSM
         idleState.AddTransition(TransitionEnum.SeePlayer, StateEnum.LookAt);
         // 转为逃跑状态
         idleState.AddTransition(TransitionEnum.FleeAction, StateEnum.Flee);
+        // 转为死亡状态
+        idleState.AddTransition(TransitionEnum.ToDeath, StateEnum.Death);
         m_fsm.AddState(idleState);
 
         PatrolState patrolState = new(m_fsm, gameObject, playerObj.transform);
@@ -65,6 +71,8 @@ public class HoundTindalosFSM : MonsterBaseFSM
         patrolState.AddTransition(TransitionEnum.SeePlayer, StateEnum.LookAt);
         // 转为逃跑状态
         patrolState.AddTransition(TransitionEnum.FleeAction, StateEnum.Flee);
+        // 转为死亡状态
+        patrolState.AddTransition(TransitionEnum.ToDeath, StateEnum.Death);
         m_fsm.AddState(patrolState);
 
         LookAtState lookAtState = new(m_fsm, gameObject, playerObj.transform);
@@ -74,6 +82,8 @@ public class HoundTindalosFSM : MonsterBaseFSM
         lookAtState.AddTransition(TransitionEnum.LostPlayer, StateEnum.Patrol);
         // 转为逃跑状态
         lookAtState.AddTransition(TransitionEnum.FleeAction, StateEnum.Flee);
+        // 转为死亡状态
+        lookAtState.AddTransition(TransitionEnum.ToDeath, StateEnum.Death);
         m_fsm.AddState(lookAtState);
 
         ChaseState chaseState = new(m_fsm, gameObject, playerObj.transform);
@@ -85,6 +95,8 @@ public class HoundTindalosFSM : MonsterBaseFSM
         chaseState.AddTransition(TransitionEnum.FleeAction, StateEnum.Flee);
         // 仅近战
         chaseState.AddTransition(TransitionEnum.MeleeAttackPlayer, StateEnum.MeleeAttack);
+        // 转为死亡状态
+        chaseState.AddTransition(TransitionEnum.ToDeath, StateEnum.Death);
         m_fsm.AddState(chaseState);
 
         // 仅远程
@@ -108,11 +120,15 @@ public class HoundTindalosFSM : MonsterBaseFSM
         meleeAttackState.AddTransition(TransitionEnum.LostPlayer, StateEnum.Patrol);
         // 转为逃跑状态
         meleeAttackState.AddTransition(TransitionEnum.FleeAction, StateEnum.Flee);
+        // 转为死亡状态
+        meleeAttackState.AddTransition(TransitionEnum.ToDeath, StateEnum.Death);
         m_fsm.AddState(meleeAttackState);
 
         FleeState fleeState = new(m_fsm, gameObject);
         // 转为Idle
         fleeState.AddTransition(TransitionEnum.ToIdle, StateEnum.Idle);
+        // 转为死亡状态
+        fleeState.AddTransition(TransitionEnum.ToDeath, StateEnum.Death);
         m_fsm.AddState(fleeState);
     }
     protected override void HurtPlayer()

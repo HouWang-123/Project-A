@@ -77,13 +77,13 @@ public class MeleeAttackState : BaseState
                         Debug.Log(GetType() + " /Act() => 命中碰撞体: " + hit.collider.gameObject.name + " 距离: " + hit.distance);
                         if (hit.collider.gameObject.TryGetComponent<PlayerControl>(out _))
                         {
-                            if (npc.GetComponent<MonsterBaseFSM>() is DrownedOnesFSM)
+                            if (npc.GetComponent<MonsterBaseFSM>() is DrownedOnesFSM drownedOnesFSM)
                             {
-                                EventManager.Instance.RunEvent(EventConstName.PLAYER_HURTED_BY_DROWNED_ONES_MELEE);
+                                EventManager.Instance.RunEvent(drownedOnesFSM.RangedAttackHurtEventName);
                             }
-                            else if (npc.GetComponent<MonsterBaseFSM>() is HoundTindalosFSM)
+                            else if (npc.GetComponent<MonsterBaseFSM>() is HoundTindalosFSM houndTindalosFSM)
                             {
-                                EventManager.Instance.RunEvent(EventConstName.PLAYER_HURTED_BY_HOUND_TINDALOS_MELEE);
+                                EventManager.Instance.RunEvent(houndTindalosFSM.HurtEventName);
                             }
                         }
                     }
@@ -92,13 +92,13 @@ public class MeleeAttackState : BaseState
                         Debug.Log(GetType() + " /Act() => 命中刚体: " + hit.rigidbody.gameObject.name + " 距离: " + hit.distance);
                         if (hit.rigidbody.gameObject.TryGetComponent<PlayerControl>(out _))
                         {
-                            if (npc.GetComponent<MonsterBaseFSM>() is DrownedOnesFSM)
+                            if (npc.GetComponent<MonsterBaseFSM>() is DrownedOnesFSM drownedOnesFSM)
                             {
-                                EventManager.Instance.RunEvent(EventConstName.PLAYER_HURTED_BY_DROWNED_ONES_MELEE);
+                                EventManager.Instance.RunEvent(drownedOnesFSM.RangedAttackHurtEventName);
                             }
-                            else if (npc.GetComponent<MonsterBaseFSM>() is HoundTindalosFSM)
+                            else if (npc.GetComponent<MonsterBaseFSM>() is HoundTindalosFSM houndTindalosFSM)
                             {
-                                EventManager.Instance.RunEvent(EventConstName.PLAYER_HURTED_BY_HOUND_TINDALOS_MELEE);
+                                EventManager.Instance.RunEvent(houndTindalosFSM.HurtEventName);
                             }
                         }
                     }
@@ -133,12 +133,17 @@ public class MeleeAttackState : BaseState
             }
         }
         // 发现光源直接逃跑
-        var lightTransform = m_gameObject.GetComponent<MonsterBaseFSM>().LightTransform;
-        if (lightTransform != null)
+        var lightComponent = npc.GetComponent<MonsterBaseFSM>().LightComponent;
+        if (lightComponent != null)
         {
-            if (Vector3.Distance(lightTransform.position, m_gameObject.transform.position) <= m_fleeDistance)
+            // 光源打开着
+            if (lightComponent.isOn)
             {
-                m_finiteStateMachine.PerformTransition(TransitionEnum.FleeAction);
+                Transform lightTransform = lightComponent.transform;
+                if (Vector3.Distance(lightTransform.position, m_gameObject.transform.position) <= m_fleeDistance)
+                {
+                    m_finiteStateMachine.PerformTransition(TransitionEnum.FleeAction);
+                }
             }
         }
     }

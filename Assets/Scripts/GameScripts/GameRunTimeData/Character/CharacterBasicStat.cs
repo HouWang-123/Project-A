@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using cfg.buff;
 using Unity.Mathematics.Geometry;
@@ -99,6 +99,7 @@ public class CharacterBasicStat
         }
         catch(Exception e)
         {
+            Debug.LogWarning("错误信息：" + e.Message);
             m_characterData = GameTableDataAgent.CharacterTable.Get(GameConstData.DEFAULT_CHARACTER_ID);
             Debug.LogWarning("==========================角色数据不存在，使用默认数据=============================");
             Debug.LogWarning("======================可以正常游玩，你将使用的角色数据ID为=========================");

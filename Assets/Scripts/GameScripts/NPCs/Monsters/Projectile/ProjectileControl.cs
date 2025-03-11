@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using UnityEngine;
 /// <summary>
 /// 发射物控制
@@ -49,9 +49,9 @@ public class ProjectileControl : MonoBehaviour
     {
         if (other.gameObject.TryGetComponent<PlayerControl>(out _) || other.gameObject.TryGetComponent<MonsterBaseFSM>(out _))
         {
-            if (MonsterBaseFSM is DrownedOnesFSM)
+            if (MonsterBaseFSM is DrownedOnesFSM drownedOnesFSM)
             {
-                EventManager.Instance.RunEvent(EventConstName.PLAYER_HURTED_BY_DROWNED_ONES_RANGED);
+                EventManager.Instance.RunEvent(drownedOnesFSM.RangedAttackHurtEventName);
             }
         }
         if (ReturnFunc != null)
