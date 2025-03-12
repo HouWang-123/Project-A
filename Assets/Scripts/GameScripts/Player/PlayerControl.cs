@@ -92,7 +92,7 @@ public class PlayerControl : MonoBehaviour
     {
         GameRunTimeData.Instance.CharacterItemSlotData.ChangeFocusSlotNumber(1); // 默认启用道具栏
         characterStat = GameRunTimeData.Instance.CharacterBasicStat.GetStat();
-        _pickupController = GetComponent<PlayerPickupController>();
+        _pickupController = GetComponentInChildren<PlayerPickupController>();
         playerRG = GetComponent<Rigidbody>();
         playerRenderer = transform.GetChild(0);
         playerRenderer.localEulerAngles = GameConstData.DefAngles;

@@ -116,10 +116,10 @@ TextureImporter:
       name: Sprite_Item_Tool_FlashLight_0
       rect:
         serializedVersion: 2
-        x: 9
-        y: 47
-        width: 188
-        height: 99
+        x: 4
+        y: 46
+        width: 195
+        height: 102
       alignment: 9
       pivot: {x: 0.13137111, y: 0.4554486}
       border: {x: 0, y: 0, z: 0, w: 0}

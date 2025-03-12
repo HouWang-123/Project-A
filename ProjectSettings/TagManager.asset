@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Item
   - Obstacle
+  - Interactive
   layers:
   - Default
   - TransparentFX
@@ -18,7 +19,7 @@ TagManager:
   - Obstacle
   - Player
   - Bullet
-  - 
+  - Interactive
   - Item
   - Monster
   - MonsterProjectile

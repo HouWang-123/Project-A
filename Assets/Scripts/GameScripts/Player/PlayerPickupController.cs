@@ -6,12 +6,10 @@ using UnityEngine.SearchService;
 using UnityEngine.Serialization;
 using UnityEngine.InputSystem;
 
-
-[RequireComponent(typeof(PlayerControl))]
 public class PlayerPickupController : MonoBehaviour
 {
     public ItemBase currentPickup; // 目标拾取
-    public List<ItemBase> Item2PickList; // 拾取列表
+    private List<ItemBase> Item2PickList; // 拾取列表
 
     public void Start()
     {
