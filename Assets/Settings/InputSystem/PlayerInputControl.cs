@@ -197,6 +197,15 @@ public partial class @PlayerInputControl: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""TimeSpeed"",
+                    ""type"": ""Button"",
+                    ""id"": ""450e7b8d-6de4-486f-93c8-5778d7f5a0ac"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -582,6 +591,28 @@ public partial class @PlayerInputControl: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""MouseScroll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7f3408f0-b2bf-40ee-93ab-25d341f33522"",
+                    ""path"": ""<Keyboard>/t"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""TimeSpeed"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""59705e5f-5b26-4dc0-9719-e01f0f47d952"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""TimeSpeed"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1034,6 +1065,7 @@ public partial class @PlayerInputControl: IInputActionCollection2, IDisposable
         m_GamePlayer__5Key = m_GamePlayer.FindAction("_5Key", throwIfNotFound: true);
         m_GamePlayer__6Key = m_GamePlayer.FindAction("_6Key", throwIfNotFound: true);
         m_GamePlayer_MouseScroll = m_GamePlayer.FindAction("MouseScroll", throwIfNotFound: true);
+        m_GamePlayer_TimeSpeed = m_GamePlayer.FindAction("TimeSpeed", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1132,6 +1164,7 @@ public partial class @PlayerInputControl: IInputActionCollection2, IDisposable
     private readonly InputAction m_GamePlayer__5Key;
     private readonly InputAction m_GamePlayer__6Key;
     private readonly InputAction m_GamePlayer_MouseScroll;
+    private readonly InputAction m_GamePlayer_TimeSpeed;
     public struct GamePlayerActions
     {
         private @PlayerInputControl m_Wrapper;
@@ -1155,6 +1188,7 @@ public partial class @PlayerInputControl: IInputActionCollection2, IDisposable
         public InputAction @_5Key => m_Wrapper.m_GamePlayer__5Key;
         public InputAction @_6Key => m_Wrapper.m_GamePlayer__6Key;
         public InputAction @MouseScroll => m_Wrapper.m_GamePlayer_MouseScroll;
+        public InputAction @TimeSpeed => m_Wrapper.m_GamePlayer_TimeSpeed;
         public InputActionMap Get() { return m_Wrapper.m_GamePlayer; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1221,6 +1255,9 @@ public partial class @PlayerInputControl: IInputActionCollection2, IDisposable
             @MouseScroll.started += instance.OnMouseScroll;
             @MouseScroll.performed += instance.OnMouseScroll;
             @MouseScroll.canceled += instance.OnMouseScroll;
+            @TimeSpeed.started += instance.OnTimeSpeed;
+            @TimeSpeed.performed += instance.OnTimeSpeed;
+            @TimeSpeed.canceled += instance.OnTimeSpeed;
         }
 
         private void UnregisterCallbacks(IGamePlayerActions instance)
@@ -1282,6 +1319,9 @@ public partial class @PlayerInputControl: IInputActionCollection2, IDisposable
             @MouseScroll.started -= instance.OnMouseScroll;
             @MouseScroll.performed -= instance.OnMouseScroll;
             @MouseScroll.canceled -= instance.OnMouseScroll;
+            @TimeSpeed.started -= instance.OnTimeSpeed;
+            @TimeSpeed.performed -= instance.OnTimeSpeed;
+            @TimeSpeed.canceled -= instance.OnTimeSpeed;
         }
 
         public void RemoveCallbacks(IGamePlayerActions instance)
@@ -1483,6 +1523,7 @@ public partial class @PlayerInputControl: IInputActionCollection2, IDisposable
         void On_5Key(InputAction.CallbackContext context);
         void On_6Key(InputAction.CallbackContext context);
         void OnMouseScroll(InputAction.CallbackContext context);
+        void OnTimeSpeed(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

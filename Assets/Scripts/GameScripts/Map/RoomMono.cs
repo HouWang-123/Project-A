@@ -1,4 +1,4 @@
-using cfg.scene;
+﻿using cfg.scene;
 using System.Collections.Generic;
 using Unity.AI.Navigation;
 using UnityEngine;
@@ -19,6 +19,8 @@ public class RoomMono : MonoBehaviour
     private List<MonsterBaseFSM> monsters = new List<MonsterBaseFSM>();
 
     //public Transform monsterPoint;    // 怪物生成点（测试用）
+    [Header("谜题物体，如果房间没有谜题就设置为空")]
+    public RoomRiddleMonoBase riddleGameObject; // 谜题物体
 
     private void Awake()
     {

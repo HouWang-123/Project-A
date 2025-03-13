@@ -32,18 +32,24 @@ public partial class TimeSystemManager : MonoBehaviour
         }
     }
 
-    // 时间配置，不同阶段对应的现实的秒数。十五分钟为游戏内一天，这里转化为秒处理
+    // 时间配置，不同阶段对应的现实的秒数，一秒进行处理，乘60是为了把游戏小时转换为游戏秒
+    // 前四分钟是夜晚，然后六分钟是白天，两分钟是黄昏，三分钟是夜晚，测试期间除以10方便观察
+    private const float realtimeMinute_Night1 = 0.4f;
+    private const float realtimeMinute_Day = 0.6f;
+    private const float realtimeMinute_Dusk = 0.2f;
+    private const float realtimeMinute_Night2 = 0.3f;
     private readonly Dictionary<TimePhaseEnum, float> phaseDurations = 
         new() 
         { 
-            { TimePhaseEnum.Night1, 0.1f * 60f }, { TimePhaseEnum.Day, 0.1f * 60f },
-            { TimePhaseEnum.Dusk, 0.1f * 60f }, { TimePhaseEnum.Night2, 0.1f * 60f }
+            { TimePhaseEnum.Night1, realtimeMinute_Night1 * 60f }, { TimePhaseEnum.Day, realtimeMinute_Day * 60f },
+            { TimePhaseEnum.Dusk, realtimeMinute_Dusk * 60f }, { TimePhaseEnum.Night2, realtimeMinute_Night2 * 60f }
         };
-
+    // 十五分钟为游戏内一天
+    private const float realSecondsPerGameDay = (realtimeMinute_Night1 + realtimeMinute_Day 
+        + realtimeMinute_Dusk + realtimeMinute_Night2) * 60f;
     // 时间阶段开始的秒数
     private readonly Dictionary<TimePhaseEnum, float> phaseStartSeconds = new();
 
-    private const float realSecondsPerGameDay = 0.4f * 60f; // 游戏一天的时间对应的现实秒数
 
     // 时间相关的事件
     private readonly UnityEvent<TimePhaseEnum, TimePhaseEnum> onTimePhaseChanged = new();
@@ -68,7 +74,8 @@ public partial class TimeSystemManager : MonoBehaviour
     private TimePhaseEnum oldPhase = TimePhaseEnum.Night1;
     private TimePhaseEnum currentPhase = TimePhaseEnum.Night1;
     private float phaseProgress;
-    private readonly float timeSpeed = 5f;
+    private float timeSpeed = 1f;
+    public float TimeSpeed { get { return timeSpeed; } set { timeSpeed = value; } }
 
     private void Awake()
     {
@@ -122,16 +129,7 @@ public partial class TimeSystemManager : MonoBehaviour
     void Update()
     {
         // 时间流逝计算，按T加快时间流速
-        float delta = Time.deltaTime;
-        //if (Input.GetKey(KeyCode.T))
-        //{
-        //    delta = Time.deltaTime * timeSpeed;
-        //    Debug.Log(GetType() + "按下了时间加速");
-        //}
-        //else
-        //{
-        //    delta = Time.deltaTime;
-        //}
+        float delta = Time.deltaTime * timeSpeed;
         elapsedRealSeconds += delta;
 
         // 游戏时间计算

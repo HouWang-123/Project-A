@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using YooAsset;
 using cfg.scene;
 using System.Collections.Generic;
@@ -93,13 +93,20 @@ public class GameControl
         }
         mono.SetData(r);
         mono.SetPlayPoint(DoorId);
-        
-        
+
+        // 不为安全屋，时间系统不走
+        TimeSystemManager.Instance.TimeSpeed = r.PrefabName switch
+        {
+            "SafetyRoom" => 1f,
+            _ => 0f,
+        };
+        RiddleByRoom(mono, r);
+
         //if(!roomCache.ContainsKey(RoomId))
         //{
         //    roomCache.Add(RoomId,o); // 加载的房间进入缓存
         //}
-        
+
         roomObj.SetActive(false);
         Object.Destroy(roomObj);
         room = r;
@@ -116,6 +123,26 @@ public class GameControl
         //}
         
         EventManager.Instance.RunEvent(EventConstName.OnChangeRoom);
+    }
+
+    // 根据房间设置谜题
+    private void RiddleByRoom(RoomMono roomMono, Rooms roomTableData)
+    {
+        switch (roomTableData.PrefabName)
+        {
+            case "Corridor1":
+                var corridor1RiddleMono = roomMono.riddleGameObject;
+                if (corridor1RiddleMono == null)
+                {
+                    corridor1RiddleMono = roomMono.gameObject.AddComponent<Corridor1RiddleMono>();
+                    roomMono.riddleGameObject = corridor1RiddleMono;
+                }
+                corridor1RiddleMono.DoRiddle();
+                break;
+            default:
+                
+                break;
+        }
     }
 
     public void GameSave()

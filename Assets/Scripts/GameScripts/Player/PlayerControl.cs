@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using YooAsset;
 using UnityEngine.Events;
 using Spine.Unity;
@@ -219,6 +219,17 @@ public class PlayerControl : MonoBehaviour
             {
                 DropItem(false);
             }
+        };
+        // 时间加速
+        InputControl.Instance.TimeSpeed.started += (item) =>
+        {
+            Debug.Log(GetType() + "按住了时间加速");
+            TimeSystemManager.Instance.TimeSpeed = 5f;
+        };
+        InputControl.Instance.TimeSpeed.canceled += (item) =>
+        {
+            Debug.Log(GetType() + "取消时间加速");
+            TimeSystemManager.Instance.TimeSpeed = 1f;
         };
         #endregion
         EventManager.Instance.RegistEvent<EPAHandState>(EventConstName.PlayerHandItem, SetHandState);

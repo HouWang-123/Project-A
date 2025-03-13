@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class GameConstData
 {
@@ -21,4 +21,7 @@ public class GameConstData
 
     // 物品垂直丢弃速度
     public static readonly Vector3 VthrowSpeed = new (0, 1.8f, 0);
+
+    // 谜题物体标签
+    public static readonly string RIDDLE_TAG = "Riddle";
 }

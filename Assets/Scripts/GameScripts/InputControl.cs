@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -27,7 +27,7 @@ public class InputControl
     public InputAction _5Key => inputActions.GamePlayer._5Key;
     public InputAction _6Key => inputActions.GamePlayer._6Key;
     public InputAction MouseScroll => inputActions.GamePlayer.MouseScroll;
-    
+    public InputAction TimeSpeed => inputActions.GamePlayer.TimeSpeed;
     
     //UI
     public Vector2 NavigatePoint => inputActions.UI.Navigate.ReadValue<Vector2>();
