@@ -596,7 +596,7 @@ public class PlayerControl : MonoBehaviour
 
     private void PlayerHurt()
     {
-        PlayerAnimatorEnum = EPlayerAnimator.Hurt;
+        SetPlayerAnimatorEnum(EPlayerAnimator.Hurt);
         isMove = false;
     }
 
