@@ -4,7 +4,7 @@
 public interface IPickUpable            // 可否被拾取接口
 {
     void OnItemPickUp();  // 拾取
-    void OnItemDrop(bool fastdrop, bool ignoreBias);
+    void OnItemDrop(bool fastdrop, bool ignoreBias,bool playerReversed);
                                                        //   在玩家丢弃物品后需要调用，用于将物品归还到场景物品节点，与Player分离
                                                        //        2025.2.14更新参数
                                                        //        fastdrop:

@@ -3195,7 +3195,7 @@
     "m_Hidden": false,
     "m_ShaderOutputName": "CellDensity",
     "m_StageCapability": 3,
-    "m_Value": 4.199999809265137,
+    "m_Value": 3.1600000858306886,
     "m_DefaultValue": 5.0,
     "m_Labels": []
 }
@@ -4558,9 +4558,9 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 1049.9998779296875,
-            "y": 1465.0,
-            "width": 151.0001220703125,
+            "x": 1068.0,
+            "y": 1391.0,
+            "width": 151.0,
             "height": 34.0
         }
     },
@@ -4886,13 +4886,13 @@
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
     "m_Value": {
-        "r": 0.24528300762176515,
-        "g": 0.0,
-        "b": 0.012786541134119034,
+        "r": 0.3962264060974121,
+        "g": 0.17890241742134095,
+        "b": 0.07289071381092072,
         "a": 1.0
     },
     "isMainColor": false,
-    "m_ColorMode": 1
+    "m_ColorMode": 0
 }
 
 {
@@ -5038,13 +5038,13 @@
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
     "m_Value": {
-        "r": 3.999999523162842,
-        "g": 1.3290276527404786,
-        "b": 0.0,
+        "r": 0.6886792182922363,
+        "g": 0.0,
+        "b": 0.02550654113292694,
         "a": 1.0
     },
     "isMainColor": false,
-    "m_ColorMode": 1
+    "m_ColorMode": 0
 }
 
 {

@@ -3,7 +3,10 @@ using DG.Tweening;
 using Spine.Unity.Examples;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
+using UnityEngine.UIElements;
 using YooAsset;
 using Random = UnityEngine.Random;
 
@@ -17,7 +20,7 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable
     public Shader DefaultSpriteShader; // 默认     shader
     public TextMeshPro StackNuberText;
     public String ItemSpriteName;
-    private bool Targeted; // 是否被拾取系统选中
+    public bool PickUpTargeted; // 是否被拾取系统选中
     private bool ItemReversed;
     private bool ignoreAngleCorrect;
     public bool DropState;
@@ -43,10 +46,10 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable
     
     protected void Start()
     {
-        var RendererTr = ItemRenderer.transform;
+        _collider = GetComponentInChildren<Collider2D>();
         if (!ignoreAngleCorrect)
         {
-            RendererTr.localEulerAngles = GameConstData.DefAngles;
+            transform.localEulerAngles = GameConstData.DefAngles;
         }
         if (ItemData == null)
         {
@@ -106,8 +109,8 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable
     // 物品拾取器，shader
     public void SetTargerted(bool v) // 拾取系统相关功能，与拾取标识相关
     {
-        Targeted = v;
-        if (Targeted)
+        PickUpTargeted = v;
+        if (PickUpTargeted)
         {
             ItemRenderer.material.shader = oulineShader;
         }
@@ -136,6 +139,7 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable
     private float H_BiasSpeed;
 
     private float V_BiasSpeed;
+    private Collider2D _collider;
 
     // 物品掉落相关物理逻辑
     protected virtual void FixedUpdate()
@@ -183,10 +187,17 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable
 
     // 物品拾取和丢弃
     public virtual void OnItemPickUp(){}
-    public virtual void OnItemDrop(bool fastDrop, bool IgnoreBias = false)
+    public virtual void OnItemDrop(bool fastDrop, bool IgnoreBias = false,bool Playerreversed = false)
     {
-        var RendererTr = ItemRenderer.transform;
-        RendererTr.localEulerAngles = GameConstData.DefAngles;
+        if (Playerreversed)
+        {
+            transform.localScale = new Vector3(-1, 1, 1);
+        }
+        else
+        {
+            transform.localScale = new Vector3(1, 1, 1);
+        }
+
         H_BiasSpeed = Random.Range(-10, 10);
         V_BiasSpeed = Random.Range(-10, 10);
         if (IgnoreBias)
@@ -195,7 +206,7 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable
             V_BiasSpeed = 0f;
         }
         DropState = true;
-        transform.DOLocalRotate(Vector3.zero, 0f);
+
         if (fastDrop)
         {
             Vector3 groundLocation = transform.position;

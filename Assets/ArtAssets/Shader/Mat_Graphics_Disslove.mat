@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Shader Graphs_TransitionShader
+  m_Name: Mat_Graphics_Disslove
   m_Shader: {fileID: -6465566751694194690, guid: 31aed1da7d6d73a45a66352659a35c8d, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -57,7 +57,7 @@ Material:
     m_Floats:
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _porcess: 11.8
+    - _porcess: 10
     m_Colors: []
   m_BuildTextureStacks: []
   m_AllowLocking: 1

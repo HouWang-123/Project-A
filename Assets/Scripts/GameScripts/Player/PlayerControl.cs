@@ -15,7 +15,7 @@ public class PlayerControl : MonoBehaviour
     private Transform playerRenderer;
     private Transform useObjParent;
     private PlayerPickupController _pickupController;
-
+    private bool PlayerReversed;
     private CharacterStat characterStat;
 
     private EPAMoveState moveState = EPAMoveState.Idle;
@@ -251,10 +251,12 @@ public class PlayerControl : MonoBehaviour
         if(l.x < v.x)
         {
             playerRenderer.localScale = GameConstData.ReverseScale;
+            PlayerReversed = true;
         }
         else
         {
             playerRenderer.localScale = Vector3.one;
+            PlayerReversed = false;
         }
 
         u = Camera.main.WorldToScreenPoint(useObjParent.position);
@@ -392,6 +394,7 @@ public class PlayerControl : MonoBehaviour
             GameRunTimeData.Instance.ItemManager.RegistItem(characterStat.LiftedItem);
             characterStat.LiftedItem.OnItemDrop(false, true);
             characterStat.LiftedItem.ChangeRendererSortingOrder(GameConstData.BelowPlayerOrder);
+            
             characterStat.LiftedItem = null;
             (int,ItemStatus) currentFocusedItemId = GameRunTimeData.Instance.CharacterItemSlotData.GetCurrentFocusedItemId();
             RefreshItemOnHand(currentFocusedItemId);
@@ -399,17 +402,19 @@ public class PlayerControl : MonoBehaviour
             return;
         }
 
-        bool removestack = GameRunTimeData.Instance.CharacterItemSlotData.ClearHandItem(fastDrop, ItemReleasePoint);
+        bool removestack = GameRunTimeData.Instance.CharacterItemSlotData.ClearHandItem(fastDrop, ItemReleasePoint,PlayerReversed);
 
         if(removestack)
         {
             string uri = characterStat.ItemOnHand.GetPrefabName();
+            int itemID = characterStat.ItemOnHand.ItemID;
             AssetHandle loadAssetAsync = YooAssets.LoadAssetAsync<GameObject>(uri);
             loadAssetAsync.Completed += handle =>
             {
                 GameObject instantiate = Instantiate(loadAssetAsync.AssetObject, ItemReleasePoint) as GameObject;
                 instantiate.transform.SetParent(GameControl.Instance.GetSceneItemList().transform);
                 ItemBase ib = instantiate.GetComponent<ItemBase>();
+                ib.InitItem(itemID);
                 GameRunTimeData.Instance.ItemManager.RegistItem(ib);
                 ib.OnItemDrop(false);
             };
@@ -477,7 +482,7 @@ public class PlayerControl : MonoBehaviour
             if(Restult != -1) // 可以拾取物品
             {
                 _pickupController.PlayerPickupItem();
-                _pickupController.ChangePickupTarget();
+                _pickupController.ChangeNextPickupTarget();
                 pickupLock = false;
             }
             else
