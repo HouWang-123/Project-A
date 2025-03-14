@@ -140,7 +140,7 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 270
+        width: 274
         height: 280
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -182,9 +182,9 @@ TextureImporter:
       name: Button_3x1_2
       rect:
         serializedVersion: 2
-        x: 560
+        x: 552
         y: 0
-        width: 270
+        width: 288
         height: 280
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -204,7 +204,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 50c5fd46f443b344d9f08ecb1b936626
     internalID: 0
     vertices: []
     indices: 

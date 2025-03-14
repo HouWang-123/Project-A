@@ -30,12 +30,12 @@ public class PlayerPickupController : MonoBehaviour
         Vector2 mousePosition = Mouse.current.position.ReadValue();
         Ray ray = Camera.main.ScreenPointToRay(mousePosition);
         RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
+        if (hit.transform == null) return;
         ItemBase itemBase = hit.transform.GetComponentInParent<ItemBase>();
+        if (itemBase == null) return;
         if (itemBase.PickUpTargeted) return;
-        if (itemBase != null)
-        {
-            ChangeToTargetItem(itemBase);
-        }
+        ChangeToTargetItem(itemBase);
+        
     }
 
     float changekeyPressTime;
@@ -130,7 +130,6 @@ public class PlayerPickupController : MonoBehaviour
             }
             Item2PickList.Add(currentPickup);
             currentPickup.SetPickupable(true);
-            currentPickup.SetTargerted(true);
             UpdateCurrentPickup();
         }
     }

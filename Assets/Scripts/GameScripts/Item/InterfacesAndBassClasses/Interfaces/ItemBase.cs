@@ -25,7 +25,7 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable
     private bool ignoreAngleCorrect;
     public bool DropState;
     public int StackCount = 1;
-
+    private GameItemPickupTip pickupTips;
     public virtual ItemStatus GetItemStatus()
     {
         return null;
@@ -113,10 +113,45 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable
         if (PickUpTargeted)
         {
             ItemRenderer.material.shader = oulineShader;
+            if (pickupTips != null)
+            {
+                if (transform.localScale.x < 0)
+                {
+                    pickupTips.PlayInitAnimation(true);
+                }
+                else
+                {
+                    pickupTips.PlayInitAnimation(false);
+                }
+                return;
+            }
+            
+            AssetHandle loadAssetAsync = YooAssets.LoadAssetAsync<GameObject>("P_UI_WorldUI_ItemPickupTip");
+            loadAssetAsync.Completed += (loadAssetAsync) =>
+            {
+                GameObject objAssetObject = loadAssetAsync.AssetObject as GameObject;
+                
+                GameObject instantiate = Instantiate(objAssetObject,transform);
+                
+                instantiate.transform.position = transform.position;
+                instantiate.transform.position += new Vector3(0, 1f,0);
+                
+                pickupTips = instantiate.GetComponent<GameItemPickupTip>();
+                if (transform.localScale.x < 0)
+                {
+                    pickupTips.PlayInitAnimation(true);
+                }
+                else
+                {
+                    pickupTips.PlayInitAnimation(false);
+                }
+            };
+            
         }
         else
         {
             ItemRenderer.material.shader = DefaultSpriteShader;
+            pickupTips.OnDetargeted();
         }
     }
 
