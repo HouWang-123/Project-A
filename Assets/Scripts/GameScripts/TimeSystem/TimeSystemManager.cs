@@ -2,35 +2,8 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public partial class TimeSystemManager : MonoBehaviour
+public partial class TimeSystemManager : Singleton<TimeSystemManager>
 {
-    private static TimeSystemManager _instance;
-    private TimeSystemManager() { }
-    
-    public static TimeSystemManager Instance
-    {
-        get
-        {
-            // 在非播放模式下直接返回null，防止创建新实例
-            if (!Application.isPlaying) return null;
-            if (_instance == null)
-            {
-                // 查找游戏对象上的单例组件，如果找不到则创建一个新的游戏对象并附加组件
-                _instance = FindFirstObjectByType<TimeSystemManager>();
-                if (_instance == null)
-                {
-                    GameObject obj = new()
-                    {
-                        name = "TimeSystemManager(Singleton)"
-                    };
-                    _instance = obj.AddComponent<TimeSystemManager>();
-                    DontDestroyOnLoad(obj);
-                }
-            }
-            return _instance;
-        }
-    }
-
     // 时间配置，不同阶段对应的现实的秒数，一秒进行处理，乘60是为了把游戏小时转换为游戏秒
     // 前四分钟是夜晚，然后六分钟是白天，两分钟是黄昏，三分钟是夜晚，测试期间除以10方便观察
     private const float realtimeMinute_Night1 = 0.4f;
@@ -78,15 +51,6 @@ public partial class TimeSystemManager : MonoBehaviour
 
     private void Awake()
     {
-        // 确保单例唯一性
-        if (_instance != null && _instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        _instance = this;
-        DontDestroyOnLoad(gameObject);
-
         float totalSeconds = 0f;
         for (int i = 0; i < phaseDurations.Count; ++i)
         {
@@ -112,17 +76,14 @@ public partial class TimeSystemManager : MonoBehaviour
         elapsedRealSeconds = phaseStartSeconds[TimePhaseEnum.Day];
     }
 
-    private void OnDestroy()
+    protected override void OnDestroy()
     {
         OnHourPassed.RemoveAllListeners();
         OnMinutePassed.RemoveAllListeners();
         OnTimePhaseChanged.RemoveAllListeners();
         OnDayPassed.RemoveAllListeners();
-        // 确保静态引用被清除
-        if (_instance == this)
-        {
-            _instance = null;
-        }
+
+        base.OnDestroy();
     }
 
     void Update()

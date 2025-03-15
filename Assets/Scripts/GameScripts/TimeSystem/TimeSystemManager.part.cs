@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public partial class TimeSystemManager : MonoBehaviour
+public partial class TimeSystemManager
 {
     public struct GameHourEvent
     {
@@ -30,11 +30,11 @@ public partial class TimeSystemManager : MonoBehaviour
     // 每天开始时重置所有标记
     private void ResetFlags()
     {
-        for (int i = 0; i < MinuteScheduledEvents.Count; i++)
+        for (int i = 0; i < MinuteScheduledEvents.Count; ++i)
         {
             m_minuteTriggeredFlags.Clear(i);
         }
-        for (int i = 0; i < PhasedChangedScheduledEvents.Count; i++)
+        for (int i = 0; i < PhasedChangedScheduledEvents.Count; ++i)
         {
             m_phaseTriggeredFlags.Clear(i);
         }
