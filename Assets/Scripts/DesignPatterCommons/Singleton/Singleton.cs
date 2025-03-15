@@ -1,9 +1,9 @@
-using Sirenix.OdinInspector;
+﻿using Sirenix.OdinInspector;
 using UnityEngine;
 
 public class Singleton<T>: SerializedMonoBehaviour where T:Component{
     protected static bool Destory = false;
-    private static object _lock = new object ();
+    private static readonly object _lock = new();
     private static T instance;
     public static T Instance
     {
@@ -16,11 +16,13 @@ public class Singleton<T>: SerializedMonoBehaviour where T:Component{
 
                 if (instance == null)
                 {
-                    instance = FindObjectOfType(typeof (T)) as T;
+                    instance = FindFirstObjectByType(typeof(T)) as T;
                     if (instance == null)
                     {
-                        GameObject  go = new GameObject();
-                        go.name = typeof (T).Name;
+                        GameObject go = new()
+                        {
+                            name = typeof(T).Name
+                        };
                         instance = go.AddComponent<T>();
                     }
                 }
