@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 
-public class MonsterBaseFSM : MonoBehaviour,IDamageable
+public class MonsterBaseFSM : MonoBehaviour, IDamageable
 {
     protected FiniteStateMachine m_fsm;
     protected float CurrentHp;
@@ -38,7 +38,14 @@ public class MonsterBaseFSM : MonoBehaviour,IDamageable
     // 玩家手上的光源
     private LightBehaviour m_lightComponent;
     public LightBehaviour LightComponent { get { return m_lightComponent; } }
-
+    [SerializeField]
+    [Header("碰撞体")]
+    private GameObject m_collider;
+    public GameObject Collider { get { return m_collider; } }
+    [SerializeField]
+    [Header("怪物的身体Renderer")]
+    private GameObject m_renderer;
+    public GameObject Renderer { get { return m_renderer; } }
     protected virtual void Init()
     {
         m_monsterDatas = GameTableDataAgent.MonsterTable.Get(m_monsterID);
@@ -50,7 +57,7 @@ public class MonsterBaseFSM : MonoBehaviour,IDamageable
 
         if (m_infoRenderer == null)
         {
-            m_infoRenderer = transform.GetChild(1).gameObject;
+            m_infoRenderer = transform.Find("InfoOnHead").gameObject;
         }
         if (m_NavMeshAgent == null)
         {
@@ -68,6 +75,11 @@ public class MonsterBaseFSM : MonoBehaviour,IDamageable
             }
         }
 
+        if (m_renderer == null)
+        {
+            m_renderer = transform.Find("Renderer").gameObject;
+        }
+
         if (m_skeletonAnim == null)
         {
             m_skeletonAnim = transform.GetChild(0).GetComponent<SkeletonAnimation>();
@@ -80,19 +92,16 @@ public class MonsterBaseFSM : MonoBehaviour,IDamageable
             { StateEnum.Death, new() { "OnDead" } }
         };
         CurrentHp = m_monsterDatas.MaxHP;
+
+        if (m_collider == null)
+        {
+            m_collider = transform.Find("MonsterCollider").gameObject;
+        }
     }
 
     protected virtual void DoUpdate()
     {
         m_fsm.DoUpdate(gameObject);
-
-        // 检测附近是否存在光源
-        // 获取手上的光源
-        var ItemOnHand = GameRunTimeData.Instance.CharacterBasicStat.GetStat().ItemOnHand;
-        if (ItemOnHand != null && ItemOnHand.TryGetComponent<LightBehaviour>(out LightBehaviour light))
-        {
-            m_lightComponent = light;
-        }
     }
 
     protected virtual void InitFSM()

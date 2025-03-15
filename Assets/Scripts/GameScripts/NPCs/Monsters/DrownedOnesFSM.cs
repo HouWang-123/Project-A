@@ -148,6 +148,10 @@ public class DrownedOnesFSM : MonsterBaseFSM
         // 转为死亡状态
         fleeState.AddTransition(TransitionEnum.ToDeath, StateEnum.Death);
         m_fsm.AddState(fleeState);
+
+        // 死亡状态
+        DeathState deathState = new(m_fsm, gameObject);
+        m_fsm.AddState(deathState);
     }
     protected override void HurtPlayer()
     {

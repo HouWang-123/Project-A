@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using DG.Tweening;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 using YooAsset;
 /// <summary>
 /// 远程攻击状态
@@ -34,6 +36,8 @@ public class RangedAttackState : BaseState
     private readonly AssetHandle m_assetHandle;
     // 转为逃跑的光源距离
     private readonly float m_fleeDistance = -1f;
+    // 玩家灯光组件
+    private readonly LightBehaviour lightCom;
     // 弹道修正向量
     private readonly Vector3 m_projectileFixVector3;
     public RangedAttackState(FiniteStateMachine finiteStateMachine, GameObject npcObj, Transform projectileTrans, Transform playerTransform)
@@ -51,11 +55,11 @@ public class RangedAttackState : BaseState
         {
             m_playerTransform = GameObject.Find("Player000").transform;
         }
-        var monsterBaseFSM = npcObj.GetComponent<MonsterBaseFSM>();
-        m_RangedDistance = monsterBaseFSM.MonsterDatas.ShootRange; // 应该获取表中的远程范围
-        m_MeleeDistance = monsterBaseFSM.MonsterDatas.HitRange;
-        m_projectileFixVector3 = new Vector3(0, 1, 0);
+        m_RangedDistance = m_monsterBaseFSM.MonsterDatas.ShootRange; // 应该获取表中的远程范围
+        m_MeleeDistance = m_monsterBaseFSM.MonsterDatas.HitRange;
+        m_projectileFixVector3 = new Vector3(0f, 1f, 0f);
         m_fleeDistance = 3f;
+        lightCom = m_monsterBaseFSM.LightComponent;
 
         // 提前生成发射物
         m_projectileQueue = new(m_projectileListCapacity);
@@ -69,7 +73,7 @@ public class RangedAttackState : BaseState
             go.transform.SetParent(m_projectileTransform);
             go.transform.SetPositionAndRotation(go.transform.parent.position, go.transform.parent.rotation);
             go.GetComponent<ProjectileControl>().ReturnFunc = ReturnProjectile;
-            go.GetComponent<ProjectileControl>().MonsterBaseFSM = monsterBaseFSM;
+            go.GetComponent<ProjectileControl>().MonsterBaseFSM = m_monsterBaseFSM;
             go.SetActive(false);
             m_projectileQueue.Enqueue(go);
             ++m_projectileCount;
@@ -105,13 +109,25 @@ public class RangedAttackState : BaseState
 
     public override void Act(GameObject npc)
     {
+        // 始终朝向玩家
+        float direction = m_playerTransform.position.x - m_monsterBaseFSM.transform.position.x;
+        // 玩家在NPC左边，看向左边
+        Vector3 scale;
+        if (direction > 0f)
+        {
+            scale = GameConstData.XNormalScale;
+        }
+        else
+        {
+            scale = GameConstData.XReverseScale;
+        }
+        m_monsterBaseFSM.Renderer.transform.localScale = scale;
         // 模拟播放攻击动画
         m_timer += Time.deltaTime * m_timeScale;
         if (!m_enterCD)
         {
-            var monsterFSM = m_gameObject.GetComponent<MonsterBaseFSM>();
             AnimationController.PlayAnim(m_gameObject, StateEnum.RangedAttack, 0, false, m_timeScale);
-            m_animTotalTime = AnimationController.AnimationTotalTime(monsterFSM.SkeletonAnim);
+            m_animTotalTime = AnimationController.AnimationTotalTime(m_monsterBaseFSM.SkeletonAnim);
             m_enterCD = true;
         }
         if (m_timer >= m_animTotalTime && !m_attacked)
@@ -145,22 +161,17 @@ public class RangedAttackState : BaseState
             m_finiteStateMachine.PerformTransition(TransitionEnum.ChasePlayer);
         }
         // 转为近战
-        if (m_gameObject.GetComponent<MonsterBaseFSM>().MonsterDatas.HitRange != -1f && distance <= m_MeleeDistance)
+        if (m_monsterBaseFSM.MonsterDatas.HitRange != -1f && distance <= m_MeleeDistance)
         {
             m_finiteStateMachine.PerformTransition(TransitionEnum.MeleeAttackPlayer);
         }
         // 发现光源直接逃跑
-        var lightComponent = npc.GetComponent<MonsterBaseFSM>().LightComponent;
-        if (lightComponent != null)
+        if (lightCom != null && lightCom.isOn)
         {
-            // 光源打开着
-            if (lightComponent.isOn)
+            Transform lightTransform = lightCom.transform;
+            if (Vector3.Distance(lightTransform.position, m_gameObject.transform.position) <= m_fleeDistance)
             {
-                Transform lightTransform = lightComponent.transform;
-                if (Vector3.Distance(lightTransform.position, m_gameObject.transform.position) <= m_fleeDistance)
-                {
-                    m_finiteStateMachine.PerformTransition(TransitionEnum.FleeAction);
-                }
+                m_finiteStateMachine.PerformTransition(TransitionEnum.FleeAction);
             }
         }
     }

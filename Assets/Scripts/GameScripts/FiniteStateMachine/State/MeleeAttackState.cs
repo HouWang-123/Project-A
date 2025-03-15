@@ -24,6 +24,8 @@ public class MeleeAttackState : BaseState
     private float m_timer = 0f;
     // 转为逃跑的光源距离
     private readonly float m_fleeDistance = -1f;
+    // 玩家灯光组件
+    private readonly LightBehaviour lightCom;
     public MeleeAttackState(FiniteStateMachine finiteStateMachine, GameObject npcObj, Transform meleeTransform, Transform playerTransform)
         : base(finiteStateMachine, npcObj)
     {
@@ -35,19 +37,32 @@ public class MeleeAttackState : BaseState
         {
             m_playerTransform = GameObject.Find("Player000").transform;
         }
-        m_MeleeDistance = npcObj.GetComponent<MonsterBaseFSM>().MonsterDatas.HitRange; // 应该获取表中的近战范围
-        m_MeleeDegree = npcObj.GetComponent<MonsterBaseFSM>().MonsterDatas.HitDegree / 2.0f;
+        m_MeleeDistance = m_monsterBaseFSM.MonsterDatas.HitRange; // 应该获取表中的近战范围
+        m_MeleeDegree = m_monsterBaseFSM.MonsterDatas.HitDegree / 2.0f;
         m_fleeDistance = 3f;
+        lightCom = m_monsterBaseFSM.LightComponent;
     }
 
     public override void Act(GameObject npc)
     {
         m_timer += Time.deltaTime * m_timeScale;
-        var monsterFSM = m_gameObject.GetComponent<MonsterBaseFSM>();
         if (!m_enterCD)
         {
+            // 播放动画前朝向玩家
+            float direction = m_playerTransform.position.x - m_monsterBaseFSM.transform.position.x;
+            // 玩家在NPC左边，看向左边
+            Vector3 scale;
+            if (direction > 0f)
+            {
+                scale = GameConstData.XNormalScale;
+            }
+            else
+            {
+                scale = GameConstData.XReverseScale;
+            }
+            m_monsterBaseFSM.Renderer.transform.localScale = scale;
             AnimationController.PlayAnim(m_gameObject, StateEnum.MeleeAttack, 0, false, m_timeScale);
-            m_animTotalTime = AnimationController.AnimationTotalTime(monsterFSM.SkeletonAnim);
+            m_animTotalTime = AnimationController.AnimationTotalTime(m_monsterBaseFSM.SkeletonAnim);
             m_enterCD = true;
         }
         
@@ -55,9 +70,12 @@ public class MeleeAttackState : BaseState
         {
             Debug.Log(GetType() + " /Act() => 动画播放完成，检测玩家是否在范围内");
             // 进行射线检测
-            int rayCount = 30; // 射线的数量
+            int rayCount = 16; // 射线的数量
             Vector3 origin = m_meleeTransform.position;
-            Vector3 forward = (m_playerTransform.position + 0.5f * Vector3.up - m_meleeTransform.position).normalized;
+            // 射线从怪物正前方发射
+            float forwardf = m_playerTransform.position.x - m_monsterBaseFSM.transform.position.x;
+
+            Vector3 forward = forwardf > 0f ? Vector3.right : Vector3.left;
 
             float angleStep = (m_MeleeDegree - -m_MeleeDegree) / (rayCount - 1);
 
@@ -77,14 +95,15 @@ public class MeleeAttackState : BaseState
                         Debug.Log(GetType() + " /Act() => 命中碰撞体: " + hit.collider.gameObject.name + " 距离: " + hit.distance);
                         if (hit.collider.gameObject.TryGetComponent<PlayerControl>(out _))
                         {
-                            if (npc.GetComponent<MonsterBaseFSM>() is DrownedOnesFSM drownedOnesFSM)
+                            if (m_monsterBaseFSM is DrownedOnesFSM drownedOnesFSM)
                             {
-                                EventManager.Instance.RunEvent(drownedOnesFSM.RangedAttackHurtEventName);
+                                EventManager.Instance.RunEvent(drownedOnesFSM.MeleeAttackHurtEventName);
                             }
-                            else if (npc.GetComponent<MonsterBaseFSM>() is HoundTindalosFSM houndTindalosFSM)
+                            else if (m_monsterBaseFSM is HoundTindalosFSM houndTindalosFSM)
                             {
-                                EventManager.Instance.RunEvent(houndTindalosFSM.HurtEventName);
+                                EventManager.Instance.RunEvent(houndTindalosFSM.MeleeAttackHurtEventName);
                             }
+                            break;
                         }
                     }
                     if (hit.rigidbody != null)
@@ -92,14 +111,15 @@ public class MeleeAttackState : BaseState
                         Debug.Log(GetType() + " /Act() => 命中刚体: " + hit.rigidbody.gameObject.name + " 距离: " + hit.distance);
                         if (hit.rigidbody.gameObject.TryGetComponent<PlayerControl>(out _))
                         {
-                            if (npc.GetComponent<MonsterBaseFSM>() is DrownedOnesFSM drownedOnesFSM)
+                            if (m_monsterBaseFSM is DrownedOnesFSM drownedOnesFSM)
                             {
                                 EventManager.Instance.RunEvent(drownedOnesFSM.RangedAttackHurtEventName);
                             }
-                            else if (npc.GetComponent<MonsterBaseFSM>() is HoundTindalosFSM houndTindalosFSM)
+                            else if (m_monsterBaseFSM is HoundTindalosFSM houndTindalosFSM)
                             {
-                                EventManager.Instance.RunEvent(houndTindalosFSM.HurtEventName);
+                                EventManager.Instance.RunEvent(houndTindalosFSM.MeleeAttackHurtEventName);
                             }
+                            break;
                         }
                     }
                 }
@@ -123,7 +143,7 @@ public class MeleeAttackState : BaseState
         if (!m_enterCD && Vector3.Distance(npc.transform.position, m_playerTransform.position) > m_MeleeDistance)
         {
             // 具有远程攻击，转为远程攻击状态
-            if (m_gameObject.GetComponent<MonsterBaseFSM>().MonsterDatas.ShootRange != -1f)
+            if (m_monsterBaseFSM.MonsterDatas.ShootRange != -1f)
             {
                 m_finiteStateMachine.PerformTransition(TransitionEnum.RangedAttackPlayer);
             }
@@ -133,17 +153,12 @@ public class MeleeAttackState : BaseState
             }
         }
         // 发现光源直接逃跑
-        var lightComponent = npc.GetComponent<MonsterBaseFSM>().LightComponent;
-        if (lightComponent != null)
+        if (lightCom != null && lightCom.isOn)
         {
-            // 光源打开着
-            if (lightComponent.isOn)
+            Transform lightTransform = lightCom.transform;
+            if (Vector3.Distance(lightTransform.position, m_gameObject.transform.position) <= m_fleeDistance)
             {
-                Transform lightTransform = lightComponent.transform;
-                if (Vector3.Distance(lightTransform.position, m_gameObject.transform.position) <= m_fleeDistance)
-                {
-                    m_finiteStateMachine.PerformTransition(TransitionEnum.FleeAction);
-                }
+                m_finiteStateMachine.PerformTransition(TransitionEnum.FleeAction);
             }
         }
     }

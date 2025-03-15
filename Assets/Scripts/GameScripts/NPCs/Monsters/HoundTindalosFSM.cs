@@ -8,7 +8,7 @@ public class HoundTindalosFSM : MonsterBaseFSM
     private Transform m_meleeTransform;
     // 事件编码
     private string thisClassHashCode;
-    public string HurtEventName { get { return thisClassHashCode; } }
+    public string MeleeAttackHurtEventName { get { return thisClassHashCode; } }
     protected override void Init()
     {
         base.Init();
@@ -130,6 +130,10 @@ public class HoundTindalosFSM : MonsterBaseFSM
         // 转为死亡状态
         fleeState.AddTransition(TransitionEnum.ToDeath, StateEnum.Death);
         m_fsm.AddState(fleeState);
+
+        // 死亡状态
+        DeathState deathState = new(m_fsm, gameObject);
+        m_fsm.AddState(deathState);
     }
     protected override void HurtPlayer()
     {

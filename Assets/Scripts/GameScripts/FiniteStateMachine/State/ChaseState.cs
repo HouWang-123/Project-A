@@ -25,6 +25,8 @@ public class ChaseState : BaseState
     private readonly float m_2MeleeAttack = -1f;
     // 转为逃跑的光源距离
     private readonly float m_fleeDistance = -1f;
+    // 玩家灯光组件
+    private readonly LightBehaviour lightCom;
     // 嘲讽动画的时间
     private float m_fuckingTime = 0f;
     // 嘲讽的CD时间
@@ -44,10 +46,10 @@ public class ChaseState : BaseState
             throw new ArgumentException();
         }
         m_gameObject = NPCObj;
-        agent = NPCObj.GetComponent<MonsterBaseFSM>().NavMeshAgent;
-        m_2LookAtDistance = m_gameObject.GetComponent<MonsterBaseFSM>().MonsterDatas.WarnRange;
-        m_2RangedAttack = m_gameObject.GetComponent<MonsterBaseFSM>().MonsterDatas.ShootRange;
-        m_2MeleeAttack = m_gameObject.GetComponent<MonsterBaseFSM>().MonsterDatas.HitRange;
+        agent = m_monsterBaseFSM.NavMeshAgent;
+        m_2LookAtDistance = m_monsterBaseFSM.MonsterDatas.WarnRange;
+        m_2RangedAttack = m_monsterBaseFSM.MonsterDatas.ShootRange;
+        m_2MeleeAttack = m_monsterBaseFSM.MonsterDatas.HitRange;
         // lastPosition = gameObject.transform.position;
         // 初始位置强制校正
         if (NavMesh.SamplePosition(NPCObj.transform.position, out NavMeshHit hit, 2.0f, NavMesh.AllAreas))
@@ -68,6 +70,7 @@ public class ChaseState : BaseState
             m_playerTransform = GameObject.Find("Player000").transform;
         }
         m_fleeDistance = 3f;
+        lightCom = m_monsterBaseFSM.LightComponent;
     }
 
     /// <summary>
@@ -77,20 +80,6 @@ public class ChaseState : BaseState
     public override void Act(GameObject npc)
     {
         // npc.transform.LookAt(m_playerTransform);
-        float npcX = npc.transform.position.x;
-        float playerX = m_playerTransform.position.x;
-        // 玩家在NPC左边，看向左边
-        // 点在右边，看向右边
-        Vector3 scale;
-        if (playerX - npcX > 0f)
-        {
-            scale = GameConstData.NormalScale;
-        }
-        else
-        {
-            scale = GameConstData.ReverseScale;
-        }
-        m_gameObject.transform.localScale = scale;
         // 跟着玩家
         if (IsPathValid(m_playerTransform.position))
         {
@@ -104,8 +93,7 @@ public class ChaseState : BaseState
             agent.isStopped = true;
             Debug.Log(GetType() + " /Act() => 触发了嘲讽动画");
             AnimationController.PlayAnim(m_gameObject, StateEnum.Idle, 0, false);
-            var monsterFSM = m_gameObject.GetComponent<MonsterBaseFSM>();
-            m_fuckingTime = AnimationController.AnimationTotalTime(monsterFSM.SkeletonAnim);
+            m_fuckingTime = AnimationController.AnimationTotalTime(m_monsterBaseFSM.SkeletonAnim);
         }
         if (m_fucking)
         {
@@ -193,17 +181,12 @@ public class ChaseState : BaseState
             }
         }
         // 发现光源直接逃跑
-        var lightComponent = npc.GetComponent<MonsterBaseFSM>().LightComponent;
-        if (lightComponent != null)
+        if (lightCom != null && lightCom.isOn)
         {
-            // 光源打开着
-            if (lightComponent.isOn)
+            Transform lightTransform = lightCom.transform;
+            if (Vector3.Distance(lightTransform.position, m_gameObject.transform.position) <= m_fleeDistance)
             {
-                Transform lightTransform = lightComponent.transform;
-                if (Vector3.Distance(lightTransform.position, m_gameObject.transform.position) <= m_fleeDistance)
-                {
-                    m_finiteStateMachine.PerformTransition(TransitionEnum.FleeAction);
-                }
+                m_finiteStateMachine.PerformTransition(TransitionEnum.FleeAction);
             }
         }
     }

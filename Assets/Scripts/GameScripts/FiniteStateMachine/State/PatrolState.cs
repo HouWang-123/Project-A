@@ -30,6 +30,8 @@ public class PatrolState : BaseState
     private readonly Transform m_playerTransform;
     // 转为逃跑的光源距离
     private readonly float m_fleeDistance = -1f;
+    // 玩家灯光组件
+    private readonly LightBehaviour lightCom;
     public PatrolState(FiniteStateMachine finiteStateMachine, GameObject NPCObj, Transform playerTransform = null)
         : base(finiteStateMachine, NPCObj)
     {
@@ -40,8 +42,8 @@ public class PatrolState : BaseState
             Debug.LogError(GetType() + "/PatrolState/ gameObject 不能为空!");
             throw new ArgumentException();
         }
-        agent = NPCObj.GetComponent<MonsterBaseFSM>().NavMeshAgent;
-        m_warnDistance = NPCObj.GetComponent<MonsterBaseFSM>().MonsterDatas.WarnRange + 5f;
+        agent = m_monsterBaseFSM.NavMeshAgent;
+        m_warnDistance = m_monsterBaseFSM.MonsterDatas.WarnRange + 5f;
         // lastPosition = gameObject.transform.position;
         // 初始位置强制校正
         if (NavMesh.SamplePosition(NPCObj.transform.position, out NavMeshHit hit, 2.0f, NavMesh.AllAreas))
@@ -61,6 +63,7 @@ public class PatrolState : BaseState
             m_playerTransform = GameObject.Find("Player000").transform;
         }
         m_fleeDistance = 3f;
+        lightCom = m_monsterBaseFSM.LightComponent;
     }
 
     /// <summary>
@@ -105,11 +108,11 @@ public class PatrolState : BaseState
             Vector3 scale;
             if (newPosX - npcPosX > 0f)
             {
-                scale = GameConstData.NormalScale;
+                scale = GameConstData.XNormalScale;
             }
             else
             {
-                scale = GameConstData.ReverseScale;
+                scale = GameConstData.XReverseScale;
             }
             
             m_gameObject.transform.localScale = scale;
@@ -199,17 +202,12 @@ public class PatrolState : BaseState
             m_finiteStateMachine.PerformTransition(TransitionEnum.SeePlayer);
         }
         // 发现光源直接逃跑
-        var lightComponent = npc.GetComponent<MonsterBaseFSM>().LightComponent;
-        if (lightComponent != null)
+        if (lightCom != null && lightCom.isOn)
         {
-            // 光源打开着
-            if (lightComponent.isOn)
+            Transform lightTransform = lightCom.transform;
+            if (Vector3.Distance(lightTransform.position, m_gameObject.transform.position) <= m_fleeDistance)
             {
-                Transform lightTransform = lightComponent.transform;
-                if (Vector3.Distance(lightTransform.position, m_gameObject.transform.position) <= m_fleeDistance)
-                {
-                    m_finiteStateMachine.PerformTransition(TransitionEnum.FleeAction);
-                }
+                m_finiteStateMachine.PerformTransition(TransitionEnum.FleeAction);
             }
         }
     }
@@ -219,9 +217,8 @@ public class PatrolState : BaseState
         base.DoBeforeEntering();
         agent.isStopped = false;
 
-        var monsterFSM = m_gameObject.GetComponent<MonsterBaseFSM>();
         // 巡逻速度是0.5倍的移动速度
-        agent.speed = 0.5f * monsterFSM.MonsterDatas.Speed * m_timeScale;
+        agent.speed = 0.5f * m_monsterBaseFSM.MonsterDatas.Speed * m_timeScale;
         // 动画播放速度为0.5倍
         AnimationController.PlayAnim(m_gameObject, StateEnum.Patrol, 0, true, 0.5f * m_timeScale);
     }
@@ -233,9 +230,8 @@ public class PatrolState : BaseState
         agent.isStopped = true;
         agent.SetDestination(agent.transform.position);
 
-        var monsterFSM = m_gameObject.GetComponent<MonsterBaseFSM>();
         // 恢复正常移动速度
-        agent.speed = monsterFSM.MonsterDatas.Speed * m_timeScale;
+        agent.speed = m_monsterBaseFSM.MonsterDatas.Speed * m_timeScale;
     }
 }
 

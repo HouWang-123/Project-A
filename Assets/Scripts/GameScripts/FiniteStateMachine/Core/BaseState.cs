@@ -20,12 +20,15 @@ public abstract class BaseState
     protected FiniteStateMachine m_finiteStateMachine;
     // 所挂载对象的引用
     protected GameObject m_gameObject;
+    // 怪物的状态机
+    protected MonsterBaseFSM m_monsterBaseFSM;
 
     public BaseState(FiniteStateMachine finiteStateMachine, GameObject gameObject)
     {
         m_timeScale = 1f;
         m_finiteStateMachine = finiteStateMachine;
         m_gameObject = gameObject;
+        m_monsterBaseFSM = gameObject.GetComponent<MonsterBaseFSM>();
     }
     /// <summary>
     /// 添加状态过渡对应的状态到字典中

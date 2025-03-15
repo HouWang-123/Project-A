@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1617249250737358193}
   - component: {fileID: 7081873136375132192}
   m_Layer: 0
-  m_Name: MonsterColider
+  m_Name: MonsterCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -108,6 +108,7 @@ MonoBehaviour:
   m_NavMeshAgent: {fileID: 879444317793477162}
   m_skeletonAnim: {fileID: 6416146041462596601}
   m_infoRenderer: {fileID: 4906414598371161004}
+  m_collider: {fileID: 3226818078808538953}
   m_projectileTransform: {fileID: 1168053493862167232}
   m_meleeTransform: {fileID: 5439699109162860848}
 --- !u!114 &2160751101551506776

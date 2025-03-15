@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 /// <summary>
 /// 待机状态
 /// </summary>
@@ -13,6 +12,8 @@ public class IdleState : BaseState
     private readonly float m_warnDistance = -1f;
     // 转为逃跑的光源距离
     private readonly float m_fleeDistance = -1f;
+    // 玩家灯光组件
+    private readonly LightBehaviour lightCom;
 
     public IdleState(FiniteStateMachine finiteStateMachine, GameObject gameObject, Transform playerTransform)
         : base(finiteStateMachine, gameObject)
@@ -20,8 +21,9 @@ public class IdleState : BaseState
         // 状态设置
         m_stateEnum = StateEnum.Idle;
         m_playerTransform = playerTransform;
-        m_warnDistance = gameObject.GetComponent<MonsterBaseFSM>().MonsterDatas.WarnRange + 5f;
+        m_warnDistance = m_monsterBaseFSM.MonsterDatas.WarnRange + 5f;
         m_fleeDistance = 3f;
+        lightCom = m_monsterBaseFSM.LightComponent;
     }
 
     public override void Act(GameObject npc)
@@ -51,17 +53,12 @@ public class IdleState : BaseState
             m_finiteStateMachine.PerformTransition(TransitionEnum.SeePlayer);
         }
         // 发现光源直接逃跑
-        var lightComponent = npc.GetComponent<MonsterBaseFSM>().LightComponent;
-        if (lightComponent != null)
+        if (lightCom != null && lightCom.isOn)
         {
-            // 光源打开着
-            if (lightComponent.isOn)
+            Transform lightTransform = lightCom.transform;
+            if (Vector3.Distance(lightTransform.position, m_gameObject.transform.position) <= m_fleeDistance)
             {
-                Transform lightTransform = lightComponent.transform;
-                if (Vector3.Distance(lightTransform.position, m_gameObject.transform.position) <= m_fleeDistance)
-                {
-                    m_finiteStateMachine.PerformTransition(TransitionEnum.FleeAction);
-                }
+                m_finiteStateMachine.PerformTransition(TransitionEnum.FleeAction);
             }
         }
     }

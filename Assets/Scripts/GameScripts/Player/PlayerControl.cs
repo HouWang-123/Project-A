@@ -250,7 +250,7 @@ public class PlayerControl : MonoBehaviour
         l = InputControl.Instance.GetLook();
         if(l.x < v.x)
         {
-            playerRenderer.localScale = GameConstData.ReverseScale;
+            playerRenderer.localScale = GameConstData.XReverseScale;
             PlayerReversed = true;
         }
         else

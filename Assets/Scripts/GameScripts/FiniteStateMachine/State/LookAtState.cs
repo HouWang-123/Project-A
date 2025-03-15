@@ -12,6 +12,8 @@ public class LookAtState : BaseState
     private readonly float m_2LostDistance = -1f;
     // 转为逃跑的光源距离
     private readonly float m_fleeDistance = -1f;
+    // 玩家灯光组件
+    private readonly LightBehaviour lightCom;
     public LookAtState(FiniteStateMachine finiteStateMachine, GameObject npcObj, Transform playerTransform = null)
         : base(finiteStateMachine, npcObj)
     {
@@ -25,9 +27,10 @@ public class LookAtState : BaseState
         {
             m_playerTransform = GameObject.Find("Player000").transform;
         }
-        m_2ChaseDistance = npcObj.GetComponent<MonsterBaseFSM>().MonsterDatas.WarnRange;
-        m_2LostDistance = npcObj.GetComponent<MonsterBaseFSM>().MonsterDatas.WarnRange + 5f;
+        m_2ChaseDistance = m_monsterBaseFSM.MonsterDatas.WarnRange;
+        m_2LostDistance = m_monsterBaseFSM.MonsterDatas.WarnRange + 5f;
         m_fleeDistance = 3f;
+        lightCom = m_monsterBaseFSM.LightComponent;
     }
     /// <summary>
     /// 执行看向玩家的动作
@@ -36,19 +39,18 @@ public class LookAtState : BaseState
     public override void Act(GameObject npc)
     {
         // npc.transform.LookAt(m_playerTransform);
-        float npcX = npc.transform.position.x;
-        float playerX = m_playerTransform.position.x;
+        float direction = m_playerTransform.position.x - m_monsterBaseFSM.transform.position.x;
         // 玩家在NPC左边，看向左边
         Vector3 scale;
-        if (playerX - npcX > 0f)
+        if (direction > 0f)
         {
-            scale = GameConstData.NormalScale;
+            scale = GameConstData.XNormalScale;
         }
         else
         {
-            scale = GameConstData.ReverseScale;
+            scale = GameConstData.XReverseScale;
         }
-        m_gameObject.transform.localScale = scale;
+        m_monsterBaseFSM.Renderer.transform.localScale = scale;
     }
     /// <summary>
     /// 判断是否切换到追逐玩家或者丢失玩家的状态
@@ -68,17 +70,12 @@ public class LookAtState : BaseState
             m_finiteStateMachine.PerformTransition(TransitionEnum.LostPlayer);
         }
         // 发现光源直接逃跑
-        var lightComponent = npc.GetComponent<MonsterBaseFSM>().LightComponent;
-        if (lightComponent != null)
+        if (lightCom != null && lightCom.isOn)
         {
-            // 光源打开着
-            if (lightComponent.isOn)
+            Transform lightTransform = lightCom.transform;
+            if (Vector3.Distance(lightTransform.position, m_gameObject.transform.position) <= m_fleeDistance)
             {
-                Transform lightTransform = lightComponent.transform;
-                if (Vector3.Distance(lightTransform.position, m_gameObject.transform.position) <= m_fleeDistance)
-                {
-                    m_finiteStateMachine.PerformTransition(TransitionEnum.FleeAction);
-                }
+                m_finiteStateMachine.PerformTransition(TransitionEnum.FleeAction);
             }
         }
     }
