@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,16 +17,18 @@ public class GlobalLightController : MonoBehaviour
     private readonly List<PhasedChangedEvent> phasedEvents;
     // 时间段对应的光的颜色
     readonly Dictionary<TimePhaseEnum, Color> timePhaseToColor;
+    // 记录离开安全屋前的时间段对应的颜色
+    private Color safetyHouseColor;
 
     public GlobalLightController()
     {
         timePhaseToColor = new(4)
         {
 
-            { TimePhaseEnum.Night2, new (20 / 255f, 20 / 255f, 25 / 255f) },
-            { TimePhaseEnum.Day, new (190 / 255f, 190f / 255f, 220 / 255f) },
-            { TimePhaseEnum.Dusk, new (120 / 255f, 50 / 255f, 40 / 255f) },
-            { TimePhaseEnum.Night1, new (30 / 255f, 30 / 255f, 70 / 255f) }
+            { TimePhaseEnum.Night2, new (20f / 255f, 20f / 255f, 25f / 255f) },
+            { TimePhaseEnum.Day, new (190f / 255f, 190f / 255f, 220f / 255f) },
+            { TimePhaseEnum.Dusk, new (120f / 255f, 50f / 255f, 40f / 255f) },
+            { TimePhaseEnum.Night1, new (30f / 255f, 30f / 255f, 70f / 255f) }
         };
 
         phasedEvents = new(4);
@@ -40,8 +42,8 @@ public class GlobalLightController : MonoBehaviour
         }
         m_globalLight2D.lightType = Light2D.LightType.Global;
     }
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
 
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Start()
     {
         // 添加时间段改变的事件
@@ -56,10 +58,28 @@ public class GlobalLightController : MonoBehaviour
             phasedEvents.Add(phasedEvent);
             TimeSystemManager.Instance.PhasedChangedScheduledEvents.Add(phasedEvent);
         }
+        EventManager.Instance.RegistEvent(EventConstName.PlayerEnterSafeHouseEvent, PlayerEnterSaftHouseHandler);
+        EventManager.Instance.RegistEvent(EventConstName.PlayerLeaveSafeHouseEvent, PlayerLeaveSaftHouseHandler);
+    }
+
+    private void PlayerEnterSaftHouseHandler()
+    {
+        // 恢复之前记录的光照
+        m_globalLight2D.color = safetyHouseColor;
+    }
+
+    private void PlayerLeaveSaftHouseHandler()
+    {
+        // 记录离开安全屋时的光照
+        safetyHouseColor = m_globalLight2D.color;
+        // 设置光源为晚上
+        m_globalLight2D.color = timePhaseToColor[TimePhaseEnum.Night1];
     }
 
     private void OnDestroy()
     {
+        EventManager.Instance.RemoveEvent(EventConstName.PlayerEnterSafeHouseEvent, PlayerEnterSaftHouseHandler);
+        EventManager.Instance.RemoveEvent(EventConstName.PlayerLeaveSafeHouseEvent, PlayerLeaveSaftHouseHandler);
         phasedEvents.Clear();
         timePhaseToColor.Clear();
     }

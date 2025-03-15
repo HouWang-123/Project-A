@@ -95,11 +95,17 @@ public class GameControl
         mono.SetPlayPoint(DoorId);
 
         // 不为安全屋，时间系统不走
-        TimeSystemManager.Instance.TimeSpeed = r.PrefabName switch
+        switch (r.PrefabName)
         {
-            "SafetyRoom" => 1f,
-            _ => 0f,
-        };
+            case "SafetyRoom": // 安全屋
+                TimeSystemManager.Instance.TimeSpeed = 1f;
+                EventManager.Instance.RunEvent(EventConstName.PlayerEnterSafeHouseEvent);
+                break;
+            default:
+                TimeSystemManager.Instance.TimeSpeed = 0f;
+                EventManager.Instance.RunEvent(EventConstName.PlayerLeaveSafeHouseEvent);
+                break;
+        }
         RiddleByRoom(mono, r);
 
         //if(!roomCache.ContainsKey(RoomId))
