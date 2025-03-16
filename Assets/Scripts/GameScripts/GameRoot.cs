@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using cfg;
 using cfg.item;
 using SimpleJSON;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using YooAsset;
 
 public class GameRoot : MonoBehaviour

@@ -11,14 +11,17 @@ public class PlayerPickupController : MonoBehaviour
 {
     public ItemBase currentPickup; // 目标拾取
     private List<ItemBase> Item2PickList; // 拾取列表
+    private LayerMask ItemLayerMask;
+
+    private void Awake()
+    {
+        ItemLayerMask = LayerMask.GetMask("Item");
+    }
 
     public void Start()
     {
         Item2PickList = new List<ItemBase>();
-        EventManager.Instance.RegistEvent("OnPickUpTargetChanges",(object item)=>
-        {
-            ChangeToTargetItem(item);
-        });
+        EventManager.Instance.RegistEvent("OnPickUpTargetChanges", (object item) => { ChangeToTargetItem(item); });
     }
 
     private void Update()
@@ -30,14 +33,32 @@ public class PlayerPickupController : MonoBehaviour
     {
         Vector2 mousePosition = Mouse.current.position.ReadValue();
         Ray ray = Camera.main.ScreenPointToRay(mousePosition);
-        RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
-        if (hit.transform == null) return;
-        ItemBase itemBase = hit.transform.GetComponentInParent<ItemBase>();
-        if (itemBase == null) return;
-        if (itemBase.PickUpTargeted) return;
-        if (itemBase.DropState) return;
-        ChangeToTargetItem(itemBase);
-        
+        bool hit = Physics.Raycast(ray.origin, ray.direction, out var hitinfo, 20000, ItemLayerMask);
+        if (hit)
+        {
+            ItemBase ib = hitinfo.transform.GetComponent<ItemBase>();
+            EventManager.Instance.RunEvent(EventConstName.OnMouseFocusItemChanges, ib);
+            if (ib == currentPickup) return;
+            if (ib == null) return;
+            if (ib.DropState) return;
+            if (Item2PickList.Contains(ib))
+            {
+                ChangeToTargetItem(ib);
+            }
+        }
+        else
+        {
+            EventManager.Instance.RunEvent<ItemBase>(EventConstName.OnMouseFocusItemChanges, null);
+        }
+        // Vector2 mousePosition = Mouse.current.position.ReadValue();
+        // Ray ray = Camera.main.ScreenPointToRay(mousePosition);
+        // RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
+        // if (hit.transform == null) return;
+        // ItemBase itemBase = hit.transform.GetComponentInParent<ItemBase>();
+        // if (itemBase == null) return;
+        // if (itemBase.PickUpTargeted) return;
+        // if (itemBase.DropState) return;
+        // ChangeToTargetItem(itemBase);
     }
 
     float changekeyPressTime;
@@ -59,6 +80,7 @@ public class PlayerPickupController : MonoBehaviour
                 changekeyPressTime = 0;
                 isfirstInput = false;
             }
+
             UpdateCurrentPickup();
         }
         else
@@ -69,10 +91,12 @@ public class PlayerPickupController : MonoBehaviour
     }
 
     private bool changeItemTooggle;
+
     public void ChangeItemToogle(bool toggle)
     {
         changeItemTooggle = toggle;
     }
+
     public void ChangeNextPickupTarget() // 拾取范围内目标拾取物品转换逻辑
     {
         if (Item2PickList.Count == 0)
@@ -85,6 +109,7 @@ public class PlayerPickupController : MonoBehaviour
         {
             currentPickup.SetTargerted(false);
         }
+
         int RangeLength = Item2PickList.Count;
         int nextindex = Item2PickList.IndexOf(currentPickup) + 1;
         if (Item2PickList.IndexOf(currentPickup) + 1 == RangeLength)
@@ -96,6 +121,7 @@ public class PlayerPickupController : MonoBehaviour
         currentPickup.SetPickupable(true);
         currentPickup.SetTargerted(true);
     }
+
     public void ChangeToTargetItem(object item) // 拾取范围内目标拾取物品转换逻辑
     {
         ItemBase ib = item as ItemBase;
@@ -105,10 +131,12 @@ public class PlayerPickupController : MonoBehaviour
             {
                 currentPickup.SetTargerted(false);
             }
+
             currentPickup = ib;
             UpdateCurrentPickup();
         }
     }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag.Equals("Item"))
@@ -116,7 +144,7 @@ public class PlayerPickupController : MonoBehaviour
             if (currentPickup != null)
             {
                 ItemBase DropingEnters = other.gameObject.GetComponent<ItemBase>();
-                if (DropingEnters.DropState) 
+                if (DropingEnters.DropState)
                 {
                     DropingEnters.OnDropCallback = () =>
                     {
@@ -127,6 +155,7 @@ public class PlayerPickupController : MonoBehaviour
                     };
                     return;
                 }
+
                 currentPickup.SetTargerted(false); // 新物品进入范围后取消之前的目标
             }
 
@@ -143,12 +172,13 @@ public class PlayerPickupController : MonoBehaviour
                 };
                 return;
             }
+
             if (newEnter == null)
             {
                 Debug.LogWarning("no ItemBase component assigned to " + other.gameObject.name);
                 return;
             }
-            
+
             if (Item2PickList.Contains(newEnter)) return;
             Item2PickList.Add(newEnter);
             newEnter.SetPickupable(true);
@@ -156,7 +186,7 @@ public class PlayerPickupController : MonoBehaviour
             UpdateCurrentPickup();
         }
     }
-    
+
     private void OnTriggerExit(Collider other) // 物品离开拾取范围
     {
         if (other.gameObject.tag.Equals("Item"))
@@ -176,8 +206,8 @@ public class PlayerPickupController : MonoBehaviour
         if (currentPickup == null) return;
         Destroy(currentPickup.gameObject);
         Item2PickList.Remove(currentPickup);
-        
         currentPickup = null;
+        EventManager.Instance.RunEvent<ItemBase>(EventConstName.OnMouseFocusItemChanges, null);
     }
 
     private void UpdateCurrentPickup()
@@ -187,6 +217,7 @@ public class PlayerPickupController : MonoBehaviour
         {
             itemBase.SetTargerted(false);
         }
+
         currentPickup.SetTargerted(true);
     }
 }

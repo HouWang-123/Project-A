@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: ec3310673a613c84d9492d2d59819d23
+guid: 74354b373897ee446b25aff2172c9a41
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1115178295383467383
-    second: UI_Cursor_InGame_Default_2_0
+      213: -7251971368547420058
+    second: UI_Cursor_Default_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -24,7 +24,7 @@ TextureImporter:
     heightScale: 0.25
     normalMapFilter: 0
     flipGreenChannel: 0
-  isReadable: 0
+  isReadable: 1
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: UI_Cursor_InGame_Default_2_0
+      name: UI_Cursor_Default_0
       rect:
         serializedVersion: 2
-        x: 21
-        y: 18
-        width: 8
-        height: 9
+        x: 0
+        y: 0
+        width: 50
+        height: 49
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 775ae8d40c8e97f00800000000000000
-      internalID: 1115178295383467383
+      spriteID: 6687d608672db5b90800000000000000
+      internalID: -7251971368547420058
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      UI_Cursor_InGame_Default_2_0: 1115178295383467383
+      UI_Cursor_Default_0: -7251971368547420058
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

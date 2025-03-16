@@ -420,6 +420,14 @@ PrefabInstance:
       propertyPath: safeArea
       value: 
       objectReference: {fileID: 3876999375900028516}
+    - target: {fileID: 3294668051913431135, guid: d236b3881432f304bbcab2405d6301c3, type: 3}
+      propertyPath: OnItemCursor
+      value: 
+      objectReference: {fileID: 21300000, guid: 74354b373897ee446b25aff2172c9a41, type: 3}
+    - target: {fileID: 3294668051913431135, guid: d236b3881432f304bbcab2405d6301c3, type: 3}
+      propertyPath: DefaultCursor
+      value: 
+      objectReference: {fileID: 21300000, guid: ec3310673a613c84d9492d2d59819d23, type: 3}
     - target: {fileID: 6303989001091802342, guid: d236b3881432f304bbcab2405d6301c3, type: 3}
       propertyPath: m_Name
       value: GameHUD_Cursor
@@ -504,6 +512,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9216747197030033237, guid: d236b3881432f304bbcab2405d6301c3, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ec3310673a613c84d9492d2d59819d23, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

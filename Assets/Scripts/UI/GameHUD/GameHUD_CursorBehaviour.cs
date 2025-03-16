@@ -1,6 +1,7 @@
 
 using System;
 using DG.Tweening;
+using Sirenix.Serialization;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
@@ -10,6 +11,9 @@ public class GameHUD_CursorBehaviour : MonoBehaviour
 {
     public Image cursorImage;
     public RectTransform safeArea;
+    
+    public Sprite DefaultCursor;
+    public Sprite OnItemCursor;
     private Sprite CurrentCursor;
     public Transform PlayerUseItemTransfrom;
     private bool HasFocus =  true;
@@ -24,6 +28,7 @@ public class GameHUD_CursorBehaviour : MonoBehaviour
         {
             OnLeftMouseUp();
         };
+        EventManager.Instance.RegistEvent<ItemBase>(EventConstName.OnMouseFocusItemChanges, CursorImgaeSwicher);
     }
 
     private void OnLeftMouseDown()
@@ -55,6 +60,22 @@ public class GameHUD_CursorBehaviour : MonoBehaviour
         ClickHandler();
     }
 
+    /// <summary>
+    /// You may add more cursor style here
+    /// 
+    /// </summary>
+    private void CursorImgaeSwicher(ItemBase itembase)
+    {
+        if (itembase == null)
+        {
+            SetCursor(DefaultCursor);
+        }
+        else
+        {
+            SetCursor(OnItemCursor);
+        }
+    }
+    
     private void ClickHandler()
     {
         
@@ -78,5 +99,9 @@ public class GameHUD_CursorBehaviour : MonoBehaviour
     private void OnApplicationFocus(bool hasFocus)
     {
         HasFocus = hasFocus;
+    }
+    private void OnDestroy()
+    {
+        EventManager.Instance.RemoveEvent<ItemBase>(EventConstName.OnMouseFocusItemChanges,CursorImgaeSwicher);
     }
 }

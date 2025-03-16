@@ -23,5 +23,8 @@
     public const string PlayerEnterSafeHouseEvent = "PlayerEnterSafeHouseEvent";
     // 玩家离开安全屋事件，用来触发时间不变
     public const string PlayerLeaveSafeHouseEvent = "PlayerLeaveSafeHouseEvent";
+
+    // 鼠标聚焦的物品位置发生改变
+    public const string OnMouseFocusItemChanges = "OnMouseFocusItemChanges";
 }
 

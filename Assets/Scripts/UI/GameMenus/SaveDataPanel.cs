@@ -18,6 +18,7 @@ public class SaveDataPanel : UIBase
             Hide();
             UIManager.Instance.GetPanel(UIPanelConfig.HUD_MainGameHUD).GetComponent<UIBase>().Show();
             GameControl.Instance.GameStart();
+            Cursor.visible = false;
         });
         AddButtonListen("CancelButton_N", () =>
         {

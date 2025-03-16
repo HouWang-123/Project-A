@@ -511,7 +511,7 @@ public class PlayerControl : MonoBehaviour
         return true;
     }
 
-    private void RefreshItemOnHand((int,ItemStatus) Item)
+    private void RefreshItemOnHand( (int,ItemStatus) Item)
     {
         int ItemId = Item.Item1;
         ItemStatus itemStatus = Item.Item2;
