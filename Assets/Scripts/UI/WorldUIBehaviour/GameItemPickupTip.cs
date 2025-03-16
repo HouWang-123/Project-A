@@ -4,18 +4,12 @@ using UnityEngine;
 
 public class GameItemPickupTip : MonoBehaviour
 {
-    public void PlayInitAnimation(bool isReversed)
+    public void PlayInitAnimation()
     {
         DOTween.Kill(this);
         transform.localScale = Vector3.zero;
-        if (isReversed)
-        {
-            transform.DOScale(new Vector3(-1,1,1), 0.2f);
-        }
-        else
-        {
             transform.DOScale(1f, 0.2f);
-        }
+        
     }
 
     public void OnDetargeted()
@@ -27,5 +21,14 @@ public class GameItemPickupTip : MonoBehaviour
     public void OnDestroy()
     {
         DOTween.Kill(this);
+    }
+
+    public void OnItemPicked()
+    {
+        DOTween.Kill(this);
+        transform.DOScale(0f, 0.2f).onComplete = () =>
+        {
+            Destroy(gameObject);
+        };
     }
 }

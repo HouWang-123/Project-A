@@ -26,11 +26,16 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable
     public bool DropState;
     public int StackCount = 1;
     private GameItemPickupTip pickupTips;
+
     public virtual ItemStatus GetItemStatus()
     {
         return null;
     }
-    public virtual void SetItemStatus(ItemStatus itemStatus) {}
+
+    public virtual void SetItemStatus(ItemStatus itemStatus)
+    {
+    }
+
     private void SetRendererImage()
     {
         AssetHandle loadAssetSync;
@@ -43,24 +48,31 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable
         ItemRenderer.sprite = loadAssetSync.AssetObject as Sprite;
         loadAssetSync.Release();
     }
-    
+
     protected void Start()
     {
         _collider = GetComponentInChildren<Collider2D>();
         if (!ignoreAngleCorrect)
         {
-            transform.localEulerAngles = GameConstData.DefAngles;
+            ItemRenderer.transform.localEulerAngles = GameConstData.DefAngles;
         }
+
         if (ItemData == null)
         {
             InitItem(ItemID); // 非动态生成的物品，拖拽进入的物品
         }
+
         CheckIsStackedItem();
         SetRendererImage();
     }
+
     public void OnDestroy()
     {
         GameRunTimeData.Instance.ItemManager.UnRegistItem(this);
+        if (pickupTips != null)
+        {
+            pickupTips.OnItemPicked();
+        }
     }
 
     // 新添加接口，通过设置id定义物品
@@ -99,7 +111,7 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable
         StackNuberText.gameObject.SetActive(true);
     }
 
-    private bool IsItemInPickupRange; // 可否拾取
+    public bool IsItemInPickupRange; // 可否拾取
 
     public void SetPickupable(bool v)
     {
@@ -115,43 +127,31 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable
             ItemRenderer.material.shader = oulineShader;
             if (pickupTips != null)
             {
-                if (transform.localScale.x < 0)
-                {
-                    pickupTips.PlayInitAnimation(true);
-                }
-                else
-                {
-                    pickupTips.PlayInitAnimation(false);
-                }
+                pickupTips.PlayInitAnimation();
                 return;
             }
-            
+
             AssetHandle loadAssetAsync = YooAssets.LoadAssetAsync<GameObject>("P_UI_WorldUI_ItemPickupTip");
             loadAssetAsync.Completed += (loadAssetAsync) =>
             {
                 GameObject objAssetObject = loadAssetAsync.AssetObject as GameObject;
-                
-                GameObject instantiate = Instantiate(objAssetObject,transform);
-                
+
+                GameObject instantiate = Instantiate(objAssetObject);
+
                 instantiate.transform.position = transform.position;
-                instantiate.transform.position += new Vector3(0, 1f,0);
-                
+                instantiate.transform.position += new Vector3(0, 1f, 0);
+                instantiate.transform.localEulerAngles = GameConstData.DefAngles;
                 pickupTips = instantiate.GetComponent<GameItemPickupTip>();
-                if (transform.localScale.x < 0)
-                {
-                    pickupTips.PlayInitAnimation(true);
-                }
-                else
-                {
-                    pickupTips.PlayInitAnimation(false);
-                }
+                pickupTips.PlayInitAnimation();
             };
-            
         }
         else
         {
             ItemRenderer.material.shader = DefaultSpriteShader;
-            pickupTips.OnDetargeted();
+            if (pickupTips != null)
+            {
+                pickupTips.OnDetargeted();
+            }
         }
     }
 
@@ -159,7 +159,7 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable
     {
         ItemRenderer.sortingOrder = OrderNumber;
     }
-    
+
 
     // 动态生成时必须调用一次初始化，用来设置物品数据
     public abstract void InitItem(int id); // 物品数据初始化
@@ -182,7 +182,13 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable
         F_Update_ItemDorp();
         F_UpdateWeaponCDRecover();
     }
-    protected virtual void F_UpdateWeaponCDRecover(){}
+
+    protected virtual void F_UpdateWeaponCDRecover()
+    {
+    }
+
+    public Action OnDropCallback;
+
     private void F_Update_ItemDorp()
     {
         if (DropState)
@@ -210,8 +216,10 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable
 
                 DropState = false;
                 upspeed = 20f;
+                OnDropCallback?.Invoke();
             }
         }
+
         //防止物品掉出世界
         if (transform.position.y < 0)
         {
@@ -221,16 +229,23 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable
     }
 
     // 物品拾取和丢弃
-    public virtual void OnItemPickUp(){}
-    public virtual void OnItemDrop(bool fastDrop, bool IgnoreBias = false,bool Playerreversed = false)
+    public virtual void OnItemPickUp()
+    {
+        if (pickupTips != null)
+        {
+            pickupTips.OnItemPicked();
+        }
+    }
+
+    public virtual void OnItemDrop(bool fastDrop, bool IgnoreBias = false, bool Playerreversed = false)
     {
         if (Playerreversed)
         {
-            transform.localScale = new Vector3(-1, 1, 1);
+            ItemRenderer.transform.localScale = new Vector3(-1, 1, 1);
         }
         else
         {
-            transform.localScale = new Vector3(1, 1, 1);
+            ItemRenderer.transform.localScale = new Vector3(1, 1, 1);
         }
 
         H_BiasSpeed = Random.Range(-10, 10);
@@ -240,6 +255,7 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable
             H_BiasSpeed = 0f;
             V_BiasSpeed = 0f;
         }
+
         DropState = true;
 
         if (fastDrop)
@@ -249,12 +265,18 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable
             DropState = false;
         }
     }
+
     // 交互逻辑
     // Fixed Update 调用
-    public virtual void OnRightInteract(){}
+    public virtual void OnRightInteract()
+    {
+    }
 
     // Fixed Update 调用
-    public virtual void OnLeftInteract(){}
+    public virtual void OnLeftInteract()
+    {
+    }
+
     /// 运动阻力
     private void SpeedDamp()
     {
@@ -263,6 +285,7 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable
         {
             upspeed -= damp * Time.deltaTime;
         }
+
         // LeftOrRight
         if (Math.Abs(H_BiasSpeed) > 0f)
         {
@@ -284,6 +307,7 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable
                 }
             }
         }
+
         // Upper Or Lower
         if (Math.Abs(V_BiasSpeed) > 0f)
         {

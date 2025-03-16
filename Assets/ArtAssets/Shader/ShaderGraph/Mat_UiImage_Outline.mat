@@ -54,9 +54,9 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _DynamicWidth: 2
+    - _DynamicWidth: 6.56
     - _Frequency: 4
-    - _width: 4
+    - _width: 4.84
     m_Colors:
     - _OutLineColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
