@@ -33,14 +33,23 @@ public class PlayerPickupController : MonoBehaviour
     {
         Vector2 mousePosition = Mouse.current.position.ReadValue();
         Ray ray = Camera.main.ScreenPointToRay(mousePosition);
+        Debug.DrawRay(ray.origin,ray.direction * 400,Color.red);
         bool hit = Physics.Raycast(ray.origin, ray.direction, out var hitinfo, 20000, ItemLayerMask);
         if (hit)
         {
+            Debug.Log(hitinfo.transform.name);
             ItemBase ib = hitinfo.transform.GetComponent<ItemBase>();
-            EventManager.Instance.RunEvent(EventConstName.OnMouseFocusItemChanges, ib);
-            if (ib == currentPickup) return;
+            // if (ib == null)
+            // {
+            //     ib = hitinfo.transform.GetComponentInChildren<ItemBase>();
+            // }
+            
             if (ib == null) return;
             if (ib.DropState) return;
+            EventManager.Instance.RunEvent(EventConstName.OnMouseFocusItemChanges, ib);
+            if (ib == currentPickup) return;
+            
+            
             if (Item2PickList.Contains(ib))
             {
                 ChangeToTargetItem(ib);

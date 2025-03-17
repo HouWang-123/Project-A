@@ -1,10 +1,8 @@
 
-using System;
+
 using DG.Tweening;
 using Sirenix.Serialization;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class GameHUD_CursorBehaviour : MonoBehaviour
@@ -82,7 +80,11 @@ public class GameHUD_CursorBehaviour : MonoBehaviour
     }
     private void CalculateCuresorPostionAndRotation()
     {
-        if (!HasFocus) return;
+        if (!HasFocus)
+        {
+            Cursor.visible = true;
+            return;
+        }
         if (PlayerUseItemTransfrom == null) return;
         Vector3 PlayerOnScreenPosition = Camera.main.WorldToScreenPoint(PlayerUseItemTransfrom.position);
         float Dis_x = PlayerOnScreenPosition.x - InputControl.Instance.GetLook().x;
@@ -94,6 +96,11 @@ public class GameHUD_CursorBehaviour : MonoBehaviour
         {
             transform.position = InputControl.Instance.GetLook();
             transform.DORotate(new Vector3(0, 0, rotate), 0.02f);
+            Cursor.visible = false;
+        }
+        else
+        {
+            Cursor.visible = true;
         }
     }
     private void OnApplicationFocus(bool hasFocus)
