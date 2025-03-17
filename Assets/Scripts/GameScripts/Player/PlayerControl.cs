@@ -203,6 +203,8 @@ public class PlayerControl : MonoBehaviour
         InputControl.Instance.EButton.started += (item) =>
         {
             bool actioned = false;
+            
+            
             if (!actioned)
             {
                 actioned = PickItem();
@@ -601,6 +603,7 @@ public class PlayerControl : MonoBehaviour
 
     private void PlayerHurt()
     {
+        Debug.Log("/////////////////HURT EVENT ////////////////");
         SetPlayerAnimatorEnum(EPlayerAnimator.Hurt);
         isMove = false;
     }

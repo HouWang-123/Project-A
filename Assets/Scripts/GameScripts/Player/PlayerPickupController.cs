@@ -145,9 +145,10 @@ public class PlayerPickupController : MonoBehaviour
             UpdateCurrentPickup();
         }
     }
-
+    
     private void OnTriggerEnter(Collider other)
     {
+        
         if (other.gameObject.tag.Equals("Item"))
         {
             if (currentPickup != null)
@@ -194,6 +195,7 @@ public class PlayerPickupController : MonoBehaviour
             currentPickup = newEnter;
             UpdateCurrentPickup();
         }
+        
     }
 
     private void OnTriggerExit(Collider other) // 物品离开拾取范围

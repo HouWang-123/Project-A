@@ -241,15 +241,15 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable
     {
         if (Playerreversed)
         {
-            ItemRenderer.transform.localScale = new Vector3(-1, 1, 1);
+            transform.localScale = new Vector3(-1, 1, 1);
         }
         else
         {
-            ItemRenderer.transform.localScale = new Vector3(1, 1, 1);
+            transform.localScale = new Vector3(1, 1, 1);
         }
 
         H_BiasSpeed = Random.Range(-10, 10);
-        V_BiasSpeed = Random.Range(-10, 10);
+        V_BiasSpeed = 0;
         if (IgnoreBias)
         {
             H_BiasSpeed = 0f;
