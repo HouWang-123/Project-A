@@ -11,7 +11,7 @@
     "AttackCD": 0.2,
     "IconName": "Icon_Item_Weapon_Dagger",
     "SpriteName": "Sprite_Item_Weapon_Dagger",
-    "PrefabName": "P_Item_Weapon",
+    "PrefabName": "P_Item_Weapon_Dagger",
     "WeaponType": 0,
     "AmmoId": -1
   },
@@ -27,7 +27,7 @@
     "AttackCD": 0.3,
     "IconName": "Icon_Item_Weapon_Sword",
     "SpriteName": "Sprite_Item_Weapon_Sword",
-    "PrefabName": "P_Item_Weapon",
+    "PrefabName": "P_Item_Weapon_Sword",
     "WeaponType": 0,
     "AmmoId": -1
   },
@@ -43,7 +43,7 @@
     "AttackCD": 0.2,
     "IconName": "Icon_Item_Weapon_KitchenKnife",
     "SpriteName": "Sprite_Item_Weapon_KitchenKnife",
-    "PrefabName": "P_Item_Weapon",
+    "PrefabName": "P_Item_Weapon_KitchenKnife",
     "WeaponType": 0,
     "AmmoId": -1
   },
@@ -59,7 +59,7 @@
     "AttackCD": 0.3,
     "IconName": "Icon_Item_Weapon_TangDao",
     "SpriteName": "Sprite_Item_Weapon_TangDao",
-    "PrefabName": "P_Item_Weapon",
+    "PrefabName": "P_Item_Weapon_TangDao",
     "WeaponType": 0,
     "AmmoId": -1
   },
@@ -75,7 +75,7 @@
     "AttackCD": 0.5,
     "IconName": "Icon_Item_Weapon_FireAxe",
     "SpriteName": "Sprite_Item_Weapon_FireAxe",
-    "PrefabName": "P_Item_Weapon",
+    "PrefabName": "P_Item_Weapon_FireAxe",
     "WeaponType": 0,
     "AmmoId": -1
   },
@@ -91,7 +91,7 @@
     "AttackCD": 0.3,
     "IconName": "Icon_Item_Weapon_HammerS",
     "SpriteName": "Sprite_Item_Weapon_HammerS",
-    "PrefabName": "P_Item_Weapon",
+    "PrefabName": "P_Item_Weapon_HammerS",
     "WeaponType": 0,
     "AmmoId": -1
   },
@@ -107,7 +107,7 @@
     "AttackCD": 0.5,
     "IconName": "Icon_Item_Weapon_HammerG",
     "SpriteName": "Sprite_Item_Weapon_HammerG",
-    "PrefabName": "P_Item_Weapon",
+    "PrefabName": "P_Item_Weapon_HammerG",
     "WeaponType": 0,
     "AmmoId": -1
   },
@@ -123,7 +123,7 @@
     "AttackCD": 0.3,
     "IconName": "Icon_Item_Weapon_Bat",
     "SpriteName": "Sprite_Item_Weapon_Bat",
-    "PrefabName": "P_Item_Weapon",
+    "PrefabName": "P_Item_Weapon_Bat",
     "WeaponType": 0,
     "AmmoId": -1
   },
@@ -139,7 +139,7 @@
     "AttackCD": 0.2,
     "IconName": "Icon_Item_Weapon_Pistol",
     "SpriteName": "Sprite_Item_Weapon_Pistol",
-    "PrefabName": "P_Item_Weapon",
+    "PrefabName": "P_Item_Weapon_Pistol",
     "WeaponType": 1,
     "AmmoId": 240004
   },
@@ -155,7 +155,7 @@
     "AttackCD": 0.4,
     "IconName": "Icon_Item_Weapon_Shotgun",
     "SpriteName": "Sprite_Item_Weapon_Shotgun",
-    "PrefabName": "P_Item_Weapon",
+    "PrefabName": "P_Item_Weapon_Shotgun",
     "WeaponType": 1,
     "AmmoId": 240005
   },
@@ -171,7 +171,7 @@
     "AttackCD": 0.5,
     "IconName": "Icon_Item_Weapon_Lighter",
     "SpriteName": "Sprite_Item_Weapon_Lighter",
-    "PrefabName": "P_Item_Weapon",
+    "PrefabName": "P_Item_Weapon_Lighter",
     "WeaponType": 1,
     "AmmoId": -1
   }

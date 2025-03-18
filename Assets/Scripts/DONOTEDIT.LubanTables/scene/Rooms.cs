@@ -83,17 +83,20 @@ public sealed partial class Rooms : Luban.BeanBase
     /// 房间里有哪些怪物
     /// </summary>
     public readonly System.Collections.Generic.List<int> MonstersIDList;
+    /// <summary>
+    /// 掉落规则
+    /// </summary>
     public readonly System.Collections.Generic.List<int> DropRuleIDList;
     /// <summary>
     /// 1为交互掉落，0为不是交互后掉落的
     /// </summary>
     public readonly System.Collections.Generic.List<bool> DropType;
     /// <summary>
-    /// 房间宽度
+    /// 房间左右宽度
     /// </summary>
     public readonly float RoomX;
     /// <summary>
-    /// 房间长度
+    /// 房间上下长度
     /// </summary>
     public readonly float RoomY;
    

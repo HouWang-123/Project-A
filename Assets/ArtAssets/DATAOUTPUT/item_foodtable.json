@@ -13,7 +13,7 @@
     "Weight": 1,
     "IconName": "Icon_Item_Food_TestItem",
     "SpriteName": "Sprite_Item_Food_TestItem",
-    "PrefabName": "P_Item_Food"
+    "PrefabName": "P_Item_Food_TestFood"
   },
   {
     "ID": 200001,
@@ -29,7 +29,7 @@
     "Weight": 1,
     "IconName": "Icon_Item_Food_water",
     "SpriteName": "Sprite_Item_Food_water",
-    "PrefabName": "P_Item_Food"
+    "PrefabName": "P_Item_Food_water"
   },
   {
     "ID": 200002,
@@ -45,7 +45,7 @@
     "Weight": 1,
     "IconName": "Icon_Item_Food_tin",
     "SpriteName": "Sprite_Item_Food_tin",
-    "PrefabName": "P_Item_Food"
+    "PrefabName": "P_Item_Food_tin"
   },
   {
     "ID": 200003,
@@ -61,6 +61,6 @@
     "Weight": 1,
     "IconName": "Icon_Item_Food_cola",
     "SpriteName": "Sprite_Item_Food_cola",
-    "PrefabName": "P_Item_Food"
+    "PrefabName": "P_Item_Food_cola"
   }
 ]

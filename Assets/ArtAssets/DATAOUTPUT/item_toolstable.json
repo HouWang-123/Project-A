@@ -8,7 +8,7 @@
     "weight": 1,
     "IconName": "Icon_Item_Tool_FlashLight",
     "SpriteName": "Sprite_Item_Tool_FlashLight",
-    "PrefabName": "P_Item_Tool"
+    "PrefabName": "P_Item_Tool_FlashLight"
   },
   {
     "ID": 250002,
@@ -19,7 +19,7 @@
     "weight": 0,
     "IconName": "Icon_Item_Tool_Firefly",
     "SpriteName": "Sprite_Item_Tool_Firefly",
-    "PrefabName": "P_Item_Tool"
+    "PrefabName": "P_Item_Tool_Firefly"
   },
   {
     "ID": 250003,
@@ -30,7 +30,7 @@
     "weight": 0,
     "IconName": "Icon_Item_Tool_WowTentacle",
     "SpriteName": "Sprite_Item_Tool_WowTentacle",
-    "PrefabName": "P_Item_Tool"
+    "PrefabName": "P_Item_Tool_WowTentacle"
   },
   {
     "ID": 250004,
@@ -41,7 +41,7 @@
     "weight": 0,
     "IconName": "Icon_Item_Tool_PocketWatch",
     "SpriteName": "Sprite_Item_Tool_PocketWatch",
-    "PrefabName": "P_Item_Tool"
+    "PrefabName": "P_Item_Tool_PocketWatch"
   },
   {
     "ID": 250005,
@@ -52,7 +52,7 @@
     "weight": 1,
     "IconName": "Icon_Item_Tool_FuelCan",
     "SpriteName": "Sprite_Item_Tool_FuelCan",
-    "PrefabName": "P_Item_Tool"
+    "PrefabName": "P_Item_Tool_FuelCan"
   },
   {
     "ID": 250006,
@@ -63,6 +63,6 @@
     "weight": 1,
     "IconName": "Icon_Item_Tool_MusicBox",
     "SpriteName": "Sprite_Item_Tool_MusicBox",
-    "PrefabName": "P_Item_Tool"
+    "PrefabName": "P_Item_Tool_MusicBox"
   }
 ]

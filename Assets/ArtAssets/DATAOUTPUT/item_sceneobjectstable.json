@@ -11,7 +11,7 @@
     "attack": 0,
     "IconName": "Icon_Item_SceneItem_Sawdust",
     "SpriteName": "Sprite_Item_SceneItem_Sawdust",
-    "PrefabName": "P_Item_SceneItem"
+    "PrefabName": "P_Item_SceneItem_Sawdust"
   },
   {
     "ID": 220002,
@@ -25,7 +25,7 @@
     "attack": 14,
     "IconName": "Icon_Item_SceneItem_BurningSawdust",
     "SpriteName": "Sprite_Item_SceneItem_BurningSawdust",
-    "PrefabName": "P_Item_SceneItem"
+    "PrefabName": "P_Item_SceneItem_BurningSawdust"
   },
   {
     "ID": 220003,
@@ -39,7 +39,7 @@
     "attack": 8,
     "IconName": "Icon_Item_SceneItem_DeadVase",
     "SpriteName": "Sprite_Item_SceneItem_DeadVase",
-    "PrefabName": "P_Item_SceneItem"
+    "PrefabName": "P_Item_SceneItem_DeadVase"
   },
   {
     "ID": 220004,
@@ -53,7 +53,7 @@
     "attack": 0,
     "IconName": "Icon_Item_SceneItem_BigBell",
     "SpriteName": "Sprite_Item_SceneItem_BigBell",
-    "PrefabName": "P_Item_SceneItem"
+    "PrefabName": "P_Item_SceneItem_BigBell"
   },
   {
     "ID": 220005,
@@ -67,7 +67,7 @@
     "attack": 0,
     "IconName": "Icon_Item_SceneItem_Anvil",
     "SpriteName": "Sprite_Item_SceneItem_Anvil",
-    "PrefabName": "P_Item_SceneItem"
+    "PrefabName": "P_Item_SceneItem_Anvil"
   },
   {
     "ID": 220006,
@@ -81,7 +81,7 @@
     "attack": 0,
     "IconName": "Icon_Item_SceneItem_Charger",
     "SpriteName": "Sprite_Item_SceneItem_Charger",
-    "PrefabName": "P_Item_SceneItem"
+    "PrefabName": "P_Item_SceneItem_Charger"
   },
   {
     "ID": 220007,
@@ -95,7 +95,7 @@
     "attack": 0,
     "IconName": "Icon_Item_SceneItem_Vine",
     "SpriteName": "Sprite_Item_SceneItem_Vine",
-    "PrefabName": "P_Item_SceneItem"
+    "PrefabName": "P_Item_SceneItem_Vine"
   },
   {
     "ID": 220008,
@@ -109,7 +109,7 @@
     "attack": 0,
     "IconName": "Icon_Item_SceneItem_Locker",
     "SpriteName": "Sprite_Item_SceneItem_Locker",
-    "PrefabName": "P_Item_SceneItem"
+    "PrefabName": "P_Item_SceneItem_Locker"
   },
   {
     "ID": 220009,
@@ -123,7 +123,7 @@
     "attack": 0,
     "IconName": "Icon_Item_SceneItem_Book",
     "SpriteName": "Sprite_Item_SceneItem_Book",
-    "PrefabName": "P_Item_SceneItem"
+    "PrefabName": "P_Item_SceneItem_Book"
   },
   {
     "ID": 220010,
@@ -137,7 +137,7 @@
     "attack": 0,
     "IconName": "Icon_Item_SceneItem_SkeletonPile",
     "SpriteName": "Sprite_Item_SceneItem_SkeletonPile",
-    "PrefabName": "P_Item_SceneItem"
+    "PrefabName": "P_Item_SceneItem_SkeletonPile"
   },
   {
     "ID": 220011,
@@ -151,7 +151,7 @@
     "attack": 14,
     "IconName": "Icon_Item_SceneItem_Fire",
     "SpriteName": "Sprite_Item_SceneItem_Fire",
-    "PrefabName": "P_Item_SceneItem"
+    "PrefabName": "P_Item_SceneItem_Fire"
   },
   {
     "ID": 220012,
@@ -165,6 +165,6 @@
     "attack": 0,
     "IconName": "Icon_Item_SceneItem_Basket",
     "SpriteName": "Sprite_Item_SceneItem_Basket",
-    "PrefabName": "P_Item_SceneItem"
+    "PrefabName": "P_Item_SceneItem_Basket"
   }
 ]

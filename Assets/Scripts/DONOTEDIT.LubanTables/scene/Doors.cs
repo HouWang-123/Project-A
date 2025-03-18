@@ -33,7 +33,7 @@ public sealed partial class Doors : Luban.BeanBase
     }
 
     /// <summary>
-    /// 序号
+    /// 门的序号
     /// </summary>
     public readonly int ID;
     /// <summary>
@@ -49,7 +49,7 @@ public sealed partial class Doors : Luban.BeanBase
     /// </summary>
     public readonly int ToRoomID;
     /// <summary>
-    /// 通向哪个门的ID，这个ID就在这个表内
+    /// 通向哪个门
     /// </summary>
     public readonly int ToDoorID;
     /// <summary>

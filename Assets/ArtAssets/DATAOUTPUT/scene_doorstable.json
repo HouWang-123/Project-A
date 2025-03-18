@@ -6,9 +6,9 @@
     "toRoomID": 300005,
     "toDoorID": 310013,
     "isInvisible": false,
-    "isLocked": false,
+    "isLocked": true,
     "requiredForOpen": [
-      0
+      240003
     ]
   },
   {
@@ -18,9 +18,9 @@
     "toRoomID": 300002,
     "toDoorID": 310003,
     "isInvisible": false,
-    "isLocked": false,
+    "isLocked": true,
     "requiredForOpen": [
-      0
+      240004
     ]
   },
   {
@@ -30,9 +30,9 @@
     "toRoomID": 300001,
     "toDoorID": 310002,
     "isInvisible": false,
-    "isLocked": false,
+    "isLocked": true,
     "requiredForOpen": [
-      0
+      240004
     ]
   },
   {
@@ -42,9 +42,9 @@
     "toRoomID": 300005,
     "toDoorID": 310012,
     "isInvisible": false,
-    "isLocked": false,
+    "isLocked": true,
     "requiredForOpen": [
-      0
+      240001
     ]
   },
   {
@@ -138,9 +138,9 @@
     "toRoomID": 300002,
     "toDoorID": 310004,
     "isInvisible": false,
-    "isLocked": false,
+    "isLocked": true,
     "requiredForOpen": [
-      0
+      240001
     ]
   },
   {
@@ -150,9 +150,9 @@
     "toRoomID": 300001,
     "toDoorID": 310001,
     "isInvisible": false,
-    "isLocked": false,
+    "isLocked": true,
     "requiredForOpen": [
-      0
+      240003
     ]
   },
   {
@@ -161,6 +161,1170 @@
     "DESCRIBE": "0",
     "toRoomID": 300002,
     "toDoorID": 310005,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310015,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 0,
+    "toDoorID": 0,
+    "isInvisible": true,
+    "isLocked": true,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310016,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300008,
+    "toDoorID": 310018,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310017,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300006,
+    "toDoorID": 310014,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310018,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300007,
+    "toDoorID": 310016,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310019,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300041,
+    "toDoorID": 310110,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310020,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300042,
+    "toDoorID": 310111,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310021,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300010,
+    "toDoorID": 310025,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310022,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300011,
+    "toDoorID": 310028,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310023,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300011,
+    "toDoorID": 310029,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310024,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300012,
+    "toDoorID": 310031,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310025,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300008,
+    "toDoorID": 310021,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310026,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300012,
+    "toDoorID": 310032,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310027,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300013,
+    "toDoorID": 310035,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310028,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300008,
+    "toDoorID": 310022,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310029,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300008,
+    "toDoorID": 310023,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310030,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300014,
+    "toDoorID": 310036,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310031,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300009,
+    "toDoorID": 310024,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310032,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300010,
+    "toDoorID": 310026,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310033,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300013,
+    "toDoorID": 310034,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310034,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300012,
+    "toDoorID": 310033,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310035,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 310025,
+    "toDoorID": 310027,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310036,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300011,
+    "toDoorID": 310030,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310037,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300015,
+    "toDoorID": 310038,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310038,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300014,
+    "toDoorID": 310037,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310039,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 0,
+    "toDoorID": 0,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310040,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300017,
+    "toDoorID": 310041,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310041,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300016,
+    "toDoorID": 310040,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310042,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300019,
+    "toDoorID": 310043,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310043,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300017,
+    "toDoorID": 310042,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310044,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300018,
+    "toDoorID": 310045,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310045,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300017,
+    "toDoorID": 310044,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310046,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300020,
+    "toDoorID": 310047,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310047,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300017,
+    "toDoorID": 310046,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310048,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300022,
+    "toDoorID": 310049,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310049,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300020,
+    "toDoorID": 310048,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310050,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300021,
+    "toDoorID": 310051,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310051,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300020,
+    "toDoorID": 310050,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310052,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300023,
+    "toDoorID": 310053,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310053,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300020,
+    "toDoorID": 310052,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310054,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300025,
+    "toDoorID": 310055,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310055,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300023,
+    "toDoorID": 310054,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310056,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300024,
+    "toDoorID": 310057,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310057,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300023,
+    "toDoorID": 310056,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310058,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300026,
+    "toDoorID": 310059,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310059,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300024,
+    "toDoorID": 310058,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310060,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300027,
+    "toDoorID": 310061,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310061,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300026,
+    "toDoorID": 310060,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310062,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300028,
+    "toDoorID": 310063,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310063,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300027,
+    "toDoorID": 310062,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310064,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300029,
+    "toDoorID": 310065,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310065,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300028,
+    "toDoorID": 310064,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310066,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300030,
+    "toDoorID": 310067,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310067,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300029,
+    "toDoorID": 310066,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310068,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300031,
+    "toDoorID": 310069,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310069,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300030,
+    "toDoorID": 310068,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310070,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300032,
+    "toDoorID": 310071,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310071,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300031,
+    "toDoorID": 310070,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310072,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300006,
+    "toDoorID": 310014,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310073,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 0,
+    "toDoorID": 0,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310074,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 0,
+    "toDoorID": 0,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310075,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 0,
+    "toDoorID": 0,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310076,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300036,
+    "toDoorID": 310080,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310077,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300036,
+    "toDoorID": 310081,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310078,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300036,
+    "toDoorID": 310082,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310079,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300035,
+    "toDoorID": 310085,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310080,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300033,
+    "toDoorID": 310076,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310081,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300033,
+    "toDoorID": 310077,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310082,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300033,
+    "toDoorID": 310078,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310083,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300038,
+    "toDoorID": 310096,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310084,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300037,
+    "toDoorID": 310090,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310085,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300033,
+    "toDoorID": 310079,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310086,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 0,
+    "toDoorID": 0,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310087,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300037,
+    "toDoorID": 310091,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310088,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300037,
+    "toDoorID": 310092,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310089,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300037,
+    "toDoorID": 310093,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310090,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300036,
+    "toDoorID": 310084,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310091,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300035,
+    "toDoorID": 310087,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310092,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300035,
+    "toDoorID": 310088,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310093,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300035,
+    "toDoorID": 310089,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310094,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300038,
+    "toDoorID": 310097,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310095,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300039,
+    "toDoorID": 310099,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310096,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300036,
+    "toDoorID": 310083,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310097,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300037,
+    "toDoorID": 310094,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310098,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 0,
+    "toDoorID": 0,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310099,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300037,
+    "toDoorID": 310095,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310100,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300040,
+    "toDoorID": 310103,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310101,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300040,
+    "toDoorID": 310104,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310102,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300040,
+    "toDoorID": 310105,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310103,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300039,
+    "toDoorID": 310100,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310104,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300039,
+    "toDoorID": 310101,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310105,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300039,
+    "toDoorID": 310102,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310106,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300041,
+    "toDoorID": 310108,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310107,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300042,
+    "toDoorID": 310109,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310108,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300040,
+    "toDoorID": 310106,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310109,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300040,
+    "toDoorID": 310107,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310110,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300008,
+    "toDoorID": 310019,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310111,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300008,
+    "toDoorID": 310020,
     "isInvisible": false,
     "isLocked": false,
     "requiredForOpen": [

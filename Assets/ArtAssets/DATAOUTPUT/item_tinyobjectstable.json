@@ -7,7 +7,7 @@
     "interactEffectID": 900001,
     "IconName": "Icon_Tiny_RingFinger",
     "SpriteName": "Sprite_Tiny_RingFinger",
-    "PrefabName": "P_Item_TinyObject"
+    "PrefabName": "P_Item_TinyObject_RingFinger"
   },
   {
     "ID": 240002,
@@ -17,7 +17,7 @@
     "interactEffectID": 900001,
     "IconName": "Icon_Tiny_LittleFinger",
     "SpriteName": "Sprite_Tiny_LittleFinger",
-    "PrefabName": "P_Item_TinyObject"
+    "PrefabName": "P_Item_TinyObject_LittleFinger"
   },
   {
     "ID": 240003,
@@ -27,7 +27,7 @@
     "interactEffectID": 900001,
     "IconName": "Icon_Tiny_Thumb",
     "SpriteName": "Sprite_Tiny_Thumb",
-    "PrefabName": "P_Item_TinyObject"
+    "PrefabName": "P_Item_TinyObject_Thumb"
   },
   {
     "ID": 240004,
@@ -37,7 +37,7 @@
     "interactEffectID": 900001,
     "IconName": "Icon_Tiny_Bullet",
     "SpriteName": "Sprite_Tiny_Bullet",
-    "PrefabName": "P_Item_TinyObject"
+    "PrefabName": "P_Item_TinyObject_Bullet"
   },
   {
     "ID": 240005,
@@ -47,6 +47,6 @@
     "interactEffectID": 900001,
     "IconName": "Icon_Tiny_Shrapnel",
     "SpriteName": "Sprite_Tiny_Shrapnel",
-    "PrefabName": "P_Item_TinyObject"
+    "PrefabName": "P_Item_TinyObject_Shrapnel"
   }
 ]

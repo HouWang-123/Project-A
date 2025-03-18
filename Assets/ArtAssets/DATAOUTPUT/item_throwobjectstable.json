@@ -9,7 +9,7 @@
     "attack": 16,
     "IconName": "Icon_Item_Throw_WoodenCrate",
     "SpriteName": "Sprite_Item_Throw_WoodenCrate",
-    "PrefabName": "P_Item_Throw"
+    "PrefabName": "P_Item_Throw_WoodenCrate"
   },
   {
     "ID": 230002,
@@ -21,7 +21,7 @@
     "attack": 4,
     "IconName": "Icon_Item_Throw_Basketball",
     "SpriteName": "Sprite_Item_Throw_Basketball",
-    "PrefabName": "P_Item_Throw"
+    "PrefabName": "P_Item_Throw_Basketball"
   },
   {
     "ID": 230003,
@@ -33,7 +33,7 @@
     "attack": 8,
     "IconName": "Icon_Item_Throw_Vase",
     "SpriteName": "Sprite_Item_Throw_Vase",
-    "PrefabName": "P_Item_Throw"
+    "PrefabName": "P_Item_Throw_Vase"
   },
   {
     "ID": 230004,
@@ -45,6 +45,6 @@
     "attack": 0,
     "IconName": "Icon_Item_Throw_DollHead",
     "SpriteName": "Sprite_Item_Throw_DollHead",
-    "PrefabName": "P_Item_Throw"
+    "PrefabName": "P_Item_Throw_DollHead"
   }
 ]

@@ -20,6 +20,7 @@ public partial class Tables
     public buff.PassiveSkillsTable PassiveSkillsTable {get; }
     public interact.InteractEffectTable InteractEffectTable {get; }
     public func.DropRuleTable DropRuleTable {get; }
+    public func.inspectionTable InspectionTable {get; }
     public item.FoodTable FoodTable {get; }
     public item.JewelryTable JewelryTable {get; }
     public item.SceneObjectsTable SceneObjectsTable {get; }
@@ -40,6 +41,7 @@ public partial class Tables
         PassiveSkillsTable = new buff.PassiveSkillsTable(loader("buff_passiveskillstable"));
         InteractEffectTable = new interact.InteractEffectTable(loader("interact_interacteffecttable"));
         DropRuleTable = new func.DropRuleTable(loader("func_dropruletable"));
+        InspectionTable = new func.inspectionTable(loader("func_inspectiontable"));
         FoodTable = new item.FoodTable(loader("item_foodtable"));
         JewelryTable = new item.JewelryTable(loader("item_jewelrytable"));
         SceneObjectsTable = new item.SceneObjectsTable(loader("item_sceneobjectstable"));
@@ -62,6 +64,7 @@ public partial class Tables
         PassiveSkillsTable.ResolveRef(this);
         InteractEffectTable.ResolveRef(this);
         DropRuleTable.ResolveRef(this);
+        InspectionTable.ResolveRef(this);
         FoodTable.ResolveRef(this);
         JewelryTable.ResolveRef(this);
         SceneObjectsTable.ResolveRef(this);
