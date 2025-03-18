@@ -84,8 +84,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5267133728842365676}
   - {fileID: 2400067106492183719}
+  - {fileID: 5267133728842365676}
   m_Father: {fileID: 8206831356080259998}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1213044245628799038
@@ -733,6 +733,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10e438b2e0dbb584894d337df01b5f5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  riddleGameObject: {fileID: 0}
 --- !u!1 &4667788018268131347
 GameObject:
   m_ObjectHideFlags: 0

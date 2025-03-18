@@ -42,6 +42,15 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Floor
+    uniqueID: 1898802691
+    locked: 0
+  - name: TopWall
+    uniqueID: 3147869969
+    locked: 0
+  - name: LeftRightWall
+    uniqueID: 533736007
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
@@ -56,6 +65,9 @@ TagManager:
     locked: 0
   - name: WorldUI
     uniqueID: 2256877117
+    locked: 0
+  - name: BottomWall
+    uniqueID: 2450428621
     locked: 0
   m_RenderingLayers:
   - Default

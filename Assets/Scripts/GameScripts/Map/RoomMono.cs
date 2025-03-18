@@ -74,7 +74,7 @@ public class RoomMono : MonoBehaviour
         {
             if(roomData.DropRuleIDList.Count != itemsParent.childCount && roomData.DropRuleIDList.Count != roomData.DropType.Count)
             {
-                Debug.LogWarning("room数据所含Drop数量与实际预制体的itemPoint不同，请检查问题！！！");
+                Debug.LogWarning("room数据所含Drop数量与实际预制体的itemPoint不同，请检查问题！！！ID == " + roomData.ID + " name == " + roomData.PrefabName);
             }
             for(int i = 0; i < roomData.DropRuleIDList.Count && i < roomData.DropType.Count && i < itemsParent.childCount; i++)
             {
@@ -107,7 +107,7 @@ public class RoomMono : MonoBehaviour
             platform.SetActive(false);
             if (roomData.MonstersIDList.Count != monstersParent.childCount)
             {
-                Debug.LogWarning("room数据所含Monsters数量与实际预制体的monsterPoint不同，请检查问题！！！");
+                Debug.LogWarning("room数据所含Monsters数量与实际预制体的monsterPoint不同，请检查问题！！！ID == " + roomData.ID + " name == " + roomData.PrefabName);
             }
             for(int i = 0;i<roomData.MonstersIDList.Count && i < monstersParent.childCount; i++)
             {
