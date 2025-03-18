@@ -4,7 +4,7 @@ TextureImporter:
   internalIDToNameTable:
   - first:
       213: 3766953444756754179
-    second: Icon_Item_Weapon_Sword_0
+    second: Sprite_Item_Weapon_Sword_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,7 +113,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Icon_Item_Weapon_Sword_0
+      name: Sprite_Item_Weapon_Sword_0
       rect:
         serializedVersion: 2
         x: 9
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Icon_Item_Weapon_Sword_0: 3766953444756754179
+      Sprite_Item_Weapon_Sword_0: 3766953444756754179
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

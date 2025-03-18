@@ -3,8 +3,8 @@ guid: b2d8d33b0481d9047a646f9c915b8958
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1707298489672769599
-    second: Icon_Item_Weapon_TangDao_0
+      213: -6096818810249450879
+    second: Sprite_Item_Weapon_TangDao_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -51,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 250
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -113,7 +113,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Icon_Item_Weapon_TangDao_0
+      name: Sprite_Item_Weapon_TangDao_0
       rect:
         serializedVersion: 2
         x: 8
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f30a1824eea81b710800000000000000
-      internalID: 1707298489672769599
+      spriteID: 18a692b289fb36ba0800000000000000
+      internalID: -6096818810249450879
       vertices: []
       indices: 
       edges: []
@@ -147,8 +147,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      Icon_Item_Weapon_TangDao_0: 1707298489672769599
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

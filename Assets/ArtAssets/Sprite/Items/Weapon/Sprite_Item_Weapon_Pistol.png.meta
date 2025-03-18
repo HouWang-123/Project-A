@@ -4,7 +4,7 @@ TextureImporter:
   internalIDToNameTable:
   - first:
       213: -4822700086760625345
-    second: Icon_Item_Weapon_Pistol_0
+    second: Sprite_Item_Weapon_Pistol_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,15 +113,15 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Icon_Item_Weapon_Pistol_0
+      name: Sprite_Item_Weapon_Pistol_0
       rect:
         serializedVersion: 2
         x: 15
         y: 181
         width: 218
         height: 131
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.26859197, y: 0.73885477}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -138,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: a2c9e9006e3c5e148b6e22b08a430141
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Icon_Item_Weapon_Pistol_0: -4822700086760625345
+      Sprite_Item_Weapon_Pistol_0: -4822700086760625345
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

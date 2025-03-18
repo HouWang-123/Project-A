@@ -436,7 +436,7 @@ GameObject:
   - component: {fileID: 1506445924177370280}
   - component: {fileID: 8449184726143135220}
   m_Layer: 12
-  m_Name: P_Item_Tool
+  m_Name: P_Item_Tool_FlashLight
   m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -478,8 +478,8 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.4709316
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 0.3583873
+  m_Center: {x: 0.0037102103, y: 0, z: 0}
 --- !u!114 &1506445924177370280
 MonoBehaviour:
   m_ObjectHideFlags: 0

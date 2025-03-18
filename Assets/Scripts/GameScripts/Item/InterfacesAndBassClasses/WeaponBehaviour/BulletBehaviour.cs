@@ -1,9 +1,10 @@
 using System;
 using UnityEngine;
 using DG.Tweening;
+using FEVM.ObjectPool;
 using FEVM.Timmer;
 
-public class BulletBehaviour : MonoBehaviour,IDoDamageHandler
+public class BulletBehaviour : MonoBehaviour,IDoDamageHandler,FT_IPoolable
 {
     private PoolableTrail MyTrailRender;
     
@@ -13,7 +14,9 @@ public class BulletBehaviour : MonoBehaviour,IDoDamageHandler
     public float Speed = 100;
     public float DamageAmount;
     private float flyDistance; // Dang
-
+    
+    private int myBucketId;
+    
     public void GetBulletTrail()
     {
         MyTrailRender = GameTrailRendererManager.Instance.GetATrail(WeaponId,transform);
@@ -24,10 +27,6 @@ public class BulletBehaviour : MonoBehaviour,IDoDamageHandler
     {
         PoolableTrail poolableTrail = MyTrailRender.GetComponent<PoolableTrail>();
         poolableTrail.RecycleTrail();
-    }
-    public void SetShotParent(ShotBehaviour behaviour)
-    {
-        m_ShotBehaviour = behaviour;
     }
     public void SetInitialDamage(float amount)
     {
@@ -56,13 +55,36 @@ public class BulletBehaviour : MonoBehaviour,IDoDamageHandler
 
         if (damageable == null)
         {
-            m_ShotBehaviour.RecycleBullet(this);
+            // shot pool null
+            RecycleTrail();
+            GameObjectPool.Instance.RecycleGameObject(gameObject,myBucketId);
             return;
         }
+        
         damageable?.DamageReceive(DamageAmount);
         //生成特效
         //......
         //********
-        m_ShotBehaviour.RecycleBullet(this);
+        
+        
+        // shot pool null
+        RecycleTrail();
+        GameObjectPool.Instance.RecycleGameObject(gameObject,myBucketId);
+    }
+
+    public void OnRecycle()
+    {
+
+    }
+
+    public void OnReEnable()
+    {
+
+    }
+
+    public void SetBucketId(int ID)
+    {
+        WeaponId = -ID;
+        myBucketId = ID;
     }
 }
