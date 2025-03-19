@@ -21,7 +21,6 @@ public sealed partial class Localization : Luban.BeanBase
         { if(!_buf["Zh"].IsString) { throw new SerializationException(); }  Zh = _buf["Zh"]; }
         { if(!_buf["En"].IsString) { throw new SerializationException(); }  En = _buf["En"]; }
         { if(!_buf["Ja"].IsString) { throw new SerializationException(); }  Ja = _buf["Ja"]; }
-        { if(!_buf["Notes"].IsString) { throw new SerializationException(); }  Notes = _buf["Notes"]; }
     }
 
     public static Localization DeserializeLocalization(JSONNode _buf)
@@ -45,10 +44,6 @@ public sealed partial class Localization : Luban.BeanBase
     /// 日文
     /// </summary>
     public readonly string Ja;
-    /// <summary>
-    /// 备注
-    /// </summary>
-    public readonly string Notes;
    
     public const int __ID__ = -1211199014;
     public override int GetTypeId() => __ID__;
@@ -64,7 +59,6 @@ public sealed partial class Localization : Luban.BeanBase
         + "Zh:" + Zh + ","
         + "En:" + En + ","
         + "Ja:" + Ja + ","
-        + "Notes:" + Notes + ","
         + "}";
     }
 }

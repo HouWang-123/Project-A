@@ -209,7 +209,8 @@
       310019,
       310020,
       310021,
-      310022
+      310022,
+      310023
     ],
     "BGM": "0",
     "visibility": 3,
@@ -269,7 +270,8 @@
     "lastLeave": 0,
     "doorList": [
       310028,
-      310029
+      310029,
+      310030
     ],
     "BGM": "0",
     "visibility": 3,
@@ -349,8 +351,9 @@
     "iSeeDeadPeople": false,
     "lastLeave": 0,
     "doorList": [
-      310038,
-      310039
+      310113,
+      310112,
+      310115
     ],
     "BGM": "0",
     "visibility": 3,
@@ -390,8 +393,8 @@
     "doorList": [
       310041,
       310042,
-      310044,
-      310046
+      310043,
+      310044
     ],
     "BGM": "0",
     "visibility": 3,
@@ -429,7 +432,7 @@
     "iSeeDeadPeople": false,
     "lastLeave": 0,
     "doorList": [
-      410043
+      310046
     ],
     "BGM": "0",
     "visibility": 3,
@@ -450,8 +453,8 @@
     "doorList": [
       310047,
       310048,
-      310050,
-      310052
+      310049,
+      310050
     ],
     "BGM": "0",
     "visibility": 3,
@@ -489,7 +492,7 @@
     "iSeeDeadPeople": false,
     "lastLeave": 0,
     "doorList": [
-      310049
+      310052
     ],
     "BGM": "0",
     "visibility": 3,
@@ -510,7 +513,7 @@
     "doorList": [
       310053,
       310054,
-      310056
+      310055
     ],
     "BGM": "0",
     "visibility": 3,
@@ -529,8 +532,8 @@
     "iSeeDeadPeople": false,
     "lastLeave": 0,
     "doorList": [
-      310057,
-      310058
+      310056,
+      310057
     ],
     "BGM": "0",
     "visibility": 3,
@@ -549,7 +552,7 @@
     "iSeeDeadPeople": false,
     "lastLeave": 0,
     "doorList": [
-      310055
+      310058
     ],
     "BGM": "0",
     "visibility": 3,
@@ -731,7 +734,9 @@
     "iSeeDeadPeople": false,
     "lastLeave": 0,
     "doorList": [
-      0
+      310125,
+      310126,
+      310127
     ],
     "BGM": "0",
     "visibility": 3,
@@ -886,7 +891,7 @@
     "lastLeave": 0,
     "doorList": [
       310108,
-      310110
+      310109
     ],
     "BGM": "0",
     "visibility": 3,
@@ -905,7 +910,7 @@
     "iSeeDeadPeople": false,
     "lastLeave": 0,
     "doorList": [
-      310109,
+      310110,
       310111
     ],
     "BGM": "0",
@@ -916,5 +921,141 @@
     "dropType": [],
     "roomX": 12,
     "roomY": 8
+  },
+  {
+    "ID": 300043,
+    "NAME": "",
+    "DESCRIBE": "",
+    "prefabName": "F1_Mroom_16",
+    "iSeeDeadPeople": false,
+    "lastLeave": 0,
+    "doorList": [
+      310116,
+      310117
+    ],
+    "BGM": "0",
+    "visibility": 3,
+    "byTime": false,
+    "monstersIDList": [],
+    "dropRuleIDList": [],
+    "dropType": [],
+    "roomX": 12,
+    "roomY": 8
+  },
+  {
+    "ID": 300044,
+    "NAME": "",
+    "DESCRIBE": "",
+    "prefabName": "F1_Mroom_17",
+    "iSeeDeadPeople": false,
+    "lastLeave": 0,
+    "doorList": [
+      310118
+    ],
+    "BGM": "0",
+    "visibility": 3,
+    "byTime": false,
+    "monstersIDList": [],
+    "dropRuleIDList": [],
+    "dropType": [],
+    "roomX": 12,
+    "roomY": 8
+  },
+  {
+    "ID": 300045,
+    "NAME": "",
+    "DESCRIBE": "",
+    "prefabName": "F1_Mroom_18",
+    "iSeeDeadPeople": false,
+    "lastLeave": 0,
+    "doorList": [
+      310119,
+      310120
+    ],
+    "BGM": "0",
+    "visibility": 3,
+    "byTime": false,
+    "monstersIDList": [],
+    "dropRuleIDList": [],
+    "dropType": [],
+    "roomX": 12,
+    "roomY": 8
+  },
+  {
+    "ID": 300046,
+    "NAME": "",
+    "DESCRIBE": "",
+    "prefabName": "F1_Mroom_19",
+    "iSeeDeadPeople": false,
+    "lastLeave": 0,
+    "doorList": [
+      310121
+    ],
+    "BGM": "0",
+    "visibility": 3,
+    "byTime": false,
+    "monstersIDList": [],
+    "dropRuleIDList": [],
+    "dropType": [],
+    "roomX": 12,
+    "roomY": 8
+  },
+  {
+    "ID": 300047,
+    "NAME": "",
+    "DESCRIBE": "",
+    "prefabName": "F1_Mroom_20",
+    "iSeeDeadPeople": false,
+    "lastLeave": 0,
+    "doorList": [
+      310122,
+      310123
+    ],
+    "BGM": "0",
+    "visibility": 3,
+    "byTime": false,
+    "monstersIDList": [],
+    "dropRuleIDList": [],
+    "dropType": [],
+    "roomX": 12,
+    "roomY": 8
+  },
+  {
+    "ID": 300048,
+    "NAME": "",
+    "DESCRIBE": "",
+    "prefabName": "F1_Mroom_21",
+    "iSeeDeadPeople": false,
+    "lastLeave": 0,
+    "doorList": [
+      310124
+    ],
+    "BGM": "0",
+    "visibility": 3,
+    "byTime": false,
+    "monstersIDList": [],
+    "dropRuleIDList": [],
+    "dropType": [],
+    "roomX": 12,
+    "roomY": 8
+  },
+  {
+    "ID": 300049,
+    "NAME": "",
+    "DESCRIBE": "",
+    "prefabName": "F1_Lroom_BOSS",
+    "iSeeDeadPeople": false,
+    "lastLeave": 0,
+    "doorList": [
+      310128
+    ],
+    "BGM": "0",
+    "visibility": 3,
+    "byTime": false,
+    "monstersIDList": [],
+    "dropRuleIDList": [],
+    "dropType": [],
+    "roomX": 18,
+    "roomY": 12
   }
 ]
