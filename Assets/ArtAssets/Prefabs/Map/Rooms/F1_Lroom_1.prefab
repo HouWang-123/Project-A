@@ -1044,7 +1044,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2889940637679282268}
   - component: {fileID: 7281355001356403093}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1087,8 +1087,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 47.330696, y: 12.621736, z: 43.5328}
-  m_Center: {x: -0.015007019, y: -6.27, z: -3.6795807}
+  m_Size: {x: 47.330696, y: 10, z: 43.5328}
+  m_Center: {x: -0.015007019, y: -5, z: -3.6795807}
 --- !u!1 &8370382469150681772
 GameObject:
   m_ObjectHideFlags: 0

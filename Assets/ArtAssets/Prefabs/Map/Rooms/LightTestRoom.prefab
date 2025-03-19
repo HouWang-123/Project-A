@@ -211,7 +211,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 2103151679
-  m_SortingLayer: 1
+  m_SortingLayer: 0
   m_SortingOrder: -2
   m_Sprite: {fileID: 435424118772736513, guid: 4f06d829215fb9e45a7574b8e90ce9a3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -298,7 +298,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 2103151679
-  m_SortingLayer: 1
+  m_SortingLayer: 0
   m_SortingOrder: -4
   m_Sprite: {fileID: 435424118772736513, guid: 4f06d829215fb9e45a7574b8e90ce9a3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -386,7 +386,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 2103151679
-  m_SortingLayer: 1
+  m_SortingLayer: 0
   m_SortingOrder: -4
   m_Sprite: {fileID: -7449144692488593795, guid: a2a9e730b3c6a2842b47cd629c76454f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -583,7 +583,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 2103151679
-  m_SortingLayer: 1
+  m_SortingLayer: 0
   m_SortingOrder: -4
   m_Sprite: {fileID: -7449144692488593795, guid: a2a9e730b3c6a2842b47cd629c76454f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -692,7 +692,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 2103151679
-  m_SortingLayer: 1
+  m_SortingLayer: 0
   m_SortingOrder: -1
   m_Sprite: {fileID: 5091236662327578234, guid: 1daf0176980f73b44b757dfe11731594, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -775,6 +775,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10e438b2e0dbb584894d337df01b5f5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  riddleGameObject: {fileID: 0}
 --- !u!1 &5660459224320369618
 GameObject:
   m_ObjectHideFlags: 0
@@ -968,7 +969,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 2103151679
-  m_SortingLayer: 1
+  m_SortingLayer: 0
   m_SortingOrder: -1
   m_Sprite: {fileID: 5091236662327578234, guid: 1daf0176980f73b44b757dfe11731594, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1131,7 +1132,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2889940637679282268}
   - component: {fileID: 7281355001356403093}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1181,8 +1182,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 12.016764, y: 12.621736, z: 8.974189}
-  m_Center: {x: 0.0071952343, y: -6.27, z: -2.7676425}
+  m_Size: {x: 12.016764, y: 10, z: 8.974189}
+  m_Center: {x: 0.0071952343, y: -5, z: -2.7676425}
 --- !u!1 &8759008969813699799
 GameObject:
   m_ObjectHideFlags: 0

@@ -165,7 +165,7 @@ public class PlayerPickupController : MonoBehaviour
                     };
                     return;
                 }
-
+                
                 currentPickup.SetTargerted(false); // 新物品进入范围后取消之前的目标
             }
 

@@ -63,3 +63,12 @@ public interface ILiftable
 {
     
 }
+/// <summary>
+/// 需要添加 Trowstate
+/// </summary>
+public interface IThrowable
+{
+    void OnThrow();      /// <summary>
+                         /// Start
+                         /// </summary>
+}

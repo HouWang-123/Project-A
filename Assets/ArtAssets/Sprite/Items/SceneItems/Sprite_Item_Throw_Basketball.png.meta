@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 75ebfa6dd47dd0e419b9893684370edd
+guid: 813cf36618ed4a04984239636f2c38c6
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5835082598870868234
-    second: "\u7BEE\u7403_0"
+      213: 3224908996833009915
+    second: Sprite_Item_Scene_Basketball_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,12 +46,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
-  spriteExtrude: 2
+  spriteMode: 1
+  spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 0
-  spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  alignment: 9
+  spritePivot: {x: 0.49489146, y: 0.19731805}
+  spritePixelsToUnits: 500
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -113,23 +113,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "\u7BEE\u7403_0"
+      name: Sprite_Item_Scene_Basketball_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 100
-        height: 100
+        x: 96
+        y: 96
+        width: 312
+        height: 308
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6fe1d3bba4f950fa0800000000000000
-      internalID: -5835082598870868234
+      spriteID: bf0613575ad21cc20800000000000000
+      internalID: 3224908996833009915
       vertices: []
       indices: 
       edges: []
@@ -139,7 +139,7 @@ TextureImporter:
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
-    internalID: 0
+    internalID: 1537655665
     vertices: []
     indices: 
     edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      "\u7BEE\u7403_0": -5835082598870868234
+      Sprite_Item_Scene_Basketball_0: 3224908996833009915
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

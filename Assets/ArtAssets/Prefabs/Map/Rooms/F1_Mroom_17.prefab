@@ -432,7 +432,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8206831356080259998}
   - component: {fileID: 6178767148014686312}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: F1_Mroom_17
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1179,8 +1179,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 50, y: 7.8395524, z: 50}
-  m_Center: {x: 0, y: -3.9197762, z: -10}
+  m_Size: {x: 50, y: 10, z: 50}
+  m_Center: {x: 0, y: -5, z: -10}
 --- !u!1 &8305693397026088812
 GameObject:
   m_ObjectHideFlags: 0

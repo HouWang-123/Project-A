@@ -39,6 +39,10 @@ public class CharacterStat
     public int PassiveSkillID;
     // Other Character Stat
     public bool Dead;
+    
+    public bool IsRun;
+    public bool IsWalk;
+    
     private ItemBase itemOnHand; // 手中的物品
     public ItemBase ItemOnHand
     {
@@ -130,7 +134,9 @@ public class CharacterBasicStat
             RunRestore = m_characterData.RunRestore,
             RunSpeedScale = m_characterData.RunSpeedScal,
             WalkSpeed = m_characterData.WalkSpeed,
-            Dead = false
+            Dead = false,
+            IsRun= false,
+            IsWalk = false
         };
         playerDataInited = true;
         GameHUD.Instance.SetHUDStat(CharacterStat);

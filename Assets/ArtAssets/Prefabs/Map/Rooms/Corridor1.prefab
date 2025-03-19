@@ -514,7 +514,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 2103151679
-  m_SortingLayer: 1
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 8010268426123125548, guid: 812b7d97abe5b7d4491d8b237bffd660, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -623,7 +623,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 2103151679
-  m_SortingLayer: 1
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 8010268426123125548, guid: 812b7d97abe5b7d4491d8b237bffd660, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1035,7 +1035,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 2103151679
-  m_SortingLayer: 1
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 8010268426123125548, guid: 812b7d97abe5b7d4491d8b237bffd660, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1517,7 +1517,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2889940637679282268}
   - component: {fileID: 7281355001356403093}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1568,8 +1568,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 87.84, y: 7.8395524, z: 50}
-  m_Center: {x: 0, y: -3.9197762, z: -10}
+  m_Size: {x: 87.84, y: 9, z: 50}
+  m_Center: {x: 0, y: -4.5, z: -10}
 --- !u!1 &8463539017405882090
 GameObject:
   m_ObjectHideFlags: 0

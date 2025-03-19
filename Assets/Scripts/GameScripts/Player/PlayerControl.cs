@@ -4,6 +4,7 @@ using UnityEngine.Events;
 using Spine.Unity;
 using System;
 using Spine;
+using UnityEngine.InputSystem;
 
 public class PlayerControl : MonoBehaviour
 {
@@ -17,7 +18,11 @@ public class PlayerControl : MonoBehaviour
     private PlayerPickupController _pickupController;
     private bool PlayerReversed;
     private CharacterStat characterStat;
-
+    private PlayerInspectionController _inspectionController;
+    private LayerMask FloorBaseLayer;
+    public Vector3 PlayerLookatDirection;
+    public Vector3 ScreenToWorldPostion;
+    
     private EPAMoveState moveState = EPAMoveState.Idle;
     public EPAMoveState MoveState
     {
@@ -73,12 +78,17 @@ public class PlayerControl : MonoBehaviour
     private UnityAction rightMouseAction = null;
     private bool rightMous = false;
     private bool shiftButt = false;
+    
+    
+    
+
 
     private void Awake()
     {
         Instance = this;
         inputControl = new PlayerInputControl();
         isDead = false;
+        FloorBaseLayer = LayerMask.GetMask("BaseFloor");
     }
 
     private void OnEnable()
@@ -90,9 +100,13 @@ public class PlayerControl : MonoBehaviour
 
     private void Start()
     {
+        #region GamePreSettings
         GameRunTimeData.Instance.CharacterItemSlotData.ChangeFocusSlotNumber(1); // 默认启用道具栏
         characterStat = GameRunTimeData.Instance.CharacterBasicStat.GetStat();
+        
         _pickupController = GetComponentInChildren<PlayerPickupController>();
+        _inspectionController = GetComponentInChildren<PlayerInspectionController>();
+        
         playerRG = GetComponent<Rigidbody>();
         playerRenderer = transform.GetChild(0);
         playerRenderer.localEulerAngles = GameConstData.DefAngles;
@@ -119,9 +133,8 @@ public class PlayerControl : MonoBehaviour
             }
         };
         TimeSystemManager.Instance.PhasedChangedScheduledEvents.Add(phasedEvent);
-
+#endregion
         // 分钟改变时间：TimeSystemManager.GameMinuteEvent， 小时改变时间：GameHourEvent
-
         #region InputSystem
 
         InputControl.Instance.GamePlayerEnable();
@@ -194,11 +207,16 @@ public class PlayerControl : MonoBehaviour
             ScrollActionTimer = 0f;
         };
 
-        //测试切换地面物品
-        //=================
-        InputControl.Instance.QButton.started += (item) => { _pickupController.ChangeItemToogle(true); };
-        InputControl.Instance.QButton.canceled += (item) => { _pickupController.ChangeItemToogle(false); };
-        //==================
+
+        InputControl.Instance.QButton.started += (item) =>
+        {
+            
+        };
+        InputControl.Instance.QButton.canceled += (item) =>
+        {
+            
+        };
+
 
         InputControl.Instance.EButton.started += (item) =>
         {
@@ -233,15 +251,60 @@ public class PlayerControl : MonoBehaviour
             Debug.Log(GetType() + "取消时间加速");
             TimeSystemManager.Instance.TimeSpeed = 1f;
         };
+        
         #endregion
+        #region EventSystem
         EventManager.Instance.RegistEvent<EPAHandState>(EventConstName.PlayerHandItem, SetHandState);
         EventManager.Instance.RegistEvent(EventConstName.PlayerHurtAnimation, PlayerHurt);
         EventManager.Instance.RegistEvent(EventConstName.PlayerOnDeadAnimation, PlayerDead);
 
+        #endregion
+        
         GameHUD.Instance.SetPlayerItemTransform(useObjParent);
     }
+    private void FixedUpdate()
+    {
+        GameRunTimeData.Instance.CharacterBasicStat.UpdatePlayerStat();
+        ProcessMove();
+        ScrollActionTimer += Time.deltaTime;
+        ProcessWeaponNodeRotation();
+        ProcessMouseAction();
+        CalculatePlayerToMouseDirection();
+    }
 
+    void CalculatePlayerToMouseDirection()
+    {
+        Vector2 mousePosition = Mouse.current.position.ReadValue();
+        Ray ray = Camera.main.ScreenPointToRay(mousePosition);
+        bool hit = Physics.Raycast(ray.origin, ray.direction, out var hitinfo, 20000, FloorBaseLayer);
+        if (hit)
+        {
+            ScreenToWorldPostion = hitinfo.point;
+        }
+    }
 
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.magenta;
+        ScreenToWorldPostion.y = 0;
+        
+        // PlayerLookatDirection = ScreenToWorldPostion - transform.position;
+        // Vector3 normalize = Vector3.Normalize(PlayerLookatDirection);
+        //
+        // Gizmos.DrawLine(transform.position,normalize);
+        
+        
+        PlayerLookatDirection = ( ScreenToWorldPostion - transform.position).normalized;
+        
+        float lineLength = 1f; // 可自由调整长度
+        Vector3 lineEndPoint = transform.position + PlayerLookatDirection * lineLength;
+        
+        Gizmos.DrawLine(transform.position, lineEndPoint);
+        Gizmos.color = Color.green;
+        Gizmos.DrawSphere(ScreenToWorldPostion, 0.1f); 
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawSphere(PlayerLookatDirection, 0.1f); 
+    }
 
     Vector3 u, v, l, a, b;
     float angle;
@@ -279,10 +342,9 @@ public class PlayerControl : MonoBehaviour
         (int,ItemStatus) currentFocusedItemId = GameRunTimeData.Instance.CharacterItemSlotData.GetCurrentFocusedItemId();
         RefreshItemOnHand(currentFocusedItemId);
     }
-    private void FixedUpdate()
-    {
-        GameRunTimeData.Instance.CharacterBasicStat.UpdatePlayerStat();
 
+    private void ProcessMove()
+    {
         if(isMove)
         {
             PlayerMove(InputControl.Instance.MovePoint, characterStat.WalkSpeed);
@@ -293,9 +355,10 @@ public class PlayerControl : MonoBehaviour
             CalculateUseObjectRotation();
             useObjParent.localEulerAngles = a;
         }
+    }
 
-        ScrollActionTimer += Time.deltaTime;
-
+    private void ProcessWeaponNodeRotation()
+    {
         // Rotate WeaponTr
         Transform weaponTr = useObjParent.GetChild(0);
         angle = a.y;
@@ -321,6 +384,9 @@ public class PlayerControl : MonoBehaviour
         b.y = 0;
         b.z = 0;
         weaponTr.localEulerAngles = b;
+    }
+    private void ProcessMouseAction()
+    {
         // 武器使用相关
         if(leftMous)
         {
@@ -331,9 +397,7 @@ public class PlayerControl : MonoBehaviour
         {
             rightMouseAction?.Invoke();
         }
-
     }
-
     private void OnDisable()
     {
         inputControl?.Dispose();
@@ -360,17 +424,23 @@ public class PlayerControl : MonoBehaviour
                 speed *= fToB;
                 MoveState = EPAMoveState.Walk_Backwards;
                 //playerSpin.timeScale = fToB;              //匹配动画速度
+                characterStat.IsWalk = true;
+                characterStat.IsRun = false;
             }
             else if(shiftButt)
             {
                 speed *= characterStat.RunSpeedScale;
                 MoveState = EPAMoveState.Run;
                 playerSpin.timeScale = speed * 0.6f;        //匹配动画速度
+                characterStat.IsWalk = false;
+                characterStat.IsRun = true;
             }
             else
             {
                 MoveState = EPAMoveState.Walk;
                 playerSpin.timeScale = speed / 0.6f;      //匹配动画速度
+                characterStat.IsWalk = false;
+                characterStat.IsRun = true;
             }
 
             //playerRG.Move(vector * speed + transform.position, Quaternion.identity);
@@ -378,6 +448,8 @@ public class PlayerControl : MonoBehaviour
         else
         {
             MoveState = EPAMoveState.Idle;
+            characterStat.IsWalk = false;
+            characterStat.IsRun = false;
         }
         if(playerRG != null && !stopmove)
         {
@@ -571,7 +643,7 @@ public class PlayerControl : MonoBehaviour
             );
         }
     }
-
+    
     private void UpdatePlayerAnimatorEnum()
     {
         SetPlayerAnimatorEnum((EPlayerAnimator)((int)MoveState + (int)HandState));
@@ -587,7 +659,7 @@ public class PlayerControl : MonoBehaviour
         var entry = playerSpin.AnimationState.SetAnimation(0, animatorEnum.ToString(), true);
         playerSpin.timeScale = 1;
     }
-
+    
     //设置手部状态
     private void SetHandState(EPAHandState arg0)
     {
@@ -603,7 +675,6 @@ public class PlayerControl : MonoBehaviour
 
     private void PlayerHurt()
     {
-        Debug.Log("/////////////////HURT EVENT ////////////////");
         SetPlayerAnimatorEnum(EPlayerAnimator.Hurt);
         isMove = false;
     }
@@ -637,9 +708,8 @@ public class PlayerControl : MonoBehaviour
             }
         }
     }
-
-
 }
+
 
 public enum EPAMoveState : int
 {

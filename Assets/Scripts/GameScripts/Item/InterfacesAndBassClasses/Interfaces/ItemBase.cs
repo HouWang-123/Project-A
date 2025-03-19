@@ -1,12 +1,6 @@
 using System;
-using DG.Tweening;
-using Spine.Unity.Examples;
 using TMPro;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
-using UnityEngine.UIElements;
 using YooAsset;
 using Random = UnityEngine.Random;
 
@@ -24,9 +18,11 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable
     private bool ItemReversed;
     private bool ignoreAngleCorrect;
     public bool DropState;
+    public bool IgnoreDefaultItemDrop;
     public int StackCount = 1;
     private GameItemPickupTip pickupTips;
-
+    protected bool IsholdByPlayer;
+    
     public virtual ItemStatus GetItemStatus()
     {
         return null;
@@ -51,6 +47,7 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable
 
     protected void Start()
     {
+        IgnoreDefaultItemDrop = false;
         _collider = GetComponentInChildren<Collider2D>();
         if (!ignoreAngleCorrect)
         {
@@ -124,13 +121,15 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable
         PickUpTargeted = v;
         if (PickUpTargeted)
         {
+            if (DropState) return;
+            if (IsholdByPlayer) return;
             ItemRenderer.material.shader = oulineShader;
             if (pickupTips != null)
             {
                 pickupTips.PlayInitAnimation();
                 return;
             }
-
+            
             AssetHandle loadAssetAsync = YooAssets.LoadAssetAsync<GameObject>("P_UI_WorldUI_ItemPickupTip");
             loadAssetAsync.Completed += (loadAssetAsync) =>
             {
@@ -191,6 +190,10 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable
 
     private void F_Update_ItemDorp()
     {
+        if (IgnoreDefaultItemDrop)
+        {
+            return;
+        }
         if (DropState)
         {
             SpeedDamp();
@@ -219,7 +222,7 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable
                 OnDropCallback?.Invoke();
             }
         }
-
+        
         //防止物品掉出世界
         if (transform.position.y < 0)
         {
@@ -331,7 +334,7 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable
         }
     }
 
-    private void OnCollisionEnter(Collision other)
+    protected virtual void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.layer == GameRoot.Instance.FloorLayer)
         {
