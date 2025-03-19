@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Sprite_Item_Weapon_TangDao_0: -6096818810249450879
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
