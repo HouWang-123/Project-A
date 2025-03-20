@@ -21,6 +21,7 @@ public sealed partial class Inspection : Luban.BeanBase
         { if(!_buf["NAME"].IsString) { throw new SerializationException(); }  NAME = _buf["NAME"]; }
         { if(!_buf["DESCRIBE"].IsString) { throw new SerializationException(); }  DESCRIBE = _buf["DESCRIBE"]; }
         { if(!_buf["ImageSpriteName"].IsString) { throw new SerializationException(); }  ImageSpriteName = _buf["ImageSpriteName"]; }
+        { if(!_buf["InteracteTime"].IsNumber) { throw new SerializationException(); }  InteracteTime = _buf["InteracteTime"]; }
     }
 
     public static Inspection DeserializeInspection(JSONNode _buf)
@@ -44,6 +45,10 @@ public sealed partial class Inspection : Luban.BeanBase
     /// 图标
     /// </summary>
     public readonly string ImageSpriteName;
+    /// <summary>
+    /// 需要持续按下交互键时间？0 为立即交互
+    /// </summary>
+    public readonly float InteracteTime;
    
     public const int __ID__ = 505299710;
     public override int GetTypeId() => __ID__;
@@ -59,6 +64,7 @@ public sealed partial class Inspection : Luban.BeanBase
         + "NAME:" + NAME + ","
         + "DESCRIBE:" + DESCRIBE + ","
         + "ImageSpriteName:" + ImageSpriteName + ","
+        + "InteracteTime:" + InteracteTime + ","
         + "}";
     }
 }

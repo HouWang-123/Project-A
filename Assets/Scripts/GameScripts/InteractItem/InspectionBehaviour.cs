@@ -6,7 +6,7 @@ using UnityEngine;
 public class InspectionBehaviour : MonoBehaviour, IInteractHandler
 {
     public int InspectionID;
-    public float InteractRequiredTime;
+    private float InteractRequiredTime;
     public Inspection InspectionData;
     public SpriteRenderer MyRenderer;
 
@@ -15,6 +15,7 @@ public class InspectionBehaviour : MonoBehaviour, IInteractHandler
     private void Start()
     {
         InspectionData = GameTableDataAgent.InspectionTable.Get(InspectionID);
+        InteractRequiredTime = InspectionData.InteracteTime;
         MyRenderer = gameObject.transform.GetComponentInChildren<SpriteRenderer>();
         
         MyRenderer.transform.localEulerAngles = GameConstData.DefAngles;

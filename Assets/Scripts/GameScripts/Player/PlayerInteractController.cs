@@ -24,7 +24,6 @@ public class PlayerInteractController : MonoBehaviour
         bool hit = Physics.Raycast(ray.origin, ray.direction, out var hitinfo, 20000, InteractiveLayer);
         if (hit)
         {
-            
             IInteractHandler interactHandler = hitinfo.transform.GetComponentInChildren<IInteractHandler>();
             if (interactHandler == null) return;
             if (interactHandler == CurrentFocusedInteractHandler) return;
@@ -42,7 +41,7 @@ public class PlayerInteractController : MonoBehaviour
             handler.OnPlayerDefocus();
         }
         CurrentFocusedInteractHandler = interactHandler;
-        interactHandler.OnPlayerDefocus();
+        interactHandler.OnPlayerFocus();
     }
     public void InteractItem()
     {
@@ -62,8 +61,7 @@ public class PlayerInteractController : MonoBehaviour
         if (InteractHandler != null)
         {
             InteractHandlerList.Add(InteractHandler);
-            CurrentFocusedInteractHandler = InteractHandler;
-            InteractHandler.OnPlayerFocus();
+            ChangeToTargetItem(InteractHandler);
         }
     }
 
@@ -72,7 +70,6 @@ public class PlayerInteractController : MonoBehaviour
         IInteractHandler InteractHandler = other.gameObject.GetComponent<IInteractHandler>();
         if (InteractHandler != null)
         {
-            
             InteractHandlerList.Contains(InteractHandler);
             InteractHandler.OnPlayerDefocus();
             InteractHandlerList.Remove(InteractHandler);
