@@ -42,6 +42,7 @@ public class CharacterStat
     
     public bool IsRun;
     public bool IsWalk;
+    public bool CanInteractOtherItem;
     
     private ItemBase itemOnHand; // 手中的物品
     public ItemBase ItemOnHand
@@ -213,7 +214,6 @@ public class CharacterBasicStat
         {
             // 死亡检测
             LifeChecker();
-
             LivePlayerStatUpdater(); // 玩家存活时执行的更新
             DeadPlayerStatUpdater(); // 玩家死亡时数据执行的更新
 
@@ -221,6 +221,7 @@ public class CharacterBasicStat
             // 生命值合理范围检测
             HpCorrector();
             SanCorrector();
+
         }
     }
 

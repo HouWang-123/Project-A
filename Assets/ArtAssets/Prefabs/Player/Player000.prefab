@@ -113,10 +113,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.28
-  m_Height: 6.88
+  m_Radius: 1.88
+  m_Height: 0
   m_Direction: 1
-  m_Center: {x: 0, y: 2.2, z: 0}
+  m_Center: {x: 0, y: 0.9, z: 0}
 --- !u!1 &3916743681480142129
 GameObject:
   m_ObjectHideFlags: 0
@@ -225,6 +225,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ItemHoldPosition: {fileID: 0}
   ItemLiftPostion: {fileID: 1483206116016020512}
+  PlayerLookatDirection: {x: 0, y: 0, z: 0}
+  ScreenToWorldPostion: {x: 0, y: 0, z: 0}
   ItemReleasePoint: {fileID: 304942487821736792}
 --- !u!114 &4592422698790457664
 MonoBehaviour:

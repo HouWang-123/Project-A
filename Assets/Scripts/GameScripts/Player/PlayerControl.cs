@@ -18,7 +18,7 @@ public class PlayerControl : MonoBehaviour
     private PlayerPickupController _pickupController;
     private bool PlayerReversed;
     private CharacterStat characterStat;
-    private PlayerInspectionController _inspectionController;
+    private PlayerInteractController _interactController;
     private LayerMask FloorBaseLayer;
     public Vector3 PlayerLookatDirection;
     public Vector3 ScreenToWorldPostion;
@@ -105,7 +105,7 @@ public class PlayerControl : MonoBehaviour
         characterStat = GameRunTimeData.Instance.CharacterBasicStat.GetStat();
         
         _pickupController = GetComponentInChildren<PlayerPickupController>();
-        _inspectionController = GetComponentInChildren<PlayerInspectionController>();
+        _interactController = GetComponentInChildren<PlayerInteractController>();
         
         playerRG = GetComponent<Rigidbody>();
         playerRenderer = transform.GetChild(0);
@@ -345,6 +345,7 @@ public class PlayerControl : MonoBehaviour
 
     private void ProcessMove()
     {
+        if (GameRunTimeData.Instance.CharacterBasicStat.GetStat().Dead) return;
         if(isMove)
         {
             PlayerMove(InputControl.Instance.MovePoint, characterStat.WalkSpeed);
@@ -359,6 +360,7 @@ public class PlayerControl : MonoBehaviour
 
     private void ProcessWeaponNodeRotation()
     {
+        if (GameRunTimeData.Instance.CharacterBasicStat.GetStat().Dead) return;
         // Rotate WeaponTr
         Transform weaponTr = useObjParent.GetChild(0);
         angle = a.y;
@@ -387,6 +389,7 @@ public class PlayerControl : MonoBehaviour
     }
     private void ProcessMouseAction()
     {
+        if (GameRunTimeData.Instance.CharacterBasicStat.GetStat().Dead) return;
         // 武器使用相关
         if(leftMous)
         {
@@ -516,6 +519,9 @@ public class PlayerControl : MonoBehaviour
 
     public bool PickItem() // 拾取物品
     {
+        
+        if (GameRunTimeData.Instance.CharacterBasicStat.GetStat().Dead) return false;
+        
         if(!PickUpValidation())
             return false;
 

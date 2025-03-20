@@ -13,9 +13,9 @@ using SimpleJSON;
 
 namespace cfg.func
 {
-public sealed partial class inspection : Luban.BeanBase
+public sealed partial class Inspection : Luban.BeanBase
 {
-    public inspection(JSONNode _buf) 
+    public Inspection(JSONNode _buf) 
     {
         { if(!_buf["ID"].IsNumber) { throw new SerializationException(); }  ID = _buf["ID"]; }
         { if(!_buf["NAME"].IsString) { throw new SerializationException(); }  NAME = _buf["NAME"]; }
@@ -23,9 +23,9 @@ public sealed partial class inspection : Luban.BeanBase
         { if(!_buf["ImageSpriteName"].IsString) { throw new SerializationException(); }  ImageSpriteName = _buf["ImageSpriteName"]; }
     }
 
-    public static inspection Deserializeinspection(JSONNode _buf)
+    public static Inspection DeserializeInspection(JSONNode _buf)
     {
-        return new func.inspection(_buf);
+        return new func.Inspection(_buf);
     }
 
     /// <summary>
@@ -45,7 +45,7 @@ public sealed partial class inspection : Luban.BeanBase
     /// </summary>
     public readonly string ImageSpriteName;
    
-    public const int __ID__ = -1488165154;
+    public const int __ID__ = 505299710;
     public override int GetTypeId() => __ID__;
 
     public  void ResolveRef(Tables tables)

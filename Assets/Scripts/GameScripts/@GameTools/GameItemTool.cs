@@ -207,20 +207,7 @@ public static class GameItemTool
         string uri = GetItemResourceData(id).IconName;
         if (uri != "")
         {
-            ItemBase ib;
-            if (YooAssets.CheckLocationValid(uri))
-            {
-                AssetHandle loadAssetAsync = YooAssets.LoadAssetAsync<Sprite>(uri);
-                loadAssetAsync.Completed += handle =>
-                {
-                    finishCallback.Invoke(handle.AssetObject as Sprite);
-                    loadAssetAsync.Release();
-                };
-            }
-            else
-            {
-                Debug.LogWarning("预制体 " + uri + " 没有找到");
-            }
+            GameSpriteTool.LoadImageAsync(uri,finishCallback);
         }
     }
     /// <summary>
@@ -233,20 +220,7 @@ public static class GameItemTool
         string uri = GetItemResourceData(id).RendererName;
         if (uri != "")
         {
-            ItemBase ib;
-            if (YooAssets.CheckLocationValid(uri))
-            {
-                AssetHandle loadAssetAsync = YooAssets.LoadAssetAsync<Sprite>(uri);
-                loadAssetAsync.Completed += handle =>
-                {
-                    finishCallback.Invoke(handle.AssetObject as Sprite);
-                    loadAssetAsync.Release();
-                };
-            }
-            else
-            {
-                Debug.LogWarning("预制体 " + uri + " 没有找到");
-            }
+            GameSpriteTool.LoadImageAsync(uri,finishCallback);
         }
     }
 }

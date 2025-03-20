@@ -38,6 +38,7 @@ public class GameTableDataAgent
     public static MonsterTable MonsterTable;
     public static LocalizationTable LocalizationTable;
     public static DropRuleTable DropRuleTable;
+    public static InspectionTable InspectionTable; 
     public static void LoadAllTable()
     {
         Tables tables = new(LoadByteBuf);
@@ -62,6 +63,7 @@ public class GameTableDataAgent
         MonsterTable = _Instance.MonsterTable;
         LocalizationTable = _Instance.LocalizationTable;
         DropRuleTable = _Instance.DropRuleTable;
+        InspectionTable = _Instance.InspectionTable;
     }
 
     private static JSONNode LoadByteBuf(string file)

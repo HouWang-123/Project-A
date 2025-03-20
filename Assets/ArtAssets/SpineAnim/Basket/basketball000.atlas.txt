@@ -1,0 +1,16 @@
+basketball000.png
+size:1312,381
+filter:Linear,Linear
+pma:true
+1
+bounds:1148,217,162,162
+offsets:1,1,164,164
+2
+bounds:1148,53,162,162
+offsets:1,1,164,164
+lankuang_b
+bounds:577,53,569,326
+offsets:1,1,571,328
+lankuang_f
+bounds:2,2,573,377
+offsets:2,1,577,379

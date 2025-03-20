@@ -66,11 +66,7 @@ public class Throwable : ItemBase, ILiftable, IThrowable
         DropState = true;
         ObjectStoped = false;
         ThrowableRigidbody.isKinematic = false;
-        
-        
-        ThrowableRigidbody.AddForce( PlayerControl.Instance.PlayerLookatDirection * 3 + new Vector3(0f,4f,0f) ,ForceMode.Impulse);
-        
-        
+        ThrowableRigidbody.AddForce( PlayerControl.Instance.PlayerLookatDirection * 3 + new Vector3(0f,4f,0f) ,ForceMode.VelocityChange);
         ThrowableRigidbody.WakeUp();
         PlayerControl.Instance.DropItem(false);
         TimeMgr.Instance.AddTask(0.1f,false, () =>

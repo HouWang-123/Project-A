@@ -13,31 +13,31 @@ using SimpleJSON;
 
 namespace cfg.func
 {
-public partial class inspectionTable
+public partial class InspectionTable
 {
-    private readonly System.Collections.Generic.Dictionary<int, func.inspection> _dataMap;
-    private readonly System.Collections.Generic.List<func.inspection> _dataList;
+    private readonly System.Collections.Generic.Dictionary<int, func.Inspection> _dataMap;
+    private readonly System.Collections.Generic.List<func.Inspection> _dataList;
     
-    public inspectionTable(JSONNode _buf)
+    public InspectionTable(JSONNode _buf)
     {
-        _dataMap = new System.Collections.Generic.Dictionary<int, func.inspection>();
-        _dataList = new System.Collections.Generic.List<func.inspection>();
+        _dataMap = new System.Collections.Generic.Dictionary<int, func.Inspection>();
+        _dataList = new System.Collections.Generic.List<func.Inspection>();
         
         foreach(JSONNode _ele in _buf.Children)
         {
-            func.inspection _v;
-            { if(!_ele.IsObject) { throw new SerializationException(); }  _v = func.inspection.Deserializeinspection(_ele);  }
+            func.Inspection _v;
+            { if(!_ele.IsObject) { throw new SerializationException(); }  _v = func.Inspection.DeserializeInspection(_ele);  }
             _dataList.Add(_v);
             _dataMap.Add(_v.ID, _v);
         }
     }
 
-    public System.Collections.Generic.Dictionary<int, func.inspection> DataMap => _dataMap;
-    public System.Collections.Generic.List<func.inspection> DataList => _dataList;
+    public System.Collections.Generic.Dictionary<int, func.Inspection> DataMap => _dataMap;
+    public System.Collections.Generic.List<func.Inspection> DataList => _dataList;
 
-    public func.inspection GetOrDefault(int key) => _dataMap.TryGetValue(key, out var v) ? v : null;
-    public func.inspection Get(int key) => _dataMap[key];
-    public func.inspection this[int key] => _dataMap[key];
+    public func.Inspection GetOrDefault(int key) => _dataMap.TryGetValue(key, out var v) ? v : null;
+    public func.Inspection Get(int key) => _dataMap[key];
+    public func.Inspection this[int key] => _dataMap[key];
 
     public void ResolveRef(Tables tables)
     {

@@ -5,8 +5,6 @@ using UnityEngine.UI;
 public class GameHUD_HpIndicator : UIBase
 {
     public Image HpBase;
-    
-
     protected override void AddListen()
     {
     }

@@ -12,6 +12,8 @@ public class GameHUD_CursorBehaviour : MonoBehaviour
     
     public Sprite DefaultCursor;
     public Sprite OnItemCursor;
+    public Sprite OnInteractCursor;
+    
     private Sprite CurrentCursor;
     public Transform PlayerUseItemTransfrom;
     private bool HasFocus =  true;
@@ -62,15 +64,23 @@ public class GameHUD_CursorBehaviour : MonoBehaviour
     /// You may add more cursor style here
     /// 
     /// </summary>
-    private void CursorImgaeSwicher(ItemBase itembase)
+    private void CursorImgaeSwicher(object handler)
     {
-        if (itembase == null)
+        if (handler == null)
         {
             SetCursor(DefaultCursor);
         }
         else
         {
-            SetCursor(OnItemCursor);
+            if (handler is ItemBase)
+            {
+                SetCursor(OnItemCursor);
+            }
+
+            if (handler is IInteractHandler)
+            {
+                SetCursor(OnInteractCursor);
+            }
         }
     }
     
