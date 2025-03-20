@@ -24,6 +24,7 @@
     // 玩家离开安全屋事件，用来触发时间不变
     public const string PlayerLeaveSafeHouseEvent = "PlayerLeaveSafeHouseEvent";
 
+    public const string PlayerFinishInteraction = "PlayerFinishInteraction";
     // 鼠标聚焦的物品位置发生改变
     public const string OnMouseFocusItemChanges = "OnMouseFocusItemChanges";
 }

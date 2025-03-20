@@ -13,6 +13,11 @@ public class GameHUD : UIBase
     public GameHUD_HpIndicator HpIndicator;
     public GameHUD_CursorBehaviour Cursor;
     public GameHUD_InspectionUI InspectionUI;
+
+    public void ResizeCursor(float ResizeScale, float AnimationTime)
+    {
+        Cursor.ReSizeMouse(ResizeScale,AnimationTime);
+    }
     public void SetPlayerItemTransform(Transform _transform)
     {
         Cursor.SetPlayerItemTransform(_transform);

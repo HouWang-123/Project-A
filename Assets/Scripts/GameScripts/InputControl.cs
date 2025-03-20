@@ -28,6 +28,7 @@ public class InputControl
     public InputAction _6Key => inputActions.GamePlayer._6Key;
     public InputAction MouseScroll => inputActions.GamePlayer.MouseScroll;
     public InputAction TimeSpeed => inputActions.GamePlayer.TimeSpeed;
+    public InputAction Interact => inputActions.GamePlayer.Interact;
     
     //UI
     public Vector2 NavigatePoint => inputActions.UI.Navigate.ReadValue<Vector2>();

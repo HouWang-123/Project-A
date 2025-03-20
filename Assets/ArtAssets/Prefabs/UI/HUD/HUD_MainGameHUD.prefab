@@ -101,6 +101,7 @@ MonoBehaviour:
   gameHUDAreaNotificationBehaviour: {fileID: 2271076509622510194}
   HpIndicator: {fileID: 1007777107536408672}
   Cursor: {fileID: 4827424336359472216}
+  InspectionUI: {fileID: 0}
 --- !u!1001 &3707677080283081510
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -428,6 +429,10 @@ PrefabInstance:
       propertyPath: DefaultCursor
       value: 
       objectReference: {fileID: 21300000, guid: ec3310673a613c84d9492d2d59819d23, type: 3}
+    - target: {fileID: 3294668051913431135, guid: d236b3881432f304bbcab2405d6301c3, type: 3}
+      propertyPath: OnInteractCursor
+      value: 
+      objectReference: {fileID: 21300000, guid: 0343391696467e44c822fe9077e744b7, type: 3}
     - target: {fileID: 6303989001091802342, guid: d236b3881432f304bbcab2405d6301c3, type: 3}
       propertyPath: m_Name
       value: GameHUD_Cursor

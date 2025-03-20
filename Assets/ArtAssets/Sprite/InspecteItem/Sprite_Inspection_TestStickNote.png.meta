@@ -116,12 +116,12 @@ TextureImporter:
       name: Sprite_Inspection_TestStickNote_0
       rect:
         serializedVersion: 2
-        x: 11
-        y: 25
-        width: 102
-        height: 74
+        x: 0
+        y: 14
+        width: 128
+        height: 98
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -138,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: cafa4bf9f4d75a145949cac99df69b09
     internalID: 0
     vertices: []
     indices: 
@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Sprite_Inspection_TestStickNote_0: 410408435477859310
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

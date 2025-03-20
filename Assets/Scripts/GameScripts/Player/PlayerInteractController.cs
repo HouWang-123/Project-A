@@ -7,10 +7,16 @@ using UnityEngine.Serialization;
 
 public class PlayerInteractController : MonoBehaviour
 {
-    [FormerlySerializedAs("InspectionList")] public List<IInteractHandler> InteractHandlerList;
+    private List<IInteractHandler> InteractHandlerList = new ();
     public LayerMask InteractiveLayer;
     public IInteractHandler CurrentFocusedInteractHandler;
-    
+    public bool interactLock;
+
+    private void Start()
+    {
+        EventManager.Instance.RegistEvent(EventConstName.PlayerFinishInteraction, PlayerCancleInteract);
+    }
+
     public void FixedUpdate()
     {
         Vector2 mousePosition = Mouse.current.position.ReadValue();
@@ -18,20 +24,14 @@ public class PlayerInteractController : MonoBehaviour
         bool hit = Physics.Raycast(ray.origin, ray.direction, out var hitinfo, 20000, InteractiveLayer);
         if (hit)
         {
-            Debug.Log(hitinfo.transform.name);
+            
             IInteractHandler interactHandler = hitinfo.transform.GetComponentInChildren<IInteractHandler>();
             if (interactHandler == null) return;
             if (interactHandler == CurrentFocusedInteractHandler) return;
-            EventManager.Instance.RunEvent(EventConstName.OnMouseFocusItemChanges, interactHandler);
-            
             if (InteractHandlerList.Contains(interactHandler))
             {
                 ChangeToTargetItem(interactHandler);
             }
-        }
-        else
-        {
-            EventManager.Instance.RunEvent<ItemBase>(EventConstName.OnMouseFocusItemChanges, null);
         }
     }
 
@@ -46,9 +46,25 @@ public class PlayerInteractController : MonoBehaviour
     }
     public void InteractItem()
     {
-        CurrentFocusedInteractHandler.OnPlayerInteract();
+        if (interactLock) return; //交互锁
+        interactLock = true;
+        CurrentFocusedInteractHandler.OnPlayerStartInteract(
+            () =>
+            {
+                interactLock = false;
+            }
+        );
     }
-    
+    public void PlayerCancleInteract()
+    {
+        if (!interactLock) return;
+        CurrentFocusedInteractHandler.OnPlayerInteractCancel(
+            () =>
+            {
+                interactLock = false;
+            }
+        );
+    }
     public void OnTriggerEnter(Collider other)
     {
         IInteractHandler InteractHandler = other.gameObject.GetComponent<IInteractHandler>();

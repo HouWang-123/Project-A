@@ -1,7 +1,4 @@
-
-
 using DG.Tweening;
-using Sirenix.Serialization;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,8 +10,8 @@ public class GameHUD_CursorBehaviour : MonoBehaviour
     public Sprite DefaultCursor;
     public Sprite OnItemCursor;
     public Sprite OnInteractCursor;
-    
-    private Sprite CurrentCursor;
+
+    private bool shouldRotate;
     public Transform PlayerUseItemTransfrom;
     private bool HasFocus =  true;
     private void Awake()
@@ -28,7 +25,7 @@ public class GameHUD_CursorBehaviour : MonoBehaviour
         {
             OnLeftMouseUp();
         };
-        EventManager.Instance.RegistEvent<ItemBase>(EventConstName.OnMouseFocusItemChanges, CursorImgaeSwicher);
+        EventManager.Instance.RegistEvent<Object>(EventConstName.OnMouseFocusItemChanges, CursorImageSwicher);
     }
 
     private void OnLeftMouseDown()
@@ -42,14 +39,23 @@ public class GameHUD_CursorBehaviour : MonoBehaviour
         DOTween.Kill(transform);
         transform.DOScale(Vector3.one, 0.3f);
     }
+
+    public void ReSizeMouse(float ResizeScale, float ResizeTime)
+    {
+        DOTween.Kill(transform);
+        transform.DOScale(ResizeScale, ResizeTime);
+    }
+    
+    
+    
     public void SetPlayerItemTransform(Transform transform)
     {
         PlayerUseItemTransfrom = transform;
     }
     public void SetCursor(Sprite cursor)
     {
-        CurrentCursor = cursor;
         cursorImage.sprite = cursor;
+        Debug.Log("设置UI");
         cursorImage.SetNativeSize();
     }
     
@@ -64,21 +70,24 @@ public class GameHUD_CursorBehaviour : MonoBehaviour
     /// You may add more cursor style here
     /// 
     /// </summary>
-    private void CursorImgaeSwicher(object handler)
+    private void CursorImageSwicher(Object handler)
     {
         if (handler == null)
         {
+            shouldRotate = true;
             SetCursor(DefaultCursor);
         }
         else
         {
             if (handler is ItemBase)
             {
+                shouldRotate = true;
                 SetCursor(OnItemCursor);
             }
 
             if (handler is IInteractHandler)
             {
+                shouldRotate = false;
                 SetCursor(OnInteractCursor);
             }
         }
@@ -90,6 +99,7 @@ public class GameHUD_CursorBehaviour : MonoBehaviour
     }
     private void CalculateCuresorPostionAndRotation()
     {
+
         if (!HasFocus)
         {
             Cursor.visible = true;
@@ -105,7 +115,16 @@ public class GameHUD_CursorBehaviour : MonoBehaviour
         if (RectTransformUtility.RectangleContainsScreenPoint(safeArea, InputControl.Instance.GetLook()))
         {
             transform.position = InputControl.Instance.GetLook();
-            transform.DORotate(new Vector3(0, 0, rotate), 0.02f);
+            
+            if (shouldRotate)
+            {
+                transform.DORotate(new Vector3(0, 0, rotate), 0.02f);
+            }
+            else
+            {
+                transform.DORotate(new Vector3(0, 0, 0), 0.02f);
+            }
+
             Cursor.visible = false;
         }
         else
@@ -119,6 +138,6 @@ public class GameHUD_CursorBehaviour : MonoBehaviour
     }
     private void OnDestroy()
     {
-        EventManager.Instance.RemoveEvent<ItemBase>(EventConstName.OnMouseFocusItemChanges,CursorImgaeSwicher);
+        EventManager.Instance.RemoveEvent<Object>(EventConstName.OnMouseFocusItemChanges,CursorImageSwicher);
     }
 }

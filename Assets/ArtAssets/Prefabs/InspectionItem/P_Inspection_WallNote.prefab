@@ -27,7 +27,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.2156863, y: 1.581081, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7396498991645650676}
@@ -55,7 +55,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -73,8 +73,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 517859215
-  m_SortingLayer: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 410408435477859310, guid: c94c9caf0c51fac40883f51b61079c0b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -97,6 +97,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7396498991645650676}
   - component: {fileID: 983395914922150801}
+  - component: {fileID: 8526915591335715866}
   m_Layer: 11
   m_Name: P_Inspection_WallNote
   m_TagString: Interactive
@@ -135,9 +136,26 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.7783797, y: 0.4821086, z: 0.5358648}
-  m_Center: {x: -0.06857376, y: 0.049236774, z: -0.19235393}
+  m_Size: {x: 0.8479205, y: 0.5497649, z: 0.13649079}
+  m_Center: {x: -0.014480919, y: 0.015408635, z: 0.0027285367}
+--- !u!114 &8526915591335715866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7601832128168043183}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d5bc5b251c9a5d46b75846e86202ae9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InspectionID: 920002
+  InteractRequiredTime: 0.8
+  MyRenderer: {fileID: 0}
+  DefaultShader: {fileID: 4800000, guid: e260cfa7296ee7642b167f1eb5be5023, type: 3}
+  SelectedShader: {fileID: -6465566751694194690, guid: 9eb813183a8ed3a44b842b168679e4d4, type: 3}

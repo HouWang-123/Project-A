@@ -186,7 +186,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Inspect",
+                    "name": "Interact",
                     "type": "Button",
                     "id": "5eea970f-1018-4cab-b6ba-5d764861d42b",
                     "expectedControlType": "",
@@ -609,8 +609,8 @@
                     "path": "<Keyboard>/f",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
-                    "action": "Inspect",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

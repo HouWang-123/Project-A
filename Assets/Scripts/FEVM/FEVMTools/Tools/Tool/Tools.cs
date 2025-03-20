@@ -39,6 +39,28 @@ public static class Tools
             }
         }
     }
+    
+    public static void Notify<T>(Action<T> action)
+    {
+        if (action == null)
+            return;
+
+        var actions = action.GetInvocationList();
+        for (int i = 0; i < actions.Length; ++i)
+        {
+            var curAction = actions[i] as Action;
+            try
+            {
+                curAction();
+            }
+            catch (Exception e)
+            {
+                //EventManager.OnExceptionOccur.BroadCastEvent(e.Message, e.StackTrace);
+                UnityEngine.Debug.LogError("action通知异常-->" + e);
+            }
+        }
+    }
+    
 
     public static void Notify<T>(Action<T> action, T t)
     {

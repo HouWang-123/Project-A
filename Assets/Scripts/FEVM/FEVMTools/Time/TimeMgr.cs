@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Object = System.Object;
 
 namespace FEVM.Timmer
 {
@@ -11,7 +12,7 @@ namespace FEVM.Timmer
         /// 定时任务列表  
         /// </summary>  
         private List<TimeTask> taskList = new List<TimeTask>();
-
+        
         private List<TimeTask> willRemove = new List<TimeTask>();
 
         /// <summary>  
@@ -24,7 +25,7 @@ namespace FEVM.Timmer
         {
             AddTask(new TimeTask(timeDelay, repeat, timeTaskCallback, excuteNow));
         }
-
+        
         public void AddTask(TimeTask taskToAdd)
         {
             if (taskList.Contains(taskToAdd) || taskToAdd == null) return;
@@ -34,7 +35,7 @@ namespace FEVM.Timmer
                 Tools.Notify(taskToAdd.timeTaskCallBack);
             }
         }
-
+        
         public bool ContainsTask(Action action)
         {
             if (taskList.Count == 0 || action == null) return false;
@@ -146,87 +147,86 @@ namespace FEVM.Timmer
         {
             taskList.Clear();
         }
+    }
+}
 
-        /// <summary>  
-        /// 定时任务封装类  
-        /// </summary>  
-        public class TimeTask
-        {
-            /// <summary>  
-            /// 延迟时间  
-            /// </summary>  
-            private float _timeDelay;
+public class TimeTask
+{
+    /// <summary>  
+    /// 延迟时间  
+    /// </summary>  
+    private float _timeDelay;
 
-            /// <summary>  
-            /// 延迟时间  
-            /// </summary>  
-            private float _timeDelayOnly;
+    /// <summary>  
+    /// 延迟时间  
+    /// </summary>  
+    private float _timeDelayOnly;
 
-            /// <summary>  
-            /// 是否需要重复执行  
-            /// </summary>  
-            private bool _repeat;
+    /// <summary>  
+    /// 是否需要重复执行  
+    /// </summary>  
+    private bool _repeat;
 
-            /// <summary>  
-            /// 回调函数  
-            /// </summary>  
-            private Action _timeTaskCallBack;
+    /// <summary>  
+    /// 回调函数  
+    /// </summary>  
+    private Action _timeTaskCallBack;
 
-            private bool _pause;
+    private bool _pause;
 
-            /// <summary>
-            /// 立即执行一次
-            /// </summary>
-            private bool _executeNow;
+    /// <summary>
+    /// 立即执行一次
+    /// </summary>
+    private bool _executeNow;
 
-            public float timeDelay
-            {
-                get { return _timeDelay; }
-                set { _timeDelay = value; }
-            }
+    public float timeDelay
+    {
+        get { return _timeDelay; }
+        set { _timeDelay = value; }
+    }
 
-            public float timeDelayOnly
-            {
-                get { return _timeDelayOnly; }
-            }
+    public float timeDelayOnly
+    {
+        get { return _timeDelayOnly; }
+    }
 
-            public bool repeat
-            {
-                get { return _repeat; }
-                set { _repeat = value; }
-            }
+    public bool repeat
+    {
+        get { return _repeat; }
+        set { _repeat = value; }
+    }
 
-            public bool pause
-            {
-                get { return _pause; }
-                set { _pause = value; }
-            }
+    public bool pause
+    {
+        get { return _pause; }
+        set { _pause = value; }
+    }
 
-            public Action timeTaskCallBack
-            {
-                get { return _timeTaskCallBack; }
-            }
+    public Action timeTaskCallBack
+    {
+        get { return _timeTaskCallBack; }
+    }
 
-            public bool executeNow
-            {
-                get { return _executeNow; }
-                set { _executeNow = value; }
-            }
+    public bool executeNow
+    {
+        get { return _executeNow; }
+        set { _executeNow = value; }
+    }
 
-            //构造函数  
-            public TimeTask(float timeDelay, bool repeat, Action timeTaskCallBack, bool executeNow)
-            {
-                _timeDelay = timeDelay;
-                _timeDelayOnly = timeDelay;
-                _repeat = repeat;
-                _timeTaskCallBack = timeTaskCallBack;
-                _executeNow = executeNow;
-            }
+    //构造函数  
+    public TimeTask(float timeDelay, bool repeat, Action timeTaskCallBack, bool executeNow)
+    {
+        _timeDelay = timeDelay;
+        _timeDelayOnly = timeDelay;
+        _repeat = repeat;
+        _timeTaskCallBack = timeTaskCallBack;
+        _executeNow = executeNow;
+    }
 
-            public TimeTask(float timeDelay, Action timeTaskCallBack, bool executeNow) : this(timeDelay, true,
-                timeTaskCallBack, executeNow)
-            {
-            }
-        }
+    //构造函数
+
+    public TimeTask(float timeDelay, Action timeTaskCallBack, bool executeNow) : this(timeDelay, true,
+        timeTaskCallBack, executeNow)
+    {
     }
 }

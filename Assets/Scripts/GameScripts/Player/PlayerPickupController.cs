@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.SearchService;
 using UnityEngine.Serialization;
 using UnityEngine.InputSystem;
+using Object = UnityEngine.Object;
 
 public class PlayerPickupController : MonoBehaviour
 {
@@ -15,7 +16,7 @@ public class PlayerPickupController : MonoBehaviour
 
     private void Awake()
     {
-        ItemLayerMask = LayerMask.GetMask("Item");
+        ItemLayerMask = LayerMask.GetMask("Item","Interactive");
     }
 
     public void Start()
@@ -37,37 +38,31 @@ public class PlayerPickupController : MonoBehaviour
         bool hit = Physics.Raycast(ray.origin, ray.direction, out var hitinfo, 20000, ItemLayerMask);
         if (hit)
         {
-            Debug.Log(hitinfo.transform.name);
             ItemBase ib = hitinfo.transform.GetComponent<ItemBase>();
-            // if (ib == null)
-            // {
-            //     ib = hitinfo.transform.GetComponentInChildren<ItemBase>();
-            // }
-            
-            if (ib == null) return;
-            if (ib.DropState) return;
-            EventManager.Instance.RunEvent(EventConstName.OnMouseFocusItemChanges, ib);
-            if (ib == currentPickup) return;
-            
-            
-            if (Item2PickList.Contains(ib))
+            if (ib != null)
             {
-                ChangeToTargetItem(ib);
+                if (ib.DropState) return;
+                EventManager.Instance.RunEvent<Object>(EventConstName.OnMouseFocusItemChanges,ib);
+                if (Item2PickList.Contains(ib))
+                {
+                    if (ib == currentPickup) return;
+                    ChangeToTargetItem(ib);
+                    return;
+                }
+            }
+            
+            // 可交互优先级低于一般物品
+            IInteractHandler interactHandler = hitinfo.transform.GetComponent<IInteractHandler>();   // 可交互优先级大于一般可拾取物品
+            if (interactHandler != null)
+            {
+                MonoBehaviour monoBehaviour = interactHandler.getMonoBehaviour();
+                EventManager.Instance.RunEvent<Object>(EventConstName.OnMouseFocusItemChanges, monoBehaviour);
             }
         }
         else
         {
-            EventManager.Instance.RunEvent<ItemBase>(EventConstName.OnMouseFocusItemChanges, null);
+            EventManager.Instance.RunEvent<Object>(EventConstName.OnMouseFocusItemChanges, null);
         }
-        // Vector2 mousePosition = Mouse.current.position.ReadValue();
-        // Ray ray = Camera.main.ScreenPointToRay(mousePosition);
-        // RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
-        // if (hit.transform == null) return;
-        // ItemBase itemBase = hit.transform.GetComponentInParent<ItemBase>();
-        // if (itemBase == null) return;
-        // if (itemBase.PickUpTargeted) return;
-        // if (itemBase.DropState) return;
-        // ChangeToTargetItem(itemBase);
     }
 
     float changekeyPressTime;
@@ -218,7 +213,7 @@ public class PlayerPickupController : MonoBehaviour
         Destroy(currentPickup.gameObject);
         Item2PickList.Remove(currentPickup);
         currentPickup = null;
-        EventManager.Instance.RunEvent<ItemBase>(EventConstName.OnMouseFocusItemChanges, null);
+        EventManager.Instance.RunEvent<Object>(EventConstName.OnMouseFocusItemChanges, null);
     }
 
     private void UpdateCurrentPickup()
