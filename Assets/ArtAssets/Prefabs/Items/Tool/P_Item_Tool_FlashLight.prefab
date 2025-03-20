@@ -433,7 +433,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1644610034085831365}
   - component: {fileID: 2968131841531107432}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: LightCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
