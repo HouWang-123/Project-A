@@ -48,22 +48,13 @@ public class PlayerInteractController : MonoBehaviour
     {
         if (interactLock) return; //交互锁
         interactLock = true;
-        CurrentFocusedInteractHandler.OnPlayerStartInteract(
-            () =>
-            {
-                interactLock = false;
-            }
-        );
+        CurrentFocusedInteractHandler.OnPlayerStartInteract();
     }
     public void PlayerCancleInteract()
     {
         if (!interactLock) return;
-        CurrentFocusedInteractHandler.OnPlayerInteractCancel(
-            () =>
-            {
-                interactLock = false;
-            }
-        );
+        CurrentFocusedInteractHandler.OnPlayerInteractCancel();
+        interactLock = false;
     }
     public void OnTriggerEnter(Collider other)
     {

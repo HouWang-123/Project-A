@@ -12,12 +12,6 @@ public class InspectionBehaviour : MonoBehaviour, IInteractHandler
 
     public Shader DefaultShader;
     public Shader SelectedShader;
-
-    private void Awake()
-    {
-
-    }
-
     private void Start()
     {
         InspectionData = GameTableDataAgent.InspectionTable.Get(InspectionID);
@@ -36,22 +30,22 @@ public class InspectionBehaviour : MonoBehaviour, IInteractHandler
         MyRenderer.material.shader = DefaultShader;
     }
 
-    public void OnPlayerFocus()
+    public void OnPlayerFocus()                      // 获得交互焦点
     {
         OnInspetionSelect();
     }
 
-    public void OnPlayerDefocus()
+    public void OnPlayerDefocus()                    // 失去交互焦点
     {
         OnInspectionDeselect();
     }
 
-    public MonoBehaviour getMonoBehaviour()
+    public MonoBehaviour getMonoBehaviour()          // 必须实现，否则功能无法使用
     {
         return this;
     }
 
-    public void OnPlayerStartInteract(Action interactCallback)   // 交互开始
+    public void OnPlayerStartInteract()   // 交互开始
     {
         GameHUD.Instance.ResizeCursor(2f,InteractRequiredTime);
         Debug.Log("========InteractStart========");
@@ -63,13 +57,13 @@ public class InspectionBehaviour : MonoBehaviour, IInteractHandler
         GameHUD.Instance.ResizeCursor(1f,0.2f);
         Debug.Log("=======FinishInterAction=======");    // 交互完成
         Debug.Log(InspectionData.ToString());
+        // todo 打开检视UI界面
         EventManager.Instance.RunEvent(EventConstName.PlayerFinishInteraction);
     }
-    public void OnPlayerInteractCancel(Action cancleCallback)   // 交互取消
+    public void OnPlayerInteractCancel()   // 交互取消
     {
         GameHUD.Instance.ResizeCursor(1f,0.2f);
         Debug.Log("=== PlayerCanceledInteract ===");
-        cancleCallback?.Invoke();
         TimeMgr.Instance.RemoveTask(OnPlayerInteract);
     }
 }
