@@ -55,7 +55,6 @@ public class GameHUD_CursorBehaviour : MonoBehaviour
     public void SetCursor(Sprite cursor)
     {
         cursorImage.sprite = cursor;
-        Debug.Log("设置UI");
         cursorImage.SetNativeSize();
     }
     

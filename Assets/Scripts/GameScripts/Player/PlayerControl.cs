@@ -234,7 +234,7 @@ public class PlayerControl : MonoBehaviour
             Debug.Log(GetType() + "取消时间加速");
             TimeSystemManager.Instance.TimeSpeed = 1f;
         };
-
+        
         // 交互模块
         InputControl.Instance.Interact.started += (item) =>
         {
@@ -245,7 +245,7 @@ public class PlayerControl : MonoBehaviour
         {
             Interact = false;
         };
-
+        
         #endregion
 
         #region EventSystem

@@ -1,9 +1,7 @@
-using System;
 using System.Collections.Generic;
-using cfg.func;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
+using Random = System.Random;
 
 public class PlayerInteractController : MonoBehaviour
 {
@@ -73,6 +71,13 @@ public class PlayerInteractController : MonoBehaviour
             InteractHandlerList.Contains(InteractHandler);
             InteractHandler.OnPlayerDefocus();
             InteractHandlerList.Remove(InteractHandler);
+            if (InteractHandlerList.Count > 0)
+            {
+                int count = InteractHandlerList.Count - 1;
+                Random r = new Random();
+                int newIndex = r.Next(0,count);
+                ChangeToTargetItem(InteractHandlerList[newIndex]);
+            }
         }
     }
 }
