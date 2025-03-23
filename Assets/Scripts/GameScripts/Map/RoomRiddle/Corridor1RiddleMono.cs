@@ -21,7 +21,6 @@ public class Corridor1RiddleMono : RoomRiddleMonoBase
     }
     protected override void SetRiddleAction()
     {
-        base.SetRiddleAction();
         int gameHour = TimeSystemManager.Instance.GameHour;
         int gameMinute = TimeSystemManager.Instance.GameMinute;
         string curTime = string.Format("{0:D2}:{1:D2}", gameHour, gameMinute);
@@ -30,13 +29,16 @@ public class Corridor1RiddleMono : RoomRiddleMonoBase
         string wrongTime = string.Format("{0:D2}:{1:D2}", (gameHour + randomHourOffset) % 24, (gameMinute + randomMinuteOffset) % 60);
         // 随机选择一个时间进行正确的设置，另一个时间进行错误的设置
         int random = Random.Range(0, 2);
-        riddleGameObjects[random].GetComponent<TextMeshPro>().text = curTime;
-        riddleGameObjects[random ^ 1].GetComponent<TextMeshPro>().text = wrongTime;
+        riddleItems[random].GetComponent<TextMeshPro>().text = curTime;
+        riddleItems[random ^ 1].GetComponent<TextMeshPro>().text = wrongTime;
+
+        isRiddleReady = true;
     }
-    protected override bool SetRiddle()
+
+    public override void DoRiddle()
     {
-        base.SetRiddle();
-        return true;
+
     }
+
 }
 

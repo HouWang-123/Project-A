@@ -86,7 +86,7 @@ public class LookAtState : BaseState
     public override void DoBeforeEntering()
     {
         base.DoBeforeEntering();
-        AnimationController.PlayAnim(m_gameObject, StateEnum.LookAt, 0, true, m_timeScale);
+        MonsterAnimationController.PlayAnim(m_gameObject, StateEnum.LookAt, 0, true, m_timeScale);
     }
 }
 

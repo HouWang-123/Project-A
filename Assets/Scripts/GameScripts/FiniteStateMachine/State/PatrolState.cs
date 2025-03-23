@@ -177,7 +177,7 @@ public class PatrolState : BaseState
         if (agent.transform.position == agent.destination)
         {
             m_canMove = false;
-            AnimationController.PlayAnim(m_gameObject, StateEnum.Idle, 0, true, m_timeScale);
+            MonsterAnimationController.PlayAnim(m_gameObject, StateEnum.Idle, 0, true, m_timeScale);
             m_waitTime += Time.deltaTime * m_timeScale;
             // 等待了两秒
             if (m_waitTime >= 2f)
@@ -191,7 +191,7 @@ public class PatrolState : BaseState
                 }
                 else
                 {
-                    AnimationController.PlayAnim(m_gameObject, StateEnum.Patrol, 0, true, m_timeScale);
+                    MonsterAnimationController.PlayAnim(m_gameObject, StateEnum.Patrol, 0, true, m_timeScale);
                 }
             }
         }
@@ -224,7 +224,7 @@ public class PatrolState : BaseState
         // 巡逻速度是0.5倍的移动速度
         agent.speed = 0.5f * m_monsterBaseFSM.MonsterDatas.Speed * m_timeScale;
         // 动画播放速度为0.5倍
-        AnimationController.PlayAnim(m_gameObject, StateEnum.Patrol, 0, true, 0.5f * m_timeScale);
+        MonsterAnimationController.PlayAnim(m_gameObject, StateEnum.Patrol, 0, true, 0.5f * m_timeScale);
     }
 
     public override void DoAfterLeaving()

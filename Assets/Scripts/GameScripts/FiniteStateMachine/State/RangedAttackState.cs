@@ -126,8 +126,8 @@ public class RangedAttackState : BaseState
         m_timer += Time.deltaTime * m_timeScale;
         if (!m_enterCD)
         {
-            AnimationController.PlayAnim(m_gameObject, StateEnum.RangedAttack, 0, false, m_timeScale);
-            m_animTotalTime = AnimationController.AnimationTotalTime(m_monsterBaseFSM.SkeletonAnim);
+            MonsterAnimationController.PlayAnim(m_gameObject, StateEnum.RangedAttack, 0, false, m_timeScale);
+            m_animTotalTime = MonsterAnimationController.AnimationTotalTime(m_monsterBaseFSM.SkeletonAnim);
             m_enterCD = true;
         }
         if (m_timer >= m_animTotalTime && !m_attacked)
@@ -141,7 +141,7 @@ public class RangedAttackState : BaseState
                 com.Direction = (m_playerTransform.position + m_projectileFixVector3 - m_projectileTransform.position).normalized;
             }
             m_attacked = true;
-            AnimationController.PlayAnim(m_gameObject, StateEnum.Idle, 0, false, m_timeScale);
+            MonsterAnimationController.PlayAnim(m_gameObject, StateEnum.Idle, 0, false, m_timeScale);
         }
         if (m_timer >= m_attackCD + m_animTotalTime)
         {
@@ -183,7 +183,7 @@ public class RangedAttackState : BaseState
     public override void DoBeforeEntering()
     {
         base.DoBeforeEntering();
-        AnimationController.PlayAnim(m_gameObject, StateEnum.RangedAttack, 0, false, m_timeScale);
+        MonsterAnimationController.PlayAnim(m_gameObject, StateEnum.RangedAttack, 0, false, m_timeScale);
     }
 }
 

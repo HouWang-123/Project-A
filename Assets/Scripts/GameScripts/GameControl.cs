@@ -106,7 +106,7 @@ public class GameControl
                 EventManager.Instance.RunEvent(EventConstName.PlayerLeaveSafeHouseEvent);
                 break;
         }
-        RiddleByRoom(mono, r);
+        RiddleByRoom(mono);
 
         //if(!roomCache.ContainsKey(RoomId))
         //{
@@ -132,22 +132,12 @@ public class GameControl
     }
 
     // 根据房间设置谜题
-    private void RiddleByRoom(RoomMono roomMono, Rooms roomTableData)
+    private void RiddleByRoom(RoomMono roomMono)
     {
-        switch (roomTableData.PrefabName)
+        var riddleObj = roomMono.riddleGameObject;
+        if (riddleObj != null)
         {
-            case "Corridor1":
-                var corridor1RiddleMono = roomMono.riddleGameObject;
-                if (corridor1RiddleMono == null)
-                {
-                    corridor1RiddleMono = roomMono.gameObject.AddComponent<Corridor1RiddleMono>();
-                    roomMono.riddleGameObject = corridor1RiddleMono;
-                }
-                corridor1RiddleMono.DoRiddle();
-                break;
-            default:
-                
-                break;
+            riddleObj.SetRiddle();
         }
     }
 

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using UnityEngine;
 using cfg.scene;
 
@@ -33,8 +33,9 @@ public class DoorMono : MonoBehaviour
         if(doorEnabled && other.gameObject.CompareTag("Player"))
         {
             Debug.Log("Player Comming!!!!");
-            
             GameControl.Instance.ChangeRoom(doorData.ToRoomID,doorData.ToDoorID);
+            // 测试房间解密专用
+            // SpawnRiddleTestRoom();
         }
     }
 
@@ -52,7 +53,10 @@ public class DoorMono : MonoBehaviour
         return transform;
     }
 
-
+    private void SpawnRiddleTestRoom()
+    {
+        GameControl.Instance.ChangeRoom(300016, 310040);
+    }
 
 
     public enum EDoorLock

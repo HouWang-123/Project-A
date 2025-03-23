@@ -32,8 +32,8 @@ public class DeathState : BaseState
     {
         base.DoBeforeEntering();
         // 死亡动画
-        AnimationController.PlayAnim(m_gameObject, StateEnum.Death, 0, false, m_timeScale);
-        m_animTime = AnimationController.AnimationTotalTime(m_monsterBaseFSM.SkeletonAnim);
+        MonsterAnimationController.PlayAnim(m_gameObject, StateEnum.Death, 0, false, m_timeScale);
+        m_animTime = MonsterAnimationController.AnimationTotalTime(m_monsterBaseFSM.SkeletonAnim);
     }
 }
 

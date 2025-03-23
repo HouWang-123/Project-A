@@ -61,8 +61,8 @@ public class MeleeAttackState : BaseState
                 scale = GameConstData.XReverseScale;
             }
             m_monsterBaseFSM.transform.localScale = scale;
-            AnimationController.PlayAnim(m_gameObject, StateEnum.MeleeAttack, 0, false, m_timeScale);
-            m_animTotalTime = AnimationController.AnimationTotalTime(m_monsterBaseFSM.SkeletonAnim);
+            MonsterAnimationController.PlayAnim(m_gameObject, StateEnum.MeleeAttack, 0, false, m_timeScale);
+            m_animTotalTime = MonsterAnimationController.AnimationTotalTime(m_monsterBaseFSM.SkeletonAnim);
             m_enterCD = true;
         }
         
@@ -126,7 +126,7 @@ public class MeleeAttackState : BaseState
             }
 
             m_attacked = true;
-            AnimationController.PlayAnim(m_gameObject, StateEnum.Idle, 0, false, m_timeScale);
+            MonsterAnimationController.PlayAnim(m_gameObject, StateEnum.Idle, 0, false, m_timeScale);
         }
         if (m_timer >= m_attackCD + m_animTotalTime)
         {
@@ -169,7 +169,7 @@ public class MeleeAttackState : BaseState
     public override void DoBeforeEntering()
     {
         base.DoBeforeEntering();
-        AnimationController.PlayAnim(m_gameObject, StateEnum.MeleeAttack, 0, false, m_timeScale);
+        MonsterAnimationController.PlayAnim(m_gameObject, StateEnum.MeleeAttack, 0, false, m_timeScale);
     }
 
 

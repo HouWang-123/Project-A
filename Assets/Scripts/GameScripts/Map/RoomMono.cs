@@ -19,8 +19,8 @@ public class RoomMono : MonoBehaviour
     private List<MonsterBaseFSM> monsters = new List<MonsterBaseFSM>();
 
     //public Transform monsterPoint;    // 怪物生成点（测试用）
-    [Header("谜题物体，如果房间没有谜题就设置为空")]
-    public RoomRiddleMonoBase riddleGameObject; // 谜题物体
+    [Header("脚本谜题，如果房间没有谜题就设置为空")]
+    public RoomRiddleMonoBase riddleGameObject; // 谜题脚本
 
     private void Awake()
     {

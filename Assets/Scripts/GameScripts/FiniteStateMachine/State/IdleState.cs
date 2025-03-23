@@ -70,6 +70,6 @@ public class IdleState : BaseState
     public override void DoBeforeEntering()
     {
         base.DoBeforeEntering();
-        AnimationController.PlayAnim(m_gameObject, StateEnum.Idle, 0, true, m_timeScale);
+        MonsterAnimationController.PlayAnim(m_gameObject, StateEnum.Idle, 0, true, m_timeScale);
     }
 }

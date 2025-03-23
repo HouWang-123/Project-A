@@ -104,7 +104,7 @@ public class FleeState : BaseState
         agent.isStopped = false;
         agent.speed = m_monsterBaseFSM.MonsterDatas.Speed * m_timeScale;
         // 状态对应动画名称
-        AnimationController.PlayAnim(m_gameObject, StateEnum.Flee, 0, true, m_timeScale);
+        MonsterAnimationController.PlayAnim(m_gameObject, StateEnum.Flee, 0, true, m_timeScale);
     }
 
     public override void DoAfterLeaving()

@@ -104,8 +104,8 @@ public class ChaseState : BaseState
             m_fuckedAnimPlayed = true;
             agent.isStopped = true;
             Debug.Log(GetType() + " /Act() => 触发了嘲讽动画");
-            AnimationController.PlayAnim(m_gameObject, StateEnum.Idle, 0, false);
-            m_fuckingTime = AnimationController.AnimationTotalTime(m_monsterBaseFSM.SkeletonAnim);
+            MonsterAnimationController.PlayAnim(m_gameObject, StateEnum.Idle, 0, false);
+            m_fuckingTime = MonsterAnimationController.AnimationTotalTime(m_monsterBaseFSM.SkeletonAnim);
         }
         if (m_fucking)
         {
@@ -115,7 +115,7 @@ public class ChaseState : BaseState
         {
             m_fuckedAnimPlayed = false;
             agent.isStopped = false;
-            AnimationController.PlayAnim(m_gameObject, StateEnum.Chase, 0, true, m_timeScale);
+            MonsterAnimationController.PlayAnim(m_gameObject, StateEnum.Chase, 0, true, m_timeScale);
         }
         // 十秒CD
         if (m_timer > m_fuckingTime + m_fuckingCD)
@@ -230,7 +230,7 @@ public class ChaseState : BaseState
     {
         base.DoBeforeEntering();
         agent.isStopped = false;
-        AnimationController.PlayAnim(m_gameObject, StateEnum.Chase, 0, true, m_timeScale);
+        MonsterAnimationController.PlayAnim(m_gameObject, StateEnum.Chase, 0, true, m_timeScale);
     }
 
     public override void DoAfterLeaving()
