@@ -13,7 +13,7 @@ public class LookAtState : BaseState
     // 转为逃跑的光源距离
     private readonly float m_fleeDistance = -1f;
     // 玩家灯光组件
-    private readonly LightBehaviour lightCom;
+    private readonly FlashLightBehaviour lightCom;
     public LookAtState(FiniteStateMachine finiteStateMachine, GameObject npcObj, Transform playerTransform = null)
         : base(finiteStateMachine, npcObj)
     {
@@ -50,7 +50,7 @@ public class LookAtState : BaseState
         {
             scale = GameConstData.XReverseScale;
         }
-        m_monsterBaseFSM.Renderer.transform.localScale = scale;
+        m_monsterBaseFSM.transform.localScale = scale;
     }
     /// <summary>
     /// 判断是否切换到追逐玩家或者丢失玩家的状态
@@ -70,13 +70,17 @@ public class LookAtState : BaseState
             m_finiteStateMachine.PerformTransition(TransitionEnum.LostPlayer);
         }
         // 发现光源直接逃跑
-        if (lightCom != null && lightCom.isOn)
+        /*if (lightCom != null && lightCom.isOn)
         {
             Transform lightTransform = lightCom.transform;
             if (Vector3.Distance(lightTransform.position, m_gameObject.transform.position) <= m_fleeDistance)
             {
                 m_finiteStateMachine.PerformTransition(TransitionEnum.FleeAction);
             }
+        }*/
+        if (m_monsterBaseFSM.IsLightOnMonster)
+        {
+            m_finiteStateMachine.PerformTransition(TransitionEnum.FleeAction);
         }
     }
     public override void DoBeforeEntering()

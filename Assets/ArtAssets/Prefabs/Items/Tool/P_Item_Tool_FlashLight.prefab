@@ -465,7 +465,7 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 31232
+    m_Bits: 14848
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -570,11 +570,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 7601832128168043183}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ab8f687faee70e4a82e3bc9b186d6d4, type: 3}
+  m_Script: {fileID: 11500000, guid: 082421b5411a08641b2e3c0825ad50ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   LightNode: {fileID: 8777771607010518713}
   isOn: 0
+  LightFieldCollider: {fileID: 2968131841531107432}
 --- !u!1 &7788931241169227175
 GameObject:
   m_ObjectHideFlags: 0

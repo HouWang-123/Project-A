@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using UnityEngine;
 using UnityEngine.Serialization;
 using YooAsset;
@@ -8,7 +8,7 @@ public class Tool : ItemBase, ISlotable
     public cfg.item.Tools data;
     // 物品初始化
     public ToolBehaviour m_ToolBehaviour;
-    public LightBehaviour m_LightBehaviour;
+    public FlashLightBehaviour m_LightBehaviour;
 
     protected ToolStatus ToolStatus
     {
@@ -53,9 +53,9 @@ public class Tool : ItemBase, ISlotable
         
         GameRunTimeData.Instance.ItemManager.RegistItem(this);
         m_ToolBehaviour = GetComponent<ToolBehaviour>();
-        if (m_ToolBehaviour is LightBehaviour)
+        if (m_ToolBehaviour is FlashLightBehaviour)
         {
-            m_LightBehaviour = m_ToolBehaviour as LightBehaviour;
+            m_LightBehaviour = m_ToolBehaviour as FlashLightBehaviour;
         }
         _toolStatus = new ToolStatus();
     }

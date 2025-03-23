@@ -25,7 +25,7 @@ public class MeleeAttackState : BaseState
     // 转为逃跑的光源距离
     private readonly float m_fleeDistance = -1f;
     // 玩家灯光组件
-    private readonly LightBehaviour lightCom;
+    private readonly FlashLightBehaviour lightCom;
     public MeleeAttackState(FiniteStateMachine finiteStateMachine, GameObject npcObj, Transform meleeTransform, Transform playerTransform)
         : base(finiteStateMachine, npcObj)
     {
@@ -60,7 +60,7 @@ public class MeleeAttackState : BaseState
             {
                 scale = GameConstData.XReverseScale;
             }
-            m_monsterBaseFSM.Renderer.transform.localScale = scale;
+            m_monsterBaseFSM.transform.localScale = scale;
             AnimationController.PlayAnim(m_gameObject, StateEnum.MeleeAttack, 0, false, m_timeScale);
             m_animTotalTime = AnimationController.AnimationTotalTime(m_monsterBaseFSM.SkeletonAnim);
             m_enterCD = true;
@@ -153,13 +153,17 @@ public class MeleeAttackState : BaseState
             }
         }
         // 发现光源直接逃跑
-        if (lightCom != null && lightCom.isOn)
+        /*if (lightCom != null && lightCom.isOn)
         {
             Transform lightTransform = lightCom.transform;
             if (Vector3.Distance(lightTransform.position, m_gameObject.transform.position) <= m_fleeDistance)
             {
                 m_finiteStateMachine.PerformTransition(TransitionEnum.FleeAction);
             }
+        }*/
+        if (m_monsterBaseFSM.IsLightOnMonster)
+        {
+            m_finiteStateMachine.PerformTransition(TransitionEnum.FleeAction);
         }
     }
     public override void DoBeforeEntering()

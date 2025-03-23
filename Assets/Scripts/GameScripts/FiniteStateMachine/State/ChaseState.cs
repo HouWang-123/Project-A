@@ -26,7 +26,7 @@ public class ChaseState : BaseState
     // 转为逃跑的光源距离
     private readonly float m_fleeDistance = -1f;
     // 玩家灯光组件
-    private readonly LightBehaviour lightCom;
+    private readonly FlashLightBehaviour lightCom;
     // 嘲讽动画的时间
     private float m_fuckingTime = 0f;
     // 嘲讽的CD时间
@@ -81,6 +81,18 @@ public class ChaseState : BaseState
     {
         // npc.transform.LookAt(m_playerTransform);
         // 跟着玩家
+        // 玩家在NPC左边，看向左边
+        float direction = m_playerTransform.position.x - m_monsterBaseFSM.transform.position.x;
+        Vector3 scale;
+        if (direction > 0f)
+        {
+            scale = GameConstData.XNormalScale;
+        }
+        else
+        {
+            scale = GameConstData.XReverseScale;
+        }
+        m_monsterBaseFSM.transform.localScale = scale;
         if (IsPathValid(m_playerTransform.position))
         {
             agent.SetDestination(m_playerTransform.position);
@@ -181,13 +193,17 @@ public class ChaseState : BaseState
             }
         }
         // 发现光源直接逃跑
-        if (lightCom != null && lightCom.isOn)
+        /*if (lightCom != null && lightCom.isOn)
         {
             Transform lightTransform = lightCom.transform;
             if (Vector3.Distance(lightTransform.position, m_gameObject.transform.position) <= m_fleeDistance)
             {
                 m_finiteStateMachine.PerformTransition(TransitionEnum.FleeAction);
             }
+        }*/
+        if (m_monsterBaseFSM.IsLightOnMonster)
+        {
+            m_finiteStateMachine.PerformTransition(TransitionEnum.FleeAction);
         }
     }
     /// <summary>

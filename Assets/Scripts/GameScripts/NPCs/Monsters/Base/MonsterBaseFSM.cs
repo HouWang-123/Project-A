@@ -1,5 +1,6 @@
 ﻿using cfg.mon;
 using Spine.Unity;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -36,8 +37,10 @@ public class MonsterBaseFSM : MonoBehaviour, IDamageable
     protected GameObject m_infoRenderer;
     public GameObject InfoRenderer { get { return m_infoRenderer; } }
     // 玩家手上的光源
-    private LightBehaviour m_lightComponent;
-    public LightBehaviour LightComponent { get { return m_lightComponent; } }
+    private FlashLightBehaviour m_lightComponent;
+    public FlashLightBehaviour LightComponent { get { return m_lightComponent; } }
+    // 光源是否照射到怪物身上
+    public bool IsLightOnMonster;
     [SerializeField]
     [Header("碰撞体")]
     private GameObject m_collider;
@@ -69,11 +72,12 @@ public class MonsterBaseFSM : MonoBehaviour, IDamageable
         {
             // 获取手上的光源
             var ItemOnHand = GameRunTimeData.Instance.CharacterBasicStat.GetStat().ItemOnHand;
-            if (ItemOnHand != null && ItemOnHand.TryGetComponent<LightBehaviour>(out LightBehaviour light))
+            if (ItemOnHand != null && ItemOnHand.TryGetComponent<FlashLightBehaviour>(out FlashLightBehaviour light))
             {
                 m_lightComponent = light;
             }
         }
+        IsLightOnMonster = false;
 
         if (m_renderer == null)
         {
@@ -97,6 +101,17 @@ public class MonsterBaseFSM : MonoBehaviour, IDamageable
         {
             m_collider = transform.Find("MonsterCollider").gameObject;
         }
+
+        EventManager.Instance.RegistEvent<FlashLightBehaviour>(EventConstName.FlashLightCreate, FlashLightCreateHander);
+    }
+    protected virtual void Clear()
+    {
+        EventManager.Instance.RemoveEvent<FlashLightBehaviour>(EventConstName.FlashLightCreate, FlashLightCreateHander);
+    }
+
+    private void FlashLightCreateHander(FlashLightBehaviour arg0)
+    {
+        m_lightComponent = arg0;
     }
 
     protected virtual void DoUpdate()

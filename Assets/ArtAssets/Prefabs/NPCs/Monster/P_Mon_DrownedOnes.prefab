@@ -10,7 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1617249250737358193}
   - component: {fileID: 7081873136375132192}
-  m_Layer: 0
+  - component: {fileID: 8187063509747872354}
+  - component: {fileID: 269329688925948394}
+  m_Layer: 13
   m_Name: MonsterCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,12 +44,12 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 320
+    m_Bits: 131072
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 28672
+    m_Bits: 24576
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -55,6 +57,46 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &8187063509747872354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3226818078808538953}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a6cbe59b30a75b42bb102ac68595568, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  monsterBaseFSM: {fileID: 2412727987202458191}
+--- !u!54 &269329688925948394
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3226818078808538953}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 131072
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &3916743681480142129
 GameObject:
   m_ObjectHideFlags: 0
@@ -108,7 +150,9 @@ MonoBehaviour:
   m_NavMeshAgent: {fileID: 879444317793477162}
   m_skeletonAnim: {fileID: 6416146041462596601}
   m_infoRenderer: {fileID: 4906414598371161004}
+  IsLightOnMonster: 0
   m_collider: {fileID: 3226818078808538953}
+  m_renderer: {fileID: 0}
   m_projectileTransform: {fileID: 1168053493862167232}
   m_meleeTransform: {fileID: 5439699109162860848}
 --- !u!114 &2160751101551506776
@@ -343,7 +387,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 517859215
-  m_SortingLayer: 3
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &6416146041462596601

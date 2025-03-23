@@ -37,7 +37,7 @@ public class RangedAttackState : BaseState
     // 转为逃跑的光源距离
     private readonly float m_fleeDistance = -1f;
     // 玩家灯光组件
-    private readonly LightBehaviour lightCom;
+    private readonly FlashLightBehaviour lightCom;
     // 弹道修正向量
     private readonly Vector3 m_projectileFixVector3;
     public RangedAttackState(FiniteStateMachine finiteStateMachine, GameObject npcObj, Transform projectileTrans, Transform playerTransform)
@@ -121,7 +121,7 @@ public class RangedAttackState : BaseState
         {
             scale = GameConstData.XReverseScale;
         }
-        m_monsterBaseFSM.Renderer.transform.localScale = scale;
+        m_monsterBaseFSM.transform.localScale = scale;
         // 模拟播放攻击动画
         m_timer += Time.deltaTime * m_timeScale;
         if (!m_enterCD)
@@ -166,13 +166,17 @@ public class RangedAttackState : BaseState
             m_finiteStateMachine.PerformTransition(TransitionEnum.MeleeAttackPlayer);
         }
         // 发现光源直接逃跑
-        if (lightCom != null && lightCom.isOn)
+        /*if (lightCom != null && lightCom.isOn)
         {
             Transform lightTransform = lightCom.transform;
             if (Vector3.Distance(lightTransform.position, m_gameObject.transform.position) <= m_fleeDistance)
             {
                 m_finiteStateMachine.PerformTransition(TransitionEnum.FleeAction);
             }
+        }*/
+        if (m_monsterBaseFSM.IsLightOnMonster)
+        {
+            m_finiteStateMachine.PerformTransition(TransitionEnum.FleeAction);
         }
     }
 

@@ -108,7 +108,7 @@ CapsuleCollider:
     m_Bits: 2048
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 16384
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
@@ -133,6 +133,7 @@ MonoBehaviour:
   InteractiveLayer:
     serializedVersion: 2
     m_Bits: 2048
+  interactLock: 0
 --- !u!1 &3916743681480142129
 GameObject:
   m_ObjectHideFlags: 0
@@ -243,6 +244,7 @@ MonoBehaviour:
   ItemLiftPostion: {fileID: 1483206116016020512}
   PlayerLookatDirection: {x: 0, y: 0, z: 0}
   ScreenToWorldPostion: {x: 0, y: 0, z: 0}
+  InteractionButtonPressed: 0
   ItemReleasePoint: {fileID: 304942487821736792}
 --- !u!114 &4592422698790457664
 MonoBehaviour:
@@ -487,7 +489,7 @@ BoxCollider:
     m_Bits: 4096
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 16384
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0

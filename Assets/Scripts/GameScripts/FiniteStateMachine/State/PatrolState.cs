@@ -31,7 +31,7 @@ public class PatrolState : BaseState
     // 转为逃跑的光源距离
     private readonly float m_fleeDistance = -1f;
     // 玩家灯光组件
-    private readonly LightBehaviour lightCom;
+    private readonly FlashLightBehaviour lightCom;
     public PatrolState(FiniteStateMachine finiteStateMachine, GameObject NPCObj, Transform playerTransform = null)
         : base(finiteStateMachine, NPCObj)
     {
@@ -202,13 +202,17 @@ public class PatrolState : BaseState
             m_finiteStateMachine.PerformTransition(TransitionEnum.SeePlayer);
         }
         // 发现光源直接逃跑
-        if (lightCom != null && lightCom.isOn)
+        /*if (lightCom != null && lightCom.isOn)
         {
             Transform lightTransform = lightCom.transform;
             if (Vector3.Distance(lightTransform.position, m_gameObject.transform.position) <= m_fleeDistance)
             {
                 m_finiteStateMachine.PerformTransition(TransitionEnum.FleeAction);
             }
+        }*/
+        if (m_monsterBaseFSM.IsLightOnMonster)
+        {
+            m_finiteStateMachine.PerformTransition(TransitionEnum.FleeAction);
         }
     }
 

@@ -7,7 +7,10 @@ public class FleeState : BaseState
 {
     // 逃跑时间
     private readonly float m_fleeTime = 3f;
+    // 单次逃跑距离
+    private readonly float m_runDistance = 3f;
     private float m_timer = 0f;
+    private bool m_isMoving = false;
     // NPC的NavMeshAgent组件
     private readonly NavMeshAgent agent;
     public FleeState(FiniteStateMachine finiteStateMachine, GameObject gameObject)
@@ -16,19 +19,41 @@ public class FleeState : BaseState
         // 设置状态
         m_stateEnum = StateEnum.Flee;
         m_fleeTime = 3f;
+        m_isMoving = false;
         agent = m_monsterBaseFSM.NavMeshAgent;
     }
 
     public override void Act(GameObject npc)
     {
-        var lightTransfrom = m_monsterBaseFSM.LightComponent.transform;
-        if (lightTransfrom)
+        if (!m_isMoving)
         {
-            Vector3 direction = 2f * (npc.transform.position - lightTransfrom.position);
-            // 在该方向
-            if (IsPathValid(npc.transform.position + direction))
+            var light = m_monsterBaseFSM.LightComponent;
+            if (light)
             {
-                agent.SetDestination(npc.transform.position + direction);
+                Vector3 temp = (npc.transform.position - light.transform.position);
+                Vector3 nextPos = npc.transform.position + m_runDistance * temp.normalized;
+                // 在该方向不可达，就往反方向走
+                if (!IsPathValid(nextPos))
+                {
+                    Vector3 curDirection = temp.normalized;
+                    float angle = 180f;
+                    Vector3 newDirection = Quaternion.Euler(0, angle, 0) * curDirection;
+                    nextPos = npc.transform.position + m_runDistance * newDirection;
+                }
+                // 调整朝向
+                float direction = nextPos.x - m_monsterBaseFSM.transform.position.x;
+                Vector3 scale;
+                if (direction > 0f)
+                {
+                    scale = GameConstData.XNormalScale;
+                }
+                else
+                {
+                    scale = GameConstData.XReverseScale;
+                }
+                m_monsterBaseFSM.transform.localScale = scale;
+                agent.SetDestination(nextPos);
+                m_isMoving = true;
             }
         }
     }
@@ -61,9 +86,16 @@ public class FleeState : BaseState
             // 超过逃跑时间
             if (m_timer > m_fleeTime)
             {
+                m_isMoving = false;
                 m_finiteStateMachine.PerformTransition(TransitionEnum.ToIdle);
                 m_timer = 0f;
             }
+        }
+        else
+        {
+            m_isMoving = false;
+            m_finiteStateMachine.PerformTransition(TransitionEnum.ToIdle);
+            m_timer = 0f;
         }
     }
     public override void DoBeforeEntering()
@@ -72,7 +104,7 @@ public class FleeState : BaseState
         agent.isStopped = false;
         agent.speed = m_monsterBaseFSM.MonsterDatas.Speed * m_timeScale;
         // 状态对应动画名称
-        AnimationController.PlayAnim(m_gameObject, StateEnum.Flee, 0, false, m_timeScale);
+        AnimationController.PlayAnim(m_gameObject, StateEnum.Flee, 0, true, m_timeScale);
     }
 
     public override void DoAfterLeaving()

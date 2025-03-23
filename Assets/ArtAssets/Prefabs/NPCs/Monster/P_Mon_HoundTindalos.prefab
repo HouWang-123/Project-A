@@ -73,7 +73,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 320
+    m_Bits: 131392
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 28672
@@ -139,7 +139,9 @@ MonoBehaviour:
   m_NavMeshAgent: {fileID: 305623357642008596}
   m_skeletonAnim: {fileID: 767538025381963838}
   m_infoRenderer: {fileID: 4906414598371161004}
+  IsLightOnMonster: 0
   m_collider: {fileID: 2558181447741931880}
+  m_renderer: {fileID: 0}
   m_meleeTransform: {fileID: 7249732146044923332}
 --- !u!114 &2160751101551506776
 MonoBehaviour:
@@ -341,7 +343,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 517859215
-  m_SortingLayer: 3
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &767538025381963838
