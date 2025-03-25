@@ -159,8 +159,8 @@
     "ID": 310014,
     "NAME": "0",
     "DESCRIBE": "0",
-    "toRoomID": 300002,
-    "toDoorID": 310005,
+    "toRoomID": 300008,
+    "toDoorID": 310017,
     "isInvisible": false,
     "isLocked": false,
     "requiredForOpen": [

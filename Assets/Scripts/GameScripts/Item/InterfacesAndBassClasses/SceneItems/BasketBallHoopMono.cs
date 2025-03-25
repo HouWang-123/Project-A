@@ -1,6 +1,7 @@
 ﻿using Spine.Unity;
 using System;
 using System.Collections.Generic;
+using Spine;
 using UnityEngine;
 /// <summary>
 /// 篮球框的Mono
@@ -24,6 +25,8 @@ public class BasketballHoopMono : RoomRiddleItemBase
     {
         basketNumPerStep = Convert.ToInt32(Math.Ceiling(Convert.ToDouble(BasketBallCount / 3.0)));
         throwables = new Stack<Throwable>();
+        TrackEntry trackEntry = skeletonAnimation.AnimationState.SetAnimation(0, "step1", false);
+        trackEntry.TimeScale = 0f;
     }
 
     // 当 MonoBehaviour 将被销毁时调用此函数
@@ -56,11 +59,13 @@ public class BasketballHoopMono : RoomRiddleItemBase
             skeletonAnimation.state.SetEmptyAnimation(0, 0.1f); // 停止当前轨道的动画
             if (throwables.Count % basketNumPerStep == 0)
             {
-                skeletonAnimation.state.SetAnimation(0, $"step{throwables.Count / basketNumPerStep}", false);
+                TrackEntry trackEntry = skeletonAnimation.state.SetAnimation(0, $"step{throwables.Count / basketNumPerStep}", false);
+                trackEntry.TimeScale = 1f;
             }
             else if (throwables.Count == BasketBallCount)
             {
-                skeletonAnimation.state.SetAnimation(0, "step3", false);
+                TrackEntry trackEntry = skeletonAnimation.state.SetAnimation(0, "step3", false);
+                trackEntry.TimeScale = 1f;
                 // 生成安全区域
                 isDone = true;
                 SpawnSafeArea();

@@ -17,7 +17,6 @@ public class GameHUD_InspectionUI : UIBase
         BigImage.DOColor(new Color(1, 1, 1, 1), 0.3f).onComplete = () =>
         {
         };
-        
     }
     public override void Hide()
     {

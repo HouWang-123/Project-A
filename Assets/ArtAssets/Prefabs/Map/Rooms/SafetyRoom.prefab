@@ -1225,17 +1225,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1433497231272455615}
     m_Modifications:
+    - target: {fileID: -2049794972155671397, guid: afe0f3b375b88c0458b803bb42174318, type: 3}
+      propertyPath: selectedDatabase
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 274872765552954411, guid: afe0f3b375b88c0458b803bb42174318, type: 3}
       propertyPath: ToDoorID
-      value: 310005
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 274872765552954411, guid: afe0f3b375b88c0458b803bb42174318, type: 3}
       propertyPath: ToRoomID
-      value: 300002
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 274872765552954411, guid: afe0f3b375b88c0458b803bb42174318, type: 3}
       propertyPath: DoorState
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6025751555970231679, guid: afe0f3b375b88c0458b803bb42174318, type: 3}
       propertyPath: m_LocalScale.x
@@ -1301,7 +1305,9 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -2049794972155671397, guid: afe0f3b375b88c0458b803bb42174318, type: 3}
+    - {fileID: 159903629595370614, guid: afe0f3b375b88c0458b803bb42174318, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

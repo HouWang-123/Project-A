@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-
+/// <summary>
+/// 数据类型的道具
+/// </summary>
 [Serializable]
 public class InventroyData
 {

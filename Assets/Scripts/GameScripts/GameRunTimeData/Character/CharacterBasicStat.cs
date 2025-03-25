@@ -221,7 +221,7 @@ public class CharacterBasicStat
             // 生命值合理范围检测
             HpCorrector();
             SanCorrector();
-
+            
         }
     }
 
@@ -229,6 +229,7 @@ public class CharacterBasicStat
     {
         if(!CharacterStat.Dead)
         {
+            
         }
     }
 

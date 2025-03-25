@@ -47,7 +47,7 @@ public class GameControl
         roomList = new GameObject();
         roomList.name = "===RoomList===";
                 
-        room = GameTableDataAgent.RoomsTable.Get(300006); // 初始房间
+        room = GameTableDataAgent.RoomsTable.Get(300007); // 初始房间
         GameHUD.Instance.OnAreaNotificaiton(room.NAME);
         AssetHandle handle = YooAssets.LoadAssetSync<GameObject>(room.PrefabName);
         mainCam = GameObject.Find("CinemachineCamera").GetComponent<CinemachineCamera>();
