@@ -271,7 +271,9 @@ public class ItemSlotData
             itemOnHand.transform.SetParent(releaspt);
             itemOnHand.transform.localPosition = Vector3.zero;
             itemOnHand.transform.SetParent(GameControl.Instance.GetSceneItemList().transform); // 移动节点
-            GameRunTimeData.Instance.ItemManager.RegistItem(itemOnHand);
+            
+            // GameRunTimeData.Instance.ItemManager.RegistItem(itemOnHand);
+            
             itemOnHand.transform.localEulerAngles = GameConstData.DefAngles;
             itemOnHand.OnItemDrop(fastDrop,false,PlayerReversed);
             

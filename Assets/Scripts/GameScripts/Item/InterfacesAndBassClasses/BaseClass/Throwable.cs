@@ -12,6 +12,7 @@ public class Throwable : ItemBase, ILiftable, IThrowable
     // 物品初始化
     public override void InitItem(int id)
     {
+        base.InitItem(id);
         ItemType = GameItemType.Throwable;
 
         try
@@ -26,7 +27,6 @@ public class Throwable : ItemBase, ILiftable, IThrowable
         }
         ItemSpriteName = data.SpriteName;
         ThrowableRigidbody = GetComponent<Rigidbody>();
-        GameRunTimeData.Instance.ItemManager.RegistItem(this);
         IgnoreDefaultItemDrop = true;
     }
     public override void OnItemPickUp()

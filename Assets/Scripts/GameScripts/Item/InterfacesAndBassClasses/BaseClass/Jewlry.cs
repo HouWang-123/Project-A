@@ -9,8 +9,8 @@ public class Jewlry : ItemBase
     // 可能存在的抽象方法，子类实现方法体
     public override void InitItem(int id)
     {
+        base.InitItem(id);
         ItemType = GameItemType.Jewelry;
-        
         try
         {
             ItemData = GameTableDataAgent.JewelryTable.Get(id);
@@ -21,8 +21,6 @@ public class Jewlry : ItemBase
         {
             ColorfulDebugger.DebugError("饰品ID" + id +"不存在，物品名称" + gameObject.name,ColorfulDebugger.Instance.Data);
         }
-        
-        GameRunTimeData.Instance.ItemManager.RegistItem(this);
     }
     public override Sprite GetItemIcon()
     {

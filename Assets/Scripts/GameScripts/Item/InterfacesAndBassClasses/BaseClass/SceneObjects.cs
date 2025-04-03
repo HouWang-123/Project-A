@@ -8,6 +8,7 @@ public class SceneObjects : ItemBase
 
     public override void InitItem(int id)
     {
+        base.InitItem(id);
         ItemType = GameItemType.SceneObject;
         try
         {
@@ -21,7 +22,6 @@ public class SceneObjects : ItemBase
         }
         ItemSpriteName = data.SpriteName;
         
-        GameRunTimeData.Instance.ItemManager.RegistItem(this);
     }
     public override Sprite GetItemIcon()
     {

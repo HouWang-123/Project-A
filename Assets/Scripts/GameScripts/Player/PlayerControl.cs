@@ -487,7 +487,9 @@ public class PlayerControl : MonoBehaviour
         if (characterStat.LiftedItem != null)
         {
             characterStat.LiftedItem.gameObject.transform.SetParent(GameControl.Instance.GetSceneItemList().transform);
-            GameRunTimeData.Instance.ItemManager.RegistItem(characterStat.LiftedItem);
+            
+            // GameRunTimeData.Instance.ItemManager.RegistItem(characterStat.LiftedItem);
+            
             characterStat.LiftedItem.OnItemDrop(false, true);
             characterStat.LiftedItem.ChangeRendererSortingOrder(GameConstData.BelowPlayerOrder);
 
@@ -513,7 +515,9 @@ public class PlayerControl : MonoBehaviour
                 instantiate.transform.SetParent(GameControl.Instance.GetSceneItemList().transform);
                 ItemBase ib = instantiate.GetComponent<ItemBase>();
                 ib.InitItem(itemID);
-                GameRunTimeData.Instance.ItemManager.RegistItem(ib);
+                
+                // GameRunTimeData.Instance.ItemManager.RegistItem(ib);
+                
                 ib.OnItemDrop(false);
             };
         }
@@ -527,20 +531,16 @@ public class PlayerControl : MonoBehaviour
         {
             return false;
         }
-
         if (_pickupController.currentPickup.DropState)
         {
             return false;
         }
-
         if (characterStat.LiftedItem != null)
         {
             return false;
         }
-
         return true;
     }
-
     public bool PickItem() // 拾取物品
     {
         if (GameRunTimeData.Instance.CharacterBasicStat.GetStat().Dead) return false;
@@ -552,7 +552,8 @@ public class PlayerControl : MonoBehaviour
 
         ItemBase toPickUpItem;
         toPickUpItem = _pickupController.currentPickup;
-        GameRunTimeData.Instance.ItemManager.UnRegistItem(toPickUpItem);
+        
+        // GameRunTimeData.Instance.ItemManager.UnRegistItem(toPickUpItem);
 
         if (toPickUpItem is ISlotable)
         {

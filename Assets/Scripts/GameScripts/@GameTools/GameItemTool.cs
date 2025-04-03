@@ -211,7 +211,7 @@ public static class GameItemTool
         }
     }
     /// <summary>
-    /// 获取物品Icon的Sprite
+    /// 获取渲染器
     /// </summary>
     /// <param name="id"></param>
     /// <param name="finishCallback"></param>

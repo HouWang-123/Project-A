@@ -65,7 +65,6 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable
 
     public void OnDestroy()
     {
-        GameRunTimeData.Instance.ItemManager.UnRegistItem(this);
         if (pickupTips != null)
         {
             pickupTips.OnItemPicked();
@@ -161,7 +160,10 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable
 
 
     // 动态生成时必须调用一次初始化，用来设置物品数据
-    public abstract void InitItem(int id); // 物品数据初始化
+    public virtual void InitItem(int id)
+    {
+        
+    } // 物品数据初始化
     public abstract Sprite GetItemIcon();
     public abstract string GetPrefabName();
 

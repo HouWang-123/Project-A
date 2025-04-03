@@ -14,6 +14,7 @@ public class Food : ItemBase,IStackable,IBuffedItem
     // 物品初始化
     public override void InitItem(int id)
     {
+        base.InitItem(id);
         ItemType = GameItemType.Food;
         try
         {
@@ -26,7 +27,6 @@ public class Food : ItemBase,IStackable,IBuffedItem
             ColorfulDebugger.DebugError("食物ID" + id +"不存在，物品名称" + gameObject.name,ColorfulDebugger.Instance.Data);
         }
         ItemSpriteName = data.SpriteName;
-        GameRunTimeData.Instance.ItemManager.RegistItem(this);
     }
     public override Sprite GetItemIcon()
     {

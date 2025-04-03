@@ -29,8 +29,6 @@ public class Weapon : ItemBase, ISlotable
             ColorfulDebugger.DebugError("武器物品ID" + ID +"不存在，物品名称" + gameObject.name,ColorfulDebugger.Instance.Data);
         }
         ItemSpriteName = data.SpriteName;
-        
-        GameRunTimeData.Instance.ItemManager.RegistItem(this);
         GetWeaponBehaviour();
     }
     
