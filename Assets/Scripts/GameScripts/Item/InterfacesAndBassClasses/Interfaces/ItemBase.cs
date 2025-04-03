@@ -22,7 +22,7 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable
     public int StackCount = 1;
     private GameItemPickupTip pickupTips;
     protected bool IsholdByPlayer;
-    
+    public ItemStatus MyItemStatus;
     public virtual ItemStatus GetItemStatus()
     {
         return null;
@@ -30,6 +30,7 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable
 
     public virtual void SetItemStatus(ItemStatus itemStatus)
     {
+        MyItemStatus = itemStatus;
     }
 
     private void SetRendererImage()

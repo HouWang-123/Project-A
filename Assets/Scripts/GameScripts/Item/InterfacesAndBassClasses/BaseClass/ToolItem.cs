@@ -120,7 +120,8 @@ public class Tool : ItemBase, ISlotable
 
     public override void SetItemStatus(ItemStatus itemStatus)
     {
-        ToolStatus = itemStatus as ToolStatus;
+        base.SetItemStatus(itemStatus);
+        ToolStatus = MyItemStatus as ToolStatus;
     }
 
     public override ItemStatus GetItemStatus()

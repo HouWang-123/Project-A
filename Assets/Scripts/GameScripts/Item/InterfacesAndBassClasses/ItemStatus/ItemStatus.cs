@@ -1,4 +1,4 @@
-public class ItemStatus
+public class ItemStatus : TrackableData
 {
     
 }

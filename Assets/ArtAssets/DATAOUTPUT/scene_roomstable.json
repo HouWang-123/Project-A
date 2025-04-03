@@ -179,7 +179,7 @@
   },
   {
     "ID": 300007,
-    "NAME": "",
+    "NAME": "Natalia",
     "DESCRIBE": "0",
     "prefabName": "F1_Mroom_Natalia",
     "iSeeDeadPeople": false,
@@ -191,8 +191,12 @@
     "visibility": 3,
     "byTime": false,
     "monstersIDList": [],
-    "dropRuleIDList": [],
-    "dropType": [],
+    "dropRuleIDList": [
+      200002
+    ],
+    "dropType": [
+      false
+    ],
     "roomX": 12,
     "roomY": 8
   },
