@@ -4,7 +4,7 @@ using UnityEngine;
 using YooAsset;
 using Random = UnityEngine.Random;
 
-public abstract class ItemBase : MonoBehaviour, IPickUpable
+public abstract class ItemBase : MonoBehaviour, IPickUpable , ITrackable
 {
     protected Luban.BeanBase ItemData;
     public int ItemID; // 物品ID
@@ -23,9 +23,10 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable
     private GameItemPickupTip pickupTips;
     protected bool IsholdByPlayer;
     public ItemStatus MyItemStatus;
+
     public virtual ItemStatus GetItemStatus()
     {
-        return null;
+        return MyItemStatus;
     }
 
     public virtual void SetItemStatus(ItemStatus itemStatus)
@@ -49,7 +50,6 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable
     protected void Start()
     {
         IgnoreDefaultItemDrop = false;
-        _collider = GetComponentInChildren<Collider2D>();
         if (!ignoreAngleCorrect)
         {
             ItemRenderer.transform.localEulerAngles = GameConstData.DefAngles;
@@ -62,6 +62,7 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable
 
         CheckIsStackedItem();
         SetRendererImage();
+        RegisterTracker();
     }
 
     public void OnDestroy()
@@ -70,6 +71,7 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable
         {
             pickupTips.OnItemPicked();
         }
+        UnRegisterTracker();
     }
 
     // 新添加接口，通过设置id定义物品
@@ -86,6 +88,7 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable
 
     private void CheckIsStackedItem()
     {
+        MyItemStatus.StackCount = StackCount;
         if (this is IStackable)
         {
             HideStackNumber();
@@ -97,17 +100,16 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable
             }
         }
     }
-
     public void HideStackNumber()
     {
         StackNuberText.gameObject.SetActive(false);
     }
-
     public void ShowStackNumber()
     {
         StackNuberText.gameObject.SetActive(true);
     }
 
+    
     public bool IsItemInPickupRange; // 可否拾取
 
     public void SetPickupable(bool v)
@@ -161,10 +163,16 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable
 
 
     // 动态生成时必须调用一次初始化，用来设置物品数据
-    public virtual void InitItem(int id)
+    public virtual void InitItem(int id,TrackerData trackerdata = null)
     {
+        if (trackerdata != null)
+        {
+            MyItemStatus = trackerdata.TrackableBaseData as ItemStatus;
+            transform.position = trackerdata.postion;
+        }
         
-    } // 物品数据初始化
+    }
+    
     public abstract Sprite GetItemIcon();
     public abstract string GetPrefabName();
 
@@ -174,9 +182,7 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable
     private float groundCheckDistance = 0.2f;
     private Vector3 velocity = GameConstData.VthrowSpeed;
     private float H_BiasSpeed;
-
     private float V_BiasSpeed;
-    private Collider2D _collider;
 
     // 物品掉落相关物理逻辑
     protected virtual void FixedUpdate()
@@ -185,9 +191,7 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable
         F_UpdateWeaponCDRecover();
     }
 
-    protected virtual void F_UpdateWeaponCDRecover()
-    {
-    }
+    protected virtual void F_UpdateWeaponCDRecover() {}
 
     public Action OnDropCallback;
 
@@ -219,7 +223,6 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable
                     position = new Vector3(position.x, hit.point.y, position.z);
                     transform.position = position;
                 }
-
                 DropState = false;
                 upspeed = 20f;
                 OnDropCallback?.Invoke();
@@ -242,7 +245,6 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable
             pickupTips.OnItemPicked();
         }
     }
-
     public virtual void OnItemDrop(bool fastDrop, bool IgnoreBias = false, bool Playerreversed = false)
     {
         if (Playerreversed)
@@ -261,9 +263,9 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable
             H_BiasSpeed = 0f;
             V_BiasSpeed = 0f;
         }
-
+        
         DropState = true;
-
+        
         if (fastDrop)
         {
             Vector3 groundLocation = transform.position;
@@ -344,5 +346,27 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable
             H_BiasSpeed = 0;
             V_BiasSpeed = 0;
         }
+    }
+
+    /// <summary>
+    /// 场景切换持久化实例状态示例DEMO
+    /// </summary>
+    /// <returns></returns>
+    public TrackerData CollectTrackedData()
+    {
+        return new TrackerData(
+            ItemID,                
+            TrackType.Item,
+            transform.position,
+            MyItemStatus           // 自定义状态，自行实现相关的类
+        );
+    }
+    public void RegisterTracker()
+    {
+        GameRunTimeData.Instance.MapTrackDataManager.RegisterTracker(this);
+    }
+    public void UnRegisterTracker()
+    {
+        GameRunTimeData.Instance.MapTrackDataManager.UnRegisterTracker(this);
     }
 }

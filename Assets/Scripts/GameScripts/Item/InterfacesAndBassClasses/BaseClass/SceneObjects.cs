@@ -6,9 +6,9 @@ public class SceneObjects : ItemBase
 {
     public cfg.item.SceneObjects data;
 
-    public override void InitItem(int id)
+    public override void InitItem(int id, TrackerData trackerData = null)
     {
-        base.InitItem(id);
+        base.InitItem(id,trackerData);
         ItemType = GameItemType.SceneObject;
         try
         {

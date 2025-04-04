@@ -15,8 +15,9 @@ public class Weapon : ItemBase, ISlotable
     private float currentCd;
     
     // 动态生成物品
-    public override void InitItem( int ID )
+    public override void InitItem( int ID , TrackerData trackerdata = null)
     {
+        base.InitItem(ID,trackerdata);
         ItemType = GameItemType.Weapon;
         try
         {

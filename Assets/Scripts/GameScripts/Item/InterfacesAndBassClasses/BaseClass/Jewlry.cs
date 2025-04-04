@@ -7,9 +7,9 @@ public class Jewlry : ItemBase
     public cfg.item.Jewelry data;
     
     // 可能存在的抽象方法，子类实现方法体
-    public override void InitItem(int id)
+    public override void InitItem(int id,TrackerData trackerData = null)
     {
-        base.InitItem(id);
+        base.InitItem(id,trackerData);
         ItemType = GameItemType.Jewelry;
         try
         {

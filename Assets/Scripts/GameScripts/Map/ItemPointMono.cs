@@ -7,7 +7,7 @@ using YooAsset;
 using cfg;
 using Random = UnityEngine.Random;
 
-public class ItemPointMono : MonoBehaviour
+public class ItemPointMono : MonoBehaviour , IInteractHandler
 {
     //[Header("生成的物品")]
     //public List<ItemTip> ItemTips;
@@ -65,6 +65,35 @@ public class ItemPointMono : MonoBehaviour
         }
     }
 
+    public void OnPlayerFocus()
+    {
+
+    }
+
+    public void OnPlayerDefocus()
+    {
+
+    }
+
+    public MonoBehaviour getMonoBehaviour()
+    {
+        return this;
+    }
+
+    public void OnPlayerStartInteract()
+    {
+        OnPlayerInteract();
+    }
+
+    public void OnPlayerInteract()
+    {
+        CreateItems();
+    }
+
+    public void OnPlayerInteractCancel()
+    {
+        
+    }
 }
 
 //[System.Serializable]

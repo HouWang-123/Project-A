@@ -14,8 +14,8 @@ public class Tool : ItemBase, ISlotable
     {
         set
         {
-            _toolStatus = value;
-            if (_toolStatus.ToolOn)
+            MyItemStatus = value;
+            if (value.ToolOn)
             {
                 m_LightBehaviour.LightOn();
                 ToolStatus.ToolOn = true;
@@ -28,15 +28,15 @@ public class Tool : ItemBase, ISlotable
         }
         get
         {
-            return _toolStatus;
+            return MyItemStatus as ToolStatus;
         }
     }
-
-    private ToolStatus _toolStatus;
+    
     private float SwitchCD = 0.2f;
     
-    public override void InitItem(int id)
+    public override void InitItem(int id, TrackerData trackerData = null)
     {
+        base.InitItem(id,trackerData);
         ItemType = GameItemType.ToolItem;
         ItemData = GameTableDataAgent.ToolsTable.Get(id);
         try
@@ -55,7 +55,11 @@ public class Tool : ItemBase, ISlotable
         {
             m_LightBehaviour = m_ToolBehaviour as FlashLightBehaviour;
         }
-        _toolStatus = new ToolStatus();
+
+        if (MyItemStatus != null)
+        {
+            MyItemStatus = new ToolStatus();
+        }
     }
     public override Sprite GetItemIcon()
     {
@@ -126,6 +130,6 @@ public class Tool : ItemBase, ISlotable
 
     public override ItemStatus GetItemStatus()
     {
-        return _toolStatus;
+        return MyItemStatus;
     }
 }

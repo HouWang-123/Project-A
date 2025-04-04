@@ -9,6 +9,7 @@ public class GameControl
 {
     public readonly static GameControl Instance;
 
+    public readonly static int DEFAULTROOM = 300007;
     //data
     private Rooms room;
 
@@ -21,7 +22,7 @@ public class GameControl
     private GameObject sceneItemNode;            //场景物品节点
     private GameObject playerObj;
     private GameObject roomObj;                  // 当前房间Go
-    //private Dictionary<int, GameObject> roomCache;
+    
     public  PlayerControl PlayerControl;
     private Dictionary<int, List<GameObject>> roomWithMonsterList; // 房间对应的怪物
     private GameObject roomList;
@@ -47,7 +48,8 @@ public class GameControl
         roomList = new GameObject();
         roomList.name = "===RoomList===";
                 
-        room = GameTableDataAgent.RoomsTable.Get(300007); // 初始房间
+        room = GameTableDataAgent.RoomsTable.Get(DEFAULTROOM); // 初始房间
+        GameRunTimeData.Instance.MapTrackDataManager.OnRoomDataLoadComplete(DEFAULTROOM);
         GameHUD.Instance.OnAreaNotificaiton(room.NAME);
         AssetHandle handle = YooAssets.LoadAssetSync<GameObject>(room.PrefabName);
         mainCam = GameObject.Find("CinemachineCamera").GetComponent<CinemachineCamera>();
@@ -67,56 +69,35 @@ public class GameControl
 
     public void ChangeRoom(int RoomId, int DoorId)
     {
-        Rooms r = GameTableDataAgent.RoomsTable.Get(RoomId);
-        GameHUD.Instance.OnAreaNotificaiton(r.NAME);
-        if(!YooAssets.CheckLocationValid(r.PrefabName))
+        Rooms roomData = GameTableDataAgent.RoomsTable.Get(RoomId);
+        if(!YooAssets.CheckLocationValid(roomData.PrefabName))
         {
             return;
         }
-        GameObject o;
-        //if (!roomCache.ContainsKey(RoomId))
-        //{
-            AssetHandle handle = YooAssets.LoadAssetSync<GameObject>(r.PrefabName);
-            o = Object.Instantiate(handle.AssetObject) as GameObject;
-            o.transform.SetParent(roomList.transform);
-        //}
-        //else
-        //{
-        //    o = roomCache[RoomId];
-        //    o.SetActive(true);
-        //}
+
+        GameRunTimeData.Instance.MapTrackDataManager.SaveTrackerData(room.ID);
         
-        RoomMono mono = o.GetComponent<RoomMono>();
+        GameRunTimeData.Instance.MapTrackDataManager.OnRoomDataLoadComplete(RoomId);
+        
+        GameHUD.Instance.OnAreaNotificaiton(roomData.NAME);
+        
+        GameObject RoomObject;
+        AssetHandle handle = YooAssets.LoadAssetSync<GameObject>(roomData.PrefabName);
+        RoomObject = Object.Instantiate(handle.AssetObject) as GameObject;
+        RoomObject.transform.SetParent(roomList.transform);
+
+        RoomMono mono = RoomObject.GetComponent<RoomMono>();
         if(mono == null)
         {
-            mono = o.AddComponent<RoomMono>();
+            mono = RoomObject.AddComponent<RoomMono>();
         }
-        mono.SetData(r);
+        mono.SetData(roomData);
         mono.SetPlayPoint(DoorId);
-
-        // 不为安全屋，时间系统不走
-        switch (r.PrefabName)
-        {
-            case "SafetyRoom": // 安全屋
-                TimeSystemManager.Instance.TimeSpeed = 1f;
-                EventManager.Instance.RunEvent(EventConstName.PlayerEnterSafeHouseEvent);
-                break;
-            default:
-                TimeSystemManager.Instance.TimeSpeed = 0f;
-                EventManager.Instance.RunEvent(EventConstName.PlayerLeaveSafeHouseEvent);
-                break;
-        }
         RiddleByRoom(mono);
-
-        //if(!roomCache.ContainsKey(RoomId))
-        //{
-        //    roomCache.Add(RoomId,o); // 加载的房间进入缓存
-        //}
-
-        roomObj.SetActive(false);
+        
         Object.Destroy(roomObj);
-        room = r;
-        roomObj = o;
+        room = roomData;
+        roomObj = RoomObject;
 
         // 房间切换后，检查怪物生成
         //if (mono.monsterList != null)
@@ -140,7 +121,7 @@ public class GameControl
             riddleObj.SetRiddle();
         }
     }
-
+    
     public void GameSave()
     {
 

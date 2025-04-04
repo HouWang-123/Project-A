@@ -1,5 +1,6 @@
 using System;
 using FEVM.Timmer;
+using PixelCrushers.DialogueSystem.ChatMapper;
 using UnityEngine;
 using YooAsset;
 
@@ -10,9 +11,9 @@ public class Throwable : ItemBase, ILiftable, IThrowable
     
     private bool ObjectStoped;
     // 物品初始化
-    public override void InitItem(int id)
+    public override void InitItem(int id,TrackerData trackerData = null)
     {
-        base.InitItem(id);
+        base.InitItem(id,trackerData);
         ItemType = GameItemType.Throwable;
 
         try

@@ -48,6 +48,13 @@ public class RoomMono : MonoBehaviour
         GameControl.Instance.SetSceneItemList(SceneItemNode);
         roomData = room;
         SetUpCamCollider();
+        
+        // 场景中可追踪的游戏物体数据
+        GameRunTimeData.Instance.MapTrackDataManager.OnRoomDataLoadComplete(room.ID);
+        // 如果游戏存档生命周期生成过一次则不进行物品，怪物初始化工作
+        bool generated = GameRunTimeData.Instance.MapTrackDataManager.RoomGenerated(room.ID); 
+        
+        
         //门的数据初始化
         doorParent = transform.Find("Door");
         if(doorParent != null)
@@ -58,35 +65,37 @@ public class RoomMono : MonoBehaviour
             }
             for(int i = 0; i < roomData.DoorList.Count && i < doorParent.childCount; i++)
             {
-                DoorMono mono = doorParent.GetChild(i).GetComponent<DoorMono>();
-                if(mono == null)
+                DoorMono doorMono = doorParent.GetChild(i).GetComponent<DoorMono>();
+                if(doorMono == null)
                 {
-                    mono = doorParent.GetChild(i).gameObject.AddComponent<DoorMono>();
+                    doorMono = doorParent.GetChild(i).gameObject.AddComponent<DoorMono>();
                 }
 
-                mono.SetData(roomData.DoorList[i]);
-                doorDic.Add(roomData.DoorList[i], mono);
+                doorMono.SetData(roomData.DoorList[i]);
+                doorDic.Add(roomData.DoorList[i], doorMono);
             }
         }
+        
         //生成物品的初始化
         itemsParent = transform.Find("ItemList");
         if(itemsParent != null)
         {
-            if(roomData.DropRuleIDList.Count != itemsParent.childCount && roomData.DropRuleIDList.Count != roomData.DropType.Count)
+            if(roomData.DropRuleIDList.Count != itemsParent.childCount || roomData.DropRuleIDList.Count != roomData.DropType.Count)
             {
                 Debug.LogWarning("room数据所含Drop数量与实际预制体的itemPoint不同，请检查问题！！！ID == " + roomData.ID + " name == " + roomData.PrefabName);
             }
             for(int i = 0; i < roomData.DropRuleIDList.Count && i < roomData.DropType.Count && i < itemsParent.childCount; i++)
             {
-                ItemPointMono mono = itemsParent.GetChild(i).GetComponent<ItemPointMono>();
-                if(mono == null)
+                ItemPointMono itemPoint = itemsParent.GetChild(i).GetComponent<ItemPointMono>();
+                if(itemPoint == null)
                 {
-                    mono = itemsParent.GetChild(i).gameObject.AddComponent<ItemPointMono>();
+                    itemPoint = itemsParent.GetChild(i).gameObject.AddComponent<ItemPointMono>();
                 }
-
-                mono.SetData(roomData.DropRuleIDList[i], roomData.DropType[i]);
+                itemPoint.SetData(roomData.DropRuleIDList[i], roomData.DropType[i]);
             }
         }
+        
+        
         //生成的怪物数据初始化
         monstersParent = transform.Find("Monsters");
         if(monstersParent != null)
@@ -111,13 +120,13 @@ public class RoomMono : MonoBehaviour
             }
             for(int i = 0;i<roomData.MonstersIDList.Count && i < monstersParent.childCount; i++)
             {
-                MonsterPointMono mono = monstersParent.GetChild(i).GetComponent<MonsterPointMono>();
-                if(mono == null)
+                MonsterPointMono enemyMono = monstersParent.GetChild(i).GetComponent<MonsterPointMono>();
+                if(enemyMono == null)
                 {
-                    mono = monstersParent.GetChild(i).gameObject.AddComponent<MonsterPointMono>();
+                    enemyMono = monstersParent.GetChild(i).gameObject.AddComponent<MonsterPointMono>();
                 }
 
-                mono.SetData(roomData.MonstersIDList[i]);
+                enemyMono.SetData(roomData.MonstersIDList[i]);
             }
         }
 

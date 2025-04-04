@@ -12,9 +12,9 @@ public class Food : ItemBase,IStackable,IBuffedItem
         return data;
     }
     // 物品初始化
-    public override void InitItem(int id)
+    public override void InitItem(int id,TrackerData trackerData = null)
     {
-        base.InitItem(id);
+        base.InitItem(id, trackerData);
         ItemType = GameItemType.Food;
         try
         {

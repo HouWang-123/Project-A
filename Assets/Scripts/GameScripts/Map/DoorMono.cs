@@ -33,6 +33,7 @@ public class DoorMono : MonoBehaviour
         if(doorEnabled && other.gameObject.CompareTag("Player"))
         {
             Debug.Log("Player Comming!!!!");
+            EventManager.Instance.RunEvent("OnGameRoomChanges");
             GameControl.Instance.ChangeRoom(doorData.ToRoomID,doorData.ToDoorID);
             // 测试房间解密专用
             // SpawnRiddleTestRoom();

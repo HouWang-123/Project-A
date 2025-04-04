@@ -58,28 +58,28 @@ public class GlobalLightController : MonoBehaviour
             phasedEvents.Add(phasedEvent);
             TimeSystemManager.Instance.PhasedChangedScheduledEvents.Add(phasedEvent);
         }
-        EventManager.Instance.RegistEvent(EventConstName.PlayerEnterSafeHouseEvent, PlayerEnterSaftHouseHandler);
-        EventManager.Instance.RegistEvent(EventConstName.PlayerLeaveSafeHouseEvent, PlayerLeaveSaftHouseHandler);
+        // EventManager.Instance.RegistEvent(EventConstName.PlayerEnterSafeHouseEvent, PlayerEnterSaftHouseHandler);
+        // EventManager.Instance.RegistEvent(EventConstName.PlayerLeaveSafeHouseEvent, PlayerLeaveSaftHouseHandler);
     }
 
-    private void PlayerEnterSaftHouseHandler()
-    {
-        // 恢复之前记录的光照
-        m_globalLight2D.color = safetyHouseColor;
-    }
-
-    private void PlayerLeaveSaftHouseHandler()
-    {
-        // 记录离开安全屋时的光照
-        safetyHouseColor = m_globalLight2D.color;
-        // 设置光源为晚上
-        m_globalLight2D.color = timePhaseToColor[TimePhaseEnum.Night1];
-    }
+    // private void PlayerEnterSaftHouseHandler()
+    // {
+    //     // 恢复之前记录的光照
+    //     m_globalLight2D.color = safetyHouseColor;
+    // }
+    //
+    // private void PlayerLeaveSaftHouseHandler()
+    // {
+    //     // 记录离开安全屋时的光照
+    //     safetyHouseColor = m_globalLight2D.color;
+    //     // 设置光源为晚上
+    //     m_globalLight2D.color = timePhaseToColor[TimePhaseEnum.Night1];
+    // }
 
     private void OnDestroy()
     {
-        EventManager.Instance.RemoveEvent(EventConstName.PlayerEnterSafeHouseEvent, PlayerEnterSaftHouseHandler);
-        EventManager.Instance.RemoveEvent(EventConstName.PlayerLeaveSafeHouseEvent, PlayerLeaveSaftHouseHandler);
+        // EventManager.Instance.RemoveEvent(EventConstName.PlayerEnterSafeHouseEvent, PlayerEnterSaftHouseHandler);
+        // EventManager.Instance.RemoveEvent(EventConstName.PlayerLeaveSafeHouseEvent, PlayerLeaveSaftHouseHandler);
         phasedEvents.Clear();
         timePhaseToColor.Clear();
     }

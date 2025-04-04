@@ -10,8 +10,9 @@ public class TinyItem : ItemBase , IDataItem
     
     // 物品初始化
 
-    public override void InitItem(int id)
+    public override void InitItem(int id,TrackerData trackerData = null)
     {
+        base.InitItem(id,trackerData);
         ItemType = GameItemType.TinyItem;
 
         try
