@@ -7,7 +7,7 @@ using YooAsset;
 using cfg;
 using Random = UnityEngine.Random;
 
-public class ItemPointMono : MonoBehaviour , IInteractHandler
+public class ItemPointMono : MonoBehaviour , IInteractHandler , ITrackable
 {
     //[Header("生成的物品")]
     //public List<ItemTip> ItemTips;
@@ -17,6 +17,7 @@ public class ItemPointMono : MonoBehaviour , IInteractHandler
     [Tooltip("false为直接生成，true为需要交互后生成")]
     private bool IsInFlood = false;
 
+    private TrackerData _trackerData;
     private SphereCollider colliderThis;
 
     private List<int> itemIDs = new List<int>();
@@ -36,10 +37,15 @@ public class ItemPointMono : MonoBehaviour , IInteractHandler
         }
         else
         {
+            RegisterTracker();
             transform.GetChild(0).gameObject.SetActive(true);
         }
     }
 
+    private void OnDestroy()
+    {
+        UnRegisterTracker();
+    }
 
     public void SetData(int ID, bool isInFlood)
     {
@@ -64,7 +70,7 @@ public class ItemPointMono : MonoBehaviour , IInteractHandler
             GameItemTool.GenerateItemAtTransform(itemIDs[i], transform);
         }
     }
-
+    // 交互操作
     public void OnPlayerFocus()
     {
 
@@ -93,6 +99,20 @@ public class ItemPointMono : MonoBehaviour , IInteractHandler
     public void OnPlayerInteractCancel()
     {
         
+    }
+    // 场景追踪
+    public void RegisterTracker()
+    {
+        GameRunTimeData.Instance.MapTrackDataManager.RegisterTracker(this);
+    }
+    public void UnRegisterTracker()
+    {
+        GameRunTimeData.Instance.MapTrackDataManager.UnRegisterTracker(this);
+    }
+
+    public TrackerData CollectTrackedData()
+    {
+        return _trackerData;
     }
 }
 

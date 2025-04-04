@@ -43,7 +43,7 @@ public class RoomMono : MonoBehaviour
     }
 
 
-    public void SetData(Rooms room)
+    public void SetDataAndGenerateItemAndEnemy(Rooms room)
     {
         GameControl.Instance.SetSceneItemList(SceneItemNode);
         roomData = room;

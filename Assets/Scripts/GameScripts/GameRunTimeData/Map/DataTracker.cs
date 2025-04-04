@@ -30,6 +30,7 @@ public class TrackerData
 public enum TrackType
 {
     Item,
+    ItemPoint,
     Enemy
 }
 

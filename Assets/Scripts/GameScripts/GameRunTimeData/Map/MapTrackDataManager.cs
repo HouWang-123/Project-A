@@ -46,7 +46,10 @@ public class MapTrackDataManager : SerializedMonoBehaviour
         foreach (var VARIABLE in CurrentTrackerList)
         {
             TrackerData collectTrackedData = VARIABLE.CollectTrackedData();
-            recorded.Add(collectTrackedData);
+            if (collectTrackedData != null)
+            {
+                recorded.Add(collectTrackedData);
+            }
         }
         AllTrackedData[roomid] = recorded;
     }
@@ -71,6 +74,12 @@ public class MapTrackDataManager : SerializedMonoBehaviour
             }
         }
     }
+    // 恢复可交互物品生成点
+    public void RecoverItemPoint(int roomid)
+    {
+        
+    }
+    
     public void RecoverEnemy(int roomid)
     {
         foreach (var data in AllTrackedData[roomid])

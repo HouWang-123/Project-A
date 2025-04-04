@@ -59,7 +59,7 @@ public class GameControl
         {
             mono = roomObj.AddComponent<RoomMono>();
         }
-        mono.SetData(room);
+        mono.SetDataAndGenerateItemAndEnemy(room);
         mono.transform.SetParent(roomList.transform);
         //roomCache.Add(300006,roomObj);
 
@@ -91,7 +91,9 @@ public class GameControl
         {
             mono = RoomObject.AddComponent<RoomMono>();
         }
-        mono.SetData(roomData);
+        mono.SetDataAndGenerateItemAndEnemy(roomData);
+        
+        
         mono.SetPlayPoint(DoorId);
         RiddleByRoom(mono);
         
@@ -175,22 +177,15 @@ public class GameControl
             var monsterTable = GameTableDataAgent.MonsterTable;
             int monsterCount = monsterTable.DataList.Count; // 怪物数量，根据房间对应的怪物数量调整
             roomWithMonsterList = new();
-            //if (roomCache.ContainsKey(roomId))
+            List<GameObject> monsterList = new();
+            for (int j = 0; j < monsterCount; ++j)
             {
-                List<GameObject> monsterList = new();
-                for (int j = 0; j < monsterCount; ++j)
-                {
-                    AssetHandle handle = YooAssets.LoadAssetSync<GameObject>(monsterTable.DataList[j].PrefabName);
-                    var monsterObj = Object.Instantiate(handle.AssetObject) as GameObject;
-                    monsterObj.name = monsterTable.DataList[j].PrefabName;
-                    monsterList.Add(monsterObj);
-                }
-                roomWithMonsterList.Add(roomId, monsterList);
+                AssetHandle handle = YooAssets.LoadAssetSync<GameObject>(monsterTable.DataList[j].PrefabName);
+                var monsterObj = Object.Instantiate(handle.AssetObject) as GameObject;
+                monsterObj.name = monsterTable.DataList[j].PrefabName;
+                monsterList.Add(monsterObj);
             }
-            //else
-            //{
-            //    Debug.LogError(GetType() + " /GetGameMonsterList => 没有找到对应的房间！");
-            //}
+            roomWithMonsterList.Add(roomId, monsterList);
         }
         return roomWithMonsterList[roomId];
     }
@@ -201,22 +196,15 @@ public class GameControl
             var monsterTable = GameTableDataAgent.MonsterTable;
             int monsterCount = monsterTable.DataList.Count; // 怪物数量，根据房间对应的怪物数量调整
             roomWithMonsterList = new();
-            //if (roomCache.ContainsKey(roomId))
+            List<GameObject> monsterList = new();
+            for (int j = 0; j < monsterCount; ++j)
             {
-                List<GameObject> monsterList = new();
-                for (int j = 0; j < monsterCount; ++j)
-                {
-                    AssetHandle handle = YooAssets.LoadAssetSync<GameObject>(monsterTable.DataList[j].PrefabName);
-                    var monsterObj = Object.Instantiate(handle.AssetObject) as GameObject;
-                    monsterObj.name = monsterTable.DataList[j].PrefabName;
-                    monsterList.Add(monsterObj);
-                }
-                roomWithMonsterList.Add(roomId, monsterList);
+                AssetHandle handle = YooAssets.LoadAssetSync<GameObject>(monsterTable.DataList[j].PrefabName);
+                var monsterObj = Object.Instantiate(handle.AssetObject) as GameObject;
+                monsterObj.name = monsterTable.DataList[j].PrefabName;
+                monsterList.Add(monsterObj);
             }
-            //else
-            //{
-            //    Debug.LogError(GetType() + " /GetGameMonsterList => 没有找到对应的房间！");
-            //}
+            roomWithMonsterList.Add(roomId, monsterList);
         }
         return roomWithMonsterList[roomId][i];
     }
