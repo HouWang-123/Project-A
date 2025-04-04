@@ -49,7 +49,6 @@ public class GameControl
         roomList.name = "===RoomList===";
                 
         room = GameTableDataAgent.RoomsTable.Get(DEFAULTROOM); // 初始房间
-        GameRunTimeData.Instance.MapTrackDataManager.OnRoomDataLoadComplete(DEFAULTROOM);
         GameHUD.Instance.OnAreaNotificaiton(room.NAME);
         AssetHandle handle = YooAssets.LoadAssetSync<GameObject>(room.PrefabName);
         mainCam = GameObject.Find("CinemachineCamera").GetComponent<CinemachineCamera>();
@@ -77,8 +76,6 @@ public class GameControl
 
         GameRunTimeData.Instance.MapTrackDataManager.SaveTrackerData(room.ID);
         
-        GameRunTimeData.Instance.MapTrackDataManager.OnRoomDataLoadComplete(RoomId);
-        
         GameHUD.Instance.OnAreaNotificaiton(roomData.NAME);
         
         GameObject RoomObject;
@@ -100,7 +97,9 @@ public class GameControl
         Object.Destroy(roomObj);
         room = roomData;
         roomObj = RoomObject;
-
+        
+        GameRunTimeData.Instance.MapTrackDataManager.RecoverItem(room.ID,sceneItemNode.transform);
+        
         // 房间切换后，检查怪物生成
         //if (mono.monsterList != null)
         //{

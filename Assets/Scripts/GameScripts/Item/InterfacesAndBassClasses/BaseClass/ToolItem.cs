@@ -55,12 +55,13 @@ public class Tool : ItemBase, ISlotable
         {
             m_LightBehaviour = m_ToolBehaviour as FlashLightBehaviour;
         }
-
-        if (MyItemStatus != null)
-        {
-            MyItemStatus = new ToolStatus();
-        }
     }
+
+    protected override void GenerateItemStatus()
+    {
+        MyItemStatus = new ToolStatus();
+    }
+
     public override Sprite GetItemIcon()
     {
         AssetHandle loadAssetSync = YooAssets.LoadAssetSync<Sprite>(data.IconName);

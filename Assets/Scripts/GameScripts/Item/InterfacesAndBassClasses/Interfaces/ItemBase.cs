@@ -54,17 +54,22 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable , ITrackable
         {
             ItemRenderer.transform.localEulerAngles = GameConstData.DefAngles;
         }
-
+        
         if (ItemData == null)
         {
             InitItem(ItemID); // 非动态生成的物品，拖拽进入的物品
         }
-
+        
+        GenerateItemStatus();
         CheckIsStackedItem();
         SetRendererImage();
         RegisterTracker();
     }
 
+    protected virtual void GenerateItemStatus()
+    {
+        MyItemStatus = new ItemStatus();
+    }
     public void OnDestroy()
     {
         if (pickupTips != null)
@@ -167,10 +172,8 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable , ITrackable
     {
         if (trackerdata != null)
         {
-            MyItemStatus = trackerdata.TrackableBaseData as ItemStatus;
             transform.position = trackerdata.postion;
         }
-        
     }
     
     public abstract Sprite GetItemIcon();
@@ -244,6 +247,7 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable , ITrackable
         {
             pickupTips.OnItemPicked();
         }
+        UnRegisterTracker();
     }
     public virtual void OnItemDrop(bool fastDrop, bool IgnoreBias = false, bool Playerreversed = false)
     {

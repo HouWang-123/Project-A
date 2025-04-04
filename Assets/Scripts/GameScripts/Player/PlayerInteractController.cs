@@ -45,12 +45,19 @@ public class PlayerInteractController : MonoBehaviour
     {
         if (interactLock) return; //交互锁
         interactLock = true;
-        CurrentFocusedInteractHandler.OnPlayerStartInteract();
+        if (CurrentFocusedInteractHandler != null)
+        {
+            CurrentFocusedInteractHandler.OnPlayerStartInteract();
+        }
+
     }
     public void PlayerCancleInteract()
     {
         if (!interactLock) return;
-        CurrentFocusedInteractHandler.OnPlayerInteractCancel();
+        if (CurrentFocusedInteractHandler != null)
+        {
+            CurrentFocusedInteractHandler.OnPlayerInteractCancel();
+        }
         interactLock = false;
     }
     public void OnTriggerEnter(Collider other)
@@ -70,6 +77,11 @@ public class PlayerInteractController : MonoBehaviour
         {
             InteractHandlerList.Contains(InteractHandler);
             InteractHandler.OnPlayerDefocus();
+            if (interactLock)
+            {
+                InteractHandler.OnPlayerInteractCancel();
+                interactLock = false;
+            }
             InteractHandlerList.Remove(InteractHandler);
             if (InteractHandlerList.Count > 0)
             {

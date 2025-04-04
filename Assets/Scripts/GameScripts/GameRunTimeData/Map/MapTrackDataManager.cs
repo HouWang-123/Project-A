@@ -1,16 +1,17 @@
 using System;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
+using UnityEngine;
 using UnityEngine.Serialization;
 
 [Serializable]
 public class MapTrackDataManager : SerializedMonoBehaviour
 {
-    public Dictionary<int, List<TrackerData>> AllTrackedData = new ();
-    public HashSet<ITrackable> CurrentTrackerList = new ();
+    public Dictionary<int, List<TrackerData>> AllTrackedData = new();
+    public HashSet<ITrackable> CurrentTrackerList = new();
     public HashSet<int> RoomIdList = new();
-    
-    
+
+
     public void RegisterTracker(ITrackable trackerData)
     {
         CurrentTrackerList.Add(trackerData);
@@ -20,13 +21,15 @@ public class MapTrackDataManager : SerializedMonoBehaviour
     {
         CurrentTrackerList.Remove(trackerData);
     }
-    
-    
+
+
     public void OnRoomDataLoadComplete(int roomid)
     {
         RoomIdList.Add(roomid);
-        AllTrackedData.Add(roomid,new List<TrackerData>());
+        if (AllTrackedData.ContainsKey(roomid)) return;
+        AllTrackedData.Add(roomid, new List<TrackerData>());
     }
+
     /// <summary>
     /// 判断某个场景是否生成过
     /// </summary>
@@ -37,6 +40,7 @@ public class MapTrackDataManager : SerializedMonoBehaviour
         {
             return true;
         }
+
         return false;
     }
 
@@ -51,12 +55,14 @@ public class MapTrackDataManager : SerializedMonoBehaviour
                 recorded.Add(collectTrackedData);
             }
         }
+
         AllTrackedData[roomid] = recorded;
     }
+
     /// <summary>
     /// 根据追踪到的场景数据重新生成对应实例，并赋状态
     /// </summary>
-    public void RecoverItem(int roomid)
+    public void RecoverItem(int roomid, Transform itemNode)
     {
         foreach (var data in AllTrackedData[roomid])
         {
@@ -65,28 +71,29 @@ public class MapTrackDataManager : SerializedMonoBehaviour
                 ItemStatus itemStatus = data.TrackableBaseData as ItemStatus;
                 if (itemStatus.StackCount > 1)
                 {
-                    GameItemTool.GenerateItemAtTransform(data.id,data.postion);
+                    GameItemTool.GenerateItemAtTransform(data.id, data.postion, false,
+                        itembase => { itembase.transform.SetParent(itemNode); });
                 }
                 else
                 {
-                    GameItemTool.GenerateStackableItemAtTransform(data.id,itemStatus.StackCount,data.postion);
+                    GameItemTool.GenerateStackableItemAtTransform(data.id, itemStatus.StackCount, data.postion, false,
+                        itembase => { itembase.transform.SetParent(itemNode); });
                 }
             }
         }
     }
+
     // 恢复可交互物品生成点
     public void RecoverItemPoint(int roomid)
     {
-        
     }
-    
+
     public void RecoverEnemy(int roomid)
     {
         foreach (var data in AllTrackedData[roomid])
         {
             if (data.TrackType == TrackType.Enemy)
             {
-                
             }
         }
     }
