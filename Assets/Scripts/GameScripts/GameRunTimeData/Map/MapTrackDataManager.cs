@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Serialization;
 
 [Serializable]
-public class MapTrackDataManager : SerializedMonoBehaviour
+public class MapTrackDataManager
 {
     public Dictionary<int, List<TrackerData>> AllTrackedData = new();
     public HashSet<ITrackable> CurrentTrackerList = new();
