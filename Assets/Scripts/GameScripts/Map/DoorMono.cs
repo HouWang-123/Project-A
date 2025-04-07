@@ -1,9 +1,11 @@
 ﻿using System;
 using UnityEngine;
 using cfg.scene;
+using FEVM.Timmer;
 
-public class DoorMono : MonoBehaviour
+public class DoorMono : MonoBehaviour, IInteractHandler
 {
+    public GameObject InteractTipPosition;
     [Header("通向的门ID")]
     public int ToDoorID;
     [Header("通向的RoomID")]
@@ -12,10 +14,15 @@ public class DoorMono : MonoBehaviour
     [Tooltip("UnLock 未锁定;.....")]
     public EDoorLock DoorState;
 
+    public bool playerinside;
 
     private Doors doorData;
-    
-    private bool doorEnabled = true;
+
+
+    private void Start()
+    {
+        InteractTipPosition.SetActive(false);
+    }
 
     public void SetData(int v)
     {
@@ -30,27 +37,29 @@ public class DoorMono : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(doorEnabled && other.gameObject.CompareTag("Player"))
+        if(other.gameObject.CompareTag("Player"))
         {
             Debug.Log("Player Comming!!!!");
             EventManager.Instance.RunEvent("OnGameRoomChanges");
-            GameControl.Instance.ChangeRoom(doorData.ToRoomID,doorData.ToDoorID);
+            playerinside = true;
+                InteractTipPosition.SetActive(true);
             // 测试房间解密专用
             // SpawnRiddleTestRoom();
         }
     }
-
+    
     private void OnTriggerExit(Collider other)
     {
         if(other.gameObject.CompareTag("Player"))
         {
-            doorEnabled = true;
+            playerinside = false;
+            TimeMgr.Instance.RemoveTask(EnterDoor);
+            InteractTipPosition.SetActive(false);
         }
     }
 
     public Transform GetPlayerPoint()
     {
-        doorEnabled = false;
         return transform;
     }
 
@@ -59,10 +68,50 @@ public class DoorMono : MonoBehaviour
         GameControl.Instance.ChangeRoom(300016, 310040);
     }
 
+    private void EnterDoor()
+    {
+        GameControl.Instance.ChangeRoom(doorData.ToRoomID,doorData.ToDoorID);
+    }
 
     public enum EDoorLock
     {
         UnLock = 1,
 
+    }
+
+    public void OnPlayerFocus()
+    {
+        if (playerinside)
+        {
+            InteractTipPosition.SetActive(true);
+        }
+    }
+
+    public void OnPlayerDefocus()
+    {
+        InteractTipPosition.SetActive(false);
+    }
+
+    public MonoBehaviour getMonoBehaviour()
+    {
+        return this;
+    }
+
+    public void OnPlayerStartInteract()
+    {
+        if (playerinside)
+        {
+            TimeMgr.Instance.AddTask(0.3f,false,EnterDoor);
+        }
+    }
+
+    public void OnPlayerInteract()
+    {
+        
+    }
+
+    public void OnPlayerInteractCancel()
+    {
+        TimeMgr.Instance.RemoveTask(EnterDoor);
     }
 }

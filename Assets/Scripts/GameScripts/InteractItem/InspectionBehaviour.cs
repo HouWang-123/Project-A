@@ -12,12 +12,16 @@ public class InspectionBehaviour : MonoBehaviour, IInteractHandler
 
     public Shader DefaultShader;
     public Shader SelectedShader;
-    private void Start()
+
+    private void Awake()
     {
         InspectionData = GameTableDataAgent.InspectionTable.Get(InspectionID);
         InteractRequiredTime = InspectionData.InteracteTime;
         MyRenderer = gameObject.transform.GetComponentInChildren<SpriteRenderer>();
-        
+    }
+
+    private void Start()
+    {
         MyRenderer.transform.localEulerAngles = GameConstData.DefAngles;
     }
 

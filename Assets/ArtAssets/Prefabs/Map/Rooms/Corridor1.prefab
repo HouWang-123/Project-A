@@ -807,9 +807,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c57c61f152c6748499e75e3b6fd8f856, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  riddleGameObjects:
-  - {fileID: 8107709328339187699}
-  - {fileID: 395618594589691276}
+  riddleItems: []
 --- !u!1 &5077956867101725581
 GameObject:
   m_ObjectHideFlags: 0
@@ -1791,6 +1789,26 @@ PrefabInstance:
       propertyPath: m_Center.z
       value: -0.19814181
       objectReference: {fileID: 0}
+    - target: {fileID: 1595432457112874750, guid: afe0f3b375b88c0458b803bb42174318, type: 3}
+      propertyPath: m_Size.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1595432457112874750, guid: afe0f3b375b88c0458b803bb42174318, type: 3}
+      propertyPath: m_Size.z
+      value: 5.1429696
+      objectReference: {fileID: 0}
+    - target: {fileID: 1595432457112874750, guid: afe0f3b375b88c0458b803bb42174318, type: 3}
+      propertyPath: m_Center.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1595432457112874750, guid: afe0f3b375b88c0458b803bb42174318, type: 3}
+      propertyPath: m_Center.z
+      value: -0.19814181
+      objectReference: {fileID: 0}
+    - target: {fileID: 1595432457112874750, guid: afe0f3b375b88c0458b803bb42174318, type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6025751555970231679, guid: afe0f3b375b88c0458b803bb42174318, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -2072,6 +2090,18 @@ PrefabInstance:
     - target: {fileID: 586252795701156097, guid: afe0f3b375b88c0458b803bb42174318, type: 3}
       propertyPath: m_Center.z
       value: -0.16211617
+      objectReference: {fileID: 0}
+    - target: {fileID: 1595432457112874750, guid: afe0f3b375b88c0458b803bb42174318, type: 3}
+      propertyPath: m_Size.z
+      value: 5.21502
+      objectReference: {fileID: 0}
+    - target: {fileID: 1595432457112874750, guid: afe0f3b375b88c0458b803bb42174318, type: 3}
+      propertyPath: m_Center.z
+      value: -0.16211617
+      objectReference: {fileID: 0}
+    - target: {fileID: 1595432457112874750, guid: afe0f3b375b88c0458b803bb42174318, type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6025751555970231679, guid: afe0f3b375b88c0458b803bb42174318, type: 3}
       propertyPath: m_LocalScale.x

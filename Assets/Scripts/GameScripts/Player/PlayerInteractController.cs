@@ -30,10 +30,19 @@ public class PlayerInteractController : MonoBehaviour
                 ChangeToTargetItem(interactHandler);
             }
         }
+        else
+        {
+            CurrentFocusedInteractHandler = null;
+        }
     }
 
     private void ChangeToTargetItem(IInteractHandler interactHandler)
     {
+        foreach (var handler in InteractHandlerList)
+        {
+            if(handler == null)
+                InteractHandlerList.Remove(handler);
+        }
         foreach (var handler in InteractHandlerList)
         {
             handler.OnPlayerDefocus();

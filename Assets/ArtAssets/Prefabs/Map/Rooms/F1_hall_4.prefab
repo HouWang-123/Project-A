@@ -2007,6 +2007,18 @@ PrefabInstance:
       propertyPath: m_Center.z
       value: -0.16211617
       objectReference: {fileID: 0}
+    - target: {fileID: 1595432457112874750, guid: afe0f3b375b88c0458b803bb42174318, type: 3}
+      propertyPath: m_Size.z
+      value: 5.21502
+      objectReference: {fileID: 0}
+    - target: {fileID: 1595432457112874750, guid: afe0f3b375b88c0458b803bb42174318, type: 3}
+      propertyPath: m_Center.z
+      value: -0.16211617
+      objectReference: {fileID: 0}
+    - target: {fileID: 1595432457112874750, guid: afe0f3b375b88c0458b803bb42174318, type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6025751555970231679, guid: afe0f3b375b88c0458b803bb42174318, type: 3}
       propertyPath: m_LocalScale.x
       value: 1

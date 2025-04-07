@@ -154,8 +154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d5bc5b251c9a5d46b75846e86202ae9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InspectionID: 920002
-  InteractRequiredTime: 0.8
+  InspectionID: 920003
   MyRenderer: {fileID: 0}
   DefaultShader: {fileID: 4800000, guid: e260cfa7296ee7642b167f1eb5be5023, type: 3}
   SelectedShader: {fileID: -6465566751694194690, guid: 9eb813183a8ed3a44b842b168679e4d4, type: 3}
