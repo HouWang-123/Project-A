@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Serialization;
+using YooAsset;
 
 [Serializable]
 public class MapTrackDataManager
@@ -71,13 +72,14 @@ public class MapTrackDataManager
                 ItemStatus itemStatus = data.TrackableBaseData as ItemStatus;
                 if (itemStatus.StackCount > 1)
                 {
-                    GameItemTool.GenerateItemAtTransform(data.id, data.postion, false,
+                    GameItemTool.GenerateStackableItemAtTransform(data.id, itemStatus.StackCount, data.postion, false,
                         itembase => { itembase.transform.SetParent(itemNode); });
                 }
                 else
                 {
-                    GameItemTool.GenerateStackableItemAtTransform(data.id, itemStatus.StackCount, data.postion, false,
+                    GameItemTool.GenerateItemAtTransform(data.id, data.postion, false,
                         itembase => { itembase.transform.SetParent(itemNode); });
+
                 }
             }
         }
@@ -86,6 +88,24 @@ public class MapTrackDataManager
     // 恢复可交互物品生成点
     public void RecoverItemPoint(int roomid)
     {
+        foreach (var data in AllTrackedData[roomid])
+        {
+            if (data.TrackType == TrackType.ItemPoint)
+            {
+                if (YooAssets.CheckLocationValid("ItemPoint"))
+                {
+                    AssetHandle loadAssetAsync = YooAssets.LoadAssetSync<GameObject>("ItemPoint");
+                    loadAssetAsync.Completed += handle =>
+                    {
+                        GameObject instantiate = GameObject.Instantiate(loadAssetAsync.AssetObject) as GameObject;
+                        instantiate.transform.position = data.postion;
+                        ItemPointMono itemPointMono = instantiate.GetComponent<ItemPointMono>();
+                        itemPointMono.SetData(data);
+                        loadAssetAsync.Release();
+                    };
+                }
+            }
+        }
     }
 
     public void RecoverEnemy(int roomid)

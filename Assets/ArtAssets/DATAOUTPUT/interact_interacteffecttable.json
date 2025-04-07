@@ -1,8 +1,8 @@
 [
   {
     "ID": 900001,
-    "NAME": 860001,
-    "DESCRIBE": 865000,
+    "NAME": 0,
+    "DESCRIBE": 860001,
     "requiredWeaponID": [
       0
     ],
@@ -18,8 +18,8 @@
   },
   {
     "ID": 900002,
-    "NAME": 860002,
-    "DESCRIBE": 865000,
+    "NAME": 0,
+    "DESCRIBE": 860002,
     "requiredWeaponID": [
       0
     ],
@@ -35,8 +35,8 @@
   },
   {
     "ID": 900003,
-    "NAME": 860003,
-    "DESCRIBE": 865000,
+    "NAME": 0,
+    "DESCRIBE": 860003,
     "requiredWeaponID": [
       0
     ],
@@ -69,8 +69,8 @@
   },
   {
     "ID": 900005,
-    "NAME": 860005,
-    "DESCRIBE": 865000,
+    "NAME": 0,
+    "DESCRIBE": 860005,
     "requiredWeaponID": [
       0
     ],
@@ -146,7 +146,7 @@
   {
     "ID": 900009,
     "NAME": 860009,
-    "DESCRIBE": 865000,
+    "DESCRIBE": 865005,
     "requiredWeaponID": [
       0
     ],
@@ -155,6 +155,57 @@
     ],
     "requiredThrowID": [
       230002
+    ],
+    "requiredToolID": [
+      0
+    ]
+  },
+  {
+    "ID": 900010,
+    "NAME": 860010,
+    "DESCRIBE": 0,
+    "requiredWeaponID": [
+      0
+    ],
+    "requiredFoodID": [
+      0
+    ],
+    "requiredThrowID": [
+      0
+    ],
+    "requiredToolID": [
+      0
+    ]
+  },
+  {
+    "ID": 900011,
+    "NAME": 860011,
+    "DESCRIBE": 0,
+    "requiredWeaponID": [
+      0
+    ],
+    "requiredFoodID": [
+      0
+    ],
+    "requiredThrowID": [
+      0
+    ],
+    "requiredToolID": [
+      0
+    ]
+  },
+  {
+    "ID": 900012,
+    "NAME": 860012,
+    "DESCRIBE": 865004,
+    "requiredWeaponID": [
+      0
+    ],
+    "requiredFoodID": [
+      0
+    ],
+    "requiredThrowID": [
+      230001
     ],
     "requiredToolID": [
       0

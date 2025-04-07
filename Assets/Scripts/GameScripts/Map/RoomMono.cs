@@ -49,10 +49,11 @@ public class RoomMono : MonoBehaviour
         roomData = room;
         SetUpCamCollider();
         
+        bool generated = GameRunTimeData.Instance.MapTrackDataManager.RoomGenerated(room.ID); 
         // 场景中可追踪的游戏物体数据
         GameRunTimeData.Instance.MapTrackDataManager.OnRoomDataLoadComplete(room.ID);
         // 如果游戏存档生命周期生成过一次则不进行物品，怪物初始化工作
-        bool generated = GameRunTimeData.Instance.MapTrackDataManager.RoomGenerated(room.ID); 
+        
         
         
         //门的数据初始化
@@ -77,23 +78,31 @@ public class RoomMono : MonoBehaviour
         }
         
         //生成物品的初始化
-        itemsParent = transform.Find("ItemList");
-        if(itemsParent != null)
+        if (!generated)
         {
-            if(roomData.DropRuleIDList.Count != itemsParent.childCount || roomData.DropRuleIDList.Count != roomData.DropType.Count)
+            itemsParent = transform.Find("ItemList");
+            if(itemsParent != null)
             {
-                Debug.LogWarning("room数据所含Drop数量与实际预制体的itemPoint不同，请检查问题！！！ID == " + roomData.ID + " name == " + roomData.PrefabName);
-            }
-            for(int i = 0; i < roomData.DropRuleIDList.Count && i < roomData.DropType.Count && i < itemsParent.childCount; i++)
-            {
-                ItemPointMono itemPoint = itemsParent.GetChild(i).GetComponent<ItemPointMono>();
-                if(itemPoint == null)
+                if(roomData.DropRuleIDList.Count != itemsParent.childCount || roomData.DropRuleIDList.Count != roomData.DropType.Count)
                 {
-                    itemPoint = itemsParent.GetChild(i).gameObject.AddComponent<ItemPointMono>();
+                    Debug.LogWarning("room数据所含Drop数量与实际预制体的itemPoint不同，请检查问题！！！ID == " + roomData.ID + " name == " + roomData.PrefabName);
                 }
-                itemPoint.SetData(roomData.DropRuleIDList[i], roomData.DropType[i]);
+                for(int i = 0; i < roomData.DropRuleIDList.Count && i < roomData.DropType.Count && i < itemsParent.childCount; i++)
+                {
+                    ItemPointMono itemPoint = itemsParent.GetChild(i).GetComponent<ItemPointMono>();
+                    if(itemPoint == null)
+                    {
+                        itemPoint = itemsParent.GetChild(i).gameObject.AddComponent<ItemPointMono>();
+                    }
+                    itemPoint.SetData(roomData.DropRuleIDList[i], roomData.DropType[i]);
+                }
             }
         }
+        else
+        {
+            GameRunTimeData.Instance.MapTrackDataManager.RecoverItemPoint(room.ID);
+        }
+
         
         
         //生成的怪物数据初始化

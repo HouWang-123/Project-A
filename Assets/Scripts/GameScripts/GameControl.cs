@@ -82,12 +82,13 @@ public class GameControl
         AssetHandle handle = YooAssets.LoadAssetSync<GameObject>(roomData.PrefabName);
         RoomObject = Object.Instantiate(handle.AssetObject) as GameObject;
         RoomObject.transform.SetParent(roomList.transform);
-
+        
         RoomMono mono = RoomObject.GetComponent<RoomMono>();
         if(mono == null)
         {
             mono = RoomObject.AddComponent<RoomMono>();
         }
+        
         mono.SetDataAndGenerateItemAndEnemy(roomData);
         
         

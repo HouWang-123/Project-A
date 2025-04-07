@@ -40,11 +40,11 @@ public sealed partial class InteractEffect : Luban.BeanBase
     /// </summary>
     public readonly int NAME;
     /// <summary>
-    /// 这里存放的是不满足条件时显示什么
+    /// 这里存放的是不满足条件时，或没有条件要求时显示什么
     /// </summary>
     public readonly int DESCRIBE;
     /// <summary>
-    /// 当玩家接近交互为这个表的【ID】字段的物品时，如果持有这个列表中任一一个ID的物品，就会显示Name字段的内容，否则出现【描述】字段的内容
+    /// 当玩家接近交互为这个物品时，如果持有这个列表中任一一个ID的物品，就会显示Name字段的内容，否则出现【描述】字段的内容
     /// </summary>
     public readonly System.Collections.Generic.List<int> RequiredWeaponID;
     public readonly System.Collections.Generic.List<int> RequiredFoodID;

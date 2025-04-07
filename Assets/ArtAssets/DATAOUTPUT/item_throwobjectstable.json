@@ -34,17 +34,5 @@
     "IconName": "Icon_Item_Throw_Vase",
     "SpriteName": "Sprite_Item_Throw_Vase",
     "PrefabName": "P_Item_Throw_Vase"
-  },
-  {
-    "ID": 230004,
-    "NAME": "娃娃头",
-    "DESCRIBE": "某个洋娃娃的头，好像他们都想要",
-    "interactEffectID": 900002,
-    "isDestructible": false,
-    "weight": 0,
-    "attack": 0,
-    "IconName": "Icon_Item_Throw_DollHead",
-    "SpriteName": "Sprite_Item_Throw_DollHead",
-    "PrefabName": "P_Item_Throw_DollHead"
   }
 ]

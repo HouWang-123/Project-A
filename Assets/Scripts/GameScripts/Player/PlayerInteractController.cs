@@ -13,10 +13,12 @@ public class PlayerInteractController : MonoBehaviour
     private void Start()
     {
         EventManager.Instance.RegistEvent(EventConstName.PlayerFinishInteraction, PlayerCancleInteract);
+        EventManager.Instance.RegistEvent<IInteractHandler>(EventConstName.OnInteractiveDestory, ClearInteractHandler);
     }
 
     public void FixedUpdate()
     {
+        Debug.Log(InteractHandlerList.Count);
         Vector2 mousePosition = Mouse.current.position.ReadValue();
         Ray ray = Camera.main.ScreenPointToRay(mousePosition);
         bool hit = Physics.Raycast(ray.origin, ray.direction, out var hitinfo, 20000, InteractiveLayer);
@@ -30,25 +32,22 @@ public class PlayerInteractController : MonoBehaviour
                 ChangeToTargetItem(interactHandler);
             }
         }
-        else
-        {
-            CurrentFocusedInteractHandler = null;
-        }
     }
 
     private void ChangeToTargetItem(IInteractHandler interactHandler)
     {
-        foreach (var handler in InteractHandlerList)
-        {
-            if(handler == null)
-                InteractHandlerList.Remove(handler);
-        }
+        InteractHandlerList.Remove(InteractHandlerList.Find(x => x.getMonoBehaviour() == null));
         foreach (var handler in InteractHandlerList)
         {
             handler.OnPlayerDefocus();
         }
         CurrentFocusedInteractHandler = interactHandler;
         interactHandler.OnPlayerFocus();
+    }
+
+    private void ClearInteractHandler(IInteractHandler handler)
+    {
+        InteractHandlerList.Remove(handler);
     }
     public void InteractItem()
     {
@@ -58,7 +57,7 @@ public class PlayerInteractController : MonoBehaviour
         {
             CurrentFocusedInteractHandler.OnPlayerStartInteract();
         }
-
+        
     }
     public void PlayerCancleInteract()
     {

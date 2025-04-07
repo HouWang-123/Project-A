@@ -21,5 +21,8 @@
     public const string OnMouseFocusItemChanges = "OnMouseFocusItemChanges";
     // 手电筒生成事件
     public const string FlashLightCreate = "FlashLightCreate";
+    
+    public const string OnInteractiveDestory = "OnInteractiveDestory";
+    
 }
 

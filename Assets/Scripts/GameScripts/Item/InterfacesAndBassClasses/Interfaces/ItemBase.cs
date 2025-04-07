@@ -63,7 +63,11 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable , ITrackable
         GenerateItemStatus();
         CheckIsStackedItem();
         SetRendererImage();
-        RegisterTracker();
+        if (!IsholdByPlayer)
+        {
+            RegisterTracker();
+        }
+
     }
 
     protected virtual void GenerateItemStatus()
@@ -76,7 +80,12 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable , ITrackable
         {
             pickupTips.OnItemPicked();
         }
-        UnRegisterTracker();
+
+        if (!IsholdByPlayer)
+        {
+            UnRegisterTracker();
+        }
+
     }
 
     // 新添加接口，通过设置id定义物品
@@ -247,6 +256,7 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable , ITrackable
         {
             pickupTips.OnItemPicked();
         }
+        IsholdByPlayer = true;
         UnRegisterTracker();
     }
     public virtual void OnItemDrop(bool fastDrop, bool IgnoreBias = false, bool Playerreversed = false)
@@ -276,6 +286,7 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable , ITrackable
             groundLocation.y = 0;
             DropState = false;
         }
+        RegisterTracker();
     }
 
     // 交互逻辑
@@ -361,7 +372,7 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable , ITrackable
         return new TrackerData(
             ItemID,                
             TrackType.Item,
-            transform.position,
+            new Vector3(transform.position.x,0,transform.position.z),
             MyItemStatus           // 自定义状态，自行实现相关的类
         );
     }

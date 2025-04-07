@@ -2,7 +2,7 @@
   {
     "ID": 220001,
     "NAME": 702001,
-    "DESCRIBE": 802001,
+    "DESCRIBE": 0,
     "interactEffectID": 900004,
     "isDestructible": true,
     "durability": 1,
@@ -16,7 +16,7 @@
   {
     "ID": 220002,
     "NAME": 702002,
-    "DESCRIBE": 802002,
+    "DESCRIBE": 0,
     "interactEffectID": 0,
     "isDestructible": false,
     "durability": 8,
@@ -30,7 +30,7 @@
   {
     "ID": 220003,
     "NAME": 702003,
-    "DESCRIBE": 802003,
+    "DESCRIBE": 0,
     "interactEffectID": 0,
     "isDestructible": true,
     "durability": 3,
@@ -44,7 +44,7 @@
   {
     "ID": 220004,
     "NAME": 702004,
-    "DESCRIBE": 802004,
+    "DESCRIBE": 0,
     "interactEffectID": 900005,
     "isDestructible": false,
     "durability": 0,
@@ -58,7 +58,7 @@
   {
     "ID": 220005,
     "NAME": 702005,
-    "DESCRIBE": 802005,
+    "DESCRIBE": 0,
     "interactEffectID": 900006,
     "isDestructible": false,
     "durability": 0,
@@ -72,7 +72,7 @@
   {
     "ID": 220006,
     "NAME": 702006,
-    "DESCRIBE": 802006,
+    "DESCRIBE": 0,
     "interactEffectID": 900007,
     "isDestructible": false,
     "durability": 10,
@@ -86,7 +86,7 @@
   {
     "ID": 220007,
     "NAME": 702007,
-    "DESCRIBE": 802007,
+    "DESCRIBE": 0,
     "interactEffectID": 900004,
     "isDestructible": true,
     "durability": 3,
@@ -100,7 +100,7 @@
   {
     "ID": 220008,
     "NAME": 702008,
-    "DESCRIBE": 802008,
+    "DESCRIBE": 0,
     "interactEffectID": 900003,
     "isDestructible": false,
     "durability": 0,
@@ -114,7 +114,7 @@
   {
     "ID": 220009,
     "NAME": 702009,
-    "DESCRIBE": 802009,
+    "DESCRIBE": 0,
     "interactEffectID": 900008,
     "isDestructible": false,
     "durability": 5,
@@ -128,7 +128,7 @@
   {
     "ID": 220010,
     "NAME": 702010,
-    "DESCRIBE": 802010,
+    "DESCRIBE": 0,
     "interactEffectID": 900004,
     "isDestructible": true,
     "durability": 300,
@@ -142,7 +142,7 @@
   {
     "ID": 220011,
     "NAME": 702011,
-    "DESCRIBE": 802011,
+    "DESCRIBE": 0,
     "interactEffectID": 0,
     "isDestructible": false,
     "durability": 5,
@@ -156,7 +156,7 @@
   {
     "ID": 220012,
     "NAME": 702012,
-    "DESCRIBE": 802012,
+    "DESCRIBE": 0,
     "interactEffectID": 900009,
     "isDestructible": false,
     "durability": 0,
@@ -166,5 +166,61 @@
     "IconName": "Icon_Item_SceneItem_Basket",
     "SpriteName": "Sprite_Item_SceneItem_Basket",
     "PrefabName": "P_Item_SceneItem_Basket"
+  },
+  {
+    "ID": 220013,
+    "NAME": 702013,
+    "DESCRIBE": 0,
+    "interactEffectID": 900010,
+    "isDestructible": false,
+    "durability": 0,
+    "buffID": 0,
+    "buffTime": 0,
+    "attack": 0,
+    "IconName": "",
+    "SpriteName": "",
+    "PrefabName": ""
+  },
+  {
+    "ID": 220014,
+    "NAME": 702014,
+    "DESCRIBE": 0,
+    "interactEffectID": 900011,
+    "isDestructible": false,
+    "durability": 0,
+    "buffID": 0,
+    "buffTime": 0,
+    "attack": 0,
+    "IconName": "",
+    "SpriteName": "",
+    "PrefabName": ""
+  },
+  {
+    "ID": 220015,
+    "NAME": 702015,
+    "DESCRIBE": 0,
+    "interactEffectID": 0,
+    "isDestructible": false,
+    "durability": 0,
+    "buffID": 0,
+    "buffTime": 0,
+    "attack": 0,
+    "IconName": "",
+    "SpriteName": "",
+    "PrefabName": ""
+  },
+  {
+    "ID": 220016,
+    "NAME": 702016,
+    "DESCRIBE": 0,
+    "interactEffectID": 900012,
+    "isDestructible": false,
+    "durability": 0,
+    "buffID": 0,
+    "buffTime": 0,
+    "attack": 0,
+    "IconName": "",
+    "SpriteName": "",
+    "PrefabName": ""
   }
 ]

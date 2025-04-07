@@ -15,9 +15,13 @@ public class DoorMono : MonoBehaviour, IInteractHandler
     public EDoorLock DoorState;
 
     public bool playerinside;
-
+    private bool targeted;
     private Doors doorData;
 
+    private void Awake()
+    {
+        InteractTipPosition = transform.Find("P_UI_WorldUI_InteractTip").gameObject;
+    }
 
     private void Start()
     {
@@ -34,6 +38,10 @@ public class DoorMono : MonoBehaviour, IInteractHandler
         doorData = data;
     }
 
+    private void OnDestroy()
+    {
+
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -42,12 +50,27 @@ public class DoorMono : MonoBehaviour, IInteractHandler
             Debug.Log("Player Comming!!!!");
             EventManager.Instance.RunEvent("OnGameRoomChanges");
             playerinside = true;
+            if (targeted)
+            {
                 InteractTipPosition.SetActive(true);
+            }
             // 测试房间解密专用
             // SpawnRiddleTestRoom();
         }
     }
-    
+
+    private void FixedUpdate()
+    {
+        if (targeted && playerinside)
+        {
+            InteractTipPosition.SetActive(true);
+        }
+        else
+        {
+            InteractTipPosition.SetActive(false);
+        }
+    }
+
     private void OnTriggerExit(Collider other)
     {
         if(other.gameObject.CompareTag("Player"))
@@ -70,13 +93,13 @@ public class DoorMono : MonoBehaviour, IInteractHandler
 
     private void EnterDoor()
     {
+        EventManager.Instance.RunEvent<IInteractHandler>(EventConstName.OnInteractiveDestory,this);
         GameControl.Instance.ChangeRoom(doorData.ToRoomID,doorData.ToDoorID);
     }
 
     public enum EDoorLock
     {
         UnLock = 1,
-
     }
 
     public void OnPlayerFocus()
@@ -85,11 +108,17 @@ public class DoorMono : MonoBehaviour, IInteractHandler
         {
             InteractTipPosition.SetActive(true);
         }
+        targeted = true;
     }
 
     public void OnPlayerDefocus()
     {
+        if (InteractTipPosition == null)
+        {
+            return;
+        }
         InteractTipPosition.SetActive(false);
+        targeted = false;
     }
 
     public MonoBehaviour getMonoBehaviour()
