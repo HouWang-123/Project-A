@@ -1240,6 +1240,22 @@ PrefabInstance:
       propertyPath: DoorState
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 586252795701156097, guid: afe0f3b375b88c0458b803bb42174318, type: 3}
+      propertyPath: m_Size.x
+      value: 1.449445
+      objectReference: {fileID: 0}
+    - target: {fileID: 586252795701156097, guid: afe0f3b375b88c0458b803bb42174318, type: 3}
+      propertyPath: m_Size.z
+      value: 1.2738538
+      objectReference: {fileID: 0}
+    - target: {fileID: 586252795701156097, guid: afe0f3b375b88c0458b803bb42174318, type: 3}
+      propertyPath: m_Center.x
+      value: -0.0748198
+      objectReference: {fileID: 0}
+    - target: {fileID: 586252795701156097, guid: afe0f3b375b88c0458b803bb42174318, type: 3}
+      propertyPath: m_Center.z
+      value: 0.16816592
+      objectReference: {fileID: 0}
     - target: {fileID: 6025751555970231679, guid: afe0f3b375b88c0458b803bb42174318, type: 3}
       propertyPath: m_LocalScale.x
       value: 1

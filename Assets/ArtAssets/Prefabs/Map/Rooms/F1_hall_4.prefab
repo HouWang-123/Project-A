@@ -1636,8 +1636,20 @@ PrefabInstance:
     m_TransformParent: {fileID: 9034707457644725112}
     m_Modifications:
     - target: {fileID: 586252795701156097, guid: afe0f3b375b88c0458b803bb42174318, type: 3}
+      propertyPath: m_Size.x
+      value: 1.2050896
+      objectReference: {fileID: 0}
+    - target: {fileID: 586252795701156097, guid: afe0f3b375b88c0458b803bb42174318, type: 3}
       propertyPath: m_Size.z
-      value: 0.6
+      value: 1.701879
+      objectReference: {fileID: 0}
+    - target: {fileID: 586252795701156097, guid: afe0f3b375b88c0458b803bb42174318, type: 3}
+      propertyPath: m_Center.x
+      value: -0.00026130676
+      objectReference: {fileID: 0}
+    - target: {fileID: 586252795701156097, guid: afe0f3b375b88c0458b803bb42174318, type: 3}
+      propertyPath: m_Center.z
+      value: 0.55093956
       objectReference: {fileID: 0}
     - target: {fileID: 6025751555970231679, guid: afe0f3b375b88c0458b803bb42174318, type: 3}
       propertyPath: m_LocalScale.x
@@ -1921,8 +1933,20 @@ PrefabInstance:
     m_TransformParent: {fileID: 9034707457644725112}
     m_Modifications:
     - target: {fileID: 586252795701156097, guid: afe0f3b375b88c0458b803bb42174318, type: 3}
+      propertyPath: m_Size.x
+      value: 1.2076502
+      objectReference: {fileID: 0}
+    - target: {fileID: 586252795701156097, guid: afe0f3b375b88c0458b803bb42174318, type: 3}
       propertyPath: m_Size.z
-      value: 0.6
+      value: 2.0315208
+      objectReference: {fileID: 0}
+    - target: {fileID: 586252795701156097, guid: afe0f3b375b88c0458b803bb42174318, type: 3}
+      propertyPath: m_Center.x
+      value: -0.011927128
+      objectReference: {fileID: 0}
+    - target: {fileID: 586252795701156097, guid: afe0f3b375b88c0458b803bb42174318, type: 3}
+      propertyPath: m_Center.z
+      value: 0.71576047
       objectReference: {fileID: 0}
     - target: {fileID: 6025751555970231679, guid: afe0f3b375b88c0458b803bb42174318, type: 3}
       propertyPath: m_LocalScale.x
@@ -2001,11 +2025,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 586252795701156097, guid: afe0f3b375b88c0458b803bb42174318, type: 3}
       propertyPath: m_Size.z
-      value: 5.21502
+      value: 4.057144
       objectReference: {fileID: 0}
     - target: {fileID: 586252795701156097, guid: afe0f3b375b88c0458b803bb42174318, type: 3}
       propertyPath: m_Center.z
-      value: -0.16211617
+      value: 0.41682196
       objectReference: {fileID: 0}
     - target: {fileID: 1595432457112874750, guid: afe0f3b375b88c0458b803bb42174318, type: 3}
       propertyPath: m_Size.z

@@ -185,4 +185,20 @@ public class RoomMono : MonoBehaviour
         playerPoint = doorDic[doorId].GetPlayerPoint();
         GameControl.Instance.GetGamePlayer().transform.position = playerPoint.position;
     }
+
+
+    [ContextMenu("ResizeDoor")]
+    public void ResizeDoor()
+    {
+        //门的数据初始化
+        doorParent = transform.Find("Door");
+        if(doorParent != null)
+        {
+            for(int i = 0; i < doorParent.childCount; i++)
+            {
+                DoorMono doorMono = doorParent.GetChild(i).GetComponent<DoorMono>();
+                doorMono.gameObject.transform.localScale = Vector3.one;
+            }
+        }
+    }
 }

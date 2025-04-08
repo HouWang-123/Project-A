@@ -12,11 +12,10 @@ GameObject:
   - component: {fileID: 586252795701156097}
   - component: {fileID: 274872765552954411}
   - component: {fileID: 159903629595370614}
-  - component: {fileID: 1595432457112874750}
   m_Layer: 11
   m_Name: Door
   m_TagString: Untagged
-  m_Icon: {fileID: 2800000, guid: b97833376aecaa14898177e26c393d38, type: 3}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -108,27 +107,6 @@ MonoBehaviour:
     prependActorNameSeparator: ': '
     prependActorNameFormat: '{0}{1}'
     subtitleColor: {r: 1, g: 1, b: 1, a: 1}
---- !u!65 &1595432457112874750
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7304085915643888516}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 2.6, y: 1.61, z: 1.38}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &5568055111933049892
 PrefabInstance:
   m_ObjectHideFlags: 0
