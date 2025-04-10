@@ -2,6 +2,7 @@
 using UnityEngine;
 using cfg.scene;
 using FEVM.Timmer;
+using UnityEditor;
 
 public class DoorMono : MonoBehaviour, IInteractHandler
 {
@@ -37,6 +38,20 @@ public class DoorMono : MonoBehaviour, IInteractHandler
     public void SetData(Doors data)
     {
         doorData = data;
+
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.magenta;
+        Gizmos.DrawSphere(transform.position,0.2f);
+        Gizmos.color = Color.white;
+        
+        GUIStyle style = new GUIStyle();
+        style.fontStyle = FontStyle.Bold;
+        style.normal.textColor = Color.white;
+        Handles.Label(transform.position + Vector3.up * 2f, doorData.ID.ToString() , style);
+
     }
 
     private void OnDestroy()

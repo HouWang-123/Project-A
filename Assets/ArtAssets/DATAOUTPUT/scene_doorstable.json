@@ -1119,8 +1119,8 @@
     "ID": 310099,
     "NAME": "0",
     "DESCRIBE": "0",
-    "toRoomID": 300037,
-    "toDoorID": 310095,
+    "toRoomID": 300034,
+    "toDoorID": 310127,
     "isInvisible": false,
     "isLocked": false,
     "requiredForOpen": [
@@ -1385,6 +1385,84 @@
     "DESCRIBE": "0",
     "toRoomID": 300045,
     "toDoorID": 310120,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310122,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 0,
+    "toDoorID": 0,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": []
+  },
+  {
+    "ID": 310123,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 0,
+    "toDoorID": 0,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": []
+  },
+  {
+    "ID": 310124,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 0,
+    "toDoorID": 0,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": []
+  },
+  {
+    "ID": 310125,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300049,
+    "toDoorID": 310128,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310126,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300033,
+    "toDoorID": 310075,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310127,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300039,
+    "toDoorID": 310099,
+    "isInvisible": false,
+    "isLocked": false,
+    "requiredForOpen": [
+      0
+    ]
+  },
+  {
+    "ID": 310128,
+    "NAME": "0",
+    "DESCRIBE": "0",
+    "toRoomID": 300035,
+    "toDoorID": 310085,
     "isInvisible": false,
     "isLocked": false,
     "requiredForOpen": [

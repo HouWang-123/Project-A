@@ -3,6 +3,7 @@ using YooAsset;
 using cfg.scene;
 using System.Collections.Generic;
 using Unity.Cinemachine;
+using UnityEngine.LightTransport.PostProcessing;
 using UnityEngine.Rendering.Universal;
 
 public class GameControl
@@ -68,52 +69,55 @@ public class GameControl
 
     public void ChangeRoom(int RoomId, int DoorId)
     {
-        Rooms roomData = GameTableDataAgent.RoomsTable.Get(RoomId);
-        if(!YooAssets.CheckLocationValid(roomData.PrefabName))
-        {
-            return;
-        }
+        RoomMono mono = InitRoom(RoomId);
+        GameRunTimeData.Instance.MapTrackDataManager.RecoverItem(room.ID,sceneItemNode.transform);
+        EventManager.Instance.RunEvent(EventConstName.OnChangeRoom);
+        mono.SetPlayPoint(DoorId);
+    }
 
-        GameRunTimeData.Instance.MapTrackDataManager.SaveTrackerData(room.ID);
-        
-        GameHUD.Instance.OnAreaNotificaiton(roomData.NAME);
-        
-        GameObject RoomObject;
-        AssetHandle handle = YooAssets.LoadAssetSync<GameObject>(roomData.PrefabName);
-        RoomObject = Object.Instantiate(handle.AssetObject) as GameObject;
-        RoomObject.transform.SetParent(roomList.transform);
-        
+    private RoomMono InitRoom(int RoomId)
+    {
+        (GameObject,Rooms) roomTurple = GetRoomObject(RoomId);
+        GameObject RoomObject = roomTurple.Item1;
+        Rooms roomData = roomTurple.Item2;
         RoomMono mono = RoomObject.GetComponent<RoomMono>();
         if(mono == null)
         {
             mono = RoomObject.AddComponent<RoomMono>();
         }
-        
         mono.SetDataAndGenerateItemAndEnemy(roomData);
-        
-        
-        mono.SetPlayPoint(DoorId);
         RiddleByRoom(mono);
-        
         Object.Destroy(roomObj);
         room = roomData;
         roomObj = RoomObject;
-        
-        GameRunTimeData.Instance.MapTrackDataManager.RecoverItem(room.ID,sceneItemNode.transform);
-        
-        // 房间切换后，检查怪物生成
-        //if (mono.monsterList != null)
-        //{
-        //    foreach (var monster in GetGameMonsterList(r.ID))
-        //    {
-        //        monster.transform.SetParent(mono.monsterList.transform);
-        //        monster.transform.position = mono.monsterList.transform.position;
-        //    }
-        //}
-        
-        EventManager.Instance.RunEvent(EventConstName.OnChangeRoom);
+        return mono;
     }
-
+    private (GameObject,Rooms) GetRoomObject(int RoomId)
+    {
+        Rooms roomData = GameTableDataAgent.RoomsTable.Get(RoomId);
+        if (roomData == null)
+        {
+            Debug.LogWarning("场景数据" + RoomId + "为空");
+            return (null,null);
+        }
+        if(!YooAssets.CheckLocationValid(roomData.PrefabName))
+        {
+            Debug.LogWarning("没有对应的预制体 " + roomData.PrefabName);
+            return (null,null);
+        }
+        GameRunTimeData.Instance.MapTrackDataManager.SaveTrackerData(room.ID);
+        GameHUD.Instance.OnAreaNotificaiton(roomData.NAME);
+        GameObject RoomObject;
+        AssetHandle handle = YooAssets.LoadAssetSync<GameObject>(roomData.PrefabName);
+        RoomObject = Object.Instantiate(handle.AssetObject) as GameObject;
+        RoomObject.transform.SetParent(roomList.transform);
+        return (RoomObject,roomData);
+    }
+    
+    private void LoadRoomLogic(int roomid)
+    {
+        
+    }
     // 根据房间设置谜题
     private void RiddleByRoom(RoomMono roomMono)
     {
@@ -207,5 +211,14 @@ public class GameControl
             roomWithMonsterList.Add(roomId, monsterList);
         }
         return roomWithMonsterList[roomId][i];
+    }
+    
+    
+    public void TeleportPlayer(int RoomId)
+    {
+        RoomMono mono = InitRoom(RoomId);
+        GameRunTimeData.Instance.MapTrackDataManager.RecoverItem(room.ID,sceneItemNode.transform);
+        EventManager.Instance.RunEvent(EventConstName.OnChangeRoom);
+        playerObj.transform.position = Vector3.zero;
     }
 }

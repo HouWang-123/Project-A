@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using cfg;
 using cfg.item;
 using SimpleJSON;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using YooAsset;
@@ -14,8 +15,19 @@ public class GameRoot : MonoBehaviour
     public Collider camCollider;
     public EPlayMode PlayMode = EPlayMode.EditorSimulateMode;
     ResourcePackage package;
-    
     public LayerMask FloorLayer;
+    
+    [LabelText("传送ID")]
+    public int TPRoomID;
+
+
+    [Button("点击传送")]
+    private void TeleportPlayer()
+    {
+        GameControl.Instance.TeleportPlayer(TPRoomID);
+    }
+    
+    
     private void Awake()
     {
         Instance = this;
@@ -74,4 +86,5 @@ public class GameRoot : MonoBehaviour
         UIManager.Instance.GetPanel(UIPanelConfig.MainPanel);
         UIManager.Instance.GetPanel(UIPanelConfig.LoadingPanel).GetComponent<UIBase>().Hide();
     }
+    
 }

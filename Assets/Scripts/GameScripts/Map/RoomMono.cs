@@ -1,6 +1,7 @@
 ﻿using cfg.scene;
 using System.Collections.Generic;
 using Unity.AI.Navigation;
+using UnityEditor;
 using UnityEngine;
 
 public class RoomMono : MonoBehaviour
@@ -215,5 +216,16 @@ public class RoomMono : MonoBehaviour
                 doorMono.gameObject.layer = 11;
             }
         }
+    }
+    private void OnDrawGizmos()
+    {
+        GUIStyle style = new GUIStyle();
+        style.fontStyle = FontStyle.Bold;
+        style.normal.textColor = Color.cyan;
+        Handles.Label(transform.position + Vector3.up * 3.2f, roomData.NAME , style);
+        GUIStyle style2 = new GUIStyle();
+        style2.fontStyle = FontStyle.Bold;
+        style2.normal.textColor = Color.white;
+        Handles.Label(transform.position + Vector3.up * 3.4f, roomData.ID.ToString() , style2);
     }
 }

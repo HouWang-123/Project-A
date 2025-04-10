@@ -8,6 +8,7 @@ public class GameHUD_AreaNotificationBehaviour : MonoBehaviour
     public TextMeshProUGUI Text;
     public void OnNotification(string Area_text)
     {
+        if (Area_text.Equals("")) return;
         Text.text = Area_text;
         _animation.enabled = true;
         _animation.Play("HUD_AreaNotificationAnimation",0,0);
