@@ -70,6 +70,8 @@ public class GameControl
     public void ChangeRoom(int RoomId, int DoorId)
     {
         RoomMono mono = InitRoom(RoomId);
+        if (mono == null) return;
+        
         GameRunTimeData.Instance.MapTrackDataManager.RecoverItem(room.ID,sceneItemNode.transform);
         EventManager.Instance.RunEvent(EventConstName.OnChangeRoom);
         mono.SetPlayPoint(DoorId);
@@ -80,6 +82,7 @@ public class GameControl
         (GameObject,Rooms) roomTurple = GetRoomObject(RoomId);
         GameObject RoomObject = roomTurple.Item1;
         Rooms roomData = roomTurple.Item2;
+        if(RoomObject == null || roomData == null ) return null;
         RoomMono mono = RoomObject.GetComponent<RoomMono>();
         if(mono == null)
         {
@@ -114,10 +117,6 @@ public class GameControl
         return (RoomObject,roomData);
     }
     
-    private void LoadRoomLogic(int roomid)
-    {
-        
-    }
     // 根据房间设置谜题
     private void RiddleByRoom(RoomMono roomMono)
     {
