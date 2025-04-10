@@ -1816,11 +1816,27 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0.467
       objectReference: {fileID: 0}
+    - target: {fileID: 6302937232223076924, guid: afe0f3b375b88c0458b803bb42174318, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 6800657518566244915, guid: afe0f3b375b88c0458b803bb42174318, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 7304085915643888516, guid: afe0f3b375b88c0458b803bb42174318, type: 3}
       propertyPath: m_Name
       value: Door
       objectReference: {fileID: 0}
     - target: {fileID: 7304085915643888516, guid: afe0f3b375b88c0458b803bb42174318, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 8766627102887322792, guid: afe0f3b375b88c0458b803bb42174318, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 8843933621754385402, guid: afe0f3b375b88c0458b803bb42174318, type: 3}
       propertyPath: m_Layer
       value: 11
       objectReference: {fileID: 0}

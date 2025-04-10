@@ -18,7 +18,6 @@ public class PlayerInteractController : MonoBehaviour
 
     public void FixedUpdate()
     {
-        Debug.Log(InteractHandlerList.Count);
         Vector2 mousePosition = Mouse.current.position.ReadValue();
         Ray ray = Camera.main.ScreenPointToRay(mousePosition);
         bool hit = Physics.Raycast(ray.origin, ray.direction, out var hitinfo, 20000, InteractiveLayer);

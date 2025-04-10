@@ -177,9 +177,9 @@
     "buffID": 0,
     "buffTime": 0,
     "attack": 0,
-    "IconName": "",
-    "SpriteName": "",
-    "PrefabName": ""
+    "IconName": "Icon_Item_SceneItem_HandleOff",
+    "SpriteName": "Sprite_Item_SceneItem_HandleOff",
+    "PrefabName": "P_Item_SceneItem_HandleOff"
   },
   {
     "ID": 220014,
@@ -191,9 +191,9 @@
     "buffID": 0,
     "buffTime": 0,
     "attack": 0,
-    "IconName": "",
-    "SpriteName": "",
-    "PrefabName": ""
+    "IconName": "Icon_Item_SceneItem_HandleOn",
+    "SpriteName": "Sprite_Item_SceneItem_HandleOn",
+    "PrefabName": "P_Item_SceneItem_HandleOn"
   },
   {
     "ID": 220015,
@@ -205,13 +205,27 @@
     "buffID": 0,
     "buffTime": 0,
     "attack": 0,
-    "IconName": "",
-    "SpriteName": "",
-    "PrefabName": ""
+    "IconName": "Icon_Item_SceneItem_SwitchLightOff",
+    "SpriteName": "Sprite_Item_SceneItem_SwitchLightOff",
+    "PrefabName": "P_Item_SceneItem_SwitchLightOff"
   },
   {
     "ID": 220016,
     "NAME": 702016,
+    "DESCRIBE": 0,
+    "interactEffectID": 0,
+    "isDestructible": false,
+    "durability": 0,
+    "buffID": 0,
+    "buffTime": 0,
+    "attack": 0,
+    "IconName": "Icon_Item_SceneItem_SwitchLightOn",
+    "SpriteName": "Sprite_Item_SceneItem_SwitchLightOn",
+    "PrefabName": "P_Item_SceneItem_SwitchLightOn"
+  },
+  {
+    "ID": 220017,
+    "NAME": 702017,
     "DESCRIBE": 0,
     "interactEffectID": 900012,
     "isDestructible": false,
@@ -219,8 +233,22 @@
     "buffID": 0,
     "buffTime": 0,
     "attack": 0,
-    "IconName": "",
-    "SpriteName": "",
-    "PrefabName": ""
+    "IconName": "Icon_Item_SceneItem_SwitchSoundOff",
+    "SpriteName": "Sprite_Item_SceneItem_SwitchSoundOff",
+    "PrefabName": "P_Item_SceneItem_SwitchSoundOff"
+  },
+  {
+    "ID": 220018,
+    "NAME": 702018,
+    "DESCRIBE": 0,
+    "interactEffectID": 900012,
+    "isDestructible": false,
+    "durability": 0,
+    "buffID": 0,
+    "buffTime": 0,
+    "attack": 0,
+    "IconName": "Icon_Item_SceneItem_SwitchSoundOn",
+    "SpriteName": "Sprite_Item_SceneItem_SwitchSoundOn",
+    "PrefabName": "P_Item_SceneItem_SwitchSoundOn"
   }
 ]

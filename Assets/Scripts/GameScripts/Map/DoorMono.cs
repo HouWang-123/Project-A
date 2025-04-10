@@ -17,9 +17,10 @@ public class DoorMono : MonoBehaviour, IInteractHandler
     public bool playerinside;
     private bool targeted;
     private Doors doorData;
-
+    public bool doorEnabled;
     private void Awake()
     {
+        doorEnabled = true;
         InteractTipPosition = transform.Find("P_UI_WorldUI_InteractTip").gameObject;
     }
 
@@ -45,6 +46,7 @@ public class DoorMono : MonoBehaviour, IInteractHandler
 
     private void OnTriggerEnter(Collider other)
     {
+        if (!doorEnabled) return;
         if(other.gameObject.CompareTag("Player"))
         {
             Debug.Log("Player Comming!!!!");
@@ -75,6 +77,7 @@ public class DoorMono : MonoBehaviour, IInteractHandler
     {
         if(other.gameObject.CompareTag("Player"))
         {
+            doorEnabled = true;
             playerinside = false;
             TimeMgr.Instance.RemoveTask(EnterDoor);
             InteractTipPosition.SetActive(false);
@@ -83,6 +86,7 @@ public class DoorMono : MonoBehaviour, IInteractHandler
 
     public Transform GetPlayerPoint()
     {
+        doorEnabled = false;
         return transform;
     }
 
@@ -104,21 +108,25 @@ public class DoorMono : MonoBehaviour, IInteractHandler
 
     public void OnPlayerFocus()
     {
+        targeted = true;
+        if (!doorEnabled) return;
         if (playerinside)
         {
             InteractTipPosition.SetActive(true);
         }
-        targeted = true;
+
     }
 
     public void OnPlayerDefocus()
     {
+        targeted = false;
+        if (!doorEnabled) return;
         if (InteractTipPosition == null)
         {
             return;
         }
         InteractTipPosition.SetActive(false);
-        targeted = false;
+
     }
 
     public MonoBehaviour getMonoBehaviour()
@@ -130,7 +138,7 @@ public class DoorMono : MonoBehaviour, IInteractHandler
     {
         if (playerinside)
         {
-            TimeMgr.Instance.AddTask(0.3f,false,EnterDoor);
+            EnterDoor();
         }
     }
 
@@ -141,6 +149,6 @@ public class DoorMono : MonoBehaviour, IInteractHandler
 
     public void OnPlayerInteractCancel()
     {
-        TimeMgr.Instance.RemoveTask(EnterDoor);
+
     }
 }

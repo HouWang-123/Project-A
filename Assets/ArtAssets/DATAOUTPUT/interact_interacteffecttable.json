@@ -162,8 +162,8 @@
   },
   {
     "ID": 900010,
-    "NAME": 860010,
-    "DESCRIBE": 0,
+    "NAME": 0,
+    "DESCRIBE": 860010,
     "requiredWeaponID": [
       0
     ],
@@ -179,8 +179,8 @@
   },
   {
     "ID": 900011,
-    "NAME": 860011,
-    "DESCRIBE": 0,
+    "NAME": 0,
+    "DESCRIBE": 860011,
     "requiredWeaponID": [
       0
     ],

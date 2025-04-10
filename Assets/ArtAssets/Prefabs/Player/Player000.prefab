@@ -71,9 +71,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1655229295199215863}
-  - component: {fileID: 5959814411547029286}
   - component: {fileID: 8252416524713805639}
-  m_Layer: 0
+  - component: {fileID: 5654487137697453516}
+  m_Layer: 9
   m_Name: InteractColider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,29 +95,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1233375662946168701}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &5959814411547029286
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2269283270143568414}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 2048
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 16384
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 1.88
-  m_Height: 0
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.9, z: 0}
 --- !u!114 &8252416524713805639
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,6 +111,29 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2048
   interactLock: 0
+--- !u!136 &5654487137697453516
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2269283270143568414}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 2048
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 161783
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.27
+  m_Height: 7.39
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3916743681480142129
 GameObject:
   m_ObjectHideFlags: 0
@@ -440,7 +440,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7954750465619787870}
   - component: {fileID: 6575029647064125973}
-  - component: {fileID: 5652412472215753415}
+  - component: {fileID: 2862353641944060281}
   m_Layer: 0
   m_Name: PickUpArea
   m_TagString: Untagged
@@ -476,8 +476,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentPickup: {fileID: 0}
---- !u!65 &5652412472215753415
-BoxCollider:
+--- !u!135 &2862353641944060281
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -489,14 +489,14 @@ BoxCollider:
     m_Bits: 4096
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 16384
+    m_Bits: 159735
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.8660054, y: 1.7046834, z: 1.6038779}
-  m_Center: {x: 0, y: 0.85229164, z: 0}
+  m_Radius: 0.93
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8647076842524301750
 GameObject:
   m_ObjectHideFlags: 0

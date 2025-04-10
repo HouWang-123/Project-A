@@ -201,4 +201,19 @@ public class RoomMono : MonoBehaviour
             }
         }
     }
+    [ContextMenu("SetDoorLayer")]
+    public void SetDoorLayer()
+    {
+        //门的数据初始化
+        doorParent = transform.Find("Door");
+        
+        if(doorParent != null)
+        {
+            for(int i = 0; i < doorParent.childCount; i++)
+            {
+                Transform doorMono = doorParent.GetChild(i);
+                doorMono.gameObject.layer = 11;
+            }
+        }
+    }
 }
