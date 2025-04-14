@@ -1,8 +1,8 @@
-﻿using Sirenix.OdinInspector;
+﻿using System;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 public class Singleton<T>: SerializedMonoBehaviour where T:Component{
-    protected static bool Destory = false;
     private static readonly object _lock = new();
     private static T instance;
     public static T Instance
@@ -11,9 +11,6 @@ public class Singleton<T>: SerializedMonoBehaviour where T:Component{
         {
             lock (_lock)
             {
-                if (Destory && !GlobalGameData.ResetSingleton)
-                    return null;
-
                 if (instance == null)
                 {
                     instance = FindFirstObjectByType(typeof(T)) as T;
@@ -31,8 +28,8 @@ public class Singleton<T>: SerializedMonoBehaviour where T:Component{
         }
     }
 
-    protected virtual void OnDestroy()
+    protected virtual void Awake()
     {
-        Destory = true;
+        DontDestroyOnLoad(this);
     }
 }

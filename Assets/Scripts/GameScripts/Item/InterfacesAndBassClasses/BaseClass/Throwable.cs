@@ -24,11 +24,10 @@ public class Throwable : ItemBase, ILiftable, IThrowable
         }
         catch (Exception e)
         {
-            ColorfulDebugger.DebugError("可投掷物品ID" + id +"不存在，物品名称" + gameObject.name,ColorfulDebugger.Instance.Data);
+            Debug.LogError("可投掷物品ID" + id +"不存在，物品名称" + gameObject.name);
         }
         ItemSpriteName = data.SpriteName;
         ThrowableRigidbody = GetComponent<Rigidbody>();
-        IgnoreDefaultItemDrop = true;
     }
     public override void OnItemPickUp()
     {
@@ -79,7 +78,6 @@ public class Throwable : ItemBase, ILiftable, IThrowable
     public override void OnItemDrop(bool fastDrop, bool IgnoreBias = false, bool Playerreversed = false)
     {
         base.OnItemDrop(fastDrop, IgnoreBias, Playerreversed);
-        IgnoreDefaultItemDrop = true;
         DropState = true;
         ThrowableRigidbody.isKinematic = false;
         ThrowableRigidbody.WakeUp();
@@ -88,6 +86,15 @@ public class Throwable : ItemBase, ILiftable, IThrowable
         {
             IsholdByPlayer = false;
         });
+    }
+
+    protected override void F_Update_ItemDorp()
+    {
+        if (transform.position.y < 0)
+        {
+            DropState = false;
+            transform.position = new Vector3(transform.position.x, 0, transform.position.z);
+        }
     }
 
     protected override void FixedUpdate()

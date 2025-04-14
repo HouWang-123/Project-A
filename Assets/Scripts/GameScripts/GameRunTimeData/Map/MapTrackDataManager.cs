@@ -1,12 +1,13 @@
 using System;
 using System.Collections.Generic;
+using Language.Lua;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Serialization;
 using YooAsset;
 
 [Serializable]
-public class MapTrackDataManager
+public class MapTrackDataManager : SerializedMonoBehaviour
 {
     public Dictionary<int, List<TrackerData>> AllTrackedData = new();
     public HashSet<ITrackable> CurrentTrackerList = new();
@@ -50,6 +51,7 @@ public class MapTrackDataManager
         List<TrackerData> recorded = new List<TrackerData>();
         foreach (var VARIABLE in CurrentTrackerList)
         {
+            if(VARIABLE == null) continue;
             TrackerData collectTrackedData = VARIABLE.CollectTrackedData();
             if (collectTrackedData != null)
             {
@@ -72,14 +74,18 @@ public class MapTrackDataManager
                 ItemStatus itemStatus = data.TrackableBaseData as ItemStatus;
                 if (itemStatus.StackCount > 1)
                 {
-                    GameItemTool.GenerateStackableItemAtTransform(data.id, itemStatus.StackCount, data.postion, false,
+                    GameItemTool.GenerateStackableItemAtTransform(data.ID, itemStatus.StackCount, data.Position, true,
                         itembase => { itembase.transform.SetParent(itemNode); });
                 }
                 else
                 {
-                    GameItemTool.GenerateItemAtTransform(data.id, data.postion, false,
-                        itembase => { itembase.transform.SetParent(itemNode); });
-
+                    GameItemTool.GenerateItemAtTransform(data.ID, data.Position, false, itembase =>
+                    {
+                        itembase.SetItemStatus(itemStatus);
+                        itembase.transform.SetParent(itemNode);
+                        itembase.transform.localScale = data.Scale;
+                        itembase.transform.eulerAngles = data.EulerAngle;
+                    });
                 }
             }
         }
@@ -98,7 +104,7 @@ public class MapTrackDataManager
                     loadAssetAsync.Completed += handle =>
                     {
                         GameObject instantiate = GameObject.Instantiate(loadAssetAsync.AssetObject) as GameObject;
-                        instantiate.transform.position = data.postion;
+                        instantiate.transform.position = data.Position;
                         ItemPointMono itemPointMono = instantiate.GetComponent<ItemPointMono>();
                         itemPointMono.SetData(data);
                         loadAssetAsync.Release();

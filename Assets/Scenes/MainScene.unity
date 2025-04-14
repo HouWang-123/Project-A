@@ -336,7 +336,6 @@ GameObject:
   m_Component:
   - component: {fileID: 605675690}
   - component: {fileID: 605675691}
-  - component: {fileID: 605675692}
   m_Layer: 0
   m_Name: Root
   m_TagString: Untagged
@@ -376,40 +375,7 @@ MonoBehaviour:
   FloorLayer:
     serializedVersion: 2
     m_Bits: 192
---- !u!114 &605675692
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 605675689}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2626a7cfcc6c2442b32412f5b05c8b0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  serializationData:
-    SerializedFormat: 2
-    SerializedBytes: 
-    ReferencedUnityObjects: []
-    SerializedBytesString: 
-    Prefab: {fileID: 0}
-    PrefabModificationsReferencedUnityObjects: []
-    PrefabModifications: []
-    SerializationNodes: []
-  Camera: {r: 0.7647059, g: 0.55803996, b: 0.12549019, a: 1}
-  Collision: {r: 0.15593326, g: 0.764151, b: 0, a: 1}
-  Battle: {r: 1, g: 0.3915094, b: 0.62023216, a: 1}
-  Data: {r: 0, g: 0.7453065, b: 1, a: 1}
-  Error: {r: 1, g: 0, b: 0, a: 1}
-  File: {r: 0.9574859, g: 1, b: 0.4666667, a: 1}
-  GameObject: {r: 0.31990921, g: 0.56335205, b: 0.745283, a: 1}
-  Info: {r: 0.22560515, g: 0.17888929, b: 0.5660378, a: 1}
-  Resource: {r: 0.9056604, g: 0.15806337, b: 0.76985925, a: 1}
-  Scene: {r: 0.6603774, g: 0, b: 0.45416752, a: 1}
-  Time: {r: 0.504717, g: 0.98240966, b: 1, a: 1}
-  UI: {r: 0.87165225, g: 1, b: 0, a: 1}
-  Warning: {r: 1, g: 0.5813637, b: 0.47450984, a: 1}
+  TPRoomID: 0
 --- !u!1001 &764230696
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -421,6 +387,10 @@ PrefabInstance:
     - target: {fileID: 125852, guid: 58ac37417e60e534f91138088a3e6f70, type: 3}
       propertyPath: m_Name
       value: Dialogue Manager
+      objectReference: {fileID: 0}
+    - target: {fileID: 125852, guid: 58ac37417e60e534f91138088a3e6f70, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 425660, guid: 58ac37417e60e534f91138088a3e6f70, type: 3}
       propertyPath: m_LocalPosition.x
@@ -771,6 +741,63 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &1903200318
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1903200320}
+  - component: {fileID: 1903200319}
+  m_Layer: 0
+  m_Name: === RUNTIME DATA ===
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1903200319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1903200318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afd78609689e46d4db69a2ea66ca69c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  CharacterItemSlotData: {fileID: 0}
+  CharacterBasicStat: {fileID: 0}
+  InventoryManger: {fileID: 0}
+  MapTrackDataManager: {fileID: 0}
+--- !u!4 &1903200320
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1903200318}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.72939795, y: -20.439573, z: 5.620248}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2137585996
 GameObject:
   m_ObjectHideFlags: 0
@@ -835,3 +862,4 @@ SceneRoots:
   - {fileID: 89577844}
   - {fileID: 764230696}
   - {fileID: 1828182710}
+  - {fileID: 1903200320}

@@ -1,8 +1,9 @@
 using System;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 [Serializable]
-public class SlotItemStatus
+public class SlotItemStatus : MonoBehaviour
 {
     public SlotItemStatus(int itemID, int stackValue,ItemStatus itemStatus)
     {
@@ -23,17 +24,17 @@ public class SlotItemStatus
     public ItemStatus ItemStatus;
 }
 
-public class ItemSlotData
+public class ItemSlotData : SerializedMonoBehaviour
 {
     // =================================================================================================================
     // ======================================       Members       ======================================================
     // =================================================================================================================
-    private int CurrentMaxSlotCount;
-    private int CurrentFocusSlot; // 玩家手中的物品对应的Number Key
+    [SerializeField] private int CurrentMaxSlotCount;
+    [SerializeField] private int CurrentFocusSlot; // 玩家手中的物品对应的Number Key
     /// <summary>
     /// 注：int下标从1开始，对应道具栏1~6
     /// </summary>
-    private Dictionary<int, SlotItemStatus> SlotItemDataList = new();
+    [SerializeField] private Dictionary<int, SlotItemStatus> SlotItemDataList = new();
     
     // =================================================================================================================
     // ===========================================   Getters&Setters   =================================================
@@ -246,6 +247,8 @@ public class ItemSlotData
         }
         // 插入物品失败，取消拾取动作
         if (slotNumber == -1) { return -1; }
+
+        Debug.Log(item.GetItemStatus().ToString());
         SlotItemStatus newItemStatus = new SlotItemStatus(item.ItemID, 1, slotNumber,item.GetItemStatus());
         SlotItemDataList[slotNumber] = newItemStatus;
         return 0;
@@ -271,10 +274,9 @@ public class ItemSlotData
             itemOnHand.transform.SetParent(releaspt);
             itemOnHand.transform.localPosition = Vector3.zero;
             itemOnHand.transform.SetParent(GameControl.Instance.GetSceneItemList().transform); // 移动节点
-            
-            // GameRunTimeData.Instance.ItemManager.RegistItem(itemOnHand);
-            
-            itemOnHand.transform.localEulerAngles = GameConstData.DefAngles;
+
+            itemOnHand.transform.localEulerAngles = Vector3.zero;
+            itemOnHand.SetRendererAngle();
             itemOnHand.OnItemDrop(fastDrop,false,PlayerReversed);
             
             itemOnHand.ChangeRendererSortingOrder(GameConstData.BelowPlayerOrder);

@@ -76,14 +76,12 @@ public partial class TimeSystemManager : Singleton<TimeSystemManager>
         elapsedRealSeconds = phaseStartSeconds[TimePhaseEnum.Day];
     }
 
-    protected override void OnDestroy()
+    protected void OnDestroy()
     {
         OnHourPassed.RemoveAllListeners();
         OnMinutePassed.RemoveAllListeners();
         OnTimePhaseChanged.RemoveAllListeners();
         OnDayPassed.RemoveAllListeners();
-
-        base.OnDestroy();
     }
 
     void Update()

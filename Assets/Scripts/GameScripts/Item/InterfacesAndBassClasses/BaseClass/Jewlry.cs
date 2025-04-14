@@ -19,7 +19,7 @@ public class Jewlry : ItemBase
         }
         catch (Exception e)
         {
-            ColorfulDebugger.DebugError("饰品ID" + id +"不存在，物品名称" + gameObject.name,ColorfulDebugger.Instance.Data);
+            Debug.LogError("饰品ID" + id +"不存在，物品名称" + gameObject.name);
         }
     }
     public override Sprite GetItemIcon()

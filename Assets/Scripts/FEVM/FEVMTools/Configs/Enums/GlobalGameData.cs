@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 public class GlobalGameData
 {
-  public static bool ResetSingleton = false;
   public static string PlayerCode;
   public static bool LoginInit = false;
   public static int PackageDays;

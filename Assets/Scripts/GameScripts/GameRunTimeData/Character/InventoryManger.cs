@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 /// <summary>
 /// 数据类型的道具
@@ -13,9 +14,9 @@ public class InventroyData
 /// <summary>
 /// 道具管理器
 /// </summary>
-public class InventoryManger
+public class InventoryManger : SerializedMonoBehaviour
 {
-    private InventroyData _inventroyData = new InventroyData();
+    [SerializeField] private InventroyData _inventroyData = new InventroyData();
     
     // 预留存档功能使用
     public void InitManager(InventroyData inventroyData)

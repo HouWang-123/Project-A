@@ -1,12 +1,23 @@
 
-public class GameRunTimeData : SingleDataMgr<GameRunTimeData>
+using System;
+
+public class GameRunTimeData : Singleton<GameRunTimeData>
 {
     /// <summary>
     /// Chararcter
     /// </summary>
-    public ItemSlotData CharacterItemSlotData = new ();
-    public CharacterBasicStat CharacterBasicStat = new ();
-    public InventoryManger InventoryManger = new InventoryManger();
+    public ItemSlotData CharacterItemSlotData;
 
-    public MapTrackDataManager MapTrackDataManager = new MapTrackDataManager();
+    public CharacterBasicStat CharacterBasicStat;
+    public InventoryManger InventoryManger;
+    public MapTrackDataManager MapTrackDataManager;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        CharacterItemSlotData = gameObject.AddComponent<ItemSlotData>();
+        CharacterBasicStat = gameObject.AddComponent<CharacterBasicStat>();
+        InventoryManger = gameObject.AddComponent<InventoryManger>();
+        MapTrackDataManager = gameObject.AddComponent<MapTrackDataManager>();
+    }
 }

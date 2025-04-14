@@ -62,8 +62,14 @@ public class ItemPointMono : MonoBehaviour , IInteractHandler , ITrackable
         
         _itemPointStatus.Interact2Create = isInFlood;
         _itemPointStatus.Created = false;
-        
-        _trackerData = new TrackerData(ID, TrackType.ItemPoint, transform.position, _itemPointStatus);
+
+        _trackerData = new TrackerData(
+            ID,
+            TrackType.ItemPoint,
+            transform.position,
+            transform.eulerAngles,
+            transform.localScale,
+            _itemPointStatus);
         
         if(!_itemPointStatus.Interact2Create)
         {
@@ -81,7 +87,13 @@ public class ItemPointMono : MonoBehaviour , IInteractHandler , ITrackable
     public void SetData(TrackerData trackerData)
     {
         _itemPointStatus = trackerData.TrackableBaseData as ItemPointStatus;
-        _trackerData = new TrackerData(trackerData.id, TrackType.ItemPoint, transform.position, _itemPointStatus);
+        _trackerData = new TrackerData(
+            trackerData.ID,
+            TrackType.ItemPoint,
+            transform.position,
+            transform.eulerAngles,
+            transform.localScale,
+            _itemPointStatus);
     }
 
     private void CreateItems()

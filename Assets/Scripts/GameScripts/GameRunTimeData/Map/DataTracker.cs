@@ -1,6 +1,8 @@
 using System;
 using SimpleJSON;
 using UnityEngine;
+using UnityEngine.Serialization;
+
 /// <summary>
 /// 存储场景后需要追踪的数据
 /// </summary>
@@ -13,17 +15,24 @@ public abstract class TrackableBaseData
 [Serializable]
 public class TrackerData
 {
-    public int id;
+    public int ID;
     public TrackType TrackType;
-    public Vector3 postion;
+    
+    public Vector3 Position;
+    public Vector3 EulerAngle;
+    public Vector3 Scale;
+    
     public TrackableBaseData TrackableBaseData;
 
-    public TrackerData(int id,TrackType trackType,Vector3 postion,TrackableBaseData trackableBaseData)
+    public TrackerData(int id,TrackType trackType,Vector3 position,Vector3 eulerAngle, Vector3 scale, TrackableBaseData trackableBaseData)
     {
-        this.id = id;                        // 对象id
+        ID = id;                        // 对象id
         TrackType = trackType;               // 追踪类型
-        this.postion = postion;              // 位置
+        Position = position;              // 位置
+        EulerAngle = eulerAngle;
+        Scale = scale;
         TrackableBaseData = trackableBaseData;  // 其他可追踪数据
+        
     }
 }
 [Serializable]

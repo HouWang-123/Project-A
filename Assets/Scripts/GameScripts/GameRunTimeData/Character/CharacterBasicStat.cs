@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using cfg.buff;
+using Sirenix.OdinInspector;
 using Unity.Mathematics.Geometry;
 using UnityEngine;
-
+[Serializable]
 public class CharacterStat
 {
     public int ID;
@@ -81,10 +82,10 @@ public class CharacterStat
 
 }
 
-public class CharacterBasicStat
+public class CharacterBasicStat : SerializedMonoBehaviour
 {
     private cfg.cha.Character m_characterData;
-    private CharacterStat CharacterStat;
+    [SerializeField] private CharacterStat CharacterStat;
     private bool playerDataInited;
 
     // 提供给存档使用

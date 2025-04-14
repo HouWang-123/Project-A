@@ -19,6 +19,24 @@ MonoBehaviour:
   addedIllegalTypes:
     serializedCollection: []
   typeSettings:
-    serializedDictionary: []
+    serializedDictionary:
+    - typeBound: ItemStatus, Assembly-CSharp
+      displayName: 
+      category: 
+      sdfIconType: 12
+      lightColor: {r: 0, g: 0, b: 0, a: 0}
+      darkColor: {r: 0.3726415, g: 0.47682422, b: 1, a: 0}
+    - typeBound: TrackerData, Assembly-CSharp
+      displayName: 
+      category: 
+      sdfIconType: 12
+      lightColor: {r: 0, g: 0, b: 0, a: 0}
+      darkColor: {r: 1, g: 0.28627455, b: 0.9698443, a: 0}
+    - typeBound: ToolStatus, Assembly-CSharp
+      displayName: 
+      category: 
+      sdfIconType: 12
+      lightColor: {r: 0, g: 0, b: 0, a: 0}
+      darkColor: {r: 0, g: 1, b: 0.065570354, a: 1}
   typePriorities:
     serializedDictionary: []

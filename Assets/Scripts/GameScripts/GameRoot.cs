@@ -36,8 +36,6 @@ public class GameRoot : MonoBehaviour
         package = YooAssets.CreatePackage("DefaultPackage");
         YooAssets.SetDefaultPackage(package);
         
-        GameRunTimeData.Instance.CharacterItemSlotData.SetMaxSlotCount(GameConstData.DEFAULT_SLOTCOUNT);
-        
         switch (PlayMode)
         {
             case EPlayMode.EditorSimulateMode:
@@ -77,7 +75,8 @@ public class GameRoot : MonoBehaviour
 
     private void GameStart()
     {
-        ColorfulDebugger.Debug("LoadingData", ColorfulDebugger.Instance.Data);
+        GameRunTimeData.Instance.CharacterItemSlotData.SetMaxSlotCount(GameConstData.DEFAULT_SLOTCOUNT);
+        
         //Data
         GameTableDataAgent.LoadAllTable();
         

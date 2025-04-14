@@ -556,8 +556,9 @@ MonoBehaviour:
   ItemSpriteName: 
   PickUpTargeted: 0
   DropState: 0
-  IgnoreDefaultItemDrop: 0
   StackCount: 1
+  MyItemStatus:
+    StackCount: 0
   IsItemInPickupRange: 0
   m_ToolBehaviour: {fileID: 0}
   m_LightBehaviour: {fileID: 0}
@@ -675,7 +676,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6744409418278166945
 Transform:
   m_ObjectHideFlags: 0

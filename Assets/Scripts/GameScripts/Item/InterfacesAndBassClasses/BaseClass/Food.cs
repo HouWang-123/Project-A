@@ -24,7 +24,7 @@ public class Food : ItemBase,IStackable,IBuffedItem
         }
         catch (Exception e)
         {
-            ColorfulDebugger.DebugError("食物ID" + id +"不存在，物品名称" + gameObject.name,ColorfulDebugger.Instance.Data);
+            Debug.LogError("食物ID" + id +"不存在，物品名称" + gameObject.name);
         }
         ItemSpriteName = data.SpriteName;
     }

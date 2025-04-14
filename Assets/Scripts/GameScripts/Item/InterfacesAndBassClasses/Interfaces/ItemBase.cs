@@ -18,11 +18,11 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable , ITrackable
     private bool ItemReversed;
     private bool ignoreAngleCorrect;
     public bool DropState;
-    public bool IgnoreDefaultItemDrop;
+
     public int StackCount = 1;
     private GameItemPickupTip pickupTips;
     protected bool IsholdByPlayer;
-    public ItemStatus MyItemStatus;
+    protected ItemStatus MyItemStatus;
 
     public virtual ItemStatus GetItemStatus()
     {
@@ -49,7 +49,6 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable , ITrackable
 
     protected void Start()
     {
-        IgnoreDefaultItemDrop = false;
         if (!ignoreAngleCorrect)
         {
             ItemRenderer.transform.localEulerAngles = GameConstData.DefAngles;
@@ -59,7 +58,6 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable , ITrackable
         {
             InitItem(ItemID); // 非动态生成的物品，拖拽进入的物品
         }
-        
         GenerateItemStatus();
         CheckIsStackedItem();
         SetRendererImage();
@@ -67,11 +65,16 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable , ITrackable
         {
             RegisterTracker();
         }
-
     }
 
+    public void SetRendererAngle()
+    {
+        ItemRenderer.transform.localEulerAngles = GameConstData.DefAngles;
+    }
     protected virtual void GenerateItemStatus()
     {
+        if(MyItemStatus !=null) return;
+        Debug.Log("生成物品状态");
         MyItemStatus = new ItemStatus();
     }
     public void OnDestroy()
@@ -80,12 +83,7 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable , ITrackable
         {
             pickupTips.OnItemPicked();
         }
-
-        if (!IsholdByPlayer)
-        {
-            UnRegisterTracker();
-        }
-
+        UnRegisterTracker();
     }
 
     // 新添加接口，通过设置id定义物品
@@ -181,7 +179,7 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable , ITrackable
     {
         if (trackerdata != null)
         {
-            transform.position = trackerdata.postion;
+            transform.position = trackerdata.Position;
         }
     }
     
@@ -207,12 +205,8 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable , ITrackable
 
     public Action OnDropCallback;
 
-    private void F_Update_ItemDorp()
+    protected virtual void F_Update_ItemDorp()
     {
-        if (IgnoreDefaultItemDrop)
-        {
-            return;
-        }
         if (DropState)
         {
             SpeedDamp();
@@ -270,6 +264,7 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable , ITrackable
             transform.localScale = new Vector3(1, 1, 1);
         }
 
+        IsholdByPlayer = false;
         H_BiasSpeed = Random.Range(-10, 10);
         V_BiasSpeed = 0;
         if (IgnoreBias)
@@ -373,6 +368,8 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable , ITrackable
             ItemID,
             TrackType.Item,
             new Vector3(transform.position.x,0,transform.position.z),
+            transform.eulerAngles,
+            transform.localScale,
             MyItemStatus           // 自定义状态，自行实现相关的类
         );
     }

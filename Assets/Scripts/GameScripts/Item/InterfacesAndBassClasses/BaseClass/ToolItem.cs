@@ -47,7 +47,7 @@ public class Tool : ItemBase, ISlotable
         }
         catch (Exception e)
         {
-            ColorfulDebugger.DebugError("工具物品ID" + id +"不存在，物品名称" + gameObject.name,ColorfulDebugger.Instance.Data);
+            Debug.LogError("工具物品ID" + ItemID +"不存在，物品名称" + gameObject.name);
         }
         ItemSpriteName = data.SpriteName;
         m_ToolBehaviour = GetComponent<ToolBehaviour>();
@@ -59,6 +59,8 @@ public class Tool : ItemBase, ISlotable
 
     protected override void GenerateItemStatus()
     {
+        if(MyItemStatus != null) return;
+        Debug.Log("生成工具物品状态信息");
         MyItemStatus = new ToolStatus();
     }
 
@@ -127,10 +129,5 @@ public class Tool : ItemBase, ISlotable
     {
         base.SetItemStatus(itemStatus);
         ToolStatus = MyItemStatus as ToolStatus;
-    }
-
-    public override ItemStatus GetItemStatus()
-    {
-        return MyItemStatus;
     }
 }

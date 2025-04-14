@@ -134,8 +134,8 @@ public class PlayerControl : MonoBehaviour
                 int gameDay = TimeSystemManager.Instance.GameDay;
                 int gameHour = TimeSystemManager.Instance.GameHour;
                 int gameMinute = TimeSystemManager.Instance.GameMinute;
-                Debug.Log(GetType() + "/ 现在是游戏时间[天数: " + gameDay + " ,小时: " + gameHour + " ,分钟: " + gameMinute + " ]");
-                Debug.Log(GetType() + "/ 触发了主角拉屎");
+                // Debug.Log(GetType() + "/ 现在是游戏时间[天数: " + gameDay + " ,小时: " + gameHour + " ,分钟: " + gameMinute + " ]");
+                // Debug.Log(GetType() + "/ 触发了主角拉屎");
             }
         };
         TimeSystemManager.Instance.PhasedChangedScheduledEvents.Add(phasedEvent);
@@ -294,23 +294,13 @@ public class PlayerControl : MonoBehaviour
         {
             ScreenToWorldPostion = hitinfo.point;
         }
-
-        ClaculatePlayerLookAtDirection();
-    }
-
-    private void ClaculatePlayerLookAtDirection()
-    {
         Gizmos.color = Color.magenta;
         ScreenToWorldPostion.y = 0;
-
-        // PlayerLookatDirection = ScreenToWorldPostion - transform.position;
-        // Vector3 normalize = Vector3.Normalize(PlayerLookatDirection);
-        //
-        // Gizmos.DrawLine(transform.position,normalize);
-
-
         PlayerLookatDirection = (ScreenToWorldPostion - transform.position).normalized;
+    }
 
+    private void OnDrawGizmos()
+    {
         float lineLength = 1f; // 可自由调整长度
         Vector3 lineEndPoint = transform.position + PlayerLookatDirection * lineLength;
 
@@ -355,8 +345,7 @@ public class PlayerControl : MonoBehaviour
 
         GameHUD.Instance.ISM_SetFocus(Number);
         GameRunTimeData.Instance.CharacterItemSlotData.ChangeFocusSlotNumber(Number);
-        (int, ItemStatus) currentFocusedItemId =
-            GameRunTimeData.Instance.CharacterItemSlotData.GetCurrentFocusedItemId();
+        (int, ItemStatus) currentFocusedItemId = GameRunTimeData.Instance.CharacterItemSlotData.GetCurrentFocusedItemId();
         RefreshItemOnHand(currentFocusedItemId);
     }
 
@@ -461,8 +450,8 @@ public class PlayerControl : MonoBehaviour
             {
                 MoveState = EPAMoveState.Walk;
                 playerSpin.timeScale = speed / 0.6f; //匹配动画速度
-                characterStat.IsWalk = false;
-                characterStat.IsRun = true;
+                characterStat.IsWalk = true;
+                characterStat.IsRun = false;
             }
 
             //playerRG.Move(vector * speed + transform.position, Quaternion.identity);
@@ -490,21 +479,17 @@ public class PlayerControl : MonoBehaviour
         {
             characterStat.LiftedItem.gameObject.transform.SetParent(GameControl.Instance.GetSceneItemList().transform);
             
-            // GameRunTimeData.Instance.ItemManager.RegistItem(characterStat.LiftedItem);
-            
             characterStat.LiftedItem.OnItemDrop(false, true);
             characterStat.LiftedItem.ChangeRendererSortingOrder(GameConstData.BelowPlayerOrder);
 
             characterStat.LiftedItem = null;
-            (int, ItemStatus) currentFocusedItemId =
-                GameRunTimeData.Instance.CharacterItemSlotData.GetCurrentFocusedItemId();
+            (int, ItemStatus) currentFocusedItemId = GameRunTimeData.Instance.CharacterItemSlotData.GetCurrentFocusedItemId();
             RefreshItemOnHand(currentFocusedItemId);
             GameHUD.Instance.slotManager.EnableHud();
             return;
         }
 
-        bool removestack =
-            GameRunTimeData.Instance.CharacterItemSlotData.ClearHandItem(fastDrop, ItemReleasePoint, PlayerReversed);
+        bool removestack = GameRunTimeData.Instance.CharacterItemSlotData.ClearHandItem(fastDrop, ItemReleasePoint, PlayerReversed);
 
         if (removestack)
         {
@@ -561,9 +546,7 @@ public class PlayerControl : MonoBehaviour
         {
             // 背包数据更新
             bool stackOverFlowed;
-            int Restult =
-                GameRunTimeData.Instance.CharacterItemSlotData.InsertOrUpdateItemSlotData(toPickUpItem,
-                    out stackOverFlowed);
+            int Restult = GameRunTimeData.Instance.CharacterItemSlotData.InsertOrUpdateItemSlotData(toPickUpItem, out stackOverFlowed);
             if (toPickUpItem is IStackable)
             {
                 if (Restult != -1) // 进入手中

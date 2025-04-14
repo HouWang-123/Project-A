@@ -155,7 +155,7 @@ namespace FEVM.Data
             string encrypted = AesEncryption.EncryptString(jsonData, Key, IV);
 
             File.WriteAllText(SavePath, encrypted);
-            ColorfulDebugger.Debug(Data.GetKey()+"数据保存成功,位置:"+SavePath,ColorfulDebugger.Instance.File);
+            Debug.LogError(Data.GetKey()+"数据保存成功,位置:"+SavePath);
         }
         protected void LoadData(Action callBack)
         {

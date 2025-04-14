@@ -23,7 +23,7 @@ public class TinyItem : ItemBase , IDataItem
         }
         catch (Exception e)
         {
-            ColorfulDebugger.DebugError("小物品ID" + id +"不存在，物品名称" + gameObject.name,ColorfulDebugger.Instance.Data);
+            Debug.LogError("小物品ID" + id +"不存在，物品名称" + gameObject.name);
         }
         ItemSpriteName = data.SpriteName;
     }

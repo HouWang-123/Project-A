@@ -18,7 +18,7 @@ public class SceneObjects : ItemBase
         }
         catch (Exception e)
         {
-            ColorfulDebugger.DebugError("场景物品ID" + ItemID +"不存在，物品名称" + gameObject.name,ColorfulDebugger.Instance.Data);
+            Debug.LogError("场景物品ID" + ItemID +"不存在，物品名称" + gameObject.name);
         }
         ItemSpriteName = data.SpriteName;
         
