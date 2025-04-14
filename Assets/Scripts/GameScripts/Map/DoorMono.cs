@@ -46,12 +46,11 @@ public class DoorMono : MonoBehaviour, IInteractHandler
         Gizmos.color = Color.magenta;
         Gizmos.DrawSphere(transform.position,0.2f);
         Gizmos.color = Color.white;
-        
         GUIStyle style = new GUIStyle();
         style.fontStyle = FontStyle.Bold;
         style.normal.textColor = Color.white;
+        if (doorData == null) return;
         Handles.Label(transform.position + Vector3.up * 2f, doorData.ID.ToString() , style);
-
     }
 
     private void OnDestroy()

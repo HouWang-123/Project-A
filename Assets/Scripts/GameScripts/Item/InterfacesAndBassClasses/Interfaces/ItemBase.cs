@@ -370,7 +370,7 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable , ITrackable
     public TrackerData CollectTrackedData()
     {
         return new TrackerData(
-            ItemID,                
+            ItemID,
             TrackType.Item,
             new Vector3(transform.position.x,0,transform.position.z),
             MyItemStatus           // 自定义状态，自行实现相关的类

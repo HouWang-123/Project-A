@@ -294,9 +294,11 @@ public class PlayerControl : MonoBehaviour
         {
             ScreenToWorldPostion = hitinfo.point;
         }
+
+        ClaculatePlayerLookAtDirection();
     }
 
-    private void OnDrawGizmos()
+    private void ClaculatePlayerLookAtDirection()
     {
         Gizmos.color = Color.magenta;
         ScreenToWorldPostion.y = 0;
