@@ -3,7 +3,6 @@ using YooAsset;
 using cfg.scene;
 using System.Collections.Generic;
 using Unity.Cinemachine;
-using UnityEngine.LightTransport.PostProcessing;
 using UnityEngine.Rendering.Universal;
 
 public class GameControl

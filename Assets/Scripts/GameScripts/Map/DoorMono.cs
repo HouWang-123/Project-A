@@ -2,7 +2,9 @@
 using UnityEngine;
 using cfg.scene;
 using FEVM.Timmer;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 
 public class DoorMono : MonoBehaviour, IInteractHandler
 {
@@ -50,7 +52,9 @@ public class DoorMono : MonoBehaviour, IInteractHandler
         style.fontStyle = FontStyle.Bold;
         style.normal.textColor = Color.white;
         if (doorData == null) return;
+#if UNITY_EDITOR
         Handles.Label(transform.position + Vector3.up * 2f, doorData.ID.ToString() , style);
+#endif
     }
 
     private void OnDestroy()

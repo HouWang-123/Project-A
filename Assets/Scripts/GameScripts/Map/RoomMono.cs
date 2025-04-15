@@ -1,7 +1,9 @@
 ﻿using cfg.scene;
 using System.Collections.Generic;
 using Unity.AI.Navigation;
-using UnityEditor;
+#if UNITY_EDITOR
+    using UnityEditor;
+#endif
 using UnityEngine;
 
 public class RoomMono : MonoBehaviour
@@ -222,10 +224,14 @@ public class RoomMono : MonoBehaviour
         GUIStyle style = new GUIStyle();
         style.fontStyle = FontStyle.Bold;
         style.normal.textColor = Color.cyan;
-        Handles.Label(transform.position + Vector3.up * 3.2f, roomData.NAME , style);
+
         GUIStyle style2 = new GUIStyle();
         style2.fontStyle = FontStyle.Bold;
         style2.normal.textColor = Color.white;
+#if UNITY_EDITOR
+        Handles.Label(transform.position + Vector3.up * 3.2f, roomData.NAME , style);
         Handles.Label(transform.position + Vector3.up * 3.4f, roomData.ID.ToString() , style2);
+#endif
+        
     }
 }
