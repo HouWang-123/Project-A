@@ -8,7 +8,7 @@ public class Throwable : ItemBase, ILiftable, IThrowable
 {
     public cfg.item.ThrowObjects data;
     public Rigidbody ThrowableRigidbody;
-    
+    private float originalDamp;
     private bool ObjectStoped;
     // 物品初始化
     public override void InitItem(int id,TrackerData trackerData = null)
@@ -28,9 +28,12 @@ public class Throwable : ItemBase, ILiftable, IThrowable
         }
         ItemSpriteName = data.SpriteName;
         ThrowableRigidbody = GetComponent<Rigidbody>();
+        IgnoreDefaultItemDrop = true;
+        originalDamp = ThrowableRigidbody.linearDamping;
     }
     public override void OnItemPickUp()
     {
+        ThrowableRigidbody.linearDamping = 0;
         IsholdByPlayer = true;
         base.OnItemPickUp();
         ThrowableRigidbody.isKinematic = true;
@@ -63,12 +66,14 @@ public class Throwable : ItemBase, ILiftable, IThrowable
 
     public void OnThrow()
     {
+        ThrowableRigidbody.linearDamping = originalDamp;
         DropState = true;
         ObjectStoped = false;
         ThrowableRigidbody.isKinematic = false;
         ThrowableRigidbody.AddForce( PlayerControl.Instance.PlayerLookatDirection * 3 + new Vector3(0f,4f,0f) ,ForceMode.VelocityChange);
         ThrowableRigidbody.WakeUp();
-        PlayerControl.Instance.DropItem(false);
+        
+        PlayerControl.Instance.DropItem(false); // ------------ 这里会调用 OnItemDrop();
         TimeMgr.Instance.AddTask(0.1f,false, () =>
         {
             IsholdByPlayer = false;
@@ -77,9 +82,11 @@ public class Throwable : ItemBase, ILiftable, IThrowable
 
     public override void OnItemDrop(bool fastDrop, bool IgnoreBias = false, bool Playerreversed = false)
     {
-        base.OnItemDrop(fastDrop, IgnoreBias, Playerreversed);
-        DropState = true;
+        RegisterTracker();
         ThrowableRigidbody.isKinematic = false;
+        IgnoreDefaultItemDrop = true;
+        DropState = true;
+        
         ThrowableRigidbody.WakeUp();
         ObjectStoped = false;
         TimeMgr.Instance.AddTask(0.1f,false, () =>
@@ -87,15 +94,7 @@ public class Throwable : ItemBase, ILiftable, IThrowable
             IsholdByPlayer = false;
         });
     }
-
-    protected override void F_Update_ItemDorp()
-    {
-        if (transform.position.y < 0)
-        {
-            DropState = false;
-            transform.position = new Vector3(transform.position.x, 0, transform.position.z);
-        }
-    }
+    
 
     protected override void FixedUpdate()
     {

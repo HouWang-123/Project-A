@@ -10,7 +10,7 @@ using Vector3 = UnityEngine.Vector3;
 public static class GameItemTool
 {
     private static Dictionary<int, ItemResourceData> dataCache = new Dictionary<int, ItemResourceData>();
-    public static ItemResourceData GetItemResourceData(int id)
+    private static ItemResourceData GetItemResourceData(int id)
     {
         if (dataCache.ContainsKey(id))
         {
