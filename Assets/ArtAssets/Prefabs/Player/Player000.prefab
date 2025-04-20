@@ -218,7 +218,7 @@ CapsuleCollider:
     m_Bits: 320
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 5120
+    m_Bits: 1024
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -366,7 +366,7 @@ MonoBehaviour:
   m_Intensity: 0.2
   m_LightVolumeIntensity: 1
   m_LightVolumeEnabled: 0
-  m_ApplyToSortingLayers: 000000003f8c5b7d037239578fe7dd1e
+  m_ApplyToSortingLayers: 000000008fe7dd1e036e2d7111afa0bb472ad01f
   m_LightCookieSprite: {fileID: 21300000, guid: 76b4afe604d91bb4cab3eff50436890a, type: 3}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -387,7 +387,7 @@ MonoBehaviour:
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
-  m_PointLightOuterRadius: 3.93
+  m_PointLightOuterRadius: 2.34
   m_ShapeLightParametricSides: 5
   m_ShapeLightParametricAngleOffset: 0
   m_ShapeLightParametricRadius: 1
@@ -615,6 +615,14 @@ PrefabInstance:
     - target: {fileID: 3792342857595360211, guid: 49e77c51e10af8340bd924f67561e328, type: 3}
       propertyPath: _animationName
       value: Idle
+      objectReference: {fileID: 0}
+    - target: {fileID: 4563598545739619769, guid: 49e77c51e10af8340bd924f67561e328, type: 3}
+      propertyPath: m_SortingLayer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4563598545739619769, guid: 49e77c51e10af8340bd924f67561e328, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9176835879298796897, guid: 49e77c51e10af8340bd924f67561e328, type: 3}
       propertyPath: m_Name

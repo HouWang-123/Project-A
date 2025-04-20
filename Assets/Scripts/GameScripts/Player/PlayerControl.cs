@@ -541,7 +541,11 @@ public class PlayerControl : MonoBehaviour
         toPickUpItem = _pickupController.currentPickup;
         
         // GameRunTimeData.Instance.ItemManager.UnRegistItem(toPickUpItem);
-
+        if (toPickUpItem is IDataItem @base)
+        {
+            @base.OnItemGet();
+            return true;
+        }
         if (toPickUpItem is ISlotable)
         {
             // 背包数据更新

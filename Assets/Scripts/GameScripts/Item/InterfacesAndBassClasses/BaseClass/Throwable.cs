@@ -8,6 +8,7 @@ public class Throwable : ItemBase, ILiftable, IThrowable
 {
     public cfg.item.ThrowObjects data;
     public Rigidbody ThrowableRigidbody;
+    public Collider _collider;
     private float originalDamp;
     private bool ObjectStoped;
     // 物品初始化
@@ -38,6 +39,7 @@ public class Throwable : ItemBase, ILiftable, IThrowable
         base.OnItemPickUp();
         ThrowableRigidbody.isKinematic = true;
         ThrowableRigidbody.Sleep();
+        _collider.enabled = false;
     }
     public override Sprite GetItemIcon()
     {
@@ -92,22 +94,24 @@ public class Throwable : ItemBase, ILiftable, IThrowable
         TimeMgr.Instance.AddTask(0.1f,false, () =>
         {
             IsholdByPlayer = false;
+            _collider.enabled = true;
         });
+
     }
     
-
     protected override void FixedUpdate()
     {
         base.FixedUpdate();
         if (IsholdByPlayer) return;
         if (ObjectStoped) return;
-        if (ThrowableRigidbody.linearVelocity == Vector3.zero)
+        if (DropState)
         {
-            ObjectStoped = true;
-            ThrowableRigidbody.Sleep();
-            DropState = false;
-            OnDropCallback?.Invoke();
-            transform.position = new Vector3(transform.position.x, 0, transform.position.z);
+            if (ThrowableRigidbody.linearVelocity == Vector3.zero)
+            {
+                ObjectStoped = true;
+                DropState = false;
+                OnDropCallback?.Invoke();
+            }
         }
     }
 

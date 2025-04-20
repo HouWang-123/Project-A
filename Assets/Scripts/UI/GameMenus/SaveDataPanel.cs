@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class SaveDataPanel : UIBase
 {
-
-
     protected override void Awake()
     {
         base.Awake();

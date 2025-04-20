@@ -61,6 +61,19 @@ public class PlayerInteractController : MonoBehaviour
     public void PlayerCancleInteract()
     {
         if (!interactLock) return;
+        if (CurrentFocusedInteractHandler is IInteractableItemReceiver receiver) // 需要玩家持有物品进行交互
+        {
+            if (GameRunTimeData.Instance.CharacterBasicStat.GetStat().ItemOnHand != null)
+            {
+                
+            }
+            if (GameRunTimeData.Instance.CharacterBasicStat.GetStat().LiftedItem != null)
+            {
+                
+            }
+            // receiver.hasInteraction()
+            // if()
+        }
         if (CurrentFocusedInteractHandler != null)
         {
             CurrentFocusedInteractHandler.OnPlayerInteractCancel();

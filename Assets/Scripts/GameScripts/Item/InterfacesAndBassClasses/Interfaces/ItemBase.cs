@@ -4,7 +4,7 @@ using UnityEngine;
 using YooAsset;
 using Random = UnityEngine.Random;
 
-public abstract class ItemBase : MonoBehaviour, IPickUpable , ITrackable
+public abstract class ItemBase : MonoBehaviour, ITrackable, IInteractableItemHandler
 {
     protected Luban.BeanBase ItemData;
     public int ItemID; // 物品ID
@@ -39,7 +39,7 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable , ITrackable
         loadAssetSync.Release();
     }
 
-    protected void Start()
+    protected virtual void Start()
     {
         if (!ignoreAngleCorrect)
         {
@@ -110,6 +110,7 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable , ITrackable
             instantiate.transform.position = transform.position;
             instantiate.transform.position += new Vector3(0, 1f, 0);
             instantiate.transform.localEulerAngles = GameConstData.DefAngles;
+            instantiate.transform.SetParent(transform);
             pickupTips = instantiate.GetComponent<GameItemPickupTip>();
             pickupTips.PlayInitAnimation();
         };
@@ -282,4 +283,13 @@ public abstract class ItemBase : MonoBehaviour, IPickUpable , ITrackable
     }
     public void RegisterTracker() { GameRunTimeData.Instance.MapTrackDataManager.RegisterTracker(this); }
     public void UnRegisterTracker() { GameRunTimeData.Instance.MapTrackDataManager.UnRegisterTracker(this); }
+    public int GetInteractItemId()
+    {
+        return ItemID;
+    }
+
+    public void HandleInteract()
+    {
+        
+    }
 }

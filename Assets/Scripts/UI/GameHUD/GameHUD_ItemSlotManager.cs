@@ -182,6 +182,7 @@ public class GameHUD_ItemSlotManager : UIBase
         int i = 1;
         foreach (var slot in ItemSlots)
         {
+            DOTween.Kill(slot);
             i++;
             DoItemSlotShowAnimation(slot, i);
         }
@@ -195,6 +196,7 @@ public class GameHUD_ItemSlotManager : UIBase
 
     void DoItemSlotHideAnimation(GameItemSlot_HUD_Behavior slotHUDBehavior, int delayedTimeScale)
     {
+        DOTween.Kill(slotHUDBehavior);
         TimeMgr.Instance.AddTask(ItemSlotAnimationInterval * (delayedTimeScale - 1), false,
             () => { slotHUDBehavior.transform.DOScale(Vector3.zero, ItemSlotAnimationTime); });
     }

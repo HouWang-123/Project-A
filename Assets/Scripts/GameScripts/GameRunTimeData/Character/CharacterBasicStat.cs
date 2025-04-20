@@ -44,8 +44,7 @@ public class CharacterStat
     public bool IsRun;
     public bool IsWalk;
     public bool CanInteractOtherItem;
-    
-    private ItemBase itemOnHand; // 手中的物品
+    [SerializeField] private ItemBase itemOnHand; // 手中的物品
     public ItemBase ItemOnHand
     {
         get { return itemOnHand; }
@@ -62,7 +61,7 @@ public class CharacterStat
             }
         }
     }
-    private ItemBase liftedItem; // 举起的物品
+    [SerializeField] private ItemBase liftedItem; // 举起的物品
     public ItemBase LiftedItem
     {
         get { return liftedItem; }
