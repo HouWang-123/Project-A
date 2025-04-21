@@ -1,8 +1,10 @@
 using System;
+using System.Collections.Generic;
+using cfg.interact;
 using UnityEngine;
 using YooAsset;
 
-public class SceneObjects : ItemBase
+public class SceneObjects : ItemBase , IInteractableItemReceiver
 {
     public cfg.item.SceneObjects data;
 
@@ -37,14 +39,39 @@ public class SceneObjects : ItemBase
         return data.PrefabName;
     }
     
-    
-    public override void OnRightInteract( )
+    // Interact
+    public void OnPlayerFocus()
     {
-        throw new NotImplementedException();
+        
     }
 
-    public override void OnLeftInteract( )
+    public void OnPlayerDefocus()
     {
-        throw new NotImplementedException();
+        
+    }
+
+    public MonoBehaviour getMonoBehaviour()
+    {
+        return this;
+    }
+
+    public void OnPlayerStartInteract()
+    {
+        
+    }
+
+    public void OnPlayerInteract()
+    {
+        
+    }
+
+    public void OnPlayerInteractCancel()
+    {
+
+    }
+
+    public bool hasInteraction(int itemid) // interacted Item Id;
+    {
+        return false;
     }
 }

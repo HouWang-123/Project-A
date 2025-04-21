@@ -41,7 +41,28 @@ public class PlayerInteractController : MonoBehaviour
             handler.OnPlayerDefocus();
         }
         CurrentFocusedInteractHandler = interactHandler;
-        interactHandler.OnPlayerFocus();
+        
+        if (CurrentFocusedInteractHandler is IInteractableItemReceiver receiver) // 需要玩家持有物品进行交互
+        {
+            // 获取手中物品ID
+            int InteractItemId = -1;
+            if (GameRunTimeData.Instance.CharacterBasicStat.GetStat().ItemOnHand != null)
+            {
+                InteractItemId = GameRunTimeData.Instance.CharacterBasicStat.GetStat().ItemOnHand.ItemID;
+            }
+            if (GameRunTimeData.Instance.CharacterBasicStat.GetStat().LiftedItem != null)
+            {
+                InteractItemId = GameRunTimeData.Instance.CharacterBasicStat.GetStat().LiftedItem.ItemID;
+            }
+            // 查找交互表
+            receiver.hasInteraction(InteractItemId);
+            // if()
+        }
+        else                                                                 // 不需要物品即可交互
+        {
+            interactHandler.OnPlayerFocus();
+        }
+        
     }
 
     private void ClearInteractHandler(IInteractHandler handler)
@@ -52,6 +73,11 @@ public class PlayerInteractController : MonoBehaviour
     {
         if (interactLock) return; //交互锁
         interactLock = true;
+
+        
+
+        
+        
         if (CurrentFocusedInteractHandler != null)
         {
             CurrentFocusedInteractHandler.OnPlayerStartInteract();
@@ -61,19 +87,7 @@ public class PlayerInteractController : MonoBehaviour
     public void PlayerCancleInteract()
     {
         if (!interactLock) return;
-        if (CurrentFocusedInteractHandler is IInteractableItemReceiver receiver) // 需要玩家持有物品进行交互
-        {
-            if (GameRunTimeData.Instance.CharacterBasicStat.GetStat().ItemOnHand != null)
-            {
-                
-            }
-            if (GameRunTimeData.Instance.CharacterBasicStat.GetStat().LiftedItem != null)
-            {
-                
-            }
-            // receiver.hasInteraction()
-            // if()
-        }
+
         if (CurrentFocusedInteractHandler != null)
         {
             CurrentFocusedInteractHandler.OnPlayerInteractCancel();

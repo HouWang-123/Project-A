@@ -116,7 +116,7 @@ public abstract class ItemBase : MonoBehaviour, ITrackable, IInteractableItemHan
         };
     }
     // 物品拾取器，shader
-    public void SetTargerted(bool v) // 拾取系统相关功能，与拾取标识相关
+    public virtual void SetTargerted(bool v) // 拾取系统相关功能，与拾取标识相关
     {
         PickUpTargeted = v;
         if (PickUpTargeted)

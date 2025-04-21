@@ -39,7 +39,7 @@ public partial class Tables
         CharacterTable = new cha.CharacterTable(loader("cha_charactertable"));
         ConditionsTable = new buff.ConditionsTable(loader("buff_conditionstable"));
         PassiveSkillsTable = new buff.PassiveSkillsTable(loader("buff_passiveskillstable"));
-        InteractEffectTable = new interact.InteractEffectTable(loader("interact_interacteffecttable"));
+        // InteractEffectTable = new interact.InteractEffectTable(loader("interact_interacteffecttable"));
         DropRuleTable = new func.DropRuleTable(loader("func_dropruletable"));
         InspectionTable = new func.InspectionTable(loader("func_inspectiontable"));
         FoodTable = new item.FoodTable(loader("item_foodtable"));

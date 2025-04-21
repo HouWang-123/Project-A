@@ -1,5 +1,4 @@
 using System;
-using cfg.interact;
 using UnityEngine;
 using YooAsset;
 

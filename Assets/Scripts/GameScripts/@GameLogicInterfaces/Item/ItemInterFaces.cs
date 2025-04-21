@@ -1,19 +1,27 @@
 /// <summary>
 /// 可是拾取接口
 /// </summary>
-// public interface IPickUpable            // 可否被拾取接口
-// {
-//     void OnItemPickUp();  // 拾取
-//     void OnItemDrop(bool fastdrop, bool ignoreBias,bool playerReversed);
-//    //   在玩家丢弃物品后需要调用，用于将物品归还到场景物品节点，与Player分离
-//    //        2025.2.14更新参数
-//    //        fastdrop:
-//    //        是否忽略物品下落动画
-//    
-//    //        2025.3.1 添加参数 ignoreBias
-//    //        是否忽略物品丢弃后的随机偏移
-//    //        2025.3.1 OnItemDrop 后会强制修正物体角度
-// }
+public interface IPickUpable            // 可否被拾取接口
+{
+    public void OnItemPickUp();  // 拾取或举起
+    public void OnItemDrop(bool fastdrop, bool ignoreBias,bool playerReversed);
+   //   在玩家丢弃物品后需要调用，用于将物品归还到场景物品节点，与Player分离
+   //        2025.2.14更新参数
+   //        fastdrop:
+   //        是否忽略物品下落动画
+   
+   //        2025.3.1 添加参数 ignoreBias
+   //        是否忽略物品丢弃后的随机偏移
+   //        2025.3.1 OnItemDrop 后会强制修正物体角度
+   public void SetTargerted(bool v);
+   public void SetPickupable(bool v);
+}
+
+// 可否举起
+public interface ILiftable : IPickUpable
+{
+    
+}
 
 
 /// <summary>
@@ -60,11 +68,7 @@ public interface IBuffedItem
     /// <returns></returns>
     public int GetBuffId();
 }
-// 可否举起
-public interface ILiftable
-{
-    
-}
+
 /// <summary>
 /// 需要添加 Trowstate
 /// </summary>

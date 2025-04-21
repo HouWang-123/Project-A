@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using YooAsset;
 
-public class Weapon : ItemBase, ISlotable
+public class Weapon : ItemBase, ISlotable , IPickUpable
 {
     public cfg.item.Weapon data;
     protected BaseWeaponBehavior _weaponBeahaviour;

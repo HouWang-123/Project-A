@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using YooAsset;
 
-public class Tool : ItemBase, ISlotable
+public class Tool : ItemBase, ISlotable , IPickUpable
 {
     public cfg.item.Tools data;
     // 物品初始化

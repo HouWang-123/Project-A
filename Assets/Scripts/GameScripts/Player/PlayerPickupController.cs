@@ -143,35 +143,34 @@ public class PlayerPickupController : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        
-        if (other.gameObject.tag.Equals("Item"))
+        ItemBase newEnter = other.gameObject.GetComponent<ItemBase>();
+        if (newEnter == null) return;
+        if (newEnter is IPickUpable toPick)
         {
             if (currentPickup != null)
             {
-                ItemBase DropingEnters = other.gameObject.GetComponent<ItemBase>();
-                if (DropingEnters.DropState)
+
+                if (newEnter.DropState)
                 {
-                    DropingEnters.OnDropCallback = () =>
+                    newEnter.OnDropCallback = () =>
                     {
-                        Item2PickList.Add(DropingEnters);
+                        Item2PickList.Add(newEnter);
                         UpdateCurrentPickup();
-                        DropingEnters.SetPickupable(true);
-                        currentPickup = DropingEnters;
+                        toPick.SetPickupable(true);
+                        currentPickup = newEnter;
                     };
                     return;
                 }
                 
-                currentPickup.SetTargerted(false); // 新物品进入范围后取消之前的目标
+                toPick.SetTargerted(false); // 新物品进入范围后取消之前的目标
             }
-
-            ItemBase newEnter = other.gameObject.GetComponent<ItemBase>();
-
+            
             if (newEnter.DropState) // 处理下落
             {
                 newEnter.OnDropCallback = () =>
                 {
                     Item2PickList.Add(newEnter);
-                    newEnter.SetPickupable(true);
+                    toPick.SetPickupable(true);
                     currentPickup = newEnter;
                     UpdateCurrentPickup();
                 };
@@ -186,7 +185,7 @@ public class PlayerPickupController : MonoBehaviour
 
             if (Item2PickList.Contains(newEnter)) return;
             Item2PickList.Add(newEnter);
-            newEnter.SetPickupable(true);
+            toPick.SetPickupable(true);
             currentPickup = newEnter;
             UpdateCurrentPickup();
         }
@@ -195,11 +194,13 @@ public class PlayerPickupController : MonoBehaviour
 
     private void OnTriggerExit(Collider other) // 物品离开拾取范围
     {
-        if (other.gameObject.tag.Equals("Item"))
+        ItemBase itemBase = other.gameObject.GetComponent<ItemBase>();
+        if (itemBase == null) return;
+        if (itemBase is IPickUpable toleave)
         {
-            ItemBase itemBase = other.gameObject.GetComponent<ItemBase>();
-            itemBase.SetPickupable(false);
-            itemBase.SetTargerted(false);
+            itemBase = other.gameObject.GetComponent<ItemBase>();
+            toleave.SetPickupable(false);
+            toleave.SetTargerted(false);
             itemBase.OnDropCallback = null;
             Item2PickList.Remove(itemBase);
             ChangeNextPickupTarget(); // 重新设定一个目标拾取
@@ -224,6 +225,9 @@ public class PlayerPickupController : MonoBehaviour
             itemBase.SetTargerted(false);
         }
 
-        currentPickup.SetTargerted(true);
+        if (GameRunTimeData.Instance.CharacterBasicStat.GetStat().LiftedItem == null)
+        {
+            currentPickup.SetTargerted(true);
+        }
     }
 }

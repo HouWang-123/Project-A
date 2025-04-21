@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using cfg.interact;
+
 using UnityEngine;
 
 public interface IInteractHandler
@@ -23,7 +23,7 @@ public interface IInteractHandler
 public interface IInteractableItemReceiver : IInteractHandler   // RequireItem
 {
     bool hasInteraction (int itemid);                          // 检查是否存在可交互的函数
-    List<InteractEffectTable> GetInteractTable();                    // 获取交互效果表
+    // List<InteractEffectTable> GetInteractTable();                    // 获取交互效果表
     
 }
 
