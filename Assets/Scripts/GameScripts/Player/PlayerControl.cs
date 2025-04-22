@@ -422,8 +422,6 @@ public class PlayerControl : MonoBehaviour
         EventManager.Instance.RemoveEvent(EventConstName.PlayerOnDeadAnimation, PlayerDead);
     }
 
-    private bool stopmove = false;
-
     private void PlayerMove(Vector3 vector, float speed)
     {
         vector.z = vector.y;
@@ -463,9 +461,15 @@ public class PlayerControl : MonoBehaviour
             characterStat.IsRun = false;
         }
 
-        if (playerRG != null && !stopmove)
+        if (playerRG != null)
         {
-            playerRG.linearVelocity = vector * speed;
+            Vector3 horizontalVelocity = vector * speed;
+            horizontalVelocity.y = 0; // 确保 Y 轴分量为 0
+            playerRG.linearVelocity = new Vector3(
+                horizontalVelocity.x,
+                playerRG.linearVelocity.y, // 保持原有的 Y 轴速度
+                horizontalVelocity.z
+            );
         }
     }
 
