@@ -1,4 +1,5 @@
 using System;
+using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
 using YooAsset;
@@ -6,6 +7,7 @@ using Random = UnityEngine.Random;
 
 public abstract class ItemBase : MonoBehaviour, ITrackable, IInteractableItemHandler
 {
+    
     protected Luban.BeanBase ItemData;
     public int ItemID; // 物品ID
     [HideInInspector] public GameItemType ItemType; // 物品类型
@@ -30,6 +32,7 @@ public abstract class ItemBase : MonoBehaviour, ITrackable, IInteractableItemHan
     private void SetRendererImage()
     {
         AssetHandle loadAssetSync;
+        if (String.IsNullOrEmpty(ItemSpriteName)) return;
         loadAssetSync = YooAssets.LoadAssetSync<Sprite>(ItemSpriteName);
         if (loadAssetSync.AssetObject == null)
         {
@@ -63,7 +66,6 @@ public abstract class ItemBase : MonoBehaviour, ITrackable, IInteractableItemHan
     protected virtual void GenerateItemStatus()
     {
         if(MyItemStatus !=null) return;
-        Debug.Log("生成物品状态");
         MyItemStatus = new ItemStatus();
     }
     public void OnDestroy()
@@ -294,5 +296,21 @@ public abstract class ItemBase : MonoBehaviour, ITrackable, IInteractableItemHan
     public void HandleInteract()
     {
         
+    }
+    
+    
+    [GUIColor(0.3f, 0.8f, 0.8f, 1f)]
+    public int ChangeToItemId;
+
+    [Button("转换到其他物品")]
+    [GUIColor(0.3f, 0.8f, 0.8f, 1f)]
+    private void ChangeToOtherItem()
+    {
+        ChangeToItem(ChangeToItemId);
+    }
+    public void ChangeToItem(int id)
+    {
+        GameItemTool.GenerateItemAtPosition(id,transform.position);
+        Destroy(gameObject);
     }
 }

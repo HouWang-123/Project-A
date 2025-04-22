@@ -476,11 +476,13 @@ public class PlayerControl : MonoBehaviour
     private bool dropKeyPressed = false;
     private bool pickupLock; // 拾取锁
 
-    public void DropItem(bool fastDrop)
+    public ItemBase DropItem(bool fastDrop)
     {
+        ItemBase droppedItem;
         // 丢下举起的物品逻辑
         if (characterStat.LiftedItem != null)
         {
+            droppedItem = characterStat.LiftedItem;
             characterStat.LiftedItem.gameObject.transform.SetParent(GameControl.Instance.GetSceneItemList().transform);
             
             characterStat.LiftedItem.OnItemDrop(false, true);
@@ -490,8 +492,9 @@ public class PlayerControl : MonoBehaviour
             (int, ItemStatus) currentFocusedItemId = GameRunTimeData.Instance.CharacterItemSlotData.GetCurrentFocusedItemId();
             RefreshItemOnHand(currentFocusedItemId);
             GameHUD.Instance.slotManager.EnableHud();
-            return;
+            return droppedItem;
         }
+
 
         bool removestack = GameRunTimeData.Instance.CharacterItemSlotData.ClearHandItem(fastDrop, ItemReleasePoint, PlayerReversed);
 
@@ -506,14 +509,13 @@ public class PlayerControl : MonoBehaviour
                 instantiate.transform.SetParent(GameControl.Instance.GetSceneItemList().transform);
                 ItemBase ib = instantiate.GetComponent<ItemBase>();
                 ib.InitItem(itemID);
-                
                 // GameRunTimeData.Instance.ItemManager.RegistItem(ib);
-                
                 ib.OnItemDrop(false);
             };
         }
-
+        
         ChangeMouseAction(GameRunTimeData.Instance.CharacterItemSlotData.GetCurrentFocusSlot());
+        return null;
     }
 
     private bool PickUpValidation()
@@ -610,7 +612,6 @@ public class PlayerControl : MonoBehaviour
 
         return true;
     }
-
     private void RefreshItemOnHand((int, ItemStatus) Item)
     {
         int ItemId = Item.Item1;
@@ -631,20 +632,19 @@ public class PlayerControl : MonoBehaviour
         rightMouseAction = null;
         if (ItemId != -1)
         {
-            GameItemTool.GenerateItemAtTransform(ItemId, ItemHoldPosition, true,
+            GameItemTool.GenerateItemAtPosition(ItemId, ItemHoldPosition, true,
                 (item) =>
                 {
                     characterStat.ItemOnHand = item;
                     item.ChangeRendererSortingOrder(GameConstData.PlayerOrder);
                     leftMouseAction = item.OnLeftInteract;
                     rightMouseAction = item.OnRightInteract;
-                    item.OnItemPickUp(); // 拾取物体后立即完成xxxx
+                    item.OnItemPickUp();
                     item.SetItemStatus(itemStatus);
                 }
             );
         }
     }
-
     private void RefreshItemLifted(int ItemId)
     {
         leftMouseAction = null;
@@ -662,7 +662,7 @@ public class PlayerControl : MonoBehaviour
 
         if (ItemId != -1)
         {
-            GameItemTool.GenerateItemAtTransform(ItemId, ItemLiftPostion, false,
+            GameItemTool.GenerateItemAtPosition(ItemId, ItemLiftPostion, false,
                 (item) =>
                 {
                     characterStat.LiftedItem = item;
@@ -674,7 +674,6 @@ public class PlayerControl : MonoBehaviour
             );
         }
     }
-
     private void UpdatePlayerAnimatorEnum()
     {
         SetPlayerAnimatorEnum((EPlayerAnimator)((int)MoveState + (int)HandState));

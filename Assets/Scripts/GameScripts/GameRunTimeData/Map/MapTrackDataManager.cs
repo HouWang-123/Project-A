@@ -79,12 +79,12 @@ public class MapTrackDataManager : SerializedMonoBehaviour
                 }
                 else
                 {
-                    GameItemTool.GenerateItemAtTransform(data.ID, data.Position, false, itembase =>
+                    GameItemTool.GenerateItemAtPosition(data.ID, data.Position, false, itembase =>
                     {
                         itembase.SetItemStatus(itemStatus);
-                        itembase.transform.SetParent(itemNode);
                         itembase.transform.localScale = data.Scale;
                         itembase.transform.eulerAngles = data.EulerAngle;
+                        itembase.transform.SetParent(itemNode);
                     });
                 }
             }

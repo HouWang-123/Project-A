@@ -8,6 +8,7 @@ using UnityEngine;
 
 public class RoomMono : MonoBehaviour
 {
+    public Transform RoomItemNode;
     private Rooms roomData;
     private Transform playerPoint;
     private GameObject SceneItemNode;
@@ -24,7 +25,7 @@ public class RoomMono : MonoBehaviour
     //public Transform monsterPoint;    // 怪物生成点（测试用）
     [Header("脚本谜题，如果房间没有谜题就设置为空")]
     public RoomRiddleMonoBase riddleGameObject; // 谜题脚本
-
+    
     private void Awake()
     {
         SceneItemNode = new GameObject("ItemNode");
@@ -103,6 +104,7 @@ public class RoomMono : MonoBehaviour
         }
         else
         {
+            Destroy(RoomItemNode.gameObject);
             GameRunTimeData.Instance.MapTrackDataManager.RecoverItemPoint(room.ID);
         }
 

@@ -100,7 +100,7 @@ public class ItemPointMono : MonoBehaviour , IInteractHandler , ITrackable
     {
         for(int i = 0; i < _itemPointStatus.itemIDs.Count; i++)
         {
-            GameItemTool.GenerateItemAtTransform(_itemPointStatus.itemIDs[i], transform);
+            GameItemTool.GenerateItemAtPosition(_itemPointStatus.itemIDs[i], transform);
         }
         _itemPointStatus.Created = true;
         UnRegisterTracker();

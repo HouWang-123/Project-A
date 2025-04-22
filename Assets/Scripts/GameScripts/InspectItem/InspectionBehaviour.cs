@@ -62,7 +62,11 @@ public class InspectionBehaviour : MonoBehaviour, IInteractHandler
         GameHUD.Instance.ResizeCursor(1f,0.2f);
         Debug.Log("=======FinishInterAction=======");    // 交互完成
         Debug.Log(InspectionData.ToString());
+        
+        
         // todo 打开检视UI界面
+        
+        
         EventManager.Instance.RunEvent(EventConstName.PlayerFinishInteraction);
     }
     public void OnPlayerInteractCancel()   // 交互取消

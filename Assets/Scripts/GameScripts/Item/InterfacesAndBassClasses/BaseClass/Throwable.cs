@@ -11,7 +11,15 @@ public class Throwable : ItemBase, ILiftable, IThrowable
     public Collider _collider;
     private float originalDamp;
     private bool ObjectStoped;
+
+    private ThrowableStatus _throwableStatus;
     // 物品初始化
+    public override void SetItemStatus(ItemStatus itemStatus)
+    {
+        base.SetItemStatus(itemStatus);
+        _throwableStatus = MyItemStatus as  ThrowableStatus;
+    }
+
     public override void InitItem(int id,TrackerData trackerData = null)
     {
         base.InitItem(id,trackerData);

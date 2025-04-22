@@ -23,7 +23,7 @@ public class HandleSWOffMono : BaseSWMono
     {
         base.OnPlayerInteract();
         
-        GameItemTool.GenerateItemAtTransform(220014, gameObject.transform.position, false, itembase =>
+        GameItemTool.GenerateItemAtPosition(220014, gameObject.transform.position, false, itembase =>
         {
             gameObject.SetActive(false);
             itembase.transform.SetParent(ItemNode);

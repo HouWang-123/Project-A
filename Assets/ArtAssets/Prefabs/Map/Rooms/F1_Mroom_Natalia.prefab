@@ -87,6 +87,39 @@ Transform:
   - {fileID: 5267133728842365676}
   m_Father: {fileID: 8206831356080259998}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &999163035152736599
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 32972157390411795}
+  m_Layer: 0
+  m_Name: RoomItemNode
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &32972157390411795
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 999163035152736599}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1573595133186861650}
+  - {fileID: 4624382460015375386}
+  m_Father: {fileID: 8206831356080259998}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1400903457248686271
 GameObject:
   m_ObjectHideFlags: 0
@@ -317,8 +350,7 @@ Transform:
   - {fileID: 7562373079979976702}
   - {fileID: 9034707457644725112}
   - {fileID: 6644368937064561745}
-  - {fileID: 2512872179767077855}
-  - {fileID: 1573595133186861650}
+  - {fileID: 32972157390411795}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6178767148014686312
@@ -333,6 +365,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10e438b2e0dbb584894d337df01b5f5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RoomItemNode: {fileID: 32972157390411795}
   riddleGameObject: {fileID: 0}
 --- !u!1 &4667788018268131347
 GameObject:
@@ -1587,25 +1620,25 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7392456787033143961, guid: 02c28663e3696e54a94a85e9a0fe2751, type: 3}
   m_PrefabInstance: {fileID: 3094100596468657022}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &3571971900903459293
+--- !u!1001 &6007987941287007768
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 8206831356080259998}
+    m_TransformParent: {fileID: 32972157390411795}
     m_Modifications:
     - target: {fileID: 1390964035880313346, guid: df503fc839580d441ac6c8ef1c1548d5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.3478954
+      value: 3.52
       objectReference: {fileID: 0}
     - target: {fileID: 1390964035880313346, guid: df503fc839580d441ac6c8ef1c1548d5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.0000009536743
+      value: -0.0000009536743
       objectReference: {fileID: 0}
     - target: {fileID: 1390964035880313346, guid: df503fc839580d441ac6c8ef1c1548d5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.2848358
+      value: -0.85
       objectReference: {fileID: 0}
     - target: {fileID: 1390964035880313346, guid: df503fc839580d441ac6c8ef1c1548d5, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1637,17 +1670,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3350307112600779601, guid: df503fc839580d441ac6c8ef1c1548d5, type: 3}
       propertyPath: m_Name
-      value: P_Item_Throw_WoodenCrate
+      value: P_Item_Throw_WoodenCrate (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: df503fc839580d441ac6c8ef1c1548d5, type: 3}
---- !u!4 &2512872179767077855 stripped
+--- !u!4 &4624382460015375386 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1390964035880313346, guid: df503fc839580d441ac6c8ef1c1548d5, type: 3}
-  m_PrefabInstance: {fileID: 3571971900903459293}
+  m_PrefabInstance: {fileID: 6007987941287007768}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6139917035872748471
 PrefabInstance:
@@ -1783,8 +1816,12 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 8206831356080259998}
+    m_TransformParent: {fileID: 32972157390411795}
     m_Modifications:
+    - target: {fileID: 2359343026047888821, guid: ced0b71816f212b42b5ef8f4a131a486, type: 3}
+      propertyPath: BasketBallCount
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 2752703774183345040, guid: ced0b71816f212b42b5ef8f4a131a486, type: 3}
       propertyPath: m_Mesh
       value: 

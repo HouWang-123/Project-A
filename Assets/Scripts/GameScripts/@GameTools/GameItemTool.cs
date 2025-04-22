@@ -70,7 +70,7 @@ public static class GameItemTool
     /// <param name="parent">父物体</param>
     /// <param name="ignoreAngleCorrect">是否忽略物品角度修正（45°朝向摄像机）</param>
     /// <param name="res">回调</param>
-    public static void GenerateItemAtTransform(int id, Transform parent, bool ignoreAngleCorrect = false, Action<ItemBase> res = null)
+    public static void GenerateItemAtPosition(int id, Transform parent, bool ignoreAngleCorrect = false, Action<ItemBase> res = null)
     {
         string uri = GetItemResourceData(id).PrefabName;
         if (uri != "")
@@ -102,7 +102,7 @@ public static class GameItemTool
     /// <param name="worldPos">世界坐标</param>
     /// <param name="ignoreAngleCorrect">是否忽略物品角度修正（45°朝向摄像机）</param>
     /// <param name="res">回调</param>
-    public static void GenerateItemAtTransform(int id, Vector3 worldPos,bool ignoreAngleCorrect = false, Action<ItemBase> res = null)
+    public static void GenerateItemAtPosition(int id, Vector3 worldPos,bool ignoreAngleCorrect = false, Action<ItemBase> res = null)
     {
         string uri = GetItemResourceData(id).PrefabName;
         if (uri != "")

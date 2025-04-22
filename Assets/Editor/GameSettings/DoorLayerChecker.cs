@@ -2,8 +2,6 @@ namespace Editor.GameSettings
 {
     using UnityEngine;
     using UnityEditor;
-    using System.IO;
-    using UnityEditor.SceneManagement;
 
     public class DoorLayerChecker : EditorWindow
     {

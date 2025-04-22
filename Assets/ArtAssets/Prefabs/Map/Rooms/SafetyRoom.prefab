@@ -533,6 +533,37 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.6886513, y: 14, z: 10.61}
   m_Center: {x: -0.15567416, y: -0.0000005082468, z: -1.6155871e-27}
+--- !u!1 &3707562291157482219
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5270872914396146521}
+  m_Layer: 0
+  m_Name: RoomItemNode
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5270872914396146521
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3707562291157482219}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8206831356080259998}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4131417124544354121
 GameObject:
   m_ObjectHideFlags: 0
@@ -678,6 +709,7 @@ Transform:
   - {fileID: 1433497231272455615}
   - {fileID: 2470391375222470857}
   - {fileID: 3577001999620005709}
+  - {fileID: 5270872914396146521}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6178767148014686312
@@ -692,6 +724,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10e438b2e0dbb584894d337df01b5f5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RoomItemNode: {fileID: 5270872914396146521}
   riddleGameObject: {fileID: 0}
 --- !u!1 &5660459224320369618
 GameObject:

@@ -20,7 +20,6 @@ public sealed partial class SceneObjects : Luban.BeanBase
         { if(!_buf["ID"].IsNumber) { throw new SerializationException(); }  ID = _buf["ID"]; }
         { if(!_buf["NAME"].IsNumber) { throw new SerializationException(); }  NAME = _buf["NAME"]; }
         { if(!_buf["DESCRIBE"].IsNumber) { throw new SerializationException(); }  DESCRIBE = _buf["DESCRIBE"]; }
-        { if(!_buf["interactEffectID"].IsNumber) { throw new SerializationException(); }  InteractEffectID = _buf["interactEffectID"]; }
         { if(!_buf["isDestructible"].IsBoolean) { throw new SerializationException(); }  IsDestructible = _buf["isDestructible"]; }
         { if(!_buf["durability"].IsNumber) { throw new SerializationException(); }  Durability = _buf["durability"]; }
         { if(!_buf["buffID"].IsNumber) { throw new SerializationException(); }  BuffID = _buf["buffID"]; }
@@ -48,10 +47,6 @@ public sealed partial class SceneObjects : Luban.BeanBase
     /// 描述
     /// </summary>
     public readonly int DESCRIBE;
-    /// <summary>
-    /// 玩家与其的交互是哪一种<br/>也就是说，在这个表里添加东西的话，要去func_InteractEffect.xlsx表里查询或添加交互显示
-    /// </summary>
-    public readonly int InteractEffectID;
     /// <summary>
     /// 是否可被武器攻击所破坏
     /// </summary>
@@ -95,7 +90,6 @@ public sealed partial class SceneObjects : Luban.BeanBase
         + "ID:" + ID + ","
         + "NAME:" + NAME + ","
         + "DESCRIBE:" + DESCRIBE + ","
-        + "interactEffectID:" + InteractEffectID + ","
         + "isDestructible:" + IsDestructible + ","
         + "durability:" + Durability + ","
         + "buffID:" + BuffID + ","
