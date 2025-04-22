@@ -6,7 +6,8 @@ public class F1_Mroom_5RiddleMono : RoomRiddleMonoBase
     {
         foreach (var item in riddleItems)
         {
-            if (item.gameObject.activeSelf && !item.IsDone)
+            var roomRiddleItem = item.GetComponent<IRoomRiddleItem>();
+            if (roomRiddleItem.GetGO().activeSelf && !roomRiddleItem.isItemDone())
             {
                 return false;
             }
@@ -18,8 +19,9 @@ public class F1_Mroom_5RiddleMono : RoomRiddleMonoBase
     {
         foreach (var item in riddleItems)
         {
+            IRoomRiddleItem roomRiddleItem = item.GetComponent<IRoomRiddleItem>();
             // 解开躲藏区域
-            if (item is HideAreaMono hideAreaMono)
+            if (roomRiddleItem is HideAreaMono hideAreaMono)
             {
                 hideAreaMono.gameObject.SetActive(true);
             }

@@ -1,35 +1,30 @@
 ﻿using System.Collections.Generic;
+using Sirenix.Utilities;
 using UnityEngine;
 // 房间谜题基类
 public abstract class RoomRiddleMonoBase : MonoBehaviour
 {
     [SerializeField]
     [Header("谜题物体")]
-    protected List<RoomRiddleItemBase> riddleItems;
+    protected List<GameObject> riddleItems;
     protected bool isRiddleReady = false;
 
     protected virtual void Awake()
     {
         // 确保列表已初始化
-        riddleItems ??= new List<RoomRiddleItemBase>();
+        riddleItems ??= new List<GameObject>();
         // 若列表为空，自动查找标签物体
         if (riddleItems.Count == 0)
         {
-            var riddleItems = transform.GetComponentsInChildren<RoomRiddleItemBase>();
-            if (riddleItems != null)
+            var riddleComponentsInChildren = transform.GetComponentsInChildren<IRoomRiddleItem>();
+            foreach (var VARIABLE in riddleComponentsInChildren)
             {
-                foreach (var item in riddleItems)
-                {
-                    this.riddleItems.Add(item);
-                }
+                riddleItems.Add(VARIABLE.GetGO());
             }
+            
         }
     }
 
-    protected virtual void Start()
-    {
-
-    }
     /// <summary>
     /// 谜题的前提条件
     /// </summary>

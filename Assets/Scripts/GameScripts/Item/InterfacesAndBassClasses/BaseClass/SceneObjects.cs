@@ -7,7 +7,7 @@ using YooAsset;
 public class SceneObjects : ItemBase , IInteractableItemReceiver
 {
     public cfg.item.SceneObjects data;
-
+    private GameInteractTip _interactTip;
     public override void InitItem(int id, TrackerData trackerData = null)
     {
         base.InitItem(id,trackerData);
@@ -42,12 +42,32 @@ public class SceneObjects : ItemBase , IInteractableItemReceiver
     // Interact
     public void OnPlayerFocus()
     {
-        
+        if (_interactTip == null)
+        {
+            AssetHandle loadAssetAsync = YooAssets.LoadAssetAsync<GameObject>("P_UI_WorldUI_InteractTip");
+            loadAssetAsync.Completed += (loadAssetAsync) =>
+            {
+                GameObject objAssetObject = loadAssetAsync.AssetObject as GameObject;
+                GameObject instantiate = Instantiate(objAssetObject);
+                instantiate.transform.position = transform.position;
+                instantiate.transform.position += new Vector3(0, 2f, 0);
+                instantiate.transform.localEulerAngles = GameConstData.DefAngles;
+                instantiate.transform.SetParent(transform);
+                _interactTip = instantiate.GetComponent<GameInteractTip>();
+                _interactTip.PlayInitAnimation();
+            };
+        }
+        else
+        {
+            _interactTip.PlayInitAnimation();
+        }
+
     }
 
     public void OnPlayerDefocus()
     {
-        
+        if(_interactTip == null) return;
+        _interactTip.OnDetargeted();
     }
 
     public MonoBehaviour getMonoBehaviour()
@@ -55,23 +75,33 @@ public class SceneObjects : ItemBase , IInteractableItemReceiver
         return this;
     }
 
-    public void OnPlayerStartInteract()
+    public virtual void OnPlayerStartInteract()
     {
         
     }
 
-    public void OnPlayerInteract()
+    public virtual void OnPlayerInteract()
     {
         
     }
-
-    public void OnPlayerInteractCancel()
+    
+    public virtual void OnPlayerInteractCancel()
     {
-
+        
     }
 
     public bool hasInteraction(int itemid) // interacted Item Id;
     {
-        return false;
+        return GameItemInteractionHub.HasInteract(itemid,ItemID);
+    }
+
+    public virtual void OnPlayerStartInteract(int itemid)
+    {
+        Debug.Log("交互成功，交互物品ID：" + itemid);
+    }
+
+    public virtual void OnPlayerFocus(int itemid)
+    {
+        Debug.Log(itemid);
     }
 }

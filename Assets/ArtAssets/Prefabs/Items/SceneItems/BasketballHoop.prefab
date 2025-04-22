@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4194259557327407337}
   - component: {fileID: 8127264137183126773}
   - component: {fileID: 2752703774183345040}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Renderer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -142,9 +142,9 @@ GameObject:
   - component: {fileID: 576101392016737071}
   - component: {fileID: 2359343026047888821}
   - component: {fileID: 5929554052436013169}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: BasketballHoop
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -198,6 +198,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ca175d6f8fa41245884560916bcfbda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ItemID: 220012
+  ItemType: 0
+  ItemRenderer: {fileID: 0}
+  oulineShader: {fileID: 0}
+  DefaultSpriteShader: {fileID: 0}
+  StackNuberText: {fileID: 0}
+  ItemSpriteName: 
+  PickUpTargeted: 0
+  DropState: 0
+  StackCount: 1
+  IsItemInPickupRange: 0
   riddleGameObject: {fileID: 0}
   skeletonAnimation: {fileID: 8127264137183126773}
   BasketBallCount: 1

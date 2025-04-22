@@ -17,7 +17,6 @@ public class GameHUD_AreaNotificationBehaviour : MonoBehaviour
 
     public void OnNotificationComplete()
     {
-        Debug.Log("StopAnimation");
         _animation.enabled = false;
     }
 }

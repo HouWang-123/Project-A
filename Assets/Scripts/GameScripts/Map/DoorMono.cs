@@ -8,7 +8,7 @@ using UnityEditor;
 
 public class DoorMono : MonoBehaviour, IInteractHandler
 {
-    public GameObject InteractTipPosition;
+    public GameInteractTip InteractTipPosition;
     [Header("通向的门ID")]
     public int ToDoorID;
     [Header("通向的RoomID")]
@@ -24,12 +24,12 @@ public class DoorMono : MonoBehaviour, IInteractHandler
     private void Awake()
     {
         doorEnabled = true;
-        InteractTipPosition = transform.Find("P_UI_WorldUI_InteractTip").gameObject;
+        InteractTipPosition = transform.Find("P_UI_WorldUI_InteractTip").gameObject.GetComponent<GameInteractTip>();
     }
 
     private void Start()
     {
-        InteractTipPosition.SetActive(false);
+        InteractTipPosition.gameObject.transform.localScale = Vector3.zero;
     }
 
     public void SetData(int v)
@@ -45,14 +45,15 @@ public class DoorMono : MonoBehaviour, IInteractHandler
 
     private void OnDrawGizmos()
     {
+        if(doorData ==null) return;
         Gizmos.color = Color.magenta;
         Gizmos.DrawSphere(transform.position,0.2f);
         Gizmos.color = Color.white;
         GUIStyle style = new GUIStyle();
         style.fontStyle = FontStyle.Bold;
         style.normal.textColor = Color.white;
-        if (doorData == null) return;
 #if UNITY_EDITOR
+
         Handles.Label(transform.position + Vector3.up * 2f, doorData.ID.ToString() , style);
 #endif
     }
@@ -72,25 +73,14 @@ public class DoorMono : MonoBehaviour, IInteractHandler
             playerinside = true;
             if (targeted)
             {
-                InteractTipPosition.SetActive(true);
+                InteractTipPosition.gameObject.SetActive(true);
+                InteractTipPosition.PlayInitAnimation();
             }
             // 测试房间解密专用
             // SpawnRiddleTestRoom();
         }
     }
-
-    private void FixedUpdate()
-    {
-        if (targeted && playerinside)
-        {
-            InteractTipPosition.SetActive(true);
-        }
-        else
-        {
-            InteractTipPosition.SetActive(false);
-        }
-    }
-
+    
     private void OnTriggerExit(Collider other)
     {
         if(other.gameObject.CompareTag("Player"))
@@ -98,7 +88,7 @@ public class DoorMono : MonoBehaviour, IInteractHandler
             doorEnabled = true;
             playerinside = false;
             TimeMgr.Instance.RemoveTask(EnterDoor);
-            InteractTipPosition.SetActive(false);
+            InteractTipPosition.OnDetargeted();
         }
     }
 
@@ -130,7 +120,7 @@ public class DoorMono : MonoBehaviour, IInteractHandler
         if (!doorEnabled) return;
         if (playerinside)
         {
-            InteractTipPosition.SetActive(true);
+            InteractTipPosition.PlayInitAnimation();
         }
 
     }
@@ -143,7 +133,7 @@ public class DoorMono : MonoBehaviour, IInteractHandler
         {
             return;
         }
-        InteractTipPosition.SetActive(false);
+        InteractTipPosition.OnDetargeted();
 
     }
 

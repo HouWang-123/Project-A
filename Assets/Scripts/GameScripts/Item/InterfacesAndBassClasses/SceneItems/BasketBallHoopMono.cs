@@ -1,12 +1,13 @@
 ﻿using Spine.Unity;
 using System;
 using System.Collections.Generic;
+using cfg.interact;
 using Spine;
 using UnityEngine;
 /// <summary>
 /// 篮球框的Mono
 /// </summary>
-public class BasketballHoopMono : RoomRiddleItemBase
+public class BasketballHoopMono : SceneObjects , IRoomRiddleItem
 {
     [Header("解密房间的引用")]
     public RoomRiddleMonoBase riddleGameObject;
@@ -16,6 +17,7 @@ public class BasketballHoopMono : RoomRiddleItemBase
     // 目前场景中篮球的数量
     public int BasketBallCount = 1;
     // 一个动画所需的篮球数
+    private bool isDone;
     private int basketNumPerStep;
     // 放入篮筐的篮球
     private Stack<Throwable> throwables;
@@ -48,7 +50,7 @@ public class BasketballHoopMono : RoomRiddleItemBase
             }
         }
     }
-
+    
     public void PushBasketBall(Throwable throwableCom)
     {
         // 根据放入篮筐的篮球数量判断应该播放哪个动画，篮筐一共有三个动画，step1、step2、step3
@@ -89,5 +91,30 @@ public class BasketballHoopMono : RoomRiddleItemBase
         {
             riddleGameObject.SetRiddle();
         }
+    }
+
+    public bool isItemDone()
+    {
+        return isDone;
+    }
+
+    public GameObject GetGO()
+    {
+        return gameObject;
+    }
+
+    // InteractFunctions
+    public override void OnPlayerStartInteract(int itemid)
+    {
+        base.OnPlayerStartInteract(itemid);
+    }
+
+    public override void OnPlayerFocus(int itemid)
+    {
+        base.OnPlayerFocus(itemid);
+        int findInteractEffectById = GameItemInteractionHub.FindInteractEffectById(itemid, ItemID);
+        InteractEffect interactEffect = GameTableDataAgent.InteractEffectTable.Get(findInteractEffectById);
+        string translation = LocalizationTool.Instance.GetTranslation(interactEffect.ShortText);
+        Debug.Log(translation);
     }
 }

@@ -70,14 +70,21 @@ public class GameRoot : MonoBehaviour
     private void GameStart()
     {
         GameRunTimeData.Instance.CharacterItemSlotData.SetMaxSlotCount(GameConstData.DEFAULT_SLOTCOUNT);
-        
         //Data
         GameTableDataAgent.LoadAllTable();
         
-        Invoke("ReadTableTest", 1f);
+        InitInteractions();
         
         UIManager.Instance.GetPanel(UIPanelConfig.MainPanel);
         UIManager.Instance.GetPanel(UIPanelConfig.LoadingPanel).GetComponent<UIBase>().Hide();
+    }
+
+    private void InitInteractions()
+    {
+        foreach (var effect in GameTableDataAgent.InteractEffectTable.DataList)
+        {
+            GameItemInteractionHub.InitInteraction(effect);
+        }
     }
     
 }

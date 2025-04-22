@@ -43,7 +43,10 @@ public abstract class ItemBase : MonoBehaviour, ITrackable, IInteractableItemHan
     {
         if (!ignoreAngleCorrect)
         {
-            ItemRenderer.transform.localEulerAngles = GameConstData.DefAngles;
+            if (ItemRenderer != null)
+            {
+                ItemRenderer.transform.localEulerAngles = GameConstData.DefAngles;
+            }
         }
 
         if (ItemData == null)

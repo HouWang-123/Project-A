@@ -229,6 +229,7 @@ public class RoomMono : MonoBehaviour
         style2.fontStyle = FontStyle.Bold;
         style2.normal.textColor = Color.white;
 #if UNITY_EDITOR
+        if(roomData == null) return;
         Handles.Label(transform.position + Vector3.up * 3.2f, roomData.NAME , style);
         Handles.Label(transform.position + Vector3.up * 3.4f, roomData.ID.ToString() , style2);
 #endif

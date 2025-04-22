@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 
 
-public class HideAreaMono : RoomRiddleItemBase
+public class HideAreaMono : MonoBehaviour, IRoomRiddleItem
 {
+    private bool isDone;
     // 如果另一个碰撞器进入了触发器，则调用 OnTriggerEnter
     private void OnTriggerEnter(Collider other)
     {
@@ -23,4 +24,13 @@ public class HideAreaMono : RoomRiddleItemBase
         }
     }
 
+    public bool isItemDone()
+    {
+        return isDone;
+    }
+
+    public GameObject GetGO()
+    {
+        return gameObject;
+    }
 }

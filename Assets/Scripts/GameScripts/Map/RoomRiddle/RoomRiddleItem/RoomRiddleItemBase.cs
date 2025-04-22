@@ -1,10 +1,9 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections;
 
-public class RoomRiddleItemBase : MonoBehaviour
+public interface IRoomRiddleItem
 {
-    // 该解密物体是否已经完成
-    protected bool isDone = false;
-	public bool IsDone { get => isDone; }
-    
+    bool isItemDone();
+    GameObject GetGO();
 }

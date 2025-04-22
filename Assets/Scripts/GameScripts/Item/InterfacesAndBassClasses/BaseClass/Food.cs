@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using YooAsset;
 
-public class Food : ItemBase,IStackable,IBuffedItem
+public class Food : ItemBase ,IPickUpable ,IStackable,IBuffedItem
 {
     public cfg.item.Food data;
     // 可能存在的抽象方法，子类实现方法体

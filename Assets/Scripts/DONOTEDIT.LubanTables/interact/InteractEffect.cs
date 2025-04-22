@@ -18,12 +18,11 @@ public sealed partial class InteractEffect : Luban.BeanBase
     public InteractEffect(JSONNode _buf) 
     {
         { if(!_buf["ID"].IsNumber) { throw new SerializationException(); }  ID = _buf["ID"]; }
-        { if(!_buf["NAME"].IsNumber) { throw new SerializationException(); }  NAME = _buf["NAME"]; }
-        { if(!_buf["DESCRIBE"].IsNumber) { throw new SerializationException(); }  DESCRIBE = _buf["DESCRIBE"]; }
-        { var __json0 = _buf["requiredWeaponID"]; if(!__json0.IsArray) { throw new SerializationException(); } RequiredWeaponID = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  RequiredWeaponID.Add(__v0); }   }
-        { var __json0 = _buf["requiredFoodID"]; if(!__json0.IsArray) { throw new SerializationException(); } RequiredFoodID = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  RequiredFoodID.Add(__v0); }   }
-        { var __json0 = _buf["requiredThrowID"]; if(!__json0.IsArray) { throw new SerializationException(); } RequiredThrowID = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  RequiredThrowID.Add(__v0); }   }
-        { var __json0 = _buf["requiredToolID"]; if(!__json0.IsArray) { throw new SerializationException(); } RequiredToolID = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  RequiredToolID.Add(__v0); }   }
+        { if(!_buf["ShortText"].IsNumber) { throw new SerializationException(); }  ShortText = _buf["ShortText"]; }
+        { if(!_buf["TipText"].IsNumber) { throw new SerializationException(); }  TipText = _buf["TipText"]; }
+        { if(!_buf["ToInteractItemID"].IsNumber) { throw new SerializationException(); }  ToInteractItemID = _buf["ToInteractItemID"]; }
+        { if(!_buf["InteractItemID"].IsNumber) { throw new SerializationException(); }  InteractItemID = _buf["InteractItemID"]; }
+        { if(!_buf["CodeExecuteID"].IsNumber) { throw new SerializationException(); }  CodeExecuteID = _buf["CodeExecuteID"]; }
     }
 
     public static InteractEffect DeserializeInteractEffect(JSONNode _buf)
@@ -36,26 +35,25 @@ public sealed partial class InteractEffect : Luban.BeanBase
     /// </summary>
     public readonly int ID;
     /// <summary>
-    /// 这里存放的是当满足条件时显示什么
+    /// 悬停到鼠标旁边的简短提示
     /// </summary>
-    public readonly int NAME;
+    public readonly int ShortText;
     /// <summary>
-    /// 这里存放的是不满足条件时，或没有条件要求时显示什么
+    /// 交互后的长文字提示
     /// </summary>
-    public readonly int DESCRIBE;
+    public readonly int TipText;
     /// <summary>
-    /// 当玩家接近交互为这个物品时，如果持有这个列表中任一一个ID的物品，就会显示Name字段的内容，否则出现【描述】字段的内容
+    /// 被交互物品ID
     /// </summary>
-    public readonly System.Collections.Generic.List<int> RequiredWeaponID;
-    public readonly System.Collections.Generic.List<int> RequiredFoodID;
+    public readonly int ToInteractItemID;
     /// <summary>
-    /// 可与之交互的投掷物品ID
+    /// 交互物品ID，-1表示空手交互
     /// </summary>
-    public readonly System.Collections.Generic.List<int> RequiredThrowID;
+    public readonly int InteractItemID;
     /// <summary>
-    /// 注意，功能描述未以字段形式配在该表中
+    /// 交互后额外执行的代码（使用策略模式）-1表示没有额外效果
     /// </summary>
-    public readonly System.Collections.Generic.List<int> RequiredToolID;
+    public readonly int CodeExecuteID;
    
     public const int __ID__ = -1473407425;
     public override int GetTypeId() => __ID__;
@@ -68,12 +66,11 @@ public sealed partial class InteractEffect : Luban.BeanBase
     {
         return "{ "
         + "ID:" + ID + ","
-        + "NAME:" + NAME + ","
-        + "DESCRIBE:" + DESCRIBE + ","
-        + "requiredWeaponID:" + Luban.StringUtil.CollectionToString(RequiredWeaponID) + ","
-        + "requiredFoodID:" + Luban.StringUtil.CollectionToString(RequiredFoodID) + ","
-        + "requiredThrowID:" + Luban.StringUtil.CollectionToString(RequiredThrowID) + ","
-        + "requiredToolID:" + Luban.StringUtil.CollectionToString(RequiredToolID) + ","
+        + "ShortText:" + ShortText + ","
+        + "TipText:" + TipText + ","
+        + "ToInteractItemID:" + ToInteractItemID + ","
+        + "InteractItemID:" + InteractItemID + ","
+        + "CodeExecuteID:" + CodeExecuteID + ","
         + "}";
     }
 }

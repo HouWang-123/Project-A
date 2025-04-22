@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
 using Random = System.Random;
 
 public class PlayerInteractController : MonoBehaviour
@@ -40,9 +41,7 @@ public class PlayerInteractController : MonoBehaviour
         {
             handler.OnPlayerDefocus();
         }
-        CurrentFocusedInteractHandler = interactHandler;
-        
-        if (CurrentFocusedInteractHandler is IInteractableItemReceiver receiver) // 需要玩家持有物品进行交互
+        if (CurrentFocusedInteractHandler is IInteractableItemReceiver receiver)
         {
             // 获取手中物品ID
             int InteractItemId = -1;
@@ -54,15 +53,18 @@ public class PlayerInteractController : MonoBehaviour
             {
                 InteractItemId = GameRunTimeData.Instance.CharacterBasicStat.GetStat().LiftedItem.ItemID;
             }
-            // 查找交互表
-            receiver.hasInteraction(InteractItemId);
-            // if()
+
+            int itemonhandid = GetOnHandItem();
+            if (receiver.hasInteraction(itemonhandid))
+            {
+                receiver.OnPlayerFocus(itemonhandid);
+            }
         }
-        else                                                                 // 不需要物品即可交互
+        else
         {
-            interactHandler.OnPlayerFocus();
+            CurrentFocusedInteractHandler = interactHandler;
+            CurrentFocusedInteractHandler.OnPlayerFocus();
         }
-        
     }
 
     private void ClearInteractHandler(IInteractHandler handler)
@@ -73,16 +75,33 @@ public class PlayerInteractController : MonoBehaviour
     {
         if (interactLock) return; //交互锁
         interactLock = true;
-
-        
-
-        
-        
-        if (CurrentFocusedInteractHandler != null)
+        if (CurrentFocusedInteractHandler == null)        // 是存在可交互的对象
         {
+            return;
+        }
+        if (CurrentFocusedInteractHandler is IInteractableItemReceiver receiver) // 需要玩家持有物品进行的特殊交互
+        {
+            // 获取手中物品ID
+            int InteractItemId = GetOnHandItem();
+            // 查找交互表
+            receiver.hasInteraction(InteractItemId);
+            
+            if (InteractItemId == -1)
+            {
+                Debug.Log("无物品交互");
+                receiver.OnPlayerStartInteract(-1);
+            }
+            else // 物品交互
+            {
+                Debug.Log("物品交互");
+                receiver.OnPlayerStartInteract(InteractItemId);
+            }
+        }
+        else                                                                 // 不需要物品即可直接交互
+        {
+            Debug.Log("不需要物品交互");
             CurrentFocusedInteractHandler.OnPlayerStartInteract();
         }
-        
     }
     public void PlayerCancleInteract()
     {
@@ -96,27 +115,25 @@ public class PlayerInteractController : MonoBehaviour
     }
     public void OnTriggerEnter(Collider other)
     {
-        IInteractHandler InteractHandler = other.gameObject.GetComponent<IInteractHandler>();
-        if (InteractHandler != null)
+        if (other.gameObject.GetComponent<IInteractHandler>() is { } interactHandler)
         {
-            InteractHandlerList.Add(InteractHandler);
-            ChangeToTargetItem(InteractHandler);
+            InteractHandlerList.Add(interactHandler);
+            ChangeToTargetItem(interactHandler);
         }
     }
 
     public void OnTriggerExit(Collider other)
     {
-        IInteractHandler InteractHandler = other.gameObject.GetComponent<IInteractHandler>();
-        if (InteractHandler != null)
+        IInteractHandler interactHandler = other.gameObject.GetComponent<IInteractHandler>();
+        if (interactHandler != null)
         {
-            InteractHandlerList.Contains(InteractHandler);
-            InteractHandler.OnPlayerDefocus();
+            interactHandler.OnPlayerDefocus();
             if (interactLock)
             {
-                InteractHandler.OnPlayerInteractCancel();
+                interactHandler.OnPlayerInteractCancel();
                 interactLock = false;
             }
-            InteractHandlerList.Remove(InteractHandler);
+            InteractHandlerList.Remove(interactHandler);
             if (InteractHandlerList.Count > 0)
             {
                 int count = InteractHandlerList.Count - 1;
@@ -125,5 +142,19 @@ public class PlayerInteractController : MonoBehaviour
                 ChangeToTargetItem(InteractHandlerList[newIndex]);
             }
         }
+    }
+
+    private int GetOnHandItem()
+    {
+        int interactItemId = -1;
+        if (GameRunTimeData.Instance.CharacterBasicStat.GetStat().ItemOnHand != null)
+        {
+            interactItemId = GameRunTimeData.Instance.CharacterBasicStat.GetStat().ItemOnHand.ItemID;
+        }
+        if (GameRunTimeData.Instance.CharacterBasicStat.GetStat().LiftedItem != null)
+        {
+            interactItemId = GameRunTimeData.Instance.CharacterBasicStat.GetStat().LiftedItem.ItemID;
+        }
+        return interactItemId;
     }
 }

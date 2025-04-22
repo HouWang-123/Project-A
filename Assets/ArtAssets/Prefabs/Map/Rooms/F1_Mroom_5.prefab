@@ -346,7 +346,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   riddleItems:
-  - {fileID: 7391171761715055573}
+  - {fileID: 0}
   - {fileID: 6719347853909110506}
 --- !u!1 &4667788018268131347
 GameObject:
@@ -2095,17 +2095,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7046925557125733558, guid: ced0b71816f212b42b5ef8f4a131a486, type: 3}
   m_PrefabInstance: {fileID: 5056599507233252960}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7391171761715055573 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2359343026047888821, guid: ced0b71816f212b42b5ef8f4a131a486, type: 3}
-  m_PrefabInstance: {fileID: 5056599507233252960}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ca175d6f8fa41245884560916bcfbda, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &5663196531171192188
 PrefabInstance:
   m_ObjectHideFlags: 0

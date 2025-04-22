@@ -305,6 +305,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4045574918917956485}
+  - component: {fileID: 2229616358025179623}
   m_Layer: 11
   m_Name: P_UI_WorldUI_InteractTip
   m_TagString: Item
@@ -328,3 +329,15 @@ Transform:
   - {fileID: 6189843880678646485}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
+--- !u!114 &2229616358025179623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4034735270642118622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4dd6378c94619e4eab4fb9110f4e868, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
