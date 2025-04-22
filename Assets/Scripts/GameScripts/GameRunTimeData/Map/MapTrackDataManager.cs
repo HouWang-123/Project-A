@@ -84,7 +84,7 @@ public class MapTrackDataManager : SerializedMonoBehaviour
                         itembase.SetItemStatus(itemStatus);
                         itembase.transform.localScale = data.Scale;
                         itembase.transform.eulerAngles = data.EulerAngle;
-                        itembase.transform.SetParent(itemNode);
+                        // itembase.transform.SetParent(itemNode);
                     });
                 }
             }

@@ -28,11 +28,3 @@ public interface IInteractableItemReceiver : IInteractHandler   // 需要物品�
 }
 
 
-
-public interface IInteractableItemHandler
-{
-    int GetInteractItemId();
-    void HandleInteract();
-
-}
-
