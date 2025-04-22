@@ -53,11 +53,13 @@ public class CharacterStat
             itemOnHand = value;
             if(itemOnHand != null)
             {
-                EventManager.Instance.RunEvent<EPAHandState>(EventConstName.PlayerHandItem, EPAHandState.Hand);
+                EventManager.Instance.RunEvent(EventConstName.OnPlayerHandItemChanges_Animation, EPAHandState.Hand);
+                EventManager.Instance.RunEvent(EventConstName.OnPlayerHandItemChanges_Item);
             }
             else
             {
-                EventManager.Instance.RunEvent<EPAHandState>(EventConstName.PlayerHandItem, EPAHandState.Default);
+                EventManager.Instance.RunEvent(EventConstName.OnPlayerHandItemChanges_Animation, EPAHandState.Default);
+                EventManager.Instance.RunEvent(EventConstName.OnPlayerHandItemChanges_Item);
             }
         }
     }
@@ -70,11 +72,13 @@ public class CharacterStat
             liftedItem = value;
             if(liftedItem != null)
             {
-                EventManager.Instance.RunEvent<EPAHandState>(EventConstName.PlayerHandItem, EPAHandState.Head);
+                EventManager.Instance.RunEvent(EventConstName.OnPlayerHandItemChanges_Animation, EPAHandState.Head);
+                EventManager.Instance.RunEvent(EventConstName.OnPlayerHandItemChanges_Item);
             }
             else
             {
-                EventManager.Instance.RunEvent<EPAHandState>(EventConstName.PlayerHandItem, EPAHandState.Default);
+                EventManager.Instance.RunEvent(EventConstName.OnPlayerHandItemChanges_Animation, EPAHandState.Default);
+                EventManager.Instance.RunEvent(EventConstName.OnPlayerHandItemChanges_Item);
             }
         }
     }

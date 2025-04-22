@@ -26,6 +26,7 @@ public static class GameItemInteractionHub
     /// <returns></returns>
     public static bool HasInteract(int ItemA, int ItemB)
     {
+        if (!InterActionList.ContainsKey(ItemA)) return false;
         if (InterActionList[ItemA].Contains(ItemB)) return true;
         return false;
     }

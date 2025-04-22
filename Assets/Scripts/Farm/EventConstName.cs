@@ -4,7 +4,8 @@
     public const string GAME_SETTINGS_TRANSLATION_CHANGES = "gamesettings.translationChanges";
 
     //玩家手中的物品变更事件
-    public const string PlayerHandItem = "PlayerHandItem";
+    public const string OnPlayerHandItemChanges_Animation = "PlayerHandItem";
+    public const string OnPlayerHandItemChanges_Item = "PlayerHandItem_ID";
     public const string OnChangeRoom = "Scene.OnChangeRoom";
 
     //玩家收到伤害动画事件

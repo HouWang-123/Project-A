@@ -15,8 +15,13 @@ public class PlayerInteractController : MonoBehaviour
     {
         EventManager.Instance.RegistEvent(EventConstName.PlayerFinishInteraction, PlayerCancleInteract);
         EventManager.Instance.RegistEvent<IInteractHandler>(EventConstName.OnInteractiveDestory, ClearInteractHandler);
+        EventManager.Instance.RegistEvent(EventConstName.OnPlayerHandItemChanges_Item, OnPlayerItemChanges);
     }
 
+    private void OnPlayerItemChanges()
+    {
+        ChangeToTargetItem(CurrentFocusedInteractHandler);
+    }
     public void FixedUpdate()
     {
         Vector2 mousePosition = Mouse.current.position.ReadValue();
@@ -36,11 +41,15 @@ public class PlayerInteractController : MonoBehaviour
 
     private void ChangeToTargetItem(IInteractHandler interactHandler)
     {
+
         InteractHandlerList.Remove(InteractHandlerList.Find(x => x.getMonoBehaviour() == null));
         foreach (var handler in InteractHandlerList)
         {
             handler.OnPlayerDefocus();
         }
+        
+        CurrentFocusedInteractHandler = interactHandler;
+        if (CurrentFocusedInteractHandler == null) return;
         if (CurrentFocusedInteractHandler is IInteractableItemReceiver receiver)
         {
             // 获取手中物品ID
@@ -140,6 +149,10 @@ public class PlayerInteractController : MonoBehaviour
                 Random r = new Random();
                 int newIndex = r.Next(0,count);
                 ChangeToTargetItem(InteractHandlerList[newIndex]);
+            }
+            else
+            {
+                CurrentFocusedInteractHandler = null;
             }
         }
     }

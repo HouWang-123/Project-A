@@ -34,13 +34,23 @@ public class SceneObjects : ItemBase , IInteractableItemReceiver
         }
         return Instantiate(loadAssetSync.AssetObject, transform) as Sprite;
     }
-    public override string GetPrefabName()
-    {
-        return data.PrefabName;
-    }
-    
+    public override string GetPrefabName() { return data.PrefabName; }
     // Interact
-    public void OnPlayerFocus()
+    public void OnPlayerDefocus()
+    {
+        if(_interactTip == null) return;
+        _interactTip.OnDetargeted();
+    }
+    public bool hasInteraction(int itemid) // interacted Item Id;
+    {
+        return GameItemInteractionHub.HasInteract(itemid,ItemID);
+    }
+    public virtual void OnPlayerStartInteract(int itemid)
+    {
+        Debug.Log("交互成功，交互物品ID：" + itemid);
+    }
+
+    public virtual void OnPlayerFocus(int itemid)
     {
         if (_interactTip == null)
         {
@@ -61,47 +71,13 @@ public class SceneObjects : ItemBase , IInteractableItemReceiver
         {
             _interactTip.PlayInitAnimation();
         }
-
-    }
-
-    public void OnPlayerDefocus()
-    {
-        if(_interactTip == null) return;
-        _interactTip.OnDetargeted();
-    }
-
-    public MonoBehaviour getMonoBehaviour()
-    {
-        return this;
-    }
-
-    public virtual void OnPlayerStartInteract()
-    {
-        
-    }
-
-    public virtual void OnPlayerInteract()
-    {
-        
     }
     
-    public virtual void OnPlayerInteractCancel()
-    {
-        
-    }
-
-    public bool hasInteraction(int itemid) // interacted Item Id;
-    {
-        return GameItemInteractionHub.HasInteract(itemid,ItemID);
-    }
-
-    public virtual void OnPlayerStartInteract(int itemid)
-    {
-        Debug.Log("交互成功，交互物品ID：" + itemid);
-    }
-
-    public virtual void OnPlayerFocus(int itemid)
-    {
-        Debug.Log(itemid);
-    }
+    
+    // notused implements
+    public virtual void OnPlayerStartInteract(){}
+    public virtual void OnPlayerInteract(){}
+    public virtual void OnPlayerInteractCancel(){}
+    public MonoBehaviour getMonoBehaviour() { return this; }
+    public void OnPlayerFocus(){}
 }

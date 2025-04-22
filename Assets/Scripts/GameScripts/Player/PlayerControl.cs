@@ -250,7 +250,7 @@ public class PlayerControl : MonoBehaviour
 
         #region EventSystem
 
-        EventManager.Instance.RegistEvent<EPAHandState>(EventConstName.PlayerHandItem, SetHandState);
+        EventManager.Instance.RegistEvent<EPAHandState>(EventConstName.OnPlayerHandItemChanges_Animation, SetHandState);
         EventManager.Instance.RegistEvent(EventConstName.PlayerHurtAnimation, PlayerHurt);
         EventManager.Instance.RegistEvent(EventConstName.PlayerOnDeadAnimation, PlayerDead);
 
@@ -417,7 +417,7 @@ public class PlayerControl : MonoBehaviour
     private void OnDestroy()
     {
         Instance = null;
-        EventManager.Instance.RemoveEvent<EPAHandState>(EventConstName.PlayerHandItem, SetHandState);
+        EventManager.Instance.RemoveEvent<EPAHandState>(EventConstName.OnPlayerHandItemChanges_Animation, SetHandState);
         EventManager.Instance.RemoveEvent(EventConstName.PlayerHurtAnimation, PlayerHurt);
         EventManager.Instance.RemoveEvent(EventConstName.PlayerOnDeadAnimation, PlayerDead);
     }
