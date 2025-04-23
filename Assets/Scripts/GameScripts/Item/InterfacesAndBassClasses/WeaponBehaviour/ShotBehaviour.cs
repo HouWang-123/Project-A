@@ -40,8 +40,6 @@ public class ShotBehaviour : BaseWeaponBehavior
     {
         GameObject bullet = GameObjectPool.Instance.GetObject(BulletPrefab, -WeaponID);
         Process(bullet.GetComponent<BulletBehaviour>());
-        
-        Debug.Log("Damage!" + damageAmount);
         void Process(BulletBehaviour bulletBehaviour)
         {
             bulletBehaviour.SetInitialDamage(damageAmount);

@@ -95,6 +95,35 @@ public static class GameItemTool
             }
         }
     }
+    
+    
+    public static void GenerateItemAtPosition(int id, Transform parent,Vector3 localpostion, bool ignoreAngleCorrect = false, Action<ItemBase> res = null)
+    {
+        string uri = GetItemResourceData(id).PrefabName;
+        if (uri != "")
+        {
+            ItemBase ib;
+            if (YooAssets.CheckLocationValid(uri))
+            {
+                AssetHandle loadAssetAsync = YooAssets.LoadAssetAsync<GameObject>(uri);
+                loadAssetAsync.Completed += handle =>
+                {
+                    GameObject instantiate = GameObject.Instantiate(loadAssetAsync.AssetObject, parent) as GameObject;
+                    instantiate.transform.localPosition = localpostion;
+                    ib = instantiate.GetComponent<ItemBase>();
+                    ib.SetItemId(id); 
+                    ib.SetIgnoreAngle(ignoreAngleCorrect);
+                    res?.Invoke(ib);
+                    loadAssetAsync.Release();
+                };
+            }
+            else
+            {
+                Debug.LogWarning("预制体 " + uri + " 没有找到");
+            }
+        }
+    }
+    
     /// <summary>
     /// 物品生成
     /// </summary>
@@ -114,7 +143,8 @@ public static class GameItemTool
                 loadAssetAsync.Completed += handle =>
                 {
                     GameObject instantiate = GameObject.Instantiate(loadAssetAsync.AssetObject) as GameObject;
-                    instantiate.transform.position = worldPos; ib = instantiate.GetComponent<ItemBase>();
+                    instantiate.transform.position = worldPos;
+                    ib = instantiate.GetComponent<ItemBase>();
                     ib.SetItemId(id); 
                     ib.SetIgnoreAngle(ignoreAngleCorrect);
                     res?.Invoke(ib);

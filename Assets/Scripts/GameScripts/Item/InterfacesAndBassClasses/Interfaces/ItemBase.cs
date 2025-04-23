@@ -24,7 +24,7 @@ public abstract class ItemBase : MonoBehaviour, ITrackable
     private GameItemPickupTip pickupTips;
     protected bool IsholdByPlayer;
     protected ItemStatus MyItemStatus;
-
+    private Vector3 originalInitPosition;
     public virtual ItemStatus GetItemStatus()
     {
         return MyItemStatus;
@@ -51,6 +51,7 @@ public abstract class ItemBase : MonoBehaviour, ITrackable
 
     protected virtual void Start()
     {
+        originalInitPosition = transform.position;
         if (!ignoreAngleCorrect)
         {
             if (ItemRenderer != null)
@@ -58,12 +59,10 @@ public abstract class ItemBase : MonoBehaviour, ITrackable
                 ItemRenderer.transform.localEulerAngles = GameConstData.DefAngles;
             }
         }
-
         if (ItemData == null)
         {
             InitItem(ItemID); // 非动态生成的物品，拖拽进入的物品
         }
-
         GenerateItemStatus();
         CheckIsStackedItem();
         SetRendererImage();
@@ -200,11 +199,17 @@ public abstract class ItemBase : MonoBehaviour, ITrackable
     private Vector3 velocity = GameConstData.VthrowSpeed;
     private float H_BiasSpeed;
 
+    private float ttl = 0f;
     // 物品掉落相关物理逻辑
     protected virtual void FixedUpdate()
     {
+        ttl += Time.deltaTime;
         F_Update_ItemDorp();
         F_UpdateWeaponCDRecover();
+        if (ttl < 0.05)
+        {
+            transform.position = originalInitPosition;
+        }
     }
 
     protected virtual void F_UpdateWeaponCDRecover()
@@ -337,7 +342,7 @@ public abstract class ItemBase : MonoBehaviour, ITrackable
         return new TrackerData(
             ItemID,
             TrackType.Item,
-            new Vector3(transform.position.x, 0, transform.position.z),
+            new Vector3(transform.position.x, transform.position.y, transform.position.z),
             transform.eulerAngles,
             transform.localScale,
             MyItemStatus // 自定义状态，自行实现相关的类
@@ -365,7 +370,7 @@ public abstract class ItemBase : MonoBehaviour, ITrackable
 
     public void ChangeToItem(int id)
     {
-        GameItemTool.GenerateItemAtPosition(id, transform.position);
+        GameItemTool.GenerateItemAtPosition(id, transform.parent, transform.localPosition);
         Destroy(gameObject);
     }
 }

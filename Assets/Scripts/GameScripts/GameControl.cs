@@ -2,6 +2,7 @@
 using YooAsset;
 using cfg.scene;
 using System.Collections.Generic;
+using FEVM.Timmer;
 using Unity.Cinemachine;
 using UnityEngine.Rendering.Universal;
 
@@ -70,8 +71,9 @@ public class GameControl
     {
         RoomMono mono = InitRoom(RoomId);
         if (mono == null) return;
-        
-        GameRunTimeData.Instance.MapTrackDataManager.RecoverItem(room.ID,sceneItemNode.transform);
+
+            GameRunTimeData.Instance.MapTrackDataManager.RecoverItem(room.ID,sceneItemNode.transform);
+
         EventManager.Instance.RunEvent(EventConstName.OnChangeRoom);
         mono.SetPlayPoint(DoorId);
     }
@@ -96,6 +98,9 @@ public class GameControl
     }
     private (GameObject,Rooms) GetRoomObject(int RoomId)
     {
+        GameRunTimeData.Instance.MapTrackDataManager.SaveTrackerData(room.ID);
+        
+        
         Rooms roomData = GameTableDataAgent.RoomsTable.Get(RoomId);
         if (roomData == null)
         {
@@ -107,7 +112,8 @@ public class GameControl
             Debug.LogWarning("没有对应的预制体 " + roomData.PrefabName);
             return (null,null);
         }
-        GameRunTimeData.Instance.MapTrackDataManager.SaveTrackerData(room.ID);
+
+        
         GameHUD.Instance.OnAreaNotificaiton(roomData.NAME);
         GameObject RoomObject;
         AssetHandle handle = YooAssets.LoadAssetSync<GameObject>(roomData.PrefabName);
