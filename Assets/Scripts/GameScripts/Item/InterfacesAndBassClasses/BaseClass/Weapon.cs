@@ -66,11 +66,15 @@ public class Weapon : ItemBase, ISlotable , IPickUpable
     }
     public override void OnRightInteract( )
     {
-        
+        base.OnRightInteract();
     }
     
     public override void OnLeftInteract( )
     {
+        if (startactionTime < 0.1f)
+        {
+            return;
+        }
         OnWeaponAttack();
     }
 

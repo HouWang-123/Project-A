@@ -203,6 +203,7 @@ public abstract class ItemBase : MonoBehaviour, ITrackable
     // 物品掉落相关物理逻辑
     protected virtual void FixedUpdate()
     {
+        startactionTime += Time.deltaTime;
         ttl += Time.deltaTime;
         F_Update_ItemDorp();
         F_UpdateWeaponCDRecover();
@@ -261,6 +262,7 @@ public abstract class ItemBase : MonoBehaviour, ITrackable
     // 物品拾取和丢弃
     public virtual void OnItemPickUp()
     {
+        startactionTime = 0;
         if (pickupTips != null) pickupTips.OnItemPicked();
         IsholdByPlayer = true;
         UnRegisterTracker();
@@ -297,6 +299,7 @@ public abstract class ItemBase : MonoBehaviour, ITrackable
     {
     }
 
+    protected float startactionTime;
     // Fixed Update 调用
     public virtual void OnLeftInteract()
     {

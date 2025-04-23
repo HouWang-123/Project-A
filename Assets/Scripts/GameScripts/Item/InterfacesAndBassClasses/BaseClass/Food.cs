@@ -59,17 +59,24 @@ public class Food : ItemBase ,IPickUpable ,IStackable,IBuffedItem
     }
     public override void OnRightInteract()
     {
+        if (startactionTime < 0.1f)
+        {
+            return;
+        }
         Debug.Log("食物右键");
     }
 
     public override void OnLeftInteract()
     {
+        if (startactionTime < 0.1f)
+        {
+            return;
+        }
         Debug.Log("食物左键");
     }
-    // todo
     public int GetBuffId()
     {
-        throw new NotImplementedException();
+        return data.BuffID;
     }
 
     public int GetItemId()

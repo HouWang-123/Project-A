@@ -16,7 +16,7 @@ public static partial class GameInteractSystemExtendedCode
         // 删除手中的篮球
         if (ExecuteID == 1000)
         {
-            Execute_1000(Source,Target);
+            Execute_1000(Source);
         }
         if (ExecuteID == 1001)
         {
@@ -52,18 +52,14 @@ public static partial class GameInteractSystemExtendedCode
         }
     }
 
-    private static void Execute_1000(GameObject source ,GameObject Target)
+    private static void Execute_1000(GameObject source)
     {
         BasketballHoopMono basketballHoopMono = source.transform.GetComponent<BasketballHoopMono>();
 
         GameObject itemBaseGameObject = GameRunTimeData.Instance.CharacterBasicStat.GetStat().LiftedItem.gameObject;
         basketballHoopMono.PushBasketBall();
         PlayerControl.Instance.DropItem(false);
-        TimeMgr.Instance.AddTask(0.3f,false, () =>
-        {
-            GameObject.Destroy(itemBaseGameObject);
-        });
-
+        GameObject.Destroy(itemBaseGameObject);
     }
     private static void Execute_1001(GameObject Target)
     {

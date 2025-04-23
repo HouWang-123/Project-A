@@ -1,6 +1,5 @@
 ﻿using System;
 using UnityEngine;
-using UnityEngine.Serialization;
 using YooAsset;
 
 public class Tool : ItemBase, ISlotable , IPickUpable
@@ -80,7 +79,7 @@ public class Tool : ItemBase, ISlotable , IPickUpable
     
     public override void OnRightInteract( )
     {
-        
+        base.OnRightInteract();
     }
 
     protected override void FixedUpdate()
@@ -99,6 +98,10 @@ public class Tool : ItemBase, ISlotable , IPickUpable
     private bool actioned = false;
     public override void OnLeftInteract( )
     {
+        if (startactionTime < 0.1f)
+        {
+            return;
+        }
         SwitchCD += Time.deltaTime;
         if (actioned)
         {

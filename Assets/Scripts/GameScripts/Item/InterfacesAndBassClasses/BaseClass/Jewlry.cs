@@ -34,11 +34,13 @@ public class Jewlry : ItemBase
     
     public override void OnRightInteract( )
     {
+        base.OnRightInteract();
         throw new NotImplementedException();
     }
 
     public override void OnLeftInteract( )
     {
+        base.OnLeftInteract();
         throw new NotImplementedException();
     }
 }
