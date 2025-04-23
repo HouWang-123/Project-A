@@ -44,7 +44,7 @@ public class SoundSWGroup : MonoBehaviour
     bool EvaluateCondition()
     {
         int blockedCount = 0;
-        foreach (var s in switches)
+            foreach (var s in switches)
         {
             if (s.IsBlocked) blockedCount++;
         }
