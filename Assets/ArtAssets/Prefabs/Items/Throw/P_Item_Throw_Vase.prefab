@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 0139aa62a73fbd244a2ddad5321c6178, type: 3}
+  m_Sprite: {fileID: 21300000, guid: cc533c7c15fcba84aa67c8496312fa27, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -100,7 +100,7 @@ GameObject:
   - component: {fileID: 8999491622445608955}
   - component: {fileID: 448177074615543536}
   m_Layer: 12
-  m_Name: P_Item_Throw_WoodenCrate
+  m_Name: P_Item_Throw_Vase
   m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -134,7 +134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 609e14423eed9eb40874530bce01ba9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ItemID: 230001
+  ItemID: 230003
   ItemType: 0
   ItemRenderer: {fileID: 5502388850923554619}
   oulineShader: {fileID: -6465566751694194690, guid: 098b3234e69aa004eae9c50eabd09355, type: 3}
@@ -194,5 +194,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.63053864, y: 0.6869375, z: 0.40732253}
-  m_Center: {x: -0.0051314533, y: 0.34166184, z: -0.008979976}
+  m_Size: {x: 0.5039848, y: 0.7192089, z: 0.25512803}
+  m_Center: {x: 0.0012407303, y: 0.35960445, z: -0.00093871355}
