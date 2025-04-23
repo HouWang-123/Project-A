@@ -28,3 +28,11 @@ public class MessagePool : SingleDataMgr<MessagePool>
         return messageDict.ContainsKey(receiverId) && messageDict[receiverId].Count > 0;
     }
 }
+
+public partial class MessageExecutor
+{
+    public void ExecuteMessage(string mes)
+    {
+        
+    }
+}

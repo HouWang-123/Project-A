@@ -15,7 +15,8 @@ public class BasketballHoopMono : SceneObjects, IRoomRiddleItem
     [SerializeField] [Header("骨骼动画组件")] private SkeletonAnimation skeletonAnimation;
 
     // 目前场景中篮球的数量
-    public int BasketBallCount = 1;
+    private bool statusFromeTracker;
+    public int BasketBallCount;
     private int _basketNumPerStep;
     // 放入篮筐的篮球
 
@@ -42,9 +43,20 @@ public class BasketballHoopMono : SceneObjects, IRoomRiddleItem
     protected override void Start()
     {
         base.Start();
-        _basketNumPerStep = Convert.ToInt32(Math.Ceiling(Convert.ToDouble(BasketBallCount / 3.0)));
-        TrackEntry trackEntry = skeletonAnimation.AnimationState.SetAnimation(0, "step1", false);
-        trackEntry.TimeScale = 0f;
+        if (!statusFromeTracker)
+        {
+            _basketballHoopStatus.BasketBallCount = BasketBallCount;
+            _basketNumPerStep = Convert.ToInt32(Math.Ceiling(Convert.ToDouble(_basketballHoopStatus.BasketBallCount / 3.0)));
+            TrackEntry trackEntry = skeletonAnimation.AnimationState.SetAnimation(0, "step1", false);
+            trackEntry.TimeScale = 0f;
+        }
+        else
+        {
+            SetAnimation();
+        }
+
+
+
     }
 
     // 如果另一个碰撞器进入了触发器，则调用 OnTriggerEnter
@@ -64,7 +76,7 @@ public class BasketballHoopMono : SceneObjects, IRoomRiddleItem
     public void PushBasketBall()
     {
         // 根据放入篮筐的篮球数量判断应该播放哪个动画，篮筐一共有三个动画，step1、step2、step3
-        if (_basketballHoopStatus.MyBasketballs < BasketBallCount)
+        if (_basketballHoopStatus.MyBasketballs < _basketballHoopStatus.BasketBallCount)
         {
             _basketballHoopStatus.MyBasketballs++;
             SetAnimation();
@@ -141,19 +153,16 @@ public class BasketballHoopMono : SceneObjects, IRoomRiddleItem
     public override void SetItemStatus(ItemStatus itemStatus)
     {
         base.SetItemStatus(itemStatus);
-        BasketballHoopStatus = MyItemStatus as BasketballHoopStatus;
-        _basketNumPerStep = Convert.ToInt32(Math.Ceiling(Convert.ToDouble(BasketBallCount / 3.0)));
-        SetAnimation();
+        statusFromeTracker = true;
+        BasketballHoopStatus basketballHoopStatus = MyItemStatus as BasketballHoopStatus;
+        BasketballHoopStatus = basketballHoopStatus;
+        _basketNumPerStep = Convert.ToInt32(Math.Ceiling(Convert.ToDouble(BasketballHoopStatus.BasketBallCount / 3.0)));
     }
 }
 
 public class BasketballHoopStatus : ItemStatus
 {
     public int BasketBallCount;
-
-    // 一个动画所需的篮球数
     public bool isDone;
-
-    // 放入篮筐的篮球
     public int MyBasketballs;
 }

@@ -2009,7 +2009,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2359343026047888821, guid: ced0b71816f212b42b5ef8f4a131a486, type: 3}
       propertyPath: BasketBallCount
-      value: 9
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2752703774183345040, guid: ced0b71816f212b42b5ef8f4a131a486, type: 3}
       propertyPath: m_Mesh
