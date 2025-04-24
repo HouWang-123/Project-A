@@ -184,8 +184,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2, y: 1.481255, z: 0.7323225}
-  m_Center: {x: 0, y: 0.57562757, z: 0.36594632}
+  m_Size: {x: 2, y: 1.2930402, z: 0.7323225}
+  m_Center: {x: 0, y: 0.6465201, z: 0.36594632}
 --- !u!114 &2359343026047888821
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -209,6 +209,7 @@ MonoBehaviour:
   DropState: 0
   StackCount: 1
   IsItemInPickupRange: 0
+  ChangeToItemId: 0
   riddleGameObject: {fileID: 0}
   skeletonAnimation: {fileID: 8127264137183126773}
   BasketBallCount: 1
@@ -219,7 +220,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8646974580354826199}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: dcf64e7d7448f3449b85de434617a214, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 4096

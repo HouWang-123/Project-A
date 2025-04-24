@@ -8,7 +8,7 @@
     "buffID": 0,
     "buffTime": 0,
     "attack": 0,
-    "IconName": "Icon_Item_SceneItem_Sawdust",
+    "IconName": "",
     "SpriteName": "Sprite_Item_SceneItem_Sawdust",
     "PrefabName": "P_Item_SceneItem_Sawdust"
   },
@@ -21,7 +21,7 @@
     "buffID": 0,
     "buffTime": 0,
     "attack": 14,
-    "IconName": "Icon_Item_SceneItem_BurningSawdust",
+    "IconName": "",
     "SpriteName": "Sprite_Item_SceneItem_BurningSawdust",
     "PrefabName": "P_Item_SceneItem_BurningSawdust"
   },
@@ -34,7 +34,7 @@
     "buffID": 0,
     "buffTime": 0,
     "attack": 8,
-    "IconName": "Icon_Item_SceneItem_DeadVase",
+    "IconName": "",
     "SpriteName": "Sprite_Item_SceneItem_DeadVase",
     "PrefabName": "P_Item_SceneItem_DeadVase"
   },
@@ -47,7 +47,7 @@
     "buffID": 0,
     "buffTime": 0,
     "attack": 0,
-    "IconName": "Icon_Item_SceneItem_BigBell",
+    "IconName": "",
     "SpriteName": "Sprite_Item_SceneItem_BigBell",
     "PrefabName": "P_Item_SceneItem_BigBell"
   },
@@ -60,7 +60,7 @@
     "buffID": 0,
     "buffTime": 0,
     "attack": 0,
-    "IconName": "Icon_Item_SceneItem_Anvil",
+    "IconName": "",
     "SpriteName": "Sprite_Item_SceneItem_Anvil",
     "PrefabName": "P_Item_SceneItem_Anvil"
   },
@@ -73,7 +73,7 @@
     "buffID": 0,
     "buffTime": 0,
     "attack": 0,
-    "IconName": "Icon_Item_SceneItem_Charger",
+    "IconName": "",
     "SpriteName": "Sprite_Item_SceneItem_Charger",
     "PrefabName": "P_Item_SceneItem_Charger"
   },
@@ -86,7 +86,7 @@
     "buffID": 0,
     "buffTime": 0,
     "attack": 0,
-    "IconName": "Icon_Item_SceneItem_Vine",
+    "IconName": "",
     "SpriteName": "Sprite_Item_SceneItem_Vine",
     "PrefabName": "P_Item_SceneItem_Vine"
   },
@@ -99,7 +99,7 @@
     "buffID": 0,
     "buffTime": 0,
     "attack": 0,
-    "IconName": "Icon_Item_SceneItem_Locker",
+    "IconName": "",
     "SpriteName": "Sprite_Item_SceneItem_Locker",
     "PrefabName": "P_Item_SceneItem_Locker"
   },
@@ -112,7 +112,7 @@
     "buffID": 0,
     "buffTime": 0,
     "attack": 0,
-    "IconName": "Icon_Item_SceneItem_Book",
+    "IconName": "",
     "SpriteName": "Sprite_Item_SceneItem_Book",
     "PrefabName": "P_Item_SceneItem_Book"
   },
@@ -125,7 +125,7 @@
     "buffID": 0,
     "buffTime": 0,
     "attack": 0,
-    "IconName": "Icon_Item_SceneItem_SkeletonPile",
+    "IconName": "",
     "SpriteName": "Sprite_Item_SceneItem_SkeletonPile",
     "PrefabName": "P_Item_SceneItem_SkeletonPile"
   },
@@ -138,7 +138,7 @@
     "buffID": 0,
     "buffTime": 0,
     "attack": 14,
-    "IconName": "Icon_Item_SceneItem_Fire",
+    "IconName": "",
     "SpriteName": "Sprite_Item_SceneItem_Fire",
     "PrefabName": "P_Item_SceneItem_Fire"
   },
@@ -164,7 +164,7 @@
     "buffID": 0,
     "buffTime": 0,
     "attack": 0,
-    "IconName": "Icon_Item_SceneItem_HandleOff",
+    "IconName": "",
     "SpriteName": "Sprite_Item_SceneItem_HandleOff",
     "PrefabName": "P_Item_SceneItem_HandleOff"
   },
@@ -177,7 +177,7 @@
     "buffID": 0,
     "buffTime": 0,
     "attack": 0,
-    "IconName": "Icon_Item_SceneItem_HandleOn",
+    "IconName": "",
     "SpriteName": "Sprite_Item_SceneItem_HandleOn",
     "PrefabName": "P_Item_SceneItem_HandleOn"
   },
@@ -190,7 +190,7 @@
     "buffID": 0,
     "buffTime": 0,
     "attack": 0,
-    "IconName": "Icon_Item_SceneItem_SwitchLightOff",
+    "IconName": "",
     "SpriteName": "Sprite_Item_SceneItem_SwitchLightOff",
     "PrefabName": "P_Item_SceneItem_SwitchLightOff"
   },
@@ -203,7 +203,7 @@
     "buffID": 0,
     "buffTime": 0,
     "attack": 0,
-    "IconName": "Icon_Item_SceneItem_SwitchLightOn",
+    "IconName": "",
     "SpriteName": "Sprite_Item_SceneItem_SwitchLightOn",
     "PrefabName": "P_Item_SceneItem_SwitchLightOn"
   },
@@ -216,7 +216,7 @@
     "buffID": 0,
     "buffTime": 0,
     "attack": 0,
-    "IconName": "Icon_Item_SceneItem_SwitchSoundOff",
+    "IconName": "",
     "SpriteName": "Sprite_Item_SceneItem_SwitchSoundOff",
     "PrefabName": "P_Item_SceneItem_SwitchSoundOff"
   },
@@ -229,7 +229,7 @@
     "buffID": 0,
     "buffTime": 0,
     "attack": 0,
-    "IconName": "Icon_Item_SceneItem_SwitchSoundOn",
+    "IconName": "",
     "SpriteName": "Sprite_Item_SceneItem_SwitchSoundOn",
     "PrefabName": "P_Item_SceneItem_SwitchSoundOn"
   }

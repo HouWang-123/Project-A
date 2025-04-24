@@ -95,9 +95,13 @@ public class Throwable : ItemBase, ILiftable, IThrowable
         ThrowableRigidbody.WakeUp();
 
         PlayerControl.Instance.DropItem(false); // ------------ 这里会调用 OnItemDrop();
-        TimeMgr.Instance.AddTask(0.1f, false, () => { IsholdByPlayer = false; });
     }
 
+    private void EnableColiders()
+    {
+        IsholdByPlayer = false;
+        _collider.enabled = true;
+    }
     public override void OnItemDrop(bool fastDrop, bool IgnoreBias = false, bool Playerreversed = false)
     {
         RegisterTracker();
@@ -107,12 +111,15 @@ public class Throwable : ItemBase, ILiftable, IThrowable
 
         ThrowableRigidbody.WakeUp();
         ObjectStoped = false;
-        TimeMgr.Instance.AddTask(0.1f, false, () =>
-        {
-            IsholdByPlayer = false;
-            _collider.enabled = true;
-        });
+        TimeMgr.Instance.AddTask(0.1f, false, EnableColiders);
     }
+
+    protected override void OnDestroy()
+    {
+        base.OnDestroy();
+        TimeMgr.Instance.RemoveTask(EnableColiders);
+    }
+
     protected override void FixedUpdate()
     {
         base.FixedUpdate();

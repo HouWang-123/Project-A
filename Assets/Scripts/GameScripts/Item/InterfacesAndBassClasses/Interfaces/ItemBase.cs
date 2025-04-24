@@ -83,13 +83,12 @@ public abstract class ItemBase : MonoBehaviour, ITrackable
         MyItemStatus = new ItemStatus();
     }
 
-    public void OnDestroy()
+    protected virtual void OnDestroy()
     {
         if (pickupTips != null)
         {
             pickupTips.OnItemPicked();
         }
-
         UnRegisterTracker();
     }
 

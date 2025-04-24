@@ -3,6 +3,7 @@ using YooAsset;
 using cfg.scene;
 using System.Collections.Generic;
 using FEVM.Timmer;
+using Sirenix.OdinInspector;
 using Unity.Cinemachine;
 using UnityEngine.Rendering.Universal;
 
@@ -152,11 +153,8 @@ public class GameControl
     {
         if(playerObj == null)
         {
-            
             // 角色数据设置
             GameRunTimeData.Instance.CharacterBasicStat.InitCharacter(PlayerId);
-            
-            
             AssetHandle handle = YooAssets.LoadAssetSync<GameObject>("Player000");
             playerObj = Object.Instantiate(handle.AssetObject) as GameObject;
             playerObj.name = "Player000";
@@ -224,5 +222,20 @@ public class GameControl
         GameRunTimeData.Instance.MapTrackDataManager.RecoverItem(room.ID,sceneItemNode.transform);
         EventManager.Instance.RunEvent(EventConstName.OnChangeRoom);
         playerObj.transform.position = Vector3.zero;
+    }
+    
+    public void GivePlayerItem(int ItemId)
+    {
+        Vector3 pos = new Vector3(1000, 1000, 1000);
+        GameItemTool.GenerateItemAtPosition(ItemId,pos,false, item =>
+        {
+            PlayerControl.PickItem(item);
+            GameObject.Destroy(item.gameObject,0.02f);
+        });
+    }
+
+    public void PlayerDropFromSky()
+    {
+        PlayerControl.Instance.DropFromSky();
     }
 }

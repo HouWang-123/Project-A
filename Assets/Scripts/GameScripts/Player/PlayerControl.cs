@@ -2,7 +2,6 @@
 using YooAsset;
 using UnityEngine.Events;
 using Spine.Unity;
-using System;
 using Spine;
 using UnityEngine.InputSystem;
 
@@ -22,7 +21,7 @@ public class PlayerControl : MonoBehaviour
     private LayerMask FloorBaseLayer;
     public Vector3 PlayerLookatDirection;
     public Vector3 ScreenToWorldPostion;
-    
+    public bool PlayerDropping;
     public bool InteractionButtonPressed;
     
     
@@ -299,18 +298,6 @@ public class PlayerControl : MonoBehaviour
         PlayerLookatDirection = (ScreenToWorldPostion - transform.position).normalized;
     }
 
-    private void OnDrawGizmos()
-    {
-        float lineLength = 1f; // 可自由调整长度
-        Vector3 lineEndPoint = transform.position + PlayerLookatDirection * lineLength;
-
-        Gizmos.DrawLine(transform.position, lineEndPoint);
-        Gizmos.color = Color.green;
-        Gizmos.DrawSphere(ScreenToWorldPostion, 0.1f);
-        Gizmos.color = Color.cyan;
-        Gizmos.DrawSphere(PlayerLookatDirection, 0.1f);
-    }
-
     Vector3 u, v, l, a, b;
     float angle;
 
@@ -424,6 +411,10 @@ public class PlayerControl : MonoBehaviour
 
     private void PlayerMove(Vector3 vector, float speed)
     {
+        if (PlayerDropping)
+        {
+            return;
+        }
         vector.z = vector.y;
         vector.y = 0;
         if ((vector - Vector3.zero).sqrMagnitude > 0.01)
@@ -518,35 +509,46 @@ public class PlayerControl : MonoBehaviour
         return null;
     }
 
-    private bool PickUpValidation()
+    private bool PickUpValidation(ItemBase itemBase)  // 用于判断哪些情况下玩家无法拾取物品
     {
-        if (_pickupController.currentPickup == null)
+
+        if (characterStat.LiftedItem != null)  // 手中有举起的物品
         {
             return false;
         }
-        if (_pickupController.currentPickup.DropState)
+        if (itemBase != null)                  // 通过代码从外部获取
+        {
+            return true;
+        }
+        if (PlayerDropping)                    // 玩家从空中掉落
         {
             return false;
         }
-        if (characterStat.LiftedItem != null)
+        if (_pickupController.currentPickup == null)  // 拾取器没有物品
+        {
+            return false;
+        }
+        if (_pickupController.currentPickup.DropState) // 拾取器中的物品正在掉落
         {
             return false;
         }
         return true;
     }
-    public bool PickItem() // 拾取物品
+    public bool PickItem(ItemBase ExternalItem = null) // 拾取物品
     {
         if (GameRunTimeData.Instance.CharacterBasicStat.GetStat().Dead) return false;
-
-        if (!PickUpValidation())
+        if (!PickUpValidation(ExternalItem))
             return false;
-
         pickupLock = true;
-
         ItemBase toPickUpItem;
-        toPickUpItem = _pickupController.currentPickup;
-        
-        // GameRunTimeData.Instance.ItemManager.UnRegistItem(toPickUpItem);
+        if (ExternalItem == null)
+        {
+            toPickUpItem = _pickupController.currentPickup;
+        }
+        else
+        {
+            toPickUpItem = ExternalItem;
+        }
         if (toPickUpItem is IDataItem @base)
         {
             @base.OnItemGet();
@@ -554,7 +556,7 @@ public class PlayerControl : MonoBehaviour
         }
         if (toPickUpItem is ISlotable)
         {
-            // 背包数据更新
+            // 物品栏数据更新
             bool stackOverFlowed;
             int Restult = GameRunTimeData.Instance.CharacterItemSlotData.InsertOrUpdateItemSlotData(toPickUpItem, out stackOverFlowed);
             if (toPickUpItem is IStackable)
@@ -576,9 +578,7 @@ public class PlayerControl : MonoBehaviour
                     }
                 }
             }
-
-            // 一般逻辑
-            if (Restult != -1) // 可以拾取物品
+            if (Restult != -1)
             {
                 _pickupController.PlayerPickupItem();
                 _pickupController.ChangeNextPickupTarget();
@@ -601,7 +601,6 @@ public class PlayerControl : MonoBehaviour
                     Destroy(characterStat.ItemOnHand.gameObject);
                     characterStat.ItemOnHand = null;
                 }
-
                 _pickupController.PlayerPickupItem();
                 characterStat.LiftedItem = toPickUpItem;
                 RefreshItemLifted(toPickUpItem.ItemID);
@@ -609,7 +608,6 @@ public class PlayerControl : MonoBehaviour
                 GameHUD.Instance.slotManager.DisableHud(false, null);
             }
         }
-
         return true;
     }
     private void RefreshItemOnHand((int, ItemStatus) Item)
@@ -740,6 +738,23 @@ public class PlayerControl : MonoBehaviour
             if (trackEntry.Animation.Name.Equals(EPlayerAnimator.Hurt.ToString()))
             {
                 isMove = true;
+            }
+        }
+    }
+    [ContextMenu("DropFromSkey")]
+    public void DropFromSky()
+    {
+        PlayerDropping = true;
+        transform.position = new Vector3(transform.position.x, 10, transform.position.z);
+    }
+
+    public void OnCollisionEnter(Collision other)
+    {
+        if (PlayerDropping)
+        {
+            if (other.gameObject.layer == 7)
+            {
+                PlayerDropping = false;
             }
         }
     }

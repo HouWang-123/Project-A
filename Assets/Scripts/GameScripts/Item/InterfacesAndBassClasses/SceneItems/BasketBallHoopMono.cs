@@ -65,6 +65,10 @@ public class BasketballHoopMono : SceneObjects, IRoomRiddleItem
         // 是否为篮球
         if (other.TryGetComponent<Throwable>(out Throwable throwableCom))
         {
+            if (isItemDone())
+            {
+                return;
+            }
             if (throwableCom.ItemID == 230002)
             {
                 Destroy(other.gameObject);
@@ -83,39 +87,74 @@ public class BasketballHoopMono : SceneObjects, IRoomRiddleItem
         }
     }
 
+    private bool GetBaseketball = false;
+    public void GetBasketball()
+    {
+        GetBaseketball = true;
+        _basketballHoopStatus.MyBasketballs--;
+        SetAnimation();
+        
+    }
     private void SetAnimation()
     {
-        skeletonAnimation.state.SetEmptyAnimation(0, 0.1f); // 停止当前轨道的动画
-        if (_basketballHoopStatus.MyBasketballs % _basketNumPerStep == 0)
+        Debug.Log("篮球框容量" + _basketballHoopStatus.BasketBallCount);
+        Debug.Log("篮球框个数" + _basketballHoopStatus.MyBasketballs);
+        if (statusFromeTracker || GetBaseketball)
         {
-            if (_basketballHoopStatus.MyBasketballs / _basketNumPerStep == 0)
+            skeletonAnimation.state.SetEmptyAnimation(0, 0.1f); // 停止当前轨道的动画
+            if (_basketballHoopStatus.MyBasketballs == 0)
             {
-                TrackEntry trackEntry2 = skeletonAnimation.state.SetAnimation(0,
-                    $"step1", false);
-                trackEntry2.TimeScale = 1f;
-                return;
+                TrackEntry trackEntry = skeletonAnimation.AnimationState.SetAnimation(0, "step1", false);
+                trackEntry.TimeScale = 0f;
             }
-            TrackEntry trackEntry = skeletonAnimation.state.SetAnimation(0,
-                $"step{_basketballHoopStatus.MyBasketballs / _basketNumPerStep}", false);
-            trackEntry.TimeScale = 1f;
+            else if (_basketballHoopStatus.MyBasketballs % _basketNumPerStep == 0)
+            {
+                TrackEntry trackEntry = skeletonAnimation.state.SetAnimation(0,
+                    $"step{_basketballHoopStatus.MyBasketballs / _basketNumPerStep}", false);
+                trackEntry.TimeScale = 999999f;
+            }
+            else if (_basketballHoopStatus.MyBasketballs == _basketballHoopStatus.BasketBallCount)
+            {
+                TrackEntry trackEntry = skeletonAnimation.state.SetAnimation(0, "step3", false);
+                trackEntry.TimeScale = 999999f;
+                // 生成安全区域
+                _basketballHoopStatus.isDone = true;
+            }
+            statusFromeTracker = false;
+            GetBaseketball = false;
         }
-        else if (_basketballHoopStatus.MyBasketballs == BasketBallCount)
+        else
+        {
+            skeletonAnimation.state.SetEmptyAnimation(0, 0.1f); // 停止当前轨道的动画
+            if (_basketballHoopStatus.MyBasketballs % _basketNumPerStep == 0)
+            {
+                if (_basketballHoopStatus.MyBasketballs / _basketNumPerStep == 0)
+                {
+                    TrackEntry trackEntry2 = skeletonAnimation.state.SetAnimation(0,
+                        $"step1", false);
+                    trackEntry2.TimeScale = 1f;
+                    return;
+                }
+                TrackEntry trackEntry = skeletonAnimation.state.SetAnimation(0,
+                    $"step{_basketballHoopStatus.MyBasketballs / _basketNumPerStep}", false);
+                trackEntry.TimeScale = 1f;
+            }
+        }
+        if (_basketballHoopStatus.MyBasketballs == _basketballHoopStatus.BasketBallCount)
         {
             TrackEntry trackEntry = skeletonAnimation.state.SetAnimation(0, "step3", false);
             trackEntry.TimeScale = 1f;
             // 生成安全区域
             _basketballHoopStatus.isDone = true;
-            SpawnSafeArea();
+            //todo 启用安全区
         }
-    }
-    private void SpawnSafeArea()
-    {
-        if (riddleGameObject != null)
+        else
         {
-            riddleGameObject.SetRiddle();
+            _basketballHoopStatus.isDone = false;
+            //todo 禁用安全区
         }
     }
-
+    
     public bool isItemDone()
     {
         return _basketballHoopStatus.isDone;
@@ -157,6 +196,11 @@ public class BasketballHoopMono : SceneObjects, IRoomRiddleItem
         BasketballHoopStatus basketballHoopStatus = MyItemStatus as BasketballHoopStatus;
         BasketballHoopStatus = basketballHoopStatus;
         _basketNumPerStep = Convert.ToInt32(Math.Ceiling(Convert.ToDouble(BasketballHoopStatus.BasketBallCount / 3.0)));
+    }
+
+    public int MyBasketballCount()
+    {
+        return _basketballHoopStatus.MyBasketballs;
     }
 }
 

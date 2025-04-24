@@ -11,15 +11,32 @@ public class GameRoot : MonoBehaviour
     ResourcePackage package;
     public LayerMask FloorLayer;
     
+    [HorizontalGroup("Columns")]
+    [BoxGroup("Columns/传送", showLabel: true)]
     [LabelText("传送ID")]
     public int TPRoomID;
 
-
+    [BoxGroup("Columns/传送")]
     [Button("点击传送")]
     private void TeleportPlayer()
     {
         GameControl.Instance.TeleportPlayer(TPRoomID);
     }
+
+    [HorizontalGroup("Columns")]
+    [BoxGroup("Columns/物品", showLabel: true)]
+    [LabelText("物品ID")]
+    [GUIColor(1f, 1f, 0)]
+    public int GiveMeItemId;
+
+    [BoxGroup("Columns/物品")]
+    [GUIColor(1f, 1f, 0)]
+    [Button("获取物品")]
+    public void GiveMeItem()
+    {
+        GameControl.Instance.GivePlayerItem(GiveMeItemId);
+    }
+    
     
     
     private void Awake()
@@ -86,5 +103,4 @@ public class GameRoot : MonoBehaviour
             GameItemInteractionHub.InitInteraction(effect);
         }
     }
-    
 }

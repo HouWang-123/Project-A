@@ -8,6 +8,7 @@ public static partial class GameInteractSystemExtendedCode
     
     public static void ExecuteInteraction(int ExecuteID , GameObject Source = null ,GameObject Target = null)
     {
+        Debug.Log("拓展交互执行 " + ExecuteID);
         if (ExecuteID == -1)
         {
             return;
@@ -20,7 +21,7 @@ public static partial class GameInteractSystemExtendedCode
         }
         if (ExecuteID == 1001)
         {
-            Execute_1001(Target);
+            Execute_1001(Source);
         }
         if (ExecuteID == 1002)
         {
@@ -55,15 +56,26 @@ public static partial class GameInteractSystemExtendedCode
     private static void Execute_1000(GameObject source)
     {
         BasketballHoopMono basketballHoopMono = source.transform.GetComponent<BasketballHoopMono>();
-
+        if (basketballHoopMono.isItemDone())
+        {
+            return;
+        }
         GameObject itemBaseGameObject = GameRunTimeData.Instance.CharacterBasicStat.GetStat().LiftedItem.gameObject;
         basketballHoopMono.PushBasketBall();
         PlayerControl.Instance.DropItem(false);
         GameObject.Destroy(itemBaseGameObject);
     }
-    private static void Execute_1001(GameObject Target)
+    private static void Execute_1001(GameObject source)
     {
+        BasketballHoopMono basketballHoopMono = source.transform.GetComponent<BasketballHoopMono>();
+        int myBasketballCount = basketballHoopMono.MyBasketballCount();
+        if (myBasketballCount > 0)
+        {
+            basketballHoopMono.GetBasketball();
+            GameControl.Instance.GivePlayerItem(230002);
+        }
         
+        Debug.Log("取出篮球");
     }
     private static void Execute_1002(GameObject Target)
     {
