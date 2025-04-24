@@ -7,8 +7,11 @@ public class GameRoot : MonoBehaviour
 {
     [HideInInspector] public static GameRoot Instance;
     public Collider camCollider;
+    [GUIColor(0,1,1)]
     public EPlayMode PlayMode = EPlayMode.EditorSimulateMode;
+    
     ResourcePackage package;
+    
     public LayerMask FloorLayer;
     
     [HorizontalGroup("Columns")]
