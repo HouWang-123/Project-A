@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6935201018336784430}
   - component: {fileID: 8327775092844613863}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Renderer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,9 +99,9 @@ GameObject:
   - component: {fileID: 8358407524103592}
   - component: {fileID: 1015273873669468263}
   - component: {fileID: 3964198083286325680}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: P_Item_SceneItem_HandleOff
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -115,7 +115,7 @@ Transform:
   m_GameObject: {fileID: 3350307112600779601}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.1401978, y: -0.3510614, z: 5.1589384}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -145,6 +145,7 @@ MonoBehaviour:
   DropState: 0
   StackCount: 1
   IsItemInPickupRange: 0
+  ChangeToItemId: 0
 --- !u!65 &1015273873669468263
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -164,8 +165,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.14, y: 2, z: 0.20717245}
-  m_Center: {x: -0.020958468, y: 0.049236774, z: 0.014853269}
+  m_Size: {x: 0.7932196, y: 0.80831456, z: 0.20717245}
+  m_Center: {x: 0.021429628, y: 0.40415728, z: 0.014853269}
 --- !u!114 &3964198083286325680
 MonoBehaviour:
   m_ObjectHideFlags: 0

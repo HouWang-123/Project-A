@@ -25,6 +25,7 @@ public abstract class ItemBase : MonoBehaviour, ITrackable
     protected bool IsholdByPlayer;
     protected ItemStatus MyItemStatus;
     private Vector3 originalInitPosition;
+
     public virtual ItemStatus GetItemStatus()
     {
         return MyItemStatus;
@@ -59,10 +60,12 @@ public abstract class ItemBase : MonoBehaviour, ITrackable
                 ItemRenderer.transform.localEulerAngles = GameConstData.DefAngles;
             }
         }
+
         if (ItemData == null)
         {
             InitItem(ItemID); // 非动态生成的物品，拖拽进入的物品
         }
+
         GenerateItemStatus();
         CheckIsStackedItem();
         SetRendererImage();
@@ -89,6 +92,7 @@ public abstract class ItemBase : MonoBehaviour, ITrackable
         {
             pickupTips.OnItemPicked();
         }
+
         UnRegisterTracker();
     }
 
@@ -167,7 +171,7 @@ public abstract class ItemBase : MonoBehaviour, ITrackable
                 pickupTips.PlayInitAnimation();
                 return;
             }
-            
+
             LoadPickupTipUI();
         }
         else
@@ -185,7 +189,6 @@ public abstract class ItemBase : MonoBehaviour, ITrackable
     // 动态生成时必须调用一次初始化，用来设置物品数据
     public virtual void InitItem(int id, TrackerData trackerdata = null)
     {
-        
     }
 
     public abstract Sprite GetItemIcon();
@@ -199,6 +202,7 @@ public abstract class ItemBase : MonoBehaviour, ITrackable
     private float H_BiasSpeed;
 
     private float ttl = 0f;
+
     // 物品掉落相关物理逻辑
     protected virtual void FixedUpdate()
     {
@@ -299,6 +303,7 @@ public abstract class ItemBase : MonoBehaviour, ITrackable
     }
 
     protected float startactionTime;
+
     // Fixed Update 调用
     public virtual void OnLeftInteract()
     {
@@ -370,9 +375,18 @@ public abstract class ItemBase : MonoBehaviour, ITrackable
         ChangeToItem(ChangeToItemId);
     }
 
-    public void ChangeToItem(int id)
+    /// <summary>
+    /// 回调表示对生成后的物体做后续操作
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="callback"></param>
+    public void ChangeToItem(int id, Action<ItemBase> callback = null)
     {
-        GameItemTool.GenerateItemAtPosition(id, transform.parent, transform.localPosition);
+        GameItemTool.GenerateItemAtPosition(id, transform.parent, transform.localPosition,
+            res: (item) =>
+            {
+                callback.Invoke(item);
+            });
         Destroy(gameObject);
     }
 }
