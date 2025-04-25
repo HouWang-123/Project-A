@@ -23,7 +23,6 @@ public class SceneObjects : ItemBase , IInteractableItemReceiver
             Debug.LogError("场景物品ID" + ItemID +"不存在，物品名称" + gameObject.name);
         }
         ItemSpriteName = data.SpriteName;
-        
     }
     public override Sprite GetItemIcon()
     {
@@ -35,21 +34,13 @@ public class SceneObjects : ItemBase , IInteractableItemReceiver
         return Instantiate(loadAssetSync.AssetObject, transform) as Sprite;
     }
     public override string GetPrefabName() { return data.PrefabName; }
-    // Interact
     public void OnPlayerDefocus()
     {
         if(_interactTip == null) return;
         _interactTip.OnDetargeted();
     }
-    public bool hasInteraction(int itemid) // interacted Item Id;
-    {
-        return GameItemInteractionHub.HasInteract(itemid,ItemID);
-    }
-    public virtual void OnPlayerStartInteract(int itemid)
-    {
-        Debug.Log("交互成功，交互物品ID：" + itemid);
-    }
-
+    public bool hasInteraction(int itemid) { return GameItemInteractionHub.HasInteract(itemid,ItemID); }
+    public virtual void OnPlayerStartInteract(int itemid) { Debug.Log("交互成功，交互物品ID：" + itemid); }
     public virtual void OnPlayerFocus(int itemid)
     {
         if (_interactTip == null)
@@ -73,11 +64,14 @@ public class SceneObjects : ItemBase , IInteractableItemReceiver
         }
     }
     
-    
-    // notused implements
     public virtual void OnPlayerStartInteract(){}
     public virtual void OnPlayerInteract(){}
     public virtual void OnPlayerInteractCancel(){}
+    public virtual void UpdateInteractHandler(ItemBase updated, IInteractHandler old)
+    {
+        Debug.Log("更新交互列表");
+        PlayerControl.Instance.GetInteractController().UpdateInteractController(updated,old);
+    }
     public MonoBehaviour getMonoBehaviour() { return this; }
     public void OnPlayerFocus(){}
 }

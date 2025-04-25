@@ -258,6 +258,10 @@ public class PlayerControl : MonoBehaviour
         GameHUD.Instance.SetPlayerItemTransform(useObjParent);
     }
 
+    public PlayerInteractController GetInteractController()
+    {
+        return _interactController;
+    }
     private void FixedUpdate()
     {
         GameRunTimeData.Instance.CharacterBasicStat.UpdatePlayerStat();

@@ -10,7 +10,6 @@ public class PlayerInteractController : MonoBehaviour
     public LayerMask InteractiveLayer;
     public IInteractHandler CurrentFocusedInteractHandler;
     public bool interactLock;
-
     private void Start()
     {
         EventManager.Instance.RegistEvent(EventConstName.PlayerFinishInteraction, PlayerCancleInteract);
@@ -39,41 +38,48 @@ public class PlayerInteractController : MonoBehaviour
         }
     }
 
+    public void UpdateInteractController(ItemBase itemBase,IInteractHandler old)
+    {
+        InteractHandlerList.Remove(old);
+        if (itemBase is IInteractHandler)
+        {
+            if (itemBase.gameObject.GetComponent<IInteractHandler>() is { } interactHandler)
+            {
+                InteractHandlerList.Add(interactHandler);
+                ChangeToTargetItem(interactHandler);
+            }
+        }
+    }
+    public void UpdateInteractController(ItemBase itemBase)
+    {
+        if (itemBase is IInteractHandler)
+        {
+            if (itemBase.gameObject.GetComponent<IInteractHandler>() is { } interactHandler)
+            {
+                InteractHandlerList.Add(interactHandler);
+                ChangeToTargetItem(interactHandler);
+            }
+        }
+    }
     private void ChangeToTargetItem(IInteractHandler interactHandler)
     {
-
         InteractHandlerList.Remove(InteractHandlerList.Find(x => x.getMonoBehaviour() == null));
         foreach (var handler in InteractHandlerList)
         {
             handler.OnPlayerDefocus();
         }
-        
         CurrentFocusedInteractHandler = interactHandler;
         if (CurrentFocusedInteractHandler == null) return;
         if (CurrentFocusedInteractHandler is IInteractableItemReceiver receiver)
         {
-            // 获取手中物品ID
-            int InteractItemId = -1;
-            if (GameRunTimeData.Instance.CharacterBasicStat.GetStat().ItemOnHand != null)
-            {
-                InteractItemId = GameRunTimeData.Instance.CharacterBasicStat.GetStat().ItemOnHand.ItemID;
-            }
-            if (GameRunTimeData.Instance.CharacterBasicStat.GetStat().LiftedItem != null)
-            {
-                InteractItemId = GameRunTimeData.Instance.CharacterBasicStat.GetStat().LiftedItem.ItemID;
-            }
-
             int itemonhandid = GetOnHandItem();
             if (receiver.hasInteraction(itemonhandid))
             {
                 receiver.OnPlayerFocus(itemonhandid);
             }
         }
-        else
-        {
-            CurrentFocusedInteractHandler = interactHandler;
-            CurrentFocusedInteractHandler.OnPlayerFocus();
-        }
+        CurrentFocusedInteractHandler = interactHandler;
+        CurrentFocusedInteractHandler.OnPlayerFocus();
     }
 
     private void ClearInteractHandler(IInteractHandler handler)
@@ -119,12 +125,12 @@ public class PlayerInteractController : MonoBehaviour
             CurrentFocusedInteractHandler.OnPlayerInteractCancel();
         }
         interactLock = false;
-        
     }
     public void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.GetComponent<IInteractHandler>() is { } interactHandler)
         {
+            if (interactHandler == CurrentFocusedInteractHandler) return;
             InteractHandlerList.Add(interactHandler);
             ChangeToTargetItem(interactHandler);
         }
@@ -141,6 +147,7 @@ public class PlayerInteractController : MonoBehaviour
                 interactHandler.OnPlayerInteractCancel();
                 interactLock = false;
             }
+            InteractHandlerList.Remove(InteractHandlerList.Find(x => x.getMonoBehaviour() == null));
             InteractHandlerList.Remove(interactHandler);
             if (InteractHandlerList.Count > 0)
             {

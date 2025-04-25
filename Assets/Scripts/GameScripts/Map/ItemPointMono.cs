@@ -136,6 +136,11 @@ public class ItemPointMono : MonoBehaviour , IInteractHandler , ITrackable
     {
         
     }
+
+    public void UpdateInteractHandler(ItemBase updated)
+    {
+    }
+
     // 场景追踪
     public void RegisterTracker()
     {

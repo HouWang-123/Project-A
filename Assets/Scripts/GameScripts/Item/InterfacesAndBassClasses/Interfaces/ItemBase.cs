@@ -25,7 +25,8 @@ public abstract class ItemBase : MonoBehaviour, ITrackable
     protected bool IsholdByPlayer;
     protected ItemStatus MyItemStatus;
     private Vector3 originalInitPosition;
-
+    protected float startactionTime;
+    
     public virtual ItemStatus GetItemStatus()
     {
         return MyItemStatus;
@@ -305,7 +306,7 @@ public abstract class ItemBase : MonoBehaviour, ITrackable
     {
     }
 
-    protected float startactionTime;
+
 
     // Fixed Update 调用
     public virtual void OnLeftInteract()
@@ -355,7 +356,7 @@ public abstract class ItemBase : MonoBehaviour, ITrackable
             new Vector3(transform.position.x, transform.position.y, transform.position.z),
             transform.eulerAngles,
             transform.localScale,
-            MyItemStatus // 自定义状态，自行实现相关的类
+            MyItemStatus
         );
     }
 
@@ -390,7 +391,6 @@ public abstract class ItemBase : MonoBehaviour, ITrackable
             {
                 callback?.Invoke(item);
                 Destroy(gameObject);
-            });
-
+        });
     }
 }

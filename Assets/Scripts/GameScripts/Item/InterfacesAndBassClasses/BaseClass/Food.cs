@@ -6,10 +6,7 @@ public class Food : ItemBase ,IPickUpable ,IStackable,IBuffedItem
 {
     public cfg.item.Food data;
     // 可能存在的抽象方法，子类实现方法体
-    public cfg.item.Food GetItemData()
-    {
-        return data;
-    }
+    public cfg.item.Food GetItemData() { return data; }
     // 物品初始化
     public override void InitItem(int id,TrackerData trackerData = null)
     {
@@ -36,10 +33,7 @@ public class Food : ItemBase ,IPickUpable ,IStackable,IBuffedItem
         }
         return Instantiate(loadAssetSync.AssetObject, transform) as Sprite;
     }
-    public int GetMaxStackValue()
-    {
-        return data.MaxStackCount;
-    }
+    public int GetMaxStackValue() { return data.MaxStackCount; }
     public void ChangeStackCount(int Count)
     {
         StackCount = Count;
@@ -49,21 +43,15 @@ public class Food : ItemBase ,IPickUpable ,IStackable,IBuffedItem
             HideStackNumber();
         }
     }
-    public int GetStackCount()
-    {
-        return StackCount;
-    }
-    public override string GetPrefabName()
-    {
-        return data.PrefabName;
-    }
+    public int GetStackCount() { return StackCount; }
+    public override string GetPrefabName() { return data.PrefabName; }
+
     public override void OnRightInteract()
     {
         if (startactionTime < 0.1f)
         {
             return;
         }
-        Debug.Log("食物右键");
     }
 
     public override void OnLeftInteract()
@@ -72,7 +60,6 @@ public class Food : ItemBase ,IPickUpable ,IStackable,IBuffedItem
         {
             return;
         }
-        Debug.Log("食物左键");
     }
     public int GetBuffId()
     {

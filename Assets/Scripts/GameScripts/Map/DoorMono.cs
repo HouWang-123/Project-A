@@ -159,4 +159,8 @@ public class DoorMono : MonoBehaviour, IInteractHandler
     {
 
     }
+
+    public void UpdateInteractHandler(ItemBase updated)
+    {
+    }
 }
