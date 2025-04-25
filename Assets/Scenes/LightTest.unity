@@ -429,7 +429,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78d9cb6a19cccf34297cb2b977260a38, type: 3}
---- !u!1001 &6837770125420883961
+--- !u!1001 &3685352459863102389
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -439,15 +439,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7396498991645650676, guid: c05c4677aa080a7408479534f4c759ea, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.86
+      value: -4.15
       objectReference: {fileID: 0}
     - target: {fileID: 7396498991645650676, guid: c05c4677aa080a7408479534f4c759ea, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.04086685
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7396498991645650676, guid: c05c4677aa080a7408479534f4c759ea, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -3.3894954
+      value: -2.8473198
       objectReference: {fileID: 0}
     - target: {fileID: 7396498991645650676, guid: c05c4677aa080a7408479534f4c759ea, type: 3}
       propertyPath: m_LocalRotation.w
@@ -479,7 +479,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7601832128168043183, guid: c05c4677aa080a7408479534f4c759ea, type: 3}
       propertyPath: m_Name
-      value: P_Item_Tool
+      value: P_Item_Tool_FlashLight
+      objectReference: {fileID: 0}
+    - target: {fileID: 8777771607010518713, guid: c05c4677aa080a7408479534f4c759ea, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -493,4 +497,4 @@ SceneRoots:
   - {fileID: 1998128210}
   - {fileID: 15763014}
   - {fileID: 16722572471935348}
-  - {fileID: 6837770125420883961}
+  - {fileID: 3685352459863102389}

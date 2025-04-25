@@ -376,6 +376,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 192
   TPRoomID: 0
+  GiveMeItemId: 0
 --- !u!1001 &764230696
 PrefabInstance:
   m_ObjectHideFlags: 0
