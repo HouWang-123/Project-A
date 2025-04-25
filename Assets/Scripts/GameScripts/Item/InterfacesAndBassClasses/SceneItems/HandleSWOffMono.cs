@@ -4,27 +4,18 @@ using UnityEngine;
 public class HandleSWOffMono : BaseSWMono
 {
     public bool IsTrue;
-    private void Start()
-    {
-        
-    }
 
     public override void OnPlayerFocus()
     {
         base.OnPlayerFocus();
     }
 
-    public override void OnPlayerStartInteract()
+    public override void OnPlayerStartInteract(int itemid)
     {
-        base.OnPlayerStartInteract();
-    }
-
-    public override void OnPlayerInteract()
-    {
-        base.OnPlayerInteract();
+        Debug.Log("开启开关");
         ChangeState();
     }
-
+    
     public override void ChangeState()
     {
         base.ChangeState();

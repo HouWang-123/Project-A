@@ -97,12 +97,10 @@ public class PlayerInteractController : MonoBehaviour
             
             if (InteractItemId == -1)
             {
-                Debug.Log("无物品交互");
                 receiver.OnPlayerStartInteract(-1);
             }
             else // 物品交互
             {
-                Debug.Log("物品交互");
                 receiver.OnPlayerStartInteract(InteractItemId);
             }
         }
@@ -121,6 +119,7 @@ public class PlayerInteractController : MonoBehaviour
             CurrentFocusedInteractHandler.OnPlayerInteractCancel();
         }
         interactLock = false;
+        
     }
     public void OnTriggerEnter(Collider other)
     {

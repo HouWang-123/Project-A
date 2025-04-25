@@ -2,25 +2,31 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseSWMono : ItemBase,IInteractHandler
+public class BaseSWMono : SceneObjects
 {
     public bool IsOn;
     public List<ItemBase> RelationObject = new();
-    public Transform ItemNode;
-
-    private void Awake()
-    {
-        ItemNode = GameObject.Find("ItemNode").transform;
-    }
-
     public virtual void OnPlayerFocus()
     {
-        
+        SetTargerted(true);
     }
 
     public virtual void OnPlayerDefocus()
     {
-        
+        SetTargerted(false);
+    }
+
+    public override void SetTargerted(bool v)
+    {
+        PickUpTargeted = v;
+        if (PickUpTargeted)
+        {
+            ItemRenderer.material.shader = oulineShader;
+        }
+        else
+        {
+            ItemRenderer.material.shader = DefaultSpriteShader;
+        }
     }
 
     public virtual void ChangeState()
@@ -32,9 +38,8 @@ public class BaseSWMono : ItemBase,IInteractHandler
         return null;
     }
 
-    public virtual void OnPlayerStartInteract()
+    public void OnPlayerStartInteract()
     {
-        
     }
 
     public virtual void OnPlayerInteract()
@@ -45,15 +50,5 @@ public class BaseSWMono : ItemBase,IInteractHandler
     public virtual void OnPlayerInteractCancel()
     {
         
-    }
-
-    public override Sprite GetItemIcon()
-    {
-        return default;
-    }
-
-    public override string GetPrefabName()
-    {
-        return default;
     }
 }

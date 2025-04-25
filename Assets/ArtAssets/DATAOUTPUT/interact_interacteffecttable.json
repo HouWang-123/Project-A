@@ -14,5 +14,21 @@
     "ToInteractItemID": 220012,
     "InteractItemID": 230002,
     "CodeExecuteID": 1000
+  },
+  {
+    "ID": 900003,
+    "ShortText": 860001,
+    "TipText": -1,
+    "ToInteractItemID": 220013,
+    "InteractItemID": -1,
+    "CodeExecuteID": -1
+  },
+  {
+    "ID": 900004,
+    "ShortText": 860001,
+    "TipText": -1,
+    "ToInteractItemID": 220014,
+    "InteractItemID": -1,
+    "CodeExecuteID": -1
   }
 ]

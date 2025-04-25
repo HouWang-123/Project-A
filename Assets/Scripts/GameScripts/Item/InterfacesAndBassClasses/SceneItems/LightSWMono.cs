@@ -18,7 +18,7 @@ public class LightSWMono : BaseSWMono
         base.OnPlayerDefocus();
     }
 
-    public override void OnPlayerStartInteract()
+    public override void OnPlayerStartInteract(int id)
     {
         base.OnPlayerStartInteract();
     }

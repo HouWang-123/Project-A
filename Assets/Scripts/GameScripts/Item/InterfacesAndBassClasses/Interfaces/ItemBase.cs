@@ -49,10 +49,9 @@ public abstract class ItemBase : MonoBehaviour, ITrackable
         ItemRenderer.sprite = loadAssetSync.AssetObject as Sprite;
         loadAssetSync.Release();
     }
-
+    
     protected virtual void Start()
     {
-        originalInitPosition = transform.position;
         if (!ignoreAngleCorrect)
         {
             if (ItemRenderer != null)
@@ -200,20 +199,24 @@ public abstract class ItemBase : MonoBehaviour, ITrackable
     private float groundCheckDistance = 0.2f;
     private Vector3 velocity = GameConstData.VthrowSpeed;
     private float H_BiasSpeed;
-
+    // 持续保持原位时间
     private float ttl = 0f;
 
     // 物品掉落相关物理逻辑
     protected virtual void FixedUpdate()
     {
+        // if (ttl < 0.05)
+        // {
+        //     originalInitPosition = transform.localPosition;
+        // }
         startactionTime += Time.deltaTime;
         ttl += Time.deltaTime;
         F_Update_ItemDorp();
         F_UpdateWeaponCDRecover();
-        if (ttl < 0.05)
-        {
-            transform.position = originalInitPosition;
-        }
+        // if (ttl < 0.05)
+        // {
+        //     transform.localPosition = originalInitPosition;
+        // }
     }
 
     protected virtual void F_UpdateWeaponCDRecover()
@@ -382,11 +385,12 @@ public abstract class ItemBase : MonoBehaviour, ITrackable
     /// <param name="callback"></param>
     public void ChangeToItem(int id, Action<ItemBase> callback = null)
     {
-        GameItemTool.GenerateItemAtPosition(id, transform.parent, transform.localPosition,
+        GameItemTool.GenerateItemAtPosition(id, transform.parent, transform.position,
             res: (item) =>
             {
-                callback.Invoke(item);
+                callback?.Invoke(item);
+                Destroy(gameObject);
             });
-        Destroy(gameObject);
+
     }
 }

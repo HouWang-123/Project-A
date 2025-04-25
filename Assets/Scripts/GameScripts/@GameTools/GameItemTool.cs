@@ -97,7 +97,7 @@ public static class GameItemTool
     }
     
     
-    public static void GenerateItemAtPosition(int id, Transform parent,Vector3 localpostion, bool ignoreAngleCorrect = false, Action<ItemBase> res = null)
+    public static void GenerateItemAtPosition(int id, Transform parent,Vector3 Postiopn, bool ignoreAngleCorrect = false, Action<ItemBase> res = null)
     {
         string uri = GetItemResourceData(id).PrefabName;
         if (uri != "")
@@ -109,7 +109,7 @@ public static class GameItemTool
                 loadAssetAsync.Completed += handle =>
                 {
                     GameObject instantiate = GameObject.Instantiate(loadAssetAsync.AssetObject, parent) as GameObject;
-                    instantiate.transform.localPosition = localpostion;
+                    instantiate.transform.position = Postiopn;
                     ib = instantiate.GetComponent<ItemBase>();
                     ib.SetItemId(id); 
                     ib.SetIgnoreAngle(ignoreAngleCorrect);

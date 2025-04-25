@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2567675885229065098, guid: cad8502bdaf596345b6906b0de717113, type: 3}
+  m_Sprite: {fileID: -4675163605744293349, guid: 8e998e18ed8208d4bb7bf585346bdd5c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -99,7 +99,7 @@ GameObject:
   - component: {fileID: 1015273873669468263}
   - component: {fileID: 3964198083286325680}
   m_Layer: 11
-  m_Name: P_Item_SceneItem_HandleOff
+  m_Name: P_Item_SceneItem_HandleOn
   m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -154,7 +154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06a1ef2f31ef40f69197b5f33d5df506, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ItemID: 220013
+  ItemID: 220014
   ItemType: 0
   ItemRenderer: {fileID: 8327775092844613863}
   oulineShader: {fileID: -6465566751694194690, guid: 098b3234e69aa004eae9c50eabd09355, type: 3}
@@ -168,5 +168,4 @@ MonoBehaviour:
   ChangeToItemId: 0
   IsOn: 0
   RelationObject: []
-  ItemNode: {fileID: 0}
   IsTrue: 0
