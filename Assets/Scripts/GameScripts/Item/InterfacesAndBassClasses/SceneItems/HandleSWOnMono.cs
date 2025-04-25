@@ -18,16 +18,15 @@ public class HandleSWOnMono : BaseSWMono
     public override void OnPlayerStartInteract()
     {
         base.OnPlayerStartInteract();
-        GameItemTool.GenerateItemAtPosition(220013, gameObject.transform.position, false, itembase =>
-        {
-            gameObject.SetActive(false);
-            itembase.transform.SetParent(ItemNode);
-            itembase.transform.localScale = gameObject.transform.localScale;
-            itembase.transform.eulerAngles = gameObject.transform.eulerAngles;
-            Destroy(gameObject);
-        });
+        ChangeState();
     }
 
+    public override void ChangeState()
+    {
+        base.ChangeState();
+        ChangeToItem(220013);
+    }
+    
     public override void OnPlayerInteract()
     {
         base.OnPlayerInteract();

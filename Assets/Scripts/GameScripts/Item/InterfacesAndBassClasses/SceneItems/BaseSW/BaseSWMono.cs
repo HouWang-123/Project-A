@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseSWMono : MonoBehaviour,IInteractHandler
+public class BaseSWMono : ItemBase,IInteractHandler
 {
     public bool IsOn;
     public List<ItemBase> RelationObject = new();
@@ -23,6 +23,10 @@ public class BaseSWMono : MonoBehaviour,IInteractHandler
         
     }
 
+    public virtual void ChangeState()
+    {
+        
+    }
     public virtual MonoBehaviour getMonoBehaviour()
     {
         return null;
@@ -41,5 +45,15 @@ public class BaseSWMono : MonoBehaviour,IInteractHandler
     public virtual void OnPlayerInteractCancel()
     {
         
+    }
+
+    public override Sprite GetItemIcon()
+    {
+        return default;
+    }
+
+    public override string GetPrefabName()
+    {
+        return default;
     }
 }
