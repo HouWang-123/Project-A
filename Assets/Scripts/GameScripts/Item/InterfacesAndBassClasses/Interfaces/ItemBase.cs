@@ -4,7 +4,21 @@ using TMPro;
 using UnityEngine;
 using YooAsset;
 using Random = UnityEngine.Random;
-
+///
+///================================！继承前请阅读所有代码！===================================
+///
+/// <summary>
+/// ！！！！！！！请不要直接继承ItemBase，否则相当于为游戏添加了一种类型的游戏品类！！！！！！！
+///
+///功能：
+///  1. 可以实现基础的拾取，举起和交互行为逻辑
+///  2. 可以实现物品与物品之间的交互逻辑
+///  3. 合理重写接口来实现特定功能
+/// 
+/// </summary>
+///
+///================================！继承前请阅读所有代码！===================================
+/// 
 public abstract class ItemBase : MonoBehaviour, ITrackable
 {
     protected Luban.BeanBase ItemData;
@@ -13,14 +27,16 @@ public abstract class ItemBase : MonoBehaviour, ITrackable
     [Space] public SpriteRenderer ItemRenderer; // 物品目标渲染
     public Shader oulineShader; // 选中时的 shader
     public Shader DefaultSpriteShader; // 默认     shader
-    public TextMeshPro StackNuberText;
-    public String ItemSpriteName;
+    public TextMeshPro StackNuberText; // 显示堆叠数量的TMP
+    public String ItemSpriteName;      //
     public bool PickUpTargeted; // 是否被拾取系统选中
+    public bool DropState;      // 物品是否处于掉落状态
+    public int StackCount = 1;  // 物品堆叠数量，仅实现了 IStackable的ItemBase适用
     private bool ItemReversed;
     private bool ignoreAngleCorrect;
-    public bool DropState;
+
     protected bool IgnoreDefaultItemDrop;
-    public int StackCount = 1;
+
     private GameItemPickupTip pickupTips;
     protected bool IsholdByPlayer;
     protected ItemStatus MyItemStatus;
@@ -193,7 +209,6 @@ public abstract class ItemBase : MonoBehaviour, ITrackable
 
     public abstract Sprite GetItemIcon();
     public abstract string GetPrefabName();
-
     private float gravity = -9.81f;
     private float upspeed = 20f;
     private float damp = 60f;
@@ -202,22 +217,13 @@ public abstract class ItemBase : MonoBehaviour, ITrackable
     private float H_BiasSpeed;
     // 持续保持原位时间
     private float ttl = 0f;
-
     // 物品掉落相关物理逻辑
     protected virtual void FixedUpdate()
     {
-        // if (ttl < 0.05)
-        // {
-        //     originalInitPosition = transform.localPosition;
-        // }
         startactionTime += Time.deltaTime;
         ttl += Time.deltaTime;
         F_Update_ItemDorp();
         F_UpdateWeaponCDRecover();
-        // if (ttl < 0.05)
-        // {
-        //     transform.localPosition = originalInitPosition;
-        // }
     }
 
     protected virtual void F_UpdateWeaponCDRecover()

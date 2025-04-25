@@ -225,7 +225,7 @@ public class PlayerPickupController : MonoBehaviour
             itemBase.SetTargerted(false);
         }
 
-        if (GameRunTimeData.Instance.CharacterBasicStat.GetStat().LiftedItem == null)
+        if (GameRunTimeData.Instance.characterBasicStatManager.GetStat().LiftedItem == null)
         {
             currentPickup.SetTargerted(true);
         }

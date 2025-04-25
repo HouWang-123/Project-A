@@ -270,7 +270,7 @@ public class ItemSlotData : SerializedMonoBehaviour
                 return true; // 对于多个的情况
             }
             SlotItemDataList.Remove(CurrentFocusSlot); // 对于一个的情况
-            ItemBase itemOnHand = GameRunTimeData.Instance.CharacterBasicStat.GetStat().ItemOnHand;
+            ItemBase itemOnHand = GameRunTimeData.Instance.characterBasicStatManager.GetStat().ItemOnHand;
             itemOnHand.transform.SetParent(releaspt);
             itemOnHand.transform.localPosition = Vector3.zero;
             itemOnHand.transform.SetParent(GameControl.Instance.GetSceneItemList().transform); // 移动节点
@@ -280,7 +280,7 @@ public class ItemSlotData : SerializedMonoBehaviour
             itemOnHand.OnItemDrop(fastDrop,false,PlayerReversed);
             
             itemOnHand.ChangeRendererSortingOrder(GameConstData.BelowPlayerOrder);
-            GameRunTimeData.Instance.CharacterBasicStat.GetStat().ItemOnHand = null;
+            GameRunTimeData.Instance.characterBasicStatManager.GetStat().ItemOnHand = null;
             GameHUD.Instance.slotManager.UpdateItem(SlotItemDataList);
         }
         return false;

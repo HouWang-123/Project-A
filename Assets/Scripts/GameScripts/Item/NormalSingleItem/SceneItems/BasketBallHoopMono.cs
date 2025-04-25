@@ -8,12 +8,11 @@ using UnityEngine;
 /// <summary>
 /// 篮球框的Mono
 /// </summary>
-public class BasketballHoopMono : SceneObjects, IRoomRiddleItem
+public class BasketballHoopMono : SceneObjects
 {
-    [Header("解密房间的引用")] public RoomRiddleMonoBase riddleGameObject;
-
     [SerializeField] [Header("骨骼动画组件")] private SkeletonAnimation skeletonAnimation;
 
+    public HideAreaMono MyHideArea;
     // 目前场景中篮球的数量
     private bool statusFromeTracker;
     public int BasketBallCount;
@@ -54,9 +53,7 @@ public class BasketballHoopMono : SceneObjects, IRoomRiddleItem
         {
             SetAnimation();
         }
-
-
-
+        CheckSafeArea();
     }
 
     // 如果另一个碰撞器进入了触发器，则调用 OnTriggerEnter
@@ -119,6 +116,7 @@ public class BasketballHoopMono : SceneObjects, IRoomRiddleItem
                 trackEntry.TimeScale = 999999f;
                 // 生成安全区域
                 _basketballHoopStatus.isDone = true;
+
             }
             statusFromeTracker = false;
             GetBaseketball = false;
@@ -140,31 +138,34 @@ public class BasketballHoopMono : SceneObjects, IRoomRiddleItem
                 trackEntry.TimeScale = 1f;
             }
         }
+        CheckSafeArea();
+    }
+
+    public void CheckSafeArea()
+    {
         if (_basketballHoopStatus.MyBasketballs == _basketballHoopStatus.BasketBallCount)
         {
             TrackEntry trackEntry = skeletonAnimation.state.SetAnimation(0, "step3", false);
             trackEntry.TimeScale = 1f;
             // 生成安全区域
+            Debug.Log("生成安全区");
             _basketballHoopStatus.isDone = true;
-            //todo 启用安全区
+            if (MyHideArea!=null)
+            {
+                MyHideArea.gameObject.SetActive(true);
+            }
+
         }
         else
         {
+            Debug.Log("撤销安全区");
             _basketballHoopStatus.isDone = false;
-            //todo 禁用安全区
+            if (MyHideArea!=null)
+            {
+                MyHideArea.gameObject.SetActive(false);
+            }
         }
     }
-    
-    public bool isItemDone()
-    {
-        return _basketballHoopStatus.isDone;
-    }
-
-    public GameObject GetGO()
-    {
-        return gameObject;
-    }
-
     // InteractFunctions
     public override void OnPlayerStartInteract(int itemid)
     {
@@ -202,6 +203,18 @@ public class BasketballHoopMono : SceneObjects, IRoomRiddleItem
     {
         return _basketballHoopStatus.MyBasketballs;
     }
+    
+    public bool isItemDone()
+    {
+        return _basketballHoopStatus.isDone;
+    }
+    
+    // Riddle Interface
+    public GameObject GetGO()
+    {
+        return gameObject;
+    }
+    
 }
 
 public class BasketballHoopStatus : ItemStatus

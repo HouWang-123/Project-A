@@ -35,6 +35,11 @@ public class GameControl
     }
     private GameControl() { }
 
+    public RoomMono GetRoom()
+    {
+        return roomObj.GetComponent<RoomMono>();
+    }
+
     public void SetSceneItemList(GameObject gameObject)
     {
         sceneItemNode = gameObject;
@@ -91,7 +96,6 @@ public class GameControl
             mono = RoomObject.AddComponent<RoomMono>();
         }
         mono.SetDataAndGenerateItemAndEnemy(roomData);
-        RiddleByRoom(mono);
         Object.Destroy(roomObj);
         room = roomData;
         roomObj = RoomObject;
@@ -123,16 +127,6 @@ public class GameControl
         return (RoomObject,roomData);
     }
     
-    // 根据房间设置谜题
-    private void RiddleByRoom(RoomMono roomMono)
-    {
-        var riddleObj = roomMono.riddleGameObject;
-        if (riddleObj != null)
-        {
-            riddleObj.SetRiddle();
-        }
-    }
-    
     public void GameSave()
     {
 
@@ -154,7 +148,7 @@ public class GameControl
         if(playerObj == null)
         {
             // 角色数据设置
-            GameRunTimeData.Instance.CharacterBasicStat.InitCharacter(PlayerId);
+            GameRunTimeData.Instance.characterBasicStatManager.InitCharacter(PlayerId);
             AssetHandle handle = YooAssets.LoadAssetSync<GameObject>("Player000");
             playerObj = Object.Instantiate(handle.AssetObject) as GameObject;
             playerObj.name = "Player000";
@@ -163,7 +157,6 @@ public class GameControl
         }
         PlayerControl = playerObj.GetComponent<PlayerControl>();
         return playerObj;
-        
     }
 
     private void CreateGlobalLight()

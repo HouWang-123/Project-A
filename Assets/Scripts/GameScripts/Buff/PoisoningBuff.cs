@@ -12,7 +12,7 @@ public class PoisoningBuff : BuffComponet
         base.Execute();
         AsyncTimer.Instance.StartTask(BuffConfig.PoisoningBuff,2f,BuffTime, () =>
         {
-            GameRunTimeData.Instance.CharacterBasicStat.PlayerLifeMinus(2f);
+            GameRunTimeData.Instance.characterBasicStatManager.PlayerLifeMinus(2f);
         });
     }
 }

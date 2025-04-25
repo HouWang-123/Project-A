@@ -26,7 +26,7 @@ public class HandleSWOnMono : BaseSWMono
         base.OnPlayerInteract();
         if (!IsTrue)
         {
-            GameRunTimeData.Instance.CharacterBasicStat.GetStat().CurrentHp -= 9999;
+            GameRunTimeData.Instance.characterBasicStatManager.GetStat().CurrentHp -= 9999;
         }
     }
 

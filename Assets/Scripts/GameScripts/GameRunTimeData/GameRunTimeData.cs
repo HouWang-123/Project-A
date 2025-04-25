@@ -1,5 +1,6 @@
 
 using System;
+using UnityEngine.Serialization;
 
 public class GameRunTimeData : Singleton<GameRunTimeData>
 {
@@ -7,17 +8,18 @@ public class GameRunTimeData : Singleton<GameRunTimeData>
     /// Chararcter
     /// </summary>
     public ItemSlotData CharacterItemSlotData;
-
-    public CharacterBasicStat CharacterBasicStat;
+    public CharacterBasicStatManager characterBasicStatManager;
     public InventoryManger InventoryManger;
     public MapTrackDataManager MapTrackDataManager;
-
+    public CharacterExtendedStatManager CharacterExtendedStatManager;
+    
     protected override void Awake()
     {
         base.Awake();
         CharacterItemSlotData = gameObject.AddComponent<ItemSlotData>();
-        CharacterBasicStat = gameObject.AddComponent<CharacterBasicStat>();
+        characterBasicStatManager = gameObject.AddComponent<CharacterBasicStatManager>();
         InventoryManger = gameObject.AddComponent<InventoryManger>();
         MapTrackDataManager = gameObject.AddComponent<MapTrackDataManager>();
+        CharacterExtendedStatManager = gameObject.AddComponent<CharacterExtendedStatManager>();
     }
 }

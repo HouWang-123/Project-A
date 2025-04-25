@@ -1,8 +1,10 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using YooAsset;
 using UnityEngine.Events;
 using Spine.Unity;
 using Spine;
+using Unity.Hierarchy;
 using UnityEngine.InputSystem;
 
 public class PlayerControl : MonoBehaviour
@@ -17,11 +19,12 @@ public class PlayerControl : MonoBehaviour
     private PlayerPickupController _pickupController;
     private bool PlayerReversed;
     private CharacterStat characterStat;
+    private CharacterExtendedStat _characterExtendedStat;
     private PlayerInteractController _interactController;
     private LayerMask FloorBaseLayer;
     public Vector3 PlayerLookatDirection;
     public Vector3 ScreenToWorldPostion;
-    public bool PlayerDropping;
+
     public bool InteractionButtonPressed;
     
     
@@ -107,8 +110,10 @@ public class PlayerControl : MonoBehaviour
         #region GamePreSettings
 
         GameRunTimeData.Instance.CharacterItemSlotData.ChangeFocusSlotNumber(1); // 默认启用道具栏
-        characterStat = GameRunTimeData.Instance.CharacterBasicStat.GetStat();
-
+        
+        characterStat = GameRunTimeData.Instance.characterBasicStatManager.GetStat();
+        _characterExtendedStat = GameRunTimeData.Instance.CharacterExtendedStatManager.GetStat();
+        
         _pickupController = GetComponentInChildren<PlayerPickupController>();
         _interactController = GetComponentInChildren<PlayerInteractController>();
 
@@ -264,7 +269,7 @@ public class PlayerControl : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        GameRunTimeData.Instance.CharacterBasicStat.UpdatePlayerStat();
+        GameRunTimeData.Instance.characterBasicStatManager.UpdatePlayerStat();
         ProcessMove();
         ScrollActionTimer += Time.deltaTime;
         ProcessWeaponNodeRotation();
@@ -342,7 +347,7 @@ public class PlayerControl : MonoBehaviour
 
     private void ProcessMove()
     {
-        if (GameRunTimeData.Instance.CharacterBasicStat.GetStat().Dead) return;
+        if (_characterExtendedStat.Dead) return;
         if (isMove)
         {
             PlayerMove(InputControl.Instance.MovePoint, characterStat.WalkSpeed);
@@ -357,7 +362,7 @@ public class PlayerControl : MonoBehaviour
 
     private void ProcessWeaponNodeRotation()
     {
-        if (GameRunTimeData.Instance.CharacterBasicStat.GetStat().Dead) return;
+        if (_characterExtendedStat.Dead) return;
         // Rotate WeaponTr
         Transform weaponTr = useObjParent.GetChild(0);
         angle = a.y;
@@ -387,7 +392,7 @@ public class PlayerControl : MonoBehaviour
 
     private void ProcessMouseAction()
     {
-        if (GameRunTimeData.Instance.CharacterBasicStat.GetStat().Dead) return;
+        if (_characterExtendedStat.Dead) return;
         // 武器使用相关
         if (leftMous)
         {
@@ -415,7 +420,7 @@ public class PlayerControl : MonoBehaviour
 
     private void PlayerMove(Vector3 vector, float speed)
     {
-        if (PlayerDropping)
+        if (_characterExtendedStat.IsDropping)
         {
             return;
         }
@@ -428,23 +433,23 @@ public class PlayerControl : MonoBehaviour
                 speed *= fToB;
                 MoveState = EPAMoveState.Walk_Backwards;
                 //playerSpin.timeScale = fToB;              //匹配动画速度
-                characterStat.IsWalk = true;
-                characterStat.IsRun = false;
+                _characterExtendedStat.IsWalk = true;
+                _characterExtendedStat.IsRun = false;
             }
             else if (shiftButt)
             {
                 speed *= characterStat.RunSpeedScale;
                 MoveState = EPAMoveState.Run;
                 playerSpin.timeScale = speed * 0.6f; //匹配动画速度
-                characterStat.IsWalk = false;
-                characterStat.IsRun = true;
+                _characterExtendedStat.IsWalk = false;
+                _characterExtendedStat.IsRun = true;
             }
             else
             {
                 MoveState = EPAMoveState.Walk;
                 playerSpin.timeScale = speed / 0.6f; //匹配动画速度
-                characterStat.IsWalk = true;
-                characterStat.IsRun = false;
+                _characterExtendedStat.IsWalk = true;
+                _characterExtendedStat.IsRun = false;
             }
 
             //playerRG.Move(vector * speed + transform.position, Quaternion.identity);
@@ -452,8 +457,8 @@ public class PlayerControl : MonoBehaviour
         else
         {
             MoveState = EPAMoveState.Idle;
-            characterStat.IsWalk = false;
-            characterStat.IsRun = false;
+            _characterExtendedStat.IsWalk = false;
+            _characterExtendedStat.IsRun = false;
         }
 
         if (playerRG != null)
@@ -524,7 +529,7 @@ public class PlayerControl : MonoBehaviour
         {
             return true;
         }
-        if (PlayerDropping)                    // 玩家从空中掉落
+        if (_characterExtendedStat.IsDropping)                    // 玩家从空中掉落
         {
             return false;
         }
@@ -540,7 +545,7 @@ public class PlayerControl : MonoBehaviour
     }
     public bool PickItem(ItemBase ExternalItem = null) // 拾取物品
     {
-        if (GameRunTimeData.Instance.CharacterBasicStat.GetStat().Dead) return false;
+        if (_characterExtendedStat.Dead) return false;
         if (!PickUpValidation(ExternalItem))
             return false;
         pickupLock = true;
@@ -748,22 +753,50 @@ public class PlayerControl : MonoBehaviour
     [ContextMenu("DropFromSkey")]
     public void DropFromSky()
     {
-        PlayerDropping = true;
+        _characterExtendedStat.IsDropping = true;
         transform.position = new Vector3(transform.position.x, 10, transform.position.z);
     }
 
     public void OnCollisionEnter(Collision other)
     {
-        if (PlayerDropping)
+        if (_characterExtendedStat.IsDropping)
         {
             if (other.gameObject.layer == 7)
             {
-                PlayerDropping = false;
+                _characterExtendedStat.IsDropping = false;
             }
         }
     }
-}
 
+    private int hideareas;
+    public void CheckIsHide()
+    {
+        if (hideareas>0)
+        {
+            _characterExtendedStat.IsHidding = true;
+        }
+        else
+        {
+            _characterExtendedStat.IsHidding = false;
+        }
+    }
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.GetComponent<HideAreaMono>() != null)
+        {
+            hideareas++;
+            CheckIsHide();
+        }
+    }
+    public void OnTriggerExit(Collider other)
+    {
+        if (other.GetComponent<HideAreaMono>() != null)
+        {
+            hideareas--;
+            CheckIsHide();
+        }
+    }
+}
 
 public enum EPAMoveState : int
 {

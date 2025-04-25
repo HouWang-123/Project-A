@@ -1,15 +1,14 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 
-public class HideAreaMono : MonoBehaviour, IRoomRiddleItem
+public class HideAreaMono : MonoBehaviour
 {
-    private bool isDone;
-    // 如果另一个碰撞器进入了触发器，则调用 OnTriggerEnter
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent<PlayerControl>(out PlayerControl _))
         {
-            isDone = true;
+            GameRunTimeData.Instance.CharacterExtendedStatManager.GetStat().IsHidding = true;
             Debug.Log(GetType() + "OnTriggerEnter() => 玩家进入躲藏区域。。。");
         }
     }
@@ -19,16 +18,10 @@ public class HideAreaMono : MonoBehaviour, IRoomRiddleItem
     {
         if (other.TryGetComponent<PlayerControl>(out PlayerControl _))
         {
-            isDone = false;
+            GameRunTimeData.Instance.CharacterExtendedStatManager.GetStat().IsHidding = false;
             Debug.Log(GetType() + "OnTriggerEnter() => 玩家离开躲藏区域。。。");
         }
     }
-
-    public bool isItemDone()
-    {
-        return isDone;
-    }
-
     public GameObject GetGO()
     {
         return gameObject;

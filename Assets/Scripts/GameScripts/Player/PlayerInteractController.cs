@@ -166,13 +166,13 @@ public class PlayerInteractController : MonoBehaviour
     private int GetOnHandItem()
     {
         int interactItemId = -1;
-        if (GameRunTimeData.Instance.CharacterBasicStat.GetStat().ItemOnHand != null)
+        if (GameRunTimeData.Instance.characterBasicStatManager.GetStat().ItemOnHand != null)
         {
-            interactItemId = GameRunTimeData.Instance.CharacterBasicStat.GetStat().ItemOnHand.ItemID;
+            interactItemId = GameRunTimeData.Instance.characterBasicStatManager.GetStat().ItemOnHand.ItemID;
         }
-        if (GameRunTimeData.Instance.CharacterBasicStat.GetStat().LiftedItem != null)
+        if (GameRunTimeData.Instance.characterBasicStatManager.GetStat().LiftedItem != null)
         {
-            interactItemId = GameRunTimeData.Instance.CharacterBasicStat.GetStat().LiftedItem.ItemID;
+            interactItemId = GameRunTimeData.Instance.characterBasicStatManager.GetStat().LiftedItem.ItemID;
         }
         return interactItemId;
     }

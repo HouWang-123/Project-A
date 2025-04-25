@@ -10,7 +10,7 @@ public class BuffComponet
     public void InitBuff(int id , int time){
         buff = GameTableDataAgent.ConditionsTable.Get(id);
         BuffTime = time * 1000;
-        playerData = GameRunTimeData.Instance.CharacterBasicStat.GetStat();
+        playerData = GameRunTimeData.Instance.characterBasicStatManager.GetStat();
     }
     public virtual void Execute(){}
 }

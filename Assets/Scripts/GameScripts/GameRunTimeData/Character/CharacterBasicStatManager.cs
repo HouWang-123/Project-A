@@ -4,54 +4,120 @@ using cfg.buff;
 using Sirenix.OdinInspector;
 using Unity.Mathematics.Geometry;
 using UnityEngine;
+
 [Serializable]
 public class CharacterStat
 {
+    // 基本信息
+    [TitleGroup("基本信息", Order = 0)]
+    [GUIColor(1f, 1f, 0.7f)]
     public int ID;
+
+    [TitleGroup("基本信息")]
+    [GUIColor(1f, 1f, 0.7f)]
     public string NAME;
+
+    [TitleGroup("基本信息")]
+    [MultiLineProperty(3)]
+    [GUIColor(1f, 1f, 0.7f)]
     public string DESCRIBE;
 
+    [TitleGroup("基本信息")]
+    [GUIColor(1f, 1f, 0.7f)]
     public string VoicePackID;
+
+    [TitleGroup("基本信息")]
+    [GUIColor(1f, 1f, 0.7f)]
     public string PrefabName;
-    // Hp
+
+    // 生命状态
+    [TitleGroup("生命状态", Order = 1)]
+    [TitleGroup("生命状态/HP", Order = 1)]
+    [GUIColor(0.8f, 1f, 0.8f)]
     public float MaxHP;
+
+    [TitleGroup("生命状态/HP")]
+    [GUIColor(0.8f, 1f, 0.8f)]
     public float CurrentHp;
-    // San
+
+    [TitleGroup("生命状态/SAN")]
+    [GUIColor(0.8f, 0.9f, 1f)]
     public float MaxSan;
+
+    [TitleGroup("生命状态/SAN")]
+    [GUIColor(0.8f, 0.9f, 1f)]
     public float CurrentSan;
-    // Food
+
+    [TitleGroup("生命状态/饥饿")]
+    [GUIColor(1f, 0.9f, 0.8f)]
     public float MaxFood;
+
+    [TitleGroup("生命状态/饥饿")]
+    [GUIColor(1f, 0.9f, 0.8f)]
     public float CurrentFood;
+
+    [TitleGroup("生命状态/饥饿")]
+    [GUIColor(1f, 0.9f, 0.8f)]
     public List<float> DigestRate;
-    // Thirsty
+
+    [TitleGroup("生命状态/口渴")]
+    [GUIColor(0.8f, 1f, 1f)]
     public float MaxThirsty;
+
+    [TitleGroup("生命状态/口渴")]
+    [GUIColor(0.8f, 1f, 1f)]
     public float CurrentThirsty;
-    // Run
+
+    // 移动与体能
+    [TitleGroup("运动属性", Order = 2)]
+    [GUIColor(0.9f, 0.9f, 1f)]
     public float WalkSpeed;
+
+    [TitleGroup("运动属性")]
+    [GUIColor(0.9f, 0.9f, 1f)]
     public float RunSpeedScale;
+
+    [TitleGroup("运动属性")]
+    [GUIColor(0.9f, 0.9f, 1f)]
     public float RunReduce;
+
+    [TitleGroup("运动属性")]
+    [GUIColor(0.9f, 0.9f, 1f)]
     public float RunRestore;
 
+    [TitleGroup("运动属性")]
+    [GUIColor(0.9f, 0.9f, 1f)]
     public float Strength;
 
+    // 背包与技能
+    [TitleGroup("技能与背包", Order = 3)]
+    [GUIColor(0.8f, 1f, 0.95f)]
     public int InventorySlots;
-    // Skill
+
+    [TitleGroup("技能与背包")]
+    [GUIColor(0.8f, 1f, 0.95f)]
     public int ActiveSkillID;
+
+    [TitleGroup("技能与背包")]
+    [GUIColor(0.8f, 1f, 0.95f)]
     public int PassiveSkillID;
-    // Other Character Stat
-    public bool Dead;
-    
-    public bool IsRun;
-    public bool IsWalk;
-    public bool CanInteractOtherItem;
-    [SerializeField] private ItemBase itemOnHand; // 手中的物品
+
+    // 手持与举起物品
+    [TitleGroup("物品状态", Order = 4)]
+    [LabelText("手中物品")]
+    [GUIColor(1f, 0.8f, 0.8f)]
+    [SerializeField]
+    private ItemBase itemOnHand;
+
+    [ShowInInspector, HideLabel]
+    [GUIColor(1f, 0.8f, 0.8f)]
     public ItemBase ItemOnHand
     {
-        get { return itemOnHand; }
+        get => itemOnHand;
         set
         {
             itemOnHand = value;
-            if(itemOnHand != null)
+            if (itemOnHand != null)
             {
                 EventManager.Instance.RunEvent(EventConstName.OnPlayerHandItemChanges_Animation, EPAHandState.Hand);
                 EventManager.Instance.RunEvent(EventConstName.OnPlayerHandItemChanges_Item);
@@ -63,14 +129,22 @@ public class CharacterStat
             }
         }
     }
-    [SerializeField] private ItemBase liftedItem; // 举起的物品
+
+    [TitleGroup("物品状态")]
+    [LabelText("举起物品")]
+    [GUIColor(1f, 0.8f, 0.8f)]
+    [SerializeField]
+    private ItemBase liftedItem;
+
+    [ShowInInspector, HideLabel]
+    [GUIColor(1f, 0.8f, 0.8f)]
     public ItemBase LiftedItem
     {
-        get { return liftedItem; }
+        get => liftedItem;
         set
         {
             liftedItem = value;
-            if(liftedItem != null)
+            if (liftedItem != null)
             {
                 EventManager.Instance.RunEvent(EventConstName.OnPlayerHandItemChanges_Animation, EPAHandState.Head);
                 EventManager.Instance.RunEvent(EventConstName.OnPlayerHandItemChanges_Item);
@@ -82,10 +156,9 @@ public class CharacterStat
             }
         }
     }
-
 }
 
-public class CharacterBasicStat : SerializedMonoBehaviour
+public class CharacterBasicStatManager : SerializedMonoBehaviour
 {
     private cfg.cha.Character m_characterData;
     [SerializeField] private CharacterStat CharacterStat;
@@ -139,16 +212,13 @@ public class CharacterBasicStat : SerializedMonoBehaviour
             RunRestore = m_characterData.RunRestore,
             RunSpeedScale = m_characterData.RunSpeedScal,
             WalkSpeed = m_characterData.WalkSpeed,
-            Dead = false,
-            IsRun= false,
-            IsWalk = false
         };
         playerDataInited = true;
         GameHUD.Instance.SetHUDStat(CharacterStat);
     }
     public void HurtPlayer(int number)
     {
-        if(CharacterStat.Dead)
+        if(GameRunTimeData.Instance.CharacterExtendedStatManager.GetStat().Dead)
             return;
         float attack = number;
         if(BuffManager.Instance.HasComponet(CharacterStat.ID, (int)BuffEnum.疯狂))
@@ -220,18 +290,17 @@ public class CharacterBasicStat : SerializedMonoBehaviour
             LifeChecker();
             LivePlayerStatUpdater(); // 玩家存活时执行的更新
             DeadPlayerStatUpdater(); // 玩家死亡时数据执行的更新
-
-            // 其他更新
-            // 生命值合理范围检测
+            
             HpCorrector();
             SanCorrector();
             
+            GameHUD.Instance.UpdateHp();
         }
     }
 
     private void LivePlayerStatUpdater()
     {
-        if(!CharacterStat.Dead)
+        if(!GameRunTimeData.Instance.CharacterExtendedStatManager.GetStat().Dead)
         {
             
         }
@@ -239,7 +308,7 @@ public class CharacterBasicStat : SerializedMonoBehaviour
 
     private void DeadPlayerStatUpdater()
     {
-        if(CharacterStat.Dead)
+        if(GameRunTimeData.Instance.CharacterExtendedStatManager.GetStat().Dead)
         {
             Debug.Log("PlayerDead");
         }
@@ -263,7 +332,7 @@ public class CharacterBasicStat : SerializedMonoBehaviour
     {
         if(CharacterStat.CurrentHp <= 0f)
         {
-            CharacterStat.Dead = true;
+            GameRunTimeData.Instance.CharacterExtendedStatManager.GetStat().Dead = true;
         }
     }
     #endregion

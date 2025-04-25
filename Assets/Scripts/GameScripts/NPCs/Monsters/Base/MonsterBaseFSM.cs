@@ -71,7 +71,7 @@ public class MonsterBaseFSM : MonoBehaviour, IDamageable
         if (m_lightComponent == null)
         {
             // 获取手上的光源
-            var ItemOnHand = GameRunTimeData.Instance.CharacterBasicStat.GetStat().ItemOnHand;
+            var ItemOnHand = GameRunTimeData.Instance.characterBasicStatManager.GetStat().ItemOnHand;
             if (ItemOnHand != null && ItemOnHand.TryGetComponent<FlashLightBehaviour>(out FlashLightBehaviour light))
             {
                 m_lightComponent = light;

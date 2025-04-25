@@ -60,7 +60,7 @@ public static partial class GameInteractSystemExtendedCode
         {
             return;
         }
-        GameObject itemBaseGameObject = GameRunTimeData.Instance.CharacterBasicStat.GetStat().LiftedItem.gameObject;
+        GameObject itemBaseGameObject = GameRunTimeData.Instance.characterBasicStatManager.GetStat().LiftedItem.gameObject;
         basketballHoopMono.PushBasketBall();
         PlayerControl.Instance.DropItem(false);
         GameObject.Destroy(itemBaseGameObject);

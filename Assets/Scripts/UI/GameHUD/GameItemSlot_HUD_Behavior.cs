@@ -30,8 +30,8 @@ public class GameItemSlot_HUD_Behavior : UIBase
 
     public void OnFocus()
     {
-        if (GameRunTimeData.Instance.CharacterBasicStat.GetStat().Dead) return;
-        if (GameRunTimeData.Instance.CharacterBasicStat.GetStat().LiftedItem != null) return;
+        if (GameRunTimeData.Instance.CharacterExtendedStatManager.GetStat().Dead) return;
+        if (GameRunTimeData.Instance.characterBasicStatManager.GetStat().LiftedItem != null) return;
         GameHUD_ItemSlotManager.ACTIVE_ITEM_SLOT = this;
         GameControl.Instance.PlayerControl.ChangeMouseAction(Key);
         SetAsActiveItem();

@@ -1,5 +1,6 @@
 ﻿using cfg.scene;
 using System.Collections.Generic;
+using System.Linq;
 using FEVM.Timmer;
 using Unity.AI.Navigation;
 #if UNITY_EDITOR
@@ -24,8 +25,7 @@ public class RoomMono : MonoBehaviour
     private List<MonsterBaseFSM> monsters = new List<MonsterBaseFSM>();
 
     //public Transform monsterPoint;    // 怪物生成点（测试用）
-    [Header("脚本谜题，如果房间没有谜题就设置为空")]
-    public RoomRiddleMonoBase riddleGameObject; // 谜题脚本
+
     
     private void Awake()
     {
@@ -46,8 +46,16 @@ public class RoomMono : MonoBehaviour
         }
         GameControl.Instance.SetSceneItemList(SceneItemNode);
     }
-
-
+    /// <summary>
+    ///  这个方法可以获取房间中所有指定类型的物品
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <returns></returns>
+    public List<T> GetItemsInScene<T>() where T : ItemBase
+    {
+        T[] componentsInChildren = transform.GetComponentsInChildren<T>();
+        return componentsInChildren.ToList();
+    }
     public void SetDataAndGenerateItemAndEnemy(Rooms room)
     {
         GameControl.Instance.SetSceneItemList(SceneItemNode);
