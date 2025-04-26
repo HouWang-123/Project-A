@@ -1,13 +1,8 @@
 using System;
 using UnityEngine;
 
-public class LightSWMono : BaseSWMono
+public class LightSWMono : RiddleSwitch
 {
-    public override void ChangeState()
-    {
-        base.ChangeState();
-    }
-
     public override void OnPlayerFocus()
     {
         base.OnPlayerFocus();
@@ -18,7 +13,7 @@ public class LightSWMono : BaseSWMono
         base.OnPlayerDefocus();
     }
 
-    public override void OnPlayerStartInteract(int id)
+    public override void OnPlayerStartInteract()
     {
         base.OnPlayerStartInteract();
     }
@@ -31,13 +26,13 @@ public class LightSWMono : BaseSWMono
     private void OnTriggerStay(Collider other)
     {
         //todo 射线触发开关
-        IsOn = true;
-        ChangeState();
+        // IsOn = true;
+        // ChangeState();
     }
 
     private void OnTriggerExit(Collider other)
     {
-        IsOn = false;
-        ChangeState();
+        // IsOn = false;
+        // ChangeState();
     }
 }

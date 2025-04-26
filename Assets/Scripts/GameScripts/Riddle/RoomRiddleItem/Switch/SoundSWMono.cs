@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SoundSWMono : BaseSWMono
+public class SoundSWMono : RiddleSwitch
 {
     [Header("检测配置")] 
     public string soundTag = "Sound";

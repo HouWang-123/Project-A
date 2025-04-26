@@ -10,8 +10,8 @@ public class HandleSWGroup: MonoBehaviour
 
     private void Start()
     {
-        OffSw = GetHandleSW<HandleSWOffMono,GameObject>();
-        OnSw = GetHandleSW<HandleSWOnMono,GameObject>();
+        OffSw = GetHandleSW<RiddleSwitch,GameObject>();
+        OnSw = GetHandleSW<RiddleSwitch,GameObject>();
     }
 
     private List<A> GetHandleSW<T,A>() 

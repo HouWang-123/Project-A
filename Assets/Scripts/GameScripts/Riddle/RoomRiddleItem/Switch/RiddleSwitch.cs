@@ -1,0 +1,63 @@
+using UnityEngine;
+using UnityEngine.Serialization;
+
+public class RiddleSwitch : RiddleItemBase
+{
+    [FormerlySerializedAs("onSpriteRenderer")] public SpriteRenderer SwithchSpriteRenderer;
+    public Sprite OnStatusSprite;
+    public Sprite OffStatusSprite;
+    public bool DefaultValue;
+    public SwitchStatus SwitchStatus
+    {
+        set
+        {
+            _switchStatus = value;
+            RiddleManager.OnRiddleItemStatusChange(this);
+        }
+        get
+        {
+            return _switchStatus;
+        }
+    }
+
+    private SwitchStatus _switchStatus;
+    public void Start()
+    {
+        base.Start();
+        _switchStatus = new SwitchStatus(DefaultValue);
+    }
+    
+    public void ChangeSwitch(bool ison)
+    {
+        if (ison)
+        {
+            SwithchSpriteRenderer.sprite = OnStatusSprite;
+            SetRiddleItemStatus(new SwitchStatus(ison));
+        }
+        else
+        {
+            SwithchSpriteRenderer.sprite = OffStatusSprite;
+            SetRiddleItemStatus(new SwitchStatus(ison));
+        }
+    }
+
+    public override void OnPlayerInteract()
+    {
+        ChangeSwitch(!SwitchStatus.is_on);
+    }
+
+    public override RiddleItemBaseStatus GetRiddleStatus()
+    {
+        return SwitchStatus;
+    }
+    public override void SetRiddleItemStatus(RiddleItemBaseStatus BaseStatus)
+    {
+        SwitchStatus = BaseStatus as SwitchStatus;
+    }
+
+    public bool GetSwitchValue()
+    {
+        return SwitchStatus.is_on;
+    }
+}
+

@@ -7,7 +7,9 @@ using UnityEngine;
 /// </summary>
 public interface IRiddleItem
 {
-    public List<RiddleCondition> GetMyRiddleConditions();
-    public void UpdateRiddleCondtion() {}
-    public bool SelfCheckConditon();
+    public int GetRiddleKey();
+    public void SetRiddleKey(int key);
+    public RiddleItemBaseStatus GetRiddleStatus();
+    public void SetRiddleItemStatus(RiddleItemBaseStatus baseStatus);
+    public void SetRiddleManager(RiddleManager riddleManager);
 }
