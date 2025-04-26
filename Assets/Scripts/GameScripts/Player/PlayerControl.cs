@@ -786,6 +786,8 @@ public class PlayerControl : MonoBehaviour
         {
             hideareas++;
             CheckIsHide();
+            
+            
         }
     }
     public void OnTriggerExit(Collider other)
