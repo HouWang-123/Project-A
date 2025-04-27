@@ -12,6 +12,7 @@ public class GameRunTimeData : Singleton<GameRunTimeData>
     public InventoryManger InventoryManger;
     public MapTrackDataManager MapTrackDataManager;
     public CharacterExtendedStatManager CharacterExtendedStatManager;
+    public RiddleItemStatusManager RiddleItemStatusManager;
     
     protected override void Awake()
     {
@@ -21,5 +22,6 @@ public class GameRunTimeData : Singleton<GameRunTimeData>
         InventoryManger = gameObject.AddComponent<InventoryManger>();
         MapTrackDataManager = gameObject.AddComponent<MapTrackDataManager>();
         CharacterExtendedStatManager = gameObject.AddComponent<CharacterExtendedStatManager>();
+        RiddleItemStatusManager = gameObject.AddComponent<RiddleItemStatusManager>();
     }
 }

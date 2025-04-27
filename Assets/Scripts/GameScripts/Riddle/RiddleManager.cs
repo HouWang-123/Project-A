@@ -15,7 +15,7 @@ public class RiddleManager : SerializedMonoBehaviour
     /// </summary>
     public Dictionary<string, UnityEvent> ExecuteList;
 
-    private Dictionary<int,RiddleItemBase> key2ItemList = new ();
+    private Dictionary<string,RiddleItemBase> key2ItemList = new ();
 
     public void Start()
     {
@@ -26,15 +26,40 @@ public class RiddleManager : SerializedMonoBehaviour
             {
                 RiddleHandler.SetRiddleManager(this);
             }
+            key2ItemList.Add(RiddleHandler.GetRiddleKey(),riddleItem);
+        }
+
+        Dictionary<string,RiddleItemBaseStatus> LoadedItemStatus = GameRunTimeData.Instance.RiddleItemStatusManager.LoadRiddleItemBaseStatusMap(GameControl.Instance.GetRoomData().ID);
+        if (LoadedItemStatus.Count > 0)
+        {
+            foreach (var kv in LoadedItemStatus)
+            {
+                key2ItemList[kv.Key].SetRiddleItemStatus(kv.Value);
+            }
         }
     }
 
-    public void ExecuteRiddle(string key)
+    public RiddleItemBase GetRiddleItemByKey(string riddleKey)
+    {
+        return key2ItemList[riddleKey];
+    }
+    public void ExecuteRiddleLogic(string key)
     {
         ExecuteList[key].Invoke();
     }
 
     public void OnRiddleItemStatusChange(RiddleItemBase riddleItemBase){
         Debug.Log("物品发生改变，ID: " + riddleItemBase.GetRiddleKey());
+        SaveOrUpdateItemStatus();
+    }
+
+    public void SaveOrUpdateItemStatus()
+    {
+        GameRunTimeData.Instance.RiddleItemStatusManager.SaveRiddleStatusFromManager(this);
+    }
+
+    public List<RiddleItemBase> GetAllRiddleItem()
+    {
+        return RiddleItems;
     }
 }

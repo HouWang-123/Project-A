@@ -12,7 +12,7 @@ public class RiddleSwitch : RiddleItemBase
         set
         {
             _switchStatus = value;
-            RiddleManager.OnRiddleItemStatusChange(this);
+            RiddleManager.OnRiddleItemStatusChange(this); // 通知Manager状态发生改变
         }
         get
         {
@@ -53,6 +53,7 @@ public class RiddleSwitch : RiddleItemBase
     public override void SetRiddleItemStatus(RiddleItemBaseStatus BaseStatus)
     {
         SwitchStatus = BaseStatus as SwitchStatus;
+        ChangeSwitch(SwitchStatus.is_on);
     }
 
     public bool GetSwitchValue()

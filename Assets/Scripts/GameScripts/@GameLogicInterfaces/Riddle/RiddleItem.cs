@@ -7,8 +7,8 @@ using UnityEngine;
 /// </summary>
 public interface IRiddleItem
 {
-    public int GetRiddleKey();
-    public void SetRiddleKey(int key);
+    public string GetRiddleKey();
+    public void SetRiddleKey(string key);
     public RiddleItemBaseStatus GetRiddleStatus();
     public void SetRiddleItemStatus(RiddleItemBaseStatus baseStatus);
     public void SetRiddleManager(RiddleManager riddleManager);

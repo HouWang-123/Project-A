@@ -37,13 +37,13 @@ public abstract class RiddleItemBase : MonoBehaviour, IInteractHandler,IRiddleIt
     }
 
 
-    public int RiddleItemKey;
-    public int GetRiddleKey()
+    public string RiddleItemKey;
+    public string GetRiddleKey()
     {
         return RiddleItemKey;
     }
-
-    public void SetRiddleKey(int key)
+    
+    public void SetRiddleKey(string key)
     {
         RiddleItemKey = key;
     }
