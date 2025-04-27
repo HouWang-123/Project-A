@@ -99,15 +99,18 @@ public class PlayerInteractController : MonoBehaviour
             // 获取手中物品ID
             int InteractItemId = GetOnHandItem();
             // 查找交互表
-            receiver.hasInteraction(InteractItemId);
+            bool hasInteraction = receiver.hasInteraction(InteractItemId);
             
-            if (InteractItemId == -1)
+            if (hasInteraction)
             {
-                receiver.OnPlayerStartInteract(-1);
-            }
-            else // 物品交互
-            {
-                receiver.OnPlayerStartInteract(InteractItemId);
+                if (InteractItemId == -1)
+                {
+                    receiver.OnPlayerStartInteract(-1);
+                }
+                else // 物品交互
+                {
+                    receiver.OnPlayerStartInteract(InteractItemId);
+                }
             }
         }
         else                                                                 // 不需要物品即可直接交互

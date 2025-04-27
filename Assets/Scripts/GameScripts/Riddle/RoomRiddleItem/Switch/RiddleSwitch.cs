@@ -7,18 +7,7 @@ public class RiddleSwitch : RiddleItemBase
     public Sprite OnStatusSprite;
     public Sprite OffStatusSprite;
     public bool DefaultValue;
-    public SwitchStatus SwitchStatus
-    {
-        set
-        {
-            _switchStatus = value;
-            RiddleManager.OnRiddleItemStatusChange(this); // 通知Manager状态发生改变
-        }
-        get
-        {
-            return _switchStatus;
-        }
-    }
+
 
     private SwitchStatus _switchStatus;
     public void Start()
@@ -32,12 +21,14 @@ public class RiddleSwitch : RiddleItemBase
         if (ison)
         {
             SwithchSpriteRenderer.sprite = OnStatusSprite;
-            SetRiddleItemStatus(new SwitchStatus(ison));
+            _switchStatus.is_on = ison;
+            RiddleManager.OnRiddleItemStatusChange(this); // 通知Manager状态发生改变
         }
         else
         {
             SwithchSpriteRenderer.sprite = OffStatusSprite;
-            SetRiddleItemStatus(new SwitchStatus(ison));
+            _switchStatus.is_on = ison;
+            RiddleManager.OnRiddleItemStatusChange(this); // 通知Manager状态发生改变
         }
     }
 
@@ -48,31 +39,23 @@ public class RiddleSwitch : RiddleItemBase
 
     public override RiddleItemBaseStatus GetRiddleStatus()
     {
-        return SwitchStatus;
+        return _switchStatus;
     }
     public override void SetRiddleItemStatus(RiddleItemBaseStatus BaseStatus)
     {
-        SwitchStatus = BaseStatus as SwitchStatus;
+        _switchStatus = BaseStatus as SwitchStatus;
+        ChangeSwitch(_switchStatus.is_on);
     }
     
-    public override bool hasInteraction(int itemid)
-    {
-        return GameItemInteractionHub.HasInteract(itemid, itemId);
-    }
 
     public override void OnPlayerStartInteract(int itemid)
     {
-        ChangeSwitch(!SwitchStatus.is_on);
+        ChangeSwitch(!_switchStatus.is_on);
     }
-
-    public override void OnPlayerFocus(int itemid)
-    {
-        OnPlayerFocus();
-    }
-
+    
     public bool GetSwitchValue()
     {
-        return SwitchStatus.is_on;
+        return _switchStatus.is_on;
     }
 }
 

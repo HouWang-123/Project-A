@@ -11,7 +11,7 @@ using UnityEngine;
 public class RoomMono : MonoBehaviour
 {
     public Transform RoomItemNode;
-    private Rooms roomData;
+    [SerializeField] private Rooms roomData;
     private Transform playerPoint;
     private GameObject SceneItemNode;
 

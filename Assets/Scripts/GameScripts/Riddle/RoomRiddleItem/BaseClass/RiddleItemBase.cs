@@ -11,11 +11,6 @@ public abstract class RiddleItemBase : MonoBehaviour, IInteractableItemReceiver,
     public GameInteractTip myInteractTip;
     public virtual void OnPlayerFocus()
     {
-        if (myInteractTip == null)
-        {
-            return;
-        }
-        myInteractTip.PlayInitAnimation();
     }
     public virtual void OnPlayerDefocus()
     {
@@ -70,8 +65,22 @@ public abstract class RiddleItemBase : MonoBehaviour, IInteractableItemReceiver,
     {
         RiddleManager = manager;
     }
-    
-    public abstract bool hasInteraction(int itemid);
+
+    public virtual bool hasInteraction(int itemid)
+    {
+        return GameItemInteractionHub.HasInteract(itemid, itemId);
+    }
     public abstract void OnPlayerStartInteract(int itemid);
-    public abstract void OnPlayerFocus(int itemid);
+
+    public virtual void OnPlayerFocus(int itemid)
+    {
+        if (hasInteraction(itemid))
+        {
+            if (myInteractTip == null)
+            {
+                return;
+            }
+            myInteractTip.PlayInitAnimation();
+        }
+    }
 }

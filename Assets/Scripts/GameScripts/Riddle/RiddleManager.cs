@@ -41,6 +41,7 @@ public class RiddleManager : SerializedMonoBehaviour
                 }
             }
         }
+        SaveOrUpdateItemStatus();
     }
 
     public RiddleItemBase GetRiddleItemByKey(string riddleKey)
