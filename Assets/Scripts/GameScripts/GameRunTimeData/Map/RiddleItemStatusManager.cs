@@ -4,7 +4,7 @@ using Sirenix.OdinInspector;
 
 public class RiddleItemStatusManager : SerializedMonoBehaviour
 {
-    public Dictionary<int, Dictionary<string, RiddleItemBaseStatus>> AllStatusList;
+    public Dictionary<int, Dictionary<string, RiddleItemBaseStatus>> AllStatusList = new ();
 
     public void SaveRiddleStatusFromManager(RiddleManager riddleManager)
     {
@@ -23,7 +23,12 @@ public class RiddleItemStatusManager : SerializedMonoBehaviour
 
     public Dictionary<string, RiddleItemBaseStatus> LoadRiddleItemBaseStatusMap(int RoomId)
     {
-        return AllStatusList[RoomId];
+        if (AllStatusList.ContainsKey(RoomId))
+        {
+            return AllStatusList[RoomId];
+        }
+
+        return null;
     }
     private Dictionary<string,RiddleItemBaseStatus> GetRiddleItemStatusFromRiddleManager (RiddleManager riddleManager)
     {

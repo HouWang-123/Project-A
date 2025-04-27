@@ -29,12 +29,16 @@ public class RiddleManager : SerializedMonoBehaviour
             key2ItemList.Add(RiddleHandler.GetRiddleKey(),riddleItem);
         }
 
-        Dictionary<string,RiddleItemBaseStatus> LoadedItemStatus = GameRunTimeData.Instance.RiddleItemStatusManager.LoadRiddleItemBaseStatusMap(GameControl.Instance.GetRoomData().ID);
-        if (LoadedItemStatus.Count > 0)
+        Dictionary<string,RiddleItemBaseStatus> LoadedItemStatus = 
+            GameRunTimeData.Instance.RiddleItemStatusManager.LoadRiddleItemBaseStatusMap(GameControl.Instance.GetRoomData().ID);
+        if (LoadedItemStatus != null)
         {
-            foreach (var kv in LoadedItemStatus)
+            if (LoadedItemStatus.Count > 0)
             {
-                key2ItemList[kv.Key].SetRiddleItemStatus(kv.Value);
+                foreach (var kv in LoadedItemStatus)
+                {
+                    key2ItemList[kv.Key].SetRiddleItemStatus(kv.Value);
+                }
             }
         }
     }

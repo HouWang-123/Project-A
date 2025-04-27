@@ -29,7 +29,7 @@ public static class GameItemTool
         {
             var Item = GameTableDataAgent.SceneObjectsTable.Get(id);
             resourceData.PrefabName = Item.PrefabName;
-            resourceData.IconName = Item.IconName;
+            resourceData.IconName = null;
             resourceData.RendererName = Item.SpriteName;
         }
         if (id.ToString().StartsWith("23")) //ThrowObject

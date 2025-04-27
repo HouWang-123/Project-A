@@ -74,8 +74,6 @@ public static partial class GameInteractSystemExtendedCode
             basketballHoopMono.GetBasketball();
             GameControl.Instance.GivePlayerItem(230002);
         }
-        
-        Debug.Log("取出篮球");
     }
     private static void Execute_1002(GameObject Target)
     {

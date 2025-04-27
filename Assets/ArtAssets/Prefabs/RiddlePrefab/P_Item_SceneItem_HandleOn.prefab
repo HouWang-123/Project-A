@@ -155,6 +155,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5053d629386ab744fb8a24ff3a931163, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemId: 220013
+  SceneObjectsData: {fileID: 0}
   RelationObject: []
   RiddleManager: {fileID: 0}
   myInteractTip: {fileID: 4125302332361639419}

@@ -43,7 +43,7 @@ public class RiddleSwitch : RiddleItemBase
 
     public override void OnPlayerInteract()
     {
-        ChangeSwitch(!SwitchStatus.is_on);
+
     }
 
     public override RiddleItemBaseStatus GetRiddleStatus()
@@ -53,7 +53,21 @@ public class RiddleSwitch : RiddleItemBase
     public override void SetRiddleItemStatus(RiddleItemBaseStatus BaseStatus)
     {
         SwitchStatus = BaseStatus as SwitchStatus;
-        ChangeSwitch(SwitchStatus.is_on);
+    }
+    
+    public override bool hasInteraction(int itemid)
+    {
+        return GameItemInteractionHub.HasInteract(itemid, itemId);
+    }
+
+    public override void OnPlayerStartInteract(int itemid)
+    {
+        ChangeSwitch(!SwitchStatus.is_on);
+    }
+
+    public override void OnPlayerFocus(int itemid)
+    {
+        OnPlayerFocus();
     }
 
     public bool GetSwitchValue()

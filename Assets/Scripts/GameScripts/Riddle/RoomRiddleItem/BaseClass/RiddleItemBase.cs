@@ -2,8 +2,10 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class RiddleItemBase : MonoBehaviour, IInteractHandler,IRiddleItem
+public abstract class RiddleItemBase : MonoBehaviour, IInteractableItemReceiver,IRiddleItem
 {
+    public int itemId;
+    public cfg.item.SceneObjects SceneObjectsData;
     public List<ItemBase> RelationObject;
     public RiddleManager RiddleManager;
     public GameInteractTip myInteractTip;
@@ -35,9 +37,9 @@ public abstract class RiddleItemBase : MonoBehaviour, IInteractHandler,IRiddleIt
     public virtual void OnPlayerInteractCancel()
     {
     }
-
-
+    
     public string RiddleItemKey;
+    
     public string GetRiddleKey()
     {
         return RiddleItemKey;
@@ -50,6 +52,7 @@ public abstract class RiddleItemBase : MonoBehaviour, IInteractHandler,IRiddleIt
 
     public void Start()
     {
+        SceneObjectsData = GameTableDataAgent.SceneObjectsTable.Get(itemId);
         if (myInteractTip == null)
         {
             Debug.LogWarning(name+"缺少交互提示");            
@@ -67,4 +70,8 @@ public abstract class RiddleItemBase : MonoBehaviour, IInteractHandler,IRiddleIt
     {
         RiddleManager = manager;
     }
+    
+    public abstract bool hasInteraction(int itemid);
+    public abstract void OnPlayerStartInteract(int itemid);
+    public abstract void OnPlayerFocus(int itemid);
 }

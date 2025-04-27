@@ -25,7 +25,6 @@ public sealed partial class SceneObjects : Luban.BeanBase
         { if(!_buf["buffID"].IsNumber) { throw new SerializationException(); }  BuffID = _buf["buffID"]; }
         { if(!_buf["buffTime"].IsNumber) { throw new SerializationException(); }  BuffTime = _buf["buffTime"]; }
         { if(!_buf["attack"].IsNumber) { throw new SerializationException(); }  Attack = _buf["attack"]; }
-        { if(!_buf["IconName"].IsString) { throw new SerializationException(); }  IconName = _buf["IconName"]; }
         { if(!_buf["SpriteName"].IsString) { throw new SerializationException(); }  SpriteName = _buf["SpriteName"]; }
         { if(!_buf["PrefabName"].IsString) { throw new SerializationException(); }  PrefabName = _buf["PrefabName"]; }
     }
@@ -68,10 +67,6 @@ public sealed partial class SceneObjects : Luban.BeanBase
     /// </summary>
     public readonly int Attack;
     /// <summary>
-    /// 图标
-    /// </summary>
-    public readonly string IconName;
-    /// <summary>
     /// 图片渲染
     /// </summary>
     public readonly string SpriteName;
@@ -95,7 +90,6 @@ public sealed partial class SceneObjects : Luban.BeanBase
         + "buffID:" + BuffID + ","
         + "buffTime:" + BuffTime + ","
         + "attack:" + Attack + ","
-        + "IconName:" + IconName + ","
         + "SpriteName:" + SpriteName + ","
         + "PrefabName:" + PrefabName + ","
         + "}";

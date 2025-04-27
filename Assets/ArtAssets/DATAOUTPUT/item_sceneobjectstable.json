@@ -8,7 +8,6 @@
     "buffID": 0,
     "buffTime": 0,
     "attack": 0,
-    "IconName": "",
     "SpriteName": "Sprite_Item_SceneItem_Sawdust",
     "PrefabName": "P_Item_SceneItem_Sawdust"
   },
@@ -21,7 +20,6 @@
     "buffID": 0,
     "buffTime": 0,
     "attack": 14,
-    "IconName": "",
     "SpriteName": "Sprite_Item_SceneItem_BurningSawdust",
     "PrefabName": "P_Item_SceneItem_BurningSawdust"
   },
@@ -34,7 +32,6 @@
     "buffID": 0,
     "buffTime": 0,
     "attack": 8,
-    "IconName": "",
     "SpriteName": "Sprite_Item_SceneItem_DeadVase",
     "PrefabName": "P_Item_SceneItem_DeadVase"
   },
@@ -47,7 +44,6 @@
     "buffID": 0,
     "buffTime": 0,
     "attack": 0,
-    "IconName": "",
     "SpriteName": "Sprite_Item_SceneItem_BigBell",
     "PrefabName": "P_Item_SceneItem_BigBell"
   },
@@ -60,7 +56,6 @@
     "buffID": 0,
     "buffTime": 0,
     "attack": 0,
-    "IconName": "",
     "SpriteName": "Sprite_Item_SceneItem_Anvil",
     "PrefabName": "P_Item_SceneItem_Anvil"
   },
@@ -73,7 +68,6 @@
     "buffID": 0,
     "buffTime": 0,
     "attack": 0,
-    "IconName": "",
     "SpriteName": "Sprite_Item_SceneItem_Charger",
     "PrefabName": "P_Item_SceneItem_Charger"
   },
@@ -86,7 +80,6 @@
     "buffID": 0,
     "buffTime": 0,
     "attack": 0,
-    "IconName": "",
     "SpriteName": "Sprite_Item_SceneItem_Vine",
     "PrefabName": "P_Item_SceneItem_Vine"
   },
@@ -99,7 +92,6 @@
     "buffID": 0,
     "buffTime": 0,
     "attack": 0,
-    "IconName": "",
     "SpriteName": "Sprite_Item_SceneItem_Locker",
     "PrefabName": "P_Item_SceneItem_Locker"
   },
@@ -112,7 +104,6 @@
     "buffID": 0,
     "buffTime": 0,
     "attack": 0,
-    "IconName": "",
     "SpriteName": "Sprite_Item_SceneItem_Book",
     "PrefabName": "P_Item_SceneItem_Book"
   },
@@ -125,7 +116,6 @@
     "buffID": 0,
     "buffTime": 0,
     "attack": 0,
-    "IconName": "",
     "SpriteName": "Sprite_Item_SceneItem_SkeletonPile",
     "PrefabName": "P_Item_SceneItem_SkeletonPile"
   },
@@ -138,7 +128,6 @@
     "buffID": 0,
     "buffTime": 0,
     "attack": 14,
-    "IconName": "",
     "SpriteName": "Sprite_Item_SceneItem_Fire",
     "PrefabName": "P_Item_SceneItem_Fire"
   },
@@ -151,7 +140,6 @@
     "buffID": 0,
     "buffTime": 0,
     "attack": 0,
-    "IconName": "",
     "SpriteName": "",
     "PrefabName": "P_Item_SceneItem_BasketballHoop"
   },
@@ -164,7 +152,6 @@
     "buffID": 0,
     "buffTime": 0,
     "attack": 0,
-    "IconName": "",
     "SpriteName": "Sprite_Item_SceneItem_HandleOff",
     "PrefabName": "P_Item_SceneItem_HandleOff"
   },
@@ -177,9 +164,8 @@
     "buffID": 0,
     "buffTime": 0,
     "attack": 0,
-    "IconName": "",
-    "SpriteName": "Sprite_Item_SceneItem_HandleOn",
-    "PrefabName": "P_Item_SceneItem_HandleOn"
+    "SpriteName": "Sprite_Item_SceneItem_SwitchLightOff",
+    "PrefabName": "P_Item_SceneItem_SwitchLightOff"
   },
   {
     "ID": 220015,
@@ -190,47 +176,7 @@
     "buffID": 0,
     "buffTime": 0,
     "attack": 0,
-    "IconName": "",
-    "SpriteName": "Sprite_Item_SceneItem_SwitchLightOff",
-    "PrefabName": "P_Item_SceneItem_SwitchLightOff"
-  },
-  {
-    "ID": 220016,
-    "NAME": 702016,
-    "DESCRIBE": 0,
-    "isDestructible": false,
-    "durability": 0,
-    "buffID": 0,
-    "buffTime": 0,
-    "attack": 0,
-    "IconName": "",
-    "SpriteName": "Sprite_Item_SceneItem_SwitchLightOn",
-    "PrefabName": "P_Item_SceneItem_SwitchLightOn"
-  },
-  {
-    "ID": 220017,
-    "NAME": 702017,
-    "DESCRIBE": 0,
-    "isDestructible": false,
-    "durability": 0,
-    "buffID": 0,
-    "buffTime": 0,
-    "attack": 0,
-    "IconName": "",
     "SpriteName": "Sprite_Item_SceneItem_SwitchSoundOff",
     "PrefabName": "P_Item_SceneItem_SwitchSoundOff"
-  },
-  {
-    "ID": 220018,
-    "NAME": 702018,
-    "DESCRIBE": 0,
-    "isDestructible": false,
-    "durability": 0,
-    "buffID": 0,
-    "buffTime": 0,
-    "attack": 0,
-    "IconName": "",
-    "SpriteName": "Sprite_Item_SceneItem_SwitchSoundOn",
-    "PrefabName": "P_Item_SceneItem_SwitchSoundOn"
   }
 ]

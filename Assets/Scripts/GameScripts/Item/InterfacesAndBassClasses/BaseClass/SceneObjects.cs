@@ -26,12 +26,7 @@ public class SceneObjects : ItemBase , IInteractableItemReceiver
     }
     public override Sprite GetItemIcon()
     {
-        AssetHandle loadAssetSync = YooAssets.LoadAssetSync<Sprite>(data.IconName);
-        if (loadAssetSync.AssetObject == null)
-        {
-            loadAssetSync = YooAssets.LoadAssetSync<Sprite>("SpriteNotFound_Default");
-        }
-        return Instantiate(loadAssetSync.AssetObject, transform) as Sprite;
+        return null;
     }
     public override string GetPrefabName() { return data.PrefabName; }
     public void OnPlayerDefocus()
@@ -67,11 +62,6 @@ public class SceneObjects : ItemBase , IInteractableItemReceiver
     public virtual void OnPlayerStartInteract(){}
     public virtual void OnPlayerInteract(){}
     public virtual void OnPlayerInteractCancel(){}
-    public virtual void UpdateInteractHandler(ItemBase updated, IInteractHandler old)
-    {
-        Debug.Log("更新交互列表");
-        PlayerControl.Instance.GetInteractController().UpdateInteractController(updated,old);
-    }
     public MonoBehaviour getMonoBehaviour() { return this; }
     public void OnPlayerFocus(){}
 }
