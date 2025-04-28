@@ -144,6 +144,7 @@ public class DoorMono : MonoBehaviour, IInteractHandler
 
     public void OnPlayerStartInteract()
     {
+        if (!doorEnabled) return;
         if (playerinside)
         {
             EnterDoor();

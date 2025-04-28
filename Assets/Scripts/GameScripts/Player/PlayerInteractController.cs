@@ -99,6 +99,11 @@ public class PlayerInteractController : MonoBehaviour
         {
             return;
         }
+
+        if (CurrentFocusedInteractHandler.getMonoBehaviour() == null)
+        {
+            return;
+        }
         if (CurrentFocusedInteractHandler is IInteractableItemReceiver receiver) // 需要玩家持有物品进行的特殊交互
         {
             // 获取手中物品ID

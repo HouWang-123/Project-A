@@ -1,4 +1,5 @@
 
+    using FEVM.Timmer;
     using UnityEngine;
 
 public class CaveMono : MonoBehaviour,IInteractHandler
@@ -35,7 +36,7 @@ public class CaveMono : MonoBehaviour,IInteractHandler
     {
         EventManager.Instance.RunEvent<IInteractHandler>(EventConstName.OnInteractiveDestory,this);
         GameControl.Instance.ChangeRoom(ToRoomID);
-        GameControl.Instance.PlayerDropFromSky();
+        TimeMgr.Instance.AddTask(0.02f,false,()=>GameControl.Instance.PlayerDropFromSky());
     }
 
     public enum EDoorLock

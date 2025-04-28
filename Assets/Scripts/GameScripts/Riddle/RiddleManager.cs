@@ -63,30 +63,34 @@ public class RiddleManager : SerializedMonoBehaviour
     {
         return RiddleItems;
     }
+    // 运行所有检查项，不推荐直接执行，可通过配置触发器延迟一些功能点的触发
     [ContextMenu("ExecuteAllRiddleFunctions")]
     public void ExecuteAllFunctionsManager()
     {
         foreach (var node in NodeValidations)
         {
-            string ExecuteKey = node.Key;
-            GameObject nodeValue = node.Value;
-            IRiddleNode riddleNode = nodeValue.transform.GetComponent<IRiddleNode>();
-            bool result = riddleNode.GetResult();
-            Debug.Log(ExecuteKey + result);
-            if (result)
+            if (String.IsNullOrEmpty(node.Key))
             {
-                ExecuteSingleRiddleLogic(ExecuteKey);
+                continue;
+            }
+            if(node.Value == null) continue;
+            
+            string ExecuteKey = node.Key;
+            ExecuteSingleRiddleLogic(ExecuteKey);
+        }
+    }
+    // 检查功能点
+    public void ExecuteSingleRiddleLogic(string key)
+    {
+        GameObject nodeValue = NodeValidations[key];
+        IRiddleNode riddleNode = nodeValue.transform.GetComponent<IRiddleNode>();
+        bool result = riddleNode.GetResult();
+        if (result)
+        {
+            if (ExecuteList.ContainsKey(key))
+            {
+                ExecuteList[key]?.Invoke();
             }
         }
     }
-    
-    public void ExecuteSingleRiddleLogic(string key)
-    {
-        if (ExecuteList.ContainsKey(key))
-        {
-            ExecuteList[key]?.Invoke();
-        }
-    }
-    
-    
 }
