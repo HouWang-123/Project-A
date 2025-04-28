@@ -20,3 +20,9 @@ public interface IRiddleNode
     public string GetNodeKey();
     public bool GetResult();
 }
+
+public interface IRiddleValueNode
+{
+    public int GetNum();
+    public void SetNum(int num);
+}

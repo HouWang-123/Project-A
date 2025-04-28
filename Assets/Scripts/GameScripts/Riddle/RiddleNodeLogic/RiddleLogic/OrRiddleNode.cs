@@ -38,11 +38,11 @@ public class OrRiddleNode : MonoBehaviour,IRiddleNode
         {
             ResultA = riddleNodeA.GetResult();
         }
-        if (RiddleItemA != null)
+        if (RiddleItemB != null)
         {
             ResultB = RiddleItemB.GetRiddleItemResult();
         }
-        if (riddleNodeA != null)
+        if (riddleNodeB != null)
         {
             ResultB = riddleNodeB.GetResult();
         }
