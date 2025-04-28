@@ -6,12 +6,9 @@ public abstract class RiddleItemBase : MonoBehaviour, IInteractableItemReceiver,
 {
     public int itemId;
     public cfg.item.SceneObjects SceneObjectsData;
-    public List<ItemBase> RelationObject;
     public RiddleManager RiddleManager;
     public GameInteractTip myInteractTip;
-    public virtual void OnPlayerFocus()
-    {
-    }
+    public virtual void OnPlayerFocus() { }
     public virtual void OnPlayerDefocus()
     {
         if (myInteractTip == null)
@@ -20,10 +17,7 @@ public abstract class RiddleItemBase : MonoBehaviour, IInteractableItemReceiver,
         }
         myInteractTip.OnDetargeted();
     }
-    public virtual MonoBehaviour getMonoBehaviour()
-    {
-        return null;
-    }
+    public virtual MonoBehaviour getMonoBehaviour() { return this; }
     public virtual void OnPlayerStartInteract()
     {
         OnPlayerInteract();
@@ -71,7 +65,7 @@ public abstract class RiddleItemBase : MonoBehaviour, IInteractableItemReceiver,
         return GameItemInteractionHub.HasInteract(itemid, itemId);
     }
     public abstract void OnPlayerStartInteract(int itemid);
-
+    public abstract bool GetRiddleItemResult();
     public virtual void OnPlayerFocus(int itemid)
     {
         if (hasInteraction(itemid))

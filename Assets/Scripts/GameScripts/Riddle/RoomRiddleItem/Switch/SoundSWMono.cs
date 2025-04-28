@@ -44,11 +44,5 @@ public class SoundSWMono : RiddleSwitch
     {
         heardSound = false;
     }
-
     public bool HasHeardSound() => heardSound;
-
-    public override MonoBehaviour getMonoBehaviour()
-    {
-        return this;
-    }
 }

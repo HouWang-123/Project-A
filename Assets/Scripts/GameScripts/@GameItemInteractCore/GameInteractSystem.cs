@@ -19,6 +19,7 @@ public static partial class GameInteractSystemExtendedCode
         {
             Execute_1000(Source);
         }
+        // 交互篮球框后获取篮球
         if (ExecuteID == 1001)
         {
             Execute_1001(Source);

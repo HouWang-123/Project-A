@@ -52,8 +52,8 @@ public class RiddleSwitch : RiddleItemBase
     {
         ChangeSwitch(!_switchStatus.is_on);
     }
-    
-    public bool GetSwitchValue()
+
+    public override bool GetRiddleItemResult()
     {
         return _switchStatus.is_on;
     }

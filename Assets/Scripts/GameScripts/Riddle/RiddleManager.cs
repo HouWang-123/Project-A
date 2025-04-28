@@ -1,9 +1,13 @@
 using System;
 using System.Collections.Generic;
+using RotaryHeart.Lib.SerializableDictionary;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Rendering;
 
+public class ExecuteListDictionary<k,v> : SerializableDictionaryBase<string,UnityEvent>{}
+public class GameObjectNodeDictionary<k,v> : SerializableDictionaryBase<string,GameObject>{}
 /// <summary>
 /// 谜题场景，可能存在多个物品
 /// </summary>
@@ -13,8 +17,10 @@ public class RiddleManager : SerializedMonoBehaviour
     /// <summary>
     /// 执行列表
     /// </summary>
-    public Dictionary<string, UnityEvent> ExecuteList;
-
+    public ExecuteListDictionary<string, UnityEvent> ExecuteList = new ();
+    
+    public GameObjectNodeDictionary<string, GameObject> NodeValidations = new ();
+    
     private Dictionary<string,RiddleItemBase> key2ItemList = new ();
 
     public void Start()
@@ -43,16 +49,6 @@ public class RiddleManager : SerializedMonoBehaviour
         }
         SaveOrUpdateItemStatus();
     }
-
-    public RiddleItemBase GetRiddleItemByKey(string riddleKey)
-    {
-        return key2ItemList[riddleKey];
-    }
-    public void ExecuteRiddleLogic(string key)
-    {
-        ExecuteList[key].Invoke();
-    }
-
     public void OnRiddleItemStatusChange(RiddleItemBase riddleItemBase){
         Debug.Log("物品发生改变，ID: " + riddleItemBase.GetRiddleKey());
         SaveOrUpdateItemStatus();
@@ -67,4 +63,30 @@ public class RiddleManager : SerializedMonoBehaviour
     {
         return RiddleItems;
     }
+    [ContextMenu("TestRiddle")]
+    public void ExecuteManager()
+    {
+        foreach (var node in NodeValidations)
+        {
+            string ExecuteKey = node.Key;
+            GameObject nodeValue = node.Value;
+            IRiddleNode riddleNode = nodeValue.transform.GetComponent<IRiddleNode>();
+            bool result = riddleNode.GetResult();
+            Debug.Log(ExecuteKey + result);
+            if (result)
+            {
+                ExecuteRiddleLogic(ExecuteKey);
+            }
+        }
+    }
+    
+    public void ExecuteRiddleLogic(string key)
+    {
+        if (ExecuteList.ContainsKey(key))
+        {
+            ExecuteList[key]?.Invoke();
+        }
+    }
+    
+    
 }

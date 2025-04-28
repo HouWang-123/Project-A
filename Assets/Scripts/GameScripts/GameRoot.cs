@@ -5,7 +5,7 @@ using YooAsset;
 
 public class GameRoot : MonoBehaviour
 {
-    [HideInInspector] public static GameRoot Instance;
+     public static GameRoot Instance;
     public Collider camCollider;
     [GUIColor(0,1,1)]
     public EPlayMode PlayMode = EPlayMode.EditorSimulateMode;
@@ -15,18 +15,22 @@ public class GameRoot : MonoBehaviour
     public LayerMask FloorLayer;
     
     [HorizontalGroup("Columns")]
+    [GUIColor(1f, 0.5f, 1f)]
     [BoxGroup("Columns/传送", showLabel: true)]
     [LabelText("传送ID")]
+
     public int TPRoomID;
 
     [BoxGroup("Columns/传送")]
     [Button("点击传送")]
+    [GUIColor(1f, 0.5f, 1f)]
     private void TeleportPlayer()
     {
         GameControl.Instance.TeleportPlayer(TPRoomID);
     }
 
     [HorizontalGroup("Columns")]
+    
     [BoxGroup("Columns/物品", showLabel: true)]
     [LabelText("物品ID")]
     [GUIColor(1f, 1f, 0)]

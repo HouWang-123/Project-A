@@ -528,8 +528,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5203345222763064890}
   - {fileID: 144045850053120452}
+  - {fileID: 5203345222763064890}
   m_Father: {fileID: 8206831356080259998}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1669323495319721942
@@ -545,14 +545,136 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   serializationData:
-    SerializedFormat: 0
-    SerializedBytes: 01010b00000045007800650063007500740065004c006900730074002f0000000001a300000055006e0069007400790045006e00670069006e0065002e00520065006e0064006500720069006e0067002e00530065007200690061006c0069007a0065006400440069006300740069006f006e00610072007900600032005b005b00530079007300740065006d002e0053007400720069006e0067002c0020006d00730063006f0072006c00690062005d002c005b0055006e0069007400790045006e00670069006e0065002e004500760065006e00740073002e0055006e006900740079004500760065006e0074002c00200055006e0069007400790045006e00670069006e0065002e0043006f00720065004d006f00640075006c0065005d005d002c00200055006e006900740079002e00520065006e0064006500720050006900700065006c0069006e00650073002e0043006f00720065002e00520075006e00740069006d0065000000000001010800000063006f006d00700061007200650072002f010000000159000000530079007300740065006d002e0043006f006c006c0065006300740069006f006e0073002e00470065006e0065007200690063002e00470065006e00650072006900630045007100750061006c0069007400790043006f006d0070006100720065007200600031005b005b00530079007300740065006d002e0053007400720069006e0067002c0020006d00730063006f0072006c00690062005d005d002c0020006d00730063006f0072006c006900620001000000050600000000000000000705
-    ReferencedUnityObjects: []
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 8463539017405882090}
+    - {fileID: 0}
+    - {fileID: 3586223912780884228}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes: []
+    SerializationNodes:
+    - Name: ExecuteList
+      Entry: 7
+      Data: 0|ExecuteListDictionary`2[[System.String, mscorlib],[UnityEngine.Events.UnityEvent,
+        UnityEngine.CoreModule]], Assembly-CSharp
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: System.Collections.Generic.KeyValuePair`2[[System.String, mscorlib],[UnityEngine.Events.UnityEvent,
+        UnityEngine.CoreModule]], mscorlib
+    - Name: 
+      Entry: 1
+      Data: SwitchToXor
+    - Name: 
+      Entry: 7
+      Data: 1|UnityEngine.Events.UnityEvent, UnityEngine.CoreModule
+    - Name: m_PersistentCalls
+      Entry: 7
+      Data: 2|UnityEngine.Events.PersistentCallGroup, UnityEngine.CoreModule
+    - Name: m_Calls
+      Entry: 7
+      Data: 3|System.Collections.Generic.List`1[[UnityEngine.Events.PersistentCall,
+        UnityEngine.CoreModule]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 4|UnityEngine.Events.PersistentCall, UnityEngine.CoreModule
+    - Name: m_Target
+      Entry: 10
+      Data: 0
+    - Name: m_TargetAssemblyTypeName
+      Entry: 1
+      Data: UnityEngine.GameObject, UnityEngine
+    - Name: m_MethodName
+      Entry: 1
+      Data: SetActive
+    - Name: m_Mode
+      Entry: 3
+      Data: 6
+    - Name: m_Arguments
+      Entry: 7
+      Data: 5|UnityEngine.Events.ArgumentCache, UnityEngine.CoreModule
+    - Name: m_ObjectArgument
+      Entry: 10
+      Data: 1
+    - Name: m_ObjectArgumentAssemblyTypeName
+      Entry: 1
+      Data: UnityEngine.Object, UnityEngine
+    - Name: m_IntArgument
+      Entry: 3
+      Data: 0
+    - Name: m_FloatArgument
+      Entry: 4
+      Data: 0
+    - Name: m_StringArgument
+      Entry: 1
+      Data: 
+    - Name: m_BoolArgument
+      Entry: 5
+      Data: false
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: m_CallState
+      Entry: 3
+      Data: 2
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: NodeValidations
+      Entry: 7
+      Data: 6|GameObjectNodeDictionary`2[[System.String, mscorlib],[UnityEngine.GameObject,
+        UnityEngine.CoreModule]], Assembly-CSharp
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: System.Collections.Generic.KeyValuePair`2[[System.String, mscorlib],[UnityEngine.GameObject,
+        UnityEngine.CoreModule]], mscorlib
+    - Name: 
+      Entry: 1
+      Data: SwitchToXor
+    - Name: 
+      Entry: 10
+      Data: 2
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
   RiddleItems:
   - {fileID: 7943890107937492727}
   - {fileID: 2879035945701028105}
@@ -946,7 +1068,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8325109907331590213}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: RiddleNode
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -964,7 +1086,8 @@ Transform:
   m_LocalPosition: {x: -0.725367, y: 2.6762574, z: -0.17859654}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 934443456051621975}
   m_Father: {fileID: 8206831356080259998}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7436985413793476152
@@ -1426,12 +1549,17 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3838774924057723599, guid: dcb364c25433d324fb88dc8dbd89f155, type: 3}
   m_PrefabInstance: {fileID: 1347265150842074054}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 4381118521505794199}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5053d629386ab744fb8a24ff3a931163, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &4381118521505794199 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3350307112600779601, guid: dcb364c25433d324fb88dc8dbd89f155, type: 3}
+  m_PrefabInstance: {fileID: 1347265150842074054}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1911596781489903507
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1584,6 +1712,81 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 7992566440552979485, guid: 099c63e09c1f0ca4db543acb6db532d7, type: 3}
   m_PrefabInstance: {fileID: 2119325008544877047}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2286277425574203989
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8325109907331590213}
+    m_Modifications:
+    - target: {fileID: 1390964035880313346, guid: e4faaf089a45a1f47ac4c59ce40449a4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.91608685
+      objectReference: {fileID: 0}
+    - target: {fileID: 1390964035880313346, guid: e4faaf089a45a1f47ac4c59ce40449a4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.3737433
+      objectReference: {fileID: 0}
+    - target: {fileID: 1390964035880313346, guid: e4faaf089a45a1f47ac4c59ce40449a4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 3.5968394
+      objectReference: {fileID: 0}
+    - target: {fileID: 1390964035880313346, guid: e4faaf089a45a1f47ac4c59ce40449a4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1390964035880313346, guid: e4faaf089a45a1f47ac4c59ce40449a4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1390964035880313346, guid: e4faaf089a45a1f47ac4c59ce40449a4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1390964035880313346, guid: e4faaf089a45a1f47ac4c59ce40449a4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1390964035880313346, guid: e4faaf089a45a1f47ac4c59ce40449a4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1390964035880313346, guid: e4faaf089a45a1f47ac4c59ce40449a4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1390964035880313346, guid: e4faaf089a45a1f47ac4c59ce40449a4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3350307112600779601, guid: e4faaf089a45a1f47ac4c59ce40449a4, type: 3}
+      propertyPath: m_Name
+      value: RiddleXor
+      objectReference: {fileID: 0}
+    - target: {fileID: 5806469382949664502, guid: e4faaf089a45a1f47ac4c59ce40449a4, type: 3}
+      propertyPath: RiddleObjA
+      value: 
+      objectReference: {fileID: 8432675927496947561}
+    - target: {fileID: 5806469382949664502, guid: e4faaf089a45a1f47ac4c59ce40449a4, type: 3}
+      propertyPath: RiddleObjB
+      value: 
+      objectReference: {fileID: 4381118521505794199}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e4faaf089a45a1f47ac4c59ce40449a4, type: 3}
+--- !u!4 &934443456051621975 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1390964035880313346, guid: e4faaf089a45a1f47ac4c59ce40449a4, type: 3}
+  m_PrefabInstance: {fileID: 2286277425574203989}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3586223912780884228 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3350307112600779601, guid: e4faaf089a45a1f47ac4c59ce40449a4, type: 3}
+  m_PrefabInstance: {fileID: 2286277425574203989}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3094100596468657022
 PrefabInstance:
@@ -2064,12 +2267,17 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3838774924057723599, guid: dcb364c25433d324fb88dc8dbd89f155, type: 3}
   m_PrefabInstance: {fileID: 6591102178494630968}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 8432675927496947561}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5053d629386ab744fb8a24ff3a931163, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &8432675927496947561 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3350307112600779601, guid: dcb364c25433d324fb88dc8dbd89f155, type: 3}
+  m_PrefabInstance: {fileID: 6591102178494630968}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7804346721149302732
 PrefabInstance:
   m_ObjectHideFlags: 0

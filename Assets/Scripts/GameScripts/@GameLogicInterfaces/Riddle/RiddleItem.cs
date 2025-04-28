@@ -12,4 +12,11 @@ public interface IRiddleItem
     public RiddleItemBaseStatus GetRiddleStatus();
     public void SetRiddleItemStatus(RiddleItemBaseStatus baseStatus);
     public void SetRiddleManager(RiddleManager riddleManager);
+    public bool GetRiddleItemResult();
+}
+
+public interface IRiddleNode
+{
+    public string GetNodeKey();
+    public bool GetResult();
 }
