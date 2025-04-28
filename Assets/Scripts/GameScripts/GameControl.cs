@@ -73,7 +73,7 @@ public class GameControl
         CreateGlobalLight();
     }
 
-    public void ChangeRoom(int RoomId, int DoorId)
+    public void ChangeRoom(int RoomId, int DoorId = -1)
     {
         RoomMono mono = InitRoom(RoomId);
         if (mono == null) return;
@@ -81,7 +81,15 @@ public class GameControl
             GameRunTimeData.Instance.MapTrackDataManager.RecoverItem(room.ID,sceneItemNode.transform);
 
         EventManager.Instance.RunEvent(EventConstName.OnChangeRoom);
-        mono.SetPlayPoint(DoorId);
+        if (DoorId == -1)
+        {
+            GameControl.Instance.GetGamePlayer().transform.position = Vector3.zero;
+        }
+        else
+        {
+            mono.SetPlayPoint(DoorId);
+        }
+
     }
 
     private RoomMono InitRoom(int RoomId)

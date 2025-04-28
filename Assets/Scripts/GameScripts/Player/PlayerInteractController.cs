@@ -84,7 +84,12 @@ public class PlayerInteractController : MonoBehaviour
 
     private void ClearInteractHandler(IInteractHandler handler)
     {
+        if (CurrentFocusedInteractHandler == handler)
+        {
+            CurrentFocusedInteractHandler = null;
+        }
         InteractHandlerList.Remove(handler);
+        
     }
     public void InteractItem()
     {

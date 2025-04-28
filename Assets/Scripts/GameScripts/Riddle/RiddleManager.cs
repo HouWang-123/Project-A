@@ -63,8 +63,8 @@ public class RiddleManager : SerializedMonoBehaviour
     {
         return RiddleItems;
     }
-    [ContextMenu("TestRiddle")]
-    public void ExecuteManager()
+    [ContextMenu("ExecuteAllRiddleFunctions")]
+    public void ExecuteAllFunctionsManager()
     {
         foreach (var node in NodeValidations)
         {
@@ -75,12 +75,12 @@ public class RiddleManager : SerializedMonoBehaviour
             Debug.Log(ExecuteKey + result);
             if (result)
             {
-                ExecuteRiddleLogic(ExecuteKey);
+                ExecuteSingleRiddleLogic(ExecuteKey);
             }
         }
     }
     
-    public void ExecuteRiddleLogic(string key)
+    public void ExecuteSingleRiddleLogic(string key)
     {
         if (ExecuteList.ContainsKey(key))
         {
