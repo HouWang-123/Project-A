@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.Serialization;
 
 // XorLogicNode
-public class XorRiddleNode : MonoBehaviour, IRiddleNode
+public class XorRiddleNode : MonoBehaviour, IRiddleNode<bool>
 {
     public string RiddleNodeKey;
     // 这里可以放入RiddleItem或者RiddleNode
@@ -18,8 +18,8 @@ public class XorRiddleNode : MonoBehaviour, IRiddleNode
     {
         IRiddleItem RiddleItemA = RiddleObjA.GetComponent<IRiddleItem>();
         IRiddleItem RiddleItemB = RiddleObjB.GetComponent<IRiddleItem>();
-        IRiddleNode riddleNodeA = RiddleObjA.GetComponent<IRiddleNode>();
-        IRiddleNode riddleNodeB = RiddleObjB.GetComponent<IRiddleNode>();
+        IRiddleNode<bool> riddleNodeA = RiddleObjA.GetComponent<IRiddleNode<bool>>();
+        IRiddleNode<bool> riddleNodeB = RiddleObjB.GetComponent<IRiddleNode<bool>>();
         bool ResultA = false;
         bool ResultB = false;
         if (RiddleItemA == null && riddleNodeA == null)

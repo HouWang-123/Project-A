@@ -15,10 +15,10 @@ public interface IRiddleItem
     public bool GetRiddleItemResult();
 }
 
-public interface IRiddleNode
+public interface IRiddleNode <T>
 {
     public string GetNodeKey();
-    public bool GetResult();
+    public T GetResult();
 }
 
 public interface IRiddleValueNode

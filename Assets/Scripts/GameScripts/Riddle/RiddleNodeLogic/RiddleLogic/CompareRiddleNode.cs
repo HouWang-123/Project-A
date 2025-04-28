@@ -3,7 +3,7 @@ using System;
 using System.Linq.Expressions;
 using UnityEngine;
 
-public class CompareRiddleNode : MonoBehaviour, IRiddleNode
+public class CompareRiddleNode : MonoBehaviour, IRiddleNode<bool>
 {
     public string nodeKey;
     public GameObject RiddleValueA;

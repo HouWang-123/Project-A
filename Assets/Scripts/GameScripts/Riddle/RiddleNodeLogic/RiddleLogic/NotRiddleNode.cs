@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class NotRiddleNode : MonoBehaviour,IRiddleNode
+public class NotRiddleNode : MonoBehaviour,IRiddleNode<bool>
 {
     public string RiddleNodeKey;
     // 这里可以放入RiddleItem或者RiddleNode
@@ -12,7 +12,7 @@ public class NotRiddleNode : MonoBehaviour,IRiddleNode
     public bool GetResult()
     {
         IRiddleItem RiddleItemA = RiddleObjA.GetComponent<IRiddleItem>();
-        IRiddleNode riddleNodeA = RiddleObjA.GetComponent<IRiddleNode>();
+        IRiddleNode<bool> riddleNodeA = RiddleObjA.GetComponent<IRiddleNode<bool>>();
         bool ResultA = false;
         if (RiddleItemA == null && riddleNodeA == null)
         {

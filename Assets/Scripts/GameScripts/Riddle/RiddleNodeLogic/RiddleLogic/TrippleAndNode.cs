@@ -1,7 +1,7 @@
 
 using UnityEngine;
 
-public class TrippleAndNode : MonoBehaviour,IRiddleNode
+public class TrippleAndNode : MonoBehaviour,IRiddleNode<bool>
 {
     public string RiddleNodeKey;
     // 这里可以放入RiddleItem或者RiddleNode
@@ -18,9 +18,9 @@ public class TrippleAndNode : MonoBehaviour,IRiddleNode
         IRiddleItem RiddleItemB = RiddleObjB.GetComponent<IRiddleItem>();
         IRiddleItem RiddleItemC = RiddleObjB.GetComponent<IRiddleItem>();
         
-        IRiddleNode riddleNodeA = RiddleObjA.GetComponent<IRiddleNode>();
-        IRiddleNode riddleNodeB = RiddleObjB.GetComponent<IRiddleNode>();
-        IRiddleNode riddleNodeC = RiddleObjB.GetComponent<IRiddleNode>();
+        IRiddleNode<bool> riddleNodeA = RiddleObjA.GetComponent<IRiddleNode<bool>>();
+        IRiddleNode<bool> riddleNodeB = RiddleObjB.GetComponent<IRiddleNode<bool>>();
+        IRiddleNode<bool> riddleNodeC = RiddleObjB.GetComponent<IRiddleNode<bool>>();
         bool ResultA = false;
         bool ResultB = false;
         bool ResultC = false;

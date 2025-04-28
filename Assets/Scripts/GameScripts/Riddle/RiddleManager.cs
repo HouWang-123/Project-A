@@ -83,7 +83,7 @@ public class RiddleManager : SerializedMonoBehaviour
     public void ExecuteSingleRiddleLogic(string key)
     {
         GameObject nodeValue = NodeValidations[key];
-        IRiddleNode riddleNode = nodeValue.transform.GetComponent<IRiddleNode>();
+        IRiddleNode<bool> riddleNode = nodeValue.transform.GetComponent<IRiddleNode<bool>>();
         bool result = riddleNode.GetResult();
         if (result)
         {
