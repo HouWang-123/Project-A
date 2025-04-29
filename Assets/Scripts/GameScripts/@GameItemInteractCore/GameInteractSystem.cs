@@ -78,11 +78,13 @@ public static partial class GameInteractSystemExtendedCode
     }
     private static void Execute_1002(GameObject Target)
     {
-        
+        GameObject itemBaseGameObject = GameRunTimeData.Instance.characterBasicStatManager.GetStat().LiftedItem.gameObject;
+        PlayerControl.Instance.DropItem(false);
+        GameObject.Destroy(itemBaseGameObject);
     }
     private static void Execute_1003(GameObject Target)
     {
-        
+        GameControl.Instance.GivePlayerItem(230001);
     }
     private static void Execute_1004(GameObject Target)
     {

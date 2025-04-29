@@ -6,7 +6,7 @@ public static class GameItemInteractionHub
     public static Dictionary<(int, int), int> FindEffectById = new ();
     public static void InitInteraction(InteractEffect effect)
     {
-        FindEffectById.Add((effect.InteractItemID,effect.ToInteractItemID),effect.ID);
+        FindEffectById.Add( (effect.InteractItemID,effect.ToInteractItemID) , effect.ID);
         if (InterActionList.ContainsKey(effect.InteractItemID))
         {
             InterActionList[effect.InteractItemID].Add(effect.ToInteractItemID);
@@ -33,11 +33,22 @@ public static class GameItemInteractionHub
         if (InterActionList[ItemA].Contains(ItemB)) return true;
         return false;
     }
+
     /// <summary>
     /// 获取交互ID。传入ID。注: ItemA 为玩家手持的物品，ItemB为待交互物品，空手传入-1
     /// </summary>
     /// <param name="ItemA"></param>
     /// <param name="ItemB"></param>
     /// <returns></returns>
-    public static int FindInteractEffectById(int ItemA, int ItemB) { return FindEffectById[(ItemA, ItemB)]; }
+    public static int FindInteractEffectById(int ItemA, int ItemB)
+    {
+        if (FindEffectById.ContainsKey((ItemA,ItemB)))
+        {
+            return FindEffectById[(ItemA, ItemB)];
+        }
+        else
+        {
+            return FindEffectById[(-2, ItemB)];
+        }
+    }
 }

@@ -24,14 +24,6 @@
     "CodeExecuteID": -1
   },
   {
-    "ID": 900004,
-    "ShortText": 860001,
-    "TipText": -1,
-    "ToInteractItemID": 220015,
-    "InteractItemID": -2,
-    "CodeExecuteID": -1
-  },
-  {
     "ID": 900005,
     "ShortText": 860001,
     "TipText": -1,
@@ -46,5 +38,29 @@
     "ToInteractItemID": 220017,
     "InteractItemID": -2,
     "CodeExecuteID": -1
+  },
+  {
+    "ID": 900007,
+    "ShortText": 860001,
+    "TipText": -1,
+    "ToInteractItemID": 220015,
+    "InteractItemID": -2,
+    "CodeExecuteID": -1
+  },
+  {
+    "ID": 900008,
+    "ShortText": 860001,
+    "TipText": -1,
+    "ToInteractItemID": 220015,
+    "InteractItemID": 230001,
+    "CodeExecuteID": 1002
+  },
+  {
+    "ID": 900009,
+    "ShortText": 860001,
+    "TipText": -1,
+    "ToInteractItemID": 220016,
+    "InteractItemID": -1,
+    "CodeExecuteID": 1003
   }
 ]

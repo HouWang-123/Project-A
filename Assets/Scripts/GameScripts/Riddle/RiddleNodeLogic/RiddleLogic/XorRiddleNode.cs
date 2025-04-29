@@ -48,10 +48,6 @@ public class XorRiddleNode : MonoBehaviour, IRiddleNode<bool>
             ResultB = riddleNodeB.GetResult();
         }
         
-        if (ResultA && ResultB)
-        {
-            return true;
-        }
         return ResultA != ResultB;
     }
     private void OnDrawGizmosSelected()

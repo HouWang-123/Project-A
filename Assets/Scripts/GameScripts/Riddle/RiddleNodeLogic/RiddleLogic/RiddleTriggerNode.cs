@@ -7,10 +7,14 @@ public class RiddleTriggerNode : MonoBehaviour
 {
     public float TriggerDelay;
     public Color TriggerColor;
+    
     [Header("触发器条件")]
     public GameObject RiddleConditionNode;
+    [Header("触发效果")]
     public UnityEvent Trigger;
+    
     private IRiddleNode<bool> PreConditionRiddleNode;
+    
     public bool hasCondition;
     public void OnTrigger()
     {

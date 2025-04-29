@@ -1,48 +1,117 @@
+using System;
+using cfg.interact;
+using FEVM.Timmer;
 using UnityEngine;
 
-public class SoundSWMono : RiddleSwitch
+public class SoundSWMono : RiddleItemBase
 {
-    [Header("检测配置")] 
-    public string soundTag = "Sound";
-    public string blockerTag = "Blocker";
+    public float SoundSustainTime;
+    public SwitchStatus isCovered;
+    public bool Active;
+    public SpriteRenderer SoundSwitchRenderer;
+    public SpriteRenderer MyCoverSpRenderer;
+    public Sprite SoundSwitchRendere;
+    public Sprite OnSoundReceive;
 
-    [Header("状态显示")]
-    [SerializeField] private bool heardSound = false;
-    [SerializeField] private int blockingCount = 0;
-
-    [Header("系统链接")]
-    public SoundSWGroup groupManager;
-
-    public bool IsBlocked => blockingCount > 0;
-
-    void OnTriggerEnter(Collider other)
+    
+    [ContextMenu("TestSoundHearing")]
+    public void OnSoundHearing()
     {
-        if (other.CompareTag(soundTag))
+        if (isCovered.is_on)
         {
-            if (!heardSound)
+            Debug.Log("======Covered=======");
+            return;
+        }
+        Active = true;
+        SoundSwitchRenderer.sprite = OnSoundReceive;
+        TimeMgr.Instance.AddTask(SoundSustainTime,false, () => { SoundHearingStop(); });
+    }
+
+    public void OnDestroy()
+    {
+        TimeMgr.Instance.RemoveTask(SoundHearingStop);
+    }
+
+    public void SoundHearingStop()
+    {
+        Active = false;
+        if (isCovered.is_on)
+        {
+            
+        }
+        else
+        {
+            SoundSwitchRenderer.sprite = SoundSwitchRendere;
+        }
+    }
+    public void Cover()
+    {
+        isCovered.is_on = true;
+        itemId = 220016;
+        SceneObjectsData = GameTableDataAgent.SceneObjectsTable.Get(220016);
+        MyCoverSpRenderer.gameObject.SetActive(true);
+    }
+    public void UnCover()
+    {
+        isCovered.is_on = false;
+        itemId = 220015;
+        SceneObjectsData = GameTableDataAgent.SceneObjectsTable.Get(220015);
+        MyCoverSpRenderer.gameObject.SetActive(false);
+    }
+    
+    public void Start()
+    {
+        base.Start();
+        if (isCovered == null)
+        {
+            isCovered = new SwitchStatus(false);
+        }
+        if (isCovered.is_on)
+        {
+            Cover();
+        }
+        else
+        {
+            UnCover();
+        }
+    }
+    public override void OnPlayerInteract() { }
+    public override RiddleItemBaseStatus GetRiddleStatus() { return isCovered; }
+
+    public override void SetRiddleItemStatus(RiddleItemBaseStatus BaseStatus)
+    {
+        isCovered = BaseStatus as SwitchStatus;
+    }
+    public override void OnPlayerStartInteract(int itemid)
+    {
+        if (isCovered.is_on)
+        {
+            int findInteractEffectById = GameItemInteractionHub.FindInteractEffectById(itemid, itemId);
+            InteractEffect interactEffect = GameTableDataAgent.InteractEffectTable.Get(findInteractEffectById);
+            GameInteractSystemExtendedCode.ExecuteInteraction(interactEffect.CodeExecuteID, gameObject);
+            UnCover();
+        }
+        else
+        {
+            if (GameRunTimeData.Instance.characterBasicStatManager.GetStat().LiftedItem != null)
             {
-                heardSound = true;
-                groupManager?.RegisterTrigger(this);
+                if (GameRunTimeData.Instance.characterBasicStatManager.GetStat().LiftedItem.ItemID == 230001 )
+                {
+                    int findInteractEffectById = GameItemInteractionHub.FindInteractEffectById(itemid, itemId);
+                    InteractEffect interactEffect = GameTableDataAgent.InteractEffectTable.Get(findInteractEffectById);
+                    GameInteractSystemExtendedCode.ExecuteInteraction(interactEffect.CodeExecuteID, gameObject);
+                    Cover();
+                }
             }
         }
-        else if (other.CompareTag(blockerTag))
-        {
-            blockingCount++;
-        }
     }
 
-    void OnTriggerExit(Collider other)
+    public override bool GetRiddleItemResult()
     {
-        if (other.CompareTag(blockerTag))
+        if (isCovered.is_on)
         {
-            blockingCount = Mathf.Max(0, blockingCount - 1);
+            return false;
         }
+        return Active;
     }
-
-    // GroupManager 调用这个来清除状态
-    public void ResetTrigger()
-    {
-        heardSound = false;
-    }
-    public bool HasHeardSound() => heardSound;
 }
