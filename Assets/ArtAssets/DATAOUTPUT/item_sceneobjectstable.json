@@ -178,5 +178,29 @@
     "attack": 0,
     "SpriteName": "Sprite_Item_SceneItem_SwitchSoundOff",
     "PrefabName": "P_Item_SceneItem_SwitchSoundOff"
+  },
+  {
+    "ID": 220016,
+    "NAME": 702016,
+    "DESCRIBE": 0,
+    "isDestructible": false,
+    "durability": 0,
+    "buffID": 0,
+    "buffTime": 0,
+    "attack": 0,
+    "SpriteName": "",
+    "PrefabName": ""
+  },
+  {
+    "ID": 220017,
+    "NAME": 702017,
+    "DESCRIBE": 0,
+    "isDestructible": false,
+    "durability": 0,
+    "buffID": 0,
+    "buffTime": 0,
+    "attack": 0,
+    "SpriteName": "",
+    "PrefabName": ""
   }
 ]

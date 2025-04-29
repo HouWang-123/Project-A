@@ -9,11 +9,14 @@ public class RiddleSwitch : RiddleItemBase
     public bool DefaultValue;
 
 
-    private SwitchStatus _switchStatus;
+    [SerializeField] private SwitchStatus _switchStatus;
     public void Start()
     {
         base.Start();
-        _switchStatus = new SwitchStatus(DefaultValue);
+        if (_switchStatus == null)
+        {
+            _switchStatus = new SwitchStatus(DefaultValue);
+        }
     }
     
     public void ChangeSwitch(bool ison)

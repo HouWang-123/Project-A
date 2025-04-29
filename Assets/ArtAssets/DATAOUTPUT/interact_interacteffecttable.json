@@ -27,8 +27,24 @@
     "ID": 900004,
     "ShortText": 860001,
     "TipText": -1,
-    "ToInteractItemID": 220014,
+    "ToInteractItemID": 220015,
+    "InteractItemID": -2,
+    "CodeExecuteID": -1
+  },
+  {
+    "ID": 900005,
+    "ShortText": 860001,
+    "TipText": -1,
+    "ToInteractItemID": 220004,
     "InteractItemID": -1,
+    "CodeExecuteID": -1
+  },
+  {
+    "ID": 900006,
+    "ShortText": 860001,
+    "TipText": -1,
+    "ToInteractItemID": 220017,
+    "InteractItemID": -2,
     "CodeExecuteID": -1
   }
 ]

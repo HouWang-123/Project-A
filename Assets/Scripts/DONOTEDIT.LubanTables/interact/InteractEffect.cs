@@ -47,7 +47,7 @@ public sealed partial class InteractEffect : Luban.BeanBase
     /// </summary>
     public readonly int ToInteractItemID;
     /// <summary>
-    /// 交互物品ID，-1表示空手交互
+    /// 交互物品ID，-1表示空手交互，-2表示忽略手中物品进行通用交互
     /// </summary>
     public readonly int InteractItemID;
     /// <summary>

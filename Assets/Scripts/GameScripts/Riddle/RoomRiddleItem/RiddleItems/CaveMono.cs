@@ -1,11 +1,12 @@
+using System;
+using System.Diagnostics;
+using FEVM.Timmer;
+using UnityEngine;
 
-    using FEVM.Timmer;
-    using UnityEngine;
-
-public class CaveMono : MonoBehaviour,IInteractHandler
+public class CaveMono : RiddleItemBase,IInteractHandler
 {
     public GameInteractTip InteractTipPosition;
-    
+    private SwitchStatus isOpen;
     [Header("通向的RoomID")]
     public int ToRoomID;
     private bool playerinside;
@@ -18,8 +19,47 @@ public class CaveMono : MonoBehaviour,IInteractHandler
     private void Start()
     {
         InteractTipPosition.gameObject.transform.localScale = Vector3.zero;
+        if (isOpen == null)
+        {
+            isOpen = new SwitchStatus(false);
+        }
+
+        if (isOpen.is_on)
+        {
+            gameObject.SetActive(true);
+        }
+        else
+        {
+            gameObject.SetActive(false);
+        }
     }
-    
+
+    public override RiddleItemBaseStatus GetRiddleStatus()
+    {
+        return isOpen;
+    }
+
+    public override void SetRiddleItemStatus(RiddleItemBaseStatus BaseStatus)
+    {
+        isOpen = BaseStatus as SwitchStatus;
+    }
+
+    public void OpenCave()
+    {
+        isOpen.is_on = true;
+        gameObject.SetActive(true);
+        RiddleManager.OnRiddleItemStatusChange(this);
+    }
+    public override void OnPlayerStartInteract(int itemid)
+    {
+        OnPlayerStartInteract();
+    }
+
+    public override bool GetRiddleItemResult()
+    {
+        return isOpen.is_on;
+    }
+
 
     private void OnTriggerEnter(Collider other)
     {
@@ -38,11 +78,7 @@ public class CaveMono : MonoBehaviour,IInteractHandler
         GameControl.Instance.ChangeRoom(ToRoomID);
         TimeMgr.Instance.AddTask(0.02f,false,()=>GameControl.Instance.PlayerDropFromSky());
     }
-
-    public enum EDoorLock
-    {
-        UnLock = 1,
-    }
+    
 
     public void OnPlayerFocus()
     {
@@ -78,9 +114,8 @@ public class CaveMono : MonoBehaviour,IInteractHandler
         }
     }
 
-    public void OnPlayerInteract()
+    public override void OnPlayerInteract()
     {
-        
     }
 
     public void OnPlayerInteractCancel()
