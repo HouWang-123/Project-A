@@ -34,7 +34,6 @@ public class RiddleManager : SerializedMonoBehaviour
             }
             key2ItemList.Add(RiddleHandler.GetRiddleKey(),riddleItem);
         }
-
         Dictionary<string,RiddleItemBaseStatus> LoadedItemStatus = 
             GameRunTimeData.Instance.RiddleItemStatusManager.LoadRiddleItemBaseStatusMap(GameControl.Instance.GetRoomData().ID);
         if (LoadedItemStatus != null)
@@ -84,7 +83,9 @@ public class RiddleManager : SerializedMonoBehaviour
     {
         GameObject nodeValue = NodeValidations[key];
         IRiddleNode<bool> riddleNode = nodeValue.transform.GetComponent<IRiddleNode<bool>>();
+        
         bool result = riddleNode.GetResult();
+        
         if (result)
         {
             if (ExecuteList.ContainsKey(key))

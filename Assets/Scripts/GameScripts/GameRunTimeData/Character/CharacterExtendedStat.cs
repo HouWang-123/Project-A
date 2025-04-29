@@ -10,7 +10,7 @@ public class CharacterExtendedStat
     public bool IsRun;
     public bool IsWalk;
 
-    public bool IsChasing;
+    public bool IsChasing; //todo 玩家是否被追击
     public bool IsHidding;
     public bool IsDropping;
 }

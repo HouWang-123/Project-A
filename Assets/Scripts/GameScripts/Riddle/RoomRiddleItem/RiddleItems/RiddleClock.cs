@@ -20,7 +20,7 @@ public class RiddleClock : RiddleItemBase
     {
         OnPlayerInteract();
     }
-
+    
     public override bool GetRiddleItemResult()
     {
         return true;
