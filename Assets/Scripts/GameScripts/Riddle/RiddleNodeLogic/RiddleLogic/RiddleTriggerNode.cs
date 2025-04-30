@@ -24,15 +24,19 @@ public class RiddleTriggerNode : MonoBehaviour
             res = PreConditionRiddleNode.GetResult();
             if (res)
             {
-                TimeMgr.Instance.AddTask(TriggerDelay,false,()=>Trigger?.Invoke());
+                TimeMgr.Instance.AddTask(TriggerDelay,false,InvokeTrigger);
             }
         }
         else
         {
-            TimeMgr.Instance.AddTask(TriggerDelay,false,()=>Trigger?.Invoke());
+            TimeMgr.Instance.AddTask(TriggerDelay,false,InvokeTrigger);
         }
     }
 
+    public void InvokeTrigger()
+    {
+        Trigger?.Invoke();
+    }
     private void Start()
     {
         hasCondition = false;
@@ -59,5 +63,10 @@ public class RiddleTriggerNode : MonoBehaviour
             Gizmos.DrawLine(transform.position,RiddleConditionNode.transform.position);
         }
 
+    }
+
+    public void OnDestroy()
+    {
+        TimeMgr.Instance.RemoveTask(InvokeTrigger);
     }
 }
