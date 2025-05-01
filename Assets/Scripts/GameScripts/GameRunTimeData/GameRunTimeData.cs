@@ -4,9 +4,7 @@ using UnityEngine.Serialization;
 
 public class GameRunTimeData : Singleton<GameRunTimeData>
 {
-    /// <summary>
-    /// Chararcter
-    /// </summary>
+    public GameState gameState;
     public ItemSlotData CharacterItemSlotData;
     public CharacterBasicStatManager characterBasicStatManager;
     public InventoryManger InventoryManger;
@@ -17,6 +15,7 @@ public class GameRunTimeData : Singleton<GameRunTimeData>
     protected override void Awake()
     {
         base.Awake();
+        gameState = gameObject.AddComponent<GameState>();
         CharacterItemSlotData = gameObject.AddComponent<ItemSlotData>();
         characterBasicStatManager = gameObject.AddComponent<CharacterBasicStatManager>();
         InventoryManger = gameObject.AddComponent<InventoryManger>();

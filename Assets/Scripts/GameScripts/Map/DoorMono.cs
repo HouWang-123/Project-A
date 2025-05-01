@@ -145,6 +145,10 @@ public class DoorMono : MonoBehaviour, IInteractHandler
     public void OnPlayerStartInteract()
     {
         if (!doorEnabled) return;
+        if (GameRunTimeData.Instance.gameState.IsPlayerInRiddle)
+        {
+            return;
+        }
         if (playerinside)
         {
             EnterDoor();

@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
+using FEVM.Timmer;
 using RotaryHeart.Lib.SerializableDictionary;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Rendering;
+using UnityEngine.Serialization;
 
 public class ExecuteListDictionary<k,v> : SerializableDictionaryBase<string,UnityEvent>{}
 public class GameObjectNodeDictionary<k,v> : SerializableDictionaryBase<string,GameObject>{}
@@ -13,6 +15,7 @@ public class GameObjectNodeDictionary<k,v> : SerializableDictionaryBase<string,G
 /// </summary>
 public class RiddleManager : SerializedMonoBehaviour
 {
+    public float LockTimer;
     public List<RiddleItemBase> RiddleItems = new();
     /// <summary>
     /// 执行列表
@@ -93,5 +96,14 @@ public class RiddleManager : SerializedMonoBehaviour
                 ExecuteList[key]?.Invoke();
             }
         }
+    }
+
+    public void RiddleLock()
+    {
+        GameRunTimeData.Instance.gameState.IsPlayerInRiddle = true;
+        TimeMgr.Instance.AddTask(LockTimer,false, () =>
+        {
+            GameRunTimeData.Instance.gameState.IsPlayerInRiddle = false;
+        });
     }
 }
