@@ -4,7 +4,6 @@ public class RiddleClock : RiddleItemBase
     public override void OnPlayerInteract()
     {
         Mytrigger.OnTrigger();
-        RiddleManager.RiddleLock();
     }
 
     public override RiddleItemBaseStatus GetRiddleStatus()
