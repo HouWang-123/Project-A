@@ -656,6 +656,7 @@ MonoBehaviour:
   - {fileID: 2559205133233811669}
   - {fileID: 4368996405879693322}
   - {fileID: 591541855758582808}
+  LockTimer: 5
 --- !u!1 &5406342287076052433
 GameObject:
   m_ObjectHideFlags: 0
