@@ -385,8 +385,6 @@ Transform:
   - {fileID: 6644368937064561745}
   - {fileID: 2532101787142996242}
   - {fileID: 8611047506179822318}
-  - {fileID: 9065232475872301232}
-  - {fileID: 4432396528442298233}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6178767148014686312
@@ -618,10 +616,7 @@ MonoBehaviour:
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects:
-    - {fileID: 9022156822930910741}
-    - {fileID: 0}
-    - {fileID: 6931989128871532810}
+    ReferencedUnityObjects: []
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -633,87 +628,7 @@ MonoBehaviour:
         UnityEngine.CoreModule]], Assembly-CSharp
     - Name: 
       Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 7
-      Data: System.Collections.Generic.KeyValuePair`2[[System.String, mscorlib],[UnityEngine.Events.UnityEvent,
-        UnityEngine.CoreModule]], mscorlib
-    - Name: 
-      Entry: 1
-      Data: SoundSwitchToXor
-    - Name: 
-      Entry: 7
-      Data: 1|UnityEngine.Events.UnityEvent, UnityEngine.CoreModule
-    - Name: m_PersistentCalls
-      Entry: 7
-      Data: 2|UnityEngine.Events.PersistentCallGroup, UnityEngine.CoreModule
-    - Name: m_Calls
-      Entry: 7
-      Data: 3|System.Collections.Generic.List`1[[UnityEngine.Events.PersistentCall,
-        UnityEngine.CoreModule]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 7
-      Data: 4|UnityEngine.Events.PersistentCall, UnityEngine.CoreModule
-    - Name: m_Target
-      Entry: 10
       Data: 0
-    - Name: m_TargetAssemblyTypeName
-      Entry: 1
-      Data: RiddleTriggerNode, Assembly-CSharp
-    - Name: m_MethodName
-      Entry: 1
-      Data: OnTrigger
-    - Name: m_Mode
-      Entry: 3
-      Data: 1
-    - Name: m_Arguments
-      Entry: 7
-      Data: 5|UnityEngine.Events.ArgumentCache, UnityEngine.CoreModule
-    - Name: m_ObjectArgument
-      Entry: 10
-      Data: 1
-    - Name: m_ObjectArgumentAssemblyTypeName
-      Entry: 1
-      Data: UnityEngine.Object, UnityEngine
-    - Name: m_IntArgument
-      Entry: 3
-      Data: 0
-    - Name: m_FloatArgument
-      Entry: 4
-      Data: 0
-    - Name: m_StringArgument
-      Entry: 1
-      Data: 
-    - Name: m_BoolArgument
-      Entry: 5
-      Data: false
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: m_CallState
-      Entry: 3
-      Data: 2
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
     - Name: 
       Entry: 13
       Data: 
@@ -722,30 +637,18 @@ MonoBehaviour:
       Data: 
     - Name: NodeValidations
       Entry: 7
-      Data: 6|GameObjectNodeDictionary`2[[System.String, mscorlib],[UnityEngine.GameObject,
+      Data: 1|GameObjectNodeDictionary`2[[System.String, mscorlib],[UnityEngine.GameObject,
         UnityEngine.CoreModule]], Assembly-CSharp
     - Name: 
       Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 7
-      Data: System.Collections.Generic.KeyValuePair`2[[System.String, mscorlib],[UnityEngine.GameObject,
-        UnityEngine.CoreModule]], mscorlib
-    - Name: 
-      Entry: 1
-      Data: SoundSwitchToXor
-    - Name: 
-      Entry: 10
-      Data: 2
-    - Name: 
-      Entry: 8
-      Data: 
+      Data: 0
     - Name: 
       Entry: 13
       Data: 
     - Name: 
       Entry: 8
       Data: 
+  LockTimer: 5
   RiddleItems:
   - {fileID: 7943890107937492727}
   - {fileID: 2879035945701028105}
@@ -2035,7 +1938,7 @@ PrefabInstance:
       objectReference: {fileID: 3586223912780884228}
     - target: {fileID: 3970834476954661424, guid: 439a7dd30d976e64f8231f2710ccf1e0, type: 3}
       propertyPath: Trigger.m_PersistentCalls.m_Calls.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3970834476954661424, guid: 439a7dd30d976e64f8231f2710ccf1e0, type: 3}
       propertyPath: Trigger.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -2047,6 +1950,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3970834476954661424, guid: 439a7dd30d976e64f8231f2710ccf1e0, type: 3}
       propertyPath: Trigger.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3970834476954661424, guid: 439a7dd30d976e64f8231f2710ccf1e0, type: 3}
+      propertyPath: Trigger.m_PersistentCalls.m_Calls.Array.data[3].m_Mode
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3970834476954661424, guid: 439a7dd30d976e64f8231f2710ccf1e0, type: 3}
@@ -2062,6 +1969,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 9022156822930910741}
     - target: {fileID: 3970834476954661424, guid: 439a7dd30d976e64f8231f2710ccf1e0, type: 3}
+      propertyPath: Trigger.m_PersistentCalls.m_Calls.Array.data[3].m_Target
+      value: 
+      objectReference: {fileID: 1669323495319721942}
+    - target: {fileID: 3970834476954661424, guid: 439a7dd30d976e64f8231f2710ccf1e0, type: 3}
       propertyPath: Trigger.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
@@ -2071,6 +1982,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3970834476954661424, guid: 439a7dd30d976e64f8231f2710ccf1e0, type: 3}
       propertyPath: Trigger.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3970834476954661424, guid: 439a7dd30d976e64f8231f2710ccf1e0, type: 3}
+      propertyPath: Trigger.m_PersistentCalls.m_Calls.Array.data[3].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3970834476954661424, guid: 439a7dd30d976e64f8231f2710ccf1e0, type: 3}
@@ -2086,6 +2001,10 @@ PrefabInstance:
       value: OnTrigger
       objectReference: {fileID: 0}
     - target: {fileID: 3970834476954661424, guid: 439a7dd30d976e64f8231f2710ccf1e0, type: 3}
+      propertyPath: Trigger.m_PersistentCalls.m_Calls.Array.data[3].m_MethodName
+      value: RiddleLock
+      objectReference: {fileID: 0}
+    - target: {fileID: 3970834476954661424, guid: 439a7dd30d976e64f8231f2710ccf1e0, type: 3}
       propertyPath: Trigger.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: SoundSWMono, Assembly-CSharp
       objectReference: {fileID: 0}
@@ -2098,6 +2017,10 @@ PrefabInstance:
       value: RiddleTriggerNode, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 3970834476954661424, guid: 439a7dd30d976e64f8231f2710ccf1e0, type: 3}
+      propertyPath: Trigger.m_PersistentCalls.m_Calls.Array.data[3].m_TargetAssemblyTypeName
+      value: RiddleManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3970834476954661424, guid: 439a7dd30d976e64f8231f2710ccf1e0, type: 3}
       propertyPath: Trigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
@@ -2107,6 +2030,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3970834476954661424, guid: 439a7dd30d976e64f8231f2710ccf1e0, type: 3}
       propertyPath: Trigger.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 3970834476954661424, guid: 439a7dd30d976e64f8231f2710ccf1e0, type: 3}
+      propertyPath: Trigger.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 6308734217240653265, guid: 439a7dd30d976e64f8231f2710ccf1e0, type: 3}
@@ -2199,72 +2126,6 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 7392456787033143961, guid: 02c28663e3696e54a94a85e9a0fe2751, type: 3}
   m_PrefabInstance: {fileID: 3094100596468657022}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &3372839069003754875
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 8206831356080259998}
-    m_Modifications:
-    - target: {fileID: 1390964035880313346, guid: e41f4301e1264964f8b38e5fd3f85f02, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 1.34
-      objectReference: {fileID: 0}
-    - target: {fileID: 1390964035880313346, guid: e41f4301e1264964f8b38e5fd3f85f02, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 4.99
-      objectReference: {fileID: 0}
-    - target: {fileID: 1390964035880313346, guid: e41f4301e1264964f8b38e5fd3f85f02, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -2.2601304
-      objectReference: {fileID: 0}
-    - target: {fileID: 1390964035880313346, guid: e41f4301e1264964f8b38e5fd3f85f02, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1390964035880313346, guid: e41f4301e1264964f8b38e5fd3f85f02, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1390964035880313346, guid: e41f4301e1264964f8b38e5fd3f85f02, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1390964035880313346, guid: e41f4301e1264964f8b38e5fd3f85f02, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1390964035880313346, guid: e41f4301e1264964f8b38e5fd3f85f02, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1390964035880313346, guid: e41f4301e1264964f8b38e5fd3f85f02, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1390964035880313346, guid: e41f4301e1264964f8b38e5fd3f85f02, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3350307112600779601, guid: e41f4301e1264964f8b38e5fd3f85f02, type: 3}
-      propertyPath: m_Name
-      value: RiddleNot
-      objectReference: {fileID: 0}
-    - target: {fileID: 7970950742984014605, guid: e41f4301e1264964f8b38e5fd3f85f02, type: 3}
-      propertyPath: RiddleObjA
-      value: 
-      objectReference: {fileID: 4682952043688741347}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: e41f4301e1264964f8b38e5fd3f85f02, type: 3}
---- !u!4 &4432396528442298233 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1390964035880313346, guid: e41f4301e1264964f8b38e5fd3f85f02, type: 3}
-  m_PrefabInstance: {fileID: 3372839069003754875}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3461562989465095745
 PrefabInstance:
@@ -3115,71 +2976,4 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 787317306193009424, guid: 2800af2d74d748a4ca7081755af749a6, type: 3}
   m_PrefabInstance: {fileID: 7804346721149302732}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &7963382855882076850
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 8206831356080259998}
-    m_Modifications:
-    - target: {fileID: 1390964035880313346, guid: bc146423eb88d2b49beff105fcb3aaed, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 1.9490131
-      objectReference: {fileID: 0}
-    - target: {fileID: 1390964035880313346, guid: bc146423eb88d2b49beff105fcb3aaed, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 4.18
-      objectReference: {fileID: 0}
-    - target: {fileID: 1390964035880313346, guid: bc146423eb88d2b49beff105fcb3aaed, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -2.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 1390964035880313346, guid: bc146423eb88d2b49beff105fcb3aaed, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1390964035880313346, guid: bc146423eb88d2b49beff105fcb3aaed, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1390964035880313346, guid: bc146423eb88d2b49beff105fcb3aaed, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1390964035880313346, guid: bc146423eb88d2b49beff105fcb3aaed, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1390964035880313346, guid: bc146423eb88d2b49beff105fcb3aaed, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1390964035880313346, guid: bc146423eb88d2b49beff105fcb3aaed, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1390964035880313346, guid: bc146423eb88d2b49beff105fcb3aaed, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3350307112600779601, guid: bc146423eb88d2b49beff105fcb3aaed, type: 3}
-      propertyPath: m_Name
-      value: RiddleAnd
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: bc146423eb88d2b49beff105fcb3aaed, type: 3}
---- !u!1 &4682952043688741347 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3350307112600779601, guid: bc146423eb88d2b49beff105fcb3aaed, type: 3}
-  m_PrefabInstance: {fileID: 7963382855882076850}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &9065232475872301232 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1390964035880313346, guid: bc146423eb88d2b49beff105fcb3aaed, type: 3}
-  m_PrefabInstance: {fileID: 7963382855882076850}
   m_PrefabAsset: {fileID: 0}
